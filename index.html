@@ -1,11 +1,124 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recursos académics - Vicente Català</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Mi web — Material de clases</title>
+  <meta name="description" content="Material y recursos para mis clases. Cursos: Java — Tema 4: Introducción a la POO.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://TU-USUARIO.github.io/mi-web/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Mi web — Material de clases">
+  <meta property="og:description" content="Material y recursos para mis clases. Curso Java: Introducción a la POO.">
+  <meta property="og:type" content="website">
+
+  <style>
+    :root{--accent:#2563eb;--muted:#6b7280;--bg:#f8fafc}
+    *{box-sizing:border-box}
+    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; background:var(--bg); color:#0f172a}
+    .container{max-width:960px;margin:28px auto;padding:18px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    h1{font-size:1.6rem;margin:0}
+    .meta{color:var(--muted);font-size:0.95rem}
+    nav a{color:var(--accent);text-decoration:none;margin-left:12px}
+    .search{margin:18px 0;display:flex;gap:8px}
+    input[type=search]{flex:1;padding:10px 12px;border:1px solid #e6edf3;border-radius:8px}
+    button{background:var(--accent);color:white;border:none;padding:10px 14px;border-radius:8px;cursor:pointer}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:18px}
+    .card{background:white;padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(15,23,42,0.06)}
+    .card h2{margin:0 0 8px 0;font-size:1.1rem}
+    .course-meta{color:var(--muted);font-size:0.9rem;margin-bottom:10px}
+    .topics{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
+    .topics a{padding:8px 10px;border-radius:8px;text-decoration:none;border:1px solid transparent}
+    .topics a:hover{background:#f1f5f9;border-color:#e6eefc}
+
+    footer{margin-top:28px;color:var(--muted);font-size:0.9rem}
+    @media (prefers-color-scheme:dark){:root{--bg:#071021} body{color:#e6eef8} .card{background:#071427;box-shadow:none} .meta, footer{color:#9aa6b2}}
+  </style>
+
+  <script>
+    // Buscador simple para indexar contenido en el cliente
+    function filtrar(){
+      const q = document.getElementById('q').value.toLowerCase();
+      const items = document.querySelectorAll('.card');
+      items.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(q) ? '' : 'none';
+      });
+    }
+
+    // Mejora: permitir abrir tecla Enter en el buscador
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const s = document.getElementById('q');
+      s.addEventListener('input', filtrar);
+      s.addEventListener('keyup', (e)=>{ if(e.key=== 'Escape') s.value=''; filtrar(); });
+    });
+  </script>
+
+  <!-- Datos estructurados para mejor indexación -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Mi web — Material de clases",
+    "url": "https://TU-USUARIO.github.io/mi-web/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://TU-USUARIO.github.io/mi-web/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
 </head>
 <body>
-    
+  <div class="container">
+    <header>
+      <div>
+        <h1>Mi web — Material de clases</h1>
+        <div class="meta">Recursos y apuntes | Cursos: Java, próximos temas y ejercicios</div>
+      </div>
+      <nav>
+        <a href="#cursos">Cursos</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </header>
+
+    <div class="search">
+      <input id="q" type="search" placeholder="Buscar curso, tema o palabra clave..." aria-label="Buscar" />
+      <button onclick="filtrar()">Buscar</button>
+    </div>
+
+    <main id="cursos">
+      <section class="grid">
+        <!-- Tarjeta: Curso Java -->
+        <article class="card" id="curso-java">
+          <h2>Curso: Java</h2>
+          <div class="course-meta">Lenguaje, POO, colecciones y prácticas.</div>
+          <p style="margin:0 0 10px 0;color:var(--muted)">Temas publicados:</p>
+          <ul class="topics">
+            <li><a href="java/4-introduccion-a-la-poo.html">4. Introducción a la POO</a></li>
+            <!-- Añade más temas aquí -->
+          </ul>
+          <p style="margin-top:12px;color:var(--muted);font-size:0.9rem">Consejo: cada tema debe tener su propia página HTML (ej. <code>java/4-introduccion-a-la-poo.html</code>)</p>
+        </article>
+
+        <!-- Tarjeta: En construcción u otros cursos -->
+        <article class="card">
+          <h2>Otros cursos / Recursos</h2>
+          <div class="course-meta">Apuntes, ejercicios y enlaces.</div>
+          <p style="margin:8px 0 0 0;color:var(--muted)">Puedes añadir aquí más cursos cuando estén listos.</p>
+        </article>
+      </section>
+    </main>
+
+    <footer id="contacto">
+      <p>¿Quieres que añada enlaces directos a tus PDFs o ejercicios? Responde con la ruta o sube los archivos al repositorio.</p>
+      <p>© <span id="year"></span> — Tu nombre</p>
+    </footer>
+  </div>
+
+  <script>document.getElementById('year').innerText = new Date().getFullYear();</script>
 </body>
 </html>
