@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Análisis de Datos con Python: NumPy y Pandas</title>
+
+    <!-- Mermaid -->
+    <script type="module">
+        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+
+    <!-- HighlightJS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+    <header>
+        <img src="../assets/logo_stucom.svg" alt="Logo de la escuela">
+        <h1>Análisis de datos con Python: NumPy y Pandas</h1>
+    </header>
+
+    <!-- ========================= -->
+    <!-- 1. INTRODUCCIÓN           -->
+    <!-- ========================= -->
+    <div class="section">
+        <h2>1. Introducción al análisis de datos</h2>
+        <p>Python es uno de los lenguajes más utilizados en análisis de datos gracias a librerías como
+            <strong>NumPy</strong> y <strong>Pandas</strong>. Ambas permiten trabajar con grandes volúmenes de datos de
+            manera eficiente y sencilla.
+        </p>
+
+        <div class="diagram">
+            <img src="../assets/numpy_pandas_19.jpg" width="450" alt="Logos NumPy y Pandas">
+        </div>
+
+        <h3>1.1 ¿Por qué usar librerías especializadas?</h3>
+        <p>Las estructuras básicas de Python (listas, diccionarios) no están optimizadas para cálculos masivos o
+            manipulación compleja de datos. Por ejemplo, si tienes un CSV con miles de filas y necesitas:</p>
+        <ul>
+            <li>Calcular promedios o estadísticas.</li>
+            <li>Filtrar registros con condiciones.</li>
+            <li>Transformar columnas completas.</li>
+            <li>Limpiar datos inconsistentes o incompletos.</li>
+        </ul>
+        <p>Estas tareas serían lentas con bucles tradicionales, pero NumPy y Pandas las resuelven de forma óptima.</p>
+
+        <div class="comparacion">
+            <div class="comparacion-item">
+                <h4>NumPy</h4>
+                <ul>
+                    <li><strong>Especialidad:</strong> cálculos numéricos eficientes.</li>
+                    <li><strong>Estructura base:</strong> arrays multidimensionales.</li>
+                    <li><strong>Uso típico:</strong> matemáticas, ciencia, machine learning.</li>
+                </ul>
+            </div>
+            <div class="comparacion-item">
+                <h4>Pandas</h4>
+                <ul>
+                    <li><strong>Especialidad:</strong> manejo de datos tabulares.</li>
+                    <li><strong>Estructura base:</strong> Series y DataFrames.</li>
+                    <li><strong>Uso típico:</strong> análisis, limpieza y preparación de datos.</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>1.2 Instalación</h3>
+        <pre><code class="language-bash">pip install numpy
+pip install pandas
+python3 -c "import numpy, pandas; print('Todo instalado correctamente')"</code></pre>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 2. NUMPY                  -->
+    <!-- ========================= -->
+    <div class="section">
+        <h2>2. NumPy: La base del cálculo científico en Python</h2>
+        <div class="diagram">
+            <img src="../assets/NumPy_logo_2020.svg.png" width="450" alt="Logo NumPy">
+        </div>
+        <p>NumPy (<strong>Numerical Python</strong>) es la librería fundamental para trabajar con datos numéricos en
+            Python. Es el núcleo sobre el que se construyen muchas otras herramientas del ecosistema científico como
+            <strong>Pandas</strong>, <strong>SciPy</strong>, <strong>Matplotlib</strong> y
+            <strong>Scikit-learn</strong>.
+        </p>
+        <p>Su elemento principal es el <strong>ndarray</strong>, un array multidimensional muy eficiente.</p>
+        <div class="diagram">
+            <img src="../assets/ndArrayNumpy.webp" width="450" alt="Logos NumPy y Pandas">
+        </div>
+
+
+        <h3>2.1 ¿Qué es un ndarray?</h3>
+        <p>El <code>ndarray</code> es un <strong>array multidimensional</strong> homogéneo y muy eficiente. Permite
+            operaciones vectorizadas y cálculos rápidos sobre todos los elementos sin usar bucles.</p>
+
+        <pre><code class="language-python">import numpy as np  # Importa la librería NumPy y le da el alias 'np'
+
+# Crear un array unidimensional con 4 elementos
+arr = np.array([10, 20, 30, 40])
+
+# Mostrar el contenido del array
+print(arr)  # Salida: [10 20 30 40]
+</code></pre>
+
+        <h3>2.2 Ventajas clave</h3>
+        <div class="info-box">
+            <ul>
+                <li><strong>Velocidad:</strong> operaciones mucho más rápidas que listas.</li>
+                <li><strong>Vectorización:</strong> operaciones sobre arrays sin bucles.</li>
+                <li><strong>Funciones matemáticas avanzadas:</strong> estadísticas, álgebra lineal, trigonometría.</li>
+                <li><strong>Soporte multidimensional:</strong> matrices 2D, 3D o N-D.</li>
+            </ul>
+        </div>
+
+        <h3>2.3 Crear arrays</h3>
+        <div class="info-box">
+            <ul>
+                <li><strong>Desde listas:</strong> <code>np.array([1, 2, 3])</code> crea un array unidimensional a
+                    partir de una lista de Python.</li>
+                <li><strong>Ceros o unos:</strong> <code>np.zeros((3,3))</code> crea una matriz 3x3 llena de ceros;
+                    <code>np.ones((2,4))</code> crea una matriz 2x4 llena de unos.
+                </li>
+                <li><strong>Rangos:</strong> <code>np.arange(0,10,2)</code> genera números de 0 a 8 de 2 en 2;
+                    <code>np.linspace(0,1,5)</code> genera 5 valores equidistantes entre 0 y 1.
+                </li>
+                <li><strong>Aleatorios:</strong> <code>np.random.rand(3,3)</code> crea una matriz 3x3 de números
+                    aleatorios entre 0 y 1; <code>np.random.randint(1,10,5)</code> genera 5 enteros aleatorios entre 1 y
+                    9.</li>
+            </ul>
+        </div>
+
+        <h3>2.4 Propiedades importantes</h3>
+        <pre><code class="language-python">arr = np.array([[1,2,3],[4,5,6]])  # Crear una matriz 2x3
+
+arr.shape      # Devuelve la forma de la matriz: (2, 3)
+arr.ndim       # Número de dimensiones: 2
+arr.size       # Número total de elementos: 6
+arr.dtype      # Tipo de datos de los elementos, por ejemplo int64
+</code></pre>
+
+        <h3>2.5 Índices y slicing</h3>
+        <pre><code class="language-python">arr = np.array([10,20,30,40,50])  # Array unidimensional
+arr[0]      # Accede al primer elemento: 10
+arr[1:4]    # Accede a elementos del índice 1 al 3: [20,30,40]
+arr[::-1]   # Invierte el array: [50,40,30,20,10]
+
+mat = np.array([[1,2,3],[4,5,6],[7,8,9]])  # Matriz 3x3
+mat[0,1]    # Elemento fila 0, columna 1: 2
+mat[:,0]    # Todos los elementos de la primera columna: [1,4,7]
+mat[1,:]    # Todos los elementos de la segunda fila: [4,5,6]
+</code></pre>
+
+        <h3>2.6 Operaciones vectorizadas</h3>
+        <pre><code class="language-python">arr = np.array([1,2,3])  
+
+arr * 10       # Multiplica todos los elementos por 10: [10,20,30]
+arr + 5        # Suma 5 a cada elemento: [6,7,8]
+np.sqrt(arr)   # Raíz cuadrada de cada elemento: [1., 1.414..., 1.732...]
+np.log(arr)    # Logaritmo natural de cada elemento
+
+# Operaciones entre arrays
+a = np.array([1,2,3])
+b = np.array([10,20,30])
+
+a + b         # Suma elemento a elemento: [11,22,33]
+a * b         # Multiplicación elemento a elemento: [10,40,90]
+</code></pre>
+
+        <h3>2.7 Estadísticas con NumPy</h3>
+        <pre><code class="language-python">datos = np.array([10,20,30,40,50])
+
+np.mean(datos)        # Calcula la media: 30.0
+np.median(datos)      # Calcula la mediana: 30.0
+np.std(datos)         # Desviación estándar
+np.var(datos)         # Varianza
+np.percentile(datos,75)  # Percentil 75: 42.5
+</code></pre>
+
+        <h3>2.8 Álgebra lineal básica</h3>
+        <pre><code class="language-python">A = np.array([[1,2],[3,4]])  # Matriz 2x2
+B = np.array([[5,6],[7,8]])  # Matriz 2x2
+
+np.dot(A,B)          # Producto de matrices: [[19,22],[43,50]]
+np.linalg.inv(A)     # Inversa de A
+np.linalg.det(A)     # Determinante de A
+</code></pre>
+
+
+        <h3>2.9 Comparación con listas de Python</h3>
+        <table>
+            <tr>
+                <th>Operación</th>
+                <th>Lista Python</th>
+                <th>NumPy</th>
+            </tr>
+            <tr>
+                <td>Suma elemento a elemento</td>
+                <td>Lenta</td>
+                <td>Muy rápida</td>
+            </tr>
+            <tr>
+                <td>Almacenar millones de datos</td>
+                <td>Ineficiente</td>
+                <td>Óptimo</td>
+            </tr>
+            <tr>
+                <td>Soporte multidimensional</td>
+                <td>No</td>
+                <td>Sí</td>
+            </tr>
+            <tr>
+                <td>Estadísticas</td>
+                <td>No</td>
+                <td>Sí</td>
+            </tr>
+            <tr>
+                <td>Vectorización</td>
+                <td>No</td>
+                <td>Sí</td>
+            </tr>
+        </table>
+        <h3 style="font-style: italic;">Herramientas principales de NumPy</h3>
+
+        <table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%;">
+            <tr>
+                <th style="width: 20%;">Herramienta</th>
+                <th style="width: 35%;">Descripción</th>
+                <th style="width: 45%;">Ejemplo</th>
+            </tr>
+
+            <!-- CREACIÓN DE ARRAYS -->
+            <tr>
+                <td colspan="3" style="background:#f0f0f0;"><strong>1. Creación de arrays</strong></td>
+            </tr>
+
+            <tr>
+                <td><code>np.array()</code></td>
+                <td>Crea un array a partir de una lista o lista de listas.</td>
+                <td><code>arr = np.array([1, 2, 3])</code></td>
+            </tr>
+            <tr>
+                <td><code>np.zeros()</code></td>
+                <td>Genera un array lleno de ceros.</td>
+                <td><code>np.zeros((3,3))</code></td>
+            </tr>
+            <tr>
+                <td><code>np.ones()</code></td>
+                <td>Crea un array lleno de unos.</td>
+                <td><code>np.ones((2,4))</code></td>
+            </tr>
+            <tr>
+                <td><code>np.arange()</code></td>
+                <td>Genera un rango numérico con paso personalizado.</td>
+                <td><code>np.arange(0, 10, 2)</code></td>
+            </tr>
+            <tr>
+                <td><code>np.linspace()</code></td>
+                <td>Genera valores equidistantes entre dos números.</td>
+                <td><code>np.linspace(0, 1, 5)</code></td>
+            </tr>
+            <tr>
+                <td><code>np.random.rand()</code></td>
+                <td>Genera números aleatorios entre 0 y 1.</td>
+                <td><code>np.random.rand(3,3)</code></td>
+            </tr>
+            <tr>
+                <td><code>np.random.randint()</code></td>
+                <td>Genera enteros aleatorios dentro de un rango.</td>
+                <td><code>np.random.randint(1, 10, 5)</code></td>
+            </tr>
+
+            <!-- PROPIEDADES -->
+            <tr>
+                <td colspan="3" style="background:#f0f0f0;"><strong>2. Propiedades del array</strong></td>
+            </tr>
+
+            <tr>
+                <td><code>.shape</code></td>
+                <td>Devuelve la forma (filas, columnas).</td>
+                <td><code>arr.shape  # (2,3)</code></td>
+            </tr>
+            <tr>
+                <td><code>.ndim</code></td>
+                <td>Número de dimensiones.</td>
+                <td><code>arr.ndim  # 2</code></td>
+            </tr>
+            <tr>
+                <td><code>.size</code></td>
+                <td>Número total de elementos.</td>
+                <td><code>arr.size  # 6</code></td>
+            </tr>
+            <tr>
+                <td><code>.dtype</code></td>
+                <td>Tipo de dato almacenado.</td>
+                <td><code>arr.dtype  # int64</code></td>
+            </tr>
+
+            <!-- ÍNDICES -->
+            <tr>
+                <td colspan="3" style="background:#f0f0f0;"><strong>3. Índices y slicing</strong></td>
+            </tr>
+
+            <tr>
+                <td>Indexación simple</td>
+                <td>Accede a un elemento del array.</td>
+                <td><code>arr[0]  # 10</code></td>
+            </tr>
+            <tr>
+                <td>Slicing</td>
+                <td>Extrae un rango de elementos.</td>
+                <td><code>arr[1:4]  # [20,30,40]</code></td>
+            </tr>
+            <tr>
+                <td>Invertir array</td>
+                <td>Devuelve el array en orden inverso.</td>
+                <td><code>arr[::-1]</code></td>
+            </tr>
+            <tr>
+                <td>Indexación 2D</td>
+                <td>Accede a elementos por fila y columna.</td>
+                <td><code>mat[0,1]  # 2</code></td>
+            </tr>
+            <tr>
+                <td>Columnas completas</td>
+                <td>Selecciona todas las filas de una columna.</td>
+                <td><code>mat[:,0]  # [1,4,7]</code></td>
+            </tr>
+
+            <!-- OPERACIONES -->
+            <tr>
+                <td colspan="3" style="background:#f0f0f0;"><strong>4. Operaciones vectorizadas</strong></td>
+            </tr>
+
+            <tr>
+                <td><code>arr * 10</code></td>
+                <td>Multiplica todos los elementos.</td>
+                <td><code>[1,2,3] * 10 → [10,20,30]</code></td>
+            </tr>
+            <tr>
+                <td><code>arr + 5</code></td>
+                <td>Suma un valor a todo el array.</td>
+                <td><code>[1,2,3] + 5 → [6,7,8]</code></td>
+            </tr>
+            <tr>
+                <td><code>np.sqrt()</code></td>
+                <td>Raíz cuadrada de cada elemento.</td>
+                <td><code>np.sqrt([1,4,9]) → [1,2,3]</code></td>
+            </tr>
+            <tr>
+                <td><code>np.log()</code></td>
+                <td>Logaritmo natural de cada elemento.</td>
+                <td><code>np.log([1,2,3])</code></td>
+            </tr>
+
+            <!-- ESTADÍSTICAS -->
+            <tr>
+                <td colspan="3" style="background:#f0f0f0;"><strong>5. Estadísticas</strong></td>
+            </tr>
+
+            <tr>
+                <td><code>np.mean()</code></td>
+                <td>Media aritmética.</td>
+                <td><code>np.mean([10,20,30]) → 20</code></td>
+            </tr>
+            <tr>
+                <td><code>np.median()</code></td>
+                <td>Mediana.</td>
+                <td><code>np.median([10,20,30]) → 20</code></td>
+            </tr>
+            <tr>
+                <td><code>np.std()</code></td>
+                <td>Desviación estándar.</td>
+                <td><code>np.std([10,20,30])</code></td>
+            </tr>
+            <tr>
+                <td><code>np.var()</code></td>
+                <td>Varianza.</td>
+                <td><code>np.var([10,20,30])</code></td>
+            </tr>
+            <tr>
+                <td><code>np.percentile()</code></td>
+                <td>Calcula percentiles.</td>
+                <td><code>np.percentile([10,20,30,40], 75)</code></td>
+            </tr>
+
+            <!-- ÁLGEBRA LINEAL -->
+            <tr>
+                <td colspan="3" style="background:#f0f0f0;"><strong>6. Álgebra lineal</strong></td>
+            </tr>
+
+            <tr>
+                <td><code>np.dot()</code></td>
+                <td>Producto de matrices o vectores.</td>
+                <td><code>np.dot(A,B)</code></td>
+            </tr>
+            <tr>
+                <td><code>np.linalg.inv()</code></td>
+                <td>Inversa de una matriz.</td>
+                <td><code>np.linalg.inv(A)</code></td>
+            </tr>
+            <tr>
+                <td><code>np.linalg.det()</code></td>
+                <td>Determinante de una matriz.</td>
+                <td><code>np.linalg.det(A)</code></td>
+            </tr>
+            <tr>
+                <td><code>np.linalg.norm()</code></td>
+                <td>Norma vectorial o matricial.</td>
+                <td><code>np.linalg.norm([3,4]) → 5</code></td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- 3. PANDAS                 -->
+    <!-- ========================= -->
+    <div class="section">
+        <h2>3. Pandas</h2>
+
+        <div class="diagram">
+            <img src="../assets/Pandas_logo.svg.png" width="350" alt="Logo Pandas">
+        </div>
+
+        <p>
+            <strong>Pandas</strong> es una librería de Python diseñada para el análisis y manipulación de datos
+            estructurados.
+            Su enfoque principal es trabajar con <strong>datasets tabulares</strong> de manera eficiente, ofreciendo
+            funciones
+            para limpieza, transformación, agregación y análisis estadístico avanzado.
+        </p>
+        <p>Los datasets tabulares son conjuntos de datos organizados en un formato de tabla, similar a una hoja de
+            cálculo o una base de datos
+            relacional. Se caracterizan por tener filas que representan observaciones o registros individuales y
+            columnas <strong>(también llamadas
+            atributos o variables)</strong> que representan características específicas de esas observaciones.
+        </p>
+
+        <p>Las estructuras fundamentales de Pandas son:</p>
+
+        <ul>
+            <li>
+                <strong>Series:</strong> un arreglo unidimensional con etiquetas (índices). Permite manejar datos de
+                forma ordenada y asociarlos a índices personalizados.
+            </li>
+            <li>
+                <strong>DataFrame:</strong> una tabla bidimensional con filas y columnas etiquetadas. Ideal para
+                datasets grandes, similares a tablas SQL o hojas de cálculo.
+            </li>
+        </ul>
+
+        <div class="diagram">
+            <img src="../assets/dataframe.png" width="450" alt="Ejemplo de DataFrame">
+        </div>
+
+        <div class="code-box">
+            <pre><code class="language-python">import pandas as pd
+
+# Crear un dataset de ejemplo
+data = {
+    'nombre': ['Ana', 'Luis', 'Carlos', 'Marta'],
+    'edad': [25, 34, 42, 19],
+    'ciudad': ['Madrid', 'Barcelona', 'Valencia', 'Sevilla']
+}
+
+# Convertir diccionario en DataFrame
+df = pd.DataFrame(data)
+print(df)
+
+# Buenas prácticas: usar nombres de columnas claros y consistentes
+</code></pre>
+        </div>
+        <div class="section">
+    <h2>Métodos clave de Pandas</h2>
+    <p>Tabla con métodos más usados de Pandas:</p>
+
+    <table border="1" cellspacing="0" cellpadding="8">
+        <thead>
+            <tr>
+                <th>Método</th>
+                <th>Descripción</th>
+                <th>Ejemplo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>head(n)</code></td>
+                <td>Devuelve las primeras <em>n</em> filas del DataFrame (por defecto 5).</td>
+                <td><code>df.head(3)</code></td>
+            </tr>
+            <tr>
+                <td><code>tail(n)</code></td>
+                <td>Devuelve las últimas <em>n</em> filas del DataFrame.</td>
+                <td><code>df.tail(2)</code></td>
+            </tr>
+            <tr>
+                <td><code>info()</code></td>
+                <td>Muestra información general del DataFrame: columnas, tipos de datos y valores nulos.</td>
+                <td><code>df.info()</code></td>
+            </tr>
+            <tr>
+                <td><code>describe()</code></td>
+                <td>Genera estadísticas descriptivas (media, desviación, min, max, cuartiles) de columnas numéricas.</td>
+                <td><code>df.describe()</code></td>
+            </tr>
+            <tr>
+                <td><code>shape</code></td>
+                <td>Devuelve una tupla con el número de filas y columnas del DataFrame.</td>
+                <td><code>df.shape</code></td>
+            </tr>
+            <tr>
+                <td><code>columns</code></td>
+                <td>Lista los nombres de todas las columnas.</td>
+                <td><code>df.columns</code></td>
+            </tr>
+            <tr>
+                <td><code>isnull()</code></td>
+                <td>Devuelve un DataFrame booleano indicando los valores nulos.</td>
+                <td><code>df.isnull()</code></td>
+            </tr>
+            <tr>
+                <td><code>dropna()</code></td>
+                <td>Elimina filas con valores nulos.</td>
+                <td><code>df.dropna()</code></td>
+            </tr>
+            <tr>
+                <td><code>fillna(valor)</code></td>
+                <td>Rellena valores nulos con el valor especificado.</td>
+                <td><code>df.fillna(0)</code></td>
+            </tr>
+            <tr>
+                <td><code>sort_values(by)</code></td>
+                <td>Ordena el DataFrame por los valores de una columna o lista de columnas.</td>
+                <td><code>df.sort_values('edad')</code></td>
+            </tr>
+            <tr>
+                <td><code>groupby(col)</code></td>
+                <td>Agrupa el DataFrame por los valores de una columna para realizar agregaciones.</td>
+                <td><code>df.groupby('ciudad')['salario'].mean()</code></td>
+            </tr>
+            <tr>
+                <td><code>pivot_table()</code></td>
+                <td>Crea una tabla dinámica agregando datos según filas y columnas específicas.</td>
+                <td><code>df.pivot_table(values='salario', index='departamento', columns='ciudad', aggfunc='mean')</code></td>
+            </tr>
+            <tr>
+                <td><code>apply(func)</code></td>
+                <td>Aplica una función a cada elemento, fila o columna del DataFrame.</td>
+                <td><code>df['edad'].apply(lambda x: x*2)</code></td>
+            </tr>
+            <tr>
+                <td><code>merge()</code></td>
+                <td>Permite unir DataFrames usando una columna clave, similar a JOIN en SQL.</td>
+                <td><code>pd.merge(df1, df2, on='id')</code></td>
+            </tr>
+            <tr>
+                <td><code>concat()</code></td>
+                <td>Concatena DataFrames vertical u horizontalmente.</td>
+                <td><code>pd.concat([df1, df2])</code></td>
+            </tr>
+            <tr>
+                <td><code>drop(columns)</code></td>
+                <td>Elimina columnas específicas del DataFrame.</td>
+                <td><code>df.drop(['columna1','columna2'], axis=1)</code></td>
+            </tr>
+            <tr>
+                <td><code>rename()</code></td>
+                <td>Cambia el nombre de columnas o índices.</td>
+                <td><code>df.rename(columns={'edad':'edad_años'})</code></td>
+            </tr>
+            <tr>
+                <td><code>sample(n)</code></td>
+                <td>Extrae una muestra aleatoria de <em>n</em> filas del DataFrame.</td>
+                <td><code>df.sample(5)</code></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- 4. CARGA DE DATOS         -->
+    <!-- ========================= -->
+    <div class="section">
+        <h2>4. Carga de datos con Pandas</h2>
+
+        <p>
+            Pandas ofrece funciones para importar datos desde múltiples fuentes:
+            archivos CSV, Excel, JSON, bases de datos SQL o APIs. Esto permite trabajar con datasets reales de manera
+            rápida y reproducible.
+        </p>
+
+        <ul>
+            <li><strong>CSV:</strong> archivos de texto separados por comas.</li>
+            <li><strong>Excel:</strong> hojas de cálculo con múltiples pestañas.</li>
+            <li><strong>JSON:</strong> datos estructurados en formato JSON.</li>
+            <li><strong>SQL:</strong> bases de datos relacionales.</li>
+        </ul>
+
+        <div class="code-box">
+            <pre><code class="language-python"># CSV
+df_csv = pd.read_csv('datos.csv')
+
+# Excel
+df_excel = pd.read_excel('datos.xlsx')
+
+# JSON
+import json
+with open('datos.json') as f:
+    data_json = json.load(f)
+df_json = pd.DataFrame(data_json)
+
+# Buenas prácticas:
+# - Revisar tipos de datos con df.dtypes
+# - Comprobar valores nulos con df.isnull().sum()
+</code></pre>
+        </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 5. MANIPULACIÓN DE DATOS  -->
+    <!-- ========================= -->
+    <div class="section">
+    <h2>5. Manipulación y transformación de datos</h2>
+
+    <p>
+        Pandas permite realizar todas las operaciones esenciales de análisis de datos: selección de columnas, filtrado de filas, creación de nuevas columnas, manejo de fechas, agregaciones y agrupaciones. A continuación veremos un ejemplo completo desde la carga de datos hasta su análisis.
+    </p>
+
+    <h3>5.1 Ejemplo completo con CSV</h3>
+    <p>Supongamos que tenemos un archivo CSV llamado <code>empleados.csv</code> con la siguiente estructura:</p>
+
+    <table border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th>nombre</th>
+                <th>edad</th>
+                <th>ciudad</th>
+                <th>departamento</th>
+                <th>salario</th>
+                <th>fecha_ingreso</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Ana</td><td>25</td><td>Madrid</td><td>IT</td><td>2500</td><td>2020-01-01</td></tr>
+            <tr><td>Luis</td><td>34</td><td>Barcelona</td><td>Marketing</td><td>3200</td><td>2018-05-15</td></tr>
+            <tr><td>Carlos</td><td>42</td><td>Valencia</td><td>Ventas</td><td>4000</td><td>2015-09-30</td></tr>
+            <tr><td>Marta</td><td>19</td><td>Sevilla</td><td>IT</td><td>1800</td><td>2021-03-20</td></tr>
+            <tr><td>Jorge</td><td>28</td><td>Madrid</td><td>Marketing</td><td>2800</td><td>2019-07-10</td></tr>
+            <tr><td>Lucia</td><td>31</td><td>Barcelona</td><td>Ventas</td><td>3000</td><td>2017-11-05</td></tr>
+        </tbody>
+    </table>
+<div class="section">
+    <h2>Descarga del CSV de Ejemplo</h2>
+    <p>Puedes descargar el archivo <code>empleados.csv</code> con los datos de ejemplo para practicar Pandas:</p>
+
+    <a href="../assets/empleados.csv" download="empleados.csv" class="download-button">
+        Descargar CSV de empleados
+    </a>
+</div>
+    <div class="code-box">
+        <pre><code class="language-python">import pandas as pd
+
+# 1. Cargar datos desde CSV
+df = pd.read_csv('empleados.csv')
+
+# Mostrar primeras filas para verificar
+print(df.head())
+
+# 2. Selección de columnas
+print(df['nombre'])              # Columna unidimensional (Series)
+print(df[['nombre','salario']])  # Selección de varias columnas
+
+# 3. Filtrado de filas
+df_mayor_30 = df[df['edad'] > 30]
+print(df_mayor_30)
+
+# 4. Crear nuevas columnas
+df['salario_anual'] = df['salario'] * 12
+df['edad_en_dias'] = df['edad'] * 365
+
+# 5. Manejo de fechas
+df['fecha_ingreso'] = pd.to_datetime(df['fecha_ingreso'])
+df['año_ingreso'] = df['fecha_ingreso'].dt.year
+df['mes_ingreso'] = df['fecha_ingreso'].dt.month
+df['dia_ingreso'] = df['fecha_ingreso'].dt.day
+
+# Buenas prácticas:
+# - Siempre revisar tipos de datos: df.dtypes
+# - Comprobar nulos: df.isnull().sum()
+# - Evitar bucles usando operaciones vectorizadas
+# - Documentar columnas nuevas y transformaciones
+</code></pre>
+    </div>
+
+    <p>
+        Con este flujo completo, desde la carga del CSV hasta las agregaciones y transformaciones, se puede hacer un análisis inicial del dataset, limpiar datos, crear nuevas métricas y preparar la información para visualización o modelado.
+    </p>
+</div>
+
+
+    <!-- ========================= -->
+    <!-- 6. ESTADÍSTICA NUMPY      -->
+    <!-- ========================= -->
+    <div class="section">
+        <h2>6. Estadística con NumPy</h2>
+
+        <p>
+            NumPy complementa a Pandas en cálculos estadísticos, permitiendo trabajar de manera vectorizada, eficiente y
+            rápida incluso con grandes datasets.
+        </p>
+
+        <div class="code-box">
+            <pre><code class="language-python">import numpy as np
+
+# Crear array con datos de ingresos
+ingresos = np.array([50000, 60000, 55000, 35000])
+
+# Calcular media, percentil y desviación estándar
+print("Media:", np.mean(ingresos))
+print("Percentil 75:", np.percentile(ingresos, 75))
+print("Desviación estándar:", np.std(ingresos))
+
+# Buenas prácticas:
+# - Usar funciones de NumPy para evitar bucles
+# - Revisar outliers y distribución de los datos
+</code></pre>
+        </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 7. COMBINANDO             -->
+    <!-- ========================= -->
+    <div class="section">
+        <h2>7. Combinando NumPy y Pandas</h2>
+
+        <div class="diagram">
+            <img src="../assets/anello_introduction_numpy_pandas_19.jpg" width="450" alt="Integración NumPy y Pandas">
+        </div>
+
+        <p>
+            Pandas y NumPy se complementan perfectamente: Pandas maneja la estructura tabular y NumPy realiza cálculos
+            vectorizados sobre los datos.
+        </p>
+
+        <div class="code-box">
+            <pre><code class="language-python"># Calcular estadísticas usando NumPy sobre columnas de DataFrame
+df['edad_media'] = np.mean(df['edad'])
+df['edad_max'] = np.max(df['edad'])
+df['edad_min'] = np.min(df['edad'])
+
+# Nota avanzada: 
+# Para datasets muy grandes, se recomienda usar operaciones NumPy directamente para optimizar memoria y velocidad
+</code></pre>
+        </div>
+    </div>
+
+  
+    
+    <!-- ========================= -->
+    <!-- 8. ACTIVIDADES            -->
+    <!-- ========================= -->
+    <div class="section">
+        <h2>8. Actividades</h2>
+
+        <p>
+            Para consolidar lo aprendido, se proponen ejercicios prácticos que combinan Pandas y NumPy:
+        </p>
+
+        <ol>
+            <li>Cargar el archivo CSV de ejemplo en un DataFrame de Pandas.</li>
+            <li>Explorar el DataFrame: <code>head()</code>, <code>info()</code>, <code>describe()</code>. Analiza el contenido que muestra cada método.</li>
+            <li>Filtrar empleados por edad, ciudad y departamento. Se tienen que hacer consultas separadas.</li>
+            <li>Crear nuevas columnas con cálculos: salario anual y antigüedad en años.</li>
+            <li>Aplicar funciones estadísticas de NumPy: media, desviación estándar y percentiles.</li>
+            <li>Realizar agrupaciones por ciudad, departamento y rango de edad (separadas): calcular métricas resumen.</li>
+            <li>Responded a las siguientes preguntas: 
+                <ul><li>1. Empleado más antiguo.</li>
+                    <li>2. Ciudad con más empleados. </li>
+                    <li>3. Departamento con mayor salario promedio.</li>
+                    <li>4. Empleado con menos experiencia en la empresa.</li>
+                    <li>5. Empleados de marketing, de la ciudad de Barcelona y Madrid, que tengan más de 10 años de experiencia.</li>
+                    <li>5. Empleados de marketing, de la ciudad de Barcelona y Madrid, que tengan más de 10 años de experiencia.</li>
+
+        </ol>
+
+        <a href="../assets/ejemplo_csv.csv" download class="download-button">Descargar CSV de ejemplo</a>
+    </div>
+
+
+
+    <footer>
+        <p>&copy; Vicente Català Ruiz 2025-26. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+
+</html>
