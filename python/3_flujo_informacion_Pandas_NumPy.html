@@ -785,10 +785,23 @@ df['edad_min'] = np.min(df['edad'])
             <li>Realizar agrupaciones por ciudad, departamento y rango de edad (separadas): calcular métricas resumen.</li>
             <li>Responded a las siguientes preguntas: 
                 <ul><li>1. Empleado más antiguo.</li>
+                     <div class="code-box">
+            <pre>Ejemplo para obtener fechas del sistema<code class="language-python">from datetime import datetime
+
+current_second = datetime.now().second
+current_minute = datetime.now().minute
+current_hour = datetime.now().hour
+
+current_day = datetime.now().day
+current_month = datetime.now().month
+current_year = datetime.now().year
+
+print(current_day)
+</code></pre>
+        </div>
                     <li>2. Ciudad con más empleados. </li>
                     <li>3. Departamento con mayor salario promedio.</li>
                     <li>4. Empleado con menos experiencia en la empresa.</li>
-                    <li>5. Empleados de marketing, de la ciudad de Barcelona y Madrid, que tengan más de 10 años de experiencia.</li>
                     <li>5. Empleados de marketing, de la ciudad de Barcelona y Madrid, que tengan más de 10 años de experiencia.</li>
 
         </ol>
