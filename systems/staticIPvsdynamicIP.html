@@ -1,77 +1,88 @@
 <!DOCTYPE html>
 <html lang='es'>
+
 <head>
-<meta charset='UTF-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1.0'>
-<title>Redes: Conceptos Básicos y Configuración</title>
-<!-- Enlaces a la hoja de estilos y recursos del curso -->
-<link rel='stylesheet' href='https://vcatalaruiz.github.io/course-resources/style.css'>
-<link rel='stylesheet' href='https://vcatalaruiz.github.io/course-resources/prism.css'>
-<script src='https://vcatalaruiz.github.io/course-resources/prism.js'></script>
-<script type='module'>
-import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-mermaid.initialize({ startOnLoad: true });
-</script>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>Redes: Conceptos Básicos y Configuración</title>
+  <!-- Enlaces a la hoja de estilos y recursos del curso -->
+  <link rel='stylesheet' href='https://vcatalaruiz.github.io/course-resources/style.css'>
+  <link rel='stylesheet' href='https://vcatalaruiz.github.io/course-resources/prism.css'>
+  <script src='https://vcatalaruiz.github.io/course-resources/prism.js'></script>
+  <script type='module'>
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
 </head>
+
 <body>
-    <header>
-        <img src="../assets/logo_stucom.svg" alt="Logo de la escuela">
+  <header>
+    <img src="../assets/logo_stucom.svg" alt="Logo de la escuela">
     <h1>Redes: Conceptos Básicos y Configuración</h1>
     </div>
-</header>
-<main>
-<section>
-<h2>Introducción: ¿Qué es una IP?</h2>
-<p><strong>IP (Internet Protocol):</strong> Es un número único que identifica un dispositivo en una red. Funciona como la "dirección" de tu casa, pero en el mundo digital. Gracias a la IP, los dispositivos pueden comunicarse entre sí.</p>
-<p>Existen dos versiones principales:</p>
-<ul>
-<li><strong>IPv4:</strong> Formato clásico, como 192.168.1.1.</li>
-<li><strong>IPv6:</strong> Formato más largo, diseñado para soportar más dispositivos.</li>
-</ul>
-<p>Sin una IP, tu dispositivo no podría enviar ni recibir datos en la red.</p>
-<h3>Otros términos importantes</h3>
-<ul>
-<li><strong>DHCP:</strong> Protocolo que asigna IPs automáticamente.</li>
-<li><strong>Gateway:</strong> Puerta de enlace para salir de la red local hacia Internet.</li>
-<li><strong>DNS:</strong> Sistema que traduce nombres de dominio en direcciones IP.</li>
-<li><strong>TCP:</strong> Protocolo que garantiza la entrega de datos.</li>
-<li><strong>UDP:</strong> Protocolo rápido, sin confirmación de entrega.</li>
-</ul>
-<div class='mermaid'>
-graph TD
-A[Dispositivo] --> B[Dirección IP]
-B --> C[Comunicación en Red]
-</div>
-</section>
+  </header>
+  <main>
+    <section>
+      <h2>Introducción: ¿Qué es una IP?</h2>
+      <p><strong>IP (Internet Protocol):</strong> Es un número único que identifica un dispositivo en una red. Funciona
+        como la "dirección" de tu casa, pero en el mundo digital. Gracias a la IP, los dispositivos pueden comunicarse
+        entre sí.</p>
+      <p>Existen dos versiones principales:</p>
+      <ul>
+        <li><strong>IPv4:</strong> Formato clásico, como 192.168.1.1.</li>
+        <li><strong>IPv6:</strong> Formato más largo, diseñado para soportar más dispositivos.</li>
+      </ul>
+      <p>Sin una IP, tu dispositivo no podría enviar ni recibir datos en la red.</p>
+      <h3>Otros términos importantes</h3>
+      <ul>
+        <li><strong>DHCP:</strong> Protocolo que asigna IPs automáticamente.</li>
+        <li><strong>Gateway:</strong> Puerta de enlace para salir de la red local hacia Internet.</li>
+        <li><strong>DNS:</strong> Sistema que traduce nombres de dominio en direcciones IP.</li>
+        <li><strong>TCP:</strong> Protocolo que garantiza la entrega de datos.</li>
+        <li><strong>UDP:</strong> Protocolo rápido, sin confirmación de entrega.</li>
+      </ul>
+      <div class='mermaid'>
+        graph TD
+        A[Dispositivo] --> B[Dirección IP]
+        B --> C[Comunicación en Red]
+      </div>
+    </section>
 
-<section>
-<h2>2. IP de Gateway y DNS</h2>
-<p><strong>Gateway:</strong> Es la puerta de enlace que conecta tu red local con otras redes, normalmente Internet. El Gateway actúa como intermediario: cuando tu dispositivo quiere acceder a una página web, envía los datos al Gateway, que los redirige hacia Internet.</p>
-<p>Además, el Gateway suele realizar funciones de <strong>enrutamiento</strong> (decide por dónde enviar los datos) y <strong>NAT (Network Address Translation)</strong>, que permite que varios dispositivos compartan una sola IP pública para salir a Internet.</p>
-<p>Sin un Gateway, tu equipo solo podría comunicarse con dispositivos dentro de la misma red local.</p>
-<h3>Ejemplo práctico</h3>
-<p>En una red doméstica, el router es el Gateway. Si tu router tiene IP 192.168.1.1, todos los dispositivos envían sus solicitudes a esa dirección para salir a Internet.</p>
-<pre class='language-bash'>
+    <section>
+      <h2>2. IP de Gateway y DNS</h2>
+      <p><strong>Gateway:</strong> Es la puerta de enlace que conecta tu red local con otras redes, normalmente
+        Internet. El Gateway actúa como intermediario: cuando tu dispositivo quiere acceder a una página web, envía los
+        datos al Gateway, que los redirige hacia Internet.</p>
+      <p>Además, el Gateway suele realizar funciones de <strong>enrutamiento</strong> (decide por dónde enviar los
+        datos) y <strong>NAT (Network Address Translation)</strong>, que permite que varios dispositivos compartan una
+        sola IP pública para salir a Internet.</p>
+      <p>Sin un Gateway, tu equipo solo podría comunicarse con dispositivos dentro de la misma red local.</p>
+      <h3>Ejemplo práctico</h3>
+      <p>En una red doméstica, el router es el Gateway. Si tu router tiene IP 192.168.1.1, todos los dispositivos envían
+        sus solicitudes a esa dirección para salir a Internet.</p>
+      <pre class='language-bash'>
 gateway 192.168.1.1
 dns-nameservers 8.8.8.8 8.8.4.4
 </pre>
-<h3>Diagrama del flujo</h3>
-<div class='mermaid'>
-graph LR
-A[PC del Usuario] --> B[Gateway/Router]
-B --> C[Proveedor de Internet]
-C --> D[Servidor DNS]
-D --> E[Servidor Web]
-</div>
-<p><strong>DNS:</strong> Convierte nombres de dominio (ej. www.google.com) en direcciones IP. Sin DNS, tendrías que escribir la IP del servidor para acceder a una web.</p>
-</section>
+      <h3>Diagrama del flujo</h3>
+      <div class='mermaid'>
+        graph LR
+        A[PC del Usuario] --> B[Gateway/Router]
+        B --> C[Proveedor de Internet]
+        C --> D[Servidor DNS]
+        D --> E[Servidor Web]
+      </div>
+      <p><strong>DNS:</strong> Convierte nombres de dominio (ej. www.google.com) en direcciones IP. Sin DNS, tendrías
+        que escribir la IP del servidor para acceder a una web.</p>
+    </section>
 
-<section>
-<h2>3. Puertos de comunicación</h2>
-<p>Los puertos son números que identifican servicios en un dispositivo. Por ejemplo, el puerto 80 se usa para HTTP y el puerto 22 para SSH.</p>
-<p><strong>Tipos:</strong> TCP (conexión fiable) y UDP (rápido, sin confirmación).</p>
-<h3>Comandos para ver puertos</h3>
-<pre class='language-bash'>
+    <section>
+      <h2>3. Puertos de comunicación</h2>
+      <p>Los puertos son números que identifican servicios en un dispositivo. Por ejemplo, el puerto 80 se usa para HTTP
+        y el puerto 22 para SSH.</p>
+      <p><strong>Tipos:</strong> TCP (conexión fiable) y UDP (rápido, sin confirmación).</p>
+      <h3>Comandos para ver puertos</h3>
+      <pre class='language-bash'>
 # Con netstat
 netstat -tuln
 
@@ -81,19 +92,19 @@ ss -tuln
 # Escaneo con nmap desde otra máquina
 nmap -p 1-65535 192.168.1.100
 </pre>
-<div class='mermaid'>
-graph TD
-A[Cliente] -->|Puerto 80| B[Servidor Web]
-A -->|Puerto 22| C[Servidor SSH]
-</div>
-</section>
+      <div class='mermaid'>
+        graph TD
+        A[Cliente] -->|Puerto 80| B[Servidor Web]
+        A -->|Puerto 22| C[Servidor SSH]
+      </div>
+    </section>
 
-<section>
-<h2>4. Configuración de Netplan</h2>
-<p>Netplan es la herramienta en Ubuntu para configurar redes mediante archivos YAML.</p>
-<h3>Ejemplo IP estática</h3>
-<p>OJO! en este ejemplo la tarjeta se llama eth0, revisad con ip a si se llama igual o, por ejemplo, enp0s3 ;)</p>
-<pre class='language-yaml'>
+    <section>
+      <h2>4. Configuración de Netplan</h2>
+      <p>Netplan es la herramienta en Ubuntu para configurar redes mediante archivos YAML.</p>
+      <h3>Ejemplo IP estática</h3>
+      <p>OJO! en este ejemplo la tarjeta se llama eth0, revisad con ip a si se llama igual o, por ejemplo, enp0s3 ;)</p>
+      <pre class='language-yaml'>
 network:
   version: 2
   ethernets:
@@ -104,36 +115,36 @@ network:
       nameservers:
         addresses: [8.8.8.8, 8.8.4.4]
 </pre>
-<h3>Ejemplo IP dinámica</h3>
-<pre class='language-yaml'>
+      <h3>Ejemplo IP dinámica</h3>
+      <pre class='language-yaml'>
 network:
   version: 2
   ethernets:
     eth0:
       dhcp4: yes
 </pre>
-<div class='mermaid'>
-graph TD
-A[Archivo YAML] --> B[Netplan Apply]
-B --> C[Configuración de Red]
-</div>
-</section>
+      <div class='mermaid'>
+        graph TD
+        A[Archivo YAML] --> B[Netplan Apply]
+        B --> C[Configuración de Red]
+      </div>
+    </section>
     <section>
-    <h3>Más información</h3>
-    <p>Consulta este artículo para aprender más sobre cómo configurar una IP fija en Ubuntu:</p>
-    <a href="https://alexcastel.wordpress.com/2022/10/21/ip-fija-en-linux-ubuntu-20-04/" target="_blank">
+      <h3>Más información</h3>
+      <p>Consulta este artículo para aprender más sobre cómo configurar una IP fija en Ubuntu:</p>
+      <a href="https://alexcastel.wordpress.com/2022/10/21/ip-fija-en-linux-ubuntu-20-04/" target="_blank">
         IP fija en Linux Ubuntu 20.04 – Blog d'Alex Castel
-    </a>
-        <p>Puedes descargar Kali Linux para hacer pruebas:</p>
-    <a href="
+      </a>
+      <p>Puedes descargar Kali Linux para hacer pruebas:</p>
+      <a href="
         https://www.kali.org/get-kali/#kali-virtual-machines" target="_blank">
         Kali Linux - Descarga
-    </a>
+      </a>
     </section>
-</main>
-<footer>
-<p>Profesores: Alex Castel y Vicente Català - ®Todos los derechos reservados.</p>
-</footer>
+  </main>
+  <footer>
+    <p>Profesores: Alex Castel y Vicente Català - ®Todos los derechos reservados.</p>
+  </footer>
 </body>
-  </html>
-  
+
+</html>

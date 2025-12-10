@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Actividad – Diseño de escenario CTF colaborativo</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <img src="../../assets/logo_stucom.svg" alt="Logo" height="70px">
+        <h1>Actividad – Diseño de escenario CTF colaborativo</h1>
+    </header>
+    <main>
+        <section class="card">
+            <h2>Enunciado</h2>
+            <p>
+                Tras unos meses de práctica viajando por el universo, ha llegado el momento de bajar a la Tierra y
+                aplicar todos los conocimientos adquiridos. Se tendrán que diseñar
+                escenarios para "defenderos" de vuestros compañeros, al mismo tiempo que vosotros "atacáis" a los
+                demás.<em> Todo desde la amistad que os une..</em></p>
+
+
+            <p>En esta actividad formaremos equipos de <strong>3 estudiantes</strong>. Cada equipo tiene que montar
+                cuatro escenarios
+                CTF, tal y como habéis visto en clase durante el curso. Os podéis apoyar en las prácticas que tenéis en
+                el campus, pero no pueden ser iguales.
+            </p>
+            <p>Los equipos podrán elegir cuatro de las seis temáticas que se listan a continuación. </p>
+            <h3>Temáticas obligatorias:</h3>
+            <ul>
+                <li><strong>1 - </strong>Comandos básicos Linux y archivos ocultos.</li>
+                <li><strong>2 - </strong>Grupos y usuarios.</li>
+                <li><strong>3 - </strong>IP y servicio web.</li>
+                <li><strong>4 - </strong>DNS y Host.</li>
+                <li><strong>5 - </strong>Búsqueda de ficheros y contenido.</li>
+                <li><strong>6 - </strong>Ejecución de scripts con crontab.</li>
+            </ul>
+
+        </section>
+
+        <section class="card">
+            <h2>Requisitos del escenario</h2>
+            <ul>
+                <li>Enunciado de cada escenario.</li>
+                <li>Entrega del entorno en <strong>OVA (VirtualBox)</strong>.</li>
+                <li>Incluir un <strong>README</strong> con: Instrucciones para levantar el escenario y pistas para guiar
+                    a los atacantes.</li>
+                <li>Documento de solución (únicamente lo podrá ver el profesor)</li>
+                <li>Dificultad <strong>progresiva</strong>: empezar por tareas básicas y añadir capas (permisos, pistas
+                    que hagan pensar, logs, ofuscación, etc.).</li>
+                <li>Cada prueba debe ser <strong>autocontenida</strong>, con pistas suficientes para avanzar sin
+                    conocimiento externo.</li>
+                <li><strong>Antes de publicar el escenario, se tendrá que validar por parte de los profesores. Hasta que
+                        no tengáis el OK no podréis empezar.</strong></li>
+
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>Sistema de puntuación</h2>
+            <p>La puntuación se basará en el sistema de velocidad que se ha aplicado en los retos del curso. Con algunas
+                puntualizaciones:</p>
+            <h3>Atacante 30%</h3>
+            <ul>
+                <li>Sube la FLAG en el enlace que se proporcionará en el campus.</li>
+                <li>Cuanto menor sea el tiempo que se ha tardado en encontrar la FLAG, mayor puntuación tendréis.</li>
+            </ul>
+            <h3>Defensor 70%</h3>
+            <ul>
+                <li>Cuanto mayor sea el tiempo que se ha tardado en encontrar la FLAG, mayor puntuación tendréis.</li>
+                <li>Creatividad en la ocultación de la FLAG.</li>
+                
+            </ul>
+            
+            
+</code></pre>
+        </section>
+
+        
+        <section class="card">
+            <h2>Entregables</h2>
+            <ul>
+                <li>Archivo <strong>.ova</strong> (Enlace a la plataforma donde la has subido).</li>
+                <li><strong>README</strong> del escenario (Markdown o PDF).</li>
+                <li>Usuario y contraseña de acceso al entorno, si aplica.</li>
+                <li>Listado de <strong>flags</strong> por prueba (solo visible para el profesor).</li>
+                <li>Explicación del montaje y resolución de cada prueba.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>Plantilla de README (orientativa)</h2>
+            <pre><code># Nombre del escenario
+
+## Descripción
+Breve narrativa del reto y objetivos.
+
+## Requisitos previos
+VirtualBox, RAM/CPU recomendadas, puertos usados.
+
+## Puesta en marcha
+Pasos para importar OVA.
+
+## Pistas
+Listado de pistas (orden sugerido).
+
+## Solución (para el profesor)
+Paso a paso para encontrar cada flag.
+
+## Flags
+- Escenario 1: CTF{...} + equipo atacante + equipo atacado
+- Escenario 2: CTF{...} + equipo atacante + equipo atacado
+...
+</code></pre>
+        </section>
+        
+    </main>
+    <div class="footer">
+        <p>Profesores: Alex Castel y Vicente Català — ®Todos los derechos reservados.</p>
+    </div>
+</body>
+
+</html>
