@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resolución de nombres en redes: /etc/hosts, DNS y Virtual Hosts</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    /* body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; margin: 0; color: #1f2937; } */
+    /* header { background: #0f766e; color: #fff; padding: 2rem 1.5rem; } */
+    h1,
+    h2,
+    h3 {
+      margin: 0.6rem 0;
+    }
+
+    main {
+      padding: 1.5rem;
+      max-width: 980px;
+      margin: auto;
+    }
+
+    code,
+    pre {
+      background: #f4f6f8;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+    }
+
+    pre {
+      padding: 1rem;
+      overflow-x: auto;
+    }
+
+    .callout {
+      background: #fff7ed;
+      border: 1px solid #fdba74;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    @media (min-width: 800px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    footer {
+      border-top: 1px solid #e5e7eb;
+      margin-top: 2rem;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+
+    .kbd {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      background: #111827;
+      color: #e5e7eb;
+      padding: 0 6px;
+      border-radius: 4px;
+    }
+  </style>
+  <script type='module'>
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+</head>
+
+<body>
+  <header>
+    <img src="../assets/logo_stucom.svg" alt="Logo de la escuela">
+    <h1>Resolución de nombres en redes: <span class="kbd">/etc/hosts</span>, DNS y Virtual Hosts</h1>
+    <p>Guía conceptual y práctica para comprender cómo un nombre de dominio se traduce a una IP y cómo los servidores
+      web deciden a qué sitio responder.</p>
+  </header>
+  <main>
+    <section>
+      <h2>1. ¿Qué es la resolución de nombres?</h2>
+      <p>Es el proceso de convertir un <strong>nombre de dominio</strong> (por ejemplo, <code>urano-server.lan</code>)
+        en una <strong>dirección IP</strong> (por ejemplo, <code>192.168.1.100</code>) para que las aplicaciones puedan
+        comunicarse con el servidor. Los humanos recuerdan mejor los nombres; las redes se comunican con números.</p>
+      <div class="diagram" >
+            <img src="../assets/dns_working.gif"  alt="Logos NumPy y Pandas">
+        </div>
+        <div>
+          <h3>Cadena de resolución típica</h3>
+          <ol>
+            <li>El cliente busca primero en su archivo local <code>/etc/hosts</code>.</li>
+            <li>Si no encuentra el nombre, consulta el servidor <strong>DNS</strong> configurado.</li>
+            <li>Con la IP resultante, el cliente envía la petición al servidor.</li>
+          </ol>
+          <div class="callout"><strong>Idea clave:</strong> <code>/etc/hosts</code> tiene <em>prioridad</em> sobre DNS.
+            Úsalo para pruebas o mapeos específicos en tu equipo.</div>
+          <div class="diagram" >
+            <img src="../assets/how-linux-etc-host-file-work.avif" style="max-width: 100%;" width="450" alt="Logos NumPy y Pandas">
+        </div>
+        </div>
+        <div>
+          
+        </div>
+      
+    </section>
+
+    <section>
+      <h2>2. Resolución local con <code>/etc/hosts</code></h2>
+      <p>Permite crear un mapeo estático nombre→IP en tu máquina sin depender de DNS.</p>
+      <pre><code class="language-java"># Edita el archivo como superusuario
+sudo nano /etc/hosts
+
+# Añade el mapeo
+192.168.1.100 urano-server.lan
+
+# Prueba el acceso por nombre
+w3m http://urano-server.lan
+</code></pre>
+      
+    </section>
+
+    <section>
+      <h2>3. Resolución con DNS (servidor externo)</h2>
+      <p>Para nombres que no están en <code>/etc/hosts</code> (por ejemplo, <code>ctf.urano.lan</code>), debes consultar
+        un <strong>servidor DNS</strong> (en el reto de clase sería: <code>192.168.1.100</code>).</p>
+      <h3>Configura tu cliente para usar ese DNS</h3>
+      <pre><code class="language-python"># Ejemplo con Netplan (Ubuntu)
+# OJO: sustituye 'eth0' por el nombre real de tu interfaz (p.ej., enp0s3)
+network:
+  version: 2
+  ethernets:
+    eth0:
+      dhcp4: yes
+      nameservers:
+        addresses: [192.168.1.100]
+
+# Aplica la configuración
+sudo netplan apply
+
+# Prueba resolución y acceso
+w3m http://ctf.urano.lan
+</code></pre>
+      
+    </section>
+
+   
+<section>
+  <h2>4. ¿Por qué a veces la IP no funciona?</h2>
+  <p>Cuando accedes a un servidor web por su <strong>IP</strong>, puede que no obtengas el sitio esperado. ¿Por qué? 
+  Muchos servidores usan <strong>Virtual Hosts</strong> (vhosts), una técnica que permite alojar varios sitios en la misma IP. 
+  El servidor decide qué contenido mostrar según la cabecera <code>Host</code> que envía el cliente en la petición HTTP.</p>
+  <p>Si accedes por IP sin el nombre correcto, la cabecera <code>Host</code> no coincide y el servidor puede devolver un error o un sitio por defecto.</p>
+  <pre><code># Ejemplo conceptual de vhost (Apache)
+&lt;VirtualHost *:80&gt;
+  ServerName urano-server.lan
+  DocumentRoot /var/www/urano
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:80&gt;
+  ServerName ctf.urano.lan
+  DocumentRoot /var/www/ctf
+&lt;/VirtualHost&gt;
+</code></pre>
+  <div class="callout"><strong>Pista 1:</strong> Acceder por nombre asegura que la cabecera <code>Host</code> coincida y el servidor entregue el sitio correcto.</div>
+  <br>
+  <div class="callout"><strong>Pista 2:</strong> En el reto de clase sucede algo si accedes con la IP en lugar de por nombre, <code>¿Crees qué puede tener relación?.</code></div>
+
+</section>
+
+
+    
+<section>
+  <h2>5. Esquema conceptual del flujo</h2>
+  <div class="mermaid">
+    graph TD
+      A[Cliente] --> B[ /etc/hosts]
+      B -->|Si existe| C[IP del servidor]
+      B -->|Si no existe| D[Consulta DNS]
+      D --> C
+      C --> E[Petición HTTP con Host: nombre]
+      E --> F[Servidor web selecciona el vhost correcto]
+  </div>
+</section>
+
+   
+
+    <section>
+      <h2>7. Comprobaciones y diagnóstico</h2>
+      <pre><code># Ver qué DNS está usando tu equipo
+resolvectl status
+
+# Comprobar entrada en /etc/hosts
+getent hosts urano-server.lan
+
+# Consultar al DNS específico
+dig @192.168.1.100 ctf.urano.lan
+
+# Ver la cabecera Host que envía tu cliente (con curl)
+curl -H "Host: urano-server.lan" http://192.168.1.100/
+</code></pre>
+    </section>
+
+    <footer>
+      <p>Profesores: Alex Castel y Vicente Català — ®Todos los derechos reservados.</p>
+    </footer>
+  </main>
+</body>
+
+</html>

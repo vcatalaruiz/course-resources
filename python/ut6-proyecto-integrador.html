@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UT6. Proyecto Integrador</title>
+
+    <!-- Mermaid -->
+    <script type="module">
+        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+
+    <!-- HighlightJS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+    <header>
+        <img style="background-color: white; padding: 2%;" src="../assets/linkia_logo.jpeg" alt="Logo de la escuela">
+        <h1>UT6. Proyecto Integrador</h1>
+    </header>
+
+    <main>
+
+        <!-- ÍNDICE -->
+        <section id="indice">
+            <h2>Índice de la Unidad</h2>
+            <ol>
+                <li>Introducción general</li>
+                <li>Fase 1: Diseño</li>
+                <li>Fase 2: Desarrollo</li>
+                <li>Fase 3: Validación</li>
+                <li>Fase 4: Autoevaluación y mejora</li>
+                <li>Fuentes de información</li>
+                <li>Glosario</li>
+                <li>Actividades de evaluación</li>
+                <li>Tabla de relación contenidos-criterios</li>
+                <li>Rúbrica global</li>
+                <li>Ejemplo completo: Gestión de un colegio</li>
+            </ol>
+        </section>
+
+        <!-- INTRODUCCIÓN -->
+        <section id="introduccion">
+            <h2>Introducción General</h2>
+            <p>El proyecto integrador busca consolidar los conocimientos adquiridos en las unidades anteriores mediante
+                el desarrollo de una solución completa que incluya diseño, implementación, validación y mejora continua.
+                Este proyecto simula un caso real y prepara al alumnado para entornos profesionales.</p>
+            <!-- Imagen conceptual aquí -->
+        </section>
+
+        <!-- FASE 1 -->
+        <section id="fase1">
+            <h2>Fase 1: Diseño</h2>
+            <h3>1.1 Análisis de necesidades</h3>
+            <p>Todo proyecto parte de una necesidad o problema. Debes responder:</p>
+            <ul>
+                <li>¿Qué funcionalidad principal tendrá la aplicación?</li>
+                <li>¿Qué tipo de usuario la utilizará?</li>
+                <li>¿Qué entradas y salidas son necesarias?</li>
+                <li>¿Qué problema concreto resuelve?</li>
+            </ul>
+            <p>Incluye requisitos funcionales (qué hace el sistema) y no funcionales (rendimiento, seguridad,
+                compatibilidad). Añade una descripción narrativa del proyecto.</p>
+            <p><strong>Ejemplo:</strong> Gestión de biblioteca escolar: registro de libros, préstamos, devoluciones y
+                usuarios.</p>
+
+            <h3>1.2 Planificación del proyecto</h3>
+            <p>Define fases, tiempos, secuencia, recursos y gestión de versiones. Usa diagramas de Gantt para visualizar
+                tareas.</p>
+            <!-- Imagen Gantt aquí -->
+
+            <h3>1.3 Estructura modular del código</h3>
+            <p>Organiza el proyecto en módulos independientes:</p>
+            <pre><code>
+proyecto_integrador/
+├── data/
+├── src/
+│   ├── main.py
+│   ├── utils.py
+│   └── models/
+└── docs/
+    </code></pre>
+            <div class="diagram">
+                ```mermaid
+                graph TD
+                A[main.py] --> B[utils.py]
+                A --> C[models]
+                ```
+            </div>
+        </section>
+
+        <!-- FASE 2 -->
+        <section id="fase2">
+            <h2>Fase 2: Desarrollo</h2>
+            <h3>2.1 Implementación de funciones y clases</h3>
+            <p>Aplica PEP8, modularidad y documentación clara.</p>
+            <p>PEP 8 es la guía oficial de estilo para escribir código Python, que establece convenciones para que el
+                código sea más legible y coherente. Se centra en aspectos como la indentación (usar 4 espacios en lugar
+                de tabuladores), la longitud máxima de línea (79 caracteres), el uso de espacios en blanco, la forma de
+                nombrar variables (usando snake_case) y funciones (snake_case) y el formato de comentarios y docstrings
+            </p>
+            <p><strong>Reglas clave de PEP 8</strong></p>
+            <ul>
+                <li><p>Indentación: Usa 4 espacios por cada nivel de indentación. </p></li>
+                <li><p>Longitud de línea: Limita las líneas a un máximo de 79 caracteres. </p></li>
+                <li><p>Líneas en blanco: Usa dos líneas en blanco para separar funciones y clases de nivel superior, y una línea
+                para separar métodos dentro de una clase. </p></li>
+            </ul>
+            <p>Líneas en blanco: Usa dos líneas en blanco para separar funciones y clases de nivel superior, y una línea
+                para separar métodos dentro de una clase. </p>
+            <p>Nombres: Usa snake_case (minúsculas separadas por guiones bajos) para variables y funciones, y CamelCase
+                para nombres de clases. </p>
+            <p>Espacios en blanco: Usa espacios alrededor de los operadores (como =) y después de las comas, pero no
+                dentro de los paréntesis. </p>
+            <p>Importaciones: Deben estar al principio del archivo, cada una en su propia línea y agrupadas en el orden:
+                biblioteca estándar, bibliotecas de terceros y bibliotecas locales. </p>
+            <p>Comentarios: Deben ser frases completas que empiecen con mayúscula y expliquen el código, no lo obvio.
+                Las docstrings para funciones, clases y métodos públicos se rigen por el PEP 257. </p>
+
+            <pre><code class="language-python">
+class AnalizadorDatos:
+    def __init__(self, ruta_csv):
+        self.ruta_csv = ruta_csv
+
+    def cargar_datos(self):
+        import pandas as pd
+        return pd.read_csv(self.ruta_csv)
+    </code></pre>
+
+            <h3>2.2 Gestión de datos de entrada/salida</h3>
+            <p>Entrada: input() o lectura de archivos. Salida: print(), archivos .txt, .csv, JSON.</p>
+            <pre><code class="language-python">
+import json
+with open('datos.json') as f:
+    data = json.load(f)
+    </code></pre>
+
+            <h3>2.3 Control de errores</h3>
+            <p>Usa try-except-finally y mensajes claros.</p>
+            <pre><code class="language-python">
+try:
+    datos = cargar_datos()
+except FileNotFoundError:
+    print("Archivo no encontrado")
+    </code></pre>
+        </section>
+
+        <!-- FASE 3 -->
+        <section id="fase3">
+            <h2>Fase 3: Validación</h2>
+            <h3>3.1 Pruebas funcionales</h3>
+            <p>Diseña casos de prueba para cada función.</p>
+            <pre><code class="language-python">
+def test_suma():
+    assert suma(2, 3) == 5
+    </code></pre>
+
+            <h3>3.2 Revisión de código y documentación</h3>
+            <p>Aplica PEP8 y docstrings:</p>
+            <pre><code class="language-python">
+def suma(a: int, b: int) -> int:
+    """Devuelve la suma de dos enteros."""
+    return a + b
+    </code></pre>
+
+            <h3>3.3 Presentación del proyecto</h3>
+            <p>Incluye descripción, capturas, valoración personal y coherencia entre diseño e implementación.</p>
+        </section>
+
+        <!-- FASE 4 -->
+        <section id="fase4">
+            <h2>Fase 4: Autoevaluación y mejora</h2>
+            <p>Reflexiona sobre dificultades, propuestas de mejora y competencias adquiridas. Usa escala 1-5 y
+                comentarios.</p>
+            <pre><code>
+Competencia técnica | Nivel (1-5) | Observaciones
+Modularidad         | 4           | Mejorar división en funciones
+POO                 | 3           | Dificultad con herencia
+    </code></pre>
+        </section>
+
+        <!-- FUENTES -->
+        <section id="fuentes">
+            <h2>Fuentes de información</h2>
+            <ul>
+                <li>Córdova, J., & Valdivia, R. (2021). Aprende Python desde cero.</li>
+                <li>Downey, A. (2022). Think Python.</li>
+                <li>Lutz, M. (2021). Learning Python.</li>
+                <li><a href="https://docs.python.org">Documentación oficial de Python</a></li>
+            </ul>
+        </section>
+
+        <!-- GLOSARIO -->
+        <section id="glosario">
+            <h2>Glosario</h2>
+            <table>
+                <tr>
+                    <th>Término</th>
+                    <th>Definición</th>
+                </tr>
+                <tr>
+                    <td>Algoritmo</td>
+                    <td>Conjunto ordenado de pasos para resolver un problema.</td>
+                </tr>
+                <tr>
+                    <td>Clase</td>
+                    <td>Plantilla que define atributos y métodos en POO.</td>
+                </tr>
+                <tr>
+                    <td>PEP8</td>
+                    <td>Guía oficial de estilo para Python.</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- ACTIVIDADES -->
+        <section id="actividades">
+            <h2>Actividades de evaluación</h2>
+            <h3>Actividad 1</h3>
+            <p>Redacta la descripción narrativa del proyecto.</p>
+            <h3>Actividad 2</h3>
+            <p>Diseña la arquitectura modular del código.</p>
+            <h3>Actividad 3</h3>
+            <p>Realiza pruebas funcionales y documenta el código.</p>
+        </section>
+
+        <!-- RÚBRICA -->
+        <section id="rubrica">
+            <h2>Rúbrica Global</h2>
+            <table>
+                <tr>
+                    <th>Criterio</th>
+                    <th>Excelente</th>
+                    <th>Aceptable</th>
+                    <th>Insuficiente</th>
+                </tr>
+                <tr>
+                    <td>Diseño</td>
+                    <td>Completo y modular</td>
+                    <td>Parcial</td>
+                    <td>Deficiente</td>
+                </tr>
+                <tr>
+                    <td>Código</td>
+                    <td>Correcto y documentado</td>
+                    <td>Con errores menores</td>
+                    <td>Incorrecto</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- EJEMPLO COMPLETO -->
+        <section id="ejemplo">
+            <h2>Ejemplo completo: Gestión de un colegio</h2>
+            <p>Este proyecto integrador consiste en desarrollar una aplicación para gestionar un colegio. Incluye:</p>
+            <ul>
+                <li>Registro de alumnos y profesores.</li>
+                <li>Gestión de asignaturas y matrículas.</li>
+                <li>Control de notas y asistencia.</li>
+            </ul>
+            <h3>Estructura del proyecto</h3>
+            <pre><code>
+gestion_colegio/
+├── data/
+│   ├── alumnos.csv
+│   ├── profesores.csv
+├── src/
+│   ├── main.py
+│   ├── utils.py
+│   ├── models/
+│   │   ├── alumno.py
+│   │   ├── profesor.py
+│   │   └── asignatura.py
+└── docs/
+    </code></pre>
+
+            <h3>Código base</h3>
+            <pre><code class="language-python">
+# models/alumno.py
+class Alumno:
+    def __init__(self, nombre, edad, curso):
+        self.nombre = nombre
+        self.edad = edad
+        self.curso = curso
+
+# models/profesor.py
+class Profesor:
+    def __init__(self, nombre, asignatura):
+        self.nombre = nombre
+        self.asignatura = asignatura
+
+# main.py
+from models.alumno import Alumno
+from models.profesor import Profesor
+
+alumnos = [Alumno("Ana", 14, "2º ESO"), Alumno("Luis", 15, "3º ESO")]
+profesores = [Profesor("María", "Matemáticas"), Profesor("Juan", "Historia")]
+
+for alumno in alumnos:
+    print(f"Alumno: {alumno.nombre}, Curso: {alumno.curso}")
+    </code></pre>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© Vicente Català Ruiz 2025-26. Todos los derechos reservados.</p>
+    </footer>
+</body>
+
+</html>
