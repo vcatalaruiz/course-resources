@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Router y rutas estáticas</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      color: #1f2937;
+    }
+
+    header {
+      background: #1d4ed8;
+      color: #fff;
+      padding: 2rem;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    main {
+      padding: 1.5rem;
+      max-width: 980px;
+      margin: auto;
+    }
+
+    code,
+    pre {
+      background: #f4f6f8;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+    }
+
+    pre {
+      padding: 1rem;
+      overflow-x: auto;
+    }
+
+    .callout {
+      background: #fef3c7;
+      border: 1px solid #fcd34d;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+    }
+
+    .mermaid {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      padding: 1rem;
+      border-radius: 6px;
+    }
+
+    footer {
+      border-top: 1px solid #e5e7eb;
+      margin-top: 2rem;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+  </style>
+  <script type='module'>
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <header>
+    <img src="../assets/logo_stucom.svg" alt="Logo de la escuela">
+    <h1>Router y rutas estáticas</h1>
+
+  </header>
+
+  <main>
+
+
+
+    <section>
+      <h2>1. ¿Qué es un router?</h2>
+      <p>Un <strong>router</strong> es un dispositivo que conecta dos o más redes diferentes y decide cómo enviar los
+        paquetes entre ellas. Trabaja en la capa 3 del modelo OSI (capa de red) y utiliza direcciones IP para tomar
+        decisiones.</p>
+      <ul>
+        <li>Permite la comunicación entre subredes distintas.</li>
+        <li>Actúa como <strong>gateway</strong> hacia otras redes.</li>
+        <li>Puede aplicar políticas de enrutamiento y seguridad.</li>
+      </ul>
+      <div class="diagram">
+        <img src="../assets/routerLAN.gif" alt="Router">
+      </div>
+      <div class="callout"><strong>Objetivo:</strong> Que un cliente en la red 192.168.2.0/24 pueda comunicarse con otro
+        de la red 192.168.1.0/24 y pueda acceder a sus recursos.</div>
+
+    </section>
+
+    <section>
+      <h2>2. Diferencia entre router y switch</h2>
+      <p>A veces, el router se confunde con el switch, ya que visualmente son muy parecidos, pero hacen cosas
+        completamente distintas.</p>
+      <p><strong>Switch:</strong> Conecta dispositivos dentro de la misma red (capa 2).<br>
+        <strong>Router:</strong> Conecta redes distintas y toma decisiones basadas en IP (capa 3).
+      </p>
+      <div class="diagram">
+        <img src="../assets/Router vs switch.gif" alt="Router vs Switch">
+      </div>
+    </section>
+
+    <section>
+      <h2>3. Direccionamiento IP y subredes</h2>
+      <p>Cada dispositivo necesita una dirección IP única. Las subredes se definen con una máscara (ej. /24 equivale a
+        255.255.255.0). Ejemplo:</p>
+      <pre><code>Red: 192.168.1.0/24
+Rango de hosts: 192.168.1.1 - 192.168.1.254
+</code></pre>
+      <div class="callout"><strong>IP fija vs dinámica:</strong> Para rutas estáticas, el router y los clientes deben
+        tener IP fija.</div>
+    </section>
+
+
+    <section>
+      <h2>4. Gateway</h2>
+      <p>El <strong>gateway</strong> (puerta de enlace) es el dispositivo que permite a un equipo salir de su red local
+        y comunicarse con otras redes. Actúa como intermediario entre la red interna y redes externas, como Internet o
+        una subred distinta.</p>
+      <p>Características clave:</p>
+      <ul>
+        <li>Normalmente es el <strong>router</strong> que conecta la red local con otra red.</li>
+        <li>Se configura en cada cliente como la dirección IP del router en su misma subred.</li>
+        <li>Sin un gateway, los dispositivos solo pueden comunicarse dentro de su propia red.</li>
+      </ul>
+      <div class="callout"><strong>Ejemplo:</strong> Si tu red es 192.168.2.0/24 y el router tiene IP 192.168.2.1, esa
+        será la puerta de enlace para todos los equipos de esa red.</div>
+      <pre><code># Configuración típica en Linux (Netplan)
+gateway4: 192.168.2.1
+</code></pre>
+    </section>
+
+
+    <section>
+      <h2>5. Rutas estáticas</h2>
+      <p>Son instrucciones manuales que indican cómo llegar a una red específica. Sin ellas, el router no sabe reenviar
+        paquetes.</p>
+      <pre><code>sudo ip route add 192.168.1.0/24 via 192.168.1.X</code></pre>
+    </section>
+
+
+    <section>
+      <h2>6. Reenvío de paquetes (ip_forward)</h2>
+      <p>Por defecto, un sistema operativo Linux no actúa como router, incluso si tiene varias interfaces de red. Para
+        que un equipo pueda reenviar tráfico entre dos redes, debemos habilitar el parámetro <code>ip_forward</code>.
+      </p>
+      <p><strong>¿Qué significa?</strong> Cuando un paquete llega a una interfaz y su destino está en otra red, el
+        sistema debe decidir si lo reenvía por otra interfaz. Si <code>ip_forward</code> está deshabilitado, el paquete
+        se descarta.</p>
+      <p><strong>Cómo habilitarlo:</strong></p>
+      <pre><code># Activación temporal (hasta reinicio)
+sudo sysctl -w net.ipv4.ip_forward=1
+
+# Comprobar estado
+cat /proc/sys/net/ipv4/ip_forward
+
+# Activación permanente
+echo \"net.ipv4.ip_forward=1\" | sudo tee /etc/sysctl.d/99-ipforward.conf
+sudo sysctl --system
+</code></pre>
+      <div class="callout"><strong>Importante:</strong> Habilitar el reenvío no es suficiente por sí solo. Debes
+        asegurarte de que las rutas están configuradas correctamente y, en entornos reales, aplicar reglas de firewall
+        para controlar el tráfico.</div>
+      <p><strong>Concepto clave:</strong> El reenvío convierte tu máquina en un router funcional, permitiendo que dos
+        redes aisladas se comuniquen.</p>
+    </section>
+
+
+
+    <section>
+      <h2>7. DNS y resolución de nombres</h2>
+      <p>El <strong>DNS (Domain Name System)</strong> es el sistema que traduce nombres de dominio (como
+        <code>web.ctf.lan</code>) en direcciones IP (por ejemplo, <code>192.168.1.100</code>). Sin DNS, tendrías que
+        recordar y escribir la IP de cada servicio.</p>
+        <div class="diagram">
+        <img src="../assets/dns_working.gif" alt="Dns">
+      </div>
+      <p><strong>¿Por qué es importante?</strong></p>
+      <ul>
+        <li>Facilita la navegación y administración de redes.</li>
+        <li>Permite usar nombres amigables en lugar de números.</li>
+        <li>Es esencial para servicios web que dependen de la cabecera <code>Host</code>.</li>
+      </ul>
+      <p><strong>Cómo configurarlo:</strong> Ajusta el cliente para usar el servidor DNS correcto:</p>
+      <pre><code># Ejemplo en Netplan
+nameservers:
+  addresses: [192.168.1.100]
+</code></pre>
+      <div class="callout"><strong>Tip:</strong> Puedes comprobar la resolución con <code>dig</code> o
+        <code>nslookup</code>:</div>
+      <pre><code>dig @192.168.1.100 web.ctf.lan
+nslookup web.ctf.lan 192.168.1.100
+</code></pre>
+    </section>
+
+    <section>
+    <h2>8. Comprobación de conectividad</h2>
+    <p>Antes de intentar acceder a servicios, verifica que las redes están conectadas correctamente.</p>
+    <p><strong>Herramientas básicas:</strong></p>
+    <ul>
+      <li><code>ping &lt;IP&gt;</code>: Comprueba si hay respuesta desde otro equipo.</li>
+      <li><code>traceroute &lt;IP&gt;</code>: Muestra el camino que siguen los paquetes y ayuda a detectar saltos
+        incorrectos.</li>
+      <li><code>ip route</code>: Lista las rutas configuradas en tu sistema.</li>
+    </ul>
+    <pre><code># Ejemplo de diagnóstico
+ping 192.168.1.100
+traceroute 192.168.1.100
+ip route show
+</code></pre>
+    <div class="callout"><strong>Consejo:</strong> Si el ping falla, revisa IPs, gateway y que el reenvío esté
+      habilitado en el router.</div>
+    </section>
+
+    <section>
+      <h2>9. Seguridad básica</h2>
+      <p>Cuando conectamos redes, debemos considerar la seguridad:</p>
+      <ul>
+        <li><strong>SSH seguro:</strong> Usa claves o contraseñas robustas para acceder a servidores.</li>
+        <li><strong>Firewall:</strong> Configura reglas para permitir solo el tráfico necesario entre redes.</li>
+        <li><strong>Tráfico bidireccional:</strong> Asegúrate de que las respuestas puedan volver al cliente (rutas y
+          NAT correctas).</li>
+        <li><strong>Evita IP forwarding abierto:</strong> En entornos reales, combina <code>ip_forward</code> con reglas
+          de filtrado.</li>
+      </ul>
+      <pre><code># Comprobar reglas de firewall
+sudo iptables -L
+# Añadir regla para permitir HTTP
+sudo iptables -A FORWARD -p tcp --dport 80 -j ACCEPT
+</code></pre>
+      <div class="callout"><strong>Importante:</strong> En un laboratorio educativo, puedes simplificar la seguridad,
+        pero en producción es crítico aplicar buenas prácticas.</div>
+    </section>
+
+
+    <section>
+      <h2>Esquema conceptual</h2>
+      <div class="mermaid">
+        graph TD
+        Cliente1[Red 192.168.1.0/24] --> Router
+        Cliente2[Red 192.168.2.0/24] --> Router
+        Router --> Internet
+      </div>
+    </section>
+
+
+    <footer>
+      <p>Profesores: Alex Castel y Vicente Català — ®Todos los derechos reservados.</p>
+    </footer>
+  </main>
+</body>
+
+</html>
