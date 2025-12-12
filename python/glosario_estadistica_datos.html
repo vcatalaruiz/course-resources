@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Análisis de Datos con Python: Glosario de fundamentos matemáticos</title>
+
+    <!-- Mermaid -->
+    <script type="module">
+        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+
+    <!-- HighlightJS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+    <header>
+        <img src="../assets/logo_stucom.svg" alt="Logo de la escuela">
+        <h1>Análisis de Datos con Python: Glosario de fundamentos matemáticos</h1>
+    </header>
+    <section>
+        <h2>1. Fundamentos numéricos y algebraicos</h2>
+        <h3>Array (vector, matriz, tensor)</h3>
+        <p>Estructura matemática que representa un conjunto ordenado de valores.</p>
+        <ul>
+            <li>Un vector es una lista de números (una dimensión).</li>
+            <li>Una matriz es una tabla de números (dos dimensiones).</li>
+            <li>Un tensor es una generalización a más dimensiones.</li>
+        </ul>
+        <p>Permiten representar datos numéricos y realizar operaciones como suma, producto o transposición.</p>
+
+        <h3>Dimensión y forma (shape)</h3>
+        <p>La dimensión describe cuántos ejes tiene un conjunto de datos (1D, 2D, 3D...), mientras que la forma indica
+            el número de elementos en cada eje.</p>
+
+        <h3>Tipos de datos numéricos</h3>
+        <p>Definen el rango y precisión de los valores: enteros (<code>int</code>), reales (<code>float</code>),
+            booleanos (<code>bool</code>), complejos (<code>complex</code>). Su correcta elección afecta la memoria y la
+            precisión de los cálculos.</p>
+
+        <h3>Operaciones vectorizadas</h3>
+        <p>Operaciones aplicadas simultáneamente a todos los elementos de un conjunto (vector o matriz), sin usar
+            bucles. Matemáticamente equivalen a sumar, multiplicar o aplicar funciones a vectores completos.</p>
+
+        <h3>Álgebra lineal</h3>
+        <p>Base matemática de muchas técnicas de análisis de datos. Incluye:</p>
+        <ul>
+            <li>Multiplicación de matrices (combinación lineal de vectores).</li>
+            <li>Determinante: mide la escala o volumen transformado por una matriz cuadrada.</li>
+            <li>Inversa: matriz que revierte la transformación (si existe).</li>
+            <li>Autovalores y autovectores: direcciones de variación, fundamentales en reducción de dimensiones.</li>
+        </ul>
+
+        <h3>Broadcasting</h3>
+        <p>Regla que permite operar entre estructuras de distintas dimensiones cuando es matemáticamente coherente.</p>
+
+    </section>
+    <section>
+        <h2>2. Fundamentos estadísticos descriptivos</h2>
+        <h3>Variable</h3>
+        <p>Propiedad medible que puede tomar distintos valores:</p>
+        <ul>
+            <li>Cuantitativa: numérica (edad, peso, temperatura).</li>
+            <li>Cualitativa: categórica (sexo, color, país).</li>
+        </ul>
+
+        <h3>Población y muestra</h3>
+        <p>Población: conjunto completo de elementos a estudiar.<br>
+            Muestra: subconjunto representativo que se analiza para inferir propiedades de la población.</p>
+
+        <h3>Media (promedio)</h3>
+        <p>Medida de tendencia central que representa el valor medio de los datos.</p>
+
+        <h3>Mediana y moda</h3>
+        <p>Mediana: valor central al ordenar los datos.<br>
+            Moda: valor más frecuente.</p>
+
+        <h3>Varianza y desviación estándar</h3>
+        <p>Miden la dispersión de los datos respecto a la media. En análisis de datos, se usan para detectar
+            variabilidad o anomalías.</p>
+
+        <h3>Distribución de frecuencias</h3>
+        <p>Describe cuántas veces aparece cada valor o rango. Se representa mediante histogramas o gráficos de densidad.
+        </p>
+
+        <h3>Percentiles y cuartiles</h3>
+        <p>Dividen el conjunto de datos en partes según su posición relativa. El cuartil 1 (Q1) es el valor por debajo
+            del cual está el 25% de los datos.</p>
+
+        <h3>Boxplot (diagrama de caja)</h3>
+        <p>Representación visual de los cuartiles y valores atípicos. Permite identificar simetría, dispersión y
+            extremos.</p>
+
+    </section>
+    <section>
+        <h2>3. Fundamentos de relación y correlación</h2>
+        <h3>Covarianza</h3>
+        <p>Mide cómo varían dos variables juntas. Valores positivos indican que crecen juntos; negativos, que una crece
+            cuando la otra disminuye.</p>
+
+        <h3>Correlación</h3>
+        <p>Versión normalizada de la covarianza. Indica fuerza y dirección de la relación lineal entre variables (de -1
+            a
+            +1).</p>
+
+        <h3>Mapa de calor (heatmap)</h3>
+        <p>Representación visual de una matriz de correlaciones. Permite detectar grupos de variables relacionadas o
+            redundantes.</p>
+
+        <h2>4. Fundamentos de agrupación y resumen de datos</h2>
+        <h3>Agrupación (grouping)</h3>
+        <p>Proceso de dividir los datos en subconjuntos según una o más variables (por ejemplo, ciudad o género).</p>
+
+        <h3>Agregación</h3>
+        <p>Aplicación de una función resumen (media, suma, conteo, etc.) sobre los grupos definidos.</p>
+
+        <h3>Ordenación y clasificación</h3>
+        <p>Permite comparar observaciones y extraer jerarquías o rankings según algún criterio.</p>
+
+        <h3>Reindexación</h3>
+        <p>Reorganización de los datos para mantener coherencia entre filas y columnas tras operaciones o combinaciones.
+        </p>
+
+    </section>
+    <section>
+        <h2>5. Fundamentos de representación gráfica</h2>
+        <h3>Ejes y escalas</h3>
+        <p>Los ejes de un gráfico representan las variables analizadas. La elección correcta de escala afecta la
+            interpretación visual.</p>
+
+        <h3>Gráfico de líneas</h3>
+        <p>Representa series temporales o tendencias continuas. Permite observar evolución o patrones a lo largo del
+            tiempo.
+        </p>
+
+        <h3>Gráfico de barras</h3>
+        <p>Usado para comparar categorías discretas o valores agrupados.</p>
+
+        <h3>Histograma</h3>
+        <p>Divide los datos en intervalos (bins) y muestra la frecuencia de aparición en cada uno, representando la
+            distribución.</p>
+
+        <h3>Gráfico de dispersión (scatterplot)</h3>
+        <p>Muestra la relación entre dos variables numéricas. Permite visualizar correlaciones o agrupamientos.</p>
+
+    </section>
+    <section>
+        <h2>6. Fundamentos de limpieza y preparación de datos</h2>
+        <h3>Valores nulos (NaN)</h3>
+        <p>Representan datos faltantes o no definidos. Su tratamiento es crucial para evitar sesgos o errores en
+            cálculos.
+        </p>
+
+        <h3>Duplicados</h3>
+        <p>Registros repetidos que distorsionan los resultados estadísticos.</p>
+
+        <h3>Conversión de tipos de datos</h3>
+        <p>Transformar valores entre categorías, números o fechas permite aplicar funciones estadísticas adecuadas.</p>
+
+        <h3>Normalización y estandarización</h3>
+        <p>Técnicas que ajustan la escala de las variables para compararlas o alimentar modelos:</p>
+        <ul>
+            <li>Normalización: escala los datos entre 0 y 1.</li>
+            <li>Estandarización: ajusta media = 0, desviación estándar = 1.</li>
+        </ul>
+
+    </section>
+    <section>
+        <h2>7. Fundamentos del análisis exploratorio</h2>
+        <h3>Exploración de datos (EDA)</h3>
+        <p>Etapa inicial del análisis para entender el comportamiento general de los datos, su calidad y sus relaciones.
+        </p>
+
+        <h3>Detección de outliers (valores atípicos)</h3>
+        <p>Identificación de puntos que se alejan significativamente del resto de los datos.</p>
+
+        <h3>Patrones y tendencias</h3>
+        <p>Identificación de comportamientos repetidos o direcciones de cambio en los datos.</p>
+
+    </section>
+    <section>
+        <h2>8. Fundamentos para etapas posteriores (IA y ML)</h2>
+        <h3>Datos como vectores de características</h3>
+        <p>Cada observación (fila) se interpreta como un vector en un espacio multidimensional. Base para los modelos de
+            aprendizaje automático.</p>
+
+        <h3>Transformaciones lineales</h3>
+        <p>Cambios de base, proyecciones o rotaciones comunes en la reducción de dimensiones (por ejemplo, PCA).</p>
+
+        <h3>Preparación de datasets</h3>
+        <p>Implica limpiar, escalar y estructurar los datos para alimentar algoritmos de predicción o clasificación.</p>
+
+    </section>
+
+    <footer>
+        <p>© Vicente Català Ruiz 2025-26. Todos los derechos reservados.</p>
+    </footer>
+</body>
+
+</html>
