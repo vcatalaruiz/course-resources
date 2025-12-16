@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Análisis de datos avanzado</title>
+
+    <!-- Mermaid -->
+    <script type="module">
+        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+
+    <!-- HighlightJS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <link rel="stylesheet" href="../style.css" />
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <img src="../assets/logo_stucom.svg" alt="Logo de la escuela">
+
+        <h1>Análisis de datos avanzado</h1>
+    </header>
+
+    <main>
+        <!-- ==================== SECCIÓN PANDAS ==================== -->
+        <section>
+
+            <h2>1. Introducción al análisis avanzado de datos en Python</h2>
+
+            <p>
+                En el tema anterior aprendimos a trabajar con <strong>NumPy</strong> y <strong>Pandas</strong>,
+                dos librerías esenciales para la manipulación y transformación de detectar y corregir problemas comunes
+                en datasets reales, y construirás dos librerías esenciales para la manipulación y transformación de
+                datos en Python.
+                flujos de análisis completos que combinan limpieza, segmentación, métricas
+                estadísticas y gráficos profesionales.
+            </p>
+
+            <p>
+                A lo largo de este tema realizaremos un flujo de trabajo completo y realista que te resultará útil
+                en ciencia de datos, business intelligence, análisis empresarial y machine learning:
+            </p>
+
+            <ul>
+                <li><strong>Carga</strong> de datos desde distintas fuentes</li>
+                <li><strong>Limpieza avanzada</strong> (nulos, tipos, outliers, integridad)</li>
+                <li><strong>EDA (Análisis Exploratorio de Datos) </strong> para comprender el comportamiento del dataset
+                </li>
+                <li><strong>Visualización</strong> profesional para comunicar resultados</li>
+                <li><strong>Conclusiones</strong> basadas en evidencia</li>
+            </ul>
+
+            <p>
+                Con esta base podrás no solo manipular datos, sino también entenderlos, interpretarlos
+                y convertirlos en conocimiento útil para la toma de decisiones.
+            </p>
+
+            <p>
+                Este segundo tema te permitirá dar un salto cualitativo: pasarás de “trabajar con datos”
+                a “comprenderlos y comunicarlos”. Introduciremos herramientas de visualización como
+                <strong>Matplotlib</strong>, <strong>Seaborn</strong> y <strong>Plotly</strong>
+            <div class="diagram">
+                <img src="../assets/Matplotlib, Seaborn y Plotly.jpg" alt="Matplotlib, Seaborn y Plotly"
+                    style="max-width: 60%;">
+            </div>
+            <h2>Instalación de herramientas</h2>
+
+            <p>Para este tema necesitas instalar las librerías de visualización:</p>
+
+            <pre><code>pip install matplotlib
+pip install seaborn
+pip install plotly   # opcional
+</code></pre>
+
+            <p>Y, si no las tienes ya, NumPy y Pandas:</p>
+
+            <pre><code>pip install numpy
+pip install pandas
+</code></pre>
+
+            <p>Comprueba que todo funciona:</p>
+
+            <pre><code>python3 -c "import numpy, pandas, matplotlib, seaborn; print('OK')"
+</code></pre>
+
+        </section>
+        
+<section>
+    <h2>2. Visualización en Python</h2>
+    <p>Tras manipular datos con NumPy y Pandas, el siguiente paso es visualizarlos para obtener patrones y comunicar resultados. Esta sección muestra las principales librerías para gráficos en Python.</p>
+
+    <h3>2.1 Matplotlib: fundamentos</h3>
+    <p>Matplotlib es la librería base para gráficos en Python. Permite crear visualizaciones estáticas como líneas, barras y dispersión. Aquí se muestra un ejemplo sencillo de evolución de ventas.</p>
+     <div class="diagram">
+                <img src="../assets/metaploit.gif" alt="Matplotlib"
+                    style="max-width: 60%;">
+            </div>
+    <pre><code class="language-python">import matplotlib.pyplot as plt
+import pandas as pd
+
+# Dataset mínimo de ejemplo
+df = pd.DataFrame({
+    "mes": ["Ene","Feb","Mar","Abr","May","Jun"],
+    "ventas": [120, 150, 90, 180, 200, 170]
+})
+
+plt.figure(figsize=(7,3))
+plt.plot(df["mes"], df["ventas"], marker="o", color="#2563eb")
+plt.title("Evolución de ventas")
+plt.xlabel("Mes")
+plt.ylabel("Ventas")
+plt.grid(alpha=.3)
+plt.tight_layout()
+plt.show()
+</code></pre>
+
+    <h3>2.2 Seaborn: visualización estadística</h3>
+    <p>Seaborn se construye sobre Matplotlib y facilita gráficos estadísticos como boxplots, histogramas y mapas de calor. Ideal para análisis exploratorio y comparación de distribuciones.</p>
+    <div class="diagram">
+                <img src="../assets/Seaborn.png" alt="Seaborn"
+                    style="max-width: 60%;">
+            </div>
+    <pre><code class="language-python">import seaborn as sns
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+np.random.seed(0)
+notas = pd.DataFrame({
+    "asig": np.random.choice(["BD","SI","RED","SEG"], size=120),
+    "nota": np.clip(np.random.normal(6.2, 1.2, size=120), 0, 10)
+})
+
+plt.figure(figsize=(7,3))
+sns.boxplot(data=notas, x="asig", y="nota", palette="Blues")
+plt.title("Distribución de notas por asignatura")
+plt.show()
+</code></pre>
+
+    <h3>2.3 Plotly: gráficos interactivos </h3>
+    <p>Plotly permite crear gráficos interactivos que se pueden explorar dinámicamente en navegadores. Es útil para dashboards y presentaciones interactivas.</p>
+      <div class="diagram">
+                <img src="../assets/Plotly.gif" alt="Plotly"
+                    style="max-width: 80%;">
+            </div>
+             <h3>Ejemplo: </h3>
+             <a href="../assets/ventas_tienda.csv" download="ventas_tienda.csv" class="download-button">
+        Descargar CSV de ventas
+    </a>
+    <pre><code class="language-python">
+
+# Ejemplo con valores de una tienda online de ropa: lectura de CSV 
+
+import os                              # Módulo estándar para operaciones con el sistema de archivos
+import numpy as np                     # Librería numérica; la usamos para comprobar tipos y operaciones
+import pandas as pd                    # Librería principal para manipulación de datos en tablas (DataFrames)
+import plotly.express as px            # Plotly Express: interfaz sencilla para gráficos interactivos
+
+CSV_PATH = "ventas_tienda.csv"         # Ruta (nombre) del archivo CSV con los datos de ventas
+
+# ------------------------------------------------------------
+# 1) Cargar CSV 
+# ------------------------------------------------------------
+df = pd.read_csv(                      # Leemos el CSV a un DataFrame de pandas
+    CSV_PATH,                          # Ruta del archivo
+    parse_dates=["fecha"]              # Indicamos que la columna 'fecha' se convierta automáticamente a tipo datetime
+)
+
+# ------------------------------------------------------------
+# 2) Preparación de datos (LIMPIEZA)
+# ------------------------------------------------------------
+# Si no existe 'importe' en el CSV, lo calculamos
+if "importe" not in df.columns:        # Comprobamos si la columna 'importe' no está presente
+    df["importe"] = (                  # Creamos la columna 'importe'
+        df["unidades"] *               # Multiplicamos el número de unidades
+        df["precio_unit"]              # por el precio unitario
+    )
+
+# Asegurar tipos (NORMALIZACIÓN)
+if not np.issubdtype(                  # Verificamos si el dtype actual de 'fecha' NO es de tipo datetime64
+    df["fecha"].dtype, np.datetime64
+):
+    df["fecha"] = pd.to_datetime(      # Si no lo es, convertimos a datetime
+        df["fecha"],                   # Columna a convertir
+        errors="coerce"                # Si hay valores inválidos, los convierte a NaT (not-a-time)
+    )
+
+# ------------------------------------------------------------
+# 3) Gráfico 1: Barras (ventas totales por ciudad)
+# ------------------------------------------------------------
+ventas_ciudad = df.groupby(            # Agrupamos el DataFrame
+    "ciudad",                          # por la columna 'ciudad'
+    as_index=False                     # devolvemos un DataFrame (no un índice)
+)["importe"].sum()                     # y sumamos el 'importe' por ciudad
+
+fig_bar = px.bar(                      # Creamos un gráfico de barras con Plotly Express
+    ventas_ciudad,                     # DataFrame con el total por ciudad
+    x="ciudad",                        # Eje X: ciudades
+    y="importe",                       # Eje Y: importe total
+    title="Ventas totales por ciudad (ene–mar 2025)",  # Título del gráfico
+    text_auto=".2s",                   # Etiquetas de texto automáticas (formato abreviado, 2 cifras)
+    color="importe",                   # Color de las barras según el importe
+    color_continuous_scale="Blues"     # Paleta de color continuo en tonos azules
+)
+fig_bar.update_layout(                 # Ajustamos el diseño del gráfico
+    yaxis_title="Importe (€)",         # Etiqueta del eje Y
+    xaxis_title="Ciudad"               # Etiqueta del eje X
+)
+fig_bar.show()                         # Mostramos el gráfico en pantalla (notebook o navegador)
+
+# ------------------------------------------------------------
+# 5) Gráfico 2: Boxplot (importes por categoría)
+# ------------------------------------------------------------
+fig_box = px.box(                      # Creamos un boxplot con Plotly Express
+    df,                                # DataFrame original (nivel de transacción)
+    x="categoría",                     # Eje X: categorías (Calzado, Ropa, Accesorios)
+    y="importe",                       # Eje Y: importe por pedido
+    color="categoría",                 # Color por categoría (leyenda y diferenciación visual)
+    title="Distribución de importes por categoría"  # Título del gráfico
+)
+fig_box.update_layout(                 # Ajustamos el diseño del boxplot
+    yaxis_title="Importe por pedido (€)",  # Etiqueta del eje Y
+    xaxis_title="Categoría"            # Etiqueta del eje X
+)
+fig
+
+
+
+</code></pre>
+
+    <div class="tip"><strong>Consejo:</strong> estandariza estilos (colores, tipografías) y añade títulos y etiquetas claras; exporta figuras con resolución suficiente para informes.</div>
+</section>
+
+<section>
+    <h2>3. Limpieza y preparación avanzada de datos</h2>
+    <p>Antes de analizar o modelar datos, es crucial limpiarlos y transformarlos. Esta sección cubre técnicas para tratar nulos, outliers, normalización y combinaciones de tablas.</p>
+
+    <h3>3.1 Detección y tratamiento de nulos</h3>
+    <p>Los valores nulos pueden sesgar análisis. Aquí se muestra cómo detectarlos y aplicar imputación simple para variables numéricas y categóricas.</p>
+    <pre><code class="language-python"># Conteo de nulos por columna
+nulos = df.isnull().sum().sort_values(ascending=False)
+
+# Imputación simple
+df["col_num"].fillna(df["col_num"].median(), inplace=True)
+df["col_cat"].fillna("Desconocido", inplace=True)
+</code></pre>
+
+    <h3>3.2 Outliers (método IQR)</h3>
+    <p>Los outliers pueden distorsionar estadísticas. El método IQR (rango intercuartílico) es una técnica común para filtrarlos.</p>
+    <pre><code class="language-python">import numpy as np
+Q1 = df["col_num"].quantile(0.25)
+Q3 = df["col_num"].quantile(0.75)
+IQR = Q3 - Q1
+filtro = (df["col_num"] >= (Q1 - 1.5*IQR)) & (df["col_num"] <= (Q3 + 1.5*IQR))
+df_limpio = df.loc[filtro].copy()
+</code></pre>
+
+    <h3>3.3 Tipos, normalización y fechas</h3>
+    <p>Es importante asegurar tipos correctos (enteros, fechas) y normalizar variables numéricas para algoritmos de Machine Learning.</p>
+    <pre><code class="language-python"># Tipos correctos
+df["id"] = df["id"].astype("int64")
+df["fecha"] = pd.to_datetime(df["fecha"], dayfirst=True, errors="coerce")
+
+# Escalado (para ML)
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler()
+df["monto_norm"] = scaler.fit_transform(df[["monto"]])
+</code></pre>
+
+    <h3>3.4 Uniones y combinaciones</h3>
+    <p>Combinar tablas es esencial para enriquecer datasets. Aquí se muestran ejemplos de JOIN y concatenación vertical.</p>
+    <pre><code class="language-python">ventas = pd.read_csv("ventas.csv")
+clientes = pd.read_csv("clientes.csv")
+
+# INNER y LEFT JOIN
+v_inner = ventas.merge(clientes, on="cliente_id", how="inner")
+v_left  = ventas.merge(clientes, on="cliente_id", how="left")
+
+# Concatenación vertical
+hist = pd.concat([ventas_2024, ventas_2025], ignore_index=True)
+</code></pre>
+
+    <div class="warn"><strong>Errores frecuentes:</strong> claves con dtypes distintos entre tablas, duplicados en claves que provocan producto cartesiano, y NaN no tratados tras los LEFT JOIN.</div>
+</section>
+
+<section>
+    <h2>4. EDA (Análisis Exploratorio de Datos)</h2>
+    <p>El EDA permite entender la estructura y relaciones en los datos antes de aplicar modelos. Incluye auditoría inicial, análisis de distribuciones y correlaciones.</p>
+    <ol>
+        <li><strong>Auditoría inicial:</strong> <code>df.shape</code>, <code>df.info()</code>, <code>df.describe()</code>, duplicados y nulos.</li>
+        <li><strong>Distribuciones:</strong> histogramas, KDE y boxplots para variables clave.</li>
+        <li><strong>Relaciones:</strong> <code>corr()</code>, scatter matrices y mapas de calor.</li>
+        <li><strong>Segmentación:</strong> <code>groupby</code>, <code>pivot_table</code> y percentiles.</li>
+        <li><strong>Storytelling:</strong> sintetiza hallazgos y limita el número de gráficos a los necesarios.</li>
+    </ol>
+    <pre><code class="language-python"># Correlaciones y mapa de calor
+import seaborn as sns
+corr = df.select_dtypes(include="number").corr(numeric_only=True)
+plt.figure(figsize=(6,4))
+sns.heatmap(corr, annot=True, cmap="Blues", fmt=".2f", linewidths=.5)
+plt.title("Matriz de correlación")
+plt.tight_layout()
+plt.show()
+</code></pre>
+</section>
+
+<section>
+    <h2>5. Caso completo: Ventas minoristas</h2>
+    <p>Ejemplo práctico que integra limpieza, EDA y visualización usando datos simulados de ventas, clientes y productos.</p>
+    <div class="grid">
+        <div>
+            <h3>ventas.csv</h3>
+            <p>Contiene información de cada transacción: fecha, cliente, producto, unidades y precio unitario.</p>
+            <pre><code>venta_id,fecha,cliente_id,producto_id,unidades,precio_unit
+1,2025-01-15,101,501,2,12.5
+2,2025-01-16,102,503,1,8.9
+3,2025-01-16,101,502,3,15.0</code></pre>
+        </div>
+        <div>
+            <h3>clientes.csv</h3>
+            <p>Incluye datos del cliente como ciudad y segmento.</p>
+            <pre><code>cliente_id,ciudad,segmento
+101,Barcelona,Hogar
+102,Madrid,Empresa</code></pre>
+        </div>
+        <div>
+            <h3>productos.csv</h3>
+            <p>Lista de productos con su categoría.</p>
+            <pre><code>producto_id,categoría
+501,Bebidas
+502,Snacks
+503,Limpieza</code></pre>
+        </div>
+    </div>
+    <pre><code class="language-python">import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+ventas   = pd.read_csv("ventas.csv", parse_dates=["fecha"]) 
+clientes = pd.read_csv("clientes.csv")
+productos= pd.read_csv("productos.csv")
+
+# Limpieza básica
+df = ventas.merge(clientes, on="cliente_id", how="left").merge(productos, on="producto_id", how="left")
+df["importe"] = df["unidades"] * df["precio_unit"]
+
+# EDA rápido
+print(df.info())
+print(df.describe(numeric_only=True))
+
+# Ventas por mes
+mensual = df.groupby(pd.Grouper(key="fecha", freq="M"))["importe"].sum().reset_index()
+</code></pre>
+        
+<section id="analisis-ventas">
+    
+    <article>
+        <h3>Actividades</h3>
+           </article>
+
+    <article>
+        <h3>1. Visualización con Seaborn</h3>
+        <p>Primero, cargamos el archivo CSV y exploramos los datos:</p>
+        <pre><code class="language-python">
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Cargar datos
+df = pd.read_csv('ventas_tienda.csv')
+print(df.head())
+        </code></pre>
+
+        <h4>1 - Distribución de precios por categoría</h4>
+        <p>Compara el rango de precios entre Calzado, Ropa y Accesorios</p>
+       
+        <h4>2 - Ventas por ciudad</h4>
+        
+        <h4>3 - Evolución temporal</h4>
+        
+        <h4>4 - Relación entre unidades y precio</h4>
+       
+    </article>
+
+    <!-- <article>
+        <h3>2. Prácticas con Metasploit</h3>
+        
+        
+    </article> -->
+</section>
+
+
+
+
+
+    </main>
+</body>
+
+</html>
