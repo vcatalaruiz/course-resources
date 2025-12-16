@@ -47,12 +47,15 @@ h2 {
     text-align: center;
 }
 
-header>h1,h2{
-    color:white;
+header>h1,
+h2 {
+    color: white;
 }
-section > h2 {
+
+section>h2 {
     color: black;
 }
+
 h3 {
     /* color: #34495e; */
     margin-top: 20px;
@@ -115,19 +118,19 @@ ul {
 .info-box {
     background-color: #e7f3ff;
     border-left: 4px solid #2980b9;
-        padding: 10px 20px 10px 5px;
+    padding: 10px 20px 10px 5px;
 }
 
 .warning-box {
     background-color: #fff3cd;
     border-left: 4px solid #ff9800;
-        padding: 10px 20px 10px 0px;
+    padding: 10px 20px 10px 0px;
 }
 
 .success-box {
     background-color: #d4edda;
     border-left: 4px solid #28a745;
-        padding: 10px 20px 10px 0px;
+    padding: 10px 20px 10px 0px;
 }
 
 .diagram {
@@ -241,13 +244,13 @@ table {
 
 th,
 td {
-    padding: 12px 15px;
-    border: 1px solid #ddd;
+        padding: 12px 15px;
+    border: 1px solid #920000;
 }
 
 th {
-    background-color: #f2f2f2;
-    color: #333;
+        background-color: #00BCD4;
+    color: #ffffff
 }
 
 tr:nth-child(even) {
@@ -262,4 +265,12 @@ caption {
     font-size: 18px;
     font-weight: bold;
     margin: 10px 0;
+}
+
+.anotation-section {
+    font-family: "Dancing Script", cursive;
+    color: blue;
+    font-size: x-large;
+    font-weight: bold;
+    background-color: lightyellow;
 }
