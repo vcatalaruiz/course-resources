@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -12,35 +13,17 @@
   <meta property="og:title" content="Vicente Catalá Ruiz">
   <meta property="og:description" content="Material y recursos para mis clases. Curso Java: Introducción a la POO.">
   <meta property="og:type" content="website">
-
-  <style>
-    :root{--accent:#2563eb;--muted:#6b7280;--bg:#f8fafc}
-    *{box-sizing:border-box}
-    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; background:var(--bg); color:#0f172a}
-    .container{max-width:960px;margin:28px auto;padding:18px}
-    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
-    h1{font-size:1.6rem;margin:0}
-    .meta{color:var(--muted);font-size:0.95rem}
-    nav a{color:var(--accent);text-decoration:none;margin-left:12px}
-    .search{margin:18px 0;display:flex;gap:8px}
-    input[type=search]{flex:1;padding:10px 12px;border:1px solid #e6edf3;border-radius:8px}
-    button{background:var(--accent);color:white;border:none;padding:10px 14px;border-radius:8px;cursor:pointer}
-
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:18px}
-    .card{background:white;padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(15,23,42,0.06)}
-    .card h2{margin:0 0 8px 0;font-size:1.1rem}
-    .course-meta{color:var(--muted);font-size:0.9rem;margin-bottom:10px}
-    .topics{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
-    .topics a{padding:8px 10px;border-radius:8px;text-decoration:none;border:1px solid transparent}
-    .topics a:hover{background:#f1f5f9;border-color:#e6eefc}
-
-    footer{margin-top:28px;color:var(--muted);font-size:0.9rem}
-    @media (prefers-color-scheme:dark){:root{--bg:#071021} body{color:#e6eef8} .card{background:#071427;box-shadow:none} .meta, footer{color:#9aa6b2}}
-  </style>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="index.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Edu+QLD+Hand:wght@400..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+    rel="stylesheet">
 
   <script>
     // Buscador simple para indexar contenido en el cliente
-    function filtrar(){
+    function filtrar() {
       const q = document.getElementById('q').value.toLowerCase();
       const items = document.querySelectorAll('.card');
       items.forEach(card => {
@@ -50,10 +33,10 @@
     }
 
     // Mejora: permitir abrir tecla Enter en el buscador
-    document.addEventListener('DOMContentLoaded', ()=>{
+    document.addEventListener('DOMContentLoaded', () => {
       const s = document.getElementById('q');
       s.addEventListener('input', filtrar);
-      s.addEventListener('keyup', (e)=>{ if(e.key=== 'Escape') s.value=''; filtrar(); });
+      s.addEventListener('keyup', (e) => { if (e.key === 'Escape') s.value = ''; filtrar(); });
     });
   </script>
 
@@ -72,14 +55,34 @@
   }
   </script>
 </head>
+
 <body>
   <div class="container">
-    <header>
+    <!-- <header>
       <div>
         <h1>Vicente Catalá Ruiz</h1>
         <div class="meta">Recursos y apuntes </div>
       </div>
-      
+
+    </header> -->
+
+    <header style="
+    
+    background-color: #2E8B57;
+    color: white;
+    text-align: center;
+    padding: 28px 20px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    border-bottom: 4px solid #2e8b57;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 8px;
+">
+      <h1 style="font-family: monospace;"> Vicente Catalá</h1>
+      <p style="font-family: monospace;">
+        Recursos y material de programación y sistemas informáticos
+      </p>
     </header>
 
     <div class="search">
@@ -91,28 +94,32 @@
       <section class="grid">
         <!-- Tarjeta: Curso Java -->
         <article class="card" id="curso-java">
-          <h2>Curso: Java</h2>
-          <div class="course-meta">Lenguaje, POO, colecciones y prácticas.</div>
+          <h2>Java <i class="fa-brands fa-java"></i></h2>
+          <div class="course-meta">
+            <p>Lenguaje, POO, colecciones y actividades.</p>
+          </div>
           <p style="margin:0 0 10px 0;color:var(--muted)">Temas publicados:</p>
           <ul class="topics">
             <li><a href="java/4_POO.html">4. Introducción a la POO</a></li>
             <!-- Añade más temas aquí -->
           </ul>
-          </article>
+        </article>
 
         <!-- Tarjeta: Curso Python -->
         <article class="card" id="curso-python">
-          <h2>Curso: Python</h2>
-          <div class="course-meta">Lenguaje, POO, colecciones y prácticas.</div>
+          <h2>Python <i class="fa-brands fa-python"></i></h2>
+          <div class="course-meta">Pandas, NumPy, IA y actividades</div>
           <p style="margin:0 0 10px 0;color:var(--muted)">Temas publicados:</p>
           <ul class="topics">
             <li><a href="python/3_flujo_informacion_Pandas_NumPy.html">3. Flujo de información: Pandas y NumPy</a></li>
-            <!-- Añade más temas aquí -->
+            <li><a href="python/4_analisis_avanzado_visualizacion_datos.html">4. Análisis avanzado de datos: Limpieza y
+                visualización de datos</a></li>
+
           </ul>
-          </article>
+        </article>
         <!-- Tarjeta: Curso Sistemas -->
         <article class="card" id="curso-sistemas">
-          <h2>Curso: Sistemas</h2>
+          <h2>Sistemas <i class="fa-brands fa-linux"></i> <i class="fa-brands fa-windows"></i></h2>
           <div class="course-meta">Linux y redes.</div>
           <p style="margin:0 0 10px 0;color:var(--muted)">Temas publicados:</p>
           <ul class="topics">
@@ -121,15 +128,16 @@
             <li><a href="systems/router_rutas_estaticas.html">3. Router</a></li>
             <!-- Añade más temas aquí -->
           </ul>
-          </article>
+        </article>
       </section>
     </main>
 
     <footer id="contacto">
-       <p>© <span id="year">2025</span> — Vicente Catalá Ruiz</p>
+      <p>© <span id="year">2025</span> — Vicente Catalá Ruiz</p>
     </footer>
   </div>
 
   <script>document.getElementById('year').innerText = new Date().getFullYear();</script>
 </body>
+
 </html>
