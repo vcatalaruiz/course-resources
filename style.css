@@ -49,7 +49,7 @@ h2 {
 
 header>h1,
 h2 {
-    color: white;
+    color: white !important;
 }
 
 .section>h1,h2 {
