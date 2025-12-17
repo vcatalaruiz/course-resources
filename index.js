@@ -7,6 +7,10 @@ window.onload = function () {
             document.getElementById("logo").style.display = 'block';
             document.getElementById("logo").setAttribute("src", "../assets/linkia_logo.jpeg");
             break;
+        case 'stucom':
+            document.getElementById("logo").style.display = 'block';
+            document.getElementById("logo").setAttribute("src", "../assets/logo_stucom.svg");
+            break;
     
     }
     
