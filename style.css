@@ -52,7 +52,7 @@ h2 {
     color: white;
 }
 
-section>h2 {
+.section>h1,h2 {
     color: black;
 }
 
