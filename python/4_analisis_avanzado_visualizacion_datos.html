@@ -562,20 +562,149 @@ mensual = df.groupby(pd.Grouper(key="fecha", freq="M"))["importe"].sum().reset_i
       </p>
       <p>
         Representa cada transformación en un subplot distinto usando histogramas.
+<section>
+  <h2>Actividades</h2>
+
+  <ol>
+    <li>
+      <h3>Actividad 1: Carga del CSV y ventas diarias</h3>
+      <p>
+        Carga el archivo CSV usando <strong>Pandas</strong>. Crea una nueva columna llamada
+        <strong>importe</strong> que sea el resultado de <code>unidades × precio_unit</code>.
       </p>
-      <p><em>Pista:</em> Usa <code>np.log()</code>, <code>np.sqrt()</code> y la fórmula <code>(x - x.min()) / (x.max() - x.min())</code>. Para subplots, <code>plt.subplot()</code>.</p>
+      <p>
+        Agrupa por la columna <strong>fecha</strong> y calcula el importe total diario. Representa
+        el resultado en un gráfico de líneas que muestre la evolución de las ventas por día.
+      </p>
+      <p><em>Pista:</em></p>
+      <pre><code class="language-python">
+df = pd.read_csv("archivo.csv")
+df["importe"] = df["unidades"] * df["precio_unit"]
+df.groupby("fecha")["importe"].sum()
+plt.plot(...)
+      </code></pre>
+    </li>
+
+    <li>
+      <h3>Actividad 2: Ventas totales por ciudad</h3>
+      <p>
+        Agrupa los datos por <strong>ciudad</strong> y calcula el importe total para cada una.
+      </p>
+      <p>
+        Representa los resultados en un gráfico de barras.
+      </p>
+      <p><em>Pista:</em></p>
+      <pre><code class="language-python">
+df.groupby("ciudad")["importe"].sum()
+plt.bar(...)
+      </code></pre>
+    </li>
+
+    <li>
+      <h3>Actividad 3: Ventas por categoría</h3>
+      <p>
+        Agrupa por categoría y calcula total de unidades e importe total.
+      </p>
+      <p>
+        Muestra un gráfico de pastel con el porcentaje del importe total.
+      </p>
+      <p><em>Pista:</em></p>
+      <pre><code class="language-python">
+df.groupby("categoría")[["unidades","importe"]].sum()
+plt.pie(...)
+      </code></pre>
+    </li>
+
+    <li>
+      <h3>Actividad 4: Precio medio por categoría con NumPy</h3>
+      <p>
+        Calcula el precio medio por categoría usando NumPy.
+      </p>
+      <p><em>Pista:</em></p>
+      <pre><code class="language-python">
+df.groupby("categoría")["precio_unit"].apply(np.mean)
+plt.bar(...)
+      </code></pre>
+    </li>
+
+    <li>
+      <h3>Actividad 5: Filtrar por ciudad y scatter plot</h3>
+      <p>
+        Filtra solo Madrid y Barcelona y crea un scatter plot.
+      </p>
+      <p><em>Pista:</em></p>
+      <pre><code class="language-python">
+filtro = df[df["ciudad"].isin(["Madrid","Barcelona"])]
+plt.scatter(filtro["precio_unit"], filtro["unidades"])
+      </code></pre>
+    </li>
+
+    <li>
+      <h3>Actividad 6: Evolución temporal del importe total</h3>
+      <p>
+        Convierte la fecha a datetime y grafica el importe diario.
+      </p>
+      <p><em>Pista:</em></p>
+      <pre><code class="language-python">
+df["fecha"] = pd.to_datetime(df["fecha"])
+df.groupby("fecha")["importe"].sum()
+plt.plot(...)
+      </code></pre>
+    </li>
+
+    <li>
+      <h3>Actividad 7: Detección de valores atípicos</h3>
+      <p>
+        Calcula Q1, Q3 e IQR para precio_unit y muestra un boxplot.
+      </p>
+      <p><em>Pista:</em></p>
+      <pre><code class="language-python">
+q1 = np.percentile(df["precio_unit"], 25)
+q3 = np.percentile(df["precio_unit"], 75)
+iqr = q3 - q1
+plt.boxplot(df["precio_unit"])
+      </code></pre>
+    </li>
+
+    <li>
+      <h3>Actividad 8: Comparación de unidades por categoría y ciudad</h3>
+      <p>
+        Crea una tabla dinámica y un gráfico de barras agrupadas.
+      </p>
+      <p><em>Pista:</em></p>
+      <pre><code class="language-python">
+tabla = df.pivot_table(values="unidades", index="categoría", columns="ciudad", aggfunc="sum")
+tabla.plot(kind="bar")
+      </code></pre>
+    </li>
+
+    <li>
+      <h3>Actividad 9: Transformaciones NumPy sobre precio_unit</h3>
+      <p>
+        Añade columnas log, sqrt y normalización min-max y grafícalas.
+      </p>
+      <p><em>Pista:</em></p>
+      <pre><code class="language-python">
+df["log_precio"] = np.log(df["precio_unit"])
+df["sqrt_precio"] = np.sqrt(df["precio_unit"])
+df["precio_norm"] = (df["precio_unit"] - df["precio_unit"].min()) / (df["precio_unit"].max() - df["precio_unit"].min())
+plt.subplot(...)
+      </code></pre>
     </li>
 
     <li>
       <h3>Actividad 10: Heatmap de correlaciones</h3>
       <p>
-        Calcula la matriz de correlación entre unidades, precio_unit e importe.
+        Calcula la matriz de correlación y represéntala como heatmap.
       </p>
-      <p>
-        Representa la matriz como un heatmap.
-      </p>
-      <p><em>Pista:</em> Usa <code>df[["unidades","precio_unit","importe"]].corr()</code>. Para el heatmap, <code>plt.imshow()</code> y <code>plt.colorbar()</code>.</p>
+      <p><em>Pista:</em></p>
+      <pre><code class="language-python">
+corr = df[["unidades","precio_unit","importe"]].corr()
+plt.imshow(corr, cmap="coolwarm")
+plt.colorbar()
+      </code></pre>
     </li>
+
   </ol>
 </section>
 
