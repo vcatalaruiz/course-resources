@@ -362,102 +362,6 @@ mensual = df.groupby(pd.Grouper(key="fecha", freq="M"))["importe"].sum().reset_i
         
 <section>
   <h2>Actividades</h2>
-
-  <ol>
-    <li>
-      <h3>Actividad 1: Carga del CSV y ventas diarias</h3>
-      <p>
-        Carga el archivo CSV usando <strong>Pandas</strong>. Crea una nueva columna llamada
-        <strong>importe</strong> que sea el resultado de <code>unidades × precio_unit</code>.
-      </p>
-      <p>
-        Agrupa por la columna <strong>fecha</strong> y calcula el importe total diario. Representa
-        el resultado en un gráfico de líneas que muestre la evolución de las ventas por día
-        usando <strong>Matplotlib</strong>.
-      </p>
-    </li>
-
-    <li>
-      <h3>Actividad 2: Ventas totales por ciudad</h3>
-      <p>
-        Usando el mismo CSV, asegúrate de tener la columna <strong>importe</strong> (unidades × precio_unit).
-        Agrupa los datos por <strong>ciudad</strong> y calcula el importe total para cada una.
-      </p>
-      <p>
-        Representa los resultados en un gráfico de barras donde el eje X sean las ciudades y el eje Y el
-        importe total. Personaliza el gráfico con título y etiquetas de ejes.
-      </p>
-    </li>
-
-    <li>
-      <h3>Actividad 3: Ventas por categoría</h3>
-      <p>
-        Agrupa el DataFrame por la columna <strong>categoría</strong> y calcula:
-      </p>
-      <ul>
-        <li><strong>Total de unidades</strong> vendidas por categoría.</li>
-        <li><strong>Importe total</strong> por categoría.</li>
-      </ul>
-      <p>
-        Muestra un gráfico de pastel (pie chart) con el porcentaje del <strong>importe total</strong>
-        para cada categoría. Asegúrate de que las etiquetas de las categorías aparezcan en el gráfico.
-      </p>
-    </li>
-
-    <li>
-      <h3>Actividad 4: Precio medio por categoría con NumPy</h3>
-      <p>
-        Utiliza <strong>NumPy</strong> junto con <strong>Pandas</strong> para calcular el
-        <strong>precio_unit medio</strong> para cada categoría.
-      </p>
-      <p>
-        Crea un nuevo DataFrame que contenga dos columnas: <strong>categoría</strong> y
-        <strong>precio_medio</strong>. Representa estos precios medios en un gráfico de barras.
-      </p>
-    </li>
-
-    <li>
-      <h3>Actividad 5: Filtrar por ciudad y scatter plot</h3>
-      <p>
-        Filtra el DataFrame para quedarte solo con las filas donde la ciudad sea
-        <strong>Madrid</strong> o <strong>Barcelona</strong>.
-      </p>
-      <p>
-        Con esos datos filtrados, realiza un diagrama de dispersión (scatter plot) donde el eje X
-        sea <strong>precio_unit</strong> y el eje Y sea <strong>unidades</strong>. Utiliza diferentes
-        colores o marcadores para distinguir entre Madrid y Barcelona.
-      </p>
-    </li>
-
-    <li>
-      <h3>Actividad 6: Evolución temporal del importe total</h3>
-      <p>
-        Convierte la columna <strong>fecha</strong> al tipo <code>datetime</code> de Pandas si todavía
-        no lo has hecho.
-      </p>
-      <p>
-        Agrupa por fecha y calcula el <strong>importe total diario</strong>. Crea un gráfico de
-        líneas que muestre la evolución del importe total a lo largo del tiempo. Añade título,
-        etiquetas y rota las fechas en el eje X si es necesario.
-      </p>
-    </li>
-
-    <li>
-      <h3>Actividad 7: Detección de valores atípicos en precio_unit</h3>
-      <p>
-        Usando <strong>NumPy</strong>, calcula para la columna <strong>precio_unit</strong>:
-      </p>
-      <ul>
-        <li><strong>Q1</strong> (primer cuartil).</li>
-        <li><strong>Q3</strong> (tercer cuartil).</li>
-        <li><strong>IQR</strong> (rango intercuartílico = Q3 − Q1).</li>
-      </ul>
-      <p>
-        Considera como valores atípicos (outliers) aquellos precios que estén por debajo de
-        <code>Q1 − 1.5 × IQR</code> o por encima de <code>Q3 + 1.5 × IQR</code>. Representa la
-        distribución de <strong>precio_unit</strong> en un <strong>boxplot</strong>.
-
-  <h2>Actividades</h2>
   <h3>Sustituye los símbolos ??? por el código que necesites para resolver el problema.</h3>
 
   <ol>
@@ -607,6 +511,11 @@ plt.???
 
 
     </main>
+    
+    <footer>
+        <p>&copy; Vicente Català Ruiz 2025-26. Todos los derechos reservados.</p>
+    </footer>
+
 </body>
 
 </html>
