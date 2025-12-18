@@ -456,56 +456,128 @@ mensual = df.groupby(pd.Grouper(key="fecha", freq="M"))["importe"].sum().reset_i
         Considera como valores atípicos (outliers) aquellos precios que estén por debajo de
         <code>Q1 − 1.5 × IQR</code> o por encima de <code>Q3 + 1.5 × IQR</code>. Representa la
         distribución de <strong>precio_unit</strong> en un <strong>boxplot</strong>.
+<section>
+  <h2>Actividades</h2>
+
+  <ol>
+    <li>
+      <h3>Actividad 1: Carga del CSV y ventas diarias</h3>
+      <p>
+        Carga el archivo CSV usando <strong>Pandas</strong>. Crea una nueva columna llamada
+        <strong>importe</strong> que sea el resultado de <code>unidades × precio_unit</code>.
       </p>
+      <p>
+        Agrupa por la columna <strong>fecha</strong> y calcula el importe total diario. Representa
+        el resultado en un gráfico de líneas que muestre la evolución de las ventas por día.
+      </p>
+      <p><em>Pista:</em> Usa <code>pd.read_csv()</code>, crea la columna con <code>df["importe"] = ...</code>, agrupa con <code>groupby()</code> y dibuja con <code>plt.plot()</code>.</p>
+    </li>
+
+    <li>
+      <h3>Actividad 2: Ventas totales por ciudad</h3>
+      <p>
+        Usando el mismo CSV, agrupa los datos por <strong>ciudad</strong> y calcula el importe total
+        para cada una.
+      </p>
+      <p>
+        Representa los resultados en un gráfico de barras donde el eje X sean las ciudades y el eje Y el
+        importe total.
+      </p>
+      <p><em>Pista:</em> Reutiliza la columna <code>importe</code>. Usa <code>groupby("ciudad")["importe"].sum()</code> y <code>plt.bar()</code>.</p>
+    </li>
+
+    <li>
+      <h3>Actividad 3: Ventas por categoría</h3>
+      <p>
+        Agrupa el DataFrame por la columna <strong>categoría</strong> y calcula el total de unidades
+        y el importe total.
+      </p>
+      <p>
+        Muestra un gráfico de pastel con el porcentaje del importe total para cada categoría.
+      </p>
+      <p><em>Pista:</em> Usa <code>groupby()</code> y selecciona varias columnas. Para el pastel, <code>plt.pie()</code>.</p>
+    </li>
+
+    <li>
+      <h3>Actividad 4: Precio medio por categoría con NumPy</h3>
+      <p>
+        Calcula el <strong>precio_unit medio</strong> para cada categoría usando <strong>NumPy</strong>.
+      </p>
+      <p>
+        Crea un DataFrame con categoría y precio medio, y represéntalo en un gráfico de barras.
+      </p>
+      <p><em>Pista:</em> Obtén los grupos con <code>groupby()</code> y aplica <code>np.mean()</code>. Para el gráfico, <code>plt.bar()</code>.</p>
+    </li>
+
+    <li>
+      <h3>Actividad 5: Filtrar por ciudad y scatter plot</h3>
+      <p>
+        Filtra el DataFrame para quedarte solo con las filas donde la ciudad sea Madrid o Barcelona.
+      </p>
+      <p>
+        Realiza un scatter plot donde el eje X sea <strong>precio_unit</strong> y el eje Y sea
+        <strong>unidades</strong>.
+      </p>
+      <p><em>Pista:</em> Filtra con <code>df[df["ciudad"].isin(["Madrid","Barcelona"])]</code>. Dibuja con <code>plt.scatter()</code>.</p>
+    </li>
+
+    <li>
+      <h3>Actividad 6: Evolución temporal del importe total</h3>
+      <p>
+        Convierte la columna <strong>fecha</strong> al tipo datetime.
+      </p>
+      <p>
+        Agrupa por fecha y calcula el importe total diario. Crea un gráfico de líneas.
+      </p>
+      <p><em>Pista:</em> Convierte con <code>pd.to_datetime()</code>. Agrupa con <code>groupby()</code>. Dibuja con <code>plt.plot()</code>.</p>
+    </li>
+
+    <li>
+      <h3>Actividad 7: Detección de valores atípicos en precio_unit</h3>
+      <p>
+        Calcula Q1, Q3 e IQR para la columna <strong>precio_unit</strong> usando NumPy.
+      </p>
+      <p>
+        Identifica los outliers y represéntalos en un boxplot.
+      </p>
+      <p><em>Pista:</em> Usa <code>np.percentile()</code> para Q1 y Q3. IQR = Q3 - Q1. Dibuja con <code>plt.boxplot()</code>.</p>
     </li>
 
     <li>
       <h3>Actividad 8: Comparación de unidades por categoría y ciudad</h3>
       <p>
-        Crea una tabla dinámica (<code>pivot_table</code>) donde las filas sean las
-        <strong>categorías</strong>, las columnas sean las <strong>ciudades</strong> y los valores sean
-        la suma de <strong>unidades</strong>.
+        Crea una tabla dinámica donde las filas sean categorías, las columnas ciudades y los valores
+        la suma de unidades.
       </p>
       <p>
-        A partir de esa tabla, construye un gráfico de barras agrupadas para comparar las unidades
-        vendidas por categoría en cada ciudad.
+        A partir de esa tabla, construye un gráfico de barras agrupadas.
       </p>
+      <p><em>Pista:</em> Usa <code>pivot_table()</code> con <code>aggfunc="sum"</code>. Para barras agrupadas, usa <code>plt.bar()</code> con posiciones desplazadas.</p>
     </li>
 
     <li>
       <h3>Actividad 9: Transformaciones NumPy sobre precio_unit</h3>
       <p>
-        Añade al DataFrame tres nuevas columnas aplicando transformaciones con <strong>NumPy</strong> a
-        <strong>precio_unit</strong>:
+        Añade tres nuevas columnas: logaritmo, raíz cuadrada y normalización min-max.
       </p>
-      <ul>
-        <li><strong>log_precio</strong>: logaritmo natural de precio_unit.</li>
-        <li><strong>sqrt_precio</strong>: raíz cuadrada de precio_unit.</li>
-        <li><strong>precio_norm</strong>: normalización min-max de precio_unit entre 0 y 1.</li>
-      </ul>
       <p>
-        Representa en una figura con varios subplots (por ejemplo, 3 filas) la distribución de
-        <strong>precio_unit</strong>, <strong>log_precio</strong> y <strong>sqrt_precio</strong>
-        usando histogramas.
+        Representa cada transformación en un subplot distinto usando histogramas.
       </p>
+      <p><em>Pista:</em> Usa <code>np.log()</code>, <code>np.sqrt()</code> y la fórmula <code>(x - x.min()) / (x.max() - x.min())</code>. Para subplots, <code>plt.subplot()</code>.</p>
     </li>
 
     <li>
       <h3>Actividad 10: Heatmap de correlaciones</h3>
       <p>
-        Asegúrate de tener en el DataFrame las columnas numéricas:
-        <strong>unidades</strong>, <strong>precio_unit</strong> e <strong>importe</strong>.
+        Calcula la matriz de correlación entre unidades, precio_unit e importe.
       </p>
       <p>
-        Calcula la matriz de correlación entre estas columnas usando <code>.corr()</code> de Pandas.
-        Representa esta matriz de correlación como un <strong>heatmap</strong> utilizando
-        <code>plt.imshow()</code> o una función similar de Matplotlib, añadiendo una barra de color
-        y etiquetas para los ejes.
+        Representa la matriz como un heatmap.
       </p>
+      <p><em>Pista:</em> Usa <code>df[["unidades","precio_unit","importe"]].corr()</code>. Para el heatmap, <code>plt.imshow()</code> y <code>plt.colorbar()</code>.</p>
     </li>
   </ol>
 </section>
-
 
 
 
