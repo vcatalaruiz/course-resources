@@ -2,6 +2,15 @@
 <html lang="es">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-EVTW1307T1');
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Análisis de datos avanzado</title>
@@ -92,18 +101,19 @@ pip install pandas
 </code></pre>
 
         </section>
-        
-<section>
-    <h2>2. Visualización en Python</h2>
-    <p>Tras manipular datos con NumPy y Pandas, el siguiente paso es visualizarlos para obtener patrones y comunicar resultados. Esta sección muestra las principales librerías para gráficos en Python.</p>
 
-    <h3>2.1 Matplotlib: fundamentos</h3>
-    <p>Matplotlib es la librería base para gráficos en Python. Permite crear visualizaciones estáticas como líneas, barras y dispersión. Aquí se muestra un ejemplo sencillo de evolución de ventas.</p>
-     <div class="diagram">
-                <img src="../assets/metaploit.gif" alt="Matplotlib"
-                    style="max-width: 60%;">
+        <section>
+            <h2>2. Visualización en Python</h2>
+            <p>Tras manipular datos con NumPy y Pandas, el siguiente paso es visualizarlos para obtener patrones y
+                comunicar resultados. Esta sección muestra las principales librerías para gráficos en Python.</p>
+
+            <h3>2.1 Matplotlib: fundamentos</h3>
+            <p>Matplotlib es la librería base para gráficos en Python. Permite crear visualizaciones estáticas como
+                líneas, barras y dispersión. Aquí se muestra un ejemplo sencillo de evolución de ventas.</p>
+            <div class="diagram">
+                <img src="../assets/metaploit.gif" alt="Matplotlib" style="max-width: 60%;">
             </div>
-    <pre><code class="language-python">import matplotlib.pyplot as plt
+            <pre><code class="language-python">import matplotlib.pyplot as plt
 import pandas as pd
 
 # Dataset mínimo de ejemplo
@@ -122,13 +132,13 @@ plt.tight_layout()
 plt.show()
 </code></pre>
 
-    <h3>2.2 Seaborn: visualización estadística</h3>
-    <p>Seaborn se construye sobre Matplotlib y facilita gráficos estadísticos como boxplots, histogramas y mapas de calor. Ideal para análisis exploratorio y comparación de distribuciones.</p>
-    <div class="diagram">
-                <img src="../assets/Seaborn.png" alt="Seaborn"
-                    style="max-width: 60%;">
+            <h3>2.2 Seaborn: visualización estadística</h3>
+            <p>Seaborn se construye sobre Matplotlib y facilita gráficos estadísticos como boxplots, histogramas y mapas
+                de calor. Ideal para análisis exploratorio y comparación de distribuciones.</p>
+            <div class="diagram">
+                <img src="../assets/Seaborn.png" alt="Seaborn" style="max-width: 60%;">
             </div>
-    <pre><code class="language-python">import seaborn as sns
+            <pre><code class="language-python">import seaborn as sns
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -144,17 +154,17 @@ plt.title("Distribución de notas por asignatura")
 plt.show()
 </code></pre>
 
-    <h3>2.3 Plotly: gráficos interactivos </h3>
-    <p>Plotly permite crear gráficos interactivos que se pueden explorar dinámicamente en navegadores. Es útil para dashboards y presentaciones interactivas.</p>
-      <div class="diagram">
-                <img src="../assets/Plotly.gif" alt="Plotly"
-                    style="max-width: 80%;">
+            <h3>2.3 Plotly: gráficos interactivos </h3>
+            <p>Plotly permite crear gráficos interactivos que se pueden explorar dinámicamente en navegadores. Es útil
+                para dashboards y presentaciones interactivas.</p>
+            <div class="diagram">
+                <img src="../assets/Plotly.gif" alt="Plotly" style="max-width: 80%;">
             </div>
-             <h3>Ejemplo: </h3>
-             <a href="../assets/ventas_tienda.csv" download="ventas_tienda.csv" class="download-button">
-        Descargar CSV de ventas
-    </a>
-    <pre><code class="language-python">
+            <h3>Ejemplo: </h3>
+            <a href="../assets/ventas_tienda.csv" download="ventas_tienda.csv" class="download-button">
+                Descargar CSV de ventas
+            </a>
+            <pre><code class="language-python">
 
 # Ejemplo con valores de una tienda online de ropa: lectura de CSV 
 
@@ -235,16 +245,19 @@ fig
 
 </code></pre>
 
-    <div class="tip"><strong>Consejo:</strong> estandariza estilos (colores, tipografías) y añade títulos y etiquetas claras; exporta figuras con resolución suficiente para informes.</div>
-</section>
+            <div class="tip"><strong>Consejo:</strong> estandariza estilos (colores, tipografías) y añade títulos y
+                etiquetas claras; exporta figuras con resolución suficiente para informes.</div>
+        </section>
 
-<section>
-    <h2>3. Limpieza y preparación avanzada de datos</h2>
-    <p>Antes de analizar o modelar datos, es crucial limpiarlos y transformarlos. Esta sección cubre técnicas para tratar nulos, outliers, normalización y combinaciones de tablas.</p>
+        <section>
+            <h2>3. Limpieza y preparación avanzada de datos</h2>
+            <p>Antes de analizar o modelar datos, es crucial limpiarlos y transformarlos. Esta sección cubre técnicas
+                para tratar nulos, outliers, normalización y combinaciones de tablas.</p>
 
-    <h3>3.1 Detección y tratamiento de nulos</h3>
-    <p>Los valores nulos pueden sesgar análisis. Aquí se muestra cómo detectarlos y aplicar imputación simple para variables numéricas y categóricas.</p>
-    <pre><code class="language-python"># Conteo de nulos por columna
+            <h3>3.1 Detección y tratamiento de nulos</h3>
+            <p>Los valores nulos pueden sesgar análisis. Aquí se muestra cómo detectarlos y aplicar imputación simple
+                para variables numéricas y categóricas.</p>
+            <pre><code class="language-python"># Conteo de nulos por columna
 nulos = df.isnull().sum().sort_values(ascending=False)
 
 # Imputación simple
@@ -252,9 +265,10 @@ df["col_num"].fillna(df["col_num"].median(), inplace=True)
 df["col_cat"].fillna("Desconocido", inplace=True)
 </code></pre>
 
-    <h3>3.2 Outliers (método IQR)</h3>
-    <p>Los outliers pueden distorsionar estadísticas. El método IQR (rango intercuartílico) es una técnica común para filtrarlos.</p>
-    <pre><code class="language-python">import numpy as np
+            <h3>3.2 Outliers (método IQR)</h3>
+            <p>Los outliers pueden distorsionar estadísticas. El método IQR (rango intercuartílico) es una técnica común
+                para filtrarlos.</p>
+            <pre><code class="language-python">import numpy as np
 Q1 = df["col_num"].quantile(0.25)
 Q3 = df["col_num"].quantile(0.75)
 IQR = Q3 - Q1
@@ -262,9 +276,10 @@ filtro = (df["col_num"] >= (Q1 - 1.5*IQR)) & (df["col_num"] <= (Q3 + 1.5*IQR))
 df_limpio = df.loc[filtro].copy()
 </code></pre>
 
-    <h3>3.3 Tipos, normalización y fechas</h3>
-    <p>Es importante asegurar tipos correctos (enteros, fechas) y normalizar variables numéricas para algoritmos de Machine Learning.</p>
-    <pre><code class="language-python"># Tipos correctos
+            <h3>3.3 Tipos, normalización y fechas</h3>
+            <p>Es importante asegurar tipos correctos (enteros, fechas) y normalizar variables numéricas para algoritmos
+                de Machine Learning.</p>
+            <pre><code class="language-python"># Tipos correctos
 df["id"] = df["id"].astype("int64")
 df["fecha"] = pd.to_datetime(df["fecha"], dayfirst=True, errors="coerce")
 
@@ -274,9 +289,10 @@ scaler = MinMaxScaler()
 df["monto_norm"] = scaler.fit_transform(df[["monto"]])
 </code></pre>
 
-    <h3>3.4 Uniones y combinaciones</h3>
-    <p>Combinar tablas es esencial para enriquecer datasets. Aquí se muestran ejemplos de JOIN y concatenación vertical.</p>
-    <pre><code class="language-python">ventas = pd.read_csv("ventas.csv")
+            <h3>3.4 Uniones y combinaciones</h3>
+            <p>Combinar tablas es esencial para enriquecer datasets. Aquí se muestran ejemplos de JOIN y concatenación
+                vertical.</p>
+            <pre><code class="language-python">ventas = pd.read_csv("ventas.csv")
 clientes = pd.read_csv("clientes.csv")
 
 # INNER y LEFT JOIN
@@ -287,20 +303,24 @@ v_left  = ventas.merge(clientes, on="cliente_id", how="left")
 hist = pd.concat([ventas_2024, ventas_2025], ignore_index=True)
 </code></pre>
 
-    <div class="warn"><strong>Errores frecuentes:</strong> claves con dtypes distintos entre tablas, duplicados en claves que provocan producto cartesiano, y NaN no tratados tras los LEFT JOIN.</div>
-</section>
+            <div class="warn"><strong>Errores frecuentes:</strong> claves con dtypes distintos entre tablas, duplicados
+                en claves que provocan producto cartesiano, y NaN no tratados tras los LEFT JOIN.</div>
+        </section>
 
-<section>
-    <h2>4. EDA (Análisis Exploratorio de Datos)</h2>
-    <p>El EDA permite entender la estructura y relaciones en los datos antes de aplicar modelos. Incluye auditoría inicial, análisis de distribuciones y correlaciones.</p>
-    <ol>
-        <li><strong>Auditoría inicial:</strong> <code>df.shape</code>, <code>df.info()</code>, <code>df.describe()</code>, duplicados y nulos.</li>
-        <li><strong>Distribuciones:</strong> histogramas, KDE y boxplots para variables clave.</li>
-        <li><strong>Relaciones:</strong> <code>corr()</code>, scatter matrices y mapas de calor.</li>
-        <li><strong>Segmentación:</strong> <code>groupby</code>, <code>pivot_table</code> y percentiles.</li>
-        <li><strong>Storytelling:</strong> sintetiza hallazgos y limita el número de gráficos a los necesarios.</li>
-    </ol>
-    <pre><code class="language-python"># Correlaciones y mapa de calor
+        <section>
+            <h2>4. EDA (Análisis Exploratorio de Datos)</h2>
+            <p>El EDA permite entender la estructura y relaciones en los datos antes de aplicar modelos. Incluye
+                auditoría inicial, análisis de distribuciones y correlaciones.</p>
+            <ol>
+                <li><strong>Auditoría inicial:</strong> <code>df.shape</code>, <code>df.info()</code>,
+                    <code>df.describe()</code>, duplicados y nulos.</li>
+                <li><strong>Distribuciones:</strong> histogramas, KDE y boxplots para variables clave.</li>
+                <li><strong>Relaciones:</strong> <code>corr()</code>, scatter matrices y mapas de calor.</li>
+                <li><strong>Segmentación:</strong> <code>groupby</code>, <code>pivot_table</code> y percentiles.</li>
+                <li><strong>Storytelling:</strong> sintetiza hallazgos y limita el número de gráficos a los necesarios.
+                </li>
+            </ol>
+            <pre><code class="language-python"># Correlaciones y mapa de calor
 import seaborn as sns
 corr = df.select_dtypes(include="number").corr(numeric_only=True)
 plt.figure(figsize=(6,4))
@@ -309,37 +329,39 @@ plt.title("Matriz de correlación")
 plt.tight_layout()
 plt.show()
 </code></pre>
-</section>
+        </section>
 
-<section>
-    <h2>5. Caso completo: Ventas minoristas</h2>
-    <p>Ejemplo práctico que integra limpieza, EDA y visualización usando datos simulados de ventas, clientes y productos.</p>
-    <div class="grid">
-        <div>
-            <h3>ventas.csv</h3>
-            <p>Contiene información de cada transacción: fecha, cliente, producto, unidades y precio unitario.</p>
-            <pre><code>venta_id,fecha,cliente_id,producto_id,unidades,precio_unit
+        <section>
+            <h2>5. Caso completo: Ventas minoristas</h2>
+            <p>Ejemplo práctico que integra limpieza, EDA y visualización usando datos simulados de ventas, clientes y
+                productos.</p>
+            <div class="grid">
+                <div>
+                    <h3>ventas.csv</h3>
+                    <p>Contiene información de cada transacción: fecha, cliente, producto, unidades y precio unitario.
+                    </p>
+                    <pre><code>venta_id,fecha,cliente_id,producto_id,unidades,precio_unit
 1,2025-01-15,101,501,2,12.5
 2,2025-01-16,102,503,1,8.9
 3,2025-01-16,101,502,3,15.0</code></pre>
-        </div>
-        <div>
-            <h3>clientes.csv</h3>
-            <p>Incluye datos del cliente como ciudad y segmento.</p>
-            <pre><code>cliente_id,ciudad,segmento
+                </div>
+                <div>
+                    <h3>clientes.csv</h3>
+                    <p>Incluye datos del cliente como ciudad y segmento.</p>
+                    <pre><code>cliente_id,ciudad,segmento
 101,Barcelona,Hogar
 102,Madrid,Empresa</code></pre>
-        </div>
-        <div>
-            <h3>productos.csv</h3>
-            <p>Lista de productos con su categoría.</p>
-            <pre><code>producto_id,categoría
+                </div>
+                <div>
+                    <h3>productos.csv</h3>
+                    <p>Lista de productos con su categoría.</p>
+                    <pre><code>producto_id,categoría
 501,Bebidas
 502,Snacks
 503,Limpieza</code></pre>
-        </div>
-    </div>
-    <pre><code class="language-python">import pandas as pd
+                </div>
+            </div>
+            <pre><code class="language-python">import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -359,159 +381,160 @@ print(df.describe(numeric_only=True))
 # Ventas por mes
 mensual = df.groupby(pd.Grouper(key="fecha", freq="M"))["importe"].sum().reset_index()
 </code></pre>
-        
-<section>
-  <h2>Actividades</h2>
-  <h3>Sustituye los símbolos ??? por el código que necesites para resolver el problema.</h3>
 
-  <ol>
-    <li>
-      <h3>Actividad 1: Carga del CSV y ventas diarias</h3>
-      <p>
-        Carga el archivo CSV usando <strong>Pandas</strong>. Crea una nueva columna llamada
-        <strong>importe</strong> que sea el resultado de <code>unidades × precio_unit</code>.
-      </p>
-      <p>
-        Agrupa por la columna <strong>fecha</strong> y calcula el importe total diario. Representa
-        el resultado en un gráfico de líneas que muestre la evolución de las ventas por día.
-      </p>
-      <p><em>Pista:</em></p>
-      <pre><code class="language-python">
+            <section>
+                <h2>Actividades</h2>
+                <h3>Sustituye los símbolos ??? por el código que necesites para resolver el problema.</h3>
+
+                <ol>
+                    <li>
+                        <h3>Actividad 1: Carga del CSV y ventas diarias</h3>
+                        <p>
+                            Carga el archivo CSV usando <strong>Pandas</strong>. Crea una nueva columna llamada
+                            <strong>importe</strong> que sea el resultado de <code>unidades × precio_unit</code>.
+                        </p>
+                        <p>
+                            Agrupa por la columna <strong>fecha</strong> y calcula el importe total diario. Representa
+                            el resultado en un gráfico de líneas que muestre la evolución de las ventas por día.
+                        </p>
+                        <p><em>Pista:</em></p>
+                        <pre><code class="language-python">
 df = pd.read_csv("archivo.csv")
 df["importe"] = ???
 df.groupby("fecha")["importe"].sum()
 plt.plot(???)
       </code></pre>
-    </li>
+                    </li>
 
-    <li>
-      <h3>Actividad 2: Ventas totales por ciudad</h3>
-      <p>
-        Agrupa los datos por <strong>ciudad</strong> y calcula el importe total para cada una.
-      </p>
-      <p>
-        Representa los resultados en un gráfico de barras.
-      </p>
-      <p><em>Pista:</em></p>
-      <pre><code class="language-python">
+                    <li>
+                        <h3>Actividad 2: Ventas totales por ciudad</h3>
+                        <p>
+                            Agrupa los datos por <strong>ciudad</strong> y calcula el importe total para cada una.
+                        </p>
+                        <p>
+                            Representa los resultados en un gráfico de barras.
+                        </p>
+                        <p><em>Pista:</em></p>
+                        <pre><code class="language-python">
 df.groupby("ciudad")["importe"].sum()
 plt.bar(???)
       </code></pre>
-    </li>
+                    </li>
 
-    <li>
-      <h3>Actividad 3: Ventas por categoría</h3>
-      <p>
-        Agrupa por categoría y calcula total de unidades e importe total.
-      </p>
-      <p>
-        Muestra un gráfico de pastel con el porcentaje del importe total.
-      </p>
-      <p><em>Pista:</em></p>
-      <pre><code class="language-python">
+                    <li>
+                        <h3>Actividad 3: Ventas por categoría</h3>
+                        <p>
+                            Agrupa por categoría y calcula total de unidades e importe total.
+                        </p>
+                        <p>
+                            Muestra un gráfico de pastel con el porcentaje del importe total.
+                        </p>
+                        <p><em>Pista:</em></p>
+                        <pre><code class="language-python">
 df.groupby(???)[["unidades","importe"]].sum()
 plt.pie(???)
       </code></pre>
-    </li>
+                    </li>
 
-    <li>
-      <h3>Actividad 4: Precio medio por categoría con NumPy</h3>
-      <p>
-        Calcula el precio medio por categoría usando NumPy.
-      </p>
-      <p><em>Pista:</em></p>
-      <pre><code class="language-python">
+                    <li>
+                        <h3>Actividad 4: Precio medio por categoría con NumPy</h3>
+                        <p>
+                            Calcula el precio medio por categoría usando NumPy.
+                        </p>
+                        <p><em>Pista:</em></p>
+                        <pre><code class="language-python">
 df.groupby(???)[???].apply(np.mean)
 plt.bar(???)
       </code></pre>
-    </li>
+                    </li>
 
-    <li>
-      <h3>Actividad 5: Filtrar por ciudad y scatter plot</h3>
-      <p>
-        Filtra solo Madrid y Barcelona y crea un scatter plot.
-      </p>
-      <p><em>Pista:</em></p>
-      <pre><code class="language-python">
+                    <li>
+                        <h3>Actividad 5: Filtrar por ciudad y scatter plot</h3>
+                        <p>
+                            Filtra solo Madrid y Barcelona y crea un scatter plot.
+                        </p>
+                        <p><em>Pista:</em></p>
+                        <pre><code class="language-python">
 filtro = df[df["ciudad"].isin(["Madrid","Barcelona"])]
 plt.scatter(filtro["???"], filtro["???"])
       </code></pre>
-    </li>
+                    </li>
 
-    <li>
-      <h3>Actividad 6: Evolución temporal del importe total</h3>
-      <p>
-        Convierte la fecha a datetime y grafica el importe diario.
-      </p>
-      <p><em>Pista:</em></p>
-      <pre><code class="language-python">
+                    <li>
+                        <h3>Actividad 6: Evolución temporal del importe total</h3>
+                        <p>
+                            Convierte la fecha a datetime y grafica el importe diario.
+                        </p>
+                        <p><em>Pista:</em></p>
+                        <pre><code class="language-python">
 df["fecha"] = pd.to_datetime(???)
 df.groupby("fecha")["importe"].sum()
 plt.plot(???)
       </code></pre>
-    </li>
+                    </li>
 
-    <li>
-      <h3>Actividad 7: Detección de valores atípicos</h3>
-      <p>
-        Calcula Q1, Q3 e IQR para precio_unit y muestra un boxplot. IQR se calcula restando el percentil 1 al 3.
-      </p>
-      <p><em>Pista:</em></p>
-      <pre><code class="language-python">
+                    <li>
+                        <h3>Actividad 7: Detección de valores atípicos</h3>
+                        <p>
+                            Calcula Q1, Q3 e IQR para precio_unit y muestra un boxplot. IQR se calcula restando el
+                            percentil 1 al 3.
+                        </p>
+                        <p><em>Pista:</em></p>
+                        <pre><code class="language-python">
 q1 = np.percentile(df["precio_unit"], 25)
 q3 = np.percentile(df["precio_unit"], 75)
 iqr = ???
 plt.boxplot(???)
       </code></pre>
-    </li>
+                    </li>
 
-    <li>
-      <h3>Actividad 8: Comparación de unidades por categoría y ciudad</h3>
-      <p>
-        Crea una tabla dinámica y un gráfico de barras agrupadas.
-      </p>
-      <p><em>Pista:</em></p>
-      <pre><code class="language-python">
+                    <li>
+                        <h3>Actividad 8: Comparación de unidades por categoría y ciudad</h3>
+                        <p>
+                            Crea una tabla dinámica y un gráfico de barras agrupadas.
+                        </p>
+                        <p><em>Pista:</em></p>
+                        <pre><code class="language-python">
 tabla = df.pivot_table(values="unidades", index="categoría", columns="ciudad", aggfunc="sum")
 tabla.plot(kind="???")
       </code></pre>
-    </li>
+                    </li>
 
-    <li>
-      <h3>Actividad 9: Transformaciones NumPy sobre precio_unit</h3>
-      <p>
-        Añade columnas log, sqrt y normalización min-max y grafícalas.
-      </p>
-      <p><em>Pista:</em></p>
-      <pre><code class="language-python">
+                    <li>
+                        <h3>Actividad 9: Transformaciones NumPy sobre precio_unit</h3>
+                        <p>
+                            Añade columnas log, sqrt y normalización min-max y grafícalas.
+                        </p>
+                        <p><em>Pista:</em></p>
+                        <pre><code class="language-python">
 df["log_precio"] = np.log(df["precio_unit"])
 df["sqrt_precio"] = np.sqrt(df["precio_unit"])
 df["precio_norm"] = ???
 plt.subplot(???)
       </code></pre>
-    </li>
+                    </li>
 
-    <li>
-      <h3>Actividad 10: Heatmap de correlaciones</h3>
-      <p>
-        Calcula la matriz de correlación y represéntala como heatmap.
-      </p>
-      <p><em>Pista:</em></p>
-      <pre><code class="language-python">
+                    <li>
+                        <h3>Actividad 10: Heatmap de correlaciones</h3>
+                        <p>
+                            Calcula la matriz de correlación y represéntala como heatmap.
+                        </p>
+                        <p><em>Pista:</em></p>
+                        <pre><code class="language-python">
 corr = df[["unidades","precio_unit","importe"]].corr()
 plt.imshow(corr, cmap="coolwarm")
 plt.???
       </code></pre>
-    </li>
+                    </li>
 
-  </ol>
-</section>
+                </ol>
+            </section>
 
 
 
 
     </main>
-    
+
     <footer>
         <p>&copy; Vicente Català Ruiz 2025-26. Todos los derechos reservados.</p>
     </footer>

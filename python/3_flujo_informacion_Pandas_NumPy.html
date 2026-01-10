@@ -2,11 +2,20 @@
 <html lang="es">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-EVTW1307T1');
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Análisis de Datos con Python: NumPy y Pandas</title>
     <script src="../../course-resources/index.js" defer></script>
-    
+
     <!-- Mermaid -->
     <script type="module">
         import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
@@ -76,12 +85,12 @@
         <pre><code class="language-bash">pip install numpy
 pip install pandas
 python3 -c "import numpy, pandas; print('Todo instalado correctamente')"</code></pre>
-            <div class="info-box">
-                <h3>Información sobre terminos matemáticos y estadísticos que verás en esta sección.</h3>
-                <i class="fa-solid fa-book"></i>
-                <a href="./glosario_estadistica_datos.html">Glosario de datos</a>
-                
-            </div>
+        <div class="info-box">
+            <h3>Información sobre terminos matemáticos y estadísticos que verás en esta sección.</h3>
+            <i class="fa-solid fa-book"></i>
+            <a href="./glosario_estadistica_datos.html">Glosario de datos</a>
+
+        </div>
     </div>
 
 
@@ -451,7 +460,7 @@ np.linalg.det(A)     # Determinante de A
             cálculo o una base de datos
             relacional. Se caracterizan por tener filas que representan observaciones o registros individuales y
             columnas <strong>(también llamadas
-            atributos o variables)</strong> que representan características específicas de esas observaciones.
+                atributos o variables)</strong> que representan características específicas de esas observaciones.
         </p>
 
         <p>Las estructuras fundamentales de Pandas son:</p>
@@ -489,111 +498,113 @@ print(df)
 </code></pre>
         </div>
         <div class="section">
-    <h2>Métodos clave de Pandas</h2>
-    <p>Tabla con métodos más usados de Pandas:</p>
+            <h2>Métodos clave de Pandas</h2>
+            <p>Tabla con métodos más usados de Pandas:</p>
 
-    <table border="1" cellspacing="0" cellpadding="8">
-        <thead>
-            <tr>
-                <th>Método</th>
-                <th>Descripción</th>
-                <th>Ejemplo</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><code>head(n)</code></td>
-                <td>Devuelve las primeras <em>n</em> filas del DataFrame (por defecto 5).</td>
-                <td><code>df.head(3)</code></td>
-            </tr>
-            <tr>
-                <td><code>tail(n)</code></td>
-                <td>Devuelve las últimas <em>n</em> filas del DataFrame.</td>
-                <td><code>df.tail(2)</code></td>
-            </tr>
-            <tr>
-                <td><code>info()</code></td>
-                <td>Muestra información general del DataFrame: columnas, tipos de datos y valores nulos.</td>
-                <td><code>df.info()</code></td>
-            </tr>
-            <tr>
-                <td><code>describe()</code></td>
-                <td>Genera estadísticas descriptivas (media, desviación, min, max, cuartiles) de columnas numéricas.</td>
-                <td><code>df.describe()</code></td>
-            </tr>
-            <tr>
-                <td><code>shape</code></td>
-                <td>Devuelve una tupla con el número de filas y columnas del DataFrame.</td>
-                <td><code>df.shape</code></td>
-            </tr>
-            <tr>
-                <td><code>columns</code></td>
-                <td>Lista los nombres de todas las columnas.</td>
-                <td><code>df.columns</code></td>
-            </tr>
-            <tr>
-                <td><code>isnull()</code></td>
-                <td>Devuelve un DataFrame booleano indicando los valores nulos.</td>
-                <td><code>df.isnull()</code></td>
-            </tr>
-            <tr>
-                <td><code>dropna()</code></td>
-                <td>Elimina filas con valores nulos.</td>
-                <td><code>df.dropna()</code></td>
-            </tr>
-            <tr>
-                <td><code>fillna(valor)</code></td>
-                <td>Rellena valores nulos con el valor especificado.</td>
-                <td><code>df.fillna(0)</code></td>
-            </tr>
-            <tr>
-                <td><code>sort_values(by)</code></td>
-                <td>Ordena el DataFrame por los valores de una columna o lista de columnas.</td>
-                <td><code>df.sort_values('edad')</code></td>
-            </tr>
-            <tr>
-                <td><code>groupby(col)</code></td>
-                <td>Agrupa el DataFrame por los valores de una columna para realizar agregaciones.</td>
-                <td><code>df.groupby('ciudad')['salario'].mean()</code></td>
-            </tr>
-            <tr>
-                <td><code>pivot_table()</code></td>
-                <td>Crea una tabla dinámica agregando datos según filas y columnas específicas.</td>
-                <td><code>df.pivot_table(values='salario', index='departamento', columns='ciudad', aggfunc='mean')</code></td>
-            </tr>
-            <tr>
-                <td><code>apply(func)</code></td>
-                <td>Aplica una función a cada elemento, fila o columna del DataFrame.</td>
-                <td><code>df['edad'].apply(lambda x: x*2)</code></td>
-            </tr>
-            <tr>
-                <td><code>merge()</code></td>
-                <td>Permite unir DataFrames usando una columna clave, similar a JOIN en SQL.</td>
-                <td><code>pd.merge(df1, df2, on='id')</code></td>
-            </tr>
-            <tr>
-                <td><code>concat()</code></td>
-                <td>Concatena DataFrames vertical u horizontalmente.</td>
-                <td><code>pd.concat([df1, df2])</code></td>
-            </tr>
-            <tr>
-                <td><code>drop(columns)</code></td>
-                <td>Elimina columnas específicas del DataFrame.</td>
-                <td><code>df.drop(['columna1','columna2'], axis=1)</code></td>
-            </tr>
-            <tr>
-                <td><code>rename()</code></td>
-                <td>Cambia el nombre de columnas o índices.</td>
-                <td><code>df.rename(columns={'edad':'edad_años'})</code></td>
-            </tr>
-            <tr>
-                <td><code>sample(n)</code></td>
-                <td>Extrae una muestra aleatoria de <em>n</em> filas del DataFrame.</td>
-                <td><code>df.sample(5)</code></td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+            <table border="1" cellspacing="0" cellpadding="8">
+                <thead>
+                    <tr>
+                        <th>Método</th>
+                        <th>Descripción</th>
+                        <th>Ejemplo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>head(n)</code></td>
+                        <td>Devuelve las primeras <em>n</em> filas del DataFrame (por defecto 5).</td>
+                        <td><code>df.head(3)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>tail(n)</code></td>
+                        <td>Devuelve las últimas <em>n</em> filas del DataFrame.</td>
+                        <td><code>df.tail(2)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>info()</code></td>
+                        <td>Muestra información general del DataFrame: columnas, tipos de datos y valores nulos.</td>
+                        <td><code>df.info()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>describe()</code></td>
+                        <td>Genera estadísticas descriptivas (media, desviación, min, max, cuartiles) de columnas
+                            numéricas.</td>
+                        <td><code>df.describe()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>shape</code></td>
+                        <td>Devuelve una tupla con el número de filas y columnas del DataFrame.</td>
+                        <td><code>df.shape</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>columns</code></td>
+                        <td>Lista los nombres de todas las columnas.</td>
+                        <td><code>df.columns</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>isnull()</code></td>
+                        <td>Devuelve un DataFrame booleano indicando los valores nulos.</td>
+                        <td><code>df.isnull()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>dropna()</code></td>
+                        <td>Elimina filas con valores nulos.</td>
+                        <td><code>df.dropna()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>fillna(valor)</code></td>
+                        <td>Rellena valores nulos con el valor especificado.</td>
+                        <td><code>df.fillna(0)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>sort_values(by)</code></td>
+                        <td>Ordena el DataFrame por los valores de una columna o lista de columnas.</td>
+                        <td><code>df.sort_values('edad')</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>groupby(col)</code></td>
+                        <td>Agrupa el DataFrame por los valores de una columna para realizar agregaciones.</td>
+                        <td><code>df.groupby('ciudad')['salario'].mean()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>pivot_table()</code></td>
+                        <td>Crea una tabla dinámica agregando datos según filas y columnas específicas.</td>
+                        <td><code>df.pivot_table(values='salario', index='departamento', columns='ciudad', aggfunc='mean')</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>apply(func)</code></td>
+                        <td>Aplica una función a cada elemento, fila o columna del DataFrame.</td>
+                        <td><code>df['edad'].apply(lambda x: x*2)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>merge()</code></td>
+                        <td>Permite unir DataFrames usando una columna clave, similar a JOIN en SQL.</td>
+                        <td><code>pd.merge(df1, df2, on='id')</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>concat()</code></td>
+                        <td>Concatena DataFrames vertical u horizontalmente.</td>
+                        <td><code>pd.concat([df1, df2])</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>drop(columns)</code></td>
+                        <td>Elimina columnas específicas del DataFrame.</td>
+                        <td><code>df.drop(['columna1','columna2'], axis=1)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>rename()</code></td>
+                        <td>Cambia el nombre de columnas o índices.</td>
+                        <td><code>df.rename(columns={'edad':'edad_años'})</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>sample(n)</code></td>
+                        <td>Extrae una muestra aleatoria de <em>n</em> filas del DataFrame.</td>
+                        <td><code>df.sample(5)</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
     </div>
 
@@ -640,45 +651,90 @@ df_json = pd.DataFrame(data_json)
     <!-- 5. MANIPULACIÓN DE DATOS  -->
     <!-- ========================= -->
     <div class="section">
-    <h2>5. Manipulación y transformación de datos</h2>
+        <h2>5. Manipulación y transformación de datos</h2>
 
-    <p>
-        Pandas permite realizar todas las operaciones esenciales de análisis de datos: selección de columnas, filtrado de filas, creación de nuevas columnas, manejo de fechas, agregaciones y agrupaciones. A continuación veremos un ejemplo completo desde la carga de datos hasta su análisis.
-    </p>
+        <p>
+            Pandas permite realizar todas las operaciones esenciales de análisis de datos: selección de columnas,
+            filtrado de filas, creación de nuevas columnas, manejo de fechas, agregaciones y agrupaciones. A
+            continuación veremos un ejemplo completo desde la carga de datos hasta su análisis.
+        </p>
 
-    <h3>5.1 Ejemplo completo con CSV</h3>
-    <p>Supongamos que tenemos un archivo CSV llamado <code>empleados.csv</code> con la siguiente estructura:</p>
+        <h3>5.1 Ejemplo completo con CSV</h3>
+        <p>Supongamos que tenemos un archivo CSV llamado <code>empleados.csv</code> con la siguiente estructura:</p>
 
-    <table border="1" cellspacing="0" cellpadding="5">
-        <thead>
-            <tr>
-                <th>nombre</th>
-                <th>edad</th>
-                <th>ciudad</th>
-                <th>departamento</th>
-                <th>salario</th>
-                <th>fecha_ingreso</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><td>Ana</td><td>25</td><td>Madrid</td><td>IT</td><td>2500</td><td>2020-01-01</td></tr>
-            <tr><td>Luis</td><td>34</td><td>Barcelona</td><td>Marketing</td><td>3200</td><td>2018-05-15</td></tr>
-            <tr><td>Carlos</td><td>42</td><td>Valencia</td><td>Ventas</td><td>4000</td><td>2015-09-30</td></tr>
-            <tr><td>Marta</td><td>19</td><td>Sevilla</td><td>IT</td><td>1800</td><td>2021-03-20</td></tr>
-            <tr><td>Jorge</td><td>28</td><td>Madrid</td><td>Marketing</td><td>2800</td><td>2019-07-10</td></tr>
-            <tr><td>Lucia</td><td>31</td><td>Barcelona</td><td>Ventas</td><td>3000</td><td>2017-11-05</td></tr>
-        </tbody>
-    </table>
-<div class="section">
-    <h2>Descarga del CSV de Ejemplo</h2>
-    <p>Puedes descargar el archivo <code>empleados.csv</code> con los datos de ejemplo para practicar Pandas:</p>
+        <table border="1" cellspacing="0" cellpadding="5">
+            <thead>
+                <tr>
+                    <th>nombre</th>
+                    <th>edad</th>
+                    <th>ciudad</th>
+                    <th>departamento</th>
+                    <th>salario</th>
+                    <th>fecha_ingreso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Ana</td>
+                    <td>25</td>
+                    <td>Madrid</td>
+                    <td>IT</td>
+                    <td>2500</td>
+                    <td>2020-01-01</td>
+                </tr>
+                <tr>
+                    <td>Luis</td>
+                    <td>34</td>
+                    <td>Barcelona</td>
+                    <td>Marketing</td>
+                    <td>3200</td>
+                    <td>2018-05-15</td>
+                </tr>
+                <tr>
+                    <td>Carlos</td>
+                    <td>42</td>
+                    <td>Valencia</td>
+                    <td>Ventas</td>
+                    <td>4000</td>
+                    <td>2015-09-30</td>
+                </tr>
+                <tr>
+                    <td>Marta</td>
+                    <td>19</td>
+                    <td>Sevilla</td>
+                    <td>IT</td>
+                    <td>1800</td>
+                    <td>2021-03-20</td>
+                </tr>
+                <tr>
+                    <td>Jorge</td>
+                    <td>28</td>
+                    <td>Madrid</td>
+                    <td>Marketing</td>
+                    <td>2800</td>
+                    <td>2019-07-10</td>
+                </tr>
+                <tr>
+                    <td>Lucia</td>
+                    <td>31</td>
+                    <td>Barcelona</td>
+                    <td>Ventas</td>
+                    <td>3000</td>
+                    <td>2017-11-05</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="section">
+            <h2>Descarga del CSV de Ejemplo</h2>
+            <p>Puedes descargar el archivo <code>empleados.csv</code> con los datos de ejemplo para practicar Pandas:
+            </p>
 
-    <a href="../assets/empleados.csv" download="empleados.csv" class="download-button">
-        Descargar CSV de empleados
-    </a>
-</div>
-    <div class="code-box">
-        <pre><code class="language-python">import pandas as pd
+            <a href="../assets/empleados.csv" download="empleados.csv" class="download-button">
+                Descargar CSV de empleados
+            </a>
+        </div>
+        <div class="code-box">
+            <pre><code class="language-python">import pandas as pd
 
 # 1. Cargar datos desde CSV
 df = pd.read_csv('empleados.csv')
@@ -710,12 +766,14 @@ df['dia_ingreso'] = df['fecha_ingreso'].dt.day
 # - Evitar bucles usando operaciones vectorizadas
 # - Documentar columnas nuevas y transformaciones
 </code></pre>
-    </div>
+        </div>
 
-    <p>
-        Con este flujo completo, desde la carga del CSV hasta las agregaciones y transformaciones, se puede hacer un análisis inicial del dataset, limpiar datos, crear nuevas métricas y preparar la información para visualización o modelado.
-    </p>
-</div>
+        <p>
+            Con este flujo completo, desde la carga del CSV hasta las agregaciones y transformaciones, se puede hacer un
+            análisis inicial del dataset, limpiar datos, crear nuevas métricas y preparar la información para
+            visualización o modelado.
+        </p>
+    </div>
 
 
     <!-- ========================= -->
@@ -774,8 +832,8 @@ df['edad_min'] = np.min(df['edad'])
         </div>
     </div>
 
-  
-    
+
+
     <!-- ========================= -->
     <!-- 8. ACTIVIDADES            -->
     <!-- ========================= -->
@@ -788,15 +846,18 @@ df['edad_min'] = np.min(df['edad'])
 
         <ol>
             <li>Cargar el archivo CSV de ejemplo en un DataFrame de Pandas.</li>
-            <li>Explorar el DataFrame: <code>head()</code>, <code>info()</code>, <code>describe()</code>. Analiza el contenido que muestra cada método.</li>
+            <li>Explorar el DataFrame: <code>head()</code>, <code>info()</code>, <code>describe()</code>. Analiza el
+                contenido que muestra cada método.</li>
             <li>Filtrar empleados por edad, ciudad y departamento. Se tienen que hacer consultas separadas.</li>
             <li>Crear nuevas columnas con cálculos: salario anual y antigüedad en años.</li>
             <li>Aplicar funciones estadísticas de NumPy: media, desviación estándar y percentiles.</li>
-            <li>Realizar agrupaciones por ciudad, departamento y rango de edad (separadas): calcular métricas resumen.</li>
-            <li>Responded a las siguientes preguntas: 
-                <ul><li>1. Empleado más antiguo.</li>
-                     <div class="code-box">
-            <pre>Ejemplo para obtener fechas del sistema<code class="language-python">from datetime import datetime
+            <li>Realizar agrupaciones por ciudad, departamento y rango de edad (separadas): calcular métricas resumen.
+            </li>
+            <li>Responded a las siguientes preguntas:
+                <ul>
+                    <li>1. Empleado más antiguo.</li>
+                    <div class="code-box">
+                        <pre>Ejemplo para obtener fechas del sistema<code class="language-python">from datetime import datetime
 
 current_second = datetime.now().second
 current_minute = datetime.now().minute
@@ -808,11 +869,12 @@ current_year = datetime.now().year
 
 print(current_day)
 </code></pre>
-        </div>
+                    </div>
                     <li>2. Ciudad con más empleados. </li>
                     <li>3. Departamento con mayor salario promedio.</li>
                     <li>4. Empleado con menos experiencia en la empresa.</li>
-                    <li>5. Empleados de marketing, de la ciudad de Barcelona y Madrid, que tengan más de 10 años de experiencia.</li>
+                    <li>5. Empleados de marketing, de la ciudad de Barcelona y Madrid, que tengan más de 10 años de
+                        experiencia.</li>
 
         </ol>
 

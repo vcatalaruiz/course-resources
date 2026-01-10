@@ -1,7 +1,16 @@
-
 <!DOCTYPE html>
 <html lang="es">
-    <head>
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-EVTW1307T1');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RA 4 - Programación Orientada a Objetos</title>
@@ -16,45 +25,50 @@
         hljs.highlightAll();
     </script>
     <link rel="stylesheet" href="../style.css">
+</head>
 
 <body>
-<header>
-    <img src="" id="logo" alt="Logo" style="display: none;">
-    <h1>RA 4 - Programación Orientada a Objetos</h1>
-    <h2 style="color:white!important">Introducción, Constructores y Modificadores de Acceso</h2>
-    <!-- Imagen del logo aquí -->
-</header>
+    <header>
+        <img src="" id="logo" alt="Logo" style="display: none;">
+        <h1>RA 4 - Programación Orientada a Objetos</h1>
+        <h2 style="color:white!important">Introducción, Constructores y Modificadores de Acceso</h2>
+        <!-- Imagen del logo aquí -->
+    </header>
 
-<main>
-    <!-- SECCIÓN 1: INTRODUCCIÓN -->
-    <section id="introduccion">
-        <h2>1. Introducción a la Programación Orientada a Objetos</h2>
-        <p>
-            La Programación Orientada a Objetos (POO) es un paradigma que permite modelar entidades del mundo real mediante
-            <strong>clases</strong> y <strong>objetos</strong>. Cada objeto combina datos (atributos) y comportamientos (métodos).
-        </p>
-        <p>Hasta el momento, para poder identificar un objeto teníamos que declarar variables independientes. Esto no es muy
-            mantenible y puede generar errores.
-        </p>
-        <div class="diagram" >
-            <img src="../assets/objeto_variables.png" style="max-width: 75%;" width="auto" alt="JSWING tree" />
-        </div>
-        <p>En el mundo real, la representación de una entidad es la suma de sus
-propiedades. Es lo que nos hace diferenciar, por ejemplo, un hombre de un
-vehículo, un animal de una planta, etc</p>
-<div class="diagram" >
-            <img src="../assets/objeto_plantilla.png" style="max-width: 75%;" width="auto" alt="JSWING tree" />
-        </div>
-        <h3>1.1. ¿Qué es una clase y un objeto?</h3>
-        <p>
-            Una <strong>clase</strong> es el molde que define cómo serán los objetos. Un <strong>objeto</strong> es una instancia concreta de esa clase.
-        </p>
-        <div class="diagram" >
-            <img src="../assets/plantilla_galletas.jpeg" style="max-width: 75%;" width="auto" alt="JSWING tree" />
-        </div>
-        <!-- Imagen conceptual aquí -->
-        <h3>1.2. Ejemplo básico</h3>
-        <pre><code class="language-java">
+    <main>
+        <!-- SECCIÓN 1: INTRODUCCIÓN -->
+        <section id="introduccion">
+            <h2>1. Introducción a la Programación Orientada a Objetos</h2>
+            <p>
+                La Programación Orientada a Objetos (POO) es un paradigma que permite modelar entidades del mundo real
+                mediante
+                <strong>clases</strong> y <strong>objetos</strong>. Cada objeto combina datos (atributos) y
+                comportamientos (métodos).
+            </p>
+            <p>Hasta el momento, para poder identificar un objeto teníamos que declarar variables independientes. Esto
+                no es muy
+                mantenible y puede generar errores.
+            </p>
+            <div class="diagram">
+                <img src="../assets/objeto_variables.png" style="max-width: 75%;" width="auto" alt="JSWING tree" />
+            </div>
+            <p>En el mundo real, la representación de una entidad es la suma de sus
+                propiedades. Es lo que nos hace diferenciar, por ejemplo, un hombre de un
+                vehículo, un animal de una planta, etc</p>
+            <div class="diagram">
+                <img src="../assets/objeto_plantilla.png" style="max-width: 75%;" width="auto" alt="JSWING tree" />
+            </div>
+            <h3>1.1. ¿Qué es una clase y un objeto?</h3>
+            <p>
+                Una <strong>clase</strong> es el molde que define cómo serán los objetos. Un <strong>objeto</strong> es
+                una instancia concreta de esa clase.
+            </p>
+            <div class="diagram">
+                <img src="../assets/plantilla_galletas.jpeg" style="max-width: 75%;" width="auto" alt="JSWING tree" />
+            </div>
+            <!-- Imagen conceptual aquí -->
+            <h3>1.2. Ejemplo básico</h3>
+            <pre><code class="language-java">
 // Definición de una clase básica en Java
 public class Vehiculo {
     String marca;       // Atributo que indica la marca del vehículo
@@ -80,23 +94,24 @@ public class Main {
     }
 }
         </code></pre>
-    </section>
+        </section>
 
-    <!-- SECCIÓN 2: CONSTRUCTORES -->
-    <section id="constructores">
-        <h2>2. Constructores</h2>
-        <p>
-            Un <strong>constructor</strong> es un método especial que se ejecuta automáticamente al crear un objeto. Sirve para inicializar
-            sus atributos. Si no se define, Java proporciona uno por defecto.
-        </p>
-        <h3>2.1. Características</h3>
-        <ul>
-            <li>Tiene el mismo nombre que la clase.</li>
-            <li>No devuelve ningún valor (ni siquiera <code>void</code>).</li>
-            <li>Puede estar sobrecargado (varios constructores con diferentes parámetros).</li>
-        </ul>
-        <h3>2.2. Ejemplo con sobrecarga</h3>
-        <pre><code class="language-java">
+        <!-- SECCIÓN 2: CONSTRUCTORES -->
+        <section id="constructores">
+            <h2>2. Constructores</h2>
+            <p>
+                Un <strong>constructor</strong> es un método especial que se ejecuta automáticamente al crear un objeto.
+                Sirve para inicializar
+                sus atributos. Si no se define, Java proporciona uno por defecto.
+            </p>
+            <h3>2.1. Características</h3>
+            <ul>
+                <li>Tiene el mismo nombre que la clase.</li>
+                <li>No devuelve ningún valor (ni siquiera <code>void</code>).</li>
+                <li>Puede estar sobrecargado (varios constructores con diferentes parámetros).</li>
+            </ul>
+            <h3>2.2. Ejemplo con sobrecarga</h3>
+            <pre><code class="language-java">
 // Clase con constructores sobrecargados
 public class Hotel {
     String nombre;
@@ -129,42 +144,49 @@ public class Main {
     }
 }
         </code></pre>
-        <!-- Imagen ilustrativa aquí -->
-    </section>
+            <!-- Imagen ilustrativa aquí -->
+        </section>
 
-    <!-- SECCIÓN 3: ENCAPSULAMIENTO -->
-    <section id="encapsulamiento">
-        <h2>3. Encapsulamiento</h2>
-        <div class="diagram" >
-            <img src="../assets/encapsulamiento_2.jpg" style="max-width: 50%;" width="auto" alt="JSWING tree" />
-        </div>
-        <p>
-            El <strong>encapsulamiento</strong> consiste en ocultar los detalles internos de una clase y exponer solo lo necesario.
-            Para ello se usan <strong>modificadores de acceso</strong> y métodos <strong>getters</strong> y <strong>setters</strong>.
-        </p>
-        
-<h3>3.1. ¿Por qué es necesario el encapsulamiento?</h3>
+        <!-- SECCIÓN 3: ENCAPSULAMIENTO -->
+        <section id="encapsulamiento">
+            <h2>3. Encapsulamiento</h2>
+            <div class="diagram">
+                <img src="../assets/encapsulamiento_2.jpg" style="max-width: 50%;" width="auto" alt="JSWING tree" />
+            </div>
+            <p>
+                El <strong>encapsulamiento</strong> consiste en ocultar los detalles internos de una clase y exponer
+                solo lo necesario.
+                Para ello se usan <strong>modificadores de acceso</strong> y métodos <strong>getters</strong> y
+                <strong>setters</strong>.
+            </p>
 
-<p>
-    Imagina que estás construyendo un coche. ¿Dejarías que cualquier persona toque el motor sin control? 
-    Probablemente no, porque podría romper algo importante. Lo mismo ocurre en programación: 
-    si todos los atributos y métodos son <strong>públicos</strong>, cualquiera puede modificarlos sin seguir las reglas 
-    que tú has definido, y eso puede provocar errores graves.
-</p>
-<div class="diagram" >
-            <img src="../assets/mecanico_rompiendo.jpg" style="max-width: 50%;" width="auto" alt="JSWING tree" />
-        </div>
-<p>
-    El <strong>encapsulamiento</strong> consiste en proteger la lógica interna de una clase. 
-    No se trata de ocultar información porque sí, sino de <strong>garantizar que los cambios se hagan de forma controlada. </strong>
-    
-</p>
-<p>Por ejemplo, si tienes un atributo <code>saldo</code> en una cuenta bancaria, no quieres que alguien lo cambie 
-    directamente a un valor negativo. En su lugar, ofreces métodos como <code>ingresar()</code> o <code>retirar()</code> 
-    que validan las operaciones.</p>
-    
-<h3>Ejemplo práctico: Cuenta bancaria con encapsulamiento</h3>
-<pre><code class="java">
+            <h3>3.1. ¿Por qué es necesario el encapsulamiento?</h3>
+
+            <p>
+                Imagina que estás construyendo un coche. ¿Dejarías que cualquier persona toque el motor sin control?
+                Probablemente no, porque podría romper algo importante. Lo mismo ocurre en programación:
+                si todos los atributos y métodos son <strong>públicos</strong>, cualquiera puede modificarlos sin seguir
+                las reglas
+                que tú has definido, y eso puede provocar errores graves.
+            </p>
+            <div class="diagram">
+                <img src="../assets/mecanico_rompiendo.jpg" style="max-width: 50%;" width="auto" alt="JSWING tree" />
+            </div>
+            <p>
+                El <strong>encapsulamiento</strong> consiste en proteger la lógica interna de una clase.
+                No se trata de ocultar información porque sí, sino de <strong>garantizar que los cambios se hagan de
+                    forma controlada. </strong>
+
+            </p>
+            <p>Por ejemplo, si tienes un atributo <code>saldo</code> en una cuenta bancaria, no quieres que alguien lo
+                cambie
+                directamente a un valor negativo. En su lugar, ofreces métodos como <code>ingresar()</code> o
+                <code>retirar()</code>
+                que validan las operaciones.
+            </p>
+
+            <h3>Ejemplo práctico: Cuenta bancaria con encapsulamiento</h3>
+            <pre><code class="java">
 // Clase que representa una cuenta bancaria
 public class CuentaBancaria {
     private double saldo; // Atributo privado para proteger el estado
@@ -215,38 +237,48 @@ public class Main {
     }
 }
 </code></pre>
-<!-- Imagen ilustrativa sobre cuenta bancaria aquí -->
-<div class="info-box">
-<p style="font-style: italic;">
-    Aunque tú seas el programador, piensa que tu código puede crecer, trabajar con otros módulos o incluso ser usado 
-    por otros desarrolladores. Si todo es público, cualquiera puede alterar el estado del objeto sin respetar las reglas 
-    que lo hacen funcionar correctamente. El encapsulamiento es como poner puertas y llaves: 
-    no impide usar la casa, pero sí evita que entren por la ventana.
-</p>
-</div>
+            <!-- Imagen ilustrativa sobre cuenta bancaria aquí -->
+            <div class="info-box">
+                <p style="font-style: italic;">
+                    Aunque tú seas el programador, piensa que tu código puede crecer, trabajar con otros módulos o
+                    incluso ser usado
+                    por otros desarrolladores. Si todo es público, cualquiera puede alterar el estado del objeto sin
+                    respetar las reglas
+                    que lo hacen funcionar correctamente. El encapsulamiento es como poner puertas y llaves:
+                    no impide usar la casa, pero sí evita que entren por la ventana.
+                </p>
+            </div>
 
-<!-- Imagen ilustrativa sobre encapsulamiento aquí -->
+            <!-- Imagen ilustrativa sobre encapsulamiento aquí -->
 
-        <h3>3.2. Modificadores de acceso</h3>
-        <p>Una buena práctica consiste en añadir modificadores de acceso a las variables de la clase. Su objetivo es mantener <strong>la consistencia</strong> de la lógica del propio objeto. Por ejemplo, imaginemos un objeto que representa un vehículo y todos sus parámetros son accesibles desde cualquier punto; el programador podría utilizar sin control los atributos y cambiar la "esencia" del objeto.</p>
-        <p>Por otro lado, para proteger la lógica, el programador no tiene por qué conocer todos los atributos y métodos de la clase.. ¿Conoces todas las herramientas que has utilizado? Por ejemplo, Scanner o System.out.println(..). Una forma de mantener la lógica de la clase es hacer accesibles únicamente aquellos métodos o atributos que realmente se tienen que utilizar.</p>
-        <div class="diagram" >
-            <img src="../assets/tabla_encapsulamiento.png" style="max-width: 75%;" width="auto" alt="JSWING tree" />
-        </div>
-        <ul>
-            <li><strong>public:</strong> Accesible desde cualquier clase.</li>
-            <li><strong>private:</strong> Solo accesible dentro de la clase.</li>
-            <li><strong>protected:</strong> Accesible desde la clase, subclases y el mismo paquete.</li>
-            <li><strong>sin modificador</strong> Accesible desde cualquier clase dentro de su mismo paquete.</li>
-        </ul>
-        <!-- Imagen tabla de visibilidad aquí -->
-        <h3>3.3. getters y setters</h3>
-        <p>Una buena práctica consiste en acceder a los atributos de la clase mediante métodos, evitando su manipulación directa. Esto permite tener un mayor control sobre la lógica e información del propio objeto.</p>
-        <div class="diagram" >
-            <img src="../assets/getter-setter.png" style="max-width: 50%;" width="auto" alt="JSWING tree" />
-        </div>
-        <h3>3.4. Ejemplo getters y setters</h3>
-        <pre><code class="language-java">
+            <h3>3.2. Modificadores de acceso</h3>
+            <p>Una buena práctica consiste en añadir modificadores de acceso a las variables de la clase. Su objetivo es
+                mantener <strong>la consistencia</strong> de la lógica del propio objeto. Por ejemplo, imaginemos un
+                objeto que representa un vehículo y todos sus parámetros son accesibles desde cualquier punto; el
+                programador podría utilizar sin control los atributos y cambiar la "esencia" del objeto.</p>
+            <p>Por otro lado, para proteger la lógica, el programador no tiene por qué conocer todos los atributos y
+                métodos de la clase.. ¿Conoces todas las herramientas que has utilizado? Por ejemplo, Scanner o
+                System.out.println(..). Una forma de mantener la lógica de la clase es hacer accesibles únicamente
+                aquellos métodos o atributos que realmente se tienen que utilizar.</p>
+            <div class="diagram">
+                <img src="../assets/tabla_encapsulamiento.png" style="max-width: 75%;" width="auto" alt="JSWING tree" />
+            </div>
+            <ul>
+                <li><strong>public:</strong> Accesible desde cualquier clase.</li>
+                <li><strong>private:</strong> Solo accesible dentro de la clase.</li>
+                <li><strong>protected:</strong> Accesible desde la clase, subclases y el mismo paquete.</li>
+                <li><strong>sin modificador</strong> Accesible desde cualquier clase dentro de su mismo paquete.</li>
+            </ul>
+            <!-- Imagen tabla de visibilidad aquí -->
+            <h3>3.3. getters y setters</h3>
+            <p>Una buena práctica consiste en acceder a los atributos de la clase mediante métodos, evitando su
+                manipulación directa. Esto permite tener un mayor control sobre la lógica e información del propio
+                objeto.</p>
+            <div class="diagram">
+                <img src="../assets/getter-setter.png" style="max-width: 50%;" width="auto" alt="JSWING tree" />
+            </div>
+            <h3>3.4. Ejemplo getters y setters</h3>
+            <pre><code class="language-java">
 // Clase con atributos privados y métodos públicos para acceder a ellos
 public class Persona {
     private String nombre; // Atributo privado
@@ -289,29 +321,34 @@ public class Main {
     }
 }
         </code></pre>
-    </section>
+        </section>
 
-<section>
-    <h2>4. Especificadores STATIC y FINAL – STATIC</h2>
-    <p>
-        El modificador <strong>static</strong> indica que un atributo o método pertenece a la clase y no a una instancia concreta.
-        Esto significa que el valor o comportamiento es compartido por todos los objetos creados a partir de esa clase.
-    </p>
-    <p>
-        Además, podemos combinar <code>static</code> con métodos públicos y privados para controlar el acceso y la lógica interna.
-        Los métodos <strong>públicos</strong> son accesibles desde cualquier parte, mientras que los <strong>privados</strong> solo se pueden usar dentro de la clase.
-    </p>
-    <!-- Imagen ilustrativa sobre static aquí -->
+        <section>
+            <h2>4. Especificadores STATIC y FINAL – STATIC</h2>
+            <p>
+                El modificador <strong>static</strong> indica que un atributo o método pertenece a la clase y no a una
+                instancia concreta.
+                Esto significa que el valor o comportamiento es compartido por todos los objetos creados a partir de esa
+                clase.
+            </p>
+            <p>
+                Además, podemos combinar <code>static</code> con métodos públicos y privados para controlar el acceso y
+                la lógica interna.
+                Los métodos <strong>públicos</strong> son accesibles desde cualquier parte, mientras que los
+                <strong>privados</strong> solo se pueden usar dentro de la clase.
+            </p>
+            <!-- Imagen ilustrativa sobre static aquí -->
 
-    <h3>4.1. Características del modificador static</h3>
-    <ul>
-        <li>Los atributos <code>static</code> son compartidos por todas las instancias de la clase.</li>
-        <li>Los métodos <code>static</code> se pueden llamar sin crear un objeto, usando el nombre de la clase.</li>
-        <li>No se puede acceder a atributos no estáticos desde un método estático.</li>
-    </ul>
+            <h3>4.1. Características del modificador static</h3>
+            <ul>
+                <li>Los atributos <code>static</code> son compartidos por todas las instancias de la clase.</li>
+                <li>Los métodos <code>static</code> se pueden llamar sin crear un objeto, usando el nombre de la clase.
+                </li>
+                <li>No se puede acceder a atributos no estáticos desde un método estático.</li>
+            </ul>
 
-    <h3>4.2. Ejemplo práctico con métodos públicos, privados y estáticos</h3>
-    <pre><code class="java">
+            <h3>4.2. Ejemplo práctico con métodos públicos, privados y estáticos</h3>
+            <pre><code class="java">
 // Clase que demuestra el uso de métodos públicos, privados y estáticos
 public class Hotel {
     private String nombre;           // Atributo privado
@@ -368,72 +405,75 @@ public class Main {
     }
 }
     </code></pre>
-</section>
+        </section>
 
-<!-- Bloque conceptual con diagrama -->
-<section>
-    <h2>Diagrama conceptual</h2>
-    <div class="mermaid">
-        classDiagram
-        class Hotel {
-            -nombre
-            -direccion
-            +Hotel(String, String)
-            +mostrarInfo()
-            -mostrarMensajePrivado()
-            +getCategoria()
-            -mensajeInternoStatic()
-            +ejecutarInterno()
-            static categoria
-        }
-    </div>
-</section>
-
-
-    
+        <!-- Bloque conceptual con diagrama -->
+        <section>
+            <h2>Diagrama conceptual</h2>
+            <div class="mermaid">
+                classDiagram
+                class Hotel {
+                -nombre
+                -direccion
+                +Hotel(String, String)
+                +mostrarInfo()
+                -mostrarMensajePrivado()
+                +getCategoria()
+                -mensajeInternoStatic()
+                +ejecutarInterno()
+                static categoria
+                }
+            </div>
+        </section>
 
 
-    <!-- DIAGRAMA MERMAID -->
-    <section >
-        <div class="info-box">
-        <!-- Tabla explicando los símbolos -->
-    <h3>Significado de los símbolos</h3>
-    <table border="1" style="width:100%; border-collapse:collapse; text-align:left;">
-        <thead>
-            <tr>
-                <th>Símbolo</th>
-                <th>Significado</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><code>+</code></td>
-                <td>Método o atributo <strong>público</strong> (accesible desde cualquier clase).</td>
-            </tr>
-            <tr>
-                <td><code>-</code></td>
-                <td>Método o atributo <strong>privado</strong> (solo accesible dentro de la clase).</td>
-            </tr>
-            <tr>
-                <td><code>#</code></td>
-                <td>Método o atributo <strong>protegido</strong> (accesible desde la clase y sus subclases).</td>
-            </tr>
-            <tr>
-                <td><code>static</code></td>
-                <td>Indica que el elemento pertenece a la <strong>clase</strong> y no a una instancia concreta.</td>
-            </tr>
-            <tr>
-                <td><code>: Tipo</code></td>
-                <td>Muestra el tipo de dato del atributo o el valor devuelto por el método.</td>
-            </tr>
-        </tbody>
-    </table>
-    </div>
-    </section>
-</main>
 
-<footer>
-     <p>&copy; Vicente Català Ruiz 2025-26. Todos los derechos reservados.</p>
-</footer>
+
+
+        <!-- DIAGRAMA MERMAID -->
+        <section>
+            <div class="info-box">
+                <!-- Tabla explicando los símbolos -->
+                <h3>Significado de los símbolos</h3>
+                <table border="1" style="width:100%; border-collapse:collapse; text-align:left;">
+                    <thead>
+                        <tr>
+                            <th>Símbolo</th>
+                            <th>Significado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>+</code></td>
+                            <td>Método o atributo <strong>público</strong> (accesible desde cualquier clase).</td>
+                        </tr>
+                        <tr>
+                            <td><code>-</code></td>
+                            <td>Método o atributo <strong>privado</strong> (solo accesible dentro de la clase).</td>
+                        </tr>
+                        <tr>
+                            <td><code>#</code></td>
+                            <td>Método o atributo <strong>protegido</strong> (accesible desde la clase y sus subclases).
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>static</code></td>
+                            <td>Indica que el elemento pertenece a la <strong>clase</strong> y no a una instancia
+                                concreta.</td>
+                        </tr>
+                        <tr>
+                            <td><code>: Tipo</code></td>
+                            <td>Muestra el tipo de dato del atributo o el valor devuelto por el método.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; Vicente Català Ruiz 2025-26. Todos los derechos reservados.</p>
+    </footer>
 </body>
+
 </html>
