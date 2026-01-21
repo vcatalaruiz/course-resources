@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scripting en Bash y automatización de tareas</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="../../course-resources/index.js" defer></script>
+  <style>
+    /* body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; margin: 0; color: #1f2937; } */
+    /* header { background: #0f766e; color: #fff; padding: 2rem 1.5rem; } */
+    h1,
+    h2,
+    h3 {
+      margin: 0.6rem 0;
+    }
+
+    main {
+      padding: 1.5rem;
+      max-width: 980px;
+      margin: auto;
+    }
+
+    code,
+    pre {
+      background: #f4f6f8;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+    }
+
+    pre {
+      padding: 1rem;
+      overflow-x: auto;
+    }
+
+    .callout {
+      background: #fff7ed;
+      border: 1px solid #fdba74;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    @media (min-width: 800px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    footer {
+      border-top: 1px solid #e5e7eb;
+      margin-top: 2rem;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+
+    .kbd {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      background: #111827;
+      color: #e5e7eb;
+      padding: 0 6px;
+      border-radius: 4px;
+    }
+  </style>
+  <script type='module'>
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+</head>
+
+
+<body>
+  <header>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+    <h1>Scripting en Bash y automatización de tareas </h1>
+  </header>
+
+  <main>
+
+
+    <section>
+      <h2>Scripting en Bash y automatización de tareas en sistemas Linux</h2>
+
+      <div class="diagram">
+        <img src="../assets/bash_scripting.jpg" alt="Bash scripting y automatización">
+      </div>
+
+      <p>
+        En la administración de sistemas Linux, una de las competencias clave es la capacidad de
+        <strong>automatizar tareas</strong> y <strong>crear scripts</strong> que permitan ejecutar acciones
+        de forma segura, repetible y eficiente.
+      </p>
+
+      <p>
+        En este tema se profundiza en el uso de <strong>Bash</strong> para la creación de scripts funcionales,
+        así como en los mecanismos básicos de automatización mediante <code>cron</code> y una introducción a
+        <code>systemd-timers</code>. Además, se trabajará la lectura y depuración de scripts existentes,
+        una situación muy habitual en entornos reales.
+      </p>
+    </section>
+
+    <section>
+      <h2>1. Variables y parámetros en Bash</h2>
+<p>
+        Las variables permiten almacenar información reutilizable dentro de un script, como rutas,
+        nombres de archivos o valores dinámicos. En Bash, las variables no necesitan declararse
+        previamente y se asignan usando el operador <code>=</code>.
+      </p>
+      <pre><code>#!/bin/bash
+
+# Asignación de variables
+nombre="Juan"
+edad=25
+directorio="/home/guardian/tesoros"
+
+# Acceso a variables
+echo "Hola, $nombre. Tienes $edad años."
+echo "El directorio es: $directorio"</code></pre>
+
+      
+
+      
+      <pre><code>directorio="/home/guardian/tesoros"</code></pre>
+
+      <p>
+        Para acceder al valor de una variable se utiliza el símbolo <code>$</code>. Es una buena práctica
+        usar comillas dobles para evitar errores durante la expansión de variables.
+      </p>
+
+      <h3>Parámetros de entrada</h3>
+      <p>
+        Los scripts pueden recibir información desde la línea de comandos mediante parámetros.
+        Estos parámetros permiten crear scripts reutilizables y flexibles.
+      </p>
+
+      <pre><code>./script.sh /ruta/al/directorio</code></pre>
+
+      <p>
+        Dentro del script, los parámetros se pueden acceder mediante variables especiales como
+        <code>$1</code>, <code>$2</code>, etc.
+      </p>
+
+      <div class="callout">
+        <strong>Idea clave:</strong> usar parámetros permite que un mismo script sirva para múltiples tareas
+        sin modificar su código.
+      </div>
+    </section>
+
+    <section>
+      <h2>2. Condicionales en Bash (<code>if</code>)</h2>
+
+      <div class="diagram">
+        <img src="../assets/if-else-bash.webp" alt="Condicionales if en Bash">
+      </div>
+
+      <p>
+        Los condicionales permiten que un script tome decisiones en función de ciertas condiciones.
+        En Bash, la estructura más habitual es el uso de <code>if</code>.
+      </p>
+
+      <pre><code>if [ condición ]; then
+    comandos
+fi</code></pre>
+
+      <p>
+        Los condicionales se utilizan frecuentemente para comprobar errores antes de ejecutar una acción,
+        como verificar si existe un directorio o si se ha proporcionado un parámetro.
+      </p>
+
+      <h3>Operadores de comparación habituales</h3>
+      <ul>
+        <li><code>-d</code> → comprueba si un directorio existe.</li>
+        <li><code>-f</code> → comprueba si un archivo existe.</li>
+        <li><code>-z</code> → comprueba si una cadena está vacía.</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Idea clave:</strong> un buen script comprueba las condiciones antes de actuar para evitar errores.
+      </div>
+    </section>
+
+    <section>
+      <h2>3. Bucles en Bash (<code>for</code>)</h2>
+
+      <div class="diagram">
+        <img src="../assets/for-bash.png" alt="Bucles for en Bash">
+      </div>
+
+      <p>
+        Los bucles permiten repetir una acción sobre un conjunto de elementos. El bucle
+        <code>for</code> es especialmente útil para recorrer listas o archivos en un directorio.
+      </p>
+
+      <pre><code>for elemento in lista; do
+    comandos
+done</code></pre>
+
+      <p>
+        En scripts de administración, los bucles se utilizan para automatizar tareas repetitivas,
+        como procesar múltiples archivos o aplicar una acción a varios elementos.
+      </p>
+
+      <div class="callout">
+        <strong>Idea clave:</strong> los bucles permiten evitar código duplicado y simplificar la lógica del script.
+      </div>
+    </section>
+
+    <section>
+      <h2>4. Creación de scripts Bash para tareas de administración</h2>
+
+      
+      <p>
+        Un script Bash bien estructurado sigue un orden lógico que facilita su lectura,
+        mantenimiento y corrección. En tareas de administración es importante que los scripts
+        sean claros y previsibles.
+      </p>
+
+      
+<pre><code>
+#!/bin/bash
+
+# ================================
+# Script de administración ejemplo
+# ================================
+
+# 1. Definición de variables
+ORIGEN="$1"
+DESTINO="/home/guardian/backups"
+FECHA=$(date +%Y-%m-%d)
+ARCHIVO="backup_$FECHA.tar.gz"
+
+# 2. Validación de parámetros y condiciones
+if [ -z "$ORIGEN" ]; then
+  echo "Error: debes indicar el directorio a respaldar."
+  exit 1
+fi
+
+if [ ! -d "$ORIGEN" ]; then
+  echo "Error: el directorio $ORIGEN no existe."
+  exit 1
+fi
+
+# 3. Ejecución de la tarea principal
+echo "Creando copia de seguridad de $ORIGEN..."
+tar -czf "$ARCHIVO" "$ORIGEN"
+mv "$ARCHIVO" "$DESTINO"
+
+# 4. Mensajes finales y salida controlada
+echo "Copia de seguridad creada correctamente en $DESTINO/$ARCHIVO"
+exit 0
+</code></pre>
+
+
+      <h3>Estructura habitual de un script</h3>
+      <ul>
+        <li>Definición de variables.</li>
+        <li>Validación de parámetros y condiciones.</li>
+        <li>Ejecución de la tarea principal.</li>
+        <li>Mensajes finales y salida controlada.</li>
+      </ul>
+
+      <p>
+        Los scripts deben tener permisos de ejecución y poder ejecutarse de forma manual
+        o automática según sea necesario.
+      </p>
+    </section>
+
+    <section>
+      <h2>5. Automatización de tareas con cron</h2>
+<div class="diagram">
+        <img src="../assets/Programar-Tareas-Automaticas-y-Scripts-con-Crontab-en-Linux.webp" alt="Cron y automatización">
+      </div>
+      
+      <p>
+        <code>cron</code> es un servicio que permite ejecutar comandos o scripts de forma automática
+        en momentos previamente programados. Cada usuario puede definir sus propias tareas
+        programadas mediante el <code>crontab</code>.
+      </p>
+
+      <p>La sintaxis básica de una tarea cron es:</p>
+
+      <pre><code>* * * * * comando</code></pre>
+
+      <p>
+        Cada asterisco representa un campo temporal que define cuándo se ejecutará la tarea
+        (minuto, hora, día del mes, mes y día de la semana).
+      </p>
+      <div class="diagram">
+        <img src="../assets/cron-explicacion.png" alt="Cron y automatización">
+      </div>
+
+
+      <p>
+        Una práctica habitual es probar primero las tareas con una ejecución frecuente y,
+        una vez verificado su funcionamiento, ajustar la programación definitiva.
+      </p>
+
+      <h2>Utilización de crontab.guru</h2>
+<p>
+    Para comprobar y entender el funcionamiento de las expresiones <strong>cron</strong>,
+    se recomienda utilizar la herramienta online <strong>crontab.guru</strong>.
+    Esta herramienta permite ver de forma inmediata <em>cuándo</em> se ejecutará
+    una tarea cron a partir de su expresión.
+  </p>
+  <a href="https://crontab.guru/">https://crontab.guru/</a> es una herramienta útil para generar y entender expresiones cron.
+
+   
+
+  <div class="callout">
+    <strong>Nota:</strong> crontab.guru es una herramienta externa y se abre en una nueva pestaña.
+    Esto es intencionado y refleja su uso habitual en entornos reales de administración de sistemas.
+  </div>
+
+  <h3>Cómo utilizar crontab.guru</h3>
+
+  <ol>
+    <li>Escribe la expresión cron en el campo de texto.</li>
+    <li>Observa la descripción en lenguaje natural que aparece debajo.</li>
+    <li>Comprueba si la ejecución coincide con lo que esperas.</li>
+  </ol>
+
+  <h3>Ejemplos habituales</h3>
+
+  <p>Cada minuto:</p>
+  <pre><code>* * * * *</code></pre>
+
+  <p>Cada día a las 03:00:</p>
+  <pre><code>0 3 * * *</code></pre>
+
+  <p>
+    Cada lunes a las 08:30:
+  </p>
+  <pre><code>30 8 * * 1</code></pre>
+
+  <div class="callout">
+    <strong>IMPORTANTE:</strong> usar crontab.guru para validar expresiones cron
+    antes de configurarlas en el sistema.
+  </div>
+  <br>
+      <div class="callout">
+        <strong>Idea clave:</strong> las tareas automatizadas deben usar rutas absolutas y ejecutarse sin interacción.
+      </div>
+    </section>
+
+
+<section>
+  <h2>6. Introducción a systemd-timers</h2>
+
+  <div class="diagram">
+        <img src="../assets/systemd-image.png" alt="Systemd timers">
+      </div>
+
+  <p>
+    En sistemas Linux modernos, <strong>systemd</strong> introduce un mecanismo alternativo a
+    <code>cron</code> para la automatización de tareas: los <strong>systemd-timers</strong>.
+    Estos timers permiten ejecutar tareas programadas de forma más controlada e integrada
+    con el sistema.
+  </p>
+
+  <p>
+    Los timers funcionan junto a <strong>servicios de systemd</strong> y ofrecen ventajas como
+    el registro automático de errores, la supervisión del estado de ejecución y una mejor
+    gestión en servidores y entornos de producción.
+  </p>
+
+  <h3>Ejemplo práctico: copia de seguridad diaria</h3>
+
+  <p>
+    En systemd, una tarea automatizada se divide en dos archivos:
+  </p>
+  <ul>
+    <li>Un <strong>servicio</strong>, que define qué se ejecuta.</li>
+    <li>Un <strong>timer</strong>, que define cuándo se ejecuta.</li>
+  </ul>
+
+  <h3>Servicio: <code>backup.service</code></h3>
+
+  <pre><code>
+[Unit]
+Description=Copia de seguridad diaria
+
+[Service]
+Type=oneshot
+ExecStart=/home/guardian/backup.sh
+  </code></pre>
+
+  <p>
+    Este servicio ejecuta un script y finaliza. El tipo <code>oneshot</code> es ideal para
+    tareas administrativas como copias de seguridad.
+  </p>
+
+  <h3>Timer: <code>backup.timer</code></h3>
+
+  <pre><code>
+[Unit]
+Description=Ejecutar backup cada día a las 03:00
+
+[Timer]
+OnCalendar=*-*-* 03:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+  </code></pre>
+
+  <p>
+    La opción <code>OnCalendar</code> define el momento de ejecución de forma clara y legible.
+    Con <code>Persistent=true</code>, la tarea se ejecutará al arrancar si el sistema estaba
+    apagado en el momento programado.
+  </p>
+
+  <h3>Activación del timer</h3>
+
+  <pre><code>
+sudo systemctl daemon-reload
+sudo systemctl enable --now backup.timer
+  </code></pre>
+
+  <h3>Visualizar estado y registros</h3>
+
+  <p>
+    Una de las grandes ventajas de systemd frente a cron es la gestión integrada del estado
+    y los registros de ejecución.
+  </p>
+
+  <pre><code>
+# Ver el estado del timer
+systemctl status backup.timer
+
+# Ver cuándo se ejecutarán los timers
+systemctl list-timers
+
+# Ver los registros del servicio
+journalctl -u backup.service
+  </code></pre>
+
+  <h3>Comparación conceptual con cron</h3>
+
+  <p>
+    Aunque cron es más sencillo de configurar, systemd-timers ofrece mayor fiabilidad en
+    sistemas modernos, especialmente en servidores.
+  </p>
+
+  <div class="callout">
+    <strong>Idea clave:</strong> cron es adecuado para tareas simples, mientras que systemd-timers
+    proporciona mayor control, registro de errores y supervisión en entornos de producción.
+  </div>
+</section>
+
+    
+<section>
+  <h2>7. Depuración y corrección de scripts Bash</h2>
+
+  <div class="diagram">
+    <img src="../assets/wordpress-debug.png" alt="Depuración de scripts Bash">
+  </div>
+
+  <h3>¿Por qué es importante depurar scripts?</h3>
+
+  <p>
+    En entornos reales de administración de sistemas es muy habitual trabajar con
+    <strong>scripts creados por otras personas</strong>, que pueden contener errores,
+    estar mal documentados o no funcionar como se espera.
+  </p>
+
+  <p>
+    Saber <strong>leer, analizar y corregir scripts</strong> es una habilidad fundamental,
+    especialmente cuando un script se ejecuta de forma automática o afecta a tareas críticas
+    del sistema.
+  </p>
+
+  <h3>¿Qué significa depurar un script?</h3>
+
+  <p>
+    Depurar un script significa <strong>observar cómo se ejecuta realmente</strong> para
+    entender qué está ocurriendo y por qué no produce el resultado esperado.
+    No se trata de adivinar errores, sino de analizar el comportamiento paso a paso.
+  </p>
+
+  <h3>Modo de depuración en Bash: <code>set -x</code></h3>
+
+  <p>
+    Bash permite activar un modo de depuración que muestra en pantalla
+    <strong>cada comando antes de ejecutarlo</strong>, junto con el valor real de las variables.
+    Esto facilita enormemente la localización de errores.
+  </p>
+
+  <p>
+    Para activar este modo, se añade la siguiente línea al inicio del script:
+  </p>
+
+  <pre><code>
+set -x
+  </code></pre>
+
+  <h3>Ejemplo sin depuración</h3>
+
+  <p>
+    Observa el siguiente script. Al ejecutarlo, no queda claro qué está fallando:
+  </p>
+
+  <pre><code>
+#!/bin/bash
+
+directorio="/ruta/incorrecta"
+
+if [ -d "$directorio" ]; then
+  echo "El directorio existe"
+else
+  echo "El directorio no existe"
+fi
+  </code></pre>
+
+  <h3>Ejemplo con depuración activada</h3>
+
+  <p>
+    Si añadimos <code>set -x</code>, podemos ver exactamente qué se está evaluando:
+  </p>
+
+  <pre><code>
+#!/bin/bash
+set -x
+
+directorio="/ruta/incorrecta"
+
+if [ -d "$directorio" ]; then
+  echo "El directorio existe"
+else
+  echo "El directorio no existe"
+fi
+  </code></pre>
+
+  <p>
+    Al ejecutar este script, Bash mostrará qué comandos se ejecutan y qué valores
+    toman las variables, lo que permite detectar rápidamente rutas incorrectas,
+    variables vacías o condiciones mal planteadas.
+  </p>
+
+  <h3>Corrección incremental de errores</h3>
+
+  <p>
+    La corrección de scripts debe realizarse de forma
+    <strong>incremental</strong>:
+  </p>
+
+  <ul>
+    <li>Se ejecuta el script.</li>
+    <li>Se observa el error o comportamiento inesperado.</li>
+    <li>Se corrige un solo problema.</li>
+    <li>Se vuelve a ejecutar para comprobar el resultado.</li>
+  </ul>
+
+  <p>
+    Este método evita introducir nuevos errores y permite entender
+    claramente el efecto de cada cambio.
+  </p>
+
+  <h3>Ejemplo típico de error y corrección</h3>
+
+  <pre><code>
+# Error: variable sin inicializar
+ruta_backup="/backups"
+
+tar -czf backup.tar.gz $directorio
+  </code></pre>
+
+  <p>
+    Con depuración activada, se puede observar que la variable <code>$directorio</code>
+    está vacía. La corrección consiste en definirla correctamente antes de usarla.
+  </p>
+
+  <div class="callout">
+    <strong>Idea clave:</strong> depurar no es adivinar errores, sino observar,
+    analizar y razonar a partir del comportamiento real del script.
+  </div>
+</section>
+
+<section>
+  <h2>Tutorial: El script del guardián</h2>
+
+  <p>
+    En este ejercicio debes crear un <strong>script Bash de administración</strong> que realice
+    una copia de seguridad de un directorio. El objetivo principal es aplicar una
+    <strong>estructura correcta de script</strong> y usar variables, parámetros y condicionales.
+  </p>
+
+  <h3>Pasos recomendados</h3>
+
+  <ol>
+    <li>
+      <strong>Crear el script Bash</strong><br>
+      Crea un archivo llamado <code>guardian.sh</code> e incluye el <em>shebang</em> correspondiente.
+    </li>
+
+    <li>
+      <strong>Definir variables</strong><br>
+      Declara variables para:
+      <ul>
+        <li>El directorio de origen (recibido como parámetro).</li>
+        <li>El directorio destino de las copias.</li>
+        <li>El nombre del archivo comprimido (incluyendo la fecha).</li>
+      </ul>
+    </li>
+
+    <li>
+      <strong>Validar parámetros y condiciones</strong><br>
+      Antes de ejecutar ninguna acción:
+      <ul>
+        <li>Comprueba que se ha pasado un parámetro.</li>
+        <li>Verifica que el directorio indicado existe.</li>
+      </ul>
+      Si alguna condición falla, muestra un mensaje de error y finaliza el script.
+    </li>
+
+    <li>
+      <strong>Ejecutar la tarea principal</strong><br>
+      Crea la copia comprimida usando <code>tar</code> y mueve el archivo al directorio de backups.
+    </li>
+
+    <li>
+      <strong>Comprobar el funcionamiento</strong><br>
+      Asegúrate de que el archivo se genera correctamente antes de ejecutar el script de verificación.
+    </li>
+  </ol>
+
+  <div class="callout">
+    <strong>Consejo:</strong> un script claro y ordenado es más fácil de automatizar y depurar.
+  </div>
+</section>
+
+<section>
+  <h2>Tutorial: El ritual diario</h2>
+
+  <p>
+    En este ejercicio aprenderás a <strong>automatizar la ejecución de un script</strong>
+    utilizando <code>cron</code>. El objetivo no es solo programar la tarea, sino entender
+    cuándo y cómo se ejecuta.
+  </p>
+
+  <h3>Pasos recomendados</h3>
+
+  <ol>
+    <li>
+      <strong>Verificar el script</strong><br>
+      Asegúrate de que el script que debe ejecutarse funciona correctamente
+      cuando se lanza de forma manual desde la terminal.
+    </li>
+
+    <li>
+      <strong>Usar rutas absolutas</strong><br>
+      Recuerda que <code>cron</code> no utiliza el mismo entorno que la terminal interactiva.
+      Usa siempre rutas completas dentro del cron.
+    </li>
+
+    <li>
+      <strong>Editar el crontab del usuario</strong><br>
+      Accede al editor de tareas programadas con el comando adecuado para el usuario guardian.
+    </li>
+
+    <li>
+      <strong>Probar la automatización</strong><br>
+      Programa inicialmente la tarea para que se ejecute cada minuto.
+      Esto te permitirá comprobar rápidamente si la configuración es correcta.
+    </li>
+
+    <li>
+      <strong>Ajustar la hora definitiva</strong><br>
+      Una vez verificado el funcionamiento, modifica la expresión cron para
+      que la tarea se ejecute cada día a las 03:00.
+    </li>
+  </ol>
+
+  <div class="callout">
+    <strong>Consejo:</strong> automatiza solo after comprobar que el script funciona correctamente.
+  </div>
+</section>
+
+<section>
+  <h2>Tutorial: El script maldito</h2>
+
+  <p>
+    En este ejercicio trabajarás con un <strong>script existente que contiene errores</strong>.
+    El objetivo es desarrollar la capacidad de <strong>leer, analizar y depurar scripts Bash</strong>.
+  </p>
+
+  <h3>Pasos recomendados</h3>
+
+  <ol>
+    <li>
+      <strong>Leer el script completo</strong><br>
+      Antes de modificar nada, revisa el contenido del script para entender
+      qué intenta hacer y cómo está estructurado.
+    </li>
+
+    <li>
+      <strong>Activar el modo de depuración</strong><br>
+      Añade la opción de depuración al inicio del script para ver
+      paso a paso qué comandos se ejecutan.
+    </li>
+
+    <li>
+      <strong>Ejecutar y observar errores</strong><br>
+      Lanza el script y presta atención a los mensajes que aparecen.
+      Identifica líneas problemáticas relacionadas con variables,
+      condicionales o rutas.
+    </li>
+
+    <li>
+      <strong>Corregir errores de forma incremental</strong><br>
+      Realiza un solo cambio cada vez y vuelve a ejecutar el script
+      para comprobar el efecto de la corrección.
+    </li>
+
+    <li>
+      <strong>Verificar el resultado final</strong><br>
+      Cuando el script se ejecute sin errores, comprueba que se genera
+      el archivo esperado y accede a su contenido.
+    </li>
+  </ol>
+
+  <div class="callout">
+    <strong>Consejo:</strong> depurar no es adivinar, es observar y razonar
+    a partir del comportamiento real del script.
+  </div>
+</section>
+
+    
+
+    <footer>
+      <p>Profesores: Alex Castel y Vicente Català — ®Todos los derechos reservados.</p>
+    </footer>
+
+  </main>
+</body>
+
+</html>
+
+
+</html>

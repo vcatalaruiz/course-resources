@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RA 7 - Utilización Avanzada de Clases (Herencia, Jerarquías e Interfaces)</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+    <h1>RA 7 - Utilización Avanzada de Clases</h1>
+    <h2 style="color:white!important">Herencia, Superclase/Subclase, Jerarquías, Pruebas e Interfaces</h2>
+  </header>
+
+  <main>
+    <!-- 1. INTRODUCCIÓN A LA HERENCIA -->
+    <section id="introduccion-herencia">
+      <h2>1. Introducción a la herencia</h2>
+      <p>
+        La <strong>herencia</strong> es un pilar de la Programación Orientada a Objetos (POO) que permite crear nuevas clases
+        a partir de clases existentes. La clase nueva (subclase) <em>hereda</em> atributos y métodos de la clase base (superclase),
+        lo que fomenta la <strong>reutilización</strong> del código, la <strong>extensibilidad</strong> y una <strong>jerarquía lógica</strong> de tipos.
+      </p>
+      <ul>
+        <li><strong>Reutilización de código:</strong> Evita repetir implementación común.</li>
+        <li><strong>Extensibilidad:</strong> Permite añadir o modificar comportamiento en subclases.</li>
+        <li><strong>Modelo jerárquico:</strong> Relación de generalización/especialización entre tipos.</li>
+      </ul>
+       <div class="diagram">
+                <img src="../assets/herencia.gif" style="max-width: 75%;" width="auto" alt="herencia" />
+            </div>
+    </section>
+
+    <!-- 2. CONCEPTOS: SUPERCLASE Y SUBCLASE -->
+    <section id="conceptos-basicos">
+      <h2>2. Herencia, superclase y subclase</h2>
+      <p>
+        En Java, la herencia se declara con <code>extends</code>. La <strong>superclase</strong> es la clase base; la <strong>subclase</strong> es la que hereda y puede
+        extender o sobrescribir el comportamiento.
+      </p>
+       <div class="diagram">
+                <img src="../assets/Herencia_ejemplo-1024x501.png" style="max-width: 75%;" width="auto" alt="herencia jerarquía" />
+            </div>
+      <pre><code class="language-java">
+// Superclase
+class Persona {
+    String nombre;
+    void correr() {
+        System.out.println("La persona corre.");
+    }
+}
+
+// Subclase que hereda y especializa
+class Deportista extends Persona {
+    @Override
+    void correr() {
+        System.out.println("El deportista corre rápido.");
+    }
+}
+
+class Informatico extends Persona {
+    @Override
+    void correr() {
+        System.out.println("El informático corre al servidor.");
+    }
+      </code></pre>
+      
+    </section>
+
+    
+<!-- 3. MODIFICADORES PARA BLOQUEAR/FORZAR HERENCIA -->
+<section id="modificadores-herencia">
+  <h2>3. Modificadores para controlar la herencia</h2>
+
+  <p>
+    Java proporciona varios modificadores que afectan directamente al comportamiento de la herencia:
+    <strong>final</strong> para bloquearla, <strong>abstract</strong> para forzarla y
+    <strong>protected</strong> para controlar el acceso desde subclases.
+  </p>
+
+  <!-- FINAL -->
+  <h3>3.1. Uso de <code>final</code> para bloquear la herencia</h3>
+  <p>
+    El modificador <code>final</code> puede aplicarse tanto a clases como a métodos:
+  </p>
+  <ul>
+    <li><strong>Clase final:</strong> no puede heredarse.</li>
+    <li><strong>Método final:</strong> no puede sobrescribirse en subclases.</li>
+  </ul>
+
+  <h4>Ejemplo: Clase final</h4>
+  <pre><code class="language-java">
+// Clase final: no puede tener subclases
+public final class ConexionBD {
+
+    public void conectar() {
+        System.out.println("Conexión establecida");
+    }
+}
+
+// ❌ ERROR: No se puede heredar de una clase final
+// class MiConexion extends ConexionBD { }
+  </code></pre>
+
+  <h4>Ejemplo: Método final</h4>
+  <pre><code class="language-java">
+class Persona {
+
+    public final void identificarse() {
+        System.out.println("Soy una persona");
+    }
+}
+
+class Estudiante extends Persona {
+
+    // ❌ ERROR: No se puede sobrescribir un método final
+    // @Override
+    // public void identificarse() { }
+}
+  </code></pre>
+
+  <div class="info-box">
+    <strong>Cuándo usar <code>final</code>:</strong>
+    <ul>
+      <li>Para proteger comportamiento crítico que no debe alterarse.</li>
+      <li>En clases utilitarias o de seguridad.</li>
+      <li>Para evitar extensiones peligrosas o no deseadas.</li>
+    </ul>
+  </div>
+
+  <!-- ABSTRACT -->
+  <h3>3.2. Uso de <code>abstract</code> para forzar la herencia</h3>
+
+  <p>
+    El modificador <code>abstract</code> define una clase que <strong>debe ser extendida</strong> y 
+    que no puede instanciarse directamente.  
+    Además, permite declarar <strong>métodos abstractos</strong> (sin implementación).
+  </p>
+
+  <h4>Ejemplo: Clase abstracta + método abstracto</h4>
+  <pre><code class="language-java">
+abstract class Animal {
+
+    abstract void hacerSonido(); // Método obligatorio
+
+    void dormir() {              // Método normal
+        System.out.println("El animal duerme");
+    }
+}
+
+class Gato extends Animal {
+    @Override
+    void hacerSonido() {
+        System.out.println("El gato maúlla");
+    }
+}
+  </code></pre>
+
+  <h4>Ejemplo: Clase abstracta como plantilla</h4>
+  <pre><code class="language-java">
+abstract class Figura {
+
+    public abstract double area();
+
+    public void mostrarTipo() {
+        System.out.println("Soy una figura geométrica");
+    }
+}
+
+class Rectangulo extends Figura {
+
+    private double ancho, alto;
+
+    Rectangulo(double ancho, double alto) {
+        this.ancho = ancho;
+        this.alto = alto;
+    }
+
+    @Override
+    public double area() {
+        return ancho * alto;
+    }
+}
+  </code></pre>
+
+  <div class="info-box">
+    <strong>Cuándo usar <code>abstract</code>:</strong>
+    <ul>
+      <li>Para crear una clase base que sirve como plantilla obligatoria.</li>
+      <li>Cuando necesitas que las subclases implementen ciertos métodos.</li>
+      <li>Si la clase base es demasiado general para tener instancias propias.</li>
+    </ul>
+  </div>
+
+  <!-- PROTECTED -->
+  <h3>3.3. Uso de <code>protected</code> para controlar acceso desde subclases</h3>
+
+  <p>
+    El modificador <code>protected</code> se usa en atributos y métodos.
+    Permite que sean accesibles:
+  </p>
+  <ul>
+    <li>Desde la propia clase.</li>
+    <li>Desde cualquier subclase, incluso si están en otro paquete.</li>
+    <li>Desde clases del mismo paquete.</li>
+  </ul>
+
+  <p>
+    Es un punto intermedio entre <code>private</code> (muy restrictivo) y <code>public</code> (sin restricciones).
+  </p>
+
+  <h4>Ejemplo: Atributo <code>protected</code> accesible desde una subclase</h4>
+  <pre><code class="language-java">
+class Vehiculo {
+
+    protected String marca;  // Visible desde subclases
+
+    protected void mostrarMarca() {
+        System.out.println("Marca: " + marca);
+    }
+}
+
+class Coche extends Vehiculo {
+
+    Coche(String marca) {
+        this.marca = marca;           // Acceso permitido
+    }
+
+    public void info() {
+        mostrarMarca();               // También accesible
+        System.out.println("Es un coche");
+    }
+}
+  </code></pre>
+
+  <h4>Ejemplo con clases en distinto paquete</h4>
+  <pre><code class="language-java">
+// paquete: transporte
+public class Vehiculo {
+    protected void arrancar() {
+        System.out.println("El vehículo arranca");
+    }
+}
+
+// paquete: transporte.terrestre
+public class Moto extends Vehiculo {
+    public void iniciar() {
+        arrancar(); // ✔ Acceso permitido porque es subclase
+    }
+}
+  </code></pre>
+
+  <div class="info-box">
+    <strong>Cuándo usar <code>protected</code>:</strong>
+    <ul>
+      <li>Cuando quieres permitir que las subclases accedan a la lógica interna.</li>
+      <li>Cuando <code>private</code> es demasiado restrictivo para la herencia.</li>
+      <li>Para atributos que forman parte del “ADN” de la clase, pero no deben ser públicos.</li>
+    </ul>
+  </div>
+
+  <!-- COMPARATIVA -->
+  <h3>3.4. Comparativa: <code>final</code> vs <code>abstract</code> vs <code>protected</code></h3>
+
+  <table border="1" style="border-collapse: collapse; width:100%; text-align:left;">
+    <tr>
+      <th>Modificador</th>
+      <th>¿Qué afecta?</th>
+      <th>Significado</th>
+      <th>Uso típico</th>
+    </tr>
+    <tr>
+      <td><code>final</code></td>
+      <td>Clases y métodos</td>
+      <td>Bloquea herencia o sobrescritura</td>
+      <td>Proteger comportamiento fijo</td>
+    </tr>
+    <tr>
+      <td><code>abstract</code></td>
+      <td>Clases y métodos</td>
+      <td>Fuerza herencia e implementación obligatoria</td>
+      <td>Plantillas de clases</td>
+    </tr>
+    <tr>
+      <td><code>protected</code></td>
+      <td>Atributos y métodos</td>
+      <td>Acceso desde subclases y mismo paquete</td>
+      <td>Permitir extensión segura</td>
+    </tr>
+  </table>
+
+</section>
+
+
+    <!-- 4. CONSTRUCTORES E IMPACTO EN LA HERENCIA -->
+    <section id="constructores-super">
+      <h2>4. Constructores y acceso a la superclase</h2>
+      <p>
+        Los <strong>constructores no se heredan</strong>, pero las subclases pueden invocar al constructor de la superclase con <code>super(...)</code>.
+        Si la superclase define solo constructores con parámetros, la subclase debe invocarlos explícitamente.
+      </p>
+      <div class="diagram">
+                <img src="../assets/superconstructor.png" style="max-width: 75%;" width="auto" alt="super constructor"/>
+            </div>
+      <pre><code class="language-java">
+class Persona {
+    String nombre;
+    int edad; 
+    Persona(String nombre, int edad) {
+        this.nombre = nombre;
+        this.edad = edad;
+    }
+}
+
+class Deportista extends Persona {
+    Deportista(String nombre, int edad) {
+        super(nombre, edad); // Llamada al constructor de la superclase
+    }
+}
+      </code></pre>
+    </section>
+
+    <!-- 5. SOBRESCRITURA DE MÉTODOS -->
+    <section id="override">
+      <h2>5. Sobrescritura de métodos</h2>
+      <p>
+        La <strong>sobrescritura</strong> (override) ocurre cuando una subclase redefine un método con la misma firma que en la superclase.
+        Es buena práctica anotar con <code>@Override</code> para obtener comprobación del compilador.
+      </p>
+      <pre><code class="language-java">
+class Animal {
+    void hacerSonido() {
+        System.out.println("El animal hace un sonido");
+    }
+}
+
+class Gato extends Animal {
+    @Override
+    void hacerSonido() {
+        System.out.println("El gato maúlla");
+    }
+}
+      </code></pre>
+    </section>
+
+    <!-- 6. DISEÑO Y APLICACIÓN DE JERARQUÍAS -->
+    <section id="jerarquias">
+      <h2>6. Diseño y aplicación de jerarquías de clases</h2>
+      <p>
+        Una jerarquía típica parte de una clase general y se especializa en subclases concretas. Ejemplo con vehículos:
+      </p>
+      <pre><code class="language-java">
+class Vehiculo {
+    int cilindrada;
+    String marca;
+    String conducir() {
+        return "Conduciendo el vehículo";
+    }
+}
+
+class Coche extends Vehiculo {
+    @Override
+    String conducir() { return "Conduciendo el coche"; }
+}
+
+class Bicicleta extends Vehiculo {
+    @Override
+    String conducir() { return "Pedaleando la bicicleta"; }
+}
+      </code></pre>
+      <div class="mermaid">
+      classDiagram
+        class Vehiculo {
+          int cilindrada
+          String marca
+          +conducir() String
+        }
+        class Coche {
+          +conducir() String
+        }
+        class Bicicleta {
+          +conducir() String
+        }
+        Vehiculo <|-- Coche
+        Vehiculo <|-- Bicicleta
+      </div>
+    </section>
+
+    <!-- 7. PRUEBAS Y DEPURACIÓN -->
+    <section id="pruebas-depuracion">
+      <h2>7. Pruebas y depuración de jerarquías</h2>
+      <p>
+        Para validar el comportamiento polimórfico, emplea pruebas unitarias con <strong>JUnit</strong> y depura con <em>breakpoints</em> para
+        inspeccionar el enlace dinámico. Ejemplo de prueba sencilla:
+      </p>
+      <pre><code class="language-java">
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class VehiculoTest {
+    @Test
+    public void testConduccionCoche() {
+        Vehiculo v = new Coche();
+        assertEquals("Conduciendo el coche", v.conducir());
+    }
+}
+      </code></pre>
+      <div class="info-box">
+        <ul>
+          <li>Incluye casos con distintas subclases y verifica salidas esperadas.</li>
+          <li>Prueba también a través de referencias de la superclase para validar el polimorfismo.</li>
+          <li>Usa el depurador para observar qué implementación se ejecuta en tiempo de ejecución.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 8. DOCUMENTACIÓN Y COMENTARIOS -->
+    <section id="documentacion">
+      <h2>8. Documentación y comentarios del código</h2>
+      <p>
+        La documentación clara favorece la mantenibilidad. Emplea <strong>Javadoc</strong> para describir parámetros (<code>@param</code>), retorno
+        (<code>@return</code>), excepciones (<code>@throws</code>) y referencias (<code>@see</code>), entre otras anotaciones.
+      </p>
+      <pre><code class="language-java">
+/**
+ * Calcula el área de un rectángulo.
+ * @param ancho ancho en unidades
+ * @param alto alto en unidades
+ * @return área calculada
+ * @throws IllegalArgumentException si ancho o alto son negativos
+ * @since 1.0
+ */
+public double areaRectangulo(double ancho, double alto) {
+    if (ancho < 0 || alto < 0) throw new IllegalArgumentException("Medidas inválidas");
+    return ancho * alto;
+}
+      </code></pre>
+      <div class="info-box">
+        <p><em>Consejo:</em> Prioriza comentarios del “por qué” frente al “qué”, y evita redundancia con código autoexplicativo.</p>
+      </div>
+    </section>
+
+    
+     
+<!-- 9. INTERFACES: DEFINICIÓN, USO Y ESCENARIOS -->
+<section id="interfaces">
+  <h2>9. Uso de interfaces y escenarios</h2>
+
+  <p>
+    Una <strong>interfaz</strong> en Java define un <strong>contrato</strong> de comportamiento que
+    una o varias clases deben implementar. A diferencia de las clases abstractas, las interfaces
+    están pensadas para describir <em>qué se puede hacer</em>, no <em>cómo</em>.
+  </p>
+<div class="diagram">
+                <img src="../assets/interfaz java.jpeg" style="max-width: 95%;" width="auto" alt="interfaces"/>
+            </div>
+  <p>
+    Las interfaces permiten la <strong>herencia múltiple de comportamiento</strong> y promueven el
+    diseño modular y desacoplado.
+  </p>
+
+<!-- 9.x ¿Por qué se utilizan las interfaces? Explicación didáctica -->
+
+  <h3>¿Por qué se utilizan las interfaces?</h3>
+
+  <p>
+    Las interfaces existen en Java para resolver un problema fundamental en el diseño orientado a 
+    objetos: <strong>cómo compartir comportamiento sin obligar a compartir estructura</strong>.
+    Dicho de otra forma, permiten que distintas clases puedan comportarse de forma similar
+    aunque no tengan relación directa en una jerarquía de herencia.
+  </p>
+
+  <h3>1. Para definir un <em>contrato</em> común</h3>
+  <p>
+    Una interfaz es como un “acuerdo” que una clase promete cumplir.  
+    Si una clase implementa una interfaz, se compromete a ofrecer ciertos métodos.
+  </p>
+
+  <div class="info-box">
+    <strong>Ejemplo didáctico:</strong><br>
+    Imagina un concurso donde todos los participantes deben cantar.  
+    No importa si es una persona, un robot o un loro:  
+    <strong>mientras puedan cantar, cumplen el contrato.</strong>
+  </div>
+
+  <pre><code class="language-java">
+interface Cantante {
+    void cantar();
+}
+  </code></pre>
+
+  <p>
+    Esto permite escribir código que no dependa de un tipo concreto, sino del <em>rol</em> que cumple.
+  </p>
+
+  <h3>2. Para permitir <strong>polimorfismo flexible</strong></h3>
+  <p>
+    Diferentes clases pueden ser tratadas como el mismo tipo si implementan la misma interfaz.
+  </p>
+
+  <pre><code class="language-java">
+List<Cantante> lista = new ArrayList<>();
+lista.add(new Persona());
+lista.add(new Robot());
+lista.add(new Loro());
+
+for (Cantante c : lista) {
+    c.cantar(); // Polimorfismo basado en interfaz
+}
+  </code></pre>
+
+  <p>
+    Aquí no importa <em>qué son</em>, sino <em>qué saben hacer</em>.
+  </p>
+
+  <h3>3. Para solucionar la limitación de herencia simple</h3>
+  <p>
+    En Java una clase solo puede heredar de una clase (herencia simple), pero puede implementar 
+    <strong>todas las interfaces que quiera</strong>.  
+    Esto permite combinar comportamientos sin crear jerarquías complejas.
+  </p>
+
+  <pre><code class="language-java">
+interface Volador { void volar(); }
+interface Nadador { void nadar(); }
+
+class Pato implements Volador, Nadador {
+    public void volar() { System.out.println("El pato vuela."); }
+    public void nadar() { System.out.println("El pato nada."); }
+}
+  </code></pre>
+
+  <h3>4. Para lograr un diseño más limpio y desacoplado</h3>
+  <p>
+    Trabajar “contra interfaces” en lugar de “contra clases concretas” permite cambiar 
+    implementaciones sin romper el resto del sistema.  
+    Esto hace que el código sea:
+  </p>
+
+  <ul>
+    <li><strong>más mantenible</strong></li>
+    <li><strong>más escalable</strong></li>
+    <li><strong>más fácil de probar</strong></li>
+    <li><strong>más reutilizable</strong></li>
+  </ul>
+
+  <h3>5. Para facilitar pruebas unitarias (mocks)</h3>
+  <p>
+    Si tu código usa interfaces, puedes sustituir una implementación real por una falsa
+    durante una prueba.
+  </p>
+
+  <pre><code class="language-java">
+class ServicioReal implements Servicio {
+    public int obtenerDato() { return 42; }
+}
+
+// Mock para test
+class ServicioFalso implements Servicio {
+    public int obtenerDato() { return 0; }
+}
+  </code></pre>
+
+  <p>
+    Así puedes simular comportamientos sin depender de bases de datos, APIs, etc.
+  </p>
+
+  <h3>6. Diagrama conceptual: las interfaces como roles</h3>
+
+  <div class="mermaid">
+  classDiagram
+    class Cantante {
+      
+      +cantar()
+    }
+
+    class Persona {
+      +cantar()
+    }
+
+    class Robot {
+      +cantar()
+    }
+
+    class Loro {
+      +cantar()
+    }
+
+    Cantante <|.. Persona
+    Cantante <|.. Robot
+    Cantante <|.. Loro
+  </div>
+
+  <h3>Resumen didáctico</h3>
+  <ul>
+    <li>Las interfaces dicen “<strong>qué</strong> debe hacer una clase”, no “cómo”.</li>
+    <li>Permiten polimorfismo flexible sin obligar a heredar.</li>
+    <li>Permiten que clases sin relación compartan comportamientos.</li>
+    <li>Facilitan pruebas, sustituciones y arquitectura limpia.</li>
+    <li>Son esenciales para patrones de diseño como Strategy, Observer, Command…</li>
+  </ul>
+
+
+
+  <h3>9.1. Sintaxis básica de una interfaz</h3>
+
+  <pre><code class="language-java">
+interface Reproducible {
+    void reproducir(); // Método abstracto (implícito)
+}
+
+class Cancion implements Reproducible {
+    @Override
+    public void reproducir() {
+        System.out.println("Reproduciendo canción...");
+    }
+}
+
+class Podcast implements Reproducible {
+    @Override
+    public void reproducir() {
+        System.out.println("Reproduciendo episodio de podcast...");
+    }
+}
+  </code></pre>
+
+  <h3>9.2. Atributos y métodos en interfaces</h3>
+
+  <p>
+    Las interfaces pueden contener:
+  </p>
+
+  <ul>
+    <li><strong>Métodos abstractos</strong> (sin cuerpo).</li>
+    <li><strong>Métodos por defecto</strong> (<code>default</code>) con implementación.</li>
+    <li><strong>Métodos estáticos</strong> (<code>static</code>).</li>
+    <li><strong>Constantes</strong> (atributos <code>public static final</code> por defecto).</li>
+  </ul>
+
+  <h4>Ejemplo con métodos default y static</h4>
+
+  <pre><code class="language-java">
+interface Calculadora {
+
+    // Constante
+    double PI = 3.1416;
+
+    // Método abstracto
+    double operar(double a, double b);
+
+    // Método default (opcional para la clase)
+    default void mostrarOperacion(String nombre) {
+        System.out.println("Ejecutando operación: " + nombre);
+    }
+
+    // Método estático
+    static void info() {
+        System.out.println("Interfaz Calculadora: versión 1.0");
+    }
+}
+
+class Suma implements Calculadora {
+
+    @Override
+    public double operar(double a, double b) {
+        mostrarOperacion("Suma");
+        return a + b;
+    }
+}
+  </code></pre>
+
+  <p>
+    Para llamar a un método estático de una interfaz:
+  </p>
+
+  <pre><code class="language-java">
+Calculadora.info();
+  </code></pre>
+
+  
+
+  
+
+  <h3>9.3. Diferencias entre interfaces y clases abstractas</h3>
+
+  <table border="1" style="border-collapse: collapse; width:100%;">
+    <tr>
+      <th>Característica</th>
+      <th>Interfaz</th>
+      <th>Clase abstracta</th>
+    </tr>
+    <tr>
+      <td>Herencia múltiple</td>
+      <td>Sí, se pueden implementar varias</td>
+      <td>No, solo una clase padre</td>
+    </tr>
+    <tr>
+      <td>Constructores</td>
+      <td>No</td>
+      <td>Sí</td>
+    </tr>
+    <tr>
+      <td>Estado (atributos)</td>
+      <td>Constantes (<code>public static final</code>)</td>
+      <td>Atributos normales</td>
+    </tr>
+    <tr>
+      <td>Uso típico</td>
+      <td>Roles, capacidades, comportamiento común</td>
+      <td>Plantillas incompletas, jerarquías</td>
+    </tr>
+  </table>
+
+  <h3>9.4. Diagrama de interfaces</h3>
+
+  <div class="mermaid">
+  classDiagram
+    class Reproducible {
+      
+      +reproducir()
+    }
+
+    class Cancion {
+      +reproducir()
+    }
+
+    class Podcast {
+      +reproducir()
+    }
+
+    Reproducible <|.. Cancion
+    Reproducible <|.. Podcast
+  </div>
+</section>
+
+    
+    <!-- 10. HERENCIA VS COMPOSICIÓN -->
+    <section id="herencia-vs-composicion">
+      <h2>10. Herencia vs composición</h2>
+      <p>
+        La <strong>herencia</strong> modela una relación “<em>es-un</em>”, mientras que la <strong>composición</strong> modela “<em>tiene-un</em>”.
+        Prefiere composición cuando necesites combinar comportamientos de forma flexible y reducir el acoplamiento.
+      </p>
+      <pre><code class="language-java">
+class Pagina {
+    int numero;
+    String texto;
+}
+
+class Libro {
+    java.util.List<Pagina> paginas = new java.util.ArrayList<>();
+    String titulo;
+    double precio;
+}
+      </code></pre>
+      <div class="mermaid">
+      classDiagram
+        class Pagina {
+          int numero
+          String texto
+        }
+        class Libro {
+          String titulo
+          double precio
+          +paginas : List< Pagina >
+        }
+        Libro o-- Pagina : composición
+      </div>
+      <div class="info-box">
+        <ul>
+          <li><strong>Usa herencia</strong> si existe una clara relación de tipo y quieres reutilizar y especializar comportamiento.</li>
+          <li><strong>Usa composición</strong> si quieres construir objetos complejos a partir de otros y variar el comportamiento en tiempo de ejecución.</li>
+        </ul>
+      </div>
+    </section>
+
+    
+
+    <!-- 12. RESUMEN -->
+    <section id="resumen">
+      <h2>11. Resumen</h2>
+      <ul>
+        <li>Herencia: reutilización, especialización y jerarquías.</li>
+        <li>Modificadores <code>final</code> y <code>abstract</code>: controlan herencia y sobrescritura.</li>
+        <li>Constructores: no se heredan; <code>super(...)</code> conecta inicialización entre clases.</li>
+        <li>Sobrescritura con <code>@Override</code> para polimorfismo seguro.</li>
+        <li>Interfaces: contrato común para múltiples implementaciones.</li>
+        <li>Composición vs herencia: elige según “es-un” o “tiene-un”.</li>
+        <li>Pruebas y documentación: calidad, verificabilidad y mantenibilidad.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>© Vicente Català Ruiz 2025-26. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>

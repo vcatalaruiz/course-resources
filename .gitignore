@@ -1,1 +1,5 @@
 plantillas/
+model_cache/
+.locks/
+.cache/
+*.safetensors

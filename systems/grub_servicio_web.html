@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resolución de nombres en redes: /etc/hosts, DNS y Virtual Hosts</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="../../course-resources/index.js" defer></script>
+  <style>
+    /* body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; margin: 0; color: #1f2937; } */
+    /* header { background: #0f766e; color: #fff; padding: 2rem 1.5rem; } */
+    h1,
+    h2,
+    h3 {
+      margin: 0.6rem 0;
+    }
+
+    main {
+      padding: 1.5rem;
+      max-width: 980px;
+      margin: auto;
+    }
+
+    code,
+    pre {
+      background: #f4f6f8;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+    }
+
+    pre {
+      padding: 1rem;
+      overflow-x: auto;
+    }
+
+    .callout {
+      background: #fff7ed;
+      border: 1px solid #fdba74;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    @media (min-width: 800px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    footer {
+      border-top: 1px solid #e5e7eb;
+      margin-top: 2rem;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+
+    .kbd {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      background: #111827;
+      color: #e5e7eb;
+      padding: 0 6px;
+      border-radius: 4px;
+    }
+  </style>
+  <script type='module'>
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+</head>
+
+
+<body>
+  <header>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+    <h1>GRUB y servicios web</h1>
+    </header>
+
+  <main>
+
+    <section>
+      <h2>1. ¿Qué es el modo rescate (<span class="kbd">rescue.target</span>)?</h2>
+      <p>En sistemas basados en <strong>systemd</strong>, los modos de arranque se llaman <strong>targets</strong>. El
+        modo
+        <code>rescue.target</code> es un modo de emergencia que:
+      </p>
+
+      <ul>
+        <li>arranca el sistema con lo mínimo indispensable,</li>
+        <li>monta los sistemas de ficheros,</li>
+        <li>arranca una consola root,</li>
+        <li>no activa servicios de red ni servicios multiusuario.</li>
+      </ul>
+
+      <p>Para volver a un modo normal debemos activar el target habitual:</p>
+<div class="diagram" >
+            <img src="../assets/Change-Runlevels-Targets-in-Systemd.png"  alt="multi-user target">
+        </div>
+      <pre><code>sudo systemctl set-default multi-user.target
+sudo reboot
+    </code></pre>
+
+      <div class="callout">
+        <strong>Idea clave:</strong> cambiar el target soluciona el primer problema del reto.
+      </div>
+    </section>
+
+    <section>
+      <h2>2. El gestor de arranque GRUB y su menú oculto</h2>
+      <div class="diagram" >
+            <img src="../assets/GRUB.webp"  alt="GRUB menu">
+        </div>
+
+      <p>Ubuntu 24 oculta el menú de GRUB para acelerar el arranque. Esto se controla mediante la variable:</p>
+
+      <pre><code>GRUB_HIDDEN_TIMEOUT_STYLE=hidden</code></pre>
+
+      <p>Para mostrar el menú al arrancar debemos editar el archivo:</p>
+
+      <pre><code>sudo nano /etc/default/grub</code></pre>
+
+      <p>Y modificar:</p>
+
+      <pre><code># Desactiva el ocultamiento
+GRUB_HIDDEN_TIMEOUT_STYLE=menu
+
+# O reemplazarlo por:
+GRUB_TIMEOUT_STYLE=menu
+GRUB_TIMEOUT=5
+    </code></pre>
+
+      <p>Después, aplicamos cambios:</p>
+
+      <pre><code>sudo update-grub</code></pre>
+
+      <div class="callout">
+        <strong>El primer código del FLAG</strong> será la línea correcta que permite que el menú de GRUB se muestre.
+      </div>
+    </section>
+
+    <section>
+      <h2>3. Servicios en systemd y activación del servicio web. ¿Qué es <code>systemd</code>?</h2>
+<div class="diagram" >
+            <img src="../assets/systemd.png"  alt="systemd">
+        </div>
+        
+    <p><strong>systemd</strong> es el sistema de inicio moderno utilizado por distribuciones como Ubuntu, Debian, Fedora o CentOS.
+       Es el encargado de arrancar el sistema, gestionar los servicios, controlar dependencias y definir los
+       distintos modos de funcionamiento del sistema (targets).</p>
+
+    <h3>¿Qué funciones tiene?</h3>
+    <ul>
+        <li><strong>Iniciar el sistema</strong> y lanzar los servicios correctamente.</li>
+        <li><strong>Supervisar</strong> servicios: reiniciar si fallan o si se detienen.</li>
+        <li>Gestionar los <strong>targets</strong> (modos de arranque).</li>
+        <li>Manejar los <strong>logs</strong> mediante <code>journalctl</code>.</li>
+        <li>Controlar sockets, timers, montaje de discos, redes y mucho más.</li>
+    </ul>
+
+    <div class="callout">
+        <strong>Idea clave:</strong> systemd es el “director de orquesta” del sistema. Nada se ejecuta sin su permiso.
+    </div>
+
+    <h3>Comandos básicos que usarás en el reto</h3>
+    <pre><code># Ver estado de un servicio
+sudo systemctl status nombre-del-servicio
+
+# Iniciar o detener un servicio
+sudo systemctl start nombre-del-servicio
+sudo systemctl stop nombre-del-servicio
+
+# Activar servicio para que inicie automáticamente
+sudo systemctl enable nombre-del-servicio
+
+# Ver el modo de arranque actual
+systemctl get-default
+
+# Cambiar el target
+sudo systemctl set-default multi-user.target
+    </code></pre>
+
+    <h3>¿Qué son los targets?</h3>
+    <p>Son “modos del sistema” que agrupan servicios. Los más importantes:</p>
+
+    <ul>
+        <li><code>rescue.target</code> → modo de emergencia con lo mínimo imprescindible.</li>
+        <li><code>multi-user.target</code> → modo normal sin entorno gráfico (el de un servidor).</li>
+        <li><code>graphical.target</code> → modo con entorno gráfico.</li>
+    </ul>
+
+    <div class="callout">
+        En el reto, el sistema está en <code>rescue.target</code> y debes devolverlo a 
+        <code>multi-user.target</code> para arrancar de forma normal.
+    </div>
+
+      <p>En el reto, el servicio web debería iniciarse en el arranque, pero no lo hace. Para diagnosticar:</p>
+
+      <h3>Comandos útiles</h3>
+
+      <pre><code># Ver el estado del servicio
+sudo systemctl status nombre-del-servicio
+
+# Activarlo para que se inicie al arrancar
+sudo systemctl enable nombre-del-servicio
+
+# Iniciarlo manualmente
+sudo systemctl start nombre-del-servicio
+    </code></pre>
+
+      <p>Una vez iniciada sesión como <strong>sysadmin</strong>, debes ejecutar el script que está en el home:</p>
+
+      <pre><code>./iniciar_servicio.sh</code></pre>
+
+      <p>Cuando el servicio esté activo, debes acceder a la web local:</p>
+
+      <pre><code>w3m localhost</code></pre>
+
+      <div class="callout">
+        <strong>El segundo código del FLAG</strong> está dentro de la página web local.
+      </div>
+    </section>
+
+    <section>
+      <h2>4. Actualización completa del sistema</h2>
+
+      <p>Para actualizar el sistema debemos ejecutar:</p>
+
+      <pre><code>sudo apt update
+sudo apt upgrade -y
+sudo apt full-upgrade -y
+    </code></pre>
+
+      <h3>Intento de actualización de versión</h3>
+      <p>Ubuntu permite cambiar a nuevas versiones usando:</p>
+
+      <pre><code>sudo do-release-upgrade</code></pre>
+
+      <p>Si no encuentra una versión LTS, debemos permitir versiones normales editando:</p>
+
+      <pre><code>sudo nano /etc/update-manager/release-upgrades</code></pre>
+
+      <p>Cambiando:</p>
+
+      <pre><code>Prompt=normal</code></pre>
+
+      <div class="callout">
+        <strong>El tercer código del FLAG</strong> será el resultado de:
+        <pre><code>lsb_release -a</code></pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>5. Esquema conceptual del flujo del reto</h2>
+
+      <div class="mermaid">
+        graph TD
+        A[Sistema en rescue.target] --> B[Cambiar a multi-user.target]
+        B --> C[Revelar GRUB]
+        C --> D[Activar servicio web]
+        D --> E[Acceder vía w3m localhost]
+        E --> F[Actualizar sistema]
+        F --> G[Obtener FLAG final]
+      </div>
+    </section>
+
+    <footer>
+      <p>Profesores: Alex Castel y Vicente Català — ®Todos los derechos reservados.</p>
+    </footer>
+
+  </main>
+</body>
+
+</html>
+
+
+</html>

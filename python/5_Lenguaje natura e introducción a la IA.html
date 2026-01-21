@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-EVTW1307T1');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lenguaje natural e introducción a la IA</title>
+    <script src="../../course-resources/index.js" defer></script>
+
+    <!-- Mermaid -->
+    <script type="module">
+        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+
+    <!-- HighlightJS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <link rel="stylesheet" href="../style.css" />
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+    <style>
+    /* body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; margin: 0; color: #1f2937; } */
+    /* header { background: #0f766e; color: #fff; padding: 2rem 1.5rem; } */
+    h1,
+    h2,
+    h3 {
+      margin: 0.6rem 0;
+    }
+
+    main {
+      padding: 1.5rem;
+      max-width: 980px;
+      margin: auto;
+    }
+
+    code,
+    pre {
+      background: #f4f6f8;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+    }
+
+    pre {
+      padding: 1rem;
+      overflow-x: auto;
+    }
+
+    .callout {
+      background: #fff7ed;
+      border: 1px solid #fdba74;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    @media (min-width: 800px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    footer {
+      border-top: 1px solid #e5e7eb;
+      margin-top: 2rem;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+
+    .kbd {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      background: #111827;
+      color: #e5e7eb;
+      padding: 0 6px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+    <header>
+        <img src="" id="logo" alt="Logo" style="display: none;">
+
+        <h1>Procesamiento de Lenguaje Natural e Introducción a la IA</h1>
+    </header>
+
+    <main>
+
+<section>
+  <h2>1. ¿Qué es el análisis predictivo?</h2>
+
+  <p>
+    El <strong>análisis predictivo</strong> es la disciplina que emplea datos históricos, algoritmos 
+    estadísticos y modelos de aprendizaje automático para <strong>predecir eventos futuros</strong>. 
+    Su objetivo es anticipar comportamientos, identificar patrones y estimar resultados probables 
+    mediante modelos matemáticos.
+  </p>
+
+  <div class="diagram">
+    <img src="../assets/análisis predictivo.jpg" alt="Ciclo del análisis predictivo">
+  </div>
+
+  <h3>¿Para qué sirve?</h3>
+  <ul>
+    <li>Predecir ventas, demanda o consumo de recursos.</li>
+    <li>Detectar anomalías o comportamientos inusuales.</li>
+    <li>Estimar riesgos (fraude, morosidad, abandono, fallos técnicos).</li>
+    <li>Optimizar procesos mediante simulación de escenarios.</li>
+  </ul>
+
+  <h3>Flujo típico del análisis predictivo</h3>
+  <pre><code>
+1. Recopilación de datos  
+2. Limpieza y transformación (ETL)  
+3. Ingeniería de características  
+4. Entrenamiento de modelos  
+5. Evaluación y validación  
+6. Despliegue y monitorización
+  </code></pre>
+<div class="diagram">
+    <img src="../assets/Predictive-Analytics-ES.png" alt="ciclo de vida del análisis predictivo">
+  </div>
+  <div class="callout">
+    <strong>Idea clave:</strong> el valor del análisis predictivo depende de la calidad de los datos 
+    y del correcto diseño del modelo, no solo del algoritmo usado.
+  </div>
+</section>
+
+
+<section>
+  <h2>2. Redes neuronales: fundamentos esenciales</h2>
+
+  <p>
+    Las <strong>redes neuronales artificiales (ANN)</strong> son modelos inspirados en el
+    cerebro humano. Están formadas por capas de neuronas conectadas mediante pesos que se ajustan 
+    durante el entrenamiento mediante <strong>backpropagation</strong>.
+  </p>
+
+  <div class="diagram">
+    <img src="../assets/red neuronal humana vs ia.jpg" alt="red neuronal artificial y humana">
+  </div>
+
+  <h3>Componentes de una red neuronal</h3>
+  <ul>
+    <li><strong>Capa de entrada:</strong> recibe los datos numéricos.</li>
+    <li><strong>Capas ocultas:</strong> transforman la información mediante funciones de activación.</li>
+    <li><strong>Capa de salida:</strong> genera la predicción final.</li>
+  </ul>
+<div class="diagram">
+    <img src="../assets/capas red neuronal.png" alt="capas de una red neuronal">
+  </div>
+  <h3>Tipos relevantes de redes</h3>
+  <ul>
+    <li><strong>MLP:</strong> para datos tabulares.</li>
+    <li><strong>CNN:</strong> visión por computadora.</li>
+    <li><strong>RNN/LSTM/GRU:</strong> secuencias y series temporales.</li>
+    <li><strong>Transformers:</strong> arquitectura base de los LLM modernos.</li>
+  </ul>
+
+  <h3>Ejemplo conceptual</h3>
+  <pre><code>
+Entrada:   [0.2, 0.7, 0.1]
+Pesos:     w1=0.5, w2=0.3, w3=0.9
+Salida:    activación(0.2*0.5 + 0.7*0.3 + 0.1*0.9)
+  </code></pre>
+
+  <div class="callout">
+    <strong>Idea clave:</strong> los Transformers sustituyen la recurrencia por mecanismos de 
+    <em>self-attention</em>, permitiendo paralelismo masivo y escalabilidad en lenguaje natural.
+  </div>
+</section>
+
+
+<section id="tokenizacion">
+  <h2>3. Tokenización en Procesamiento de Lenguaje Natural (PLN)</h2>
+
+  <p>
+    La tokenización es el proceso mediante el cual un modelo de lenguaje convierte texto en unidades mínimas llamadas 
+    <strong>tokens</strong>. Estas unidades pueden ser palabras, caracteres o subpalabras, dependiendo del método utilizado. 
+    Los tres enfoques principales son: <em>word-based</em>, <em>character-based</em> y <em>Byte Pair Encoding (BPE)</em>.
+  </p>
+ <div class="diagram">
+    <img src="../assets/tokenizacionpng.png" alt="tokenizacion">
+  </div>
+  <!-- 3.1 WORD-BASED -->
+  <h3>3.1 Tokenización Word-Based (por palabras)</h3>
+  <p>
+    En este método, cada <strong>palabra completa</strong> del texto se convierte en un token individual.
+  </p>
+
+  <pre><code>
+Texto:
+"La inteligencia artificial avanza rápido"
+
+Tokens:
+["La", "inteligencia", "artificial", "avanza", "rápido"]
+  </code></pre>
+
+  <h4>Ventajas</h4>
+  <ul>
+    <li>Fácil de interpretar y comprender.</li>
+    <li>Las secuencias son cortas, lo que facilita el procesamiento.</li>
+  </ul>
+
+  <h4>Desventajas</h4>
+  <ul>
+    <li>Problema de palabras fuera del vocabulario (OOV).</li>
+    <li>El vocabulario puede crecer rápidamente, ocupando mucha memoria.</li>
+    <li>No captura relaciones internas de las palabras.</li>
+  </ul>
+
+  <!-- 3.2 CHARACTER-BASED -->
+  <h3>3.2 Tokenización Character-Based (por caracteres)</h3>
+  <p>
+    En este enfoque, cada <strong>carácter individual</strong> (letra, número o símbolo) se utiliza como token.
+  </p>
+
+  <pre><code>
+Texto:
+"Hola"
+
+Tokens:
+["H", "o", "l", "a"]
+  </code></pre>
+
+  <h4>Ventajas</h4>
+  <ul>
+    <li>No existen problemas de palabras desconocidas (OOV).</li>
+    <li>El vocabulario es muy pequeño.</li>
+  </ul>
+
+  <h4>Desventajas</h4>
+  <ul>
+    <li>Las secuencias resultantes son muy largas.</li>
+    <li>Requiere modelos más grandes o profundos para capturar patrones.</li>
+  </ul>
+
+  <!-- 3.3 BPE -->
+  <h3>3.3 Tokenización BPE (Byte Pair Encoding)</h3>
+  <p>
+    El método <strong>BPE</strong> genera <strong>subpalabras</strong> combinando caracteres y fragmentos frecuentes. 
+    Este método equilibra la necesidad de manejar palabras desconocidas y mantener un vocabulario compacto.
+  </p>
+
+  <pre><code>
+Texto:
+"computadora"
+
+Tokens posibles:
+["compu", "tador", "a"]
+  </code></pre>
+
+  <h4>Ventajas</h4>
+  <ul>
+    <li>Maneja eficazmente palabras nuevas o raras.</li>
+    <li>El vocabulario es más pequeño que en la tokenización por palabras.</li>
+    <li>Es la base de los modelos de lenguaje actuales (GPT, LLaMA, Mistral, etc.).</li>
+  </ul>
+
+  <h4>Desventajas</h4>
+  <ul>
+    <li>Las divisiones pueden no coincidir con la estructura lingüística real.</li>
+    <li>Añade cierta complejidad al proceso de codificación/decodificación.</li>
+  </ul>
+
+  <!-- Resumen -->
+  <h3>Resumen comparativo</h3>
+
+  <table border="1" cellpadding="6" cellspacing="0">
+    <tr>
+      <th>Método</th>
+      <th>Tamaño de vocabulario</th>
+      <th>Manejo de palabras nuevas</th>
+      <th>Longitud de secuencia</th>
+    </tr>
+    <tr>
+      <td>Word-based</td>
+      <td>Muy grande</td>
+      <td>Malo</td>
+      <td>Corto</td>
+    </tr>
+    <tr>
+      <td>Character-based</td>
+      <td>Muy pequeño</td>
+      <td>Excelente</td>
+      <td>Largo</td>
+    </tr>
+    <tr>
+      <td>BPE</td>
+      <td>Medio</td>
+      <td>Excelente</td>
+      <td>Medio</td>
+    </tr>
+  </table>
+</section>
+
+<section id="pytorch">
+  <h2>4. Construcción de un chatbot con PyTorch y LLM</h2>
+
+  <p>
+    Los LLM modernos pueden integrarse en un chatbot mediante PyTorch y la librería 
+    <strong>HuggingFace Transformers</strong>. Esta sección muestra un ejemplo práctico 
+    reutilizando modelos preentrenados.
+  </p>
+
+<div class="diagram">
+    <img src="../assets/pytorch workflow.png" alt="pytorch workflow">
+  </div>
+
+  <h3>1. Instalación de dependencias</h3>
+  <pre><code class="language-bash">
+pip install torch transformers
+  </code></pre>
+
+  <h3>2. Carga de un modelo preentrenado (ej. GPT-2)</h3>
+  <pre><code class="language-python">
+from transformers import AutoTokenizer, AutoModelForCausalLM
+
+model_name = "gpt2"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForCausalLM.from_pretrained(model_name)
+  </code></pre>
+
+  <h3>3. Función básica de generación</h3>
+  <pre><code class="language-python">
+def chat(prompt):
+    tokens = tokenizer(prompt, return_tensors="pt")
+    output = model.generate(
+        tokens["input_ids"],
+        max_length=150,
+        temperature=0.7,
+        do_sample=True,
+        top_p=0.9
+    )
+    return tokenizer.decode(output[0], skip_special_tokens=True)
+  </code></pre>
+
+  <h3>4. Ejemplo de uso</h3>
+  <pre><code class="language-python">
+print(chat("Hola, ¿qué puedes hacer?"))
+  </code></pre>
+
+<section id="ejemplo-phi2">
+  <h2>Ejemplo de uso de un modelo LLM local con Transformers</h2>
+
+  <p>
+    Este ejemplo muestra cómo cargar un modelo previamente descargado (Phi-2), 
+    crear una función <code>chat()</code> y generar una respuesta en función de una pregunta 
+    escrita por el usuario. El código incluye comentarios explicando cada paso.
+  </p>
+
+  <pre><code class="language-python">
+from transformers import AutoTokenizer, AutoModelForCausalLM
+
+# Nombre del modelo que queremos utilizar (Phi-2 en este caso)
+model_name = "microsoft/Phi-2"
+
+# Directorio local donde se guarda el modelo para no descargarlo cada vez
+cache_dir = "./model_cache"
+
+# Carga del tokenizer desde la carpeta local
+# El tokenizer convierte texto → números (tokens)
+tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir=cache_dir)
+
+# Carga del modelo desde la carpeta local
+# Este es el modelo neuronal que generará texto
+model = AutoModelForCausalLM.from_pretrained(model_name, cache_dir=cache_dir)
+
+# Función para generar respuestas usando el modelo
+def chat(prompt):
+    # Convertimos el texto (prompt) en tensores para PyTorch
+    tokens = tokenizer(prompt, return_tensors="pt")
+    
+    # Generamos texto a partir del modelo
+    output = model.generate(
+        tokens["input_ids"],   # tokens de entrada
+        max_length=150,        # longitud máxima total (prompt + respuesta)
+        temperature=0.2,       # determina creatividad (baja = respuestas más precisas)
+        do_sample=False,       # False = determinista (sin muestreo aleatorio)
+        top_p=0.9              # filtrado por probabilidad acumulada
+    )
+    
+    # Convertimos los tokens de salida a texto nuevamente
+    return tokenizer.decode(output[0], skip_special_tokens=True)
+
+# Pedimos al usuario que escriba una pregunta
+question = input("Escribe tu pregunta: ")
+
+# Creamos el prompt que se envía al modelo
+# Le damos instrucciones y le pasamos la pregunta del usuario
+prompt = (
+    "Answer the following question with a short factual answer.\n"
+    f"Question: {question}\n"
+    "Answer:"
+)
+
+# Ejecutamos el modelo y mostramos la respuesta final
+print(chat(prompt))
+  </code></pre>
+</section>
+
+  <div class="callout">
+    <strong>Idea clave:</strong> este chatbot no tiene memoria, no interpreta contexto 
+    multivuelta y usa un modelo pequeño. Para algo más potente, se recomienda LLaMA, Mistral 
+    o modelos instruct adaptados.
+  </div>
+</section>
+
+
+
+
+
+<section>
+  <h2>Actividades</h2>
+
+  <h3>Actividad práctica: Construcción y mejora de un chatbot interactivo con LLM</h3>
+
+  <div class="callout">
+    <strong>Aviso:</strong> mejorar un chatbot en la práctica no significa reentrenar el modelo,
+    sino guiar su comportamiento mediante prompts, ejemplos y parámetros.
+  </div>
+  <p>
+    En esta actividad construirás un <strong>chatbot interactivo por consola</strong>
+    utilizando un modelo de lenguaje local. El objetivo no es solo generar respuestas,
+    sino <strong>analizar respuestas erróneas y mejorar el comportamiento del modelo</strong>
+    mediante ajustes de prompt y parámetros.
+  </p>
+
+  <h3>Objetivos de la actividad</h3>
+  <ul>
+    <li>Crear un chatbot interactivo funcional.</li>
+    <li>Detectar respuestas incorrectas, incompletas o con un tono inadecuado.</li>
+    <li>Mejorar las respuestas sin reentrenar el modelo.</li>
+    <li>Comprender la importancia del diseño del prompt y los parámetros.</li>
+  </ul>
+
+  <hr>
+
+  <h3>Parte 1 — Chatbot interactivo básico. Implementa el código necesario para que un usuario pueda interactuar con el chatbot</h3>
+
+  <p>Código base del chatbot (punto de partida):</p>
+
+  <pre><code>
+from transformers import AutoTokenizer, AutoModelForCausalLM
+
+model_name = "microsoft/Phi-2"
+cache_dir = "./model_cache"
+
+tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir=cache_dir)
+model = AutoModelForCausalLM.from_pretrained(model_name, cache_dir=cache_dir)
+
+def chat(prompt):
+    tokens = tokenizer(prompt, return_tensors="pt")
+    output = model.generate(
+        tokens["input_ids"],
+        max_length=200,
+        temperature=0.3,
+        do_sample=False
+    )
+    return tokenizer.decode(output[0], skip_special_tokens=True)
+
+print("Chatbot de atención al cliente (escribe 'salir' para terminar)")
+# Aquí empieza el bucle interactivo. Añade el código necesario para que el usuario pueda escribir preguntas y recibir respuestas.
+  </code></pre>
+
+  <p>
+    Ejecuta el programa y comprueba que el chatbot responde a las preguntas introducidas.
+  </p>
+
+  <hr>
+
+  <h3>Parte 2 — Detección de respuestas erróneas</h3>
+
+  <p>Introduce algunas de las siguientes preguntas reales:</p>
+
+  <pre><code>
+He olvidado mi contraseña, ¿cómo puedo recuperarla?
+¿Cuánto tarda el envío de un pedido estándar?
+Mi producto llegó dañado, ¿qué tengo que hacer?
+¿Puedo cambiar un artículo comprado hace dos semanas?
+  </code></pre>
+
+  <p>
+    Para cada respuesta generada, analiza si es:
+  </p>
+  <ul>
+    <li>Incorrecta</li>
+    <li>Incompleta</li>
+    <li>Con tono inadecuado</li>
+    <li>Correcta y clara</li>
+  </ul>
+
+  <p>
+    Anota los errores detectados junto con la pregunta correspondiente.
+  </p>
+
+  <hr>
+
+  <h3>Parte 3 — Mejora del chatbot mediante ejemplos corregidos (Few-Shot)</h3>
+
+  <p>
+    Modifica el prompt añadiendo ejemplos de preguntas y respuestas correctas.
+  </p>
+
+  <pre><code>
+
+prompt = (
+    "Eres un asistente de atención al cliente.\n"
+    "Responde de forma clara, breve y educada.\n\n"
+    "Ejemplo:\n"
+    "Pregunta: Mi producto llegó dañado.\n"
+    "Respuesta: Sentimos lo ocurrido. Por favor, contacta con atención al cliente en un plazo de 7 días.\n\n"
+    f"Pregunta: {question}\n"
+    "Respuesta:"
+)
+
+  </code></pre>
+
+  <p>
+    Ejecuta el chatbot de nuevo y observa cómo cambia el estilo y la precisión de las respuestas.
+  </p>
+
+  <hr>
+
+  <h3>Parte 4 — Corrección de respuestas erróneas mediante feedback</h3>
+
+  <p>
+    Cuando el chatbot responda mal, proporciona correcciones explícitas en el prompt:
+  </p>
+
+  <pre><code>
+
+prompt = (
+    "Eres un asistente de atención al cliente.\n"
+    "La respuesta anterior era incorrecta.\n"
+    "Corrige la respuesta siguiendo estas normas:\n\n"
+    "- Las contraseñas se recuperan por correo electrónico.\n"
+    "- Los productos dañados deben notificarse en 7 días.\n\n"
+    f"Pregunta: {question}\n"
+    "Respuesta:"
+)
+
+  </code></pre>
+
+  <p>
+    Analiza si el modelo corrige la respuesta y se ajusta mejor a las normas indicadas.
+  </p>
+
+  <hr>
+
+  <h3>Parte 5 — Ajuste de parámetros del modelo</h3>
+
+  <p>
+    Modifica el valor de <code>temperature</code> y observa las diferencias:
+  </p>
+
+  <pre><code>
+temperature = 0.1  # Respuestas más precisas y conservadoras
+temperature = 0.7  # Respuestas más creativas (y más propensas a error)
+  </code></pre>
+
+  <p>
+    Anota cómo afectan estos cambios a la calidad de las respuestas.
+  </p>
+
+  <hr>
+
+  <h3>Parte 6 — Simulación de memoria.</h3>
+
+  <p>
+    Para mejorar el nivel de las respuestas, simula un historial concatenando mensajes previos en el prompt. Sigue este ejemplo como guía:
+  </p>
+
+  <pre><code>
+history = ""
+
+history += f"User: {question}\n"
+history += f"Assistant: {answer}\n"
+
+prompt = history + f"User: {new_question}\nAssistant:"
+  </code></pre>
+
+  <p>
+    Comprueba si el modelo mantiene el contexto o empieza a generar información incorrecta.
+  </p>
+
+  <hr>
+
+  <h3>Entrega de la actividad</h3>
+
+  <ul>
+    <li>Código del chatbot funcional.</li>
+    <li>Lista de respuestas erróneas detectadas.</li>
+    <li>Cambios realizados en el prompt y parámetros.</li>
+    <li>Documento PDF con caputuras de la implementación y de los resultados.</li>
+  </ul>
+
+  
+</section>
+
+
+    <footer>
+        <p>Profesor: Vicente Català — ®Todos los derechos reservados.</p>
+    </footer>
+    </main>
+</body>
+
+
+
+</html>
