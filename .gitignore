@@ -3,3 +3,4 @@ model_cache/
 .locks/
 .cache/
 *.safetensors
+.gitattributes
