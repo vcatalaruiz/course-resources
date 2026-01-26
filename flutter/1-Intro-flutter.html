@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-EVTW1307T1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RA 7 - Utilización Avanzada de Clases (Herencia, Jerarquías e Interfaces)</title>
+    <script src="/course-resources/index.js" defer></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <header>
+        <img src="" id="logo" alt="Logo" style="display: none;">
+        <h1>RA 7 - Utilización Avanzada de Clases</h1>
+        <h2 style="color:white!important">Herencia, Superclase/Subclase, Jerarquías, Pruebas e Interfaces</h2>
+    </header>
+
+    <main>
+
+        <!-- =========================================================
+ TEMA 1 · Introducción a Flutter (post-Dart) y arquitectura
+========================================================= -->
+        <section id="t1-introduccion-flutter">
+            <h2>1. Introducción a Flutter y arquitectura del framework</h2>
+
+            <div class="diagram">
+                <img src="../assets/fluuter-logo.png" alt="Logo de Flutter">
+            </div>
+
+            <p>
+                <strong>Flutter</strong> es un SDK de UI multiplataforma que compila a código nativo (móvil/escritorio)
+                o transpila a JavaScript para Web.
+                Su filosofía <em>“Everything is a Widget”</em> indica que cualquier parte de la interfaz —texto,
+                imágenes,
+                contenedores, pantallas completas— se construye componiendo widgets.
+                Flutter se compone de un <em>framework</em> (widgets, animaciones, layout) y un <em>engine</em>
+                (renderizado
+                mediante Skia), que juntos permiten dibujar interfaces de alto rendimiento.
+            </p>
+
+            <h3>1.1. Estructura mínima de una app (modular)</h3>
+
+            <p>
+                Una app Flutter comienza en <code>main.dart</code>, donde se ejecuta <code>runApp()</code>.
+                La estructura recomendada es separar las pantallas en <code>lib/screens/</code> para mejorar la
+                organización
+                y mantener una arquitectura modular y escalable.
+            </p>
+
+            <div class="diagram">
+                <img src="../assets/ejemplo-flutter.gif" alt="Ejemplo de app Flutter">
+            </div>
+
+            <!-- Código con comentarios pedagógicos -->
+            <pre><p>lib/main.dart</p><code class="language-js">
+import 'package:flutter/material.dart';
+import 'screens/home_screen.dart';
+
+// Punto de entrada de la aplicación.
+// runApp() recibe el widget raíz que se mostrará en pantalla.
+void main() => runApp(const MyApp());
+
+// MyApp es el widget raíz de la aplicación.
+// Extiende StatelessWidget porque no necesita estado interno.
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      // Nombre interno de la app (visible en tareas recientes en Android).
+      title: 'Mi App Flutter',
+
+      // Oculta la cinta "debug" en la esquina superior derecha.
+      debugShowCheckedModeBanner: false,
+
+      // Definición del tema clásico de Material 2 usando primarySwatch.
+      // Esto asigna automáticamente tonos del color azul a la app.
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+
+      // Pantalla inicial de la aplicación.
+      home: const HomeScreen(),
+    );
+  }
+}
+</code></pre>
+
+            <pre><p>lib/screens/home_screen.dart</p><code class="language-js">
+import 'package:flutter/material.dart';
+
+// Pantalla de inicio de la app.
+// Stateless porque su contenido no cambia dinámicamente.
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // AppBar es la barra superior típica de Material Design.
+      appBar: AppBar(title: Text('Home')),
+
+      // El cuerpo de esta pantalla es un texto centrado.
+      body: Center(
+        child: Text('Hola Flutter'),
+      ),
+    );
+  }
+}
+</code></pre>
+
+            <h3>1.2. Estructura de proyecto y <code>pubspec.yaml</code></h3>
+
+            <p>
+                El archivo <code>pubspec.yaml</code> gestiona dependencias, assets, fuentes y metadatos de la app.
+                Es esencial registrar las carpetas de imágenes para poder usarlas con <code>Image.asset()</code>.
+            </p>
+
+            <pre><code class="language-yaml">
+name: mi_app
+
+# Versión mínima del SDK de Dart necesaria para el proyecto.
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+flutter:
+  # Activa el uso de iconografía y estilos Material
+  uses-material-design: true
+
+  # Registro de la carpeta de imágenes
+  assets:
+    - assets/images/
+</code></pre>
+        </section>
+
+        <!-- =========================================================
+ TEMA 2 · Widgets, layouts y composición
+ Basado en PDFs oficiales: 1.Introducción a Flutter y 2.Componentes
+========================================================= -->
+        <section id="t2-widgets-layouts">
+            <h2>2. Widgets, layouts y composición</h2>
+
+            <p>
+                Flutter organiza la interfaz mediante un <strong>árbol de widgets</strong>.
+                Un widget puede ser:
+                <em>un elemento visual, un contenedor, un layout, una función, un botón…</em>
+                Todo se compone, nada se dibuja directamente. +
+            </p>
+
+            <div class="diagram">
+                <img src="../assets/sample-flutter-layout.png" alt="Diagrama: árbol de widgets" style="max-width: 90%;">
+            </div>
+
+            <H3>Modulos y componentes</H3>
+            <p>Los elementos básicos se tienen que incluir en layouts o contenedores para ir
+                construyendo el árbol. Todos los componentes tienen un parámetro “child” o “children” para añadir uno o
+                más hijos.</p>
+
+                <div class="diagram">
+                <img src="../assets/child-children-flutter.jpeg" alt="Flutter: hijos" style="max-width: 90%;">
+            </div>
+
+            
+
+
+            <!-- =========================================================
+     2.1 Stateless vs Stateful
+    ========================================================= -->
+            <h3>2.1. Stateless vs Stateful (modular)</h3>
+            <p>
+                Existen dos grandes familias de widgets:
+            </p>
+
+            <ul>
+                <li><strong>StatelessWidget</strong>: sin estado, contenido fijo.</li>
+                <li><strong>StatefulWidget</strong>: con estado, permite actualizar la vista dinámicamente.</li>
+            </ul>
+<div class="diagram">
+                <img src="../assets/stateless-stateful-flutter.png" alt="StateLess-stateful" style="max-width: 90%;">
+            </div>
+            <p>
+                Un <code>StatelessWidget</code> es adecuado para contenido estático.
+                Un <code>StatefulWidget</code> se usa cuando necesitamos almacenar estado interno y
+                reconstruir la pantalla al llamar a <code>setState()</code> </p>
+
+           
+
+            <h4>Ejemplo modular: StatelessWidget</h4>
+
+            <pre><p>lib/widgets/saludo.dart</p><code class="language-js">
+// EJEMPLO DE WIDGET SIN ESTADO 
+//
+// Muestra un texto fijo. No cambia dinámicamente.
+
+import 'package:flutter/material.dart';
+
+class Saludo extends StatelessWidget {
+  final String nombre;
+  const Saludo({super.key, required this.nombre});
+
+  @override
+  Widget build(BuildContext context) {
+    // Este widget siempre devuelve lo mismo.
+    // build() no se vuelve a ejecutar salvo que su padre se reconstruya.
+    return Text('Hola, $nombre');
+  }
+}
+</code></pre>
+
+            <h4>Ejemplo modular: StatefulWidget </h4>
+
+            <pre><p>lib/widgets/contador.dart</p><code class="language-js">
+// EJEMPLO DE STATEFULWIDGET
+//
+// Un contador que aumenta al pulsar un botón.
+
+import 'package:flutter/material.dart';
+
+class Contador extends StatefulWidget {
+  const Contador({super.key});
+  @override
+  State<Contador> createState() => _ContadorState();
+}
+
+class _ContadorState extends State<Contador> {
+  int _valor = 0; // estado interno mutable
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          '$_valor',
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+
+        const SizedBox(height: 8),
+
+        ElevatedButton(
+          onPressed: () {
+            // setState() indica a Flutter que debe redibujar la UI
+            setState(() => _valor++);
+          },
+          child: const Text('Sumar'),
+        ),
+      ],
+    );
+  }
+}
+</code></pre>
+
+            <div class="diagram">
+                <img src="../assets/flutter-lifecycle-widget.png" alt="Ciclo de vida StatefulWidget" style="max-width: 90%;">
+                 </div>
+
+            <!-- =========================================================
+     2.2 ROW / COLUMN / CONTAINERS
+    ========================================================= -->
+            <h3>2.2. Row, Column y contenedores (según PDF 2)</h3>
+
+            <p>
+                Row y Column son los widgets de distribución más importantes.
+                Controlamos alineación mediante:
+                <code>mainAxisAlignment</code> y <code>crossAxisAlignment</code>.
+                 <div class="diagram">
+                <img src="../assets/mainaxis-crossaxis-flutter.jpeg" alt="Ejes principal y transversal en Row/Column" style="max-width: 90%;">
+                
+            </div>
+               </p>
+               <p>Row y columna nos permiten organizar la vista distribuyendo los elementos por filas y
+columnas.</p>
+               <ul>
+                 <li>Este es el patrón más común a la hora de organizar las vistas.</li> 
+                 <li>Características:</li>
+                 <li>Row y Column toman ambos una lista de widgets hijos.</li>
+                 <li>Un widget hijo puede ser él mismo un Row, Column, u otro widget complejo.</li>
+                 <li>Puedes especificar como un Row o Column alinea sus hijos, tanto vertical como
+horizontalmente.</li>
+
+            <div class="diagram">
+                <img src="../assets/distribucion-flutter-row-column.jpeg" alt="Ejes principal y transversal en Row/Column" style="max-width: 90%;">
+                
+            </div>
+
+            <div class="diagram">
+                <img src="../assets/distribucion-flutter-columnas-filas.jpeg" alt="Ejes principal y transversal en Row/Column" style="max-width: 90%;">
+                
+            </div>
+
+            <h4>Ejemplo:</h4>
+
+            <pre><p>lib/widgets/menu_icons.dart</p><code class="language-js">
+// Ejemplo de Row alineado con spaceBetween (como en el PDF de componentes)
+
+import 'package:flutter/material.dart';
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // AppBar es la barra superior típica de Material Design.
+      appBar: AppBar(
+        // Título mostrado en la AppBar.
+        title: Text('Mi Primera App'),
+      ),
+      // El cuerpo de esta pantalla es un texto centrado.
+      body: Center(
+        child: Container(
+          padding: EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: Colors.blueAccent, // Fondo del Row
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Icon(Icons.home, color: Colors.white),
+              Icon(Icons.search, color: Colors.white),
+              Icon(Icons.person, color: Colors.white),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+<h3>Salida del código anterior:</h3>
+<div class="diagram">
+                <img src="../assets/salida-alinear-row.jpeg"  alt="Row alineado con spaceBetween" style="max-width: 50%;">
+               
+            </div>
+           
+
+            <!-- =========================================================
+     2.3 EXPANDED / FLEXIBLE
+    ========================================================= -->
+            <h3>2.3. Expanded y Flexible</h3>
+
+            <p>
+                Según el PDF, estos widgets permiten repartir el espacio sobrante dentro de un Row o Column.
+                <code>Expanded</code> ocupa todo el espacio posible; <code>Flexible</code> lo controla según el
+                <em>flex</em>.</p>
+
+            <div class="diagram">
+                <img src="../assets/expanded-flexible-flutter.png" alt="Expanded vs Flexible" style="max-width: 90%;">
+                
+            </div>
+
+            <pre><p>lib/widgets/flexible_bars.dart</p><code class="language-js">
+import 'package:flutter/material.dart';
+
+// Ejemplo simple: una barra roja y otra azul con proporciones distintas.
+
+
+import 'package:flutter/material.dart';
+
+/// Pantalla principal de la app.
+/// `StatelessWidget` porque el contenido no cambia internamente (no hay estado).
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // `Scaffold` provee la estructura visual básica de una pantalla Material:
+    // AppBar (barra superior), body (contenido), FAB, Drawer, etc.
+    return Scaffold(
+      // AppBar es la barra superior típica de Material Design.
+      appBar: AppBar(
+        // Título mostrado en la AppBar.
+        title: const Text('Mi Primera App'),
+        // Puedes ajustar el estilo con: backgroundColor, elevation, centerTitle, etc.
+      ),
+
+      // El cuerpo de esta pantalla: centramos su contenido con `Center`.
+      body: Center(
+        // `Container` nos permite aplicar padding, color de fondo, bordes, etc.
+        child: Container(
+          // Espacio interno para que el contenido "respire".
+          padding: const EdgeInsets.all(8),
+
+          // Decoración del contenedor: color de fondo y bordes redondeados.
+          decoration: BoxDecoration(
+            color: Colors.blueAccent,              // Fondo alrededor del Row
+            borderRadius: BorderRadius.circular(12), // Esquinas redondeadas
+          ),
+
+          // `Row` organiza sus hijos en una fila horizontal.
+          child: Row(
+            // Al usar Expanded/Flexible, no necesitas `mainAxisAlignment` aquí.
+            children: const [
+              // `Expanded` toma todo el espacio restante disponible en el eje principal
+              // según la distribución de flex. Por defecto `flex: 1`.
+              Expanded(
+                // `ColoredBox` pinta un color sólido detrás de su hijo (ligero y eficiente).
+                child: ColoredBox(
+                  color: Colors.red,
+                  child: SizedBox(
+                    height: 40, // Altura fija de la "barra" roja
+                    // Center centra el texto tanto vertical como horizontalmente.
+                    child: Center(
+                      child: Text(
+                        'Expanded',
+                        // Estilo del texto: blanco y en negrita para contrastar.
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              // `Flexible` también participa en el reparto de espacio, pero permite
+              // que su hijo determine su tamaño hasta el máximo permitido por el flex.
+              // Aquí `flex: 2` => ocupará el doble de ancho que el `Expanded` anterior.
+              Flexible(
+                flex: 2,
+                child: ColoredBox(
+                  color: Colors.blue,
+                  child: SizedBox(
+                    height: 40, // Altura fija de la "barra" azul
+                    child: Center(
+                      child: Text(
+                        'Flexible x2',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+</code></pre>
+<!--  -->
+
+
+
+
+    </main>
+
+    <footer>
+        <p>© Vicente Català Ruiz 2025-26. Todos los derechos reservados.</p>
+    </footer>
+</body>
+
+</html>
