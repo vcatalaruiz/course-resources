@@ -2,72 +2,72 @@
 <html lang="es">
 
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-EVTW1307T1');
-    </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RA 2 - Introducción a Flutter</title>
-    <script src="/course-resources/index.js" defer></script>
-    <script type="module">
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-        mermaid.initialize({ startOnLoad: true });
-    </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
-    <link rel="stylesheet" href="../style.css">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RA 2 - Introducción a Flutter</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
-    <header>
-        <img src="" id="logo" alt="Logo" style="display: none;">
-        <h1>RA 2 - Introducción a Flutter</h1>
-         </header>
+  <header>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+    <h1>RA 2 - Introducción a Flutter</h1>
+  </header>
 
-    <main>
+  <main>
 
-        <!-- =========================================================
+    <!-- =========================================================
  TEMA 1 · Introducción a Flutter (post-Dart) y arquitectura
 ========================================================= -->
-        <section id="t1-introduccion-flutter">
-            <h2>1. Introducción a Flutter y arquitectura del framework</h2>
+    <section id="t1-introduccion-flutter">
+      <h2>1. Introducción a Flutter y arquitectura del framework</h2>
 
-            <div class="diagram">
-                <img src="../assets/fluuter-logo.png" alt="Logo de Flutter">
-            </div>
+      <div class="diagram">
+        <img src="../assets/fluuter-logo.png" alt="Logo de Flutter">
+      </div>
 
-            <p>
-                <strong>Flutter</strong> es un SDK de UI multiplataforma que compila a código nativo (móvil/escritorio)
-                o transpila a JavaScript para Web.
-                Su filosofía <em>“Everything is a Widget”</em> indica que cualquier parte de la interfaz —texto,
-                imágenes,
-                contenedores, pantallas completas— se construye componiendo widgets.
-                Flutter se compone de un <em>framework</em> (widgets, animaciones, layout) y un <em>engine</em>
-                (renderizado
-                mediante Skia), que juntos permiten dibujar interfaces de alto rendimiento.
-            </p>
+      <p>
+        <strong>Flutter</strong> es un SDK de UI multiplataforma que compila a código nativo (móvil/escritorio)
+        o transpila a JavaScript para Web.
+        Su filosofía <em>“Everything is a Widget”</em> indica que cualquier parte de la interfaz —texto,
+        imágenes,
+        contenedores, pantallas completas— se construye componiendo widgets.
+        Flutter se compone de un <em>framework</em> (widgets, animaciones, layout) y un <em>engine</em>
+        (renderizado
+        mediante Skia), que juntos permiten dibujar interfaces de alto rendimiento.
+      </p>
 
-            <h3>1.1. Estructura mínima de una app (modular)</h3>
+      <h3>1.1. Estructura mínima de una app (modular)</h3>
 
-            <p>
-                Una app Flutter comienza en <code>main.dart</code>, donde se ejecuta <code>runApp()</code>.
-                La estructura recomendada es separar las pantallas en <code>lib/screens/</code> para mejorar la
-                organización
-                y mantener una arquitectura modular y escalable.
-            </p>
+      <p>
+        Una app Flutter comienza en <code>main.dart</code>, donde se ejecuta <code>runApp()</code>.
+        La estructura recomendada es separar las pantallas en <code>lib/screens/</code> para mejorar la
+        organización
+        y mantener una arquitectura modular y escalable.
+      </p>
 
-            <div class="diagram">
-                <img src="../assets/ejemplo-flutter.gif" alt="Ejemplo de app Flutter">
-            </div>
+      <div class="diagram">
+        <img src="../assets/ejemplo-flutter.gif" alt="Ejemplo de app Flutter">
+      </div>
 
-            <!-- Código con comentarios pedagógicos -->
-            <pre><p>lib/main.dart</p><code class="language-js">
+      <!-- Código con comentarios pedagógicos -->
+      <pre><p>lib/main.dart</p><code class="language-js">
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 
@@ -102,7 +102,7 @@ class MyApp extends StatelessWidget {
 }
 </code></pre>
 
-            <pre><p>lib/screens/home_screen.dart</p><code class="language-js">
+      <pre><p>lib/screens/home_screen.dart</p><code class="language-js">
 import 'package:flutter/material.dart';
 
 // Pantalla de inicio de la app.
@@ -125,14 +125,14 @@ class HomeScreen extends StatelessWidget {
 }
 </code></pre>
 
-            <h3>1.2. Estructura de proyecto y <code>pubspec.yaml</code></h3>
+      <h3>1.2. Estructura de proyecto y <code>pubspec.yaml</code></h3>
 
-            <p>
-                El archivo <code>pubspec.yaml</code> gestiona dependencias, assets, fuentes y metadatos de la app.
-                Es esencial registrar las carpetas de imágenes para poder usarlas con <code>Image.asset()</code>.
-            </p>
+      <p>
+        El archivo <code>pubspec.yaml</code> gestiona dependencias, assets, fuentes y metadatos de la app.
+        Es esencial registrar las carpetas de imágenes para poder usarlas con <code>Image.asset()</code>.
+      </p>
 
-            <pre><code class="language-yaml">
+      <pre><code class="language-yaml">
 name: mi_app
 
 # Versión mínima del SDK de Dart necesaria para el proyecto.
@@ -151,63 +151,63 @@ flutter:
   assets:
     - assets/images/
 </code></pre>
-        </section>
+    </section>
 
-        <!-- =========================================================
+    <!-- =========================================================
  TEMA 2 · Widgets, layouts y composición
  Basado en PDFs oficiales: 1.Introducción a Flutter y 2.Componentes
 ========================================================= -->
-        <section id="t2-widgets-layouts">
-            <h2>2. Widgets, layouts y composición</h2>
+    <section id="t2-widgets-layouts">
+      <h2>2. Widgets, layouts y composición</h2>
 
-            <p>
-                Flutter organiza la interfaz mediante un <strong>árbol de widgets</strong>.
-                Un widget puede ser:
-                <em>un elemento visual, un contenedor, un layout, una función, un botón…</em>
-                Todo se compone, nada se dibuja directamente. +
-            </p>
+      <p>
+        Flutter organiza la interfaz mediante un <strong>árbol de widgets</strong>.
+        Un widget puede ser:
+        <em>un elemento visual, un contenedor, un layout, una función, un botón…</em>
+        Todo se compone, nada se dibuja directamente. +
+      </p>
 
-            <div class="diagram">
-                <img src="../assets/sample-flutter-layout.png" alt="Diagrama: árbol de widgets" style="max-width: 90%;">
-            </div>
+      <div class="diagram">
+        <img src="../assets/sample-flutter-layout.png" alt="Diagrama: árbol de widgets" style="max-width: 90%;">
+      </div>
 
-            <H3>Modulos y componentes</H3>
-            <p>Los elementos básicos se tienen que incluir en layouts o contenedores para ir
-                construyendo el árbol. Todos los componentes tienen un parámetro “child” o “children” para añadir uno o
-                más hijos.</p>
+      <H3>Modulos y componentes</H3>
+      <p>Los elementos básicos se tienen que incluir en layouts o contenedores para ir
+        construyendo el árbol. Todos los componentes tienen un parámetro “child” o “children” para añadir uno o
+        más hijos.</p>
 
-                <div class="diagram">
-                <img src="../assets/child-children-flutter.jpeg" alt="Flutter: hijos" style="max-width: 90%;">
-            </div>
-
-            
+      <div class="diagram">
+        <img src="../assets/child-children-flutter.jpeg" alt="Flutter: hijos" style="max-width: 90%;">
+      </div>
 
 
-            <!-- =========================================================
+
+
+      <!-- =========================================================
      2.1 Stateless vs Stateful
     ========================================================= -->
-            <h3>2.1. Stateless vs Stateful (modular)</h3>
-            <p>
-                Existen dos grandes familias de widgets:
-            </p>
+      <h3>2.1. Stateless vs Stateful (modular)</h3>
+      <p>
+        Existen dos grandes familias de widgets:
+      </p>
 
-            <ul>
-                <li><strong>StatelessWidget</strong>: sin estado, contenido fijo.</li>
-                <li><strong>StatefulWidget</strong>: con estado, permite actualizar la vista dinámicamente.</li>
-            </ul>
-<div class="diagram">
-                <img src="../assets/stateless-stateful-flutter.png" alt="StateLess-stateful" style="max-width: 90%;">
-            </div>
-            <p>
-                Un <code>StatelessWidget</code> es adecuado para contenido estático.
-                Un <code>StatefulWidget</code> se usa cuando necesitamos almacenar estado interno y
-                reconstruir la pantalla al llamar a <code>setState()</code> </p>
+      <ul>
+        <li><strong>StatelessWidget</strong>: sin estado, contenido fijo.</li>
+        <li><strong>StatefulWidget</strong>: con estado, permite actualizar la vista dinámicamente.</li>
+      </ul>
+      <div class="diagram">
+        <img src="../assets/stateless-stateful-flutter.png" alt="StateLess-stateful" style="max-width: 90%;">
+      </div>
+      <p>
+        Un <code>StatelessWidget</code> es adecuado para contenido estático.
+        Un <code>StatefulWidget</code> se usa cuando necesitamos almacenar estado interno y
+        reconstruir la pantalla al llamar a <code>setState()</code> </p>
 
-           
 
-            <h4>Ejemplo modular: StatelessWidget</h4>
 
-            <pre><p>lib/widgets/saludo.dart</p><code class="language-js">
+      <h4>Ejemplo modular: StatelessWidget</h4>
+
+      <pre><p>lib/widgets/saludo.dart</p><code class="language-js">
 // EJEMPLO DE WIDGET SIN ESTADO 
 //
 // Muestra un texto fijo. No cambia dinámicamente.
@@ -227,9 +227,9 @@ class Saludo extends StatelessWidget {
 }
 </code></pre>
 
-            <h4>Ejemplo modular: StatefulWidget </h4>
+      <h4>Ejemplo modular: StatefulWidget </h4>
 
-            <pre><p>lib/widgets/contador.dart</p><code class="language-js">
+      <pre><p>lib/widgets/contador.dart</p><code class="language-js">
 // EJEMPLO DE STATEFULWIDGET
 //
 // Un contador que aumenta al pulsar un botón.
@@ -269,47 +269,50 @@ class _ContadorState extends State<Contador> {
 }
 </code></pre>
 
-            <div class="diagram">
-                <img src="../assets/flutter-lifecycle-widget.png" alt="Ciclo de vida StatefulWidget" style="max-width: 90%;">
-                 </div>
+      <div class="diagram">
+        <img src="../assets/flutter-lifecycle-widget.png" alt="Ciclo de vida StatefulWidget" style="max-width: 90%;">
+      </div>
 
-            <!-- =========================================================
+      <!-- =========================================================
      2.2 ROW / COLUMN / CONTAINERS
     ========================================================= -->
-            <h3>2.2. Row, Column y contenedores (según PDF 2)</h3>
+      <h3>2.2. Row, Column y contenedores (según PDF 2)</h3>
 
-            <p>
-                Row y Column son los widgets de distribución más importantes.
-                Controlamos alineación mediante:
-                <code>mainAxisAlignment</code> y <code>crossAxisAlignment</code>.
-                 <div class="diagram">
-                <img src="../assets/mainaxis-crossaxis-flutter.jpeg" alt="Ejes principal y transversal en Row/Column" style="max-width: 90%;">
-                
-            </div>
-               </p>
-               <p>Row y columna nos permiten organizar la vista distribuyendo los elementos por filas y
-columnas.</p>
-               <ul>
-                 <li>Este es el patrón más común a la hora de organizar las vistas.</li> 
-                 <li>Características:</li>
-                 <li>Row y Column toman ambos una lista de widgets hijos.</li>
-                 <li>Un widget hijo puede ser él mismo un Row, Column, u otro widget complejo.</li>
-                 <li>Puedes especificar como un Row o Column alinea sus hijos, tanto vertical como
-horizontalmente.</li>
+      <p>
+        Row y Column son los widgets de distribución más importantes.
+        Controlamos alineación mediante:
+        <code>mainAxisAlignment</code> y <code>crossAxisAlignment</code>.
+      <div class="diagram">
+        <img src="../assets/mainaxis-crossaxis-flutter.jpeg" alt="Ejes principal y transversal en Row/Column"
+          style="max-width: 90%;">
 
-            <div class="diagram">
-                <img src="../assets/distribucion-flutter-row-column.jpeg" alt="Ejes principal y transversal en Row/Column" style="max-width: 90%;">
-                
-            </div>
+      </div>
+      </p>
+      <p>Row y columna nos permiten organizar la vista distribuyendo los elementos por filas y
+        columnas.</p>
+      <ul>
+        <li>Este es el patrón más común a la hora de organizar las vistas.</li>
+        <li>Características:</li>
+        <li>Row y Column toman ambos una lista de widgets hijos.</li>
+        <li>Un widget hijo puede ser él mismo un Row, Column, u otro widget complejo.</li>
+        <li>Puedes especificar como un Row o Column alinea sus hijos, tanto vertical como
+          horizontalmente.</li>
+      </ul>
+      <div class="diagram">
+        <img src="../assets/distribucion-flutter-row-column.jpeg" alt="Ejes principal y transversal en Row/Column"
+          style="max-width: 90%;">
 
-            <div class="diagram">
-                <img src="../assets/distribucion-flutter-columnas-filas.jpeg" alt="Ejes principal y transversal en Row/Column" style="max-width: 90%;">
-                
-            </div>
+      </div>
 
-            <h4>Ejemplo:</h4>
+      <div class="diagram">
+        <img src="../assets/distribucion-flutter-columnas-filas.jpeg" alt="Ejes principal y transversal en Row/Column"
+          style="max-width: 90%;">
 
-            <pre><p>lib/widgets/menu_icons.dart</p><code class="language-js">
+      </div>
+
+      <h4>Ejemplo:</h4>
+
+      <pre><p>lib/widgets/menu_icons.dart</p><code class="language-js">
 // Ejemplo de Row alineado con spaceBetween (como en el PDF de componentes)
 
 import 'package:flutter/material.dart';
@@ -347,29 +350,32 @@ class HomeScreen extends StatelessWidget {
   }
 }
 </code></pre>
-<h3>Salida del código anterior:</h3>
-<div class="diagram">
-                <img src="../assets/salida-alinear-row.jpeg"  alt="Row alineado con spaceBetween" style="max-width: 50%;">
-               
-            </div>
-           
+      <h3>Salida del código anterior:</h3>
+      <div class="diagram">
+        <img src="../assets/salida-alinear-row.jpeg" alt="Row alineado con spaceBetween" style="max-width: 50%;">
 
-            <!-- =========================================================
+      </div>
+    </section>
+
+
+    <!-- =========================================================
      2.3 EXPANDED / FLEXIBLE
     ========================================================= -->
-            <h3>2.3. Expanded y Flexible</h3>
+    <section>
+    <h3>2.3. Expanded y Flexible</h3>
 
-            <p>
-                Según el PDF, estos widgets permiten repartir el espacio sobrante dentro de un Row o Column.
-                <code>Expanded</code> ocupa todo el espacio posible; <code>Flexible</code> lo controla según el
-                <em>flex</em>.</p>
+    <p>
+      Según el PDF, estos widgets permiten repartir el espacio sobrante dentro de un Row o Column.
+      <code>Expanded</code> ocupa todo el espacio posible; <code>Flexible</code> lo controla según el
+      <em>flex</em>.
+    </p>
 
-            <div class="diagram">
-                <img src="../assets/expanded-flexible-flutter.png" alt="Expanded vs Flexible" style="max-width: 90%;">
-                
-            </div>
+    <div class="diagram">
+      <img src="../assets/expanded-flexible-flutter.png" alt="Expanded vs Flexible" style="max-width: 90%;">
 
-            <pre><p>lib/widgets/flexible_bars.dart</p><code class="language-js">
+    </div>
+
+    <pre><p>lib/widgets/flexible_bars.dart</p><code class="language-js">
 import 'package:flutter/material.dart';
 
 // Ejemplo simple: una barra roja y otra azul con proporciones distintas.
@@ -465,16 +471,82 @@ class HomeScreen extends StatelessWidget {
 
 
 </code></pre>
-<!--  -->
+    </section>
+    <section id="navegacion">
+  <h2>3. Navegación básica</h2>
+
+  <div class="diagram">
+      <img src="../assets/navigation.webp" alt="Navegación básica" style="max-width: 90%;">
+
+    </div>
+
+  <p>
+    Flutter utiliza <strong>Navigation</strong>, un sistema de navegación basado en una <strong>pila (stack)</strong>. 
+    Las pantallas se apilan unas sobre otras: la que está arriba es la que se ve.
+  </p>
+
+  <h3>¿Cómo funciona?</h3>
+  <p>
+    Para navegar desde la pantalla <strong>A</strong> hacia la pantalla <strong>B</strong>, 
+    Flutter añade una nueva ruta a la pila mediante <code>Navigator.push()</code>.
+    Para volver atrás, elimina la ruta superior con <code>Navigator.pop()</code>.
+  </p>
+<div class="diagram">
+      <img src="../assets/navigation-push-pop.png" alt="Navegación básica" style="max-width: 90%;">
+
+    </div>
+  <h3>Ir de A → B (push)</h3>
+  <p>
+    Para abrir una nueva pantalla, se utiliza <strong>push</strong>. Esto coloca 
+    la nueva pantalla encima de la actual.
+  </p>
+
+  <pre><code class="language-java">
+// Pantalla A
+ElevatedButton(
+  onPressed: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const PantallaB(),
+      ),
+    );
+  },
+  child: const Text('Ir a Pantalla B'),
+);
+  </code></pre>
+
+  <h3>Volver de B → A (pop)</h3>
+  <p>
+    Para regresar a la pantalla anterior basta con realizar un 
+    <strong>pop</strong>. Esto elimina la pantalla actual de la pila.
+  </p>
+
+  <pre><code class="language-java">
+// Pantalla B
+ElevatedButton(
+  onPressed: () {
+    Navigator.pop(context); // Regresa a Pantalla A
+  },
+  child: const Text('Volver'),
+);
+  </code></pre>
+
+  <p>
+    Esta es la forma más sencilla y directa de navegar entre pantallas en Flutter. 
+    Más adelante se explicarán rutas nombradas, envío de argumentos y navegación más avanzada.
+  </p>
+</section>
 
 
 
 
-    </main>
 
-    <footer>
-        <p>© Vicente Català Ruiz 2025-26. Todos los derechos reservados.</p>
-    </footer>
+  </main>
+
+  <footer>
+    <p>© Vicente Català Ruiz 2025-26. Todos los derechos reservados.</p>
+  </footer>
 </body>
 
 </html>
