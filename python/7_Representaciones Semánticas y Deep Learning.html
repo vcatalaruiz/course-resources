@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Representaciones Semánticas y Deep Learning</title>
+  <script src="../../index.js" defer></script>
+
+  <!-- Mermaid -->
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+
+  <!-- HighlightJS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <link rel="stylesheet" href="../style.css" />
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <header>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+    <h1>Representaciones Semánticas y Deep Learning</h1>
+  </header>
+
+  <main>
+
+    <section id="introduccion">
+      <h2>Introducción</h2>
+
+      <div class="diagram">
+        <img src="../assets/deep_learning.webp" alt="Deep learning logo">
+      </div>
+      <p>
+        En este tema aprenderemos cómo los modelos modernos representan el significado de las palabras
+        y frases mediante vectores llamados <strong>embeddings</strong>. A diferencia de los
+        métodos tradicionales, estos vectores capturan relaciones semánticas, permitiendo comparar
+        textos según su <em>significado</em> y no solo por coincidencia de palabras.
+      </p>
+
+      <p>
+        También veremos cómo calcular similitudes entre textos y cómo crear un sistema básico
+        de búsqueda inteligente, similar al que utilizan los asistentes virtuales y los motores
+        de recomendación basados en lenguaje.
+      </p>
+
+
+    </section>
+    <section id="embeddings">
+      <h2>1. ¿Qué son los embeddings?</h2>
+
+      <p>
+        Un <strong>embedding</strong> es una representación numérica de palabras o frases
+        en forma de vector. La idea clave es que textos con significados parecidos tendrán
+        vectores cercanos en el espacio, mientras que textos distintos estarán más alejados.
+      </p>
+      <div class="diagram">
+        <img src="../assets/embedding-model.gif" alt="Embedding models diagram">
+      </div>
+      <p>
+        Este tipo de representación permite que los modelos “entiendan” relaciones como:
+      </p>
+
+      <ul>
+        <li>"gato" está cerca de "perro", pero lejos de "banana".</li>
+        <li>"manzana" está cerca de "banana" y también de "google".</li>
+        <li>"Madrid" estaría cerca de "Barcelona", pero lejos de "helado".</li>
+      </ul>
+
+      <div class="diagram">
+        <img src="../assets/embedding-pair-vector.png" alt="Embedding pair vector diagram">
+      </div>
+
+
+      <div class="callout">
+        Los embeddings capturan <strong>significado</strong>, no solo palabras.
+      </div>
+    </section>
+    <section id="tipos-embeddings">
+      <h2>2. Embeddings de palabras vs. embeddings de frases</h2>
+
+      <p>
+        Existen dos niveles de embeddings: los que representan palabras individuales y los que
+        representan una frase completa. Los embeddings de frases suelen resultar más útiles
+        para tareas reales, porque capturan el contexto completo.
+      </p>
+
+      <h3>2.1 Embeddings de palabras</h3>
+      <ul>
+        <li>Representan una sola palabra.</li>
+        <li>Limitación: la palabra tiene el mismo vector siempre, aunque cambie su significado según el contexto.</li>
+      </ul>
+
+      <h3>2.2 Embeddings de frases</h3>
+      <ul>
+        <li>Capturan el significado de una frase entera.</li>
+        <li>Se obtienen con modelos modernos basados en Transformers.</li>
+      </ul>
+
+      <table border="1" cellpadding="6" cellspacing="0">
+        <caption><strong>Comparativa: Embeddings de frases vs. embeddings de palabras</strong></caption>
+        <thead>
+          <tr>
+            <th>Característica</th>
+            <th>Embeddings de frases</th>
+            <th>Embeddings de palabras</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Alcance</td>
+            <td>Representan frases completas (sentencias).</td>
+            <td>Representan palabras individuales.</td>
+          </tr>
+          <tr>
+            <td>Tipo de representación</td>
+            <td>Capturan el significado global y el contexto de la frase.</td>
+            <td>Capturan relaciones semánticas entre palabras individuales.</td>
+          </tr>
+          <tr>
+            <td>Dependencia del contexto</td>
+            <td>Dependientes del contexto (mismo término puede variar según la frase).</td>
+            <td>Generalmente independientes del contexto (un vector por palabra).</td>
+          </tr>
+          <tr>
+            <td>Uso típico</td>
+            <td>Comprensión semántica a nivel de frase; comparación de textos completos.</td>
+            <td>Analizar similitudes entre palabras; construir vocabularios y mapas semánticos.</td>
+          </tr>
+          <tr>
+            <td>Aplicaciones</td>
+            <td>Búsqueda semántica, recuperación de información, recomendación por significado.</td>
+            <td>Tareas centradas en nivel palabra (analizar términos, analogías simples).</td>
+          </tr>
+          <tr>
+            <td>Complejidad</td>
+            <td>Más costosos computacionalmente (modelos de frases/Transformers).</td>
+            <td>Menos costosos; se pueden entrenar o cargar rápidamente.</td>
+          </tr>
+          <tr>
+            <td>Técnicas / modelos de ejemplo</td>
+            <td>Sentence-BERT (SBERT), Universal Sentence Encoder (USE), modelos basados en Transformers.</td>
+            <td>Word2Vec, GloVe, FastText.</td>
+          </tr>
+          <tr>
+            <td>Ventajas</td>
+            <td>Información rica y relevante al contexto; mejor para comparar significados completos.</td>
+            <td>Eficientes para capturar relaciones a nivel palabra; útiles con vocabularios grandes.</td>
+          </tr>
+          <tr>
+            <td>Desventajas</td>
+            <td>Requieren más recursos y tiempo de cómputo.</td>
+            <td>No capturan bien el contexto completo de una frase.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        Para tareas de clasificación, recomendación o búsqueda,
+        los embeddings de frases suelen funcionar mejor.
+      </div>
+    </section>
+    <section id="similitud">
+  <h2>3. Similitud semántica</h2>
+
+  <p>
+    Una vez convertimos palabras o frases en vectores mediante <strong>embeddings</strong>,
+    podemos comparar estos vectores entre sí. Esto nos permite saber si dos textos son
+    parecidos en significado, incluso aunque no compartan exactamente las mismas palabras.
+  </p>
+
+  <p>
+    Esta capacidad es fundamental en muchas aplicaciones modernas, como buscadores inteligentes,
+    sistemas de recomendación, clasificación de documentos y chatbots que deben interpretar
+    la intención del usuario.
+  </p>
+
+  <h3>3.1 ¿Por qué necesitamos medir similitud?</h3>
+  <p>
+    En los métodos tradicionales, comparar textos se basaba principalmente en contar palabras
+    (como con BoW o TF‑IDF). Sin embargo, estos métodos fallan cuando dos textos usan palabras 
+    distintas para expresar la misma idea. Los embeddings solucionan este problema representando 
+    el <strong>significado</strong> en un espacio vectorial.
+  </p>
+
+  <h3>3.2 Similitud del coseno</h3>
+  <p>
+    La métrica más utilizada para comparar embeddings es la 
+    <strong>similitud de coseno</strong>. El coseno mide el ángulo entre dos vectores:
+  </p>
+
+  <ul>
+    <li><strong>Similitud = 1</strong> → vectores muy parecidos → textos muy similares.</li>
+    <li><strong>Similitud ≈ 0</strong> → vectores perpendiculares → textos no relacionados.</li>
+    <li><strong>Similitud = -1</strong> → significados opuestos (poco frecuente en PLN).</li>
+  </ul>
+
+ <div class="diagram">
+        <img src="../assets/cosine similarity.png" alt="Cosine similarity diagram">
+      </div>
+
+  <p>
+    El coseno se utiliza porque ignora la longitud del vector (su magnitud) y se centra
+    únicamente en la dirección, que es lo que realmente representa el significado.
+  </p>
+
+  <h3>3.3 Ejemplo práctico</h3>
+  <p>
+    Supongamos que queremos comparar dos vectores generados por un modelo
+    de embeddings. Con <code>cosine_similarity</code> podemos obtener rápidamente
+    un valor entre 0 y 1 que indica su similitud.
+  </p>
+
+  <pre><code class="language-python">
+from sklearn.metrics.pairwise import cosine_similarity
+import numpy as np
+
+v1 = np.array([1, 0, 1])
+v2 = np.array([1, 1, 1])
+
+print(cosine_similarity([v1], [v2]))
+  </code></pre>
+
+  <div class="diagram">
+    <!-- ESPACIO PARA IMAGEN: Ejemplo de cálculo del coseno -->
+  </div>
+
+  <h3>3.4 ¿Qué aporta esto en la práctica?</h3>
+  <p>
+    Utilizar similitud semántica permite que un sistema encuentre textos relevantes
+    aunque la consulta del usuario no coincida exactamente con las palabras del documento.
+    Por ejemplo:
+  </p>
+
+  <ul>
+    <li>“El paquete llegó roto” y “Mi pedido vino dañado” → alta similitud.</li>
+    <li>“Me encanta este producto” y “No estoy satisfecho con la compra” → baja similitud.</li>
+  </ul>
+
+  <p>
+    Esto hace posible crear buscadores inteligentes que trabajan por <strong>significado</strong>,
+    no solo por palabra clave.
+  </p>
+
+  <div class="callout">
+    <strong>Conclusión:</strong> la similitud semántica permite a los sistemas de IA
+    relacionar textos según su significado y no según coincidencias superficiales de palabras.
+    Es uno de los pilares del PLN moderno.
+  </div>
+</section>
+    <section id="crear-embeddings">
+      <h2>4. Crear embeddings con un modelo moderno</h2>
+
+      <p>
+        Hoy en día existen modelos especializados en generar embeddings de alta calidad.
+        Su funcionamiento interno es complejo, pero utilizarlos es sencillo gracias a librerías
+        como <strong>sentence-transformers</strong>.
+      </p>
+
+      <pre><code class="language-python">
+from sentence_transformers import SentenceTransformer
+
+modelo = SentenceTransformer("all-MiniLM-L6-v2")
+
+frases = ["El producto llegó roto", "El envío fue muy rápido"]
+vectors = modelo.encode(frases)
+
+print(vectors.shape)   # (2, dimensiones)
+  </code></pre>
+
+      <div class="diagram">
+        <!-- ESPACIO PARA IMAGEN PIPELINE EMBEDDINGS -->
+      </div>
+
+      <div class="callout">
+        <strong>Nota:</strong> en clase no profundizamos en el modelo, solo en su uso práctico.
+      </div>
+    </section>
+    <section id="busqueda">
+      <h2>5. Búsqueda inteligente basada en embeddings</h2>
+
+      <p>
+        La búsqueda tradicional compara palabras. Pero una búsqueda inteligente compara
+        el <strong>significado</strong> usando embeddings y similitud de coseno.
+      </p>
+
+      <p>
+        Esto permite encontrar resultados aunque no coincidan las palabras exactas.
+      </p>
+
+      <pre><code class="language-python">
+consulta = "paquete roto"
+documentos = [
+    "Mi pedido llegó dañado",
+    "El envío fue muy rápido",
+    "Estoy contento con el producto"
+]
+
+# Crear embeddings
+vec_consulta = modelo.encode([consulta])
+vec_docs = modelo.encode(documentos)
+
+# Calcular similitudes
+sim = cosine_similarity(vec_consulta, vec_docs)
+print(sim)
+  </code></pre>
+
+      <div class="diagram">
+        <!-- ESPACIO PARA IMAGEN BUSQUEDA SEMANTICA -->
+      </div>
+
+      <div class="callout">
+        Este método permite búsquedas más humanas y precisas.
+      </div>
+    </section>
+    <section id="actividad-final">
+      <h2>6. Actividad final: construye tu propio buscador semántico</h2>
+
+      <ol>
+        <li>Crea una lista de 8–10 frases cortas.</li>
+        <li>Genera los embeddings con un modelo preentrenado.</li>
+        <li>Introduce una consulta (pregunta o frase).</li>
+        <li>Calcula la similitud de coseno entre la consulta y las frases.</li>
+        <li>Muestra el resultado ordenado de mayor a menor similitud.</li>
+        <li>Explica por qué la frase más similar ha salido en primer lugar.</li>
+      </ol>
+
+      <div class="diagram">
+        <!-- ESPACIO PARA IMAGEN RESUMEN ACTIVIDAD -->
+      </div>
+
+      <div class="callout">
+        <strong>Resultado esperado:</strong> un pequeño buscador que encuentra textos por significado.
+      </div>
+    </section>
+
+    <footer>
+      <p>Profesor: Vicente Català — ®Todos los derechos reservados.</p>
+    </footer>
+  </main>
+</body>
+
+
+
+</html>
