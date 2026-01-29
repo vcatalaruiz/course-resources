@@ -236,10 +236,7 @@ v2 = np.array([1, 1, 1])
 print(cosine_similarity([v1], [v2]))
   </code></pre>
 
-  <div class="diagram">
-    <!-- ESPACIO PARA IMAGEN: Ejemplo de cálculo del coseno -->
-  </div>
-
+ 
   <h3>3.4 ¿Qué aporta esto en la práctica?</h3>
   <p>
     Utilizar similitud semántica permite que un sistema encuentre textos relevantes
@@ -263,7 +260,7 @@ print(cosine_similarity([v1], [v2]))
     Es uno de los pilares del PLN moderno.
   </div>
 </section>
-    <section id="crear-embeddings">
+    <!-- <section id="crear-embeddings">
       <h2>4. Crear embeddings con un modelo moderno</h2>
 
       <p>
@@ -272,25 +269,134 @@ print(cosine_similarity([v1], [v2]))
         como <strong>sentence-transformers</strong>.
       </p>
 
+      <div class="diagram">
+        <img src="../assets/sentence-transformers-logo.png" alt="Sentence Transformers logo">
+      </div>
+      <p>
+        Sentence Transformers es una librería de Python que facilita el uso de modelos preentrenados
+        para generar embeddings de frases. Estos modelos están basados en la arquitectura
+        Transformer, que ha revolucionado el procesamiento del lenguaje natural.
+      </p>
+      
+      <div class="callout">
+        <strong>Documentación oficial:</strong> <a href="https://sbert.net/">https://sbert.net/</a>
+      </div>
+
+      <p>
+        Para instalar la librería, usamos pip:
+      </p>
+      <pre><code class="language-bash">
+pip install sentence-transformers
+      </code></pre>
+      
+      <p>Ejemplo de uso de Sentence Transformers:</p>
       <pre><code class="language-python">
+# Importamos la clase SentenceTransformer desde la librería sentence_transformers.
+# Esta clase permite cargar modelos pre-entrenados para convertir texto en vectores numéricos (embeddings).
 from sentence_transformers import SentenceTransformer
 
+# Cargamos un modelo preentrenado. "all-MiniLM-L6-v2" es liviano y eficiente,
+# ideal para generar embeddings semánticos.
 modelo = SentenceTransformer("all-MiniLM-L6-v2")
 
+# Lista de frases que queremos convertir en vectores.
 frases = ["El producto llegó roto", "El envío fue muy rápido"]
+
+# Generamos los embeddings. El resultado es una matriz donde cada fila
+# representa el vector de una frase.
 vectors = modelo.encode(frases)
 
-print(vectors.shape)   # (2, dimensiones)
+# Imprimimos la forma de la matriz resultante.
+# Debe mostrar (2, dimensiones) porque hay 2 frases,
+# y cada una es convertida en un vector de cierta dimensión (p. ej., 384).
+print(vectors.shape)
   </code></pre>
 
-      <div class="diagram">
-        <!-- ESPACIO PARA IMAGEN PIPELINE EMBEDDINGS -->
-      </div>
+      
 
       <div class="callout">
         <strong>Nota:</strong> en clase no profundizamos en el modelo, solo en su uso práctico.
       </div>
-    </section>
+    </section> -->
+    <section id="crear-embeddings">
+  <h2>4. Crear embeddings con un modelo moderno</h2>
+
+  <p>
+        Hoy en día existen modelos especializados en generar embeddings de alta calidad.
+        Su funcionamiento interno es complejo, pero utilizarlos es sencillo gracias a librerías
+        como <strong>sentence-transformers</strong>.
+      </p>
+
+      <div class="diagram">
+        <img src="../assets/sentence-transformers-logo.png" alt="Sentence Transformers logo">
+      </div>
+
+  <p>
+    Sentence Transformers es una librería de Python que facilita el uso de modelos preentrenados
+    para generar embeddings de frases. Estos modelos están basados en la arquitectura
+    Transformer, que ha revolucionado el procesamiento del lenguaje natural.
+  </p>
+
+  <p>
+    Está basada en modelos tipo <strong>Transformer</strong>,
+    muy eficientes a la hora de capturar significado. Con unas pocas líneas de código
+    podemos convertir frases en vectores útiles para tareas reales como:
+  </p>
+
+  <ul>
+    <li>búsqueda semántica (buscar por significado),</li>
+    <li>detection de duplicados,</li>
+    <li>clasificación de comentarios,</li>
+    <li>agrupación automática de opiniones,</li>
+    <li>sistemas de recomendación.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Documentación oficial:</strong>
+    <a href="https://sbert.net/">https://sbert.net/</a>
+  </div>
+
+  <p>Instalación mediante pip:</p>
+
+  <pre><code class="language-bash">
+pip install sentence-transformers
+  </code></pre>
+
+  <p>Ejemplo básico de uso:</p>
+
+  <pre><code class="language-python">
+# Importamos la clase SentenceTransformer desde la librería sentence_transformers.
+# Sirve para cargar un modelo que convierte frases en vectores numéricos (embeddings).
+from sentence_transformers import SentenceTransformer
+
+# Cargamos un modelo preentrenado. "all-MiniLM-L6-v2" es rápido y produce
+# embeddings de buena calidad que capturan el significado de las frases.
+modelo = SentenceTransformer("all-MiniLM-L6-v2")
+
+# Frases que queremos convertir en vectores.
+frases = ["El producto llegó roto", "El envío fue muy rápido"]
+
+# Convertimos cada frase en un vector. Obtendremos una matriz donde cada fila
+# es el embedding de una frase.
+vectors = modelo.encode(frases)
+
+# Mostramos la forma (shape) de la matriz resultante:
+# (2, dimensiones) significa: 2 frases, cada una convertida en un vector
+# de varias dimensiones (normalmente 384).
+print(vectors.shape)
+  </code></pre>
+
+  <p>
+    Lo realmente útil de estos vectores no es ver sus números,
+    sino <strong>compararlos</strong>. Si dos frases tienen significados parecidos,
+    sus vectores estarán muy cerca entre sí. Con esto podemos construir sistemas de
+    búsqueda inteligente, clasificación de opiniones, detección de duplicados, y mucho más.
+  </p>
+
+  <div class="callout">
+    <strong>Nota:</strong> en clase nos centramos en el uso práctico, no en los detalles matemáticos o internos del modelo.
+  </div>
+</section>
     <section id="busqueda">
       <h2>5. Búsqueda inteligente basada en embeddings</h2>
 
@@ -303,7 +409,11 @@ print(vectors.shape)   # (2, dimensiones)
         Esto permite encontrar resultados aunque no coincidan las palabras exactas.
       </p>
 
-      <pre><code class="language-python">
+      <pre><code class="language-python"># Ejemplo de búsqueda semántica usando embeddings y similitud de coseno
+from sklearn.metrics.pairwise import cosine_similarity
+from sentence_transformers import SentenceTransformer
+import numpy as np
+modelo = SentenceTransformer("all-MiniLM-L6-v2")
 consulta = "paquete roto"
 documentos = [
     "Mi pedido llegó dañado",
@@ -318,36 +428,134 @@ vec_docs = modelo.encode(documentos)
 # Calcular similitudes
 sim = cosine_similarity(vec_consulta, vec_docs)
 print(sim)
-  </code></pre>
 
-      <div class="diagram">
-        <!-- ESPACIO PARA IMAGEN BUSQUEDA SEMANTICA -->
-      </div>
+umbral = 0.55
+mejor = documentos[np.argmax(sim)]
 
+if sim.max() < umbral:
+    print("No hay coincidencias suficientemente parecidas.")
+else:
+    print("Mejor sentencia:", mejor)
+  </code>
+<strong>Resultado:</strong>
+[[0.6053243  0.41458666 0.31157726]]
+Mejor sentencia: Mi paquete llegó
+</pre>
+
+      <p><strong>Interpretación del resultado:</strong></p>
+      <ul>
+        <li>El valor más alto indica la frase más similar a la consulta.</li>
+        <li>La similitud de coseno varía entre -1 y 1, siendo 1 la máxima similitud.</li>
+        <li>Si la similitud máxima es menor que el umbral (0.55), no hay coincidencias relevantes.</li>
+        <li>Entendemos que un valor por debajo de 0.55 indica que la similitud no es suficiente para considerarla relevante.</li>
+      </ul>
+      <p><strong>Con all-MiniLM-L6-v2, la escala suele ser:</strong></p>
+      <ul>
+        <li>0.7–1.0: muy similar</li>
+        <li>0.5–0.7: moderadamente similar</li>
+        <li>0.3–0.5: poco similar</li>
+        <li>0.0–0.3: no relacionado</li>
+      </ul>
+      
       <div class="callout">
         Este método permite búsquedas más humanas y precisas.
       </div>
     </section>
-    <section id="actividad-final">
-      <h2>6. Actividad final: construye tu propio buscador semántico</h2>
+    <section id="actividades">
+  <h2>6. Actividades prácticas</h2>
 
-      <ol>
-        <li>Crea una lista de 8–10 frases cortas.</li>
-        <li>Genera los embeddings con un modelo preentrenado.</li>
-        <li>Introduce una consulta (pregunta o frase).</li>
-        <li>Calcula la similitud de coseno entre la consulta y las frases.</li>
-        <li>Muestra el resultado ordenado de mayor a menor similitud.</li>
-        <li>Explica por qué la frase más similar ha salido en primer lugar.</li>
-      </ol>
+  <p>
+    A continuación se proponen varias actividades para practicar todo lo aprendido sobre
+    embeddings, similitud semántica y búsqueda inteligente. Los ejercicios están pensados
+    para que experimentes, observes diferencias entre modelos y comprendas cómo afectan
+    los embeddings al funcionamiento de los sistemas modernos.
+  </p>
 
-      <div class="diagram">
-        <!-- ESPACIO PARA IMAGEN RESUMEN ACTIVIDAD -->
-      </div>
+  <h3>6.1 Actividad 1: Comparar frases</h3>
+  <p>
+    Genera embeddings de las siguientes frases y calcula la similitud de coseno entre
+    cada par:
+  </p>
+  <ul>
+    <li>“El paquete llegó roto”</li>
+    <li>“El pedido vino dañado”</li>
+    <li>“Estoy muy contento con mi compra”</li>
+  </ul>
+  <p>
+    <strong>Pregunta:</strong> ¿Qué pareja de frases presenta mayor similitud? ¿Por qué?
+  </p>
 
-      <div class="callout">
-        <strong>Resultado esperado:</strong> un pequeño buscador que encuentra textos por significado.
-      </div>
-    </section>
+  <h3>6.2 Actividad 2: Cambiar el modelo</h3>
+  <p>
+    Repite la actividad anterior usando dos modelos distintos, por ejemplo:
+  </p>
+  <ul>
+    <li><code>all-MiniLM-L6-v2</code></li>
+    <li><code>all-mpnet-base-v2</code></li>
+  </ul>
+  <p>
+    <strong>Preguntas:</strong>
+  </p>
+  <ul>
+    <li>¿Qué modelo genera valores de similitud más altos?</li>
+    <li>¿Cuál parece captar mejor el significado?</li>
+    <li>¿Qué modelo usarías en un sistema real? ¿Por qué?</li>
+  </ul>
+
+  <h3>6.3 Actividad 3: Búsqueda semántica</h3>
+  <p>
+    Usando el código de búsqueda inteligente, añade los siguientes documentos:
+  </p>
+  <ul>
+    <li>“El mensajero dejó el paquete en mal estado”</li>
+    <li>“Todo llegó perfecto, gracias”</li>
+    <li>“El envase venía abierto”</li>
+  </ul>
+  <p>
+    Luego prueba estas consultas:
+  </p>
+  <ul>
+    <li>“envío dañado”</li>
+    <li>“muy satisfecho con el pedido”</li>
+    <li>“problemas con el paquete”</li>
+  </ul>
+  <p>
+    <strong>Preguntas:</strong>
+  </p>
+  <ul>
+    <li>¿Qué documento devuelve el sistema para cada consulta?</li>
+    <li>¿Hay casos en los que no encuentra nada relevante? ¿Por qué?</li>
+  </ul>
+
+  <h3>6.4 Actividad 4: Ajustar el umbral</h3>
+  <p>
+    Modifica el valor del umbral (<code>umbral = 0.55</code>) y repite la búsqueda.
+    Prueba valores como 0.40, 0.60 o 0.70.
+  </p>
+  <p>
+    <strong>Preguntas:</strong>
+  </p>
+  <ul>
+    <li>¿Qué cambia cuando usas un umbral más alto?</li>
+    <li>¿Qué riesgos tendría usar un umbral demasiado bajo o demasiado alto en un sistema real?</li>
+  </ul>
+
+  <h3>6.5 Actividad 5: Crear tu propio mini‑buscador</h3>
+  <p>
+    Escribe un pequeño programa que:
+  </p>
+  <ol>
+    <li>Lea una consulta escrita por el usuario.</li>
+    <li>Busque el documento más parecido usando embeddings.</li>
+    <li>Devuelva el texto más relevante (o indique que no hay coincidencias).</li>
+  </ol>
+  
+  <div class="callout">
+    <strong>Recuerda:</strong> la mejor forma de entender los embeddings es usarlos,
+    experimentar con distintos modelos y observar cómo afecta cada decisión al resultado.
+  </div>
+</section>
+
 
     <footer>
       <p>Profesor: Vicente Català — ®Todos los derechos reservados.</p>
