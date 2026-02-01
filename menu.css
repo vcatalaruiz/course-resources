@@ -1,0 +1,187 @@
+/* ===== VC MENU (namespaced) ===== */
+:root{
+  /* Cambia el ancho si quieres un rail más estrecho/ancho */
+  --vc-rail-w: 280px;
+
+  /* Paleta clara (por defecto, “estilo chat”); si tu sitio es oscuro,
+     añade .vc-dark en <html> o <body> para activar el tema oscuro de abajo */
+  --vc-bg: #ffffff;
+  --vc-fg: #111827;
+  --vc-border: #e5e7eb;
+  --vc-shadow: 0 10px 30px rgba(0,0,0,.12);
+  --vc-accent: #2563eb;     /* azul (resalte) */
+  --vc-accent-2: #1f2937;   /* gris oscuro para iconos/hover */
+
+  --vc-topbar-h: 56px;
+}
+
+/* Tema oscuro opcional: añade class="vc-dark" en <html> o <body> si tu sitio es dark */
+.vc-dark{
+  --vc-bg: #0b1220;
+  --vc-fg: #e5e7eb;
+  --vc-border: #1e293b;
+  --vc-shadow: 0 10px 30px rgba(0,0,0,.35);
+  --vc-accent: #22c55e;     /* verde activo */
+  --vc-accent-2: #38bdf8;   /* azul hover */
+}
+
+/* Scroll suave y que headings no queden tapados por cabecera */
+html{ scroll-behavior: smooth; }
+:where(h2, h3, h4){ scroll-margin-top: calc(var(--vc-topbar-h) + 24px); }
+
+/* ===== Botón SIEMPRE visible ===== */
+.vc-toggle{
+  /* position: fixed; */
+  left: max(16px, env(safe-area-inset-left, 0px));
+  bottom: max(16px, env(safe-area-inset-bottom, 0px));
+  z-index: 1201;
+  width: 44px; height: 44px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 999px;
+  border: 1px solid var(--vc-border);
+  background: var(--vc-bg);
+  color: var(--vc-fg);
+  box-shadow: 0 8px 24px rgba(0,0,0,.25);
+  cursor: pointer;
+}
+.vc-toggle:hover{ background: rgba(0,0,0,.05); }
+.vc-toggle:focus-visible{ outline: 2px solid var(--vc-accent); outline-offset: 2px; }
+
+/* ===== Drawer (móvil/tablet) ===== */
+.vc-rail{
+  position: fixed;
+  inset: 0 auto 0 0;              /* left drawer */
+  width: min(86vw, var(--vc-rail-w));
+  background: var(--vc-bg);
+  color: var(--vc-fg);
+  border-right: 1px solid var(--vc-border);
+  box-shadow: var(--vc-shadow);
+  transform: translateX(-105%);
+  transition: transform .25s ease;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  max-height: 100dvh;
+}
+.vc-rail.is-open{ transform: translateX(0); }
+
+.vc-rail-head{
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--vc-border);
+  min-height: 48px;
+}
+.vc-rail-title{ font-weight: 600; font-size: .95rem; }
+
+.vc-btn{
+  appearance: none;
+  border: 0; background: transparent;
+  width: 36px; height: 36px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 8px; cursor: pointer; color: inherit;
+}
+.vc-btn:hover{ background: rgba(0,0,0,.06); }
+.vc-btn:focus-visible{ outline: 2px solid var(--vc-accent); outline-offset: 2px; }
+
+.vc-list{ list-style: none; margin: 0; padding: 6px 0 12px 0; overflow: auto; flex: 1; }
+.vc-row{ display: grid; grid-template-columns: 28px 1fr; align-items: center; }
+
+.vc-disc{
+  appearance: none; border: 0; background: transparent;
+  width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer; color: currentColor; border-radius: 6px;
+}
+.vc-disc:hover{ background: rgba(0,0,0,.06); }
+.vc-disc:focus-visible{ outline: 2px solid var(--vc-accent); outline-offset: 2px; }
+.vc-disc::before{
+  content: ''; width: 8px; height: 8px;
+  border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg); transition: transform .18s ease;
+}
+.vc-disc[aria-expanded="true"]::before{ transform: rotate(45deg); }
+
+.vc-list a{
+  display: block; padding: 10px 12px; color: inherit; text-decoration: none;
+  border-left: 3px solid transparent; line-height: 1.2;
+}
+.vc-list a:hover{ background: rgba(0,0,0,.05); }
+.vc-list a[aria-current="true"]{
+  background: color-mix(in srgb, var(--vc-accent), transparent 84%);
+  border-left-color: var(--vc-accent);
+}
+
+a.vc-lvl1{ font-weight: 600; padding-left: 6px; }
+a.vc-lvl2{ font-size: .95rem; padding-left: 28px; color: #334155; }
+.vc-dark a.vc-lvl2{ color: #cbd5e1; }
+
+.vc-sub{ list-style: none; margin: 0; padding: 4px 0 8px 0; }
+.vc-sub[hidden]{ display: none; }
+
+/* Backdrop */
+.vc-backdrop{
+  position: fixed; inset: 0; background: rgba(0,0,0,.4);
+  opacity: 0; transition: opacity .2s ease; z-index: 1090;
+}
+.vc-backdrop[hidden]{ display: none; }
+.vc-backdrop.show{ opacity: 1; }
+
+/* Cuando el drawer está abierto, bloquea scroll del fondo */
+body.vc-lock{ overflow: hidden; }
+
+/* ===== Escritorio (≥1024px): rail fijo a la izquierda, SIN hueco entre header y main ===== */
+@media (min-width: 1024px){
+  /* Shell de 2 columnas y 3 filas: header | contenido | footer */
+  body{
+    display: grid;
+    grid-template-columns: var(--vc-rail-w) minmax(0, 1fr);
+    grid-template-rows: auto 1fr auto;   /* 👈 filas explícitas */
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  /* Rail integrado (no overlay), ocupa todas las filas del grid de la col izquierda */
+  .vc-rail{
+    grid-column: 1;
+    grid-row: 1 / -1;                    /* 👈 ocupa filas 1..3 sin forzar altura de la fila 1 */
+    /* position: sticky; */
+    top: 0;
+    transform: none !important;
+    width: var(--vc-rail-w);
+    height: 100dvh;
+    z-index: 1;
+    overflow: auto;
+  }
+
+  /* Header, main y footer en la columna 2 y filas correctas */
+  header{ grid-column: 2; grid-row: 1; }
+  main  { grid-column: 2; grid-row: 2; }
+  footer{ grid-column: 2; grid-row: 3; }
+
+  /* En escritorio no usamos backdrop; sublistas abiertas */
+  .vc-backdrop{ display: none !important; }
+  .vc-sub{ display: block; }
+
+  /* Estado colapsado del rail (contenido a ancho completo) */
+  body.vc-collapsed{
+    grid-template-columns: 0 minmax(0, 1fr);
+  }
+  body.vc-collapsed .vc-rail{
+    position: fixed;                      /* fuera del flujo, oculto a la izquierda */
+    transform: translateX(-105%) !important;
+    pointer-events: none;
+    visibility: hidden;
+  }
+}
+
+/* Anti-overflow del contenido (evita scroll horizontal global) */
+img, svg, canvas, video{ max-width: 100%; height: auto; }
+pre{ max-width: 100%; overflow: auto; }
+code{ white-space: pre-wrap; word-break: break-word; }
+
+
+nav, nav > ul, nav > a {
+    font-size: small;
+}
+a.vc-lvl2 {
+    font-size: small;
+}

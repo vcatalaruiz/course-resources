@@ -1,17 +1,18 @@
-# Recorridos de directorios
-import os
+# ---------------------------------------------
+# Ejemplo 3.8: tamaño de objetos y límites de recursión
+# ---------------------------------------------
+import sys
 
-# 1) Listar nombres rápidamente
-# print("Contenido de . :", os.listdir("."))
+# Medimos tamaños de objetos básicos.
+print("sizeof(int):", sys.getsizeof(42))
+print("sizeof(str vacía):", sys.getsizeof(""))
+print("sizeof(lista vacía):", sys.getsizeof([]))
 
-# 2) Recorrer con información de tipo (más rápido que multiple os.stat)
-# with os.scandir(".") as it:
-#     for entry in it:
-#         tipo = "DIR" if entry.is_dir() else ("FILE" if entry.is_file() else "OTRO")
-#         print(f"{entry.name}: {tipo}")
+# Demostramos que getsizeof de una lista no suma el tamaño de sus elementos.
+lista = [1, 2, 3, 4, 5]
+tam_lista = sys.getsizeof(lista)
+tam_elementos = sum(sys.getsizeof(x) for x in lista)
+print(f"Tamaño lista: {tam_lista} bytes; elementos: {tam_elementos} bytes (no incluidos).")
 
-# # 3) Recorrido recursivo del árbol (subcarpetas)
-for root, dirs, files in os.walk("."):
-    print("Directorio:", root)
-    for f in files:
-        print("  -", f)
+# Límite de recursión actual (número máximo de llamadas recursivas antes de lanzar RecursionError).
+print("Límite de recursión:", sys.getrecursionlimit())

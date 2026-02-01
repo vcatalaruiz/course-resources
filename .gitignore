@@ -4,3 +4,5 @@ model_cache/
 .cache/
 *.safetensors
 .gitattributes
+trash/
+python/ejemplo.py

@@ -14,7 +14,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Módulos del sistema</title>
-  <script src="../../course-resources/index.js" defer></script>
+
 
   <!-- Mermaid -->
   <script type="module">
@@ -27,114 +27,91 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
   <script>hljs.highlightAll();</script>
 
-  <link rel="stylesheet" href="../style.css" />
+
   <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
-  <style>
-    /* body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; margin: 0; color: #1f2937; } */
-    /* header { background: #0f766e; color: #fff; padding: 2rem 1.5rem; } */
-    h1,
-    h2,
-    h3 {
-      margin: 0.6rem 0;
-    }
-
-    main {
-      padding: 1.5rem;
-      max-width: 980px;
-      margin: auto;
-    }
-
-    code,
-    pre {
-      background: #f4f6f8;
-      border: 1px solid #e5e7eb;
-      border-radius: 6px;
-    }
-
-    pre {
-      padding: 1rem;
-      overflow-x: auto;
-    }
-
-    .callout {
-      background: #fff7ed;
-      border: 1px solid #fdba74;
-      padding: 0.75rem 1rem;
-      border-radius: 8px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-
-    @media (min-width: 800px) {
-      .grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    footer {
-      border-top: 1px solid #e5e7eb;
-      margin-top: 2rem;
-      padding: 1rem;
-      font-size: 0.9rem;
-      color: #6b7280;
-    }
-
-    .kbd {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      background: #111827;
-      color: #e5e7eb;
-      padding: 0 6px;
-      border-radius: 4px;
-    }
-  </style>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
 </head>
 
+
 <body>
+
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <!-- X SVG -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+  <!-- ===== /VC SIDEBAR ===== -->
+
   <header>
-    <img src="" id="logo" alt="Logo" style="display: none;">
+
+    <!-- ===== VC SIDEBAR (desde cero) ===== -->
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail"
+      aria-expanded="false">
+      <!--Hamburger icon -->
+      <i class="fa fa-bars" aria-hidden="true"></i>
+
+
+    </button>
     <h1>Módulos del sistema</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
   </header>
+
+
 
   <main>
 
-    
-<section>
-  <h2>1. Introducción: módulos del sistema en Python</h2>
-  <div class="diagram">
+
+    <section>
+      <h2>1. Introducción: módulos del sistema en Python</h2>
+      <div class="diagram">
         <img src="../assets/python modules.jpeg" alt="python system modules" style="max-width: 60%;">
       </div>
-  <p>En este tema trabajaremos con módulos de la biblioteca estándar que permiten interactuar con el sistema operativo, crear herramientas de línea de comandos, ejecutar procesos externos y comunicarnos por red.</p>
-  <ul>
-    <li><strong>Objetivo:</strong> comprender y aplicar <code>os</code>, <code>sys</code>, <code>subprocess</code>, <code>socket</code> y <code>argparse</code> en scripts profesionales.</li>
-    <li><strong>Casos de uso:</strong> automatización, utilidades de administración, clientes/servidores básicos y CLIs reproducibles.</li>
-    <li><strong>Buenas prácticas:</strong> portabilidad, manejo de errores, mensajes claros y seguridad.</li>
-  </ul>
-  <div class="callout">
-    Dominar estos módulos multiplica la capacidad de tus scripts para integrarse con el sistema y otros programas.
-  </div>
-</section>
+      <p>En este tema trabajaremos con módulos de la biblioteca estándar que permiten interactuar con el sistema
+        operativo, crear herramientas de línea de comandos, ejecutar procesos externos y comunicarnos por red.</p>
+      <ul>
+        <li><strong>Objetivo:</strong> comprender y aplicar <code>os</code>, <code>sys</code>, <code>subprocess</code>,
+          <code>socket</code> y <code>argparse</code> en scripts profesionales.
+        </li>
+        <li><strong>Casos de uso:</strong> automatización, utilidades de administración, clientes/servidores básicos y
+          CLIs reproducibles.</li>
+        <li><strong>Buenas prácticas:</strong> portabilidad, manejo de errores, mensajes claros y seguridad.</li>
+      </ul>
+      <div class="callout">
+        Dominar estos módulos multiplica la capacidad de tus scripts para integrarse con el sistema y otros programas.
+      </div>
+    </section>
+    <section>
+      <h2>2. Módulo <code>os</code>: trabajar con archivos y carpetas </h2>
 
-
-<section>
-  <h2>2. Módulo <code>os</code>: trabajar con archivos y carpetas </h2>
-
-  <div class="diagram">
+      <div class="diagram">
         <img src="../assets/os_module.jpeg" alt="os module" style="max-width: 60%;">
       </div>
-  <p>El módulo <code>os</code> proporciona utilidades para interactuar con el sistema operativo: gestionar rutas y directorios, crear/eliminar/mover archivos y carpetas, consultar información del sistema y leer variables de entorno. A continuación se detallan las operaciones más habituales con ejemplos comentados.</p>
+      <p>El módulo <code>os</code> proporciona utilidades para interactuar con el sistema operativo: gestionar rutas y
+        directorios, crear/eliminar/mover archivos y carpetas, consultar información del sistema y leer variables de
+        entorno. A continuación se detallan las operaciones más habituales con ejemplos comentados.</p>
 
-  <!-- 2.1 -->
-  <h3>2.1. ¿En qué carpeta estoy? ¿Cómo construyo rutas portables?</h3>
-  <ul>
-    <li><code>os.getcwd()</code>: devuelve la carpeta actual (CWD).</li>
-    <li><code>os.path.join(...)</code>: une trozos de rutas sin importar el sistema operativo.</li>
-  </ul>
+      <!-- 2.1 -->
+      <h3>2.1. ¿En qué carpeta estoy? ¿Cómo construyo rutas portables?</h3>
+      <ul>
+        <li><code>os.getcwd()</code>: devuelve la carpeta actual (CWD).</li>
+        <li><code>os.path.join(...)</code>: une trozos de rutas sin importar el sistema operativo.</li>
+      </ul>
 
-  <pre><code class="language-python"># EJEMPLO: mostrar la carpeta actual y construir la ruta a un PDF dentro de "docs"
+      <pre><code class="language-python"># EJEMPLO: mostrar la carpeta actual y construir la ruta a un PDF dentro de "docs"
 import os
 
 # Obtener el "current working directory" (carpeta desde donde corre el script)
@@ -145,29 +122,31 @@ print("Carpeta actual:", cwd)
 ruta_pdf = os.path.join("docs", "manuales", "instalacion.pdf")
 print("Ejemplo de ruta:", ruta_pdf)  # Se adapta a Windows/Linux/macOS</code></pre>
 
-  <h4>Ejercicio</h4>
-  <p>Crea una ruta para <code>recursos/img/logo.png</code> desde tu ruta actual, sin escribir el separador manualmente. Imprime el resultado.<picture>
-    <source media="(min-width: )" srcset="">
-    <img src="" alt="">
-  </picture></p>
-  <details>
-    <summary>Solución</summary>
-    <pre><code class="language-python">import os
+      <h4>Ejercicio</h4>
+      <p>Crea una ruta para <code>recursos/img/logo.png</code> desde tu ruta actual, sin escribir el separador
+        manualmente. Imprime el resultado.<picture>
+          <source media="(min-width: )" srcset="">
+          <img src="" alt="">
+        </picture>
+      </p>
+      <details>
+        <summary>Solución</summary>
+        <pre><code class="language-python">import os
 ruta_logo = os.path.join(os.getcwd(), "recursos", "img", "logo.png")
 print("Ruta del logo:", ruta_logo)</code></pre>
 
-  </details>
+      </details>
 
-  <hr />
+      <hr />
 
-  <!-- 2.2 -->
-  <h3>2.2. Comprobar si existe (archivo o carpeta)</h3>
-  <ul>
-    <li><code>os.path.exists(ruta)</code>: ¿existe?</li>
-    <li><code>os.path.isdir(ruta)</code> / <code>os.path.isfile(ruta)</code>: ¿es carpeta o archivo?</li>
-  </ul>
+      <!-- 2.2 -->
+      <h3>2.2. Comprobar si existe (archivo o carpeta)</h3>
+      <ul>
+        <li><code>os.path.exists(ruta)</code>: ¿existe?</li>
+        <li><code>os.path.isdir(ruta)</code> / <code>os.path.isfile(ruta)</code>: ¿es carpeta o archivo?</li>
+      </ul>
 
-  <pre><code class="language-python"># EJEMPLO: comprobar un nombre concreto y decir qué es
+      <pre><code class="language-python"># EJEMPLO: comprobar un nombre concreto y decir qué es
 import os
 
 nombre = "material"  # cambia este valor para probar
@@ -179,11 +158,11 @@ if os.path.exists(nombre):
 else:
     print(nombre, "no existe")</code></pre>
 
-  <h4>Ejercicio</h4>
-  <p>Pide al usuario una ruta y di si existe. Si existe, indica si es archivo o carpeta.</p>
-  <details>
-    <summary>Solución</summary>
-    <pre><code class="language-python">import os
+      <h4>Ejercicio</h4>
+      <p>Pide al usuario una ruta y di si existe. Si existe, indica si es archivo o carpeta.</p>
+      <details>
+        <summary>Solución</summary>
+        <pre><code class="language-python">import os
 
 ruta = input("Introduce una ruta: ").strip()
 if os.path.exists(ruta):
@@ -193,18 +172,18 @@ if os.path.exists(ruta):
         print("Es archivo")
 else:
     print("No existe")</code></pre>
-  </details>
+      </details>
 
-  <hr />
+      <hr />
 
-  <!-- 2.3 -->
-  <h3>2.3. Crear carpetas</h3>
-  <ul>
-    <li><code>os.mkdir("nombre")</code>: crea una sola carpeta (debe no existir).</li>
-    <li><code>os.makedirs("a/b/c", exist_ok=True)</code>: crea varias a la vez; no falla si ya existen.</li>
-  </ul>
+      <!-- 2.3 -->
+      <h3>2.3. Crear carpetas</h3>
+      <ul>
+        <li><code>os.mkdir("nombre")</code>: crea una sola carpeta (debe no existir).</li>
+        <li><code>os.makedirs("a/b/c", exist_ok=True)</code>: crea varias a la vez; no falla si ya existen.</li>
+      </ul>
 
-  <pre><code class="language-python"># EJEMPLO: crear una carpeta para "exportaciones" y otra estructura para "reportes"
+      <pre><code class="language-python"># EJEMPLO: crear una carpeta para "exportaciones" y otra estructura para "reportes"
 import os
 
 # Crea "export" si no existe; si existe, lanza error -> prueba con try/except o usa makedirs
@@ -218,26 +197,27 @@ except FileExistsError:
 os.makedirs("reportes/2026/trimestre1", exist_ok=True)
 print("Estructura 'reportes/2026/trimestre1' lista")</code></pre>
 
-  <h4>Ejercicio</h4>
-  <p>Crea las carpetas <code>curso_python/temas</code> y <code>curso_python/entregas</code> (en dos llamadas separadas) sin que falle si existen.</p>
-  <details>
-    <summary>Solución</summary>
-    <pre><code class="language-python">import os
+      <h4>Ejercicio</h4>
+      <p>Crea las carpetas <code>curso_python/temas</code> y <code>curso_python/entregas</code> (en dos llamadas
+        separadas) sin que falle si existen.</p>
+      <details>
+        <summary>Solución</summary>
+        <pre><code class="language-python">import os
 
 os.makedirs("curso_python/temas", exist_ok=True)
 os.makedirs("curso_python/entregas", exist_ok=True)
 print("Carpetas preparadas")</code></pre>
-  </details>
+      </details>
 
-  <hr />
+      <hr />
 
-  <!-- 2.4 -->
-  <h3>2.4. Listar el contenido de una carpeta</h3>
-  <ul>
-    <li><code>os.listdir("ruta")</code>: devuelve la lista de nombres (archivos y subcarpetas).</li>
-  </ul>
+      <!-- 2.4 -->
+      <h3>2.4. Listar el contenido de una carpeta</h3>
+      <ul>
+        <li><code>os.listdir("ruta")</code>: devuelve la lista de nombres (archivos y subcarpetas).</li>
+      </ul>
 
-  <pre><code class="language-python"># EJEMPLO: listar lo que hay dentro de "reportes" si existe
+      <pre><code class="language-python"># EJEMPLO: listar lo que hay dentro de "reportes" si existe
 import os
 
 carpeta = "reportes"
@@ -247,11 +227,11 @@ if os.path.isdir(carpeta):
 else:
     print("No existe la carpeta:", carpeta)</code></pre>
 
-  <h4>Ejercicio</h4>
-  <p>Lista el contenido de la carpeta <code>curso_python</code>. Si no existe, muéstralo por pantalla.</p>
-  <details>
-    <summary>Solución</summary>
-    <pre><code class="language-python">import os
+      <h4>Ejercicio</h4>
+      <p>Lista el contenido de la carpeta <code>curso_python</code>. Si no existe, muéstralo por pantalla.</p>
+      <details>
+        <summary>Solución</summary>
+        <pre><code class="language-python">import os
 
 base = "curso_python"
 if os.path.isdir(base):
@@ -259,18 +239,18 @@ if os.path.isdir(base):
         print("-", n)
 else:
     print("No existe:", base)</code></pre>
-  </details>
+      </details>
 
-  <hr />
+      <hr />
 
-  <!-- 2.5 -->
-  <h3>2.5. Crear y borrar archivos</h3>
-  <ul>
-    <li>Crear con <code>open(..., "w")</code> y escribir texto.</li>
-    <li>Borrar con <code>os.remove("archivo")</code> si existe.</li>
-  </ul>
+      <!-- 2.5 -->
+      <h3>2.5. Crear y borrar archivos</h3>
+      <ul>
+        <li>Crear con <code>open(..., "w")</code> y escribir texto.</li>
+        <li>Borrar con <code>os.remove("archivo")</code> si existe.</li>
+      </ul>
 
-  <pre><code class="language-python"># EJEMPLO: crear un archivo de notas y luego borrarlo de forma segura
+      <pre><code class="language-python"># EJEMPLO: crear un archivo de notas y luego borrarlo de forma segura
 import os
 
 # Crear y escribir dentro (el "with" cierra el archivo automáticamente)
@@ -282,11 +262,12 @@ if os.path.exists("notas_asix.txt"):
     os.remove("notas_asix.txt")
     print("Archivo 'notas_asix.txt' borrado")</code></pre>
 
-  <h4>Ejercicio</h4>
-  <p>Crea un archivo <code>mensaje.txt</code> con el texto “Hola ASIX” y después bórralo mostrando mensajes en cada paso.</p>
-  <details>
-    <summary>Solución</summary>
-    <pre><code class="language-python">import os
+      <h4>Ejercicio</h4>
+      <p>Crea un archivo <code>mensaje.txt</code> con el texto “Hola ASIX” y después bórralo mostrando mensajes en cada
+        paso.</p>
+      <details>
+        <summary>Solución</summary>
+        <pre><code class="language-python">import os
 
 with open("mensaje.txt", "w", encoding="utf-8") as f:
     f.write("Hola ASIX\n")
@@ -295,17 +276,17 @@ print("Creado mensaje.txt")
 if os.path.exists("mensaje.txt"):
     os.remove("mensaje.txt")
     print("Borrado mensaje.txt")</code></pre>
-  </details>
+      </details>
 
-  <hr />
+      <hr />
 
-  <!-- 2.6 -->
-  <h3>2.6. Borrar carpetas (recuerda: deben estar vacías)</h3>
-  <ul>
-    <li><code>os.rmdir("carpeta")</code>: borra una carpeta vacía. Si tiene algo dentro, da error.</li>
-  </ul>
+      <!-- 2.6 -->
+      <h3>2.6. Borrar carpetas (recuerda: deben estar vacías)</h3>
+      <ul>
+        <li><code>os.rmdir("carpeta")</code>: borra una carpeta vacía. Si tiene algo dentro, da error.</li>
+      </ul>
 
-  <pre><code class="language-python"># EJEMPLO: intentar borrar una carpeta y manejar el error si no está vacía
+      <pre><code class="language-python"># EJEMPLO: intentar borrar una carpeta y manejar el error si no está vacía
 import os
 
 objetivo = "reportes/2026/trimestre1"
@@ -318,11 +299,12 @@ if os.path.isdir(objetivo):
 else:
     print("No existe:", objetivo)</code></pre>
 
-  <h4>Ejercicio</h4>
-  <p>Crea la carpeta <code>prueba_vaciar</code>, mete un archivo dentro y comprueba que <code>os.rmdir</code> falla. Luego borra el archivo y vuelve a intentar borrar la carpeta.</p>
-  <details>
-    <summary>Solución</summary>
-    <pre><code class="language-python">import os
+      <h4>Ejercicio</h4>
+      <p>Crea la carpeta <code>prueba_vaciar</code>, mete un archivo dentro y comprueba que <code>os.rmdir</code> falla.
+        Luego borra el archivo y vuelve a intentar borrar la carpeta.</p>
+      <details>
+        <summary>Solución</summary>
+        <pre><code class="language-python">import os
 
 os.makedirs("prueba_vaciar", exist_ok=True)
 with open(os.path.join("prueba_vaciar", "tmp.txt"), "w", encoding="utf-8") as f:
@@ -337,17 +319,17 @@ except OSError:
 os.remove(os.path.join("prueba_vaciar", "tmp.txt"))
 os.rmdir("prueba_vaciar")
 print("Ahora sí: carpeta borrada")</code></pre>
-  </details>
+      </details>
 
-  <hr />
+      <hr />
 
-  <!-- 2.7 -->
-  <h3>2.7. Renombrar o mover archivos</h3>
-  <ul>
-    <li><code>os.rename(origen, destino)</code>: cambia el nombre o mueve a otra carpeta.</li>
-  </ul>
+      <!-- 2.7 -->
+      <h3>2.7. Renombrar o mover archivos</h3>
+      <ul>
+        <li><code>os.rename(origen, destino)</code>: cambia el nombre o mueve a otra carpeta.</li>
+      </ul>
 
-  <pre><code class="language-python"># EJEMPLO: crear un archivo de demo y renombrarlo
+      <pre><code class="language-python"># EJEMPLO: crear un archivo de demo y renombrarlo
 import os
 
 # Crear un archivo de ejemplo
@@ -358,11 +340,12 @@ with open("informe.txt", "w", encoding="utf-8") as f:
 os.rename("informe.txt", "informe_final.txt")
 print("Renombrado a 'informe_final.txt'")</code></pre>
 
-  <h4>Ejercicio</h4>
-  <p>Crea <code>moverme.txt</code> y muévelo dentro de la carpeta <code>curso_python</code> (créala si no existe).</p>
-  <details>
-    <summary>Solución</summary>
-    <pre><code class="language-python">import os
+      <h4>Ejercicio</h4>
+      <p>Crea <code>moverme.txt</code> y muévelo dentro de la carpeta <code>curso_python</code> (créala si no existe).
+      </p>
+      <details>
+        <summary>Solución</summary>
+        <pre><code class="language-python">import os
 
 # Archivo a mover
 with open("moverme.txt", "w", encoding="utf-8") as f:
@@ -374,321 +357,306 @@ os.makedirs("curso_python", exist_ok=True)
 # Mover usando rename
 os.rename("moverme.txt", os.path.join("curso_python", "moverme.txt"))
 print("Movido a curso_python/")</code></pre>
-  </details>
+      </details>
 
-  <hr />
+      <hr />
 
-  <!-- 2.8 -->
-  <h3>2.8. Leer una variable de entorno (básico)</h3>
-  <ul>
-    <li><code>os.getenv("NOMBRE", "por_defecto")</code>: lee una variable del sistema; si no existe, usa el valor por defecto.</li>
-  </ul>
+      <!-- 2.8 -->
+      <h3>2.8. Leer una variable de entorno (básico)</h3>
+      <ul>
+        <li><code>os.getenv("NOMBRE", "por_defecto")</code>: lee una variable del sistema; si no existe, usa el valor
+          por defecto.</li>
+      </ul>
 
-  <pre><code class="language-python"># EJEMPLO: leer una variable de entorno común y usar un valor por defecto si no está
+      <pre><code class="language-python"># EJEMPLO: leer una variable de entorno común y usar un valor por defecto si no está
 import os
 
 # En Linux/macOS suele existir USER; en Windows USERNAME
 usuario = os.getenv("USER") or os.getenv("USERNAME") or "desconocido"
 print("Usuario detectado:", usuario)</code></pre>
 
-  <h4>Ejercicio</h4>
-  <p>Lee la variable <code>HOME</code> (o <code>HOMEPATH</code> en Windows). Si no existe, imprime “No disponible”.</p>
-  <details>
-    <summary>Solución</summary>
-    <pre><code class="language-python">import os
+      <h4>Ejercicio</h4>
+      <p>Lee la variable <code>HOME</code> (o <code>HOMEPATH</code> en Windows). Si no existe, imprime “No disponible”.
+      </p>
+      <details>
+        <summary>Solución</summary>
+        <pre><code class="language-python">import os
 
 home = os.getenv("HOME") or os.getenv("HOMEPATH") or "No disponible"
 print("HOME:", home)</code></pre>
-  </details>
+      </details>
 
-  <hr />
+      <hr />
 
- 
-</section>
+      <br>
+      <h3>Actividad OS</h3>
 
-<section>
-  <h2>Actividad final: Mi primera carpeta de trabajo con <code>os</code></h2>
+      <p>
+        En esta actividad vas a crear y gestionar una pequeña estructura de carpetas y archivos
+        usando el módulo <code>os</code>.
+        El objetivo no es programar “bien”, sino entender qué hace cada instrucción.
+      </p>
 
-  <p>
-    En esta actividad vas a crear y gestionar una pequeña estructura de carpetas y archivos
-    usando el módulo <code>os</code>. 
-    El objetivo no es programar “bien”, sino entender qué hace cada instrucción.
-  </p>
+      <div class="callout">
+        <strong>Importante:</strong> ve ejecutando el programa poco a poco y comprueba qué hace
+        cada parte. No copies todo al final sin probar.
+      </div>
 
-  <div class="callout">
-    <strong>Importante:</strong> ve ejecutando el programa poco a poco y comprueba qué hace
-    cada parte. No copies todo al final sin probar.
-  </div>
+      <h3>Enunciado</h3>
+      <p>Crea un programa en Python que haga lo siguiente:</p>
 
-  <h3>Enunciado</h3>
-  <p>Crea un programa en Python que haga lo siguiente:</p>
+      <ol>
+        <li>Muestre por pantalla el directorio actual.</li>
+        <li>Compruebe si existe la carpeta <code>mi_carpeta</code>.</li>
+        <li>Si no existe, la cree.</li>
+        <li>Dentro de <code>mi_carpeta</code>, cree un archivo llamado <code>info.txt</code>.</li>
+        <li>Escriba dentro del archivo el texto: <em>"Hola desde Python"</em>.</li>
+        <li>Liste el contenido de <code>mi_carpeta</code>.</li>
+        <li>Renombre el archivo <code>info.txt</code> a <code>info_final.txt</code>.</li>
+        <li>Muestre un mensaje final indicando que todo ha terminado.</li>
+      </ol>
 
-  <ol>
-    <li>Muestre por pantalla el directorio actual.</li>
-    <li>Compruebe si existe la carpeta <code>mi_carpeta</code>.</li>
-    <li>Si no existe, la cree.</li>
-    <li>Dentro de <code>mi_carpeta</code>, cree un archivo llamado <code>info.txt</code>.</li>
-    <li>Escriba dentro del archivo el texto: <em>"Hola desde Python"</em>.</li>
-    <li>Liste el contenido de <code>mi_carpeta</code>.</li>
-    <li>Renombre el archivo <code>info.txt</code> a <code>info_final.txt</code>.</li>
-    <li>Muestre un mensaje final indicando que todo ha terminado.</li>
-  </ol>
+      <h3>Pistas</h3>
+      <ul>
+        <li>Usa <code>os.getcwd()</code> para saber dónde estás.</li>
+        <li>Usa <code>os.path.exists()</code> para comprobar si algo existe.</li>
+        <li>Usa <code>os.makedirs()</code> para crear carpetas.</li>
+        <li>Usa <code>open()</code> para crear y escribir archivos.</li>
+        <li>Usa <code>os.listdir()</code> para listar contenido.</li>
+        <li>Usa <code>os.rename()</code> para cambiar el nombre del archivo.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>3. Módulo <code>sys</code>: intérprete, argumentos y E/S estándar</h2>
+      <div class="diagram">
+        <img src="../assets/Python-SYS-Module.webp" alt="sys module" style="max-width: 70%;">
+      </div>
+      <p>
+        El módulo <code>sys</code> expone funciones y objetos que permiten interactuar con el intérprete de Python:
+        leer argumentos de línea de comandos (<code>sys.argv</code>), trabajar con los flujos estándar
+        (<code>sys.stdin</code>, <code>sys.stdout</code>, <code>sys.stderr</code>),
+        consultar metainformación del entorno (<code>sys.version</code>, <code>sys.platform</code>,
+        <code>sys.executable</code>) y terminar el programa con
+        códigos de salida (<code>sys.exit()</code>). También ofrece utilidades para el control del runtime (recursión,
+        codificación, rutas de importación).
+      </p>
 
-  <h3>Pistas</h3>
-  <ul>
-    <li>Usa <code>os.getcwd()</code> para saber dónde estás.</li>
-    <li>Usa <code>os.path.exists()</code> para comprobar si algo existe.</li>
-    <li>Usa <code>os.makedirs()</code> para crear carpetas.</li>
-    <li>Usa <code>open()</code> para crear y escribir archivos.</li>
-    <li>Usa <code>os.listdir()</code> para listar contenido.</li>
-    <li>Usa <code>os.rename()</code> para cambiar el nombre del archivo.</li>
-  </ul>
+      <!-- 3.1 -->
+      <h3>3.1. Argumentos de línea de comandos: <code>sys.argv</code></h3>
+      <p>
+        <code>sys.argv</code> es una lista de cadenas con el nombre del script en <code>argv[0]</code> y los argumentos
+        proporcionados por el usuario a partir de <code>argv[1]</code>. Es útil para utilidades sencillas; para CLIs
+        robustas,
+        se recomienda <code>argparse</code> (validación, tipos, ayuda automática).
+      </p>
 
+      <p><strong>Ejemplo:</strong></p>
+      <pre><code class="language-python"># Lectura de argumentos desde sys.argv
+import sys
+print("Primer argumento (nombre del script):", sys.argv[0]) # Devuelve el nombre del script
+print("Segundo argumento (argumento recibido):", sys.argv[1])  # A partir de aquí, los argumentos del usuario
 
-
-
-
-<!-- 
-<section>
-  <h2>3. Módulo <code>sys</code>: intérprete y E/S estándar</h2>
-  <ul>
-    <li>Argumentos de línea de comandos: <code>sys.argv</code>.</li>
-    <li>Flujos estándar: <code>sys.stdin</code>, <code>sys.stdout</code>, <code>sys.stderr</code>.</li>
-    <li>Metadatos del intérprete: <code>sys.version</code>, <code>sys.platform</code>, <code>sys.path</code>.</li>
-    <li>Salida del programa: <code>sys.exit(code)</code>.</li>
-  </ul>
-  <pre><code># Ejemplo: uso básico de sys.argv y mensajes en stderr
+      </code></pre>
+      <h4>Ejercicio</h4>
+      <p>
+        Crea un código que reciba dos números enteros como argumentos de línea de comandos,
+        los sume e imprima el resultado.
+        Si no se proporcionan dos números, muestra un mensaje de uso y termina con código de error.
+      </p>
+      <details>
+        <summary>Ver solución</summary>
+        <pre><code class="language-python"># ---------------------------------------------
+# Solución: Sumar dos números recibidos por línea de comandos
+# ---------------------------------------------
 import sys
 
-# sys.argv es una lista con el nombre del script y los argumentos:
-#   argv[0] -> nombre del script
-#   argv[1:] -> argumentos proporcionados por el usuario
-if len(sys.argv) &lt; 2:
-    # Enviamos el mensaje de uso a stderr (buen hábito para separar salida normal de errores/ayuda)
-    print("Uso: python app.py &lt;nombre&gt;", file=sys.stderr)
-    sys.exit(1)  # Código de salida distinto de 0 indica error
+# Comprobamos que hay, al menos, dos argumentos (además del nombre del script).
+# sys.argv[0] -> nombre del script
+# sys.argv[1] -> primer número (como str)
+# sys.argv[2] -> segundo número (como str)
+if len(sys.argv) &lt; 3:
+    # Enviamos el mensaje de uso a stderr para diferenciarlo de la salida normal.
+    print("Argumentos insuficientes. Se necesitan dos parámetros &lt;num1&gt; &lt;num2&gt;", file=sys.stderr)
+    # Terminamos con código 1 para indicar error en los argumentos.
+    sys.exit(1)
 
-nombre = sys.argv[1]
-print(f"Hola, {nombre}!")
+# Extraemos los argumentos como cadenas.
+n1_str = sys.argv[1]
+n2_str = sys.argv[2]
 
-# Información útil para depuración (versión y plataforma)
-print("Python:", sys.version.split()[0], "| Plataforma:", sys.platform, file=sys.stderr)
-
-# Modificar sys.path (con cuidado) para añadir rutas de módulos si es estrictamente necesario
-# sys.path.append("/ruta/a/mis_modulos")</code></pre>
-  <div class="callout">
-    <strong>Consejo:</strong> usa <code>sys</code> para tareas puntuales; para CLIs robustas, prefiere <code>argparse</code>.
-  </div>
-</section>
-
-<section>
-  <h2>4. Módulo <code>argparse</code>: creación de CLIs profesionales</h2>
-  <h3>Conceptos</h3>
-  <ul>
-    <li>Argumentos posicionales y opcionales (con <code>--banderas</code>).</li>
-    <li>Tipos, validación, valores por defecto y ayuda automática (<code>-h</code>).</li>
-    <li>Subcomandos para herramientas complejas.</li>
-  </ul>
-  <pre><code># Ejemplo: CLI con subcomandos (push/pull) y opciones
-import argparse
-
-# Creamos el parser principal con nombre del programa y descripción.
-parser = argparse.ArgumentParser(
-    prog="filesync",
-    description="Sincroniza archivos entre directorios."
-)
-
-# Los subparsers permiten definir comandos como 'filesync push' y 'filesync pull'.
-sub = parser.add_subparsers(dest="cmd", required=True)
-
-# Subcomando 'push' para subir cambios desde src a dst.
-p_push = sub.add_parser("push", help="Sube cambios al destino")
-p_push.add_argument("src", type=str, help="Directorio origen")
-p_push.add_argument("dst", type=str, help="Directorio destino")
-# Opción booleana: si está presente no aplica cambios (simulación)
-p_push.add_argument("--dry-run", action="store_true", help="No aplica cambios, solo muestra acciones")
-
-# Subcomando 'pull' para traer cambios desde un remoto.
-p_pull = sub.add_parser("pull", help="Baja cambios del destino")
-p_pull.add_argument("remote", type=str, help="Nombre o URL del remoto")
-
-# parse_args lee sys.argv y valida tipos/valores según la definición anterior.
-args = parser.parse_args()
-
-# Lógica de negocio en función del subcomando elegido.
-if args.cmd == "push":
-    acciones = f"Sincronizando {args.src} → {args.dst}"
-    if args.dry_run:
-        acciones += " (simulación)"
-    print(acciones)
-elif args.cmd == "pull":
-    print("Actualizando desde", args.remote)</code></pre>
-  <div class="callout">
-    <strong>Ventaja:</strong> <code>argparse</code> genera uso y ayuda automáticamente y reduce errores en el parseo manual.
-  </div>
-</section>
-
-<section>
-  <h2>5. Módulo <code>subprocess</code>: ejecución de procesos externos</h2>
-  <h3>Patrones de uso</h3>
-  <ul>
-    <li>Ejecución simple y verificación: <code>subprocess.run</code> con <code>check=True</code>.</li>
-    <li>Captura de salida: <code>capture_output=True</code> o <code>stdout=subprocess.PIPE</code>.</li>
-    <li>Redirección de errores y códigos de retorno.</li>
-    <li>Riesgos y seguridad: no interpolar entradas no confiables (evitar <code>shell=True</code> salvo necesidad).</li>
-  </ul>
-  <pre><code># Ejemplo: ejecutar un comando de forma segura y capturar su salida
-import subprocess
-
-# Ejecutamos 'ls -la' como lista de argumentos (más seguro que cadena con shell=True).
-result = subprocess.run(
-    ["ls", "-la"],
-    capture_output=True,  # Captura stdout y stderr en result.stdout/result.stderr
-    text=True,            # Decodifica a str (en lugar de bytes)
-    check=True            # Lanza excepción si el código de retorno != 0
-)
-print("Salida estándar:\n", result.stdout)
-
-# Manejo de errores al ejecutar un comando que falla.
 try:
-    subprocess.run(["false"], check=True)  # 'false' devuelve código 1
-except subprocess.CalledProcessError as e:
-    # e.returncode contiene el código de salida del proceso fallido.
-    print("El comando falló con código:", e.returncode)
+    # Convertimos las cadenas a enteros (podría fallar si no son números).
+    n1 = int(n1_str)
+    n2 = int(n2_str)
+except ValueError:
+    # Informamos del error por stderr y terminamos con código distinto de 0.
+    print("Error: ambos argumentos deben ser enteros.", file=sys.stderr)
+    sys.exit(1)
 
-# Ejemplo de uso con entrada estándar (pasar datos al proceso)
-# echo_proc = subprocess.run(["grep", "hola"], input="hola mundo\nadiós\n", text=True, capture_output=True)
-# print("Coincidencias:\n", echo_proc.stdout)</code></pre>
-  <div class="callout">
-    <strong>Seguridad:</strong> construye la lista de argumentos sin pasar por el shell y valida siempre las entradas.
-  </div>
-</section>
+# Calculamos la suma y la mostramos por stdout (salida estándar).
+resultado = n1 + n2
+print(f"La suma de {n1} + {n2} es: {resultado}")
 
-<section>
-  <h2>6. Módulo <code>socket</code>: comunicación en red</h2>
-  <h3>Conceptos básicos</h3>
-  <ul>
-    <li>Modelo cliente-servidor y puertos.</li>
-    <li>TCP (conexión) vs UDP (datagramas).</li>
-    <li>Codificación de datos (bytes ↔ texto).</li>
-  </ul>
-  <div class="grid">
-    <div>
-      <h3>Servidor TCP mínimo</h3>
-      <pre><code># Servidor TCP que acepta UNA conexión, recibe un mensaje y responde con un eco prefijado.
-import socket
+# En este punto el programa termina de forma natural con código 0 (éxito).
+  </code></pre>
+      </details>
 
-HOST, PORT = "127.0.0.1", 5000  # '127.0.0.1' limita conexiones a la máquina local
-# Creamos un socket IPv4 (AF_INET) de tipo TCP (SOCK_STREAM)
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.bind((HOST, PORT))  # Asociamos el socket a host:puerto
-    s.listen(1)           # Empezamos a escuchar (máx. 1 conexión en cola)
-    print(f"Escuchando en {HOST}:{PORT}")
-    conn, addr = s.accept()  # Bloquea hasta que un cliente se conecte
-    with conn:
-        print("Conexión de:", addr)
-        data = conn.recv(1024)     # Recibimos hasta 1024 bytes
-        # Respondemos con un prefijo "OK: " seguido de los bytes recibidos
-        conn.sendall(b"OK: " + data)  # sendall asegura que se envían todos los bytes</code></pre>
-    </div>
-    <div>
-      <h3>Cliente TCP mínimo</h3>
-      <pre><code># Cliente TCP que se conecta al servidor, envía 'hola' y muestra la respuesta.
-import socket
 
-HOST, PORT = "127.0.0.1", 5000
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as c:
-    c.connect((HOST, PORT))        # Establece conexión con el servidor
-    c.sendall(b"hola")             # Envía bytes; para texto, .encode() convierte str → bytes
-    respuesta = c.recv(1024)       # Lee la respuesta (bytes)
-    print("Respuesta:", respuesta.decode())  # Decodificamos bytes → str para imprimir</code></pre>
-    </div>
-  </div>
-  <div class="callout">
-    <strong>Nota:</strong> usa <code>with</code> para cerrar sockets automáticamente; considera <code>settimeout()</code> para evitar bloqueos.
-  </div>
-</section>
 
-<section>
-  <h2>7. Integración: scripts completos y mantenibles</h2>
-  <p>Combinar <code>argparse</code>, <code>os</code>/<code>pathlib</code>, <code>sys</code> y <code>subprocess</code> permite crear herramientas robustas y portables.</p>
-  <pre><code># Estructura típica de script profesional con manejo de errores y salida clara
-#!/usr/bin/env python3
-import argparse
+
+
+      <hr />
+
+      <!-- 3.2 -->
+      <h3>3.2. Información del intérprete y del entorno de ejecución</h3>
+      <p>
+        <code>sys</code> ofrece datos útiles para diagnósticos y portabilidad: versión de Python, plataforma del
+        sistema,
+        ejecutable usado, rutas de búsqueda de módulos y codificación del sistema de archivos.
+      </p>
+
+      <p><strong>En el siguiente ejemplo vemos cómo obtener información del entorno:</strong></p>
+      <pre><code class="language-python">
 import sys
-import subprocess
-from pathlib import Path
 
-def run(cmd: list[str]) -> str:
-    """
-    Ejecuta un comando del sistema y devuelve su salida estándar como texto.
-    Lanza CalledProcessError si el comando devuelve un código distinto de 0.
-    """
-    res = subprocess.run(cmd, capture_output=True, text=True, check=True)
-    return res.stdout
+# Versión completa de Python como cadena; version_info da tupla detallada (mayor, menor, micro).
+print("Versión de Python:", sys.version)
+print("Version info:", sys.version_info)  # (major, minor, micro, releaselevel, serial)
 
-def main():
-    # Definimos argumentos con valores por defecto y descripciones claras
-    p = argparse.ArgumentParser(description="Limpia y empaqueta un proyecto.")
-    p.add_argument("--src", default=".", help="Ruta del proyecto (por defecto: .)")
-    p.add_argument("--out", default="dist", help="Ruta de salida (por defecto: dist)")
-    args = p.parse_args()
+# Plataforma reportada (ej. 'win32', 'linux', 'darwin').
+print("Plataforma:", sys.platform)
 
-    # Normalizamos rutas con pathlib para portabilidad
-    src = Path(args.src)
-    out = Path(args.out)
-    out.mkdir(parents=True, exist_ok=True)  # Creamos la carpeta de salida
+# Ruta del ejecutable de Python en uso (útil para depurar entornos con varios intérpretes).
+print("Intérprete:", sys.executable)
 
-    print("Analizando repositorio…")
-    # Ejecutamos 'git status --short' dentro del directorio src
-    try:
-        estado = run(["git", "-C", str(src), "status", "--short"])
-        print(estado if estado.strip() else "(Sin cambios)")
-    except subprocess.CalledProcessError:
-        # Si no es un repo git o falla el comando, informamos pero seguimos
-        print("Aviso: no es un repositorio Git o el comando 'git' no está disponible.", file=sys.stderr)
+# Rutas donde Python busca módulos; el orden es importante para las importaciones.
+print("sys.path (rutas de importación):")
+for p in sys.path:
+    print(" -", p)
 
-    print("Empaquetando…")
-    # Simulación de empaquetado: escribir un archivo de marca en 'out'
-    (out / "build.txt").write_text("Build OK\n", encoding="utf-8")
-    print("Listo. Artefactos en:", out)
+# Codificación del sistema de archivos (influye en cómo se mapean nombres de ficheros ↔ cadenas).
+print("Filesystem encoding:", sys.getfilesystemencoding())
+  </code></pre>
 
-if __name__ == "__main__":
-    try:
-        main()
-    except subprocess.CalledProcessError as e:
-        # Errores en comandos externos: reportamos y propagamos código de salida
-        print("Error de proceso:", e, file=sys.stderr)
-        sys.exit(e.returncode)
-    except Exception as ex:
-        # Capturamos errores inesperados para dar un mensaje útil
-        print("Fallo inesperado:", ex, file=sys.stderr)
-        sys.exit(2)</code></pre>
-  <div class="callout">
-    <strong>Buenas prácticas:</strong> funciones pequeñas, manejo de excepciones, mensajes claros, evitar rutas absolutas y añadir pruebas.
-  </div>
-</section>
+      <h4>Ejercicio</h4>
+      <p>
+        Muestra solo la versión “mayor.menor” (por ejemplo, <code>3.12</code>) usando <code>sys.version_info</code>, y
+        comprueba si estás en Windows (<code>win32</code>) o Linux (<code>linux</code>) para imprimir un mensaje
+        apropiado.
+      </p>
 
-<section>
-  <h2>8. Actividades prácticas y evaluación</h2>
-  <ol>
-    <li><strong>CLI de copia de seguridad:</strong> con <code>argparse</code> y <code>pathlib</code>, que comprima (utilidad externa con <code>subprocess</code>) y registre acciones en un log.</li>
-    <li><strong>Monitor de proceso:</strong> script que ejecute un comando con <code>subprocess</code>, registre salida y códigos de retorno, y avise si supera un tiempo (timeout).</li>
-    <li><strong>Echo TCP:</strong> servidor y cliente con <code>socket</code> (mensaje de saludo, eco, cierre limpio), con comentarios sobre encoding.</li>
-    <li><strong>Explorador de entorno:</strong> imprimir variables de entorno filtradas y ruta actual con <code>os</code>/<code>sys</code>, evitando mostrar datos sensibles.</li>
-  </ol>
-  <div class="callout">
-    <strong>Reto final:</strong> entrega una herramienta CLI que integre <code>os</code>, <code>argparse</code> y <code>subprocess</code> para automatizar una tarea real de tu elección (incluye README y ayuda <code>-h</code>).
-  </div>
-</section>
- -->
+      <details>
+        <summary>Solución</summary>
+        <pre><code class="language-python">import sys
+version_mayor_menor = f"{sys.version_info.major}.{sys.version_info.minor}"
+print("Versión mayor.menor de Python:", version_mayor_menor)
+if sys.platform == "win32":
+    print("Estás en Windows")
+elif sys.platform == "linux": 
+    print("Estás en Linux")
+else:
+    print("Estás en otra plataforma:", sys.platform)</code></pre>
+      </details>
+      <hr />
 
+      <!-- 3.3 -->
+      <h3>3.3. Finalizar el programa con códigos de salida: <code>sys.exit()</code></h3>
+      <p>
+        <code>sys.exit(código)</code> termina el programa devolviendo un código al sistema: <code>0</code> suele
+        significar éxito;
+        cualquier otro valor indica error. Internamente lanza <code>SystemExit</code>, por lo que puede capturarse si se
+        desea
+        realizar limpieza adicional.
+      </p>
 
+      <pre><code class="language-python"># ---------------------------------------------
+# Ejemplo 3.3: usar sys.exit para terminar con códigos específicos     
+import sys
+print("0: Saliendo con éxito  (sys.exit(0))")
+sys.exit(0)
+print("1: Saliendo con error  (sys.exit(1))")
+sys.exit(1)
 
+      </code></pre>
+
+      <div class="callout">
+        <strong>Nota:</strong> En scripts largos, captura <code>SystemExit</code> solo si necesitas liberar recursos o
+        registrar el evento; de lo contrario, deja que el programa termine naturalmente.
+      </div>
+      <hr>
+      <h4>Ejercicio</h4>
+      <p>
+        Escribe un programa que pida una ruta por entrada interactiva y verifique si existe. Comprueba
+        mediante el módulo <code>os</code> (del tema anterior) si la ruta existe o no.
+        Si no existe, muestra un mensaje de error y termina con código
+        <code>1</code>.
+        Si existe, muestra un mensaje de confirmación y termina con código
+        <code>0</code>.
+
+      </p>
+
+      <details>
+        <summary>Solución</summary>
+        <pre><code class="language-python"># ---------------------------------------------
+# Ejemplo 3.3: validar la existencia de una ruta y terminar con códigos apropiados
+# ---------------------------------------------
+import sys
+import os
+
+# Pedimos una ruta por entrada interactiva (podrías usar sys.argv en un caso real).
+ruta = input("Introduce una ruta a comprobar: ").strip()
+
+# Si la ruta no existe, informamos por stderr y salimos con código 1 (error).
+if not os.path.exists(ruta):
+    print(f"Error: la ruta '{ruta}' no existe.", file=sys.stderr)
+    sys.exit(1)
+
+# Si existe, confirmamos por stdout y salimos con código 0 (éxito).
+print(f"La ruta '{ruta}' existe.")
+sys.exit(0)
+  </code></pre>
+      </details>
+
+      <br>
+      <hr>
+      <br>
+      <h3>Actividad SYS</h3>
+      <p>
+        El equipo TIC del instituto necesita una utilidad sencilla de línea de comandos para:
+      <ul>
+        <li>Obtener información básica del entorno de Python</li>
+        <li>Verificar la existencia de rutas en el sistema</li>
+        <li>Devolver códigos de salida claros para automatización</li>
+      </ul>
+      </p>
+
+      <p>
+        Tu tarea es crear un programa en Python que pasándole parámetros desde la línea de comandos realice lo
+        siguiente:
+      </p>
+      <ol>
+        <li>Mostrar la versión de Python (ej. 3.12).</li>
+        <li>Mostrar la plataforma del sistema (ej. win32, linux).</li>
+        <li>Aceptar una ruta como argumento de línea de comandos.</li>
+        <li>Comprobar si la ruta existe usando el módulo <code>os</code>.</li>
+        <li>Si la ruta existe, imprimir un mensaje de confirmación y salir con código 0.</li>
+        <li>Si la ruta no existe, imprimir un mensaje de error y salir con código 1.</li>
+      </ol>
+      <h3>Pistas</h3>
+      <ul>
+        <li>Usa <code>sys.argv</code> para leer argumentos de línea de comandos.</li>
+        <li>Usa <code>sys.version_info</code> para obtener la versión de Python.</li>
+        <li>Usa <code>sys.platform</code> para obtener la plataforma del sistema.</li>
+        <li>Usa <code>os.path.exists()</code> para comprobar si la ruta existe.</li>
+        <li>Usa <code>sys.exit()</code> para terminar el programa con el código adecuado.</li>
+      </ul>
+
+    </section>
     <footer>
       <p>Profesor: Vicente Català — ®Todos los derechos reservados.</p>
     </footer>
   </main>
+
 </body>
 
 
