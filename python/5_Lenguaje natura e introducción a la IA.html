@@ -28,74 +28,44 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
 
-    <link rel="stylesheet" href="../style.css" />
     <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
-    <style>
-    /* body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; margin: 0; color: #1f2937; } */
-    /* header { background: #0f766e; color: #fff; padding: 2rem 1.5rem; } */
-    h1,
-    h2,
-    h3 {
-      margin: 0.6rem 0;
-    }
-
-    main {
-      padding: 1.5rem;
-      max-width: 980px;
-      margin: auto;
-    }
-
-    code,
-    pre {
-      background: #f4f6f8;
-      border: 1px solid #e5e7eb;
-      border-radius: 6px;
-    }
-
-    pre {
-      padding: 1rem;
-      overflow-x: auto;
-    }
-
-    .callout {
-      background: #fff7ed;
-      border: 1px solid #fdba74;
-      padding: 0.75rem 1rem;
-      border-radius: 8px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-
-    @media (min-width: 800px) {
-      .grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    footer {
-      border-top: 1px solid #e5e7eb;
-      margin-top: 2rem;
-      padding: 1rem;
-      font-size: 0.9rem;
-      color: #6b7280;
-    }
-
-    .kbd {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      background: #111827;
-      color: #e5e7eb;
-      padding: 0 6px;
-      border-radius: 4px;
-    }
-  </style>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
 </head>
 
+
 <body>
-    <header>
+
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <!-- X SVG -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+  <!-- ===== /VC SIDEBAR ===== -->
+
+  <header>
+
+    <!-- ===== VC SIDEBAR (desde cero) ===== -->
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail"
+      aria-expanded="false">
+      <!--Hamburger icon -->
+      <i class="fa fa-bars" aria-hidden="true"></i>
+
+
+    </button>
         <img src="" id="logo" alt="Logo" style="display: none;">
 
         <h1>Procesamiento de Lenguaje Natural e Introducción a la IA</h1>
