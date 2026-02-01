@@ -28,46 +28,46 @@
     <script>hljs.highlightAll();</script>
 
     <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
-  <script src="../index.js" defer></script>
-  <script src="../menu.js" defer></script>
-  <!-- <link rel="stylesheet" href="../index.css"> -->
-  <link rel="stylesheet" href="../style.css" />
-  <link rel="stylesheet" href="../menu.css">
+    <script src="../index.js" defer></script>
+    <script src="../menu.js" defer></script>
+    <!-- <link rel="stylesheet" href="../index.css"> -->
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../menu.css">
 </head>
 
 
 <body>
 
 
-  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
-    <div class="vc-rail-head">
-      <span class="vc-rail-title">Índice</span>
-      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
-        <!-- X SVG -->
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-        </svg>
-      </button>
-    </div>
-    <ul id="vc-list" class="vc-list"></ul>
-  </nav>
+    <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+        <div class="vc-rail-head">
+            <span class="vc-rail-title">Índice</span>
+            <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+                <!-- X SVG -->
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+        <ul id="vc-list" class="vc-list"></ul>
+    </nav>
 
-  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
-  <!-- ===== /VC SIDEBAR ===== -->
+    <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+    <!-- ===== /VC SIDEBAR ===== -->
 
-  <header>
+    <header>
 
-    <!-- ===== VC SIDEBAR (desde cero) ===== -->
-    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail"
-      aria-expanded="false">
-      <!--Hamburger icon -->
-      <i class="fa fa-bars" aria-hidden="true"></i>
+        <!-- ===== VC SIDEBAR (desde cero) ===== -->
+        <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+            aria-controls="vc-rail" aria-expanded="false">
+            <!--Hamburger icon -->
+            <i class="fa fa-bars" aria-hidden="true"></i>
 
 
-    </button>
-        <img src="" id="logo" alt="Logo" style="display: none;">
+        </button>
 
         <h1>Análisis de datos avanzado</h1>
+        <img src="" id="logo" alt="Logo" style="display: none;">
     </header>
 
     <main>
@@ -345,7 +345,8 @@ hist = pd.concat([ventas_2024, ventas_2025], ignore_index=True)
                 auditoría inicial, análisis de distribuciones y correlaciones.</p>
             <ol>
                 <li><strong>Auditoría inicial:</strong> <code>df.shape</code>, <code>df.info()</code>,
-                    <code>df.describe()</code>, duplicados y nulos.</li>
+                    <code>df.describe()</code>, duplicados y nulos.
+                </li>
                 <li><strong>Distribuciones:</strong> histogramas, KDE y boxplots para variables clave.</li>
                 <li><strong>Relaciones:</strong> <code>corr()</code>, scatter matrices y mapas de calor.</li>
                 <li><strong>Segmentación:</strong> <code>groupby</code>, <code>pivot_table</code> y percentiles.</li>
