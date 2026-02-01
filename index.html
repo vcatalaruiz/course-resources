@@ -52,38 +52,24 @@
 </head>
 
 <body>
-  <!-- Barra superior -->
-  <nav class="topbar" role="navigation" aria-label="Barra superior">
-    <div class="container topbar__inner">
-      #
-        <i class="fa-solid fa-graduation-cap"></i>
-        <span>Vicente Catalá</span>
-      </a>
-      <button class="topbar__toggle" aria-label="Abrir menú">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-      <ul class="topbar__menu">
-        <li>#cursosCursos</a></li>
-        <li>#buscadorBuscar</a></li>
-        <li><a href="#contacto"/a></li>
-      </ul>
-    </div>
-  </nav>
+  <div class="container">
 
-  <div class="container page">
-    <header class="hero-dev">
-      <span class="tag">~/vicente</span>
-      <h1>> Vicente Catalá</h1>
-      <p>// Material de programación y sistemas</p>
-    </header>
+    
+<header class="hero-dev">
+  <span class="tag">~/vicente</span>
+  <h1>&gt; Vicente Catalá</h1>
+  <p>// Material de programación y sistemas</p>
+</header>
 
-    <!-- Buscador -->
-    <div class="search" id="buscador">
+
+
+   
+
+    <div class="search">
       <input id="q" type="search" placeholder="Buscar curso, tema o palabra clave..." aria-label="Buscar" />
       <button onclick="filtrar()">Buscar</button>
     </div>
 
-    <!-- Cursos -->
     <main id="cursos">
       <section class="grid">
         <!-- Tarjeta: Curso Java -->
@@ -94,8 +80,10 @@
           </div>
           <p style="margin:0 0 10px 0;color:var(--muted)">Temas publicados:</p>
           <ul class="topics">
-            <li>java/4_POO.html4. Introducción a la POO</a></li>
-            <li><a href="java/_Herencia.html5. RA 7 - Herencia, Superclase/Subclase, Jerarquías, Pruebas e Interfaces</a></li>
+            <li><a href="java/4_POO.html">4. Introducción a la POO</a></li>
+            <li><a href="java/5_POO_RA7_Herencia.html">5. RA 7 - Herencia, Superclase/Subclase, Jerarquías, Pruebas e
+                Interfaces</a></li>
+
           </ul>
         </article>
 
@@ -105,92 +93,47 @@
           <div class="course-meta">Pandas, NumPy, IA y actividades</div>
           <p style="margin:0 0 10px 0;color:var(--muted)">Temas publicados:</p>
           <ul class="topics">
-            <li><a href="python/nformacion_Pandas_NumPy.html3. Flujo de información: Pandas y NumPy</a></li>
-            <li><a href="python/4_analzado_visualizacion_datos.html4. Análisis avanzado de datos: Limpieza y visualización de datos</a></li>
-            <li>python/5_Lenguaje natura e introducción a la IA.html5. Lenguaje natural e introducción a la IA</a></li>
-            <li>python/6_modulos%20del%20sistema.html6. Módulos del sistema</a></li>
-            <li>python/7_Representaciones Semánticas y Deep Learning.html7. Representaciones Semánticas y Deep Learning</a></li>
+            <li><a href="python/3_flujo_informacion_Pandas_NumPy.html">3. Flujo de información: Pandas y NumPy</a></li>
+            <li><a href="python/4_analisis_avanzado_visualizacion_datos.html">4. Análisis avanzado de datos: Limpieza y
+                visualización de datos</a></li>
+            <li><a href="python/5_Lenguaje natura e introducción a la IA.html">5. Lenguaje natural e introducción a la
+                IA</a></li>
+            <li><a href="python/6_modulos%20del%20sistema.html">6. Módulos del sistema</a></li>
+            <li><a href="python/7_Representaciones Semánticas y Deep Learning.html">7. Representaciones Semánticas y Deep Learning</a></li>
           </ul>
         </article>
-
-        <!-- Tarjeta: Curso Flutter -->
+         <!-- Tarjeta: Curso Flutter -->
         <article class="card" id="curso-flutter">
           <h2>Flutter <i class="fa-brands fa-flutter"></i></h2>
           <div class="course-meta">1 - Introducción a Flutter</div>
           <p style="margin:0 0 10px 0;color:var(--muted)">Temas publicados:</p>
           <ul class="topics">
-            <li><a href/1-Intro-flutter.html1. Introducción a Flutter</a></li>
+            <li><a href="flutter/1-Intro-flutter.html">1. Introducción a Flutter</a></li>
           </ul>
         </article>
-
         <!-- Tarjeta: Curso Sistemas -->
         <article class="card" id="curso-sistemas">
           <h2>Sistemas <i class="fa-brands fa-linux"></i> <i class="fa-brands fa-windows"></i></h2>
           <div class="course-meta">Linux y redes.</div>
           <p style="margin:0 0 10px 0;color:var(--muted)">Temas publicados:</p>
           <ul class="topics">
-            <li>systems/staticIPvsdynamicIP.html1. IP estática vs IP dinámica</a></li>
-            <li><a href="systems/resolucion_nombres_dns_hosts.htmlosts)</a></li>
-            <li><a href="systems/router_rutas_estaticas.html</a></li>
-            <li><a href="systems/grub_servicio_webRUB y servicios web</a></li>
-            <li><astems/scripting_bash.html5. Scripting en Bash y automatización de tareas</a></li>
+            <li><a href="systems/staticIPvsdynamicIP.html">1. IP estática vs IP dinámica</a></li>
+            <li><a href="systems/resolucion_nombres_dns_hosts.html">2. DNS (hosts)</a></li>
+            <li><a href="systems/router_rutas_estaticas.html">3. Router</a></li>
+            <li><a href="systems/grub_servicio_web.html">4. GRUB y servicios web</a></li>
+            <li><a href="systems/scripting_bash.html">5. Scripting en Bash y automatización de tareas</a></li>
+
           </ul>
         </article>
       </section>
     </main>
+
+    <footer id="contacto">
+      <p>© <span id="year">2025</span> — Vicente Catalá Ruiz</p>
+    </footer>
   </div>
 
-  <!-- Footer -->
-  <footer class="site-footer" id="contacto" role="contentinfo">
-    <div class="container footer__grid">
-      <div>
-        <h3>Sobre mí</h3>
-        <p>Profesor de programación y sistemas. Este sitio reúne material y recursos de clase.</p>
-      </div>
-      <nav aria-label="Enlaces útiles">
-        <h3>Enlaces</h3>
-        <ul>
-          <li>#cursosCursos</a></li>
-          <li>#buscadorBuscar</a></li>
-          <li>mailto:tu-correo@ejemplo.comEmail</a></li>
-        </ul>
-      </nav>
-      <div>
-        <h3>Sígueme</h3>
-        <p class="social">
-          <a hrefss="fa-brands fa-github"></i></a>
-          #<i class="fa-brands fa-linkedin"></i></a>
-          #<i class="fa-brands fa-x-twitter"></i></a>
-        </p>
-      </div>
-    </div>
-    <div class="footer__copy">© <span id="year"></span> — Vicente Catalá Ruiz</div>
-  </footer>
-
-  <script>
-    // Tu filtro existente
-    function filtrar(){
-      const q = document.getElementById('q').value.toLowerCase();
-      const items = document.querySelectorAll('.card');
-      items.forEach(card => {
-        const text = card.innerText.toLowerCase();
-        card.style.display = text.includes(q) ? '' : 'none';
-      });
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-      const s = document.getElementById('q');
-      s.addEventListener('input', filtrar);
-      s.addEventListener('keyup', (e) => { if (e.key === 'Escape') s.value = ''; filtrar(); });
-
-      // Año dinámico
-      document.getElementById('year').innerText = new Date().getFullYear();
-
-      // Toggle menú móvil
-      const toggle = document.querySelector('.topbar__toggle');
-      const menu = document.querySelector('.topbar__menu');
-      toggle.addEventListener('click', () => menu.classList.toggle('open'));
-    });
-  </script>
+  <script>document.getElementById('year').innerText = new Date().getFullYear();</script>
 </body>
 
 </html>
