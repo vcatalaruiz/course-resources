@@ -59,8 +59,8 @@
   <header>
 
     <!-- ===== VC SIDEBAR (desde cero) ===== -->
-    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail"
-      aria-expanded="false">
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+      aria-controls="vc-rail" aria-expanded="false">
       <!--Hamburger icon -->
       <i class="fa fa-bars" aria-hidden="true"></i>
 
@@ -443,13 +443,16 @@ print("HOME:", home)</code></pre>
 
       <!-- 3.1 -->
       <h3>3.1. Argumentos de línea de comandos: <code>sys.argv</code></h3>
+
       <p>
         <code>sys.argv</code> es una lista de cadenas con el nombre del script en <code>argv[0]</code> y los argumentos
         proporcionados por el usuario a partir de <code>argv[1]</code>. Es útil para utilidades sencillas; para CLIs
         robustas,
         se recomienda <code>argparse</code> (validación, tipos, ayuda automática).
       </p>
-
+      <div class="diagram">
+        <img src="../assets/args-systems.jpg" alt="args system python" style="max-width: 60%;">
+      </div>
       <p><strong>Ejemplo:</strong></p>
       <pre><code class="language-python"># Lectura de argumentos desde sys.argv
 import sys
@@ -515,6 +518,9 @@ print(f"La suma de {n1} + {n2} es: {resultado}")
         ejecutable usado, rutas de búsqueda de módulos y codificación del sistema de archivos.
       </p>
 
+      <div class="diagram">
+        <img src="../assets/system-info.jpeg" alt="info system python" style="max-width: 60%;">
+      </div>
       <p><strong>En el siguiente ejemplo vemos cómo obtener información del entorno:</strong></p>
       <pre><code class="language-python">
 import sys
@@ -568,6 +574,9 @@ else:
         desea
         realizar limpieza adicional.
       </p>
+      <div class="diagram">
+        <img src="../assets/pc-exit.jpg" alt="exit system python" style="max-width: 60%;">
+      </div>
 
       <pre><code class="language-python"># ---------------------------------------------
 # Ejemplo 3.3: usar sys.exit para terminar con códigos específicos     
