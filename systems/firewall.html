@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Firewall en Linux</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="../../course-resources/index.js" defer></script>
+
+  <script type='module'>
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <!-- X SVG -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+  <!-- ===== /VC SIDEBAR ===== -->
+
+  <header>
+
+    <!-- ===== VC SIDEBAR (desde cero) ===== -->
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+      aria-controls="vc-rail" aria-expanded="false">
+      <!--Hamburger icon -->
+      <i class="fa fa-bars" aria-hidden="true"></i>
+
+
+    </button>
+    <h1>Firewall en Linux</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+    <section>
+      <h2>Firewall y Seguridad con UFW</h2>
+
+      <p>
+        En esta unidad aprenderás a proteger un sistema Linux configurando un
+        <strong>firewall real</strong> mediante UFW (Uncomplicated Firewall), una herramienta
+        sencilla pero potente que permite gestionar reglas de filtrado de red de forma segura.
+      </p>
+
+      <h3>¿Qué es un firewall?</h3>
+      <p>
+        Un firewall es un sistema de seguridad que controla el tráfico de red entrante y saliente
+        según reglas predefinidas. Su función principal es proteger el sistema de accesos no autorizados,
+        ataques externos y amenazas potenciales.
+      </p>
+      <div class="diagram">
+        <img src="../assets/firewall-working.gif" alt="firewall working" style="max-width: 60%;">
+      </div>
+
+      <div class="callout">
+        La mejor defensa es cerrar todo y abrir solo lo imprescindible.
+      </div>
+    </section>
+
+    <section>
+      <h2>Firewall en Linux con UFW (Uncomplicated Firewall)</h2>
+      <div class="diagram">
+        <img src="../assets/UFW-Linux.jpg" alt="UFW en Linux" style="max-width: 60%;">
+      </div>
+
+      <p>
+        UFW es una interfaz simplificada para gestionar reglas de firewall en sistemas Linux.
+        Actúa como una capa superior de <strong>iptables</strong> o <strong>nftables</strong>
+        y permite definir políticas de seguridad de forma clara, predecible y segura.
+      </p>
+
+      <p>
+        El objetivo de este tema es aprender a configurar un firewall real siguiendo buenas prácticas
+        como <strong>política por defecto restrictiva</strong>, uso de reglas por servicio o por IP,
+        y activación del <strong>logging</strong> para auditoría.
+      </p>
+
+      <div class="callout">
+        <strong>Recuerda:</strong> Primero abrir lo necesario, después activar el firewall.
+        Si no, puedes bloquearte tú mismo.
+      </div>
+    </section>
+
+    <section>
+      <h2>1. Principios básicos de seguridad con UFW</h2>
+
+      <p>
+        Antes de aplicar reglas, se debe tener clara la estrategia de seguridad:
+      </p>
+
+      <ul>
+        <li><strong>UFW enable:</strong>Activa el firewall. </li>
+        <div class="diagram">
+          <img src="../assets/ufw-command-in-linux-ufw-enable.png" alt="UFW enable" style="max-width: 60%;">
+        </div>
+        <li><strong>UFW disable:</strong> Desactiva el firewall. </li>
+        <div class="diagram">
+          <img src="../assets/ufw-command-in-linux-ufw-disable.png" alt="UFW disable" style="max-width: 60%;">
+        </div>
+        <li><strong>UFW status:</strong> Comprueba el estado del firewall. </li>
+        <div class="diagram">
+          <img src="../assets/ufw status.png" alt="Estado de UFW" style="max-width: 60%;">
+        </div>
+        <li><strong>Deny incoming:</strong> Por defecto, rechaza todo el tráfico entrante no solicitado. </li>
+        </li>
+        <div class="diagram">
+          <img src="../assets/ufw-command-in-linux-deny.png" alt="UFW deny" style="max-width: 60%;">
+        </div>
+        <li><strong>Allow incoming:</strong> Permite tráfico entrante desde ciertos puertos o IPs. </li>
+        <div class="diagram">
+          <img src="../assets/ufw-command-in-linux-enable.png" alt="UFW enable" style="max-width: 60%;">
+        </div>
+        <li><strong>UFW enable specific port:</strong> Activa un puerto específico. Ejemplo: <code>sudo ufw allow 22/tcp</code></li>
+        <div class="diagram">
+          <img src="../assets/ufw-command-in-linux-allow-port.png" alt="UFW allow port" style="max-width: 60%;">
+        </div>
+        <li><strong>Stateful inspection:</strong> UFW reconoce conexiones existentes → si tú inicias la conexión, la
+          respuesta se permite automáticamente.</li>
+          
+      </ul>
+
+      <p>
+        Esta combinación garantiza que el sistema queda protegido sin romper la conectividad necesaria.
+      </p>
+    </section>
+
+    <section>
+      <h2>2. Configuración inicial (orden correcto)</h2>
+
+      <h3>SSH: Entender como funciona</h3>
+      <p>
+        SSH (Secure Shell) es un protocolo que permite acceder de forma segura a un sistema remoto.
+        Utiliza cifrado para proteger la comunicación y autenticar a los usuarios.
+      </p>
+      <p>
+        Al configurar un firewall en un servidor remoto, es crucial permitir el tráfico SSH
+        antes de activar el firewall. De lo contrario, podrías bloquearte a ti mismo y perder el acceso.
+      </p>
+
+      <div class="diagram">
+        <img src="../assets/ssh working.gif" alt="SSH working" style="
+        max-width: 60%;">
+      </div>
+
+      <p>Para evitar perder el acceso remoto al servidor, sigue estrictamente este orden:</p>
+
+      <pre><code>
+# 1. Ver estado del firewall
+sudo ufw status
+
+# 2. Establecer políticas por defecto
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+
+# 3. Permitir SSH (muy importante)
+sudo ufw allow ssh
+# o: sudo ufw allow 22/tcp
+
+# 4. Activar UFW
+sudo ufw enable
+  </code></pre>
+
+      <div class="callout">
+        <strong>Consejo:</strong> Nunca actives UFW sin permitir SSH primero en servidores remotos.
+      </div>
+    </section>
+
+    <section>
+      <h2>3. Gestión de reglas en UFW</h2>
+
+      <h3>A. Reglas por puerto o servicio</h3>
+
+      <pre><code>
+sudo ufw allow http         # Puerto 80
+sudo ufw allow 443/tcp      # Puerto 443
+sudo ufw allow 5000:5100/udp  # Rangos de puertos
+  </code></pre>
+
+      <h3>B. Reglas por dirección IP</h3>
+
+      <p>Muy útil para entornos de administración avanzada (ASIR):</p>
+
+      <pre><code>
+# Permitir a una IP acceder a todo
+sudo ufw allow from 192.168.1.50
+
+# Permitir solo acceso a un puerto concreto
+sudo ufw allow from 192.168.1.50 to any port 3306
+  </code></pre>
+
+      <h3>C. Eliminar reglas</h3>
+
+      <p>Puedes eliminar reglas por texto o por número:</p>
+
+      <pre><code>
+sudo ufw delete allow 80
+
+# Mostrar reglas numeradas
+sudo ufw status numbered
+
+# Borrar por número
+sudo ufw delete 3
+  </code></pre>
+    </section>
+
+    <section>
+      <h2>4. Logging y auditoría</h2>
+
+      <p>
+        Activar el registro es fundamental para detectar ataques, escaneos de puertos o actividad sospechosa.
+      </p>
+
+      <pre><code>
+sudo ufw logging on
+sudo ufw logging medium     # Niveles: low, medium, high, full
+  </code></pre>
+
+      <p><strong>Archivos de auditoría:</strong></p>
+
+      <ul>
+        <li><code>/var/log/ufw.log</code></li>
+        <li><code>dmesg | grep UFW</code></li>
+      </ul>
+
+      <p>
+        Busca especialmente las entradas con <strong>[UFW BLOCK]</strong>, que indican conexiones rechazadas.
+      </p>
+
+      <div class="callout">
+        El log te dice quién intenta entrar, a qué puerto y desde dónde.
+      </div>
+    </section>
+    <section>
+  <h2>Tips para superar el reto del Firewall</h2>
+
+  <p>
+    Este reto pone en práctica la configuración real de un firewall en Linux usando UFW.
+    Aunque los pasos parecen sencillos, es fácil cometer errores que bloquean servicios o
+    hacen creer que algo “no funciona”. Estos consejos están pensados para ayudarte a evitar
+    los fallos típicos y avanzar de forma segura.
+  </p>
+
+  <h3>1. Comprueba siempre qué puertos están abiertos</h3>
+  <p>
+    Antes de tocar el firewall, comprueba qué servicios están escuchando. Esto te permite
+    saber qué deberías ver después del endurecimiento.
+  </p>
+
+  <pre><code>ss -tuln
+nmap -sV [IP_de_la_máquina]</code></pre>
+
+  <div class="callout">
+    <strong>Consejo:</strong> Escanea desde fuera para obtener una visión real de lo que está expuesto.
+  </div>
+
+  <h3>2. Sigue el orden correcto al configurar UFW</h3>
+  <p>
+    El error más común es activar UFW antes de permitir SSH.  
+    <strong>Si te bloqueas a ti mismo, tendrás que acceder físicamente o entrar por consola local.</strong>
+  </p>
+
+  <pre><code>
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow ssh
+sudo ufw enable
+  </code></pre>
+
+  <h3>3. Usa reglas claras y específicas</h3>
+  <p>
+    Si solo una IP debe acceder a un servicio, no abras el puerto globalmente.  
+    Las reglas específicas son mejores para mantener la máquina segura.
+  </p>
+
+  <pre><code>
+sudo ufw allow from 192.168.x.x to any port 22
+  </code></pre>
+
+  <h3>4. Activa el logging antes de hacer pruebas</h3>
+  <p>
+    Así podrás ver exactamente qué está entrando y qué está siendo bloqueado.
+  </p>
+
+  <pre><code>
+sudo ufw logging high
+tail -f /var/log/ufw.log
+  </code></pre>
+
+  <div class="callout">
+    <strong>Pista técnica:</strong> busca las entradas <code>[UFW BLOCK]</code> y analiza SRC, DST y DPT.
+  </div>
+
+  <h3>5. Si algo no funciona, revisa las reglas activas</h3>
+  <p>
+    Muchas veces el fallo no es UFW, sino una regla que dejaste activada sin darte cuenta.
+  </p>
+
+  <pre><code>
+sudo ufw status numbered
+sudo ufw delete [número]
+  </code></pre>
+
+  <h3>6. Escanea desde otra máquina para verificar</h3>
+  <p>
+    Después de configurar el firewall, realiza un escaneo externo:
+  </p>
+
+  <pre><code>nmap -Pn [IP_de_la_máquina]</code></pre>
+
+  <p>
+    Solo deberías ver <strong>el puerto SSH</strong> si lo has hecho correctamente.
+  </p>
+
+ 
+
+  
+
+  <div class="callout">
+    <strong>Consejo:</strong> No memorices comandos: comprende qué tráfico permites o bloqueas.
+  </div>
+</section>
+
+
+
+
+    <footer>
+      <p>Profesores: Alex Castel y Vicente Català — ®Todos los derechos reservados.</p>
+    </footer>
+
+  </main>
+</body>
+
+</html>
+
+
+</html>
