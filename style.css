@@ -339,3 +339,124 @@ caption {
 img, svg, canvas, video { max-width: 100%; height: auto; }
 pre { max-width: 100%; overflow: auto; }
 code { white-space: pre-wrap; word-break: break-word; }
+
+/* Quiz styles */
+.quiz-intro {
+    background: #f8f9fb;
+    border: 1px solid #e6e8ee;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 16px 0 24px;
+}
+
+.quiz-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    font-size: 0.95rem;
+    color: #4a4f59;
+}
+
+.quiz-container {
+    display: grid;
+    gap: 20px;
+}
+
+.question-card {
+    border: 1px solid #e3e6ef;
+    border-radius: 12px;
+    padding: 16px 18px;
+    background: #ffffff;
+}
+
+.question-title {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.options {
+    display: grid;
+    gap: 8px;
+}
+
+.option {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: background 0.2s ease, border 0.2s ease;
+}
+
+.option:hover {
+    background: #f4f6ff;
+    border-color: #d9defa;
+}
+
+.option input {
+    margin-top: 3px;
+}
+
+.option.correct {
+    background: #e8f8ef;
+    border-color: #bde7cf;
+}
+
+.option.incorrect {
+    background: #fdecec;
+    border-color: #f6c2c2;
+}
+
+.explanation {
+    margin-top: 10px;
+    font-size: 0.92rem;
+    color: #4f5561;
+}
+
+.quiz-actions {
+    display: flex;
+    gap: 12px;
+    margin: 24px 0;
+    flex-wrap: wrap;
+}
+
+.quiz-actions button {
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid #cfd6e5;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.quiz-actions button.primary {
+    background: #2f5cff;
+    color: #fff;
+    border-color: #2f5cff;
+}
+
+.quiz-actions button.danger {
+    background: #e6493d;
+    color: #fff;
+    border-color: #e6493d;
+}
+
+.result-box {
+    border: 1px solid #e6e8ee;
+    background: #f8f9fb;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    display: none;
+}
+
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #eef2ff;
+    color: #2b3a7a;
+    font-weight: 600;
+    font-size: 0.85rem;
+}

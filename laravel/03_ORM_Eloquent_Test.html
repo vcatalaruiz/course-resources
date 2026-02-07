@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laravel ORM Eloquent — Test</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+<body>
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+  <header>
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1>Laravel ORM Eloquent — Test</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+
+    <section id="intro">
+      <h2>1. Instrucciones</h2>
+      <div class="quiz-intro">
+        <p>Responde las 25 preguntas tipo test sobre <strong>Eloquent ORM</strong>, modelos, CRUD, factories y relaciones. Al final podrás ver tu puntuación y la explicación de cada respuesta.</p>
+        <div class="quiz-meta">
+          <span class="badge">25 preguntas</span>
+          <span>Modo: selección única</span>
+          <span>Corrección inmediata al enviar</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="test">
+      <h2>2. Test de conocimientos</h2>
+
+      <div id="result" class="result-box"></div>
+
+      <form id="quiz-form" class="quiz-container" aria-describedby="result">
+        <!-- Preguntas generadas por JS -->
+      </form>
+
+      <div class="quiz-actions">
+        <button type="button" class="primary" id="check-btn">Corregir</button>
+        <button type="button" class="danger" id="reset-btn">Reiniciar</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const QUESTIONS = [
+      {
+        text: "¿Qué es Eloquent en Laravel?",
+        options: [
+          "Un motor de plantillas",
+          "El ORM de Laravel",
+          "Un servidor HTTP",
+          "Una herramienta de migraciones"
+        ],
+        answer: 1,
+        explanation: "Eloquent es el ORM oficial de Laravel."
+      },
+      {
+        text: "¿Qué representa un modelo Eloquent?",
+        options: [
+          "Una vista",
+          "Una tabla de base de datos",
+          "Un controlador",
+          "Un middleware"
+        ],
+        answer: 1,
+        explanation: "Cada modelo representa una tabla."
+      },
+      {
+        text: "¿Qué comando crea un modelo llamado Hotel?",
+        options: [
+          "php artisan make:model Hotel",
+          "php artisan make:controller Hotel",
+          "php artisan make:migration Hotel",
+          "php artisan make:seed Hotel"
+        ],
+        answer: 0,
+        explanation: "make:model crea un modelo."
+      },
+      {
+        text: "¿Para qué sirve la propiedad $fillable en un modelo?",
+        options: [
+          "Para ocultar campos en JSON",
+          "Para permitir asignación masiva",
+          "Para definir relaciones",
+          "Para configurar timestamps"
+        ],
+        answer: 1,
+        explanation: "$fillable permite asignar masivamente esos campos."
+      },
+      {
+        text: "¿Qué hace Hotel::create([...])?",
+        options: [
+          "Actualiza un registro",
+          "Crea un nuevo registro",
+          "Elimina un registro",
+          "Busca un registro"
+        ],
+        answer: 1,
+        explanation: "create inserta un nuevo registro con asignación masiva."
+      },
+      {
+        text: "¿Qué devuelve Hotel::all()?",
+        options: [
+          "Un solo registro",
+          "Todos los registros",
+          "El último registro",
+          "Un recuento"
+        ],
+        answer: 1,
+        explanation: "all() devuelve todos los registros del modelo."
+      },
+      {
+        text: "¿Qué hace Hotel::find(1)?",
+        options: [
+          "Busca por nombre",
+          "Busca por ID",
+          "Busca por dirección",
+          "Elimina el registro"
+        ],
+        answer: 1,
+        explanation: "find busca por clave primaria."
+      },
+      {
+        text: "¿Qué hace Hotel::destroy(1)?",
+        options: [
+          "Actualiza el registro 1",
+          "Crea el registro 1",
+          "Elimina el registro 1",
+          "Duplica el registro 1"
+        ],
+        answer: 2,
+        explanation: "destroy elimina el registro con ese ID."
+      },
+      {
+        text: "¿Qué devuelve Hotel::where('nombre','like','%Hotel%')->get()?",
+        options: [
+          "Un solo registro",
+          "Una colección de registros",
+          "Un booleano",
+          "Un entero"
+        ],
+        answer: 1,
+        explanation: "get() devuelve una colección con los resultados."
+      },
+      {
+        text: "¿Qué hace $hotel->save()?",
+        options: [
+          "Guarda cambios en el modelo",
+          "Elimina el modelo",
+          "Crea una migración",
+          "Ejecuta un seeder"
+        ],
+        answer: 0,
+        explanation: "save persiste cambios del modelo."
+      },
+      {
+        text: "¿Qué método se usa para borrar un modelo instanciado?",
+        options: [
+          "$hotel->remove()",
+          "$hotel->delete()",
+          "$hotel->drop()",
+          "$hotel->destroy()"
+        ],
+        answer: 1,
+        explanation: "delete elimina el modelo instanciado."
+      },
+      {
+        text: "¿Qué comando crea modelo y factory?",
+        options: [
+          "php artisan make:model Hotel -mf",
+          "php artisan make:factory Hotel -m",
+          "php artisan make:model Hotel --seed",
+          "php artisan make:factory Hotel -f"
+        ],
+        answer: 0,
+        explanation: "-mf crea modelo y factory."
+      },
+      {
+        text: "¿Qué clase se usa para definir una factory?",
+        options: [
+          "Illuminate\Database\Seeder",
+          "Illuminate\Database\Eloquent\Factory",
+          "Illuminate\Database\Eloquent\Factories\Factory",
+          "Illuminate\Database\ModelFactory"
+        ],
+        answer: 2,
+        explanation: "Las factories extienden Illuminate\\Database\\Eloquent\\Factories\\Factory."
+      },
+      {
+        text: "¿Qué hace $this->faker->company() en una factory?",
+        options: [
+          "Genera un nombre de empresa",
+          "Crea una tabla",
+          "Valida datos",
+          "Ejecuta un seeder"
+        ],
+        answer: 0,
+        explanation: "Faker genera datos de prueba."
+      },
+      {
+        text: "¿Qué hace Hotel::factory()->create()?",
+        options: [
+          "Crea un registro usando la factory",
+          "Elimina un registro",
+          "Crea una migración",
+          "Actualiza todos los registros"
+        ],
+        answer: 0,
+        explanation: "create genera y guarda un registro con la factory."
+      },
+      {
+        text: "¿Qué hace Hotel::factory()->count(10)->create()?",
+        options: [
+          "Crea 1 registro",
+          "Crea 10 registros",
+          "Elimina 10 registros",
+          "Actualiza 10 registros"
+        ],
+        answer: 1,
+        explanation: "count(10) crea diez registros."
+      },
+      {
+        text: "¿Qué relación define hasMany en un modelo?",
+        options: [
+          "1:1",
+          "1:N",
+          "N:N",
+          "N:1"
+        ],
+        answer: 1,
+        explanation: "hasMany es relación uno a muchos."
+      },
+      {
+        text: "¿Qué relación define belongsTo en un modelo?",
+        options: [
+          "El modelo pertenece a otro",
+          "El modelo tiene muchos",
+          "El modelo tiene uno",
+          "El modelo no tiene relación"
+        ],
+        answer: 0,
+        explanation: "belongsTo indica que el modelo pertenece a otro."
+      },
+      {
+        text: "¿Qué devuelve $hotel->habitaciones?",
+        options: [
+          "Una colección de habitaciones",
+          "Un booleano",
+          "Un entero",
+          "Una migración"
+        ],
+        answer: 0,
+        explanation: "Accede a la relación hasMany."
+      },
+      {
+        text: "¿Dónde se registra un seeder para ejecutarlo en bloque?",
+        options: [
+          "routes/web.php",
+          "database/seeders/DatabaseSeeder.php",
+          "config/app.php",
+          "app/Models"
+        ],
+        answer: 1,
+        explanation: "DatabaseSeeder es el punto de entrada."
+      },
+      {
+        text: "¿Qué comando ejecuta todos los seeders registrados?",
+        options: [
+          "php artisan db:seed",
+          "php artisan seed:run",
+          "php artisan migrate:seed",
+          "php artisan eloquent:seed"
+        ],
+        answer: 0,
+        explanation: "db:seed ejecuta los seeders."
+      },
+      {
+        text: "En un seeder: Hotel::factory()->count(20)->create(); ¿qué hace?",
+        options: [
+          "Crea 20 registros usando la factory",
+          "Elimina 20 registros",
+          "Actualiza 20 registros",
+          "Crea 1 registro"
+        ],
+        answer: 0,
+        explanation: "count(20) crea veinte registros con la factory."
+      },
+      {
+        text: "Si un modelo tiene protected $table = 'hoteles';, ¿qué indica?",
+        options: [
+          "El nombre de la base de datos",
+          "El nombre de la tabla asociada",
+          "El nombre de la conexión",
+          "El nombre del controlador"
+        ],
+        answer: 1,
+        explanation: "$table define la tabla del modelo."
+      },
+      {
+        text: "¿Cuál es la operación CRUD que corresponde a UPDATE?",
+        options: [
+          "Crear",
+          "Leer",
+          "Actualizar",
+          "Eliminar"
+        ],
+        answer: 2,
+        explanation: "UPDATE corresponde a actualizar."
+      },
+      {
+        text: "Interpretación: $hotel = Hotel::find(1); $hotel->direccion = 'Nueva'; $hotel->save();",
+        options: [
+          "Crea un nuevo hotel",
+          "Actualiza la dirección del hotel con id 1",
+          "Elimina el hotel con id 1",
+          "Busca hoteles por nombre"
+        ],
+        answer: 1,
+        explanation: "Se modifica la dirección y se guarda."
+      }
+    ];
+
+    const quizForm = document.getElementById('quiz-form');
+    const resultBox = document.getElementById('result');
+    const checkBtn = document.getElementById('check-btn');
+    const resetBtn = document.getElementById('reset-btn');
+
+    function renderQuiz() {
+      quizForm.innerHTML = '';
+      QUESTIONS.forEach((q, index) => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.dataset.index = index;
+
+        const title = document.createElement('div');
+        title.className = 'question-title';
+        title.textContent = `${index + 1}. ${q.text}`;
+
+        const options = document.createElement('div');
+        options.className = 'options';
+
+        q.options.forEach((opt, optIndex) => {
+          const label = document.createElement('label');
+          label.className = 'option';
+
+          const input = document.createElement('input');
+          input.type = 'radio';
+          input.name = `q${index}`;
+          input.value = optIndex;
+          input.setAttribute('aria-label', opt);
+
+          const span = document.createElement('span');
+          span.textContent = opt;
+
+          label.appendChild(input);
+          label.appendChild(span);
+          options.appendChild(label);
+        });
+
+        const explanation = document.createElement('div');
+        explanation.className = 'explanation';
+        explanation.hidden = true;
+
+        card.appendChild(title);
+        card.appendChild(options);
+        card.appendChild(explanation);
+        quizForm.appendChild(card);
+      });
+    }
+
+    function checkAnswers() {
+      let correct = 0;
+
+      const cards = quizForm.querySelectorAll('.question-card');
+      cards.forEach((card) => {
+        const index = Number(card.dataset.index);
+        const question = QUESTIONS[index];
+        const selected = card.querySelector('input[type="radio"]:checked');
+        const options = card.querySelectorAll('.option');
+        const explanation = card.querySelector('.explanation');
+
+        options.forEach((opt) => opt.classList.remove('correct', 'incorrect'));
+
+        if (selected) {
+          const selectedIndex = Number(selected.value);
+          if (selectedIndex === question.answer) {
+            correct += 1;
+            options[selectedIndex].classList.add('correct');
+          } else {
+            options[selectedIndex].classList.add('incorrect');
+            options[question.answer].classList.add('correct');
+          }
+        } else {
+          options[question.answer].classList.add('correct');
+        }
+
+        explanation.textContent = `Explicación: ${question.explanation}`;
+        explanation.hidden = false;
+      });
+
+      const total = QUESTIONS.length;
+      const percent = Math.round((correct / total) * 100);
+
+      resultBox.style.display = 'block';
+      resultBox.innerHTML = `
+        <h3>Resultado</h3>
+        <p>Has acertado <strong>${correct}</strong> de <strong>${total}</strong> preguntas (${percent}%).</p>
+        <p>Revisa las explicaciones debajo de cada pregunta.</p>
+      `;
+
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetQuiz() {
+      renderQuiz();
+      resultBox.style.display = 'none';
+      resultBox.innerHTML = '';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    checkBtn.addEventListener('click', checkAnswers);
+    resetBtn.addEventListener('click', resetQuiz);
+
+    renderQuiz();
+  </script>
+</body>
+</html>

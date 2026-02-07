@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laravel Migration & Seeder — Test</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+<body>
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+  <header>
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1>Laravel Migration & Seeder — Test</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+
+    <section id="intro">
+      <h2>1. Instrucciones</h2>
+      <div class="quiz-intro">
+        <p>Responde las 25 preguntas tipo test sobre <strong>migrations</strong>, <strong>seeders</strong> y <strong>Faker</strong> en Laravel. Al final podrás ver tu puntuación y la explicación de cada respuesta.</p>
+        <div class="quiz-meta">
+          <span class="badge">25 preguntas</span>
+          <span>Modo: selección única</span>
+          <span>Corrección inmediata al enviar</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="test">
+      <h2>2. Test de conocimientos</h2>
+
+      <div id="result" class="result-box"></div>
+
+      <form id="quiz-form" class="quiz-container" aria-describedby="result">
+        <!-- Preguntas generadas por JS -->
+      </form>
+
+      <div class="quiz-actions">
+        <button type="button" class="primary" id="check-btn">Corregir</button>
+        <button type="button" class="primary" id="reset-btn">Reiniciar</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const QUESTIONS = [
+      {
+        text: "¿Qué es una migración en Laravel?",
+        options: [
+          "Un script para crear vistas",
+          "Un control de versiones del esquema de base de datos",
+          "Un sistema de plantillas para HTML",
+          "Un paquete para autenticación"
+        ],
+        answer: 1,
+        explanation: "Las migraciones permiten versionar y gestionar el esquema de la base de datos."
+      },
+      {
+        text: "¿Qué comando crea una nueva migración?",
+        options: [
+          "php artisan make:model",
+          "php artisan make:seed",
+          "php artisan make:migration",
+          "php artisan migrate:make"
+        ],
+        answer: 2,
+        explanation: "El comando correcto es make:migration."
+      },
+      {
+        text: "¿Qué método se usa para aplicar cambios al esquema?",
+        options: [
+          "up()",
+          "down()",
+          "apply()",
+          "run()"
+        ],
+        answer: 0,
+        explanation: "En la migración, up() define los cambios a aplicar."
+      },
+      {
+        text: "¿Qué método revierte los cambios de una migración?",
+        options: [
+          "rollback()",
+          "down()",
+          "reverse()",
+          "drop()"
+        ],
+        answer: 1,
+        explanation: "down() define cómo deshacer los cambios."
+      },
+      {
+        text: "¿Qué comando ejecuta todas las migraciones pendientes?",
+        options: [
+          "php artisan migrate",
+          "php artisan db:seed",
+          "php artisan migrate:fresh",
+          "php artisan schema:apply"
+        ],
+        answer: 0,
+        explanation: "php artisan migrate ejecuta las migraciones pendientes."
+      },
+      {
+        text: "¿Qué clase se usa típicamente para definir columnas?",
+        options: [
+          "Blueprint",
+          "SchemaManager",
+          "Column",
+          "TableBuilder"
+        ],
+        answer: 0,
+        explanation: "Blueprint se utiliza para definir columnas dentro de Schema::create."
+      },
+      {
+        text: "¿Qué hace $table->timestamps()?",
+        options: [
+          "Crea una clave primaria",
+          "Añade created_at y updated_at",
+          "Genera un índice único",
+          "Elimina columnas de fecha"
+        ],
+        answer: 1,
+        explanation: "timestamps() añade created_at y updated_at."
+      },
+      {
+        text: "¿Cómo se crea un seeder?",
+        options: [
+          "php artisan make:seeder",
+          "php artisan make:migration",
+          "php artisan seed:create",
+          "php artisan db:seeder"
+        ],
+        answer: 0,
+        explanation: "El comando correcto es make:seeder."
+      },
+      {
+        text: "¿Qué método se implementa en un seeder?",
+        options: [
+          "up()",
+          "down()",
+          "run()",
+          "seed()"
+        ],
+        answer: 2,
+        explanation: "Los seeders implementan el método run()."
+      },
+      {
+        text: "¿Qué comando ejecuta un seeder específico?",
+        options: [
+          "php artisan db:seed --class=HotelSeeder",
+          "php artisan migrate --seed=HotelSeeder",
+          "php artisan seed --only HotelSeeder",
+          "php artisan db:seed:class HotelSeeder"
+        ],
+        answer: 0,
+        explanation: "Se usa db:seed con la opción --class."
+      },
+      {
+        text: "¿Qué es Faker en Laravel?",
+        options: [
+          "Un ORM",
+          "Un generador de datos falsos",
+          "Un driver de base de datos",
+          "Un sistema de logs"
+        ],
+        answer: 1,
+        explanation: "Faker genera datos de prueba realistas."
+      },
+      {
+        text: "¿Cómo se crea una instancia de Faker en un seeder?",
+        options: [
+          "Faker::new()",
+          "Factory::faker()",
+          "Faker::create('es_ES')",
+          "new Faker('es_ES')"
+        ],
+        answer: 2,
+        explanation: "Se usa Faker::create('es_ES')."
+      },
+      {
+        text: "¿Qué comando recrea la BD y ejecuta los seeders?",
+        options: [
+          "php artisan migrate --seed",
+          "php artisan migrate:refresh",
+          "php artisan migrate:fresh --seed",
+          "php artisan db:reset --seed"
+        ],
+        answer: 2,
+        explanation: "migrate:fresh --seed elimina y recrea todo."
+      },
+      {
+        text: "¿Qué tipo de relación representa un hotel con muchas habitaciones?",
+        options: [
+          "1:1",
+          "1:N",
+          "N:N",
+          "Polimórfica"
+        ],
+        answer: 1,
+        explanation: "Un hotel puede tener muchas habitaciones, relación 1:N."
+      },
+      {
+        text: "¿Qué método crea una clave foránea en una migración?",
+        options: [
+          "$table->foreignKey()",
+          "$table->foreignId()->constrained()",
+          "$table->id()->foreign()",
+          "$table->reference()"
+        ],
+        answer: 1,
+        explanation: "foreignId()->constrained() crea la FK y referencia la tabla."
+      },
+      {
+        text: "¿Qué opción suele acompañar a foreignId para borrar en cascada?",
+        options: [
+          "->cascade()",
+          "->onDelete('cascade')",
+          "->deleteCascade()",
+          "->dropOnDelete()"
+        ],
+        answer: 1,
+        explanation: "Se usa onDelete('cascade')."
+      },
+      {
+        text: "¿Qué tabla se genera al usar $table->id()?",
+        options: [
+          "Una columna integer autoincremental llamada id",
+          "Una columna string llamada id",
+          "Una columna uuid llamada key",
+          "Dos columnas id y uuid"
+        ],
+        answer: 0,
+        explanation: "$table->id() crea un bigint autoincremental llamado id."
+      },
+      {
+        text: "¿Qué hace Schema::dropIfExists('hoteles')?",
+        options: [
+          "Elimina la tabla si existe",
+          "Renombra la tabla hoteles",
+          "Borra filas de hoteles",
+          "Crea la tabla hoteles"
+        ],
+        answer: 0,
+        explanation: "dropIfExists elimina la tabla solo si existe."
+      },
+      {
+        text: "¿Dónde se registran los seeders para ejecutarse en bloque?",
+        options: [
+          "database/seeders/DatabaseSeeder.php",
+          "config/database.php",
+          "routes/web.php",
+          "app/Providers/AppServiceProvider.php"
+        ],
+        answer: 0,
+        explanation: "DatabaseSeeder es el punto de entrada para seeders."
+      },
+      {
+        text: "¿Qué comando revierte el último lote de migraciones?",
+        options: [
+          "php artisan migrate:rollback",
+          "php artisan migrate:down",
+          "php artisan migrate:reset",
+          "php artisan migrate:undo"
+        ],
+        answer: 0,
+        explanation: "migrate:rollback revierte el último batch."
+      },
+      {
+        text: "¿Qué hace php artisan migrate:refresh?",
+        options: [
+          "Solo aplica nuevas migraciones",
+          "Revierte y vuelve a ejecutar todas las migraciones",
+          "Elimina la base de datos",
+          "Ejecuta solo seeders"
+        ],
+        answer: 1,
+        explanation: "refresh hace rollback y luego migrate."
+      },
+      {
+        text: "Si en una migración se define `\$table->string('direccion')->nullable()`, ¿qué implica?",
+        options: [
+          "La columna no puede ser null",
+          "La columna admite valores null",
+          "La columna será única",
+          "La columna se autoincrementa"
+        ],
+        answer: 1,
+        explanation: "nullable() permite que la columna acepte null."
+      },
+      {
+        text: "En un seeder con `for (\$i = 0; \$i < 10; \$i++) { DB::table('hoteles')->insert([...]); }`, ¿cuántos registros se insertan?",
+        options: [
+          "1",
+          "9",
+          "10",
+          "11"
+        ],
+        answer: 2,
+        explanation: "El bucle va de 0 a 9, insertando 10 registros."
+      },
+      {
+        text: "En una migración con `\$table->foreignId('hotel_id')->constrained()->onDelete('cascade')`, ¿qué ocurre al borrar un hotel?",
+        options: [
+          "Se impide el borrado si hay habitaciones",
+          "Se ponen las habitaciones a null",
+          "Se borran las habitaciones asociadas",
+          "No pasa nada"
+        ],
+        answer: 2,
+        explanation: "onDelete('cascade') elimina las filas hijas relacionadas."
+      },
+      {
+        text: "Si el método `down()` contiene `Schema::dropIfExists('hoteles')`, ¿qué pasa al hacer rollback?",
+        options: [
+          "Se renombra la tabla hoteles",
+          "Se elimina la tabla si existe",
+          "Se borran solo los datos",
+          "No se hace ningún cambio"
+        ],
+        answer: 1,
+        explanation: "dropIfExists elimina la tabla solo si está creada."
+      }
+    ];
+
+    const quizForm = document.getElementById('quiz-form');
+    const resultBox = document.getElementById('result');
+    const checkBtn = document.getElementById('check-btn');
+    const resetBtn = document.getElementById('reset-btn');
+
+    function renderQuiz() {
+      quizForm.innerHTML = '';
+      QUESTIONS.forEach((q, index) => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.dataset.index = index;
+
+        const title = document.createElement('div');
+        title.className = 'question-title';
+        title.textContent = `${index + 1}. ${q.text}`;
+
+        const options = document.createElement('div');
+        options.className = 'options';
+
+        q.options.forEach((opt, optIndex) => {
+          const label = document.createElement('label');
+          label.className = 'option';
+
+          const input = document.createElement('input');
+          input.type = 'radio';
+          input.name = `q${index}`;
+          input.value = optIndex;
+          input.setAttribute('aria-label', opt);
+
+          const span = document.createElement('span');
+          span.textContent = opt;
+
+          label.appendChild(input);
+          label.appendChild(span);
+          options.appendChild(label);
+        });
+
+        const explanation = document.createElement('div');
+        explanation.className = 'explanation';
+        explanation.hidden = true;
+
+        card.appendChild(title);
+        card.appendChild(options);
+        card.appendChild(explanation);
+        quizForm.appendChild(card);
+      });
+    }
+
+    function checkAnswers() {
+      let correct = 0;
+
+      const cards = quizForm.querySelectorAll('.question-card');
+      cards.forEach((card) => {
+        const index = Number(card.dataset.index);
+        const question = QUESTIONS[index];
+        const selected = card.querySelector('input[type="radio"]:checked');
+        const options = card.querySelectorAll('.option');
+        const explanation = card.querySelector('.explanation');
+
+        options.forEach((opt) => opt.classList.remove('correct', 'incorrect'));
+
+        if (selected) {
+          const selectedIndex = Number(selected.value);
+          if (selectedIndex === question.answer) {
+            correct += 1;
+            options[selectedIndex].classList.add('correct');
+          } else {
+            options[selectedIndex].classList.add('incorrect');
+            options[question.answer].classList.add('correct');
+          }
+        } else {
+          options[question.answer].classList.add('correct');
+        }
+
+        explanation.textContent = `Explicación: ${question.explanation}`;
+        explanation.hidden = false;
+      });
+
+      const total = QUESTIONS.length;
+      const percent = Math.round((correct / total) * 100);
+
+      resultBox.style.display = 'block';
+      resultBox.innerHTML = `
+        <h3>Resultado</h3>
+        <p>Has acertado <strong>${correct}</strong> de <strong>${total}</strong> preguntas (${percent}%).</p>
+        <p>Revisa las explicaciones debajo de cada pregunta.</p>
+      `;
+
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetQuiz() {
+      renderQuiz();
+      resultBox.style.display = 'none';
+      resultBox.innerHTML = '';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    checkBtn.addEventListener('click', checkAnswers);
+    resetBtn.addEventListener('click', resetQuiz);
+
+    renderQuiz();
+  </script>
+</body>
+</html>
