@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RA 12 - Hibernate</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <!-- X SVG -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+  <!-- ===== /VC SIDEBAR ===== -->
+
+  <header>
+
+    <!-- ===== VC SIDEBAR (desde cero) ===== -->
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail"
+      aria-expanded="false">
+      <!--Hamburger icon -->
+      <i class="fa fa-bars" aria-hidden="true"></i>
+
+
+    </button>
+    <h1>RA 12 - Acceso a datos con Hibernate</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+<main>
+
+<!-- SECCIÓN 1 -->
+<section id="introduccion">
+<h2>1. Introducción a Hibernate</h2>
+
+<p>
+Hibernate es un framework ORM (Object-Relational Mapping) que permite mapear clases Java a tablas de una base de datos.
+Para ello se utilizan <strong>anotaciones</strong> que describen cómo se comporta cada atributo frente al sistema de persistencia.
+</p>
+
+<div class="diagram">
+    <img src="../assets/hibernate_logo.png" style="max-width:35%;" alt="Hibernate Logo">
+</div>
+<div class="diagram">
+    <img src="../assets/orm_overview.png" style="max-width:60%;" alt="Hibernate Logo">
+</div>
+
+<h3>1.1. ¿Qué es una entidad?</h3>
+<p>
+Una <strong>entidad</strong> es una clase Java que representa una tabla en la base de datos.  
+Hibernate utiliza anotaciones como <code>@Entity</code>, <code>@Table</code>, <code>@Id</code> y <code>@Column</code> para definir su estructura.
+</p>
+<div class="diagram">
+    <img src="../assets/orm_annotations.png" style="max-width:60%;" alt="Hibernate Logo">
+</div>
+
+<pre><code class="language-java">
+// Clase básica mapeada con Hibernate
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "vehiculos")
+public class Vehiculo {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String marca;
+    private String modelo;
+    private int anyo;
+
+    public void mostrarInfo() {
+        System.out.println(marca + " " + modelo + " (" + anyo + ")");
+    }
+}
+</code></pre>
+
+</section>
+
+<!-- SECCIÓN 2: ANOTACIONES IMPORTANTES -->
+<section id="anotaciones">
+<h2>2. Anotaciones principales en Hibernate</h2>
+
+<ul>
+    <li><code>@Entity</code> → Declara que la clase es una tabla.</li>
+    <li><code>@Table(name="nombre")</code> → Indica el nombre real de la tabla.</li>
+    <li><code>@Id</code> → Marca la clave primaria.</li>
+    <li><code>@GeneratedValue</code> → Estrategia de autogeneración de ID.</li>
+    <li><code>@Column</code> → Configura una columna concreta.</li>
+</ul>
+
+<h3>2.1. Ejemplo completo</h3>
+
+<pre><code class="language-java">
+@Entity
+@Table(name = "hoteles")
+public class Hotel {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String nombre;
+
+    @Column(length = 100)
+    private String direccion;
+
+    public Hotel() {}
+
+    public Hotel(String nombre, String direccion) {
+        this.nombre = nombre;
+        this.direccion = direccion;
+    }
+
+    public void mostrar() {
+        System.out.println(nombre + " - " + direccion);
+    }
+}
+</code></pre>
+
+</section>
+
+<!-- SECCIÓN 3 RELACIONES -->
+<section id="relaciones">
+<h2>3. Relaciones entre entidades</h2>
+
+<div class="diagram">
+    <img src="../assets/orm_relationships.png" style="max-width:60%;" alt="Relaciones JPA">
+</div>
+
+<p>Hibernate permite definir relaciones entre tablas directamente en las clases.</p>
+
+<ul>
+    <li><strong>@OneToOne</strong>: uno a uno</li>
+    <li><strong>@OneToMany</strong>: uno a muchos</li>
+    <li><strong>@ManyToOne</strong>: muchos a uno</li>
+    <li><strong>@ManyToMany</strong>: muchos a muchos</li>
+</ul>
+
+<h3>3.1. Ejemplo Uno a Muchos (1:N)</h3>
+
+<pre><code class="language-java">
+// Un hotel tiene muchas habitaciones
+@Entity
+@Table(name = "habitaciones")
+public class Habitacion {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private int numero;
+
+    @ManyToOne
+    @JoinColumn(name = "hotel_id")
+    private Hotel hotel;
+}
+</code></pre>
+
+<h3>3.2. Ejemplo Muchos a Uno (N:1)</h3>
+
+<pre><code class="language-java">
+@Entity
+@Table(name = "hoteles")
+public class Hotel {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String nombre;
+
+    @OneToMany(mappedBy = "hotel")
+    private List<Habitacion> habitaciones = new ArrayList<>();
+}
+</code></pre>
+
+</section>
+
+<!-- SECCIÓN 4: SESSION y CRUD -->
+<section id="crud">
+<h2>4. CRUD con Hibernate</h2>
+
+<p>Para manipular entidades se usa <strong>Session</strong> y <strong>Transaction</strong>.</p>
+
+<h3>Ejemplo: Insertar (CREATE)</h3>
+<pre><code class="language-java">
+Session session = HibernateUtil.getSessionFactory().openSession();
+Transaction tx = session.beginTransaction();
+
+Hotel h = new Hotel("Gran Hotel", "Calle Mayor 3");
+session.persist(h);
+
+tx.commit();
+session.close();
+</code></pre>
+
+<h3>Ejemplo: Consultar (READ)</h3>
+<pre><code class="language-java">
+Session session = HibernateUtil.getSessionFactory().openSession();
+
+Hotel h = session.get(Hotel.class, 1L);
+h.mostrar();
+
+session.close();
+</code></pre>
+
+<h3>Ejemplo: Actualizar (UPDATE)</h3>
+<pre><code class="language-java">
+Session session = HibernateUtil.getSessionFactory().openSession();
+Transaction tx = session.beginTransaction();
+
+Hotel h = session.get(Hotel.class, 1L);
+h.setNombre("Gran Hotel Deluxe");
+h.setDireccion("Avenida del Prado 10");
+
+session.merge(h);
+
+tx.commit();
+session.close();
+</code></pre>
+
+<h3>Ejemplo: Eliminar (DELETE)</h3>
+<pre><code class="language-java">
+Session session = HibernateUtil.getSessionFactory().openSession();
+Transaction tx = session.beginTransaction();
+
+Hotel h = session.get(Hotel.class, 1L);
+session.remove(h);
+
+tx.commit();
+session.close();
+</code></pre>
+
+</section>
+
+<!-- DIAGRAMA MERMAID -->
+<section>
+<h2>Diagrama conceptual de entidad con relaciones</h2>
+<div class="mermaid">
+classDiagram
+class Hotel {
+    +id : Long
+    +nombre : String
+    +direccion : String
+}
+class Habitacion {
+    +id : Long
+    +numero : int
+}
+Hotel "1" --> "*" Habitacion
+</div>
+</section>
+
+<!-- TABLA DE SÍMBOLOS -->
+<section>
+<div class="info-box">
+<h3>Significado de anotaciones principales</h3>
+
+<table border="1" style="width:100%; border-collapse:collapse;">
+    <tr><th>Anotación</th><th>Significado</th></tr>
+    <tr><td><code>@Entity</code></td><td>Indica que la clase será una tabla.</td></tr>
+    <tr><td><code>@Id</code></td><td>Clave primaria.</td></tr>
+    <tr><td><code>@Column</code></td><td>Configuración de columna.</td></tr>
+    <tr><td><code>@OneToMany</code></td><td>Relación uno a muchos.</td></tr>
+    <tr><td><code>@ManyToOne</code></td><td>Relación muchos a uno.</td></tr>
+</table>
+</div>
+</section>
+
+</main>
+
+<footer>
+<p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+</footer>
+</body>
+</html>
