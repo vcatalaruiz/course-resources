@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Introducción a Git</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <!-- X SVG -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+  <!-- ===== /VC SIDEBAR ===== -->
+
+  <header>
+
+    <!-- ===== VC SIDEBAR (desde cero) ===== -->
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail"
+      aria-expanded="false">
+      <!--Hamburger icon -->
+      <i class="fa fa-bars" aria-hidden="true"></i>
+
+
+    </button>
+    <h1>Introducción a Git</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+<main>
+
+<!-- SECCIÓN 1 -->
+<section id="vcs">
+<h2>1. Sistemas de Control de Versiones (VCS)</h2>
+
+<p>
+Un <strong>VCS (Version Control System)</strong> es una herramienta que permite
+registrar y gestionar los cambios realizados en uno o varios archivos a lo largo del tiempo.
+En programación, estos cambios suelen afectar al código fuente de una aplicación.
+</p>
+
+<p>
+Gracias a un VCS es posible:
+</p>
+
+<ul>
+    <li>Guardar el historial completo de un proyecto</li>
+    <li>Recuperar versiones anteriores del código</li>
+    <li>Identificar quién realizó cada cambio y cuándo</li>
+    <li>Trabajar en equipo sin sobrescribir el trabajo de otros</li>
+</ul>
+
+<h3>1.1. ¿Por qué es necesario un VCS en programación?</h3>
+
+<p>
+En proyectos reales, el código evoluciona constantemente: se corrigen errores,
+se añaden nuevas funcionalidades y se realizan mejoras.
+Sin un sistema de control de versiones, estos cambios serían difíciles de gestionar.
+</p>
+
+<p>
+Un VCS evita problemas comunes como:
+</p>
+
+<ul>
+    <li>Pérdida de código por errores o sobrescrituras</li>
+    <li>Confusión entre distintas versiones de un mismo archivo</li>
+    <li>Dificultad para trabajar varias personas sobre el mismo proyecto</li>
+</ul>
+
+<p>
+Por este motivo, el uso de un VCS es una práctica <strong>imprescindible</strong>
+en el desarrollo de software profesional.
+</p>
+
+</section>
+
+<!-- SECCIÓN 2 -->
+<section id="introduccion">
+<h2>2. ¿Qué es Git?</h2>
+
+<p>
+<strong>Git</strong> es un sistema de control de versiones distribuido que permite gestionar
+los cambios realizados en un proyecto a lo largo del tiempo.
+Es especialmente útil cuando varias personas trabajan sobre el mismo código.
+</p>
+
+<div class="diagram">
+    <img src="../assets/git_logo.png" style="max-width:30%;" alt="Git Logo">
+</div>
+
+<ul>
+    <li>Permite trabajar sin conexión</li>
+    <li>Es rápido y eficiente</li>
+    <li>Es el estándar en la industria del software</li>
+</ul>
+
+<div class="diagram">
+    <img src="../assets/git_use.png" style="max-width:100%;" alt="Git Logo">
+</div>
+
+</section>
+
+<!-- SECCIÓN 3 -->
+<section id="repositorio">
+<h2>3. Repositorio Git</h2>
+
+<p>
+Un <strong>repositorio</strong> es el lugar donde Git almacena el historial del proyecto.
+Puede ser local o remoto.
+</p>
+<div class="diagram">
+    <img src="../assets/git_repository.png" style="max-width:80%;" alt="Git Logo">
+</div>
+
+<h3>3.1. Crear un repositorio</h3>
+
+<pre><code class="language-bash">
+git init
+</code></pre>
+
+</section>
+
+<!-- SECCIÓN 4 -->
+<section id="flujo">
+<h2>4. Flujo básico de trabajo en Git (init)</h2>
+
+<div class="diagram">
+    <img src="../assets/git_flow.gif" style="max-width:80%;" alt="Git Flow">
+</div>
+
+<h3>4.1. Añadir cambios (add)</h3>
+
+<pre><code class="language-bash">
+git add archivo.txt
+</code></pre>
+
+<h3>4.2. Confirmar cambios (commit)</h3>
+
+<pre><code class="language-bash">
+git commit -m "Mensaje descriptivo"
+</code></pre>
+
+<h3>4.3. Enviar cambios al repositorio remoto (push)</h3>
+
+<pre><code class="language-bash">
+git push origin main
+</code></pre>
+
+</section>
+
+<!-- SECCIÓN 5 -->
+<section id="ramas">
+<h2>5. Ramas en Git (Branches)</h2>
+
+<p>
+Las ramas permiten desarrollar nuevas funcionalidades sin afectar
+al código principal.
+</p>
+
+<div class="diagram">
+    <img src="../assets/git_branch.png" style="max-width:80%;" alt="Git Flow">
+</div>
+
+</section>
+
+<!-- SECCIÓN 6 -->
+<section id="github">
+<h2>6. Git y GitHub</h2>
+
+<p>
+GitHub es una plataforma que permite alojar repositorios Git
+y trabajar de forma colaborativa.
+</p>
+
+<div class="diagram">
+    <img src="../assets/github_use.png" style="max-width:80%;" alt="Git Logo">
+</div>
+
+<h3>6.1. Descargar cambios (clone)</h3>
+
+<pre><code class="language-bash">
+git clone https://github.com/usuario/proyecto.git
+</code></pre>
+
+</section>
+
+<!-- SECCIÓN 7 -->
+<section id="conflictos">
+<h2>7. Conflictos en Git</h2>
+
+<p>
+Un <strong>conflicto</strong> en Git ocurre cuando dos o más personas modifican
+la misma parte de un archivo y Git no puede decidir automáticamente
+qué versión es la correcta.
+</p>
+
+<h3>7.1. ¿Cuándo se producen los conflictos?</h3>
+
+<ul>
+    <li>Dos desarrolladores editan las mismas líneas de un archivo</li>
+    <li>Se realiza un <code>merge</code> entre ramas con cambios incompatibles</li>
+    <li>Se hace un <code>pull</code> con cambios remotos que colisionan con los locales</li>
+</ul>
+
+<h3>7.2. Ejemplo de conflicto</h3>
+
+<pre><code class="language-text">
+<<<<<<< HEAD
+System.out.println("Versión local");
+=======
+System.out.println("Versión remota");
+>>>>>>> origin/main
+</code></pre>
+
+<h3>7.3. Resolución de conflictos</h3>
+
+<p>
+Para resolver un conflicto es necesario:
+</p>
+
+<ol>
+    <li>Editar el archivo manualmente</li>
+    <li>Elegir o combinar los cambios</li>
+    <li>Eliminar los marcadores de conflicto</li>
+    <li>Añadir el archivo resuelto</li>
+    <li>Realizar un nuevo commit</li>
+</ol>
+
+</section>
+
+<!-- SECCIÓN 8 -->
+<section id="gitignore">
+<h2>8. Archivo .gitignore</h2>
+
+<p>
+El archivo <code>.gitignore</code> se utiliza para indicar a Git
+qué archivos o carpetas <strong>no deben ser versionados</strong>.
+</p>
+
+<p>
+Es habitual ignorar:
+</p>
+
+<ul>
+    <li>Archivos compilados</li>
+    <li>Dependencias</li>
+    <li>Archivos temporales</li>
+    <li>Configuraciones locales</li>
+</ul>
+
+<h3>8.1. Ejemplo de .gitignore</h3>
+
+<pre><code class="language-text">
+/bin/
+/target/
+*.log
+.env
+.idea/
+</code></pre>
+
+<p>
+Una vez ignorado un archivo, Git dejará de tenerlo en cuenta
+en futuros commits.
+</p>
+
+</section>
+
+<!-- SECCIÓN 9 -->
+<section id="strategy">
+<h2>9. Estrategias de trabajo con Git</h2>
+
+<p>
+Una <strong>Git Strategy</strong> define cómo se utilizan las ramas
+y cómo se integran los cambios en un proyecto.
+Elegir una buena estrategia mejora la organización y reduce errores.
+</p>
+
+<h3>9.1. Rama principal</h3>
+
+<p>
+La rama <code>main</code> (o <code>master</code>) contiene la versión estable del proyecto.
+Nunca debería incluir código sin probar.
+</p>
+
+<h3>9.2. Ramas de desarrollo</h3>
+
+<ul>
+    <li>Una rama por funcionalidad</li>
+    <li>Se crean a partir de <code>main</code></li>
+    <li>Se integran mediante <code>merge</code></li>
+</ul>
+<div class="diagram">
+    <img src="../assets/git_simple	.png" style="max-width:80%;" alt="Git Logo">
+</div>
+
+<h3>9.3. Ejemplo de estrategia</h3>
+
+<div class="diagram">
+    <img src="../assets/git_strategy.png" style="max-width:80%;" alt="Git Logo">
+</div>
+
+</section>
+
+
+
+</main>
+
+<footer>
+<p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+</footer>
+
+</body>
+</html>
