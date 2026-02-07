@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laravel Migration Seeder</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <!-- X SVG -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+  <!-- ===== /VC SIDEBAR ===== -->
+
+  <header>
+
+    <!-- ===== VC SIDEBAR (desde cero) ===== -->
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail"
+      aria-expanded="false">
+      <!--Hamburger icon -->
+      <i class="fa fa-bars" aria-hidden="true"></i>
+
+
+    </button>
+    <h1>Laravel Migration Seeder</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+<main>
+
+<!-- SECCIÓN 1 -->
+<section id="introduccion">
+<h2>1. Introducción</h2>
+
+<p>
+Laravel ofrece herramientas para gestionar la base de datos de forma estructurada:
+<strong>migraciones</strong> para el esquema, <strong>seeders</strong> para los datos y
+<strong>Faker</strong> para generar información de prueba.
+</p>
+
+<div class="diagram">
+    <img src="../assets/laravel_logo.png" style="max-width:35%;" alt="Laravel Logo">
+</div>
+</section>
+
+<!-- SECCIÓN 2 -->
+<section id="migrations">
+<h2>2. Migrations</h2>
+
+<h3>2.1. Crear una migración</h3>
+
+<pre><code class="language-bash">
+php artisan make:migration create_hoteles_table
+</code></pre>
+
+<h3>2.2. Definir la estructura</h3>
+
+<pre><code class="language-php">
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+    public function up(): void {
+        Schema::create('hoteles', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre');
+            $table->string('direccion')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void {
+        Schema::dropIfExists('hoteles');
+    }
+};
+</code></pre>
+
+<h3>2.3. Ejecutar migraciones</h3>
+
+<pre><code class="language-bash">
+php artisan migrate
+</code></pre>
+</section>
+
+<!-- SECCIÓN 3 -->
+<section id="seeders">
+<h2>3. Seeders</h2>
+
+<h3>3.1. Crear un seeder</h3>
+
+<pre><code class="language-bash">
+php artisan make:seeder HotelSeeder
+</code></pre>
+
+<h3>3.2. Seeder básico</h3>
+
+<pre><code class="language-php">
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class HotelSeeder extends Seeder {
+    public function run(): void {
+        DB::table('hoteles')->insert([
+            'nombre' => 'Gran Hotel',
+            'direccion' => 'Calle Mayor 3',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
+}
+</code></pre>
+
+<h3>3.3. Ejecutar seeder</h3>
+
+<pre><code class="language-bash">
+php artisan db:seed --class=HotelSeeder
+</code></pre>
+</section>
+
+<!-- SECCIÓN 4 -->
+<section id="faker">
+<h2>4. Uso de Faker</h2>
+
+<p>
+<strong>Faker</strong> permite generar datos realistas directamente dentro de un seeder.
+</p>
+
+<h3>4.1. Usar Faker en un Seeder</h3>
+
+<pre><code class="language-php">
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
+
+class HotelSeeder extends Seeder {
+    public function run(): void {
+
+        $faker = Faker::create('es_ES');
+
+        for ($i = 0; $i < 10; $i++) {
+            DB::table('hoteles')->insert([
+                'nombre' => $faker->company(),
+                'direccion' => $faker->address(),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+    }
+}
+</code></pre>
+
+<h3>4.2. Ejecutar el seeder con Faker</h3>
+
+<pre><code class="language-bash">
+php artisan db:seed --class=HotelSeeder
+</code></pre>
+</section>
+
+<!-- SECCIÓN 5 -->
+<section id="relaciones">
+<h2>5. Relaciones entre tablas</h2>
+
+<h3>5.1. Crear migración para relación 1:N</h3>
+
+<pre><code class="language-bash">
+php artisan make:migration create_habitaciones_table
+</code></pre>
+
+<h3>5.2. Clave foránea</h3>
+
+<pre><code class="language-php">
+Schema::create('habitaciones', function (Blueprint $table) {
+    $table->id();
+    $table->integer('numero');
+    $table->foreignId('hotel_id')
+          ->constrained()
+          ->onDelete('cascade');
+    $table->timestamps();
+});
+</code></pre>
+</section>
+
+<!-- SECCIÓN 6 -->
+<section id="todo">
+<h2>6. Todo en un solo comando</h2>
+
+<pre><code class="language-bash">
+php artisan migrate:fresh --seed
+</code></pre>
+</section>
+
+<!-- DIAGRAMA -->
+<section>
+<h2>Diagrama conceptual</h2>
+
+<div class="mermaid">
+classDiagram
+class Hotel {
+    id
+    nombre
+    direccion
+}
+class Habitacion {
+    id
+    numero
+    hotel_id
+}
+Hotel "1" --> "*" Habitacion
+</div>
+</section>
+
+<!-- RESUMEN -->
+<section>
+<div class="info-box">
+<h3>Resumen rápido</h3>
+
+<table border="1" style="width:100%; border-collapse:collapse;">
+    <tr><th>Acción</th><th>Comando</th></tr>
+    <tr><td>Crear migración</td><td>make:migration</td></tr>
+    <tr><td>Ejecutar migraciones</td><td>migrate</td></tr>
+    <tr><td>Crear seeder</td><td>make:seeder</td></tr>
+    <tr><td>Usar Faker</td><td>Faker::create()</td></tr>
+    <tr><td>Recrear BD</td><td>migrate:fresh --seed</td></tr>
+</table>
+</div>
+</section>
+
+</main>
+
+<footer>
+<p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+</footer>
+</body>
+</html>
