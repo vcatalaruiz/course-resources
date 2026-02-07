@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laravel Livewire</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <!-- X SVG -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+  <!-- ===== /VC SIDEBAR ===== -->
+
+  <header>
+
+    <!-- ===== VC SIDEBAR (desde cero) ===== -->
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail"
+      aria-expanded="false">
+      <!--Hamburger icon -->
+      <i class="fa fa-bars" aria-hidden="true"></i>
+
+
+    </button>
+    <h1>Laravel Livewire</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+<main>
+
+<!-- SECCIÓN 1 -->
+<section id="introduccion">
+<h2>1. ¿Qué es Livewire?</h2>
+
+<p>
+<strong>Livewire</strong> es un framework full-stack para Laravel que permite crear
+interfaces dinámicas sin escribir JavaScript. Funciona combinando componentes PHP
+con vistas Blade reactivas.
+</p>
+
+<div class="diagram">
+    <img src="../assets/laravel_livewire.png" style="max-width:35%;" alt="Laravel Logo">
+</div>
+</section>
+
+<!-- SECCIÓN 2 -->
+<section id="instalacion">
+<h2>2. Instalación</h2>
+
+<h3>2.1. Instalar paquete</h3>
+<pre><code class="language-bash">
+composer require livewire/livewire
+</code></pre>
+
+<h3>2.2. Incluir assets</h3>
+<pre><code class="language-php">
+&lt;!-- layout.blade.php --&gt;
+@livewireStyles
+...
+@livewireScripts
+</code></pre>
+</section>
+
+<!-- SECCIÓN 3 -->
+<section id="componentes">
+<h2>3. Componentes Livewire</h2>
+
+<h3>3.1. Crear componente</h3>
+<pre><code class="language-bash">
+php artisan make:livewire contador
+</code></pre>
+
+<h3>3.2. Clase del componente</h3>
+<pre><code class="language-php">
+namespace App\Livewire;
+
+use Livewire\Component;
+
+class Contador extends Component
+{
+    public int $count = 0;
+
+    public function increment(): void
+    {
+        $this->count++;
+    }
+
+    public function render()
+    {
+        return view('livewire.contador');
+    }
+}
+</code></pre>
+
+<h3>3.3. Vista del componente</h3>
+<pre><code class="language-php">
+&lt;div&gt;
+    &lt;h4&gt;{{ $count }}&lt;/h4&gt;
+    &lt;button wire:click="increment"&gt;Sumar&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+</section>
+
+<!-- SECCIÓN 4 -->
+<section id="binding">
+<h2>4. Data Binding</h2>
+
+<h3>4.1. Enlace bidireccional</h3>
+<pre><code class="language-php">
+&lt;input type="text" wire:model="nombre"&gt;
+&lt;p&gt;Hola, {{ $nombre }}&lt;/p&gt;
+</code></pre>
+
+<h3>4.2. Propiedad en el componente</h3>
+<pre><code class="language-php">
+public string $nombre = '';
+</code></pre>
+</section>
+
+<!-- SECCIÓN 5 -->
+<section id="eventos">
+<h2>5. Eventos y métodos</h2>
+
+<h3>5.1. Llamar métodos</h3>
+<pre><code class="language-php">
+&lt;button wire:click="guardar"&gt;Guardar&lt;/button&gt;
+</code></pre>
+
+<h3>5.2. Método en componente</h3>
+<pre><code class="language-php">
+public function guardar(): void
+{
+    // Lógica de guardado
+}
+</code></pre>
+</section>
+
+<!-- SECCIÓN 6 -->
+<section id="validacion">
+<h2>6. Validación</h2>
+
+<h3>6.1. Reglas</h3>
+<pre><code class="language-php">
+protected array $rules = [
+    'email' => 'required|email'
+];
+</code></pre>
+
+<h3>6.2. Validar y mostrar errores</h3>
+<pre><code class="language-php">
+public function guardar(): void
+{
+    $this->validate();
+    // Guardar datos
+}
+</code></pre>
+
+<pre><code class="language-php">
+&lt;input type="text" wire:model="email"&gt;
+@error('email') &lt;span class="error"&gt;{{ $message }}&lt;/span&gt; @enderror
+</code></pre>
+</section>
+
+<!-- SECCIÓN 7 -->
+<section id="lifecycle">
+<h2>7. Ciclo de vida</h2>
+
+<h3>7.1. Hooks comunes</h3>
+<pre><code class="language-php">
+public function mount(): void
+{
+    // Se ejecuta al iniciar
+}
+
+public function updated($property): void
+{
+    // Se ejecuta al cambiar una propiedad
+}
+</code></pre>
+</section>
+
+<!-- SECCIÓN 8 -->
+<section id="paginacion">
+<h2>8. Paginación</h2>
+
+<h3>8.1. Usar WithPagination</h3>
+<pre><code class="language-php">
+use Livewire\WithPagination;
+
+class ListaUsuarios extends Component
+{
+    use WithPagination;
+
+    public function render()
+    {
+        return view('livewire.lista-usuarios', [
+            'usuarios' => User::paginate(10)
+        ]);
+    }
+}
+</code></pre>
+
+<h3>8.2. Mostrar paginación</h3>
+<pre><code class="language-php">
+{{ $usuarios->links() }}
+</code></pre>
+</section>
+
+<!-- DIAGRAMA -->
+<section>
+<h2>Flujo Livewire</h2>
+
+<div class="mermaid">
+flowchart LR
+A[Componente PHP] --> B[Render Blade]
+B --> C[DOM en el navegador]
+C --> D[Interacción del usuario]
+D --> A
+</div>
+</section>
+
+<!-- RESUMEN -->
+<section>
+<div class="info-box">
+<h3>Resumen rápido</h3>
+
+<table border="1" style="width:100%; border-collapse:collapse;">
+<tr><th>Concepto</th><th>Uso</th></tr>
+<tr><td>Componente</td><td>Clase PHP + vista Blade</td></tr>
+<tr><td>wire:model</td><td>Enlace bidireccional</td></tr>
+<tr><td>wire:click</td><td>Eventos sin JS</td></tr>
+<tr><td>Validation</td><td>Reglas del servidor</td></tr>
+<tr><td>Pagination</td><td>Listados reactivos</td></tr>
+</table>
+</div>
+</section>
+
+</main>
+
+<footer>
+<p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+</footer>
+</body>
+</html>
