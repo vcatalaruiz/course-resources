@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-EVTW1307T1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ObjectDB (OODB)</title>
+    <script src="/course-resources/index.js" defer></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+    <script src="../index.js" defer></script>
+    <script src="../menu.js" defer></script>
+    <!-- <link rel="stylesheet" href="../index.css"> -->
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+
+    <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+        <div class="vc-rail-head">
+            <span class="vc-rail-title">Índice</span>
+            <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+                <!-- X SVG -->
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+        <ul id="vc-list" class="vc-list"></ul>
+    </nav>
+
+    <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+    <!-- ===== /VC SIDEBAR ===== -->
+
+    <header>
+
+        <!-- ===== VC SIDEBAR (desde cero) ===== -->
+        <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+            aria-controls="vc-rail" aria-expanded="false">
+            <!--Hamburger icon -->
+            <i class="fa fa-bars" aria-hidden="true"></i>
+
+
+        </button>
+        <h1>Acceso a datos con OODB</h1>
+        <img src="" id="logo" alt="Logo" style="display: none;">
+    </header>
+
+    <main>
+
+        <!-- SECCIÓN 1 -->
+        <section id="introduccion">
+            <h2>1. Introducción a ObjectDB</h2>
+
+            <p>
+                ObjectDB es una base de datos <strong>orientada a objetos (OODB)</strong> que almacena información
+                directamente como objetos Java. Está diseñada para ofrecer <strong>alta velocidad, persistencia
+                    transparente y
+                    compatibilidad con JPA</strong>.
+            </p>
+
+            <div class="diagram">
+                <img src="../assets/objectdb_logo.png" style="max-width:35%;" alt="ObjectDB Logo">
+            </div>
+
+            <h3>1.1. Ventajas sobre bases de datos relacionales</h3>
+            <ul>
+                <li><strong>Persistencia de objetos</strong>: no es necesario mapear manualmente a tablas.</li>
+                <li><strong>Transparencia JPA</strong>: las operaciones CRUD se integran con Java de forma natural.</li>
+                <li><strong>Alto rendimiento</strong>: consultas optimizadas sobre objetos.</li>
+            </ul>
+
+        </section>
+
+        <!-- SECCIÓN 2 -->
+        <section id="sql-vs-oodb">
+            <h2>2. SQL vs OODB</h2>
+
+            <h3>2.1. Datos</h3>
+            <p>
+                Mientras que SQL requiere normalización y tablas, OODB almacena objetos completos, respetando la
+                estructura de la aplicación.
+            </p>
+
+            <h3>2.2. Conceptos clave</h3>
+            <ul>
+                <li>Entidades (Entity)</li>
+                <li>Atributos de objeto</li>
+                <li>Relaciones entre objetos (1:1, 1:N, N:M)</li>
+            </ul>
+
+            <h3>2.3. Uso</h3>
+            <p>
+                OODB es ideal para aplicaciones Java, APIs REST, juegos, simuladores y sistemas donde los objetos son
+                complejos y la integridad de relaciones es importante.
+            </p>
+
+        </section>
+
+        <!-- SECCIÓN 3 -->
+        <section id="modelo-objeto">
+            <h2>3. Modelo basado en objetos</h2>
+
+            <p>
+                En ObjectDB, los datos se almacenan como <strong>objetos Java persistentes</strong>. Cada entidad se
+                representa mediante una clase con anotaciones JPA.
+            </p>
+
+            <pre><code class="language-java">
+@Entity
+public class Hotel {
+    @Id @GeneratedValue
+    private long id;
+    private String nombre;
+    private String direccion;
+    private int habitaciones;
+}
+</code></pre>
+
+        </section>
+
+        <!-- SECCIÓN 4 -->
+        <section id="relaciones-objetos">
+            <h2>4. Relaciones entre objetos</h2>
+
+            <p>
+                Las relaciones en OODB se representan mediante referencias directas entre objetos:
+            </p>
+
+            <ul>
+                <li><strong>1:1, 1:N y N:M</strong> mediante atributos de objeto y listas</li>
+                <li><strong>Embebido o Referencia</strong> según necesidad de acceso o compartición</li>
+            </ul>
+
+            <h3>4.1. Ejemplo embebido (1:N)</h3>
+            <!-- DIAGRAMA -->
+        <section>
+            <h4>Modelo conceptual OODB</h4>
+
+            <div class="mermaid">
+                classDiagram
+                class Hotel {
+                +id
+                +nombre
+                +direccion
+                }
+                class Habitacion {
+                +numero
+                +precio
+                }
+                Hotel "1" o-- "*" Habitacion : embebido
+            </div>
+        </section>
+
+            <pre><code class="language-java">
+@Entity
+public class Hotel {
+    @Id @GeneratedValue
+    private long id;
+    private String nombre;
+    @OneToMany(cascade=CascadeType.ALL)
+    private List<Habitacion> habitaciones;
+}
+
+@Entity
+public class Habitacion {
+    private int numero;
+    private double precio;
+}
+</code></pre>
+
+            <h4>Ventajas</h4>
+            <ul>
+                <li>Acceso directo a los objetos relacionados</li>
+                <li>Consultas más rápidas</li>
+            </ul>
+
+            <h4>Desventajas</h4>
+            <ul>
+                <li>Puede duplicar información si se comparte</li>
+            </ul>
+            
+
+        </section>
+
+        <!-- SECCIÓN 5 CRUD -->
+        <section id="crud">
+            <h2>5. CRUD con ObjectDB y Java</h2>
+
+            <p>
+                ObjectDB se maneja mediante JPA y EntityManager en Java.
+            </p>
+
+            <h3>5.1. Conexión y creación de EntityManager</h3>
+
+            <pre><code class="language-java">
+EntityManagerFactory emf = Persistence.createEntityManagerFactory("objects/p2.odb");
+EntityManager em = emf.createEntityManager();
+</code></pre>
+
+            <h3>5.2. Create (Insertar)</h3>
+
+            <pre><code class="language-java">
+em.getTransaction().begin();
+Point p = new Point(1, 2);
+em.persist(p);
+em.getTransaction().commit();
+</code></pre>
+
+            <h3>5.3. Read (Consultar)</h3>
+
+            <pre><code class="language-java">
+TypedQuery<Point> query = em.createQuery("SELECT p FROM Point p", Point.class);
+List<Point> results = query.getResultList();
+for(Point p : results) {
+    System.out.println(p);
+}
+</code></pre>
+
+            <h3>5.4. Update (Actualizar)</h3>
+
+            <pre><code class="language-java">
+em.getTransaction().begin();
+Query update = em.createQuery("UPDATE Point p SET p.x = p.x + 100 WHERE p.x < :threshold");
+update.setParameter("threshold", 5);
+update.executeUpdate();
+em.getTransaction().commit();
+em.clear(); // Importante para refrescar
+</code></pre>
+
+            <h3>5.5. Delete (Eliminar)</h3>
+
+            <pre><code class="language-java">
+em.getTransaction().begin();
+Query delete = em.createQuery("DELETE FROM Point p WHERE p.x >= :minX");
+delete.setParameter("minX", 103);
+delete.executeUpdate();
+em.getTransaction().commit();
+em.clear(); // Refrescar
+</code></pre>
+
+        </section>        
+
+        <!-- SECCIÓN 6 -->
+        <section id="setup">
+            <h2>6. Puesta a punto (setup)</h2>
+
+            <h3>6.1. Instalación</h3>
+            <p>
+                Descarga ObjectDB desde <a href="https://www.objectdb.com/download/2.9.2" target="_blank"
+                    rel="noopener">https://www.objectdb.com/download/2.9.2</a>
+                y descomprime el paquete.                
+            </p>
+
+            <h3>6.2. Dependencia</h3>
+            <p>
+                Añade la dependencia de ObjectDB en tu proyecto.
+            </p>
+
+            <pre><code class="language-xml">
+&lt;!-- Define ObjectDB repository --&gt;
+&lt;repositories&gt;
+    &lt;repository&gt;
+        &lt;id&gt;objectdb&lt;/id&gt;
+        &lt;name&gt;ObjectDB Repository&lt;/name&gt;
+        &lt;url&gt;https://m2.objectdb.com&lt;/url&gt;
+    &lt;/repository&gt;
+&lt;/repositories&gt;
+&lt;dependencies&gt;
+    &lt;!-- ObjectDB dependency --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.objectdb&lt;/groupId&gt;
+        &lt;artifactId&gt;objectdb&lt;/artifactId&gt;
+        &lt;version&gt;2.9.2&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+
+            <h3>6.3. Ejecutar</h3>
+            <p>
+                En la carpeta <code>bin</code> de la instalación, ejecuta:
+            </p>
+
+            <pre><code class="language-bash">java -jar explorer-2.9.2.jar
+</code></pre>
+
+            <p>
+                Este comando abre el visualizador de ObjectDB (ObjectDB Explorer) para inspeccionar archivos <code>.odb</code>.
+            </p>
+        </section>
+
+        <!-- RESUMEN -->
+        <section>
+            <div class="info-box">
+                <h3>Resumen clave</h3>
+                <ul>
+                    <li>ObjectDB es OODB orientada a objetos</li>
+                    <li>Se integra con JPA y Java</li>
+                    <li>Almacena objetos persistentes sin esquema rígido</li>
+                    <li>Relaciones directas entre objetos (1:1, 1:N, N:M)</li>
+                    <li>CRUD sencillo y eficiente con EntityManager</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+    </footer>
+</body>
+
+</html>
