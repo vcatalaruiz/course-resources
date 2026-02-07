@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MongoDB</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <!-- X SVG -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+  <!-- ===== /VC SIDEBAR ===== -->
+
+  <header>
+
+    <!-- ===== VC SIDEBAR (desde cero) ===== -->
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail"
+      aria-expanded="false">
+      <!--Hamburger icon -->
+      <i class="fa fa-bars" aria-hidden="true"></i>
+
+
+    </button>
+    <h1>Acceso a datos con MongoDB</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+    <main>
+
+        <!-- SECCIÓN 1 -->
+        <section id="introduccion">
+            <h2>1. Introducción a MongoDB</h2>
+
+            <p>
+                MongoDB es una base de datos <strong>NoSQL orientada a documentos</strong> que almacena la información
+                en formato
+                <strong>BSON</strong> (Binary JSON). Está diseñada para ofrecer <strong>flexibilidad, escalabilidad y
+                    alto rendimiento</strong>.
+            </p>
+
+            <div class="diagram">
+                <img src="../assets/mongodb_logo.png" style="max-width:35%;" alt="MongoDB Logo">
+            </div>
+
+            <h3>1.1. Problemas de las bases de datos relacionales</h3>
+            <ul>
+                <li><strong>Escalabilidad</strong>: escalar verticalmente tiene límites físicos.</li>
+                <li><strong>Flexibilidad</strong>: cualquier cambio requiere modificar el esquema.</li>
+                <li><strong>Rendimiento</strong>: uso intensivo de joins.</li>
+            </ul>
+            <div class="diagram">
+                <img src="../assets/mongodb_performance.png" style="max-width:70%;" alt="MongoDB Logo">
+            </div>
+
+        </section>
+
+        <!-- SECCIÓN 2 -->
+        <section id="sql-vs-nosql">
+            <h2>2. SQL vs NoSQL</h2>
+
+            <h3>2.1. Datos</h3>
+            <div class="diagram">
+                <img src="../assets/mongodb_data.png" style="max-width:100%;" alt="MongoDB Logo">
+            </div>
+            
+            
+            <h3>2.2. Conceptos</h3>
+            <div class="diagram">
+                <img src="../assets/mongodb_concepts.png" style="max-width:100%;" alt="MongoDB Logo">
+            </div>
+            
+            <div class="diagram">
+                <img src="../assets/mongodb_concepts2.png" style="max-width:100%;" alt="MongoDB Logo">
+            </div>
+            
+            <h3>2.3. Uso</h3>
+            <p>
+                MongoDB es especialmente adecuado para <strong>APIs REST</strong>, aplicaciones web, móviles, Big Data e
+                IoT.
+            </p>
+
+        </section>
+
+        <!-- SECCIÓN 3 -->
+        <section id="documentos">
+            <h2>3. Modelo basado en documentos</h2>
+
+            <p>
+                En MongoDB los datos se almacenan como <strong>documentos JSON</strong> dentro de colecciones.
+                No es obligatorio que todos los documentos tengan la misma estructura.
+            </p>
+
+            <pre><code class="language-json">
+{
+  "_id": "64fa12",
+  "nombre": "Gran Hotel",
+  "direccion": "Calle Mayor 3",
+  "habitaciones": 120
+}
+</code></pre>
+
+        </section>
+
+        <!-- SECCIÓN 4 -->
+        <section id="relaciones">
+            <h2>4. Relaciones en MongoDB</h2>
+
+            <p>
+                MongoDB no usa joins tradicionales. Las relaciones se modelan de dos formas:
+            </p>
+
+            <ul>
+                <li><strong>Embedding (Documentos embebidos)</strong></li>
+                <li><strong>Referencing (Referencias)</strong></li>
+            </ul>
+
+            <h3>4.1. Relaciones embebidas (Embedding)</h3>
+
+            <p>
+                Se utilizan cuando los datos se consultan juntos con frecuencia (relación 1:N).
+            </p>
+
+            <pre><code class="language-json">
+{
+  "_id": 1,
+  "hotel": "Gran Hotel",
+  "habitaciones": [
+    { "numero": 101, "precio": 80 },
+    { "numero": 102, "precio": 90 }
+  ]
+}
+</code></pre>
+
+            <h3>Ventajas</h3>
+            <ul>
+                <li>Menos consultas</li>
+                <li>Mejor rendimiento</li>
+            </ul>
+
+            <h3>Desventajas</h3>
+            <ul>
+                <li>Duplicación de datos</li>
+                <li>Límite de 16MB por documento</li>
+            </ul>
+
+            <h3>4.2. Relaciones por referencia (Referencing)</h3>
+
+            <pre><code class="language-json">
+{
+  "_id": 101,
+  "numero": 101,
+  "hotel_id": 1
+}
+</code></pre>
+
+            <p>
+                Se recomienda cuando los datos crecen mucho o se reutilizan en múltiples colecciones.
+            </p>
+
+        </section>
+
+        <!-- SECCIÓN 5 CRUD -->
+        <section id="crud">
+            <h2>5. CRUD con MongoDB</h2>
+
+            <p>
+                MongoDB se puede usar desde Java mediante el <strong>MongoDB Java Driver</strong>.
+            </p>
+
+            <h3>5.1. Conexión</h3>
+
+            <pre><code class="language-java">
+MongoClient client = MongoClients.create("mongodb://localhost:27017");
+MongoDatabase db = client.getDatabase("empresa");
+MongoCollection<Document> col = db.getCollection("hoteles");
+</code></pre>
+
+            <h3>5.2. Create (Insertar)</h3>
+
+            <pre><code class="language-java">
+Document hotel = new Document("nombre", "Gran Hotel")
+        .append("direccion", "Calle Mayor 3")
+        .append("habitaciones", 120);
+
+col.insertOne(hotel);
+</code></pre>
+
+            <h3>5.3. Read (Consultar)</h3>
+
+            <pre><code class="language-java">
+for (Document d : col.find()) {
+    System.out.println(d.toJson());
+}
+</code></pre>
+
+            <h3>5.4. Update (Actualizar)</h3>
+
+            <pre><code class="language-java">
+col.updateOne(
+    Filters.eq("nombre", "Gran Hotel"),
+    Updates.set("direccion", "Avenida Central 10")
+);
+</code></pre>
+
+            <h3>5.5. Delete (Eliminar)</h3>
+
+            <pre><code class="language-java">
+col.deleteOne(Filters.eq("nombre", "Gran Hotel"));
+</code></pre>
+
+        </section>
+
+        <!-- DIAGRAMA -->
+        <section>
+            <h2>Modelo conceptual MongoDB</h2>
+
+            <div class="mermaid">
+                classDiagram
+                class Hotel {
+                +_id
+                +nombre
+                +direccion
+                }
+                class Habitacion {
+                +numero
+                +precio
+                }
+                Hotel "1" o-- "*" Habitacion : embebido
+            </div>
+        </section>
+
+        <!-- RESUMEN -->
+        <section>
+            <div class="info-box">
+                <h3>Resumen clave</h3>
+                <ul>
+                    <li>MongoDB es NoSQL orientado a documentos</li>
+                    <li>Usa BSON (JSON binario)</li>
+                    <li>No requiere esquema fijo</li>
+                    <li>Relaciones por embedding o referencing</li>
+                    <li>CRUD sencillo y eficiente</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+    </footer>
+</body>
+
+</html>
