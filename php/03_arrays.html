@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formularios en PHP</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+  <header>
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1>Arrays en PHP</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+    <p>Los arrays son estructuras de datos fundamentales que permiten almacenar múltiples valores en una sola variable. En PHP, los arrays son muy flexibles y pueden contener diferentes tipos de datos.</p>
+
+    <!-- SECCIÓN 1: QUÉ SON LOS ARRAYS -->
+    <section id="que-son-arrays">
+      <h2>1. ¿Qué son los arrays?</h2>
+
+      <p>Un array es una colección de elementos que se almacenan bajo un único nombre de variable. Cada elemento tiene una posición (índice) o una clave (key) que lo identifica.</p>
+
+      <h3>1.1. Tipos de arrays en PHP</h3>
+      <ul>
+        <li><strong>Indexed Arrays:</strong> Utilizan índices numéricos (0, 1, 2, ...)</li>
+        <li><strong>Associative Arrays:</strong> Utilizan claves de cadena (nombres personalizados)</li>
+        <li><strong>Multidimensional Arrays:</strong> Arrays que contienen otros arrays</li>
+      </ul>
+
+      <h3>1.2. Ventajas de usar arrays</h3>
+      <ul>
+        <li>Almacenar múltiples valores relacionados</li>
+        <li>Facilitan la iteración sobre colecciones de datos</li>
+        <li>Permiten estructurar datos complejos</li>
+        <li>Reducen la necesidad de crear múltiples variables</li>
+      </ul>
+    </section>
+
+    <!-- SECCIÓN 2: CREAR ARRAYS INDEXADOS -->
+    <section id="arrays-indexados">
+      <h2>2. Arrays indexados</h2>
+
+      <h3>2.1. Crear un array indexado</h3>
+      <pre><code class="language-php">
+&lt;?php
+// Método 1: Usando array()
+$colores = array("Rojo", "Verde", "Azul");
+
+// Método 2: Usando [] (sintaxis corta recomendada)
+$numeros = [10, 20, 30, 40, 50];
+
+// Método 3: Asignando elementos uno a uno
+$frutas = [];
+$frutas[0] = "Manzana";
+$frutas[1] = "Plátano";
+$frutas[2] = "Naranja";
+
+echo $colores[0];  // Imprime: Rojo
+echo $numeros[2];  // Imprime: 30
+?&gt;
+</code></pre>
+
+      <h3>2.2. Obtener información del array</h3>
+      <pre><code class="language-php">
+&lt;?php
+$nombres = ["Ana", "Bruno", "Carlos", "Diana"];
+
+// count() - Número de elementos
+echo count($nombres);  // Imprime: 4
+
+// sizeof() - Alias de count()
+echo sizeof($nombres); // Imprime: 4
+
+// Verificar si existe un índice
+if (isset($nombres[1])) {
+    echo $nombres[1];  // Imprime: Bruno
+}
+?&gt;
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 3: ARRAYS ASOCIATIVOS -->
+    <section id="arrays-asociativos">
+      <h2>3. Arrays asociativos</h2>
+
+      <h3>3.1. Crear un array asociativo</h3>
+      <pre><code class="language-php">
+&lt;?php
+// Método 1: Usando array()
+$persona = array(
+    "nombre" => "Juan",
+    "edad" => 30,
+    "ciudad" => "Madrid"
+);
+
+// Método 2: Usando [] (más moderno)
+$coche = [
+    "marca" => "Toyota",
+    "modelo" => "Corolla",
+    "año" => 2023,
+    "precio" => 25000
+];
+
+// Acceder a los valores
+echo $persona["nombre"];  // Imprime: Juan
+echo $coche["marca"];     // Imprime: Toyota
+?&gt;
+</code></pre>
+
+      <h3>3.2. Verificar claves y valores</h3>
+      <pre><code class="language-php">
+&lt;?php
+$usuario = ["nombre" => "María", "email" => "maria@ejemplo.com"];
+
+// array_key_exists() - Verificar si existe una clave
+if (array_key_exists("nombre", $usuario)) {
+    echo "La clave 'nombre' existe";
+}
+
+// in_array() - Verificar si existe un valor
+if (in_array("maria@ejemplo.com", $usuario)) {
+    echo "El email existe en el array";
+}
+
+// isset() - Alternativa para verificar
+if (isset($usuario["nombre"])) {
+    echo $usuario["nombre"];
+}
+?&gt;
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 4: MODIFICAR ARRAYS -->
+    <section id="modificar-arrays">
+      <h2>4. Modificar arrays</h2>
+
+      <h3>4.1. Agregar elementos</h3>
+      <pre><code class="language-php">
+&lt;?php
+$lista = ["primero", "segundo"];
+
+// Agregar al final (array indexado)
+$lista[] = "tercero";  // Índice 2
+$lista[] = "cuarto";   // Índice 3
+
+// Usar array_push() para agregar múltiples elementos
+array_push($lista, "quinto", "sexto");
+
+// Agregar a un array asociativo
+$datos = ["nombre" => "Juan"];
+$datos["edad"] = 30;
+$datos["ciudad"] = "Barcelona";
+
+print_r($lista);   // Muestra toda la estructura
+print_r($datos);
+?&gt;
+</code></pre>
+
+      <h3>4.2. Eliminar elementos</h3>
+      <pre><code class="language-php">
+&lt;?php
+$colores = ["Rojo", "Verde", "Azul", "Amarillo"];
+
+// array_pop() - Eliminar último elemento
+$ultimo = array_pop($colores);
+echo $ultimo;  // Imprime: Amarillo
+
+// array_shift() - Eliminar primer elemento
+$primero = array_shift($colores);
+echo $primero; // Imprime: Rojo
+
+// unset() - Eliminar un elemento específico
+unset($colores[0]);
+
+// array_splice() - Eliminar y reemplazar
+$numeros = [1, 2, 3, 4, 5];
+array_splice($numeros, 1, 2);  // Elimina 2 elementos desde índice 1
+// $numeros ahora es [1, 4, 5]
+?&gt;
+</code></pre>
+
+      <h3>4.3. Modificar elementos</h3>
+      <pre><code class="language-php">
+&lt;?php
+$precios = ["manzana" => 1.50, "platano" => 0.80, "naranja" => 1.20];
+
+// Modificar un valor
+$precios["manzana"] = 1.75;
+
+// Cambiar una clave
+$precios["platano"] = 2.50;
+
+// array_replace() - Reemplazar múltiples valores
+$nuevosPrecios = ["manzana" => 2.00, "uva" => 3.00];
+$precios = array_replace($precios, $nuevosPrecios);
+?&gt;
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 5: ITERAR ARRAYS -->
+    <section id="iterar-arrays">
+      <h2>5. Iterar a través de arrays</h2>
+
+      <h3>5.1. Usar foreach()</h3>
+      <pre><code class="language-php">
+&lt;?php
+$frutas = ["Manzana", "Plátano", "Naranja"];
+
+// Iterar sin índice
+foreach ($frutas as $fruta) {
+    echo $fruta . "&lt;br&gt;";
+}
+
+// Iterar con índice
+foreach ($frutas as $indice => $fruta) {
+    echo "$indice: $fruta&lt;br&gt;";
+}
+
+// Array asociativo
+$persona = ["nombre" => "Carlos", "edad" => 25, "ciudad" => "Valencia"];
+
+foreach ($persona as $clave => $valor) {
+    echo "$clave: $valor&lt;br&gt;";
+}
+?&gt;
+</code></pre>
+
+      <h3>5.2. Usar bucles for</h3>
+      <pre><code class="language-php">
+&lt;?php
+$numeros = [10, 20, 30, 40, 50];
+
+// Bucle for tradicional
+for ($i = 0; $i < count($numeros); $i++) {
+    echo $numeros[$i] . "&lt;br&gt;";
+}
+
+// Bucle while
+$j = 0;
+while ($j < count($numeros)) {
+    echo $numeros[$j] . "&lt;br&gt;";
+    $j++;
+}
+?&gt;
+</code></pre>
+
+      <h3>5.3. Usar array_map() y array_filter()</h3>
+      <pre><code class="language-php">
+&lt;?php
+$numeros = [1, 2, 3, 4, 5];
+
+// array_map() - Aplicar función a cada elemento
+$duplicados = array_map(function($n) {
+    return $n * 2;
+}, $numeros);
+// $duplicados = [2, 4, 6, 8, 10]
+
+// array_filter() - Filtrar elementos
+$pares = array_filter($numeros, function($n) {
+    return $n % 2 == 0;
+});
+// $pares = [2, 4]
+?&gt;
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 6: FUNCIONES DE ARRAYS -->
+    <section id="funciones-arrays">
+      <h2>6. Funciones útiles de arrays</h2>
+
+      <h3>6.1. Búsqueda y ordenamiento</h3>
+      <pre><code class="language-php">
+&lt;?php
+$numeros = [5, 2, 8, 1, 9, 3];
+
+// array_search() - Buscar un valor
+$posicion = array_search(8, $numeros);
+echo $posicion;  // Imprime: 2
+
+// in_array() - Verificar si existe
+if (in_array(5, $numeros)) {
+    echo "5 existe en el array";
+}
+
+// sort() - Ordenar ascendente
+sort($numeros);        // [1, 2, 3, 5, 8, 9]
+
+// rsort() - Ordenar descendente
+rsort($numeros);       // [9, 8, 5, 3, 2, 1]
+
+// asort() - Ordenar manteniendo claves
+$datos = ["c" => 3, "a" => 1, "b" => 2];
+asort($datos);         // ["a" => 1, "b" => 2, "c" => 3]
+?&gt;
+</code></pre>
+
+      <h3>6.2. Transformación de arrays</h3>
+      <pre><code class="language-php">
+&lt;?php
+$nombres = ["Ana", "Bruno", "Carlos"];
+$edades = [25, 30, 28];
+
+// array_combine() - Combinar arrays
+$personas = array_combine($nombres, $edades);
+// ["Ana" => 25, "Bruno" => 30, "Carlos" => 28]
+
+// array_flip() - Intercambiar claves y valores
+$datos = ["nombre" => "Juan", "edad" => 30];
+$invertido = array_flip($datos);
+// [30 => "edad", "Juan" => "nombre"]
+
+// array_reverse() - Invertir orden
+$lista = [1, 2, 3, 4, 5];
+$invertida = array_reverse($lista);
+// [5, 4, 3, 2, 1]
+
+// array_merge() - Fusionar arrays
+$array1 = ["a" => 1, "b" => 2];
+$array2 = ["c" => 3, "d" => 4];
+$fusionado = array_merge($array1, $array2);
+?&gt;
+</code></pre>
+
+      <h3>6.3. Funciones de cantidad y suma</h3>
+      <pre><code class="language-php">
+&lt;?php
+$numeros = [10, 20, 30, 40, 50];
+
+// count() / sizeof() - Contar elementos
+echo count($numeros);  // Imprime: 5
+
+// array_sum() - Sumar elementos
+echo array_sum($numeros);  // Imprime: 150
+
+// array_product() - Multiplicar elementos
+echo array_product([2, 3, 4]);  // Imprime: 24
+
+// array_unique() - Eliminar duplicados
+$datos = [1, 2, 2, 3, 3, 3, 4];
+$unicos = array_unique($datos);
+// [1, 2, 3, 4]
+?&gt;
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 7: ARRAYS MULTIDIMENSIONALES -->
+    <section id="arrays-multidimensionales">
+      <h2>7. Arrays multidimensionales</h2>
+
+      <h3>7.1. Arrays de arrays (tablas)</h3>
+      <pre><code class="language-php">
+&lt;?php
+// Array 2D - Tabla
+$estudiantes = [
+    ["Ana", 25, "Madrid"],
+    ["Bruno", 22, "Barcelona"],
+    ["Carlos", 23, "Valencia"],
+    ["Diana", 24, "Bilbao"]
+];
+
+// Acceder a elementos
+echo $estudiantes[0][0];     // Imprime: Ana
+echo $estudiantes[1][2];     // Imprime: Barcelona
+echo $estudiantes[2][1];     // Imprime: 23
+
+// Iterar
+foreach ($estudiantes as $fila) {
+    echo "Nombre: " . $fila[0] . "&lt;br&gt;";
+}
+?&gt;
+</code></pre>
+
+      <h3>7.2. Arrays asociativos multidimensionales</h3>
+      <pre><code class="language-php">
+&lt;?php
+// Lista de personas con propiedades
+$personas = [
+    [
+        "nombre" => "Elena",
+        "edad" => 28,
+        "ciudad" => "Madrid",
+        "email" => "elena@ejemplo.com"
+    ],
+    [
+        "nombre" => "Fernando",
+        "edad" => 32,
+        "ciudad" => "Barcelona",
+        "email" => "fernando@ejemplo.com"
+    ],
+    [
+        "nombre" => "Gabriela",
+        "edad" => 26,
+        "ciudad" => "Sevilla",
+        "email" => "gabriela@ejemplo.com"
+    ]
+];
+
+// Acceder
+echo $personas[0]["nombre"];  // Imprime: Elena
+echo $personas[1]["email"];   // Imprime: fernando@ejemplo.com
+
+// Iterar
+foreach ($personas as $persona) {
+    echo $persona["nombre"] . " (" . $persona["edad"] . " años)&lt;br&gt;";
+}
+?&gt;
+</code></pre>
+
+      <h3>7.3. Arrays mixtos</h3>
+      <pre><code class="language-php">
+&lt;?php
+// Combinar arrays indexados y asociativos
+$producto = [
+    "id" => 1,
+    "nombre" => "Laptop",
+    "precio" => 999.99,
+    "especificaciones" => [
+        "procesador" => "Intel i7",
+        "ram" => "16GB",
+        "almacenamiento" => "512GB SSD"
+    ],
+    "etiquetas" => ["electrónica", "computadora", "portátil"]
+];
+
+// Acceder
+echo $producto["nombre"];                      // Laptop
+echo $producto["especificaciones"]["ram"];     // 16GB
+echo $producto["etiquetas"][0];                // electrónica
+?&gt;
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 8: OPERACIONES AVANZADAS -->
+    <section id="operaciones-avanzadas">
+      <h2>8. Operaciones avanzadas con arrays</h2>
+
+      <h3>8.1. Extracto y compactación</h3>
+      <pre><code class="language-php">
+&lt;?php
+// extract() - Convertir array en variables
+$datos = ["nombre" => "Héctor", "edad" => 35, "ciudad" => "Granada"];
+extract($datos);
+
+echo $nombre;   // Imprime: Héctor
+echo $edad;     // Imprime: 35
+
+// compact() - Convertir variables en array
+$marca = "Ford";
+$modelo = "Mustang";
+$año = 1969;
+
+$coche = compact("marca", "modelo", "año");
+// ["marca" => "Ford", "modelo" => "Mustang", "año" => 1969]
+?&gt;
+</code></pre>
+
+      <h3>8.2. Limpiar y rellenar</h3>
+      <pre><code class="language-php">
+&lt;?php
+// array_pad() - Rellenar array a una longitud específica
+$numeros = [1, 2, 3];
+$rellenado = array_pad($numeros, 5, 0);
+// [1, 2, 3, 0, 0]
+
+// array_fill() - Crear array lleno de un valor
+$repetidos = array_fill(0, 4, "X");
+// ["X", "X", "X", "X"]
+
+// array_chunk() - Dividir en fragmentos
+$datos = [1, 2, 3, 4, 5, 6, 7, 8];
+$fragmentos = array_chunk($datos, 3);
+// [[1, 2, 3], [4, 5, 6], [7, 8]]
+
+// array_slice() - Extraer porción
+$lista = ["a", "b", "c", "d", "e"];
+$porcion = array_slice($lista, 1, 3);
+// ["b", "c", "d"]
+?&gt;
+</code></pre>
+
+      <h3>8.3. Funciones de clave</h3>
+      <pre><code class="language-php">
+&lt;?php
+$persona = ["nombre" => "Iris", "edad" => 29, "ciudad" => "Almería"];
+
+// array_keys() - Obtener todas las claves
+$claves = array_keys($persona);
+// ["nombre", "edad", "ciudad"]
+
+// array_values() - Obtener todos los valores
+$valores = array_values($persona);
+// ["Iris", 29, "Almería"]
+
+// array_key_exists() - Verificar si existe clave
+if (array_key_exists("edad", $persona)) {
+    echo "La clave 'edad' existe";
+}
+
+// array_column() - Extraer columna de array 2D
+$usuarios = [
+    ["id" => 1, "nombre" => "Juan", "edad" => 30],
+    ["id" => 2, "nombre" => "María", "edad" => 25],
+    ["id" => 3, "nombre" => "Pedro", "edad" => 35]
+];
+
+$nombres = array_column($usuarios, "nombre");
+// ["Juan", "María", "Pedro"]
+?&gt;
+</code></pre>
+    </section>
+
+    <!-- RESUMEN -->
+    <section id="resumen">
+      <div class="info-box">
+        <h3>Resumen de arrays en PHP</h3>
+        <ul>
+          <li>Los arrays almacenan múltiples valores en una variable</li>
+          <li>Arrays indexados usan números (0, 1, 2, ...)</li>
+          <li>Arrays asociativos usan claves personalizadas</li>
+          <li>foreach() es la forma más común de iterar arrays</li>
+          <li>count() obtiene el número de elementos</li>
+          <li>array_push() agrega elementos al final</li>
+          <li>array_pop() elimina el último elemento</li>
+          <li>sort() ordena de menor a mayor</li>
+          <li>array_merge() combina múltiples arrays</li>
+          <li>Los arrays multidimensionales contienen otros arrays</li>
+          <li>extract() convierte arrays en variables</li>
+          <li>array_column() extrae datos de arrays 2D</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+  </footer> 
+</body>
+
+</html>

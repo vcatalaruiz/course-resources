@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHP Arrays — Test</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+<body>
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+  <header>
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1>PHP Arrays — Test</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+
+    <section id="intro">
+      <h2>1. Instrucciones</h2>
+      <div class="quiz-intro">
+        <p>Responde las 25 preguntas tipo test sobre <strong>arrays en PHP</strong>, tipos de arrays, funciones y manipulación de datos. Al final podrás ver tu puntuación y la explicación de cada respuesta.</p>
+        <div class="quiz-meta">
+          <span class="badge">25 preguntas</span>
+          <span>Modo: selección única</span>
+          <span>Corrección inmediata al enviar</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="test">
+      <h2>2. Test de conocimientos</h2>
+
+      <div id="result" class="result-box"></div>
+
+      <form id="quiz-form" class="quiz-container" aria-describedby="result">
+        <!-- Preguntas generadas por JS -->
+      </form>
+
+      <div class="quiz-actions">
+        <button type="button" class="primary" id="check-btn">Corregir</button>
+        <button type="button" class="danger" id="reset-btn">Reiniciar</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const QUESTIONS = [
+      {
+        text: "¿Qué es un array en PHP?",
+        options: [
+          "Una función",
+          "Una colección de elementos almacenados bajo un único nombre",
+          "Un tipo de variable booleana",
+          "Un operador matemático"
+        ],
+        answer: 1,
+        explanation: "Un array es una colección de elementos bajo un único nombre de variable."
+      },
+      {
+        text: "¿Cuántos tipos principales de arrays hay en PHP?",
+        options: [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        answer: 2,
+        explanation: "Los tres tipos principales son: indexados, asociativos y multidimensionales."
+      },
+      {
+        text: "¿Cuál es la sintaxis moderna para crear un array vacío?",
+        options: [
+          "array()",
+          "new Array()",
+          "[]",
+          "<array>"
+        ],
+        answer: 2,
+        explanation: "La sintaxis moderna es usar []."
+      },
+      {
+        text: "¿Qué es un array indexado?",
+        options: [
+          "Un array con claves de texto",
+          "Un array con índices numéricos (0, 1, 2, ...)",
+          "Un array multidimensional",
+          "Un array vacío"
+        ],
+        answer: 1,
+        explanation: "Los arrays indexados usan índices numéricos empezando en 0."
+      },
+      {
+        text: "¿Qué es un array asociativo?",
+        options: [
+          "Un array con índices numéricos",
+          "Un array con claves de cadena personalizadas",
+          "Un array multidimensional",
+          "Un array ordenado"
+        ],
+        answer: 1,
+        explanation: "Los arrays asociativos usan claves de texto como 'nombre' o 'edad'."
+      },
+      {
+        text: "¿Cuál es la función para contar elementos?",
+        options: [
+          "length()",
+          "size()",
+          "count()",
+          "total()"
+        ],
+        answer: 2,
+        explanation: "count() devuelve el número de elementos del array."
+      },
+      {
+        text: "¿Qué función agrega un elemento al final del array?",
+        options: [
+          "add()",
+          "array_push()",
+          "append()",
+          "insert()"
+        ],
+        answer: 1,
+        explanation: "array_push() agrega uno o más elementos al final."
+      },
+      {
+        text: "¿Qué función elimina el último elemento?",
+        options: [
+          "array_shift()",
+          "array_pop()",
+          "unset()",
+          "array_splice()"
+        ],
+        answer: 1,
+        explanation: "array_pop() elimina y devuelve el último elemento."
+      },
+      {
+        text: "¿Qué función elimina el primer elemento?",
+        options: [
+          "array_pop()",
+          "array_shift()",
+          "unset()",
+          "array_delete()"
+        ],
+        answer: 1,
+        explanation: "array_shift() elimina el primer elemento."
+      },
+      {
+        text: "¿Qué función verifica si una clave existe en un array?",
+        options: [
+          "isset()",
+          "array_key_exists()",
+          "in_array()",
+          "array_search()"
+        ],
+        answer: 1,
+        explanation: "array_key_exists() verifica la existencia de una clave."
+      },
+      {
+        text: "¿Qué función verifica si un valor existe en un array?",
+        options: [
+          "array_key_exists()",
+          "isset()",
+          "in_array()",
+          "array_find()"
+        ],
+        answer: 2,
+        explanation: "in_array() verifica si un valor existe en el array."
+      },
+      {
+        text: "¿Cuál es la estructura de bucle ideal para arrays?",
+        options: [
+          "while",
+          "for",
+          "foreach",
+          "do...while"
+        ],
+        answer: 2,
+        explanation: "foreach es la estructura ideal para iterar arrays."
+      },
+      {
+        text: "¿Qué hace array_map()?",
+        options: [
+          "Filtra elementos",
+          "Aplica una función a cada elemento",
+          "Ordena el array",
+          "Busca un elemento"
+        ],
+        answer: 1,
+        explanation: "array_map() aplica una función a cada elemento del array."
+      },
+      {
+        text: "¿Qué hace array_filter()?",
+        options: [
+          "Ordena elementos",
+          "Filtra elementos según una condición",
+          "Busca elementos",
+          "Combina arrays"
+        ],
+        answer: 1,
+        explanation: "array_filter() devuelve elementos que cumplen una condición."
+      },
+      {
+        text: "¿Qué hace array_merge()?",
+        options: [
+          "Ordena arrays",
+          "Filtra arrays",
+          "Combina dos o más arrays",
+          "Elimina duplicados"
+        ],
+        answer: 2,
+        explanation: "array_merge() combina dos o más arrays en uno solo."
+      },
+      {
+        text: "¿Qué hace array_keys()?",
+        options: [
+          "Devuelve los valores",
+          "Devuelve las claves",
+          "Ordena el array",
+          "Busca una clave"
+        ],
+        answer: 1,
+        explanation: "array_keys() devuelve todas las claves del array."
+      },
+      {
+        text: "¿Qué hace array_values()?",
+        options: [
+          "Devuelve las claves",
+          "Devuelve los valores",
+          "Ordena el array",
+          "Filtra valores"
+        ],
+        answer: 1,
+        explanation: "array_values() devuelve todos los valores del array."
+      },
+      {
+        text: "¿Qué hace sort()?",
+        options: [
+          "Ordena de forma descendente",
+          "Ordena de forma ascendente",
+          "Busca un elemento",
+          "Elimina duplicados"
+        ],
+        answer: 1,
+        explanation: "sort() ordena el array de forma ascendente."
+      },
+      {
+        text: "¿Qué hace rsort()?",
+        options: [
+          "Ordena de forma ascendente",
+          "Ordena de forma descendente",
+          "Invierte el array",
+          "Busca un elemento"
+        ],
+        answer: 1,
+        explanation: "rsort() ordena el array de forma descendente."
+      },
+      {
+        text: "¿Qué es un array multidimensional?",
+        options: [
+          "Un array con un elemento",
+          "Un array dentro de otro array",
+          "Un array con claves",
+          "Un array vacío"
+        ],
+        answer: 1,
+        explanation: "Un array multidimensional es un array que contiene otros arrays."
+      },
+      {
+        text: "Interpretación: $lista = ['a', 'b', 'c']; echo $lista[1];",
+        options: [
+          "Imprime: a",
+          "Imprime: b",
+          "Imprime: c",
+          "Error"
+        ],
+        answer: 1,
+        explanation: "El índice 1 corresponde al segundo elemento 'b'."
+      },
+      {
+        text: "¿Qué función busca la posición de un valor?",
+        options: [
+          "array_find()",
+          "in_array()",
+          "array_search()",
+          "array_locate()"
+        ],
+        answer: 2,
+        explanation: "array_search() devuelve la clave del primer valor encontrado."
+      },
+      {
+        text: "¿Qué función invierte el orden de un array?",
+        options: [
+          "sort()",
+          "array_reverse()",
+          "rsort()",
+          "array_flip()"
+        ],
+        answer: 1,
+        explanation: "array_reverse() devuelve el array en orden inverso."
+      },
+      {
+        text: "¿Qué hace array_slice()?",
+        options: [
+          "Ordena el array",
+          "Extrae una porción del array",
+          "Elimina elementos",
+          "Filtra el array"
+        ],
+        answer: 1,
+        explanation: "array_slice() extrae una porción del array."
+      },
+      {
+        text: "¿Qué hace array_unique()?",
+        options: [
+          "Ordena el array",
+          "Elimina duplicados",
+          "Busca valores únicos",
+          "Cuenta valores únicos"
+        ],
+        answer: 1,
+        explanation: "array_unique() elimina valores duplicados del array."
+      }
+    ];
+
+    const quizForm = document.getElementById('quiz-form');
+    const resultBox = document.getElementById('result');
+    const checkBtn = document.getElementById('check-btn');
+    const resetBtn = document.getElementById('reset-btn');
+
+    function renderQuiz() {
+      quizForm.innerHTML = '';
+      QUESTIONS.forEach((q, index) => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.dataset.index = index;
+
+        const title = document.createElement('div');
+        title.className = 'question-title';
+        title.textContent = `${index + 1}. ${q.text}`;
+
+        const options = document.createElement('div');
+        options.className = 'options';
+
+        q.options.forEach((opt, optIndex) => {
+          const label = document.createElement('label');
+          label.className = 'option';
+
+          const input = document.createElement('input');
+          input.type = 'radio';
+          input.name = `q${index}`;
+          input.value = optIndex;
+          input.setAttribute('aria-label', opt);
+
+          const span = document.createElement('span');
+          span.textContent = opt;
+
+          label.appendChild(input);
+          label.appendChild(span);
+          options.appendChild(label);
+        });
+
+        const explanation = document.createElement('div');
+        explanation.className = 'explanation';
+        explanation.hidden = true;
+
+        card.appendChild(title);
+        card.appendChild(options);
+        card.appendChild(explanation);
+        quizForm.appendChild(card);
+      });
+    }
+
+    function checkAnswers() {
+      let correct = 0;
+
+      const cards = quizForm.querySelectorAll('.question-card');
+      cards.forEach((card) => {
+        const index = Number(card.dataset.index);
+        const question = QUESTIONS[index];
+        const selected = card.querySelector('input[type="radio"]:checked');
+        const options = card.querySelectorAll('.option');
+        const explanation = card.querySelector('.explanation');
+
+        options.forEach((opt) => opt.classList.remove('correct', 'incorrect'));
+
+        if (selected) {
+          const selectedIndex = Number(selected.value);
+          if (selectedIndex === question.answer) {
+            correct += 1;
+            options[selectedIndex].classList.add('correct');
+          } else {
+            options[selectedIndex].classList.add('incorrect');
+            options[question.answer].classList.add('correct');
+          }
+        } else {
+          options[question.answer].classList.add('correct');
+        }
+
+        explanation.textContent = `Explicación: ${question.explanation}`;
+        explanation.hidden = false;
+      });
+
+      const total = QUESTIONS.length;
+      const percent = Math.round((correct / total) * 100);
+
+      resultBox.style.display = 'block';
+      resultBox.innerHTML = `
+        <h3>Resultado</h3>
+        <p>Has acertado <strong>${correct}</strong> de <strong>${total}</strong> preguntas (${percent}%).</p>
+        <p>Revisa las explicaciones debajo de cada pregunta.</p>
+      `;
+
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetQuiz() {
+      renderQuiz();
+      resultBox.style.display = 'none';
+      resultBox.innerHTML = '';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    checkBtn.addEventListener('click', checkAnswers);
+    resetBtn.addEventListener('click', resetQuiz);
+
+    renderQuiz();
+  </script>
+</body>
+</html>

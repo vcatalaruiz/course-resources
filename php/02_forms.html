@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formularios en PHP</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <!-- X SVG -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+  <!-- ===== /VC SIDEBAR ===== -->
+
+  <header>
+
+    <!-- ===== VC SIDEBAR (desde cero) ===== -->
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail"
+      aria-expanded="false">
+      <!--Hamburger icon -->
+      <i class="fa fa-bars" aria-hidden="true"></i>
+
+
+    </button>
+    <h1>Formularios en PHP</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+
+    <!-- SECCIÓN 1: INTRODUCCIÓN A FORMULARIOS -->
+    <section id="intro-formularios">
+      <h2>1. Introducción a formularios HTML y PHP</h2>
+
+      <p>
+        Los <strong>formularios HTML</strong> permiten que los usuarios envíen datos desde el navegador.
+        <strong>PHP</strong> procesa esos datos en el servidor.
+      </p>
+
+      <h3>1.1. ¿Cómo funciona?</h3>
+      <ul>
+        <li>El usuario rellena un formulario HTML</li>
+        <li>Presiona el botón "Enviar"</li>
+        <li>Los datos se envían al servidor</li>
+        <li>PHP procesa los datos</li>
+        <li>El servidor responde con una página HTML</li>
+      </ul>
+    </section>
+
+    <!-- SECCIÓN 2: ESTRUCTURA HTML DE FORMULARIOS -->
+    <section id="estructura-formularios">
+      <h2>2. Estructura básica de un formulario HTML</h2>
+
+      <h3>2.1. Elemento form</h3>
+      <pre><code class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Mi Formulario&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;!-- Formulario básico --&gt;
+    &lt;form action="procesar.php" method="POST"&gt;
+        &lt;label for="nombre"&gt;Nombre:&lt;/label&gt;
+        &lt;input type="text" id="nombre" name="nombre"&gt;
+        &lt;br&gt;&lt;br&gt;
+
+        &lt;label for="email"&gt;Email:&lt;/label&gt;
+        &lt;input type="email" id="email" name="email"&gt;
+        &lt;br&gt;&lt;br&gt;
+
+        &lt;input type="submit" value="Enviar"&gt;
+    &lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h3>2.2. Atributos del formulario</h3>
+      <ul>
+        <li><strong>action</strong>: URL del archivo PHP que procesa los datos</li>
+        <li><strong>method</strong>: Método de envío (GET o POST)</li>
+        <li><strong>name</strong>: Nombre del campo (importante para PHP)</li>
+        <li><strong>id</strong>: Identificador único del campo</li>
+      </ul>
+    </section>
+
+    <!-- SECCIÓN 3: CAMPOS DE FORMULARIO -->
+    <section id="campos-formulario">
+      <h2>3. Tipos de campos de formulario</h2>
+
+      <h3>3.1. Campos de texto</h3>
+      <pre><code class="language-html">
+&lt;!-- Campo de texto simple --&gt;
+&lt;input type="text" name="nombre" placeholder="Ingrese su nombre"&gt;
+
+&lt;!-- Campo de contraseña --&gt;
+&lt;input type="password" name="clave"&gt;
+
+&lt;!-- Campo de email --&gt;
+&lt;input type="email" name="email"&gt;
+
+&lt;!-- Campo de número --&gt;
+&lt;input type="number" name="edad" min="0" max="120"&gt;
+
+&lt;!-- Área de texto multilínea --&gt;
+&lt;textarea name="comentarios" rows="5" cols="40"&gt;&lt;/textarea&gt;
+</code></pre>
+
+      <h3>3.2. Botones y elementos de selección</h3>
+      <pre><code class="language-html">
+&lt;!-- Checkbox (casillas de verificación) --&gt;
+&lt;input type="checkbox" name="terminos" value="si"&gt;
+&lt;label&gt;Acepto los términos y condiciones&lt;/label&gt;
+&lt;br&gt;
+
+&lt;!-- Radio buttons (selección única) --&gt;
+&lt;input type="radio" name="genero" value="masculino"&gt; Masculino
+&lt;input type="radio" name="genero" value="femenino"&gt; Femenino
+&lt;br&gt;
+
+&lt;!-- Lista desplegable --&gt;
+&lt;select name="pais"&gt;
+    &lt;option value="españa"&gt;España&lt;/option&gt;
+    &lt;option value="méxico"&gt;México&lt;/option&gt;
+    &lt;option value="argentina"&gt;Argentina&lt;/option&gt;
+&lt;/select&gt;
+&lt;br&gt;
+
+&lt;!-- Botón de envío --&gt;
+&lt;input type="submit" value="Enviar"&gt;
+
+&lt;!-- Botón de reinicio --&gt;
+&lt;input type="reset" value="Limpiar"&gt;
+
+&lt;!-- Botón personalizado --&gt;
+&lt;button type="button"&gt;Click aquí&lt;/button&gt;
+</code></pre>
+
+      <h3>3.3. Otros tipos de entrada</h3>
+      <pre><code class="language-html">
+&lt;!-- Fecha --&gt;
+&lt;input type="date" name="fecha_nacimiento"&gt;
+
+&lt;!-- Color --&gt;
+&lt;input type="color" name="color_favorito"&gt;
+
+&lt;!-- Rango (slider) --&gt;
+&lt;input type="range" name="volumen" min="0" max="100"&gt;
+
+&lt;!-- Archivo --&gt;
+&lt;input type="file" name="documento"&gt;
+
+&lt;!-- URL --&gt;
+&lt;input type="url" name="sitio_web"&gt;
+
+&lt;!-- Teléfono --&gt;
+&lt;input type="tel" name="telefono"&gt;
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 4: GET vs POST -->
+    <section id="get-vs-post">
+      <h2>4. Métodos GET y POST</h2>
+
+      <h3>4.1. Método GET</h3>
+      <pre><code class="language-html">
+&lt;!-- Los datos se envían en la URL --&gt;
+&lt;form action="procesar.php" method="GET"&gt;
+    &lt;input type="text" name="usuario"&gt;
+    &lt;input type="submit" value="Enviar"&gt;
+&lt;/form&gt;
+
+&lt;!-- URL resultante: procesar.php?usuario=Juan --&gt;
+</code></pre>
+
+      <h3>4.2. Método POST</h3>
+      <pre><code class="language-html">
+&lt;!-- Los datos se envían en el cuerpo del mensaje HTTP --&gt;
+&lt;form action="procesar.php" method="POST"&gt;
+    &lt;input type="text" name="usuario"&gt;
+    &lt;input type="submit" value="Enviar"&gt;
+&lt;/form&gt;
+
+&lt;!-- Los datos NO aparecen en la URL --&gt;
+</code></pre>
+
+      <h3>4.3. Comparación GET vs POST</h3>
+      <table style="width:100%; border-collapse: collapse;">
+        <tr style="border: 1px solid #ddd;">
+          <th style="border: 1px solid #ddd; padding: 8px;">Característica</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">GET</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">POST</th>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">Datos en URL</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Sí</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">No</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">Límite de datos</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">~2KB</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Más grande</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">Seguridad</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Baja</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Media</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">Caching</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Sí</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">No</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">Uso típico</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Búsquedas</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Datos sensibles</td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- SECCIÓN 5: ACCESO A DATOS CON $_GET Y $_POST -->
+    <section id="acceso-datos">
+      <h2>5. Acceso a datos con $_GET y $_POST</h2>
+
+      <h3>5.1. Super array $_GET</h3>
+      <pre><code class="language-php">
+&lt;?php
+// formulario.html: &lt;form action="procesar.php" method="GET"&gt;
+//                   &lt;input type="text" name="usuario"&gt;
+
+// procesar.php:
+if (isset($_GET['usuario'])) {
+    $usuario = $_GET['usuario'];
+    echo "Hola, " . htmlspecialchars($usuario);
+} else {
+    echo "No se recibió el usuario";
+}
+?&gt;
+</code></pre>
+
+      <h3>5.2. Super array $_POST</h3>
+      <pre><code class="language-php">
+&lt;?php
+// formulario.html: &lt;form action="procesar.php" method="POST"&gt;
+//                   &lt;input type="text" name="usuario"&gt;
+
+// procesar.php:
+if (isset($_POST['usuario'])) {
+    $usuario = $_POST['usuario'];
+    echo "Hola, " . htmlspecialchars($usuario);
+} else {
+    echo "No se recibió el usuario";
+}
+?&gt;
+</code></pre>
+
+      <h3>5.3. Super array $_REQUEST (GET y POST)</h3>
+      <pre><code class="language-php">
+&lt;?php
+// $_REQUEST acepta tanto GET como POST
+if (isset($_REQUEST['email'])) {
+    $email = $_REQUEST['email'];
+    echo "Tu email es: " . htmlspecialchars($email);
+}
+?&gt;
+</code></pre>
+
+      <h3>5.4. isset() y empty()</h3>
+      <pre><code class="language-php">
+&lt;?php
+// Verificar si existe
+if (isset($_POST['nombre'])) {
+    echo "Nombre recibido";
+}
+
+// Verificar si está vacío
+if (empty($_POST['nombre'])) {
+    echo "El nombre está vacío";
+}
+
+// Ambas cosas
+if (!empty($_POST['nombre'])) {
+    $nombre = $_POST['nombre'];
+    echo "Nombre: " . htmlspecialchars($nombre);
+}
+?&gt;
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 6: VALIDACIÓN DE FORMULARIOS -->
+    <section id="validacion">
+      <h2>6. Validación de formularios</h2>
+
+      <h3>6.1. Validación básica</h3>
+      <pre><code class="language-php">
+&lt;?php
+$errores = array();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Validar nombre
+    if (empty($_POST['nombre'])) {
+        $errores[] = "El nombre es obligatorio";
+    } elseif (strlen($_POST['nombre']) < 3) {
+        $errores[] = "El nombre debe tener mínimo 3 caracteres";
+    }
+
+    // Validar email
+    if (empty($_POST['email'])) {
+        $errores[] = "El email es obligatorio";
+    } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        $errores[] = "El email no es válido";
+    }
+
+    // Si no hay errores
+    if (empty($errores)) {
+        echo "Formulario enviado correctamente";
+        // Procesar datos
+    } else {
+        // Mostrar errores
+        foreach ($errores as $error) {
+            echo "- " . htmlspecialchars($error) . "<br>";
+        }
+    }
+}
+?&gt;
+</code></pre>
+
+      <h3>6.2. Funciones de validación</h3>
+      <pre><code class="language-php">
+&lt;?php
+// filter_var() - Filtrar y validar variables
+$email = "usuario@ejemplo.com";
+
+// Validar email
+if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo "Email válido";
+}
+
+// Validar URL
+if (filter_var("https://ejemplo.com", FILTER_VALIDATE_URL)) {
+    echo "URL válida";
+}
+
+// Validaciones personalizadas con regex
+$patron = '/^[A-Za-z]{3,}$/';  // Solo letras, mínimo 3
+if (preg_match($patron, "Juan")) {
+    echo "Nombre válido";
+}
+?&gt;
+</code></pre>      
+    </section>
+
+    <!-- SECCIÓN 7: SUBIDA DE ARCHIVOS -->
+    <section id="subida-archivos">
+      <h2>7. Subida de archivos (File Upload)</h2>
+
+      <h3>7.1. Formulario para subir archivos</h3>
+      <pre><code class="language-html">
+&lt;!-- El atributo enctype es OBLIGATORIO --&gt;
+&lt;form action="procesar_archivo.php" method="POST" enctype="multipart/form-data"&gt;
+    &lt;label for="archivo"&gt;Selecciona un archivo:&lt;/label&gt;
+    &lt;input type="file" name="archivo" id="archivo" required&gt;
+    &lt;br&gt;&lt;br&gt;
+
+    &lt;input type="submit" value="Subir"&gt;
+&lt;/form&gt;
+</code></pre>
+
+      <h3>7.2. Procesar archivos subidos</h3>
+      <pre><code class="language-php">
+&lt;?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Verificar si se subió un archivo
+    if (isset($_FILES['archivo'])) {
+        $archivo = $_FILES['archivo'];
+
+        // Información del archivo
+        $nombre = $archivo['name'];           // Nombre original
+        $tipo = $archivo['type'];             // Tipo MIME
+        $tamanio = $archivo['size'];          // Tamaño en bytes
+        $temp = $archivo['tmp_name'];         // Ubicación temporal
+        $error = $archivo['error'];           // Código de error
+
+        // Validaciones
+        if ($error === UPLOAD_ERR_OK) {
+            // Verificar extensión
+            $extensiones_permitidas = array('jpg', 'png', 'gif', 'pdf');
+            $ext = pathinfo($nombre, PATHINFO_EXTENSION);
+            $ext = strtolower($ext);
+
+            if (in_array($ext, $extensiones_permitidas)) {
+                // Verificar tamaño (máximo 2MB)
+                if ($tamanio <= 2 * 1024 * 1024) {
+                    // Generar nombre único
+                    $nuevo_nombre = uniqid('archivo_') . '.' . $ext;
+                    $ruta_destino = 'uploads/' . $nuevo_nombre;
+
+                    // Mover archivo
+                    if (move_uploaded_file($temp, $ruta_destino)) {
+                        echo "Archivo subido exitosamente: " . htmlspecialchars($nuevo_nombre);
+                    } else {
+                        echo "Error al mover el archivo";
+                    }
+                } else {
+                    echo "El archivo es demasiado grande";
+                }
+            } else {
+                echo "Extensión no permitida";
+            }
+        } else {
+            echo "Error en la subida del archivo";
+        }
+    }
+}
+?&gt;
+</code></pre>      
+    </section>
+
+
+
+    <!-- RESUMEN -->
+    <section id="resumen">
+      <div class="info-box">
+        <h3>Resumen de formularios en PHP</h3>
+        <ul>
+          <li>Los formularios HTML envían datos a scripts PHP</li>
+          <li>GET envía datos en la URL (limitado a ~2KB)</li>
+          <li>POST envía datos en el cuerpo (más seguro)</li>
+          <li>Siempre validar datos del cliente en el servidor</li>
+          <li>Usar htmlspecialchars() para prevenir XSS</li>
+          <li>Usar filter_var() para validación de emails, URLs, etc.</li>
+          <li>Para archivos, usar $_FILES y enctype="multipart/form-data"</li>
+          <li>Sanitizar siempre los datos del usuario</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+  </footer>
+</body>
+
+</html>

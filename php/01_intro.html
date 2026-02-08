@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-EVTW1307T1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducción a PHP</title>
+    <script src="/course-resources/index.js" defer></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+    <script src="../index.js" defer></script>
+    <script src="../menu.js" defer></script>
+    <!-- <link rel="stylesheet" href="../index.css"> -->
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+
+    <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+        <div class="vc-rail-head">
+            <span class="vc-rail-title">Índice</span>
+            <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+                <!-- X SVG -->
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+        <ul id="vc-list" class="vc-list"></ul>
+    </nav>
+
+    <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+    <!-- ===== /VC SIDEBAR ===== -->
+
+    <header>
+
+        <!-- ===== VC SIDEBAR (desde cero) ===== -->
+        <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+            aria-controls="vc-rail" aria-expanded="false">
+            <!--Hamburger icon -->
+            <i class="fa fa-bars" aria-hidden="true"></i>
+
+
+        </button>
+        <h1>Introducción a PHP</h1>
+        <img src="" id="logo" alt="Logo" style="display: none;">
+    </header>
+
+    <main>
+
+        <!-- SECCIÓN 1: INTRODUCCIÓN -->
+        <section id="intro">
+            <h2>1. ¿Qué es PHP?</h2>
+
+            <div class="diagram">
+                <img src="../assets/php_logo.png" style="max-width:30%;" alt="PHP Logo">
+            </div>
+
+            <p>
+                <strong>PHP</strong> (PHP: Hypertext Preprocessor) es un lenguaje de programación de código abierto
+                especialmente diseñado para el <strong>desarrollo web del lado del servidor</strong>.
+            </p>
+
+            <ul>
+                <li>Es ejecutado en el servidor, generando HTML que se envía al cliente</li>
+                <li>Puede integrarse fácilmente con HTML</li>
+                <li>Es compatible con múltiples bases de datos (MySQL, PostgreSQL, etc.)</li>
+                <li>Es multiplataforma (Windows, Linux, macOS)</li>
+                <li>Es gratuito y de código abierto</li>
+            </ul>
+
+            <h3>1.1. ¿Para qué se usa PHP?</h3>
+            <ul>
+                <li>Crear páginas web dinámicas</li>
+                <li>Recoger datos de formularios</li>
+                <li>Gestionar bases de datos</li>
+                <li>Crear sistemas de autenticación</li>
+                <li>Generar contenido personalizado</li>
+            </ul>
+        </section>
+
+        <!-- SECCIÓN 2: INSTALACIÓN -->
+        <section id="instalacion">
+            <h2>2. Instalación de PHP</h2>
+
+            <h3>2.1. Opciones de instalación</h3>
+            <p>
+                Para desarrollar con PHP necesitas un servidor web con PHP instalado. Las opciones más comunes son:
+            </p>
+
+            <ul>
+                <li><strong>XAMPP</strong>: Paquete todo-en-uno (Apache + MySQL + PHP)</li>
+                <li>WAMP: Para Windows (Windows + Apache + MySQL + PHP)</li>
+                <li>MAMP: Para macOS</li>
+                <li>Servidor PHP integrado: Desde PHP 5.4+ incluye un servidor de desarrollo</li>
+            </ul>
+
+            <h3>2.2. XAMPP</h3>
+             <div class="diagram">
+                <img src="../assets/php_xampp.png" style="max-width:60%;" alt="PHP Xampp">
+            </div>
+            <p>
+                XAMPP crea una carpeta <code>htdocs</code> donde debes colocar tus archivos PHP.
+                El servidor Apache lee y ejecuta los archivos desde esta ubicación.
+            </p>
+            <ul>
+                <li><strong>Windows</strong>: <code>C:\xampp\htdocs\</code></li>
+                <li><strong>macOS</strong>: <code>/Applications/XAMPP/htdocs/</code></li>
+            </ul>
+            <p>
+                Para acceder a tus archivos desde el navegador: <code>http://localhost/index.php</code>
+            </p>
+             <div class="diagram">
+                <img src="../assets/php_htdocs.png" style="max-width:60%;" alt="PHP htdocs">
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: SINTAXIS -->
+        <section id="sintaxis">
+            <h2>3. Sintaxis básica de PHP</h2>
+
+            <p>
+                Los scripts PHP comienzan con <code>&lt;?php</code> y terminan con <code>?&gt;</code>
+            </p>
+
+            <pre><code class="language-php">
+&lt;?php
+// Este es un script PHP básico
+echo "¡Hola, Mundo!";
+?&gt;
+</code></pre>
+
+            <h3>3.1. Integración con HTML</h3>
+            <pre><code class="language-php">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Mi página PHP&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;&lt;?php echo "Bienvenido a PHP"; ?&gt;&lt;/h1&gt;
+    &lt;p&gt;Hoy es &lt;?php echo date("d/m/Y"); ?&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+            <h3>3.2. Reglas importantes</h3>
+            <ul>
+                <li>Los archivos PHP deben tener extensión <code>.php</code></li>
+                <li>Las instrucciones terminan con punto y coma <code>;</code></li>
+                <li>PHP es <strong>case-sensitive</strong> para variables, pero no para palabras clave</li>
+            </ul>
+        </section>
+
+        <!-- SECCIÓN 4: COMENTARIOS -->
+        <section id="comentarios">
+            <h2>4. Comentarios en PHP</h2>
+
+            <p>Los comentarios se usan para documentar el código y no se ejecutan.</p>
+
+            <pre><code class="language-php">
+&lt;?php
+// Este es un comentario de una línea
+
+# También se puede usar # para comentarios de una línea
+
+/*
+  Este es un comentario
+  de múltiples líneas
+  que puede ocupar varias líneas
+*/
+
+echo "Los comentarios no se muestran"; // Comentario al final de la línea
+?&gt;
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 5: VARIABLES -->
+        <section id="variables">
+            <h2>5. Variables en PHP</h2>
+
+            <p>
+                Las variables en PHP comienzan con el símbolo <code>$</code> seguido del nombre de la variable.
+            </p>
+
+            <pre><code class="language-php">
+&lt;?php
+// Declaración de variables
+$nombre = "Juan";           // String (cadena de texto)
+$edad = 25;                 // Integer (número entero)
+$precio = 19.99;            // Float (número decimal)
+$activo = true;             // Boolean (verdadero/falso)
+
+// Las variables son case-sensitive
+$color = "rojo";
+$Color = "azul";            // Variable diferente
+echo $color;                // Imprime: rojo
+?&gt;
+</code></pre>
+
+            <h3>5.1. Reglas para nombres de variables</h3>
+            <ul>
+                <li>Deben comenzar con <code>$</code></li>
+                <li>Después de $ debe ir una letra o guión bajo</li>
+                <li>Solo pueden contener letras, números y guiones bajos</li>
+                <li>Son case-sensitive (<code>$nombre</code> ≠ <code>$Nombre</code>)</li>
+            </ul>
+
+            <h3>5.2. Variables dinámicas</h3>
+            <pre><code class="language-php">
+&lt;?php
+$nombre_variable = "edad";
+$$nombre_variable = 30;     // Crea $edad = 30
+
+echo $edad;                 // Imprime: 30
+?&gt;
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 6: ECHO / PRINT -->
+        <section id="echo-print">
+            <h2>6. Echo y Print</h2>
+
+            <p>
+                <code>echo</code> y <code>print</code> se usan para mostrar contenido en pantalla.
+            </p>
+
+            <h3>6.1. Echo</h3>
+            <pre><code class="language-php">
+&lt;?php
+// Echo puede mostrar múltiples valores separados por comas
+echo "Hola", " ", "Mundo";
+
+// Echo con variables
+$nombre = "María";
+echo "Hola, $nombre";       // Interpolación de variables
+
+// Echo con concatenación
+echo "Hola, " . $nombre;    // Operador de concatenación .
+?&gt;
+</code></pre>
+
+            <h3>6.2. Print</h3>
+            <pre><code class="language-php">
+&lt;?php
+// Print solo puede mostrar un valor
+print "Hola Mundo";
+
+// Print devuelve 1, por lo que puede usarse en expresiones
+$resultado = print "Texto";  // $resultado = 1
+?&gt;
+</code></pre>
+
+            <h3>6.3. Diferencias entre echo y print</h3>
+            <ul>
+                <li><strong>echo</strong>: Más rápido, puede recibir múltiples parámetros, no devuelve valor</li>
+                <li><strong>print</strong>: Más lento, un solo parámetro, devuelve 1</li>
+            </ul>
+        </section>
+
+        <!-- SECCIÓN 7: TIPOS DE DATOS -->
+        <section id="tipos-datos">
+            <h2>7. Tipos de datos en PHP</h2>
+
+            <p>PHP soporta varios tipos de datos:</p>
+
+            <pre><code class="language-php">
+&lt;?php
+// 1. String (cadena de texto)
+$texto = "Hola Mundo";
+$texto2 = 'También con comillas simples';
+
+// 2. Integer (número entero)
+$numero = 42;
+$negativo = -15;
+
+// 3. Float/Double (número decimal)
+$decimal = 3.14;
+$cientifico = 1.5e3;        // 1500
+
+// 4. Boolean (verdadero o falso)
+$verdadero = true;
+$falso = false;
+
+// 5. Array (arreglo)
+$colores = array("rojo", "verde", "azul");
+$numeros = [1, 2, 3, 4, 5]; // Sintaxis corta
+
+// 6. Object (objeto)
+class Persona {
+    public $nombre;
+}
+$persona = new Persona();
+$persona->nombre = "Juan";
+
+// 7. NULL (valor nulo)
+$vacio = null;
+
+// Verificar tipo de dato
+echo gettype($numero);      // Imprime: integer
+var_dump($colores);         // Muestra información detallada
+?&gt;
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 8: STRINGS -->
+        <section id="strings">
+            <h2>8. Strings (Cadenas de texto)</h2>
+
+            <h3>8.1. Operaciones con strings</h3>
+            <pre><code class="language-php">
+&lt;?php
+$nombre = "Juan";
+$apellido = "García";
+
+// Concatenación
+$nombre_completo = $nombre . " " . $apellido;
+echo $nombre_completo;      // Imprime: Juan García
+
+// Longitud de una cadena
+echo strlen($nombre_completo);  // Imprime: 12
+
+// Contar palabras
+echo str_word_count($nombre_completo);  // Imprime: 2
+
+// Invertir cadena
+echo strrev($nombre);       // Imprime: nauJ
+
+// Buscar texto
+echo strpos("Hola Mundo", "Mundo");  // Imprime: 5 (posición)
+?&gt;
+</code></pre>
+
+            <h3>8.2. Funciones útiles de strings</h3>
+            <pre><code class="language-php">
+&lt;?php
+$texto = "Hola Mundo PHP";
+
+// Convertir a mayúsculas y minúsculas
+echo strtoupper($texto);    // HOLA MUNDO PHP
+echo strtolower($texto);    // hola mundo php
+
+// Reemplazar texto
+echo str_replace("Mundo", "Amigo", $texto);  // Hola Amigo PHP
+
+// Extraer subcadena
+echo substr($texto, 0, 4);  // Hola
+
+// Dividir cadena en array
+$palabras = explode(" ", $texto);  // ["Hola", "Mundo", "PHP"]
+
+// Unir array en cadena
+$nueva_cadena = implode("-", $palabras);  // Hola-Mundo-PHP
+?&gt;
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 9: NÚMEROS -->
+        <section id="numeros">
+            <h2>9. Numbers (Números)</h2>
+
+            <h3>9.1. Integers (Enteros)</h3>
+            <pre><code class="language-php">
+&lt;?php
+$entero = 42;
+$negativo = -100;
+$hexadecimal = 0xFF;        // 255 en decimal
+
+// Verificar si es entero
+var_dump(is_int($entero));  // bool(true)
+
+// Valor máximo y mínimo
+echo PHP_INT_MAX;           // 9223372036854775807 (en 64 bits)
+echo PHP_INT_MIN;           // -9223372036854775808
+?&gt;
+</code></pre>
+
+            <h3>9.2. Floats (Decimales)</h3>
+            <pre><code class="language-php">
+&lt;?php
+$decimal = 3.14;
+$cientifico = 2.5e3;        // 2500
+
+// Verificar si es float
+var_dump(is_float($decimal));  // bool(true)
+
+// Verificar si es numérico
+var_dump(is_numeric("123"));   // bool(true)
+var_dump(is_numeric("abc"));   // bool(false)
+?&gt;
+</code></pre>
+
+            <h3>9.3. Operaciones numéricas</h3>
+            <pre><code class="language-php">
+&lt;?php
+$a = 10;
+$b = 3;
+
+echo $a + $b;               // Suma: 13
+echo $a - $b;               // Resta: 7
+echo $a * $b;               // Multiplicación: 30
+echo $a / $b;               // División: 3.333...
+echo $a % $b;               // Módulo (resto): 1
+echo $a ** $b;              // Potencia: 1000
+?&gt;
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 10: CASTING -->
+        <section id="casting">
+            <h2>10. Casting (Conversión de tipos)</h2>
+
+            <p>
+                El casting permite convertir una variable de un tipo a otro.
+            </p>
+
+            <pre><code class="language-php">
+&lt;?php
+// Convertir a string
+$numero = 123;
+$texto = (string)$numero;
+echo gettype($texto);       // string
+
+// Convertir a integer
+$decimal = 3.14;
+$entero = (int)$decimal;
+echo $entero;               // 3 (se trunca, no redondea)
+
+// Convertir a float
+$numero = 42;
+$decimal = (float)$numero;
+echo $decimal;              // 42.0
+
+// Convertir a boolean
+$valor = 1;
+$booleano = (bool)$valor;
+var_dump($booleano);        // bool(true)
+
+// Valores que se convierten a false
+var_dump((bool)0);          // false
+var_dump((bool)"");         // false
+var_dump((bool)null);       // false
+var_dump((bool)[]);         // false
+
+// Convertir a array
+$numero = 10;
+$array = (array)$numero;
+print_r($array);            // Array([0] => 10)
+?&gt;
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 11: MATH -->
+        <section id="math">
+            <h2>11. Funciones matemáticas</h2>
+
+            <pre><code class="language-php">
+&lt;?php
+// Funciones básicas
+echo abs(-5);               // Valor absoluto: 5
+echo ceil(3.2);             // Redondear hacia arriba: 4
+echo floor(3.8);            // Redondear hacia abajo: 3
+echo round(3.5);            // Redondear: 4
+
+// Potencias y raíces
+echo pow(2, 3);             // Potencia: 8 (2^3)
+echo sqrt(16);              // Raíz cuadrada: 4
+
+// Máximo y mínimo
+echo max(1, 5, 3, 9, 2);    // Valor máximo: 9
+echo min(1, 5, 3, 9, 2);    // Valor mínimo: 1
+
+// Números aleatorios
+echo rand();                // Número aleatorio
+echo rand(1, 100);          // Entre 1 y 100
+
+// Constantes matemáticas
+echo M_PI;                  // 3.14159265358979
+echo M_E;                   // 2.7182818284590 (número e)
+
+// Funciones trigonométricas
+echo sin(M_PI / 2);         // Seno: 1
+echo cos(0);                // Coseno: 1
+echo tan(M_PI / 4);         // Tangente: 1
+?&gt;
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 12: CONSTANTES -->
+        <section id="constantes">
+            <h2>12. Constantes</h2>
+
+            <p>
+                Las constantes son como variables pero su valor <strong>no puede cambiar</strong> una vez definido.
+            </p>
+
+            <h3>12.1. Definir constantes</h3>
+            <pre><code class="language-php">
+&lt;?php
+// Método 1: usando define()
+define("SITIO", "Mi Web");
+define("VERSION", 1.5);
+define("PI", 3.14159);
+
+echo SITIO;                 // Mi Web
+
+// Método 2: usando const (desde PHP 5.3)
+const PAIS = "España";
+const EDAD_MINIMA = 18;
+
+echo PAIS;                  // España
+
+// Las constantes son globales
+function mostrarVersion() {
+    echo VERSION;           // Se puede acceder desde cualquier lugar
+}
+?&gt;
+</code></pre>
+
+            <h3>12.2. Constantes predefinidas</h3>
+            <pre><code class="language-php">
+&lt;?php
+// Constantes útiles de PHP
+echo PHP_VERSION;           // Versión de PHP
+echo PHP_OS;                // Sistema operativo
+echo PHP_INT_MAX;           // Valor entero máximo
+
+// Verificar si existe una constante
+if (defined("SITIO")) {
+    echo "La constante SITIO existe";
+}
+?&gt;
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 13: CONSTANTES MÁGICAS -->
+        <section id="magic-constants">
+            <h2>13. Constantes mágicas</h2>
+
+            <p>
+                PHP tiene constantes especiales que cambian dependiendo del contexto.
+            </p>
+
+            <pre><code class="language-php">
+&lt;?php
+// __LINE__ - Número de línea actual
+echo "Esta es la línea: " . __LINE__;
+
+// __FILE__ - Ruta completa del archivo
+echo "Archivo: " . __FILE__;
+
+// __DIR__ - Directorio del archivo
+echo "Directorio: " . __DIR__;
+
+// __FUNCTION__ - Nombre de la función actual
+function miFuncion() {
+    echo "Función: " . __FUNCTION__;
+}
+
+// __CLASS__ - Nombre de la clase actual
+class MiClase {
+    public function mostrar() {
+        echo "Clase: " . __CLASS__;
+    }
+}
+
+// __METHOD__ - Nombre del método actual
+class Ejemplo {
+    public function metodo() {
+        echo "Método: " . __METHOD__;  // Ejemplo::metodo
+    }
+}
+
+// __NAMESPACE__ - Espacio de nombres actual
+namespace MiApp;
+echo "Namespace: " . __NAMESPACE__;
+?&gt;
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 14: OPERADORES -->
+        <section id="operadores">
+            <h2>14. Operadores en PHP</h2>
+
+            <h3>14.1. Operadores aritméticos</h3>
+            <pre><code class="language-php">
+&lt;?php
+$a = 10;
+$b = 3;
+
+echo $a + $b;               // Suma: 13
+echo $a - $b;               // Resta: 7
+echo $a * $b;               // Multiplicación: 30
+echo $a / $b;               // División: 3.333...
+echo $a % $b;               // Módulo: 1
+echo $a ** $b;              // Potencia: 1000
+?&gt;
+</code></pre>
+
+            <h3>14.2. Operadores de asignación</h3>
+            <pre><code class="language-php">
+&lt;?php
+$x = 10;                    // Asignación simple
+$x += 5;                    // $x = $x + 5 -> 15
+$x -= 3;                    // $x = $x - 3 -> 12
+$x *= 2;                    // $x = $x * 2 -> 24
+$x /= 4;                    // $x = $x / 4 -> 6
+$x %= 5;                    // $x = $x % 5 -> 1
+
+$texto = "Hola";
+$texto .= " Mundo";         // Concatenación: "Hola Mundo"
+?&gt;
+</code></pre>
+
+            <h3>14.3. Operadores de comparación</h3>
+            <pre><code class="language-php">
+&lt;?php
+$a = 5;
+$b = "5";
+
+var_dump($a == $b);         // true (igual en valor)
+var_dump($a === $b);        // false (idéntico: valor y tipo)
+var_dump($a != $b);         // false (diferente)
+var_dump($a !== $b);        // true (no idéntico)
+var_dump($a > 3);           // true (mayor que)
+var_dump($a < 10);          // true (menor que)
+var_dump($a >= 5);          // true (mayor o igual)
+var_dump($a <= 5);          // true (menor o igual)
+
+// Operador spaceship (PHP 7+)
+echo 5 <=> 3;               // 1 (5 mayor que 3)
+echo 3 <=> 5;               // -1 (3 menor que 5)
+echo 5 <=> 5;               // 0 (son iguales)
+?&gt;
+</code></pre>
+
+            <h3>14.4. Operadores lógicos</h3>
+            <pre><code class="language-php">
+&lt;?php
+$x = true;
+$y = false;
+
+var_dump($x && $y);         // AND: false
+var_dump($x || $y);         // OR: true
+var_dump(!$x);              // NOT: false
+var_dump($x and $y);        // AND (menor precedencia): false
+var_dump($x or $y);         // OR (menor precedencia): true
+var_dump($x xor $y);        // XOR (exclusivo): true
+?&gt;
+</code></pre>
+
+            <h3>14.5. Operadores de incremento/decremento</h3>
+            <pre><code class="language-php">
+&lt;?php
+$contador = 5;
+
+echo ++$contador;           // Pre-incremento: 6 (incrementa y luego usa)
+echo $contador++;           // Post-incremento: 6 (usa y luego incrementa)
+echo $contador;             // 7
+
+echo --$contador;           // Pre-decremento: 6
+echo $contador--;           // Post-decremento: 6
+echo $contador;             // 5
+?&gt;
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 15: IF ELSE -->
+        <section id="if-else">
+            <h2>15. Condicionales If...Else...Elseif</h2>
+
+            <h3>15.1. If simple</h3>
+            <pre><code class="language-php">
+&lt;?php
+$edad = 18;
+
+if ($edad >= 18) {
+    echo "Eres mayor de edad";
+}
+?&gt;
+</code></pre>
+
+            <h3>15.2. If...Else</h3>
+            <pre><code class="language-php">
+&lt;?php
+$temperatura = 15;
+
+if ($temperatura > 25) {
+    echo "Hace calor";
+} else {
+    echo "Hace frío";
+}
+?&gt;
+</code></pre>
+
+            <h3>15.3. If...Elseif...Else</h3>
+            <pre><code class="language-php">
+&lt;?php
+$nota = 7;
+
+if ($nota >= 9) {
+    echo "Sobresaliente";
+} elseif ($nota >= 7) {
+    echo "Notable";
+} elseif ($nota >= 5) {
+    echo "Aprobado";
+} else {
+    echo "Suspenso";
+}
+?&gt;
+</code></pre>
+
+            <h3>15.4. Operador ternario</h3>
+            <pre><code class="language-php">
+&lt;?php
+$edad = 20;
+
+// Sintaxis: condición ? valor_si_true : valor_si_false
+$resultado = ($edad >= 18) ? "Mayor" : "Menor";
+echo $resultado;            // Mayor
+
+// Operador null coalescing (PHP 7+)
+$nombre = $_GET['nombre'] ?? "Anónimo";  // Si no existe, usa "Anónimo"
+?&gt;
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 16: SWITCH -->
+        <section id="switch">
+            <h2>16. Switch</h2>
+
+            <p>
+                La estructura <code>switch</code> evalúa una expresión y ejecuta código según diferentes casos.
+            </p>
+
+            <pre><code class="language-php">
+&lt;?php
+$dia = 3;
+
+switch ($dia) {
+    case 1:
+        echo "Lunes";
+        break;
+    case 2:
+        echo "Martes";
+        break;
+    case 3:
+        echo "Miércoles";
+        break;
+    case 4:
+        echo "Jueves";
+        break;
+    case 5:
+        echo "Viernes";
+        break;
+    case 6:
+    case 7:
+        echo "Fin de semana";
+        break;
+    default:
+        echo "Día inválido";
+}
+?&gt;
+</code></pre>
+
+            <h3>16.1. Switch con múltiples valores</h3>
+            <pre><code class="language-php">
+&lt;?php
+$mes = "enero";
+
+switch ($mes) {
+    case "diciembre":
+    case "enero":
+    case "febrero":
+        echo "Invierno";
+        break;
+    case "marzo":
+    case "abril":
+    case "mayo":
+        echo "Primavera";
+        break;
+    case "junio":
+    case "julio":
+    case "agosto":
+        echo "Verano";
+        break;
+    case "septiembre":
+    case "octubre":
+    case "noviembre":
+        echo "Otoño";
+        break;
+    default:
+        echo "Mes no válido";
+}
+?&gt;
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 17: LOOPS -->
+        <section id="loops">
+            <h2>17. Bucles (Loops)</h2>
+
+            <h3>17.1. While</h3>
+            <pre><code class="language-php">
+&lt;?php
+// While: se ejecuta mientras la condición sea verdadera
+$contador = 1;
+
+while ($contador <= 5) {
+    echo "Número: $contador<br>";
+    $contador++;
+}
+// Imprime: 1, 2, 3, 4, 5
+?&gt;
+</code></pre>
+
+            <h3>17.2. Do...While</h3>
+            <pre><code class="language-php">
+&lt;?php
+// Do-While: se ejecuta al menos una vez
+$numero = 10;
+
+do {
+    echo "Número: $numero<br>";
+    $numero++;
+} while ($numero < 10);         // La condición es falsa, pero se ejecuta una vez
+?&gt;
+</code></pre>
+
+            <h3>17.3. For</h3>
+            <pre><code class="language-php">
+&lt;?php
+// For: bucle con inicialización, condición e incremento
+for ($i = 1; $i <= 5; $i++) {
+    echo "Iteración: $i<br>";
+}
+
+// For con saltos
+for ($i = 0; $i <= 10; $i += 2) {
+    echo $i . " ";              // 0 2 4 6 8 10
+}
+?&gt;
+</code></pre>
+
+            <h3>17.4. Foreach (para arrays)</h3>
+            <pre><code class="language-php">
+&lt;?php
+// Foreach: recorre arrays
+$colores = ["rojo", "verde", "azul"];
+
+foreach ($colores as $color) {
+    echo "Color: $color<br>";
+}
+
+// Foreach con índice y valor
+$edades = ["Juan" => 25, "María" => 30, "Pedro" => 28];
+
+foreach ($edades as $nombre => $edad) {
+    echo "$nombre tiene $edad años<br>";
+}
+?&gt;
+</code></pre>
+
+            <h3>17.5. Break y Continue</h3>
+            <pre><code class="language-php">
+&lt;?php
+// Break: sale del bucle
+for ($i = 1; $i <= 10; $i++) {
+    if ($i == 5) {
+        break;                  // Sale del bucle cuando i = 5
+    }
+    echo $i . " ";              // 1 2 3 4
+}
+
+echo "<br>";
+
+// Continue: salta a la siguiente iteración
+for ($i = 1; $i <= 10; $i++) {
+    if ($i % 2 == 0) {
+        continue;               // Salta los números pares
+    }
+    echo $i . " ";              // 1 3 5 7 9
+}
+?&gt;
+</code></pre>
+
+            <h3>17.6. Bucles anidados</h3>
+            <pre><code class="language-php">
+&lt;?php
+// Tabla de multiplicar
+for ($i = 1; $i <= 3; $i++) {
+    for ($j = 1; $j <= 3; $j++) {
+        $resultado = $i * $j;
+        echo "$i x $j = $resultado<br>";
+    }
+    echo "---<br>";
+}
+?&gt;
+</code></pre>
+        </section>
+
+        <!-- RESUMEN -->
+        <section id="resumen">
+            <div class="info-box">
+                <h3>Resumen de PHP básico</h3>
+                <ul>
+                    <li><strong>PHP</strong> es un lenguaje del lado del servidor para desarrollo web</li>
+                    <li>Las variables comienzan con <code>$</code> y son case-sensitive</li>
+                    <li>Soporta múltiples tipos de datos: string, int, float, bool, array, object, null</li>
+                    <li>Usa <code>echo</code> o <code>print</code> para mostrar contenido</li>
+                    <li>Incluye operadores aritméticos, lógicos y de comparación</li>
+                    <li>Las estructuras de control incluyen if, switch</li>
+                    <li>Los bucles disponibles son: while, do-while, for, foreach</li>
+                    <li>Las constantes se definen con <code>define()</code> o <code>const</code></li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+    </footer>
+</body>
+
+</html>

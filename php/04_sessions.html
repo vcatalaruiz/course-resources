@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sesiones en PHP</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+  <header>
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1>Sesiones en PHP</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+    <p>Las sesiones permiten mantener información del usuario a través de múltiples páginas. Son esenciales para crear aplicaciones web interactivas como sistemas de login, carritos de compra y preferencias de usuario.</p>
+
+    <!-- SECCIÓN 1: QUÉ SON LAS SESIONES -->
+    <section id="que-son-sesiones">
+      <h2>1. ¿Qué son las sesiones?</h2>
+
+      <p>Una sesión es una forma de almacenar información (en variables) para usarla en múltiples páginas. A diferencia de las cookies, la información de sesión no se almacena en el ordenador del usuario, sino en el servidor.</p>
+
+      <h3>1.1. ¿Por qué usar sesiones?</h3>
+      <ul>
+        <li>Mantener el estado de autenticación del usuario</li>
+        <li>Almacenar datos temporales entre páginas (carritos de compra)</li>
+        <li>Guardar preferencias del usuario durante la visita</li>
+        <li>Mayor seguridad que las cookies (datos en el servidor)</li>
+      </ul>
+
+      <h3>1.2. Sesiones vs Cookies</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Característica</th>
+            <th>Sesiones</th>
+            <th>Cookies</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Almacenamiento</td>
+            <td>Servidor</td>
+            <td>Cliente (navegador)</td>
+          </tr>
+          <tr>
+            <td>Seguridad</td>
+            <td>Más seguro</td>
+            <td>Menos seguro</td>
+          </tr>
+          <tr>
+            <td>Límite de datos</td>
+            <td>Sin límite práctico</td>
+            <td>~4KB por cookie</td>
+          </tr>
+          <tr>
+            <td>Duración</td>
+            <td>Hasta cerrar navegador</td>
+            <td>Fecha de expiración configurable</td>
+          </tr>
+          <tr>
+            <td>Acceso desde JS</td>
+            <td>No (solo PHP)</td>
+            <td>Sí (si no es httpOnly)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>1.3. ¿Cómo funcionan las sesiones?</h3>
+      <ol>
+        <li>Se llama a <code>session_start()</code> en PHP</li>
+        <li>PHP genera un ID de sesión único (PHPSESSID)</li>
+        <li>El ID se envía al navegador como cookie</li>
+        <li>Los datos de sesión se guardan en el servidor</li>
+        <li>En cada petición, PHP lee el ID y carga los datos</li>
+      </ol>
+    </section>
+
+    <!-- SECCIÓN 2: INICIAR UNA SESIÓN -->
+    <section id="iniciar-sesion">
+      <h2>2. Iniciar una sesión</h2>
+
+      <h3>2.1. session_start()</h3>
+      <pre><code class="language-php">
+&lt;?php
+// SIEMPRE debe ser la primera línea antes de cualquier salida HTML
+session_start();
+
+// Ahora puedes usar $_SESSION
+$_SESSION['usuario'] = "Juan";
+$_SESSION['email'] = "juan@ejemplo.com";
+
+echo "Sesión iniciada correctamente";
+?&gt;
+</code></pre>
+
+      <div class="warning-box">
+        <strong>⚠️ Importante:</strong> <code>session_start()</code> debe llamarse ANTES de cualquier salida HTML, espacios en blanco o echo. De lo contrario, obtendrás el error: <em>"Cannot send session cookie - headers already sent"</em>.
+      </div>
+
+      <h3>2.2. Verificar si existe una sesión</h3>
+      <pre><code class="language-php">
+&lt;?php
+// Método 1: Verificar con session_status()
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Método 2: Verificar si existe PHPSESSID
+if (!isset($_COOKIE['PHPSESSID'])) {
+    session_start();
+}
+
+// Método 3: Usar session_id()
+if (session_id() === '') {
+    session_start();
+}
+?&gt;
+</code></pre>
+
+      <h3>2.3. Obtener información de sesión</h3>
+      <pre><code class="language-php">
+&lt;?php
+session_start();
+
+// ID de sesión actual
+echo session_id();  // Ejemplo: 4h8s9d7f6g5h4j3k2l1
+
+// Estado de la sesión
+echo session_status();
+// PHP_SESSION_DISABLED = 0  (sesiones deshabilitadas)
+// PHP_SESSION_NONE = 1      (sesiones habilitadas pero no iniciada)
+// PHP_SESSION_ACTIVE = 2    (sesión activa)
+
+// Nombre de la sesión (cookie)
+echo session_name();  // PHPSESSID (por defecto)
+
+// Configuración actual
+print_r(session_get_cookie_params());
+?&gt;
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 3: TRABAJAR CON VARIABLES DE SESIÓN -->
+    <section id="variables-sesion">
+      <h2>3. Trabajar con variables de sesión</h2>
+
+      <h3>3.1. Crear y almacenar datos</h3>
+      <pre><code class="language-php">
+&lt;?php
+session_start();
+
+// Crear variables de sesión
+$_SESSION['usuario'] = "María";
+$_SESSION['rol'] = "admin";
+$_SESSION['ultimo_acceso'] = date("Y-m-d H:i:s");
+
+// Almacenar arrays
+$_SESSION['carrito'] = [
+    "producto1" => ["nombre" => "Laptop", "precio" => 999],
+    "producto2" => ["nombre" => "Mouse", "precio" => 25]
+];
+
+// Almacenar objetos
+class Usuario {
+    public $nombre;
+    public $email;
+}
+
+$usuario = new Usuario();
+$usuario->nombre = "Pedro";
+$usuario->email = "pedro@ejemplo.com";
+$_SESSION['usuario_obj'] = $usuario;
+?&gt;
+</code></pre>
+
+      <h3>3.2. Leer datos de sesión</h3>
+      <pre><code class="language-php">
+&lt;?php
+session_start();
+
+// Verificar si existe antes de usar
+if (isset($_SESSION['usuario'])) {
+    echo "Bienvenido, " . $_SESSION['usuario'];
+} else {
+    echo "No has iniciado sesión";
+}
+
+// Usar operador null coalescing
+$usuario = $_SESSION['usuario'] ?? "Invitado";
+echo "Usuario: $usuario";
+
+// Acceder a arrays
+if (isset($_SESSION['carrito']['producto1'])) {
+    echo $_SESSION['carrito']['producto1']['nombre'];
+}
+?&gt;
+</code></pre>
+
+      <h3>3.3. Modificar datos de sesión</h3>
+      <pre><code class="language-php">
+&lt;?php
+session_start();
+
+// Actualizar una variable
+$_SESSION['contador'] = ($_SESSION['contador'] ?? 0) + 1;
+
+// Modificar elemento de array
+$_SESSION['carrito']['producto1']['precio'] = 899;
+
+// Agregar elemento a un array
+$_SESSION['historial'][] = "Página visitada: " . $_SERVER['REQUEST_URI'];
+
+// Combinar arrays
+$_SESSION['permisos'] = array_merge(
+    $_SESSION['permisos'] ?? [],
+    ['leer', 'escribir']
+);
+?&gt;
+</code></pre>
+
+      <h3>3.4. Eliminar variables de sesión</h3>
+      <pre><code class="language-php">
+&lt;?php
+session_start();
+
+// Eliminar una variable específica
+unset($_SESSION['variable_temporal']);
+
+// Eliminar múltiples variables
+unset($_SESSION['var1'], $_SESSION['var2'], $_SESSION['var3']);
+
+// Limpiar todas las variables de sesión (pero mantener la sesión)
+$_SESSION = [];
+
+// Alternativa: session_unset()
+session_unset();  // Equivalente a $_SESSION = []
+?&gt;
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 4: DESTRUIR SESIONES -->
+    <section id="destruir-sesion">
+      <h2>4. Destruir una sesión</h2>
+
+      <h3>4.1. session_destroy()</h3>
+      <pre><code class="language-php">
+&lt;?php
+session_start();
+
+// Método completo para cerrar sesión
+// Paso 1: Limpiar variables de sesión
+$_SESSION = [];
+
+// Paso 2: Eliminar cookie de sesión
+if (isset($_COOKIE[session_name()])) {
+    setcookie(session_name(), '', time() - 3600, '/');
+}
+
+// Paso 3: Destruir la sesión en el servidor
+session_destroy();
+
+echo "Sesión cerrada correctamente";
+?&gt;
+</code></pre>
+
+      <h3>4.2. Logout completo</h3>
+      <pre><code class="language-php">
+&lt;?php
+// logout.php
+session_start();
+
+// Limpiar todas las variables de sesión
+$_SESSION = array();
+
+// Eliminar la cookie de sesión del navegador
+if (ini_get("session.use_cookies")) {
+    $params = session_get_cookie_params();
+    setcookie(
+        session_name(),
+        '',
+        time() - 42000,
+        $params["path"],
+        $params["domain"],
+        $params["secure"],
+        $params["httponly"]
+    );
+}
+
+// Destruir la sesión
+session_destroy();
+
+// Redirigir al login
+header("Location: login.php");
+exit;
+?&gt;
+</code></pre>      
+    </section>
+
+    <!-- SECCIÓN 5: EJEMPLOS PRÁCTICOS -->
+    <section id="ejemplos-practicos">
+      <h2>5. Ejemplos prácticos</h2>
+
+      <h3>5.1. Sistema de login simple</h3>
+      <pre><code class="language-php">
+&lt;?php
+// login.php
+session_start();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $usuario = $_POST['usuario'] ?? '';
+    $password = $_POST['password'] ?? '';
+
+    // Validar credenciales (ejemplo simple)
+    if ($usuario === 'admin' && $password === '1234') {
+        // Regenerar ID por seguridad
+        session_regenerate_id(true);
+
+        // Guardar datos en sesión
+        $_SESSION['autenticado'] = true;
+        $_SESSION['usuario'] = $usuario;
+        $_SESSION['rol'] = 'administrador';
+        $_SESSION['login_time'] = time();
+
+        // Redirigir al panel
+        header("Location: panel.php");
+        exit;
+    } else {
+        $error = "Credenciales incorrectas";
+    }
+}
+?&gt;
+
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Login&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2&gt;Iniciar sesión&lt;/h2&gt;
+    &lt;?php if (isset($error)): ?&gt;
+        &lt;p style="color: red;"&gt;&lt;?php echo $error; ?&gt;&lt;/p&gt;
+    &lt;?php endif; ?&gt;
+
+    &lt;form method="POST"&gt;
+        &lt;label&gt;Usuario:&lt;/label&gt;
+        &lt;input type="text" name="usuario" required&gt;&lt;br&gt;&lt;br&gt;
+
+        &lt;label&gt;Contraseña:&lt;/label&gt;
+        &lt;input type="password" name="password" required&gt;&lt;br&gt;&lt;br&gt;
+
+        &lt;button type="submit"&gt;Entrar&lt;/button&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h3>5.2. Verificar autenticación</h3>
+      <pre><code class="language-php">
+&lt;?php
+// panel.php (página protegida)
+session_start();
+
+// Verificar si el usuario está autenticado
+if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) {
+    // Redirigir al login
+    header("Location: login.php");
+    exit;
+}
+
+// Si llegó aquí, el usuario está autenticado
+$usuario = $_SESSION['usuario'];
+$rol = $_SESSION['rol'];
+?&gt;
+
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Panel de Control&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Bienvenido, &lt;?php echo htmlspecialchars($usuario); ?&gt;&lt;/h1&gt;
+    &lt;p&gt;Rol: &lt;?php echo htmlspecialchars($rol); ?&gt;&lt;/p&gt;
+
+    &lt;p&gt;Tiempo de sesión: 
+        &lt;?php 
+        $tiempo = time() - $_SESSION['login_time'];
+        echo gmdate("H:i:s", $tiempo);
+        ?&gt;
+    &lt;/p&gt;
+
+    &lt;a href="logout.php"&gt;Cerrar sesión&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h3>5.3. Carrito de compras</h3>
+      <pre><code class="language-php">
+&lt;?php
+// carrito.php
+session_start();
+
+// Inicializar carrito si no existe
+if (!isset($_SESSION['carrito'])) {
+    $_SESSION['carrito'] = [];
+}
+
+// Agregar producto al carrito
+if (isset($_POST['agregar'])) {
+    $producto_id = $_POST['producto_id'];
+    $nombre = $_POST['nombre'];
+    $precio = $_POST['precio'];
+    $cantidad = $_POST['cantidad'] ?? 1;
+
+    // Si ya existe, aumentar cantidad
+    if (isset($_SESSION['carrito'][$producto_id])) {
+        $_SESSION['carrito'][$producto_id]['cantidad'] += $cantidad;
+    } else {
+        $_SESSION['carrito'][$producto_id] = [
+            'nombre' => $nombre,
+            'precio' => $precio,
+            'cantidad' => $cantidad
+        ];
+    }
+}
+
+// Eliminar producto del carrito
+if (isset($_POST['eliminar'])) {
+    $producto_id = $_POST['producto_id'];
+    unset($_SESSION['carrito'][$producto_id]);
+}
+
+// Vaciar carrito
+if (isset($_POST['vaciar'])) {
+    $_SESSION['carrito'] = [];
+}
+
+// Calcular total
+$total = 0;
+foreach ($_SESSION['carrito'] as $item) {
+    $total += $item['precio'] * $item['cantidad'];
+}
+?&gt;
+
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Carrito de Compras&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Mi Carrito&lt;/h1&gt;
+
+    &lt;?php if (empty($_SESSION['carrito'])): ?&gt;
+        &lt;p&gt;El carrito está vacío&lt;/p&gt;
+    &lt;?php else: ?&gt;
+        &lt;table border="1"&gt;
+            &lt;tr&gt;
+                &lt;th&gt;Producto&lt;/th&gt;
+                &lt;th&gt;Precio&lt;/th&gt;
+                &lt;th&gt;Cantidad&lt;/th&gt;
+                &lt;th&gt;Subtotal&lt;/th&gt;
+                &lt;th&gt;Acción&lt;/th&gt;
+            &lt;/tr&gt;
+            &lt;?php foreach ($_SESSION['carrito'] as $id => $item): ?&gt;
+            &lt;tr&gt;
+                &lt;td&gt;&lt;?php echo htmlspecialchars($item['nombre']); ?&gt;&lt;/td&gt;
+                &lt;td&gt;$&lt;?php echo number_format($item['precio'], 2); ?&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;?php echo $item['cantidad']; ?&gt;&lt;/td&gt;
+                &lt;td&gt;$&lt;?php echo number_format($item['precio'] * $item['cantidad'], 2); ?&gt;&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;form method="POST" style="display:inline;"&gt;
+                        &lt;input type="hidden" name="producto_id" value="&lt;?php echo $id; ?&gt;"&gt;
+                        &lt;button type="submit" name="eliminar"&gt;Eliminar&lt;/button&gt;
+                    &lt;/form&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;?php endforeach; ?&gt;
+            &lt;tr&gt;
+                &lt;td colspan="3"&gt;&lt;strong&gt;Total:&lt;/strong&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;strong&gt;$&lt;?php echo number_format($total, 2); ?&gt;&lt;/strong&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+
+        &lt;form method="POST"&gt;
+            &lt;button type="submit" name="vaciar"&gt;Vaciar Carrito&lt;/button&gt;
+        &lt;/form&gt;
+    &lt;?php endif; ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h3>5.4. Contador de visitas</h3>
+      <pre><code class="language-php">
+&lt;?php
+session_start();
+
+// Incrementar contador
+if (!isset($_SESSION['visitas'])) {
+    $_SESSION['visitas'] = 1;
+    $_SESSION['primera_visita'] = date("Y-m-d H:i:s");
+} else {
+    $_SESSION['visitas']++;
+}
+
+$_SESSION['ultima_visita'] = date("Y-m-d H:i:s");
+?&gt;
+
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+    &lt;h2&gt;Estadísticas de tu visita&lt;/h2&gt;
+    &lt;p&gt;Número de visitas: &lt;?php echo $_SESSION['visitas']; ?&gt;&lt;/p&gt;
+    &lt;p&gt;Primera visita: &lt;?php echo $_SESSION['primera_visita']; ?&gt;&lt;/p&gt;
+    &lt;p&gt;Última visita: &lt;?php echo $_SESSION['ultima_visita']; ?&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    </section>
+
+    <!-- RESUMEN -->
+    <section id="resumen">
+      <div class="info-box">
+        <h3>Resumen de sesiones en PHP</h3>
+        <ul>
+          <li>Las sesiones almacenan datos en el servidor, no en el cliente</li>
+          <li><strong>session_start()</strong> debe ser la primera línea antes de HTML</li>
+          <li><strong>$_SESSION</strong> es un array superglobal para almacenar datos</li>
+          <li><strong>session_destroy()</strong> elimina la sesión completamente</li>
+          <li>Regenerar ID con <strong>session_regenerate_id()</strong> después del login</li>
+          <li>Usar <strong>httponly</strong> y <strong>secure</strong> para cookies de sesión</li>
+          <li>Implementar timeout de inactividad para mayor seguridad</li>
+          <li>Validar información del navegador en cada petición</li>
+          <li>Las sesiones son ideales para login, carritos y preferencias</li>
+          <li>Limpiar <strong>$_SESSION</strong> antes de <strong>session_destroy()</strong></li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+
+</html>

@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación Orientada a Objetos en PHP</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+  <header>
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1>Programación Orientada a Objetos en PHP</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+    <p>La Programación Orientada a Objetos (POO) es un paradigma de programación que organiza el código en objetos que contienen datos (propiedades) y comportamientos (métodos). PHP soporta completamente POO desde la versión 5.</p>
+
+    <!-- SECCIÓN 1: INTRODUCCIÓN A POO -->
+    <section id="introduccion-poo">
+      <h2>1. Introducción a la POO</h2>
+
+      <h3>1.1. ¿Qué es la POO?</h3>
+      <p>La POO es un paradigma de programación que modela conceptos del mundo real mediante <strong>objetos</strong> que combinan datos y funcionalidad.</p>
+
+      <h3>1.2. Conceptos fundamentales</h3>
+      <ul>
+        <li><strong>Clase:</strong> Plantilla o molde para crear objetos</li>
+        <li><strong>Objeto:</strong> Instancia de una clase</li>
+        <li><strong>Propiedad:</strong> Variable dentro de una clase</li>
+        <li><strong>Método:</strong> Función dentro de una clase</li>
+        <li><strong>Encapsulación:</strong> Ocultar detalles internos</li>
+        <li><strong>Herencia:</strong> Reutilizar código de una clase padre</li>
+        <li><strong>Polimorfismo:</strong> Misma interfaz, diferentes implementaciones</li>
+      </ul>
+
+      <h3>1.3. Ventajas de la POO</h3>
+      <ul>
+        <li>Código más organizado y mantenible</li>
+        <li>Reutilización mediante herencia</li>
+        <li>Facilita el trabajo en equipo</li>
+        <li>Modelado más natural del mundo real</li>
+        <li>Encapsulación protege los datos</li>
+      </ul>
+    </section>
+
+    <!-- SECCIÓN 2: CLASES Y OBJETOS -->
+    <section id="clases-objetos">
+      <h2>2. Clases y objetos</h2>
+
+      <h3>2.1. Crear una clase</h3>
+      <pre><code class="language-php">
+&lt;?php
+// Definir una clase
+class Persona {
+    // Propiedades (atributos)
+    public $nombre;
+    public $edad;
+    
+    // Método
+    public function saludar() {
+        echo "Hola, soy " . $this->nombre;
+    }
+}
+
+// Crear un objeto (instanciar)
+$persona1 = new Persona();
+$persona1->nombre = "Juan";
+$persona1->edad = 30;
+
+echo $persona1->nombre;  // Juan
+$persona1->saludar();    // Hola, soy Juan
+?&gt;
+</code></pre>
+
+      <h3>2.2. $this - Referencia al objeto actual</h3>
+      <pre><code class="language-php">
+&lt;?php
+class Coche {
+    public $marca;
+    public $modelo;
+    
+    public function obtenerInfo() {
+        // $this se refiere al objeto actual
+        return $this->marca . " " . $this->modelo;
+    }
+    
+    public function cambiarMarca($nuevaMarca) {
+        $this->marca = $nuevaMarca;
+    }
+}
+
+$miCoche = new Coche();
+$miCoche->marca = "Toyota";
+$miCoche->modelo = "Corolla";
+
+echo $miCoche->obtenerInfo();  // Toyota Corolla
+
+$miCoche->cambiarMarca("Honda");
+echo $miCoche->marca;  // Honda
+?&gt;
+</code></pre>
+
+      <h3>2.3. Constructor y destructor</h3>
+      <pre><code class="language-php">
+&lt;?php
+class Usuario {
+    public $nombre;
+    public $email;
+    
+    // Constructor: se ejecuta al crear el objeto
+    public function __construct($nombre, $email) {
+        $this->nombre = $nombre;
+        $this->email = $email;
+        echo "Usuario creado: " . $this->nombre . "&lt;br&gt;";
+    }
+    
+    // Destructor: se ejecuta al destruir el objeto
+    public function __destruct() {
+        echo "Usuario destruido: " . $this->nombre . "&lt;br&gt;";
+    }
+}
+
+// Al crear el objeto, se ejecuta __construct
+$usuario = new Usuario("María", "maria@ejemplo.com");
+
+echo $usuario->nombre;  // María
+
+// Al finalizar el script o usar unset(), se ejecuta __destruct
+unset($usuario);
+?&gt;
+</code></pre>
+
+      <h3>2.4. Múltiples objetos de la misma clase</h3>
+      <pre><code class="language-php">
+&lt;?php
+class Producto {
+    public $nombre;
+    public $precio;
+    
+    public function __construct($nombre, $precio) {
+        $this->nombre = $nombre;
+        $this->precio = $precio;
+    }
+    
+    public function mostrar() {
+        return $this->nombre . ": $" . $this->precio;
+    }
+}
+
+// Crear múltiples objetos
+$producto1 = new Producto("Laptop", 999);
+$producto2 = new Producto("Mouse", 25);
+$producto3 = new Producto("Teclado", 45);
+
+echo $producto1->mostrar() . "&lt;br&gt;";  // Laptop: $999
+echo $producto2->mostrar() . "&lt;br&gt;";  // Mouse: $25
+echo $producto3->mostrar() . "&lt;br&gt;";  // Teclado: $45
+?&gt;
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 3: MODIFICADORES DE ACCESO -->
+    <section id="modificadores-acceso">
+      <h2>3. Modificadores de acceso</h2>
+
+      <h3>3.1. Public, private, protected</h3>
+      <pre><code class="language-php">
+&lt;?php
+class CuentaBancaria {
+    public $titular;           // Accesible desde cualquier lugar
+    private $saldo;            // Solo accesible dentro de la clase
+    protected $numeroCuenta;   // Accesible en la clase y clases hijas
+    
+    public function __construct($titular, $saldoInicial) {
+        $this->titular = $titular;
+        $this->saldo = $saldoInicial;
+        $this->numeroCuenta = rand(1000, 9999);
+    }
+    
+    // Método público para acceder a propiedad privada
+    public function obtenerSaldo() {
+        return $this->saldo;
+    }
+    
+    public function depositar($cantidad) {
+        if ($cantidad > 0) {
+            $this->saldo += $cantidad;
+            return true;
+        }
+        return false;
+    }
+    
+    public function retirar($cantidad) {
+        if ($cantidad > 0 && $cantidad <= $this->saldo) {
+            $this->saldo -= $cantidad;
+            return true;
+        }
+        return false;
+    }
+}
+
+$cuenta = new CuentaBancaria("Ana López", 1000);
+
+echo $cuenta->titular;           // Ana López (funciona: public)
+echo $cuenta->obtenerSaldo();    // 1000 (funciona: método público)
+// echo $cuenta->saldo;          // ERROR: propiedad privada
+
+$cuenta->depositar(500);
+echo $cuenta->obtenerSaldo();    // 1500
+?&gt;
+</code></pre>
+
+      <h3>3.2. Getters y Setters</h3>
+      <pre><code class="language-php">
+&lt;?php
+class Persona {
+    private $nombre;
+    private $edad;
+    
+    // Getter: obtener valor
+    public function getNombre() {
+        return $this->nombre;
+    }
+    
+    // Setter: establecer valor con validación
+    public function setNombre($nombre) {
+        if (strlen($nombre) >= 2) {
+            $this->nombre = $nombre;
+            return true;
+        }
+        return false;
+    }
+    
+    public function getEdad() {
+        return $this->edad;
+    }
+    
+    public function setEdad($edad) {
+        if ($edad >= 0 && $edad <= 120) {
+            $this->edad = $edad;
+            return true;
+        }
+        return false;
+    }
+}
+
+$persona = new Persona();
+
+$persona->setNombre("Carlos");
+$persona->setEdad(25);
+
+echo $persona->getNombre();  // Carlos
+echo $persona->getEdad();    // 25
+
+// Validación en acción
+$persona->setEdad(200);      // No cambia (valor inválido)
+echo $persona->getEdad();    // Sigue siendo 25
+?&gt;
+</code></pre>
+
+      <h3>3.3. Tabla de modificadores</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Modificador</th>
+            <th>Clase</th>
+            <th>Clase Hija</th>
+            <th>Fuera de la Clase</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>public</strong></td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td><strong>protected</strong></td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>❌</td>
+          </tr>
+          <tr>
+            <td><strong>private</strong></td>
+            <td>✅</td>
+            <td>❌</td>
+            <td>❌</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SECCIÓN 4: HERENCIA -->
+    <section id="herencia">
+      <h2>4. Herencia</h2>
+
+      <h3>4.1. Heredar de una clase padre</h3>
+      <pre><code class="language-php">
+&lt;?php
+// Clase padre (base)
+class Animal {
+    public $nombre;
+    public $edad;
+    
+    public function __construct($nombre, $edad) {
+        $this->nombre = $nombre;
+        $this->edad = $edad;
+    }
+    
+    public function comer() {
+        echo $this->nombre . " está comiendo&lt;br&gt;";
+    }
+    
+    public function dormir() {
+        echo $this->nombre . " está durmiendo&lt;br&gt;";
+    }
+}
+
+// Clase hija (hereda de Animal)
+class Perro extends Animal {
+    public $raza;
+    
+    public function __construct($nombre, $edad, $raza) {
+        parent::__construct($nombre, $edad);  // Llamar constructor padre
+        $this->raza = $raza;
+    }
+    
+    public function ladrar() {
+        echo $this->nombre . " está ladrando: ¡Guau!&lt;br&gt;";
+    }
+}
+
+class Gato extends Animal {
+    public function maullar() {
+        echo $this->nombre . " está maullando: ¡Miau!&lt;br&gt;";
+    }
+}
+
+// Usar las clases
+$perro = new Perro("Max", 3, "Golden Retriever");
+$perro->comer();    // Método heredado
+$perro->ladrar();   // Método propio
+
+$gato = new Gato("Luna", 2);
+$gato->comer();     // Método heredado
+$gato->maullar();   // Método propio
+?&gt;
+</code></pre>
+
+      <h3>4.2. Sobrescribir métodos (Override)</h3>
+      <pre><code class="language-php">
+&lt;?php
+class Vehiculo {
+    protected $marca;
+    
+    public function __construct($marca) {
+        $this->marca = $marca;
+    }
+    
+    public function arrancar() {
+        echo "El vehículo arranca&lt;br&gt;";
+    }
+}
+
+class Coche extends Vehiculo {
+    // Sobrescribir método del padre
+    public function arrancar() {
+        echo "El coche " . $this->marca . " arranca con llave&lt;br&gt;";
+    }
+}
+
+class Moto extends Vehiculo {
+    // Sobrescribir método del padre
+    public function arrancar() {
+        echo "La moto " . $this->marca . " arranca con botón&lt;br&gt;";
+    }
+}
+
+$coche = new Coche("Toyota");
+$coche->arrancar();  // El coche Toyota arranca con llave
+
+$moto = new Moto("Yamaha");
+$moto->arrancar();   // La moto Yamaha arranca con botón
+?&gt;
+</code></pre>
+
+      <h3>4.3. Palabra clave parent</h3>
+      <pre><code class="language-php">
+&lt;?php
+class Empleado {
+    protected $nombre;
+    protected $salarioBase;
+    
+    public function __construct($nombre, $salarioBase) {
+        $this->nombre = $nombre;
+        $this->salarioBase = $salarioBase;
+    }
+    
+    public function calcularSalario() {
+        return $this->salarioBase;
+    }
+}
+
+class Gerente extends Empleado {
+    private $bono;
+    
+    public function __construct($nombre, $salarioBase, $bono) {
+        parent::__construct($nombre, $salarioBase);  // Llamar constructor padre
+        $this->bono = $bono;
+    }
+    
+    public function calcularSalario() {
+        // Usar método del padre y agregar funcionalidad
+        return parent::calcularSalario() + $this->bono;
+    }
+}
+
+$empleado = new Empleado("Juan", 2000);
+echo "Salario empleado: $" . $empleado->calcularSalario() . "&lt;br&gt;";  // $2000
+
+$gerente = new Gerente("María", 3000, 1000);
+echo "Salario gerente: $" . $gerente->calcularSalario() . "&lt;br&gt;";   // $4000
+?&gt;
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 5: PROPIEDADES Y MÉTODOS ESTÁTICOS -->
+    <section id="static">
+      <h2>5. Propiedades y métodos estáticos</h2>
+
+      <h3>5.1. Uso de static</h3>
+      <pre><code class="language-php">
+&lt;?php
+class Contador {
+    // Propiedad estática: compartida por todas las instancias
+    public static $cuenta = 0;
+    
+    public function __construct() {
+        // Acceder con self::
+        self::$cuenta++;
+    }
+    
+    // Método estático: se puede llamar sin crear objeto
+    public static function obtenerCuenta() {
+        return self::$cuenta;
+    }
+}
+
+// Crear objetos
+$c1 = new Contador();
+$c2 = new Contador();
+$c3 = new Contador();
+
+// Acceder a propiedad estática con ::
+echo Contador::$cuenta;           // 3
+
+// Llamar método estático
+echo Contador::obtenerCuenta();   // 3
+?&gt;
+</code></pre>
+
+      <h3>5.2. Ejemplo práctico: clase utilidades</h3>
+      <pre><code class="language-php">
+&lt;?php
+class Utilidades {
+    // Métodos estáticos que no requieren instancia
+    public static function validarEmail($email) {
+        return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
+    }
+    
+    public static function generarPassword($longitud = 8) {
+        $caracteres = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $password = '';
+        for ($i = 0; $i < $longitud; $i++) {
+            $password .= $caracteres[rand(0, strlen($caracteres) - 1)];
+        }
+        return $password;
+    }
+    
+    public static function formatearFecha($fecha) {
+        return date('d/m/Y', strtotime($fecha));
+    }
+}
+
+// Usar sin crear objeto
+if (Utilidades::validarEmail("usuario@ejemplo.com")) {
+    echo "Email válido&lt;br&gt;";
+}
+
+$password = Utilidades::generarPassword(12);
+echo "Password generada: " . $password . "&lt;br&gt;";
+
+echo Utilidades::formatearFecha("2024-12-25");  // 25/12/2024
+?&gt;
+</code></pre>
+
+      <h3>5.3. self vs $this</h3>
+      <pre><code class="language-php">
+&lt;?php
+class Ejemplo {
+    public static $estatica = "Soy estática";
+    public $normal = "Soy normal";
+    
+    public static function metodoEstatico() {
+        // En métodos estáticos solo se puede usar self::
+        echo self::$estatica . "&lt;br&gt;";
+        // echo $this->normal;  // ERROR: $this no existe aquí
+    }
+    
+    public function metodoNormal() {
+        // En métodos normales se puede usar ambos
+        echo self::$estatica . "&lt;br&gt;";      // Acceder a estática
+        echo $this->normal . "&lt;br&gt;";        // Acceder a normal
+    }
+}
+
+// Llamar método estático
+Ejemplo::metodoEstatico();
+
+// Llamar método normal
+$obj = new Ejemplo();
+$obj->metodoNormal();
+?&gt;
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 6: INTERFACES Y CLASES ABSTRACTAS -->
+    <section id="interfaces-abstractas">
+      <h2>6. Interfaces y clases abstractas</h2>
+
+      <h3>6.1. Interfaces</h3>
+      <pre><code class="language-php">
+&lt;?php
+// Interfaz: define un contrato (qué métodos debe tener)
+interface Figura {
+    public function calcularArea();
+    public function calcularPerimetro();
+}
+
+class Rectangulo implements Figura {
+    private $ancho;
+    private $alto;
+    
+    public function __construct($ancho, $alto) {
+        $this->ancho = $ancho;
+        $this->alto = $alto;
+    }
+    
+    // Implementar métodos obligatorios
+    public function calcularArea() {
+        return $this->ancho * $this->alto;
+    }
+    
+    public function calcularPerimetro() {
+        return 2 * ($this->ancho + $this->alto);
+    }
+}
+
+class Circulo implements Figura {
+    private $radio;
+    
+    public function __construct($radio) {
+        $this->radio = $radio;
+    }
+    
+    public function calcularArea() {
+        return pi() * pow($this->radio, 2);
+    }
+    
+    public function calcularPerimetro() {
+        return 2 * pi() * $this->radio;
+    }
+}
+
+$rectangulo = new Rectangulo(5, 10);
+echo "Área rectángulo: " . $rectangulo->calcularArea() . "&lt;br&gt;";  // 50
+
+$circulo = new Circulo(7);
+echo "Área círculo: " . $circulo->calcularArea() . "&lt;br&gt;";  // ~153.94
+?&gt;
+</code></pre>
+
+      <h3>6.2. Clases abstractas</h3>
+      <pre><code class="language-php">
+&lt;?php
+// Clase abstracta: no se puede instanciar directamente
+abstract class Persona {
+    protected $nombre;
+    protected $edad;
+    
+    public function __construct($nombre, $edad) {
+        $this->nombre = $nombre;
+        $this->edad = $edad;
+    }
+    
+    // Método concreto (con implementación)
+    public function presentarse() {
+        echo "Hola, soy " . $this->nombre . "&lt;br&gt;";
+    }
+    
+    // Método abstracto (sin implementación)
+    abstract public function trabajar();
+}
+
+class Programador extends Persona {
+    private $lenguaje;
+    
+    public function __construct($nombre, $edad, $lenguaje) {
+        parent::__construct($nombre, $edad);
+        $this->lenguaje = $lenguaje;
+    }
+    
+    // Implementar método abstracto obligatoriamente
+    public function trabajar() {
+        echo $this->nombre . " está programando en " . $this->lenguaje . "&lt;br&gt;";
+    }
+}
+
+class Diseñador extends Persona {
+    public function trabajar() {
+        echo $this->nombre . " está diseñando gráficos&lt;br&gt;";
+    }
+}
+
+// $persona = new Persona("Juan", 30);  // ERROR: no se puede instanciar clase abstracta
+
+$programador = new Programador("Ana", 28, "PHP");
+$programador->presentarse();  // Método heredado
+$programador->trabajar();     // Método implementado
+
+$diseñador = new Diseñador("Luis", 32);
+$diseñador->trabajar();
+?&gt;
+</code></pre>
+
+      <h3>6.3. Diferencias entre interfaces y clases abstractas</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Característica</th>
+            <th>Interface</th>
+            <th>Clase Abstracta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Métodos</td>
+            <td>Solo declaraciones (sin código)</td>
+            <td>Pueden tener código</td>
+          </tr>
+          <tr>
+            <td>Propiedades</td>
+            <td>Solo constantes</td>
+            <td>Cualquier propiedad</td>
+          </tr>
+          <tr>
+            <td>Herencia múltiple</td>
+            <td>Sí (implements varias)</td>
+            <td>No (extends solo una)</td>
+          </tr>
+          <tr>
+            <td>Constructor</td>
+            <td>No puede tener</td>
+            <td>Puede tener</td>
+          </tr>
+          <tr>
+            <td>Uso</td>
+            <td>Contrato de comportamiento</td>
+            <td>Compartir código base</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SECCIÓN 7: TRAITS -->
+    <section id="traits">
+      <h2>7. Traits (Rasgos)</h2>
+
+      <h3>7.1. Reutilizar código con traits</h3>
+      <pre><code class="language-php">
+&lt;?php
+// Trait: colección de métodos reutilizables
+trait Logger {
+    public function log($mensaje) {
+        echo "[LOG] " . date('Y-m-d H:i:s') . ": " . $mensaje . "&lt;br&gt;";
+    }
+}
+
+trait Validador {
+    public function validarEmail($email) {
+        return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
+    }
+    
+    public function validarTexto($texto, $minLength = 3) {
+        return strlen($texto) >= $minLength;
+    }
+}
+
+// Usar traits con 'use'
+class Usuario {
+    use Logger, Validador;  // Usar múltiples traits
+    
+    private $nombre;
+    private $email;
+    
+    public function registrar($nombre, $email) {
+        if ($this->validarTexto($nombre) && $this->validarEmail($email)) {
+            $this->nombre = $nombre;
+            $this->email = $email;
+            $this->log("Usuario registrado: " . $nombre);
+            return true;
+        }
+        return false;
+    }
+}
+
+$usuario = new Usuario();
+$usuario->registrar("Pedro", "pedro@ejemplo.com");
+// [LOG] 2024-02-08 10:30:00: Usuario registrado: Pedro
+?&gt;
+</code></pre>
+
+      <h3>7.2. Resolver conflictos en traits</h3>
+      <pre><code class="language-php">
+&lt;?php
+trait A {
+    public function saludar() {
+        echo "Hola desde A&lt;br&gt;";
+    }
+}
+
+trait B {
+    public function saludar() {
+        echo "Hola desde B&lt;br&gt;";
+    }
+}
+
+class MiClase {
+    use A, B {
+        // Resolver conflicto: usar método de B en lugar de A
+        B::saludar insteadof A;
+        // Crear alias para método de A
+        A::saludar as saludarA;
+    }
+}
+
+$obj = new MiClase();
+$obj->saludar();   // Hola desde B
+$obj->saludarA();  // Hola desde A
+?&gt;
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 8: NAMESPACES Y AUTOLOAD -->
+    <section id="namespaces-autoload">
+      <h2>8. Namespaces y autoload</h2>
+
+      <h3>8.1. Namespaces (Espacios de nombres)</h3>
+      <pre><code class="language-php">
+&lt;?php
+// archivo: Database/Connection.php
+namespace Database;
+
+class Connection {
+    public function connect() {
+        echo "Conectando a base de datos&lt;br&gt;";
+    }
+}
+
+// archivo: Models/User.php
+namespace Models;
+
+class User {
+    public function create() {
+        echo "Creando usuario&lt;br&gt;";
+    }
+}
+
+// archivo: index.php
+// Usar namespaces con 'use'
+use Database\Connection;
+use Models\User;
+
+$db = new Connection();
+$db->connect();
+
+$user = new User();
+$user->create();
+
+// O usar nombre completo
+$db2 = new \Database\Connection();
+?&gt;
+</code></pre>
+      
+      <h3>8.2. Composer autoload (PSR-4)</h3>
+      <pre><code class="language-json">
+{
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
+</code></pre>
+
+      <pre><code class="language-php">
+&lt;?php
+// Después de ejecutar: composer dump-autoload
+
+require_once 'vendor/autoload.php';
+
+// Estructura de carpetas:
+// src/
+//   Controllers/
+//     UserController.php
+//   Models/
+//     User.php
+
+// El namespace App\ se mapea a la carpeta src/
+use App\Controllers\UserController;
+use App\Models\User;
+
+$controller = new UserController();  // Carga src/Controllers/UserController.php
+$user = new User();                  // Carga src/Models/User.php
+?&gt;
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 9: EJEMPLO PRÁCTICO COMPLETO -->
+    <section id="ejemplo-completo">
+      <h2>9. Ejemplo práctico: Sistema de productos</h2>
+
+      <h3>9.1. Clase base Producto</h3>
+      <pre><code class="language-php">
+&lt;?php
+abstract class Producto {
+    protected $id;
+    protected $nombre;
+    protected $precio;
+    protected static $contador = 0;
+    
+    public function __construct($nombre, $precio) {
+        self::$contador++;
+        $this->id = self::$contador;
+        $this->nombre = $nombre;
+        $this->precio = $precio;
+    }
+    
+    // Método abstracto
+    abstract public function calcularPrecioFinal();
+    
+    // Getters
+    public function getId() {
+        return $this->id;
+    }
+    
+    public function getNombre() {
+        return $this->nombre;
+    }
+    
+    public function getPrecio() {
+        return $this->precio;
+    }
+    
+    // Método estático
+    public static function getTotalProductos() {
+        return self::$contador;
+    }
+    
+    public function mostrarInfo() {
+        return "ID: {$this->id}, Nombre: {$this->nombre}, Precio base: ${$this->precio}";
+    }
+}
+?&gt;
+</code></pre>
+
+      <h3>9.2. Clases hijas</h3>
+      <pre><code class="language-php">
+&lt;?php
+class ProductoFisico extends Producto {
+    private $peso;
+    private $costoEnvio;
+    
+    public function __construct($nombre, $precio, $peso) {
+        parent::__construct($nombre, $precio);
+        $this->peso = $peso;
+        $this->costoEnvio = $this->calcularCostoEnvio();
+    }
+    
+    private function calcularCostoEnvio() {
+        return $this->peso * 0.5;  // $0.5 por kg
+    }
+    
+    public function calcularPrecioFinal() {
+        return $this->precio + $this->costoEnvio;
+    }
+    
+    public function mostrarInfo() {
+        return parent::mostrarInfo() . ", Peso: {$this->peso}kg, Envío: ${$this->costoEnvio}";
+    }
+}
+
+class ProductoDigital extends Producto {
+    private $tamañoMB;
+    private $descuento = 0.10;  // 10% descuento
+    
+    public function __construct($nombre, $precio, $tamañoMB) {
+        parent::__construct($nombre, $precio);
+        $this->tamañoMB = $tamañoMB;
+    }
+    
+    public function calcularPrecioFinal() {
+        return $this->precio * (1 - $this->descuento);
+    }
+    
+    public function descargar() {
+        return "Descargando {$this->nombre} ({$this->tamañoMB}MB)...";
+    }
+    
+    public function mostrarInfo() {
+        return parent::mostrarInfo() . ", Tamaño: {$this->tamañoMB}MB, Descuento: " . ($this->descuento * 100) . "%";
+    }
+}
+?&gt;
+</code></pre>
+
+      <h3>9.3. Carrito de compras</h3>
+      <pre><code class="language-php">
+&lt;?php
+class Carrito {
+    private $productos = [];
+    
+    public function agregarProducto(Producto $producto) {
+        $this->productos[] = $producto;
+    }
+    
+    public function calcularTotal() {
+        $total = 0;
+        foreach ($this->productos as $producto) {
+            $total += $producto->calcularPrecioFinal();
+        }
+        return $total;
+    }
+    
+    public function mostrarCarrito() {
+        echo "&lt;h3&gt;Carrito de Compras&lt;/h3&gt;";
+        foreach ($this->productos as $producto) {
+            echo $producto->mostrarInfo() . "&lt;br&gt;";
+            echo "Precio final: $" . number_format($producto->calcularPrecioFinal(), 2) . "&lt;br&gt;&lt;br&gt;";
+        }
+        echo "&lt;strong&gt;Total: $" . number_format($this->calcularTotal(), 2) . "&lt;/strong&gt;&lt;br&gt;";
+    }
+    
+    public function getCantidadProductos() {
+        return count($this->productos);
+    }
+}
+?&gt;
+</code></pre>
+
+      <h3>9.4. Uso del sistema</h3>
+      <pre><code class="language-php">
+&lt;?php
+// Crear productos
+$laptop = new ProductoFisico("Laptop Dell", 999, 2.5);
+$mouse = new ProductoFisico("Mouse Logitech", 25, 0.2);
+$ebook = new ProductoDigital("Curso PHP", 49, 150);
+$software = new ProductoDigital("Photoshop", 299, 2048);
+
+// Crear carrito
+$carrito = new Carrito();
+$carrito->agregarProducto($laptop);
+$carrito->agregarProducto($mouse);
+$carrito->agregarProducto($ebook);
+$carrito->agregarProducto($software);
+
+// Mostrar carrito
+$carrito->mostrarCarrito();
+
+// Estadísticas
+echo "&lt;br&gt;Total de productos creados: " . Producto::getTotalProductos() . "&lt;br&gt;";
+echo "Productos en carrito: " . $carrito->getCantidadProductos() . "&lt;br&gt;";
+
+// Descargar producto digital
+if ($ebook instanceof ProductoDigital) {
+    echo $ebook->descargar() . "&lt;br&gt;";
+}
+?&gt;
+</code></pre>
+    </section>
+
+    <!-- RESUMEN -->
+    <section id="resumen">
+      <div class="info-box">
+        <h3>Resumen de POO en PHP</h3>
+        <ul>
+          <li><strong>Clase:</strong> molde o plantilla; <strong>Objeto:</strong> instancia de una clase</li>
+          <li><strong>$this</strong> referencia al objeto actual dentro de la clase</li>
+          <li><strong>__construct()</strong> se ejecuta al crear objeto; <strong>__destruct()</strong> al destruirlo</li>
+          <li><strong>public:</strong> accesible desde cualquier lugar</li>
+          <li><strong>private:</strong> solo dentro de la clase</li>
+          <li><strong>protected:</strong> clase y clases hijas</li>
+          <li><strong>extends</strong> para heredar; <strong>parent::</strong> para acceder al padre</li>
+          <li><strong>static</strong> para propiedades/métodos compartidos; acceso con <strong>::</strong></li>
+          <li><strong>interface</strong> define contrato; <strong>abstract</strong> clase base con código compartido</li>
+          <li><strong>trait</strong> para reutilizar código sin herencia</li>
+          <li><strong>namespace</strong> organiza código; <strong>autoload</strong> carga clases automáticamente</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+
+</html>
