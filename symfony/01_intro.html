@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducción a Symfony</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+  <header>
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1>Introducción a Symfony</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+    <p>Symfony es un framework PHP robusto y modular para el desarrollo de aplicaciones web modernas. Se basa en componentes reutilizables y promueve buenas prácticas como la separación de responsabilidades, el uso de servicios y la configuración flexible.</p>
+
+    <!-- SECCIÓN 1: INTRODUCCIÓN BÁSICA -->
+        <section id="introduccion-basica">
+            <h2>1. Introducción básica a Symfony</h2>
+
+            <h3>1.1. ¿Qué es Symfony?</h3>
+            <p>Symfony es un framework PHP open-source creado por SensioLabs (Fabien Potencier) en 2005. Sigue el patrón <strong>MVC (Model-View-Controller)</strong> y está orientado a aplicaciones escalables gracias a su arquitectura basada en componentes.</p>
+
+            <h3>1.2. Características principales</h3>
+            <ul>
+                <li><strong>Componentes Symfony:</strong> librerías reutilizables y desacopladas</li>
+                <li><strong>Symfony Flex:</strong> gestión de recetas y configuración automática</li>
+                <li><strong>Doctrine ORM:</strong> mapeo objeto-relacional para bases de datos</li>
+                <li><strong>Twig:</strong> motor de plantillas moderno y seguro</li>
+                <li><strong>Console:</strong> CLI con comandos <code>bin/console</code></li>
+                <li><strong>Routing:</strong> rutas con atributos o YAML</li>
+                <li><strong>Security:</strong> autenticación y autorización robusta</li>
+                <li><strong>Dependency Injection:</strong> contenedor de servicios</li>
+            </ul>
+
+            <h3>1.3. Estructura del proyecto Symfony</h3>
+            <pre><code class="language-plaintext">
+mi-proyecto/
+├── assets/                 # Assets (CSS/JS) fuente
+├── bin/                    # Comando bin/console
+├── config/                 # Configuración (routes, services, packages)
+├── migrations/             # Migraciones Doctrine
+├── public/                 # Document root (index.php)
+├── src/                    # Código de la aplicación
+│   ├── Controller/         # Controladores
+│   ├── Entity/             # Entidades Doctrine
+│   ├── Repository/         # Repositorios
+│   └── Kernel.php          # Kernel del framework
+├── templates/              # Vistas Twig
+├── tests/                  # Tests
+├── var/                    # Cache y logs
+└── vendor/                 # Dependencias Composer
+</code></pre>
+
+            <h3>1.4. Instalación</h3>
+            <pre><code class="language-bash">
+# Opción 1: Symfony Skeleton (mínimo)
+composer create-project symfony/skeleton mi-proyecto
+
+# Opción 2: Symfony WebApp (completo)
+composer create-project symfony/website-skeleton mi-proyecto
+
+# Opción 3: Symfony CLI
+symfony new mi-proyecto --webapp
+
+# Iniciar servidor de desarrollo
+cd mi-proyecto
+symfony serve -d
+# Visitar: https://127.0.0.1:8000
+</code></pre>
+
+            <h3>1.5. Patrón MVC en Symfony</h3>
+            <div class="mermaid">
+graph LR
+        A[Usuario/Cliente] -->|HTTP Request| B[Routing]
+        B -->|Llama| C[Controller]
+        C -->|Lee/Escribe| D[Model/Entity]
+        D -->|Doctrine ORM| E[(Database)]
+        C -->|Retorna| F[View<br/>Twig]
+        F -->|HTTP Response| A
+    
+        style B fill:#e1f5ff
+        style C fill:#fff4e1
+        style D fill:#ffe1e1
+        style F fill:#e1ffe1
+            </div>
+        </section>
+
+    <!-- SECCIÓN 2: RUTAS -->
+    <section id="web-php">
+      <h2>2. Rutas en Symfony</h2>
+
+      <h3>2.1. Archivos de rutas</h3>
+      <p>En Symfony las rutas se pueden definir en <code>config/routes.yaml</code> o mediante atributos en los controladores.</p>
+
+      <pre><code class="language-yaml">
+# config/routes.yaml
+home:
+  path: /
+  controller: App\Controller\HomeController::index
+
+contacto:
+  path: /contacto
+  controller: App\Controller\HomeController::contacto
+  methods: [GET, POST]
+</code></pre>
+
+      <pre><code class="language-php">
+&lt;?php
+// src/Controller/HomeController.php
+
+namespace App\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class HomeController extends AbstractController
+{
+    #[Route('/', name: 'home')]
+    public function index(): Response
+    {
+        return $this->render('home/index.html.twig');
+    }
+
+    #[Route('/usuario/{id}', name: 'usuario_show', requirements: ['id' => '\\d+'])]
+    public function usuario(int $id): Response
+    {
+        return new Response('Usuario ID: ' . $id);
+    }
+
+    #[Route('/saludo/{nombre}', name: 'saludo', defaults: ['nombre' => 'Invitado'])]
+    public function saludo(string $nombre): Response
+    {
+        return new Response('Hola, ' . $nombre);
+    }
+}
+?&gt;
+</code></pre>
+
+      <h3>2.2. Verbos HTTP</h3>
+      <pre><code class="language-php">
+&lt;?php
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
+
+#[Route('/articulos', name: 'articulos_list', methods: ['GET'])]
+public function listar(): Response
+{
+    return new Response('Lista de artículos');
+}
+
+#[Route('/articulos', name: 'articulos_create', methods: ['POST'])]
+public function crear(): Response
+{
+    return new Response('Crear nuevo artículo');
+}
+
+#[Route('/articulos/{id}', name: 'articulos_update', methods: ['PUT', 'PATCH'])]
+public function actualizar(int $id): Response
+{
+    return new Response('Actualizar artículo ' . $id);
+}
+
+#[Route('/articulos/{id}', name: 'articulos_delete', methods: ['DELETE'])]
+public function eliminar(int $id): Response
+{
+    return new Response('Eliminar artículo ' . $id);
+}
+?&gt;
+</code></pre>
+
+      <h3>2.3. Rutas nombradas</h3>
+      <pre><code class="language-php">
+&lt;?php
+#[Route('/dashboard', name: 'dashboard')]
+public function dashboard(): Response
+{
+    return $this->render('dashboard.html.twig');
+}
+
+#[Route('/perfil/{id}', name: 'perfil_ver')]
+public function perfil(int $id): Response
+{
+    // ...
+}
+
+// Usar rutas nombradas
+// En controlador:
+return $this->redirectToRoute('dashboard');
+
+// En vista Twig:
+// &lt;a href="{{ path('dashboard') }}"&gt;Dashboard&lt;/a&gt;
+// &lt;a href="{{ path('perfil_ver', {id: 5}) }}"&gt;Ver perfil&lt;/a&gt;
+?&gt;
+</code></pre>
+
+      <h3>2.4. Grupos de rutas</h3>
+      <pre><code class="language-php">
+&lt;?php
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
+
+#[Route('/admin', name: 'admin_')]
+class AdminController extends AbstractController
+{
+    #[Route('/usuarios', name: 'usuarios')]
+    public function usuarios(): Response
+    {
+        // URL: /admin/usuarios
+        // Nombre: admin_usuarios
+        return new Response('Usuarios');
+    }
+
+    #[Route('/productos', name: 'productos')]
+    public function productos(): Response
+    {
+        // URL: /admin/productos
+        return new Response('Productos');
+    }
+}
+?&gt;
+</code></pre>
+
+      <h3>2.5. Rutas a controladores</h3>
+      <pre><code class="language-php">
+&lt;?php
+use App\Controller\ProductoController;
+
+// Las rutas se definen en el propio controlador con #[Route]
+// Symfony recomienda este enfoque para mantener rutas y acciones juntas.
+
+// Para generar un CRUD completo:
+// php bin/console make:crud Producto
+?&gt;
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 3: CONTROLADORES -->
+    <section id="controllers">
+      <h2>3. Controladores (Controllers)</h2>
+
+      <h3>3.1. Crear un controlador</h3>
+      <pre><code class="language-bash">
+# Crear controlador básico
+php bin/console make:controller ProductoController
+
+# Crear entidad + migración
+php bin/console make:entity Producto
+
+# Crear CRUD completo (controlador + formularios + templates)
+php bin/console make:crud Producto
+</code></pre>
+
+      <h3>3.2. Estructura de un controlador</h3>
+      <pre><code class="language-php">
+&lt;?php
+// src/Controller/ProductoController.php
+
+namespace App\Controller;
+
+use App\Entity\Producto;
+use App\Repository\ProductoRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class ProductoController extends AbstractController
+{
+    #[Route('/productos', name: 'productos_index', methods: ['GET'])]
+    public function index(ProductoRepository $repo): Response
+    {
+        $productos = $repo->findAll();
+        return $this->render('productos/index.html.twig', [
+            'productos' => $productos
+        ]);
+    }
+
+    #[Route('/productos/nuevo', name: 'productos_create', methods: ['GET', 'POST'])]
+    public function create(Request $request, EntityManagerInterface $em): Response
+    {
+        if ($request->isMethod('POST')) {
+            $producto = new Producto();
+            $producto->setNombre($request->request->get('nombre'));
+            $producto->setPrecio((float) $request->request->get('precio'));
+
+            $em->persist($producto);
+            $em->flush();
+
+            $this->addFlash('success', 'Producto creado');
+            return $this->redirectToRoute('productos_index');
+        }
+
+        return $this->render('productos/create.html.twig');
+    }
+
+    #[Route('/productos/{id}', name: 'productos_show', methods: ['GET'])]
+    public function show(Producto $producto): Response
+    {
+        return $this->render('productos/show.html.twig', [
+            'producto' => $producto
+        ]);
+    }
+}
+?&gt;
+</code></pre>
+
+      <h3>3.3. Controlador simple</h3>
+      <pre><code class="language-php">
+&lt;?php
+// src/Controller/HomeController.php
+
+namespace App\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class HomeController extends AbstractController
+{
+    #[Route('/', name: 'home', methods: ['GET'])]
+    public function inicio(): Response
+    {
+        return $this->render('home/index.html.twig', [
+            'titulo' => 'Bienvenido a mi sitio',
+            'descripcion' => 'Este es un ejemplo de Symfony'
+        ]);
+    }
+
+    #[Route('/contacto', name: 'contacto', methods: ['GET'])]
+    public function contacto(): Response
+    {
+        return $this->render('home/contacto.html.twig');
+    }
+
+    #[Route('/contacto', name: 'contacto_enviar', methods: ['POST'])]
+    public function enviarContacto(Request $request): Response
+    {
+        $nombre = $request->request->get('nombre');
+        $email = $request->request->get('email');
+        $mensaje = $request->request->get('mensaje');
+
+        // Procesar formulario...
+
+        $this->addFlash('success', 'Formulario enviado');
+        return $this->redirectToRoute('contacto');
+    }
+}
+?&gt;
+</code></pre>
+
+      <h3>3.4. Tipos de respuestas</h3>
+      <pre><code class="language-php">
+&lt;?php
+namespace App\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class RespuestaController extends AbstractController
+{
+    #[Route('/vista', name: 'respuesta_vista')]
+    public function vista(): Response
+    {
+        return $this->render('ejemplo.html.twig', ['dato' => 'valor']);
+    }
+
+    #[Route('/json', name: 'respuesta_json')]
+    public function json(): JsonResponse
+    {
+        return $this->json([
+            'success' => true,
+            'data' => ['nombre' => 'Juan', 'edad' => 25]
+        ]);
+    }
+
+    #[Route('/texto', name: 'respuesta_texto')]
+    public function texto(): Response
+    {
+        return new Response('Hola mundo', 200, ['Content-Type' => 'text/plain']);
+    }
+
+    #[Route('/redirigir', name: 'respuesta_redirigir')]
+    public function redirigir(): Response
+    {
+        return $this->redirectToRoute('home');
+    }
+
+    #[Route('/descargar', name: 'respuesta_descargar')]
+    public function descargar(): BinaryFileResponse
+    {
+        $ruta = $this->getParameter('kernel.project_dir') . '/public/documento.pdf';
+        return $this->file($ruta);
+    }
+}
+?&gt;
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 4: TWIG (Motor de plantillas) -->
+    <section id="twig">
+      <h2>4. Twig (Motor de plantillas)</h2>
+
+      <h3>4.1. Sintaxis básica</h3>
+      <pre><code class="language-html">
+{# templates/ejemplo.html.twig #}
+
+{# Imprimir variables (escapa HTML automáticamente) #}
+&lt;h1&gt;{{ titulo }}&lt;/h1&gt;
+&lt;p&gt;{{ descripcion }}&lt;/p&gt;
+
+{# Imprimir sin escapar (PELIGROSO con datos de usuario) #}
+&lt;div&gt;{{ htmlContenido|raw }}&lt;/div&gt;
+
+{# Comentarios Twig (no aparecen en HTML) #}
+{# Este es un comentario #}
+
+{# Mostrar valor por defecto si variable no existe #}
+&lt;p&gt;{{ variable|default('Valor por defecto') }}&lt;/p&gt;
+</code></pre>
+
+      <h3>4.2. Estructuras de control</h3>
+      <pre><code class="language-html">
+{# IF / ELSEIF / ELSE #}
+{% if edad >= 18 %}
+    &lt;p&gt;Eres mayor de edad&lt;/p&gt;
+{% elseif edad >= 13 %}
+    &lt;p&gt;Eres adolescente&lt;/p&gt;
+{% else %}
+    &lt;p&gt;Eres menor de edad&lt;/p&gt;
+{% endif %}
+
+{# ISSET / EMPTY #}
+{% if nombre is defined %}
+    &lt;p&gt;El nombre es: {{ nombre }}&lt;/p&gt;
+{% endif %}
+
+{% if productos is empty %}
+    &lt;p&gt;No hay productos&lt;/p&gt;
+{% endif %}
+
+{# AUTH (usuario autenticado) #}
+{% if is_granted('ROLE_USER') %}
+    &lt;p&gt;Bienvenido, {{ app.user.email }}&lt;/p&gt;
+{% else %}
+    &lt;a href="/login"&gt;Iniciar sesión&lt;/a&gt;
+{% endif %}
+</code></pre>
+
+      <h3>4.3. Bucles</h3>
+      <pre><code class="language-html">
+{# FOR #}
+{% for i in 0..9 %}
+    &lt;p&gt;Número: {{ i }}&lt;/p&gt;
+{% endfor %}
+
+{# FOREACH #}
+{% for producto in productos %}
+    &lt;div&gt;
+        &lt;h3&gt;{{ producto.nombre }}&lt;/h3&gt;
+        &lt;p&gt;€{{ producto.precio }}&lt;/p&gt;
+    &lt;/div&gt;
+{% endfor %}
+
+{# FOR-ELSE (con caso de array vacío) #}
+{% for usuario in usuarios %}
+    &lt;li&gt;{{ usuario.nombre }}&lt;/li&gt;
+{% else %}
+    &lt;p&gt;No hay usuarios registrados&lt;/p&gt;
+{% endfor %}
+
+{# Variable loop en bucles #}
+{% for item in items %}
+    {% if loop.first %}
+        &lt;p&gt;Primer elemento&lt;/p&gt;
+    {% endif %}
+
+    &lt;p&gt;{{ loop.index }}. {{ item }}&lt;/p&gt;
+
+    {% if loop.last %}
+        &lt;p&gt;Último elemento&lt;/p&gt;
+    {% endif %}
+{% endfor %}
+</code></pre>
+
+      <h3>4.4. Layouts y herencia</h3>
+      <pre><code class="language-html">
+{# templates/base.html.twig #}
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;{% block titulo %}Mi Sitio{% endblock %}&lt;/title&gt;
+    &lt;link rel="stylesheet" href="{{ asset('css/app.css') }}"&gt;
+    {% block styles %}{% endblock %}
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;Mi Aplicación Symfony&lt;/h1&gt;
+        &lt;nav&gt;
+            &lt;a href="{{ path('home') }}"&gt;Inicio&lt;/a&gt;
+            &lt;a href="{{ path('productos_index') }}"&gt;Productos&lt;/a&gt;
+        &lt;/nav&gt;
+    &lt;/header&gt;
+
+    &lt;main&gt;
+        {% block contenido %}{% endblock %}
+    &lt;/main&gt;
+
+    &lt;footer&gt;
+        &lt;p&gt;&amp;copy; 2024 Mi Sitio&lt;/p&gt;
+    &lt;/footer&gt;
+
+    &lt;script src="{{ asset('js/app.js') }}"&gt;&lt;/script&gt;
+    {% block scripts %}{% endblock %}
+&lt;/body&gt;
+&lt;/html&gt;
+
+{# templates/productos/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block titulo %}Lista de Productos{% endblock %}
+
+{% block styles %}
+    &lt;link rel="stylesheet" href="{{ asset('css/productos.css') }}"&gt;
+{% endblock %}
+
+{% block contenido %}
+    &lt;h2&gt;Productos&lt;/h2&gt;
+
+    &lt;ul&gt;
+        {% for producto in productos %}
+            &lt;li&gt;{{ producto.nombre }} - €{{ producto.precio }}&lt;/li&gt;
+        {% endfor %}
+    &lt;/ul&gt;
+{% endblock %}
+
+{% block scripts %}
+    &lt;script src="{{ asset('js/productos.js') }}"&gt;&lt;/script&gt;
+{% endblock %}
+</code></pre>
+
+      <h3>4.5. Componentes</h3>
+      <pre><code class="language-html">
+{# templates/components/alerta.html.twig #}
+&lt;div class="alert alert-{{ tipo }}"&gt;
+    &lt;strong&gt;{{ titulo }}&lt;/strong&gt;
+    {{ mensaje }}
+&lt;/div&gt;
+
+{# Usar el componente #}
+{{ include('components/alerta.html.twig', {
+    tipo: 'success',
+    titulo: 'Éxito',
+    mensaje: 'El producto fue guardado correctamente.'
+}) }}
+
+{{ include('components/alerta.html.twig', {
+    tipo: 'danger',
+    titulo: 'Error',
+    mensaje: 'No se pudo completar la operación.'
+}) }}
+</code></pre>
+
+      <h3>4.6. Incluir otras vistas</h3>
+      <pre><code class="language-html">
+{# Incluir parcial #}
+{{ include('partials/header.html.twig') }}
+
+{# Incluir con datos #}
+{{ include('partials/producto.html.twig', { producto: producto }) }}
+
+{# Incluir si existe #}
+{{ include('partials/sidebar.html.twig', ignore_missing = true) }}
+
+{# Incluir cuando condición #}
+{% if is_granted('ROLE_ADMIN') %}
+    {{ include('partials/admin-menu.html.twig') }}
+{% endif %}
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 5: EVENTOS Y SEGURIDAD -->
+    <section id="middleware">
+      <h2>5. Eventos y filtros (equivalente a middleware)</h2>
+
+      <h3>5.1. ¿Qué es un listener/subscriber?</h3>
+    <p>Symfony no usa middleware clásico. En su lugar, utiliza el sistema de <strong>eventos del Kernel</strong> y el componente de <strong>Security</strong> para interceptar y filtrar peticiones.</p>
+
+      <div class="mermaid">
+graph LR
+    A[Request] --> B[KernelEvents::REQUEST]
+    B --> C[Controller]
+    C --> D[KernelEvents::RESPONSE]
+    D --> E[Response]
+    E --> F[Client]
+    
+    style B fill:#e1f5ff
+    style C fill:#ffe1e1
+    style D fill:#e1f5ff
+      </div>
+
+      <h3>5.2. Crear un subscriber</h3>
+      <pre><code class="language-bash">
+# Crear subscriber de eventos
+php bin/console make:subscriber VerificarEdadSubscriber
+</code></pre>
+
+      <pre><code class="language-php">
+&lt;?php
+// src/EventSubscriber/VerificarEdadSubscriber.php
+
+namespace App\EventSubscriber;
+
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\Routing\RouterInterface;
+
+class VerificarEdadSubscriber implements EventSubscriberInterface
+{
+    public function __construct(private RouterInterface $router) {}
+
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            KernelEvents::REQUEST => ['onKernelRequest', 10],
+        ];
+    }
+
+    public function onKernelRequest(RequestEvent $event): void
+    {
+        if (!$event->isMainRequest()) {
+            return;
+        }
+
+        $request = $event->getRequest();
+        $edad = (int) $request->query->get('edad', 0);
+
+        if ($edad < 18) {
+            $url = $this->router->generate('home');
+            $event->setResponse(new RedirectResponse($url));
+        }
+    }
+}
+?&gt;
+</code></pre>
+
+      <h3>5.3. Registrar subscriber</h3>
+      <pre><code class="language-yaml">
+# config/services.yaml
+services:
+  App\EventSubscriber\:
+    resource: '../src/EventSubscriber'
+    tags: ['kernel.event_subscriber']
+</code></pre>
+
+      <h3>5.4. Restringir acceso a rutas</h3>
+      <pre><code class="language-php">
+&lt;?php
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+
+#[IsGranted('ROLE_USER')]
+#[Route('/dashboard', name: 'dashboard')]
+public function dashboard(): Response
+{
+    // Solo usuarios autenticados
+}
+
+#[IsGranted('ROLE_ADMIN')]
+#[Route('/admin', name: 'admin')]
+public function admin(): Response
+{
+    // Solo administradores
+}
+?&gt;
+</code></pre>
+
+      <h3>5.5. Acceso por configuración</h3>
+      <pre><code class="language-yaml">
+# config/packages/security.yaml
+security:
+  access_control:
+    - { path: ^/admin, roles: ROLE_ADMIN }
+    - { path: ^/dashboard, roles: ROLE_USER }
+</code></pre>
+
+      <h3>5.6. Prioridad de eventos</h3>
+      <pre><code class="language-php">
+&lt;?php
+public static function getSubscribedEvents(): array
+{
+    return [
+        KernelEvents::REQUEST => ['onKernelRequest', 20],
+        KernelEvents::RESPONSE => ['onKernelResponse', -10],
+    ];
+}
+?&gt;
+</code></pre>
+    </section>
+
+        <!-- SECCIÓN 6: KERNEL -->
+        <section id="kernel">
+            <h2>6. Kernel en Symfony</h2>
+
+            <h3>6.1. ¿Qué es el Kernel?</h3>
+            <p>El Kernel (<code>src/Kernel.php</code>) es el núcleo de Symfony. Registra los bundles, carga la configuración y orquesta el ciclo de vida de cada petición.</p>
+
+            <h3>6.2. Estructura del Kernel</h3>
+            <pre><code class="language-php">
+&lt;?php
+// config/bundles.php
+
+return [
+        Symfony\Bundle\FrameworkBundle\FrameworkBundle::class => ['all' => true],
+        Symfony\Bundle\TwigBundle\TwigBundle::class => ['all' => true],
+        Doctrine\Bundle\DoctrineBundle\DoctrineBundle::class => ['all' => true],
+];
+
+// src/Kernel.php
+namespace App;
+
+use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Component\HttpKernel\Kernel as BaseKernel;
+
+class Kernel extends BaseKernel
+{
+        use MicroKernelTrait;
+}
+?&gt;
+</code></pre>
+
+            <h3>6.3. Tipos de configuración</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Archivo</th>
+                        <th>Uso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Bundles</strong></td>
+                        <td>config/bundles.php</td>
+                        <td>Activa componentes del framework</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Paquetes</strong></td>
+                        <td>config/packages/*.yaml</td>
+                        <td>Configuración de cada bundle</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Servicios</strong></td>
+                        <td>config/services.yaml</td>
+                        <td>Contenedor de dependencias</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Rutas</strong></td>
+                        <td>config/routes.yaml</td>
+                        <td>Definición de endpoints</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>6.4. Ciclo de petición (eventos)</h3>
+            <pre><code class="language-plaintext">
+1. KernelEvents::REQUEST
+     ↓
+2. Controller Resolver
+     ↓
+3. Controller
+     ↓
+4. KernelEvents::RESPONSE
+     ↓
+5. Respuesta al cliente
+</code></pre>
+
+            <h3>6.5. Añadir un bundle</h3>
+            <pre><code class="language-bash">
+# Instalar Twig (si no está)
+composer require symfony/twig-bundle
+
+# El bundle se registra automáticamente en config/bundles.php
+</code></pre>
+
+            <h3>6.6. Cache y entorno</h3>
+            <pre><code class="language-bash">
+# Limpiar cache
+php bin/console cache:clear
+
+# Cache por entorno
+var/cache/dev
+var/cache/prod
+</code></pre>
+        </section>
+
+    <!-- RESUMEN -->
+        <section id="resumen">
+            <div class="info-box">
+                <h3>Resumen de Symfony</h3>
+                <ul>
+                    <li><strong>Symfony:</strong> framework PHP MVC modular y escalable</li>
+                    <li><strong>config/routes.yaml o atributos:</strong> define rutas HTTP</li>
+                    <li><strong>Controladores:</strong> gestionan la lógica y retornan Response</li>
+                    <li><strong>Twig:</strong> motor de plantillas con sintaxis {{ variable }}, {% if %}, {% for %}</li>
+                    <li><strong>Layouts Twig:</strong> herencia con {% extends %} y {% block %}</li>
+                    <li><strong>Eventos del Kernel:</strong> listeners/subscribers para filtrar peticiones</li>
+                    <li><strong>Kernel.php:</strong> registra bundles y configura el framework</li>
+                    <li><strong>bin/console:</strong> CLI para generar controllers, entidades y CRUD</li>
+                    <li><strong>Doctrine ORM:</strong> acceso a base de datos con entidades</li>
+                    <li><strong>Patrón MVC:</strong> Routing → Controller → Entity → Twig</li>
+                </ul>
+            </div>
+        </section>
+
+  </main>
+
+</body>
+
+</html>

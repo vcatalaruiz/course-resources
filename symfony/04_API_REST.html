@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Symfony API REST</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+<body>
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+  <header>
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1>Symfony API REST</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+
+    <!-- SECCIÓN 1: INTRODUCCIÓN -->
+    <section id="introduccion">
+      <h2>1. Introducción a API REST en Symfony</h2>
+
+      <p>
+        Una <strong>API REST</strong> permite que aplicaciones externas (frontend, móviles, etc.) 
+        se comuniquen con tu backend mediante HTTP y JSON. Symfony ofrece herramientas potentes 
+        para crear APIs: <strong>Serializer</strong>, <strong>Validator</strong> y <strong>Security</strong>.
+      </p>
+
+      <div class="mermaid">
+graph LR
+    A[Cliente/Frontend] -->|HTTP JSON| B[API REST Symfony]
+    B -->|Response JSON| A
+    B --> C[Doctrine]
+    C --> D[(Database)]
+    
+    style A fill:#e1f5ff
+    style B fill:#ffe1e1
+    style C fill:#fff4e1
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: CREAR ENDPOINT -->
+    <section id="endpoints">
+      <h2>2. Crear endpoints API</h2>
+
+      <h3>2.1. Controlador básico API</h3>
+
+      <pre><code class="language-php">
+&lt;?php
+// src/Controller/Api/HotelController.php
+
+namespace App\Controller\Api;
+
+use App\Entity\Hotel;
+use App\Repository\HotelRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+#[Route('/api/hoteles', name: 'api_hoteles_')]
+class HotelController extends AbstractController
+{
+    #[Route('', name: 'index', methods: ['GET'])]
+    public function index(HotelRepository $repository): JsonResponse
+    {
+        $hoteles = $repository->findAll();
+        
+        return $this->json($hoteles, Response::HTTP_OK);
+    }
+
+    #[Route('/{id}', name: 'show', methods: ['GET'])]
+    public function show(Hotel $hotel): JsonResponse
+    {
+        return $this->json($hotel, Response::HTTP_OK);
+    }
+
+    #[Route('', name: 'create', methods: ['POST'])]
+    public function create(Request $request, EntityManagerInterface $em): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+
+        $hotel = new Hotel();
+        $hotel->setNombre($data['nombre']);
+        $hotel->setDireccion($data['direccion'] ?? null);
+
+        $em->persist($hotel);
+        $em->flush();
+
+        return $this->json($hotel, Response::HTTP_CREATED);
+    }
+
+    #[Route('/{id}', name: 'update', methods: ['PUT', 'PATCH'])]
+    public function update(Hotel $hotel, Request $request, EntityManagerInterface $em): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+
+        if (isset($data['nombre'])) {
+            $hotel->setNombre($data['nombre']);
+        }
+        if (isset($data['direccion'])) {
+            $hotel->setDireccion($data['direccion']);
+        }
+
+        $em->flush();
+
+        return $this->json($hotel, Response::HTTP_OK);
+    }
+
+    #[Route('/{id}', name: 'delete', methods: ['DELETE'])]
+    public function delete(Hotel $hotel, EntityManagerInterface $em): JsonResponse
+    {
+        $em->remove($hotel);
+        $em->flush();
+
+        return $this->json(null, Response::HTTP_NO_CONTENT);
+    }
+}
+</code></pre>
+
+      <h3>2.2. Probar endpoints</h3>
+
+      <pre><code class="language-bash">
+# GET - Listar todos
+curl http://localhost:8000/api/hoteles
+
+# GET - Obtener uno
+curl http://localhost:8000/api/hoteles/1
+
+# POST - Crear
+curl -X POST http://localhost:8000/api/hoteles \
+  -H "Content-Type: application/json" \
+  -d '{"nombre":"Hotel Central","direccion":"Calle Mayor 10"}'
+
+# PUT - Actualizar
+curl -X PUT http://localhost:8000/api/hoteles/1 \
+  -H "Content-Type: application/json" \
+  -d '{"nombre":"Hotel Modificado"}'
+
+# DELETE - Eliminar
+curl -X DELETE http://localhost:8000/api/hoteles/1
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 3: SERIALIZER -->
+    <section id="serializer">
+      <h2>3. Serializer y grupos</h2>
+
+      <h3>3.1. Configurar grupos de serialización</h3>
+
+      <pre><code class="language-php">
+&lt;?php
+// src/Entity/Hotel.php
+
+namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+
+#[ORM\Entity]
+class Hotel
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    #[Groups(['hotel:read', 'hotel:write'])]
+    private ?int $id = null;
+
+    #[ORM\Column(length: 255)]
+    #[Groups(['hotel:read', 'hotel:write'])]
+    private string $nombre;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['hotel:read', 'hotel:write'])]
+    private ?string $direccion = null;
+
+    #[ORM\Column]
+    #[Groups(['hotel:read'])]  // Solo lectura
+    private ?\DateTimeImmutable $createdAt = null;
+
+    // getters y setters...
+}
+</code></pre>
+
+      <h3>3.2. Usar grupos en el controlador</h3>
+
+      <pre><code class="language-php">
+&lt;?php
+#[Route('', name: 'index', methods: ['GET'])]
+public function index(HotelRepository $repository): JsonResponse
+{
+    $hoteles = $repository->findAll();
+    
+    return $this->json($hoteles, Response::HTTP_OK, [], [
+        'groups' => ['hotel:read']
+    ]);
+}
+</code></pre>
+
+      <h3>3.3. Serializer manual</h3>
+
+      <pre><code class="language-php">
+&lt;?php
+use Symfony\Component\Serializer\SerializerInterface;
+
+public function index(
+    HotelRepository $repository, 
+    SerializerInterface $serializer
+): Response
+{
+    $hoteles = $repository->findAll();
+    
+    $json = $serializer->serialize($hoteles, 'json', [
+        'groups' => ['hotel:read']
+    ]);
+    
+    return new Response($json, Response::HTTP_OK, [
+        'Content-Type' => 'application/json'
+    ]);
+}
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 4: VALIDACIÓN -->
+    <section id="validacion">
+      <h2>4. Validación de datos</h2>
+
+      <h3>4.1. Constraints en la entidad</h3>
+
+      <pre><code class="language-php">
+&lt;?php
+// src/Entity/Hotel.php
+
+use Symfony\Component\Validator\Constraints as Assert;
+
+class Hotel
+{
+    #[Assert\NotBlank(message: 'El nombre es obligatorio')]
+    #[Assert\Length(
+        min: 3,
+        max: 255,
+        minMessage: 'El nombre debe tener al menos {{ limit }} caracteres',
+        maxMessage: 'El nombre no puede superar {{ limit }} caracteres'
+    )]
+    private string $nombre;
+
+    #[Assert\Length(max: 255)]
+    private ?string $direccion = null;
+}
+</code></pre>
+
+      <h3>4.2. Validar en el controlador</h3>
+
+      <pre><code class="language-php">
+&lt;?php
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+
+#[Route('', name: 'create', methods: ['POST'])]
+public function create(
+    Request $request, 
+    EntityManagerInterface $em,
+    ValidatorInterface $validator
+): JsonResponse
+{
+    $data = json_decode($request->getContent(), true);
+
+    $hotel = new Hotel();
+    $hotel->setNombre($data['nombre'] ?? '');
+    $hotel->setDireccion($data['direccion'] ?? null);
+
+    // Validar
+    $errors = $validator->validate($hotel);
+
+    if (count($errors) > 0) {
+        $errorsArray = [];
+        foreach ($errors as $error) {
+            $errorsArray[$error->getPropertyPath()][] = $error->getMessage();
+        }
+
+        return $this->json([
+            'success' => false,
+            'errors' => $errorsArray
+        ], Response::HTTP_BAD_REQUEST);
+    }
+
+    $em->persist($hotel);
+    $em->flush();
+
+    return $this->json($hotel, Response::HTTP_CREATED);
+}
+</code></pre>
+
+      <h3>4.3. Respuesta de error</h3>
+
+      <pre><code class="language-json">
+{
+  "success": false,
+  "errors": {
+    "nombre": [
+      "El nombre es obligatorio",
+      "El nombre debe tener al menos 3 caracteres"
+    ]
+  }
+}
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 5: AUTENTICACIÓN JWT -->
+    <section id="jwt">
+      <h2>5. Autenticación con JWT</h2>
+
+      <h3>5.1. Instalar JWT Bundle</h3>
+
+      <pre><code class="language-bash">
+composer require lexik/jwt-authentication-bundle
+
+# Generar claves
+php bin/console lexik:jwt:generate-keypair
+</code></pre>
+
+      <h3>5.2. Configurar security.yaml</h3>
+
+      <pre><code class="language-yaml">
+# config/packages/security.yaml
+security:
+  password_hashers:
+    Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+
+  providers:
+    app_user_provider:
+      entity:
+        class: App\Entity\User
+        property: email
+
+  firewalls:
+    login:
+      pattern: ^/api/login
+      stateless: true
+      json_login:
+        check_path: /api/login
+        success_handler: lexik_jwt_authentication.handler.authentication_success
+        failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+    api:
+      pattern: ^/api
+      stateless: true
+      jwt: ~
+
+  access_control:
+    - { path: ^/api/login, roles: PUBLIC_ACCESS }
+    - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+</code></pre>
+
+      <h3>5.3. Configurar rutas</h3>
+
+      <pre><code class="language-yaml">
+# config/routes.yaml
+api_login:
+  path: /api/login
+  methods: ['POST']
+</code></pre>
+
+      <h3>5.4. Autenticarse y usar token</h3>
+
+      <pre><code class="language-bash">
+# Login (obtener token)
+curl -X POST http://localhost:8000/api/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"user@example.com","password":"password"}'
+
+# Respuesta:
+# {
+#   "token": "eyJ0eXAiOiJKV1QiLCJhbGc..."
+# }
+
+# Usar token en peticiones
+curl http://localhost:8000/api/hoteles \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGc..."
+</code></pre>
+
+      <h3>5.5. Proteger endpoints</h3>
+
+      <pre><code class="language-php">
+&lt;?php
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+
+#[Route('/api/hoteles', name: 'api_hoteles_')]
+#[IsGranted('ROLE_USER')]
+class HotelController extends AbstractController
+{
+    #[Route('', name: 'create', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
+    public function create(): JsonResponse
+    {
+        // Solo administradores pueden crear
+    }
+}
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 6: CORS -->
+    <section id="cors">
+      <h2>6. CORS (Cross-Origin Resource Sharing)</h2>
+
+      <h3>6.1. Instalar NelmioCorsBundle</h3>
+
+      <pre><code class="language-bash">
+composer require nelmio/cors-bundle
+</code></pre>
+
+      <h3>6.2. Configurar CORS</h3>
+
+      <pre><code class="language-yaml">
+# config/packages/nelmio_cors.yaml
+nelmio_cors:
+  defaults:
+    origin_regex: true
+    allow_origin: ['*']  # En producción: dominios específicos
+    allow_methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
+    allow_headers: ['Content-Type', 'Authorization']
+    expose_headers: ['Link']
+    max_age: 3600
+
+  paths:
+    '^/api':
+      allow_origin: ['http://localhost:3000', 'http://localhost:5173']
+      allow_headers: ['X-Custom-Auth', 'Content-Type', 'Authorization']
+      allow_methods: ['POST', 'PUT', 'GET', 'DELETE', 'PATCH']
+      max_age: 3600
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 7: API PLATFORM -->
+    <section id="api-platform">
+      <h2>7. API Platform (alternativa rápida)</h2>
+
+      <h3>7.1. Instalar API Platform</h3>
+
+      <pre><code class="language-bash">
+composer require api
+</code></pre>
+
+      <h3>7.2. Anotar entidad</h3>
+
+      <pre><code class="language-php">
+&lt;?php
+// src/Entity/Hotel.php
+
+namespace App\Entity;
+
+use ApiPlatform\Metadata\ApiResource;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity]
+#[ApiResource]
+class Hotel
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    #[ORM\Column(length: 255)]
+    private string $nombre;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $direccion = null;
+
+    // getters y setters...
+}
+</code></pre>
+
+      <h3>7.3. Endpoints generados automáticamente</h3>
+
+      <pre><code class="language-plaintext">
+GET     /api/hotels           # Lista
+GET     /api/hotels/{id}      # Detalle
+POST    /api/hotels           # Crear
+PUT     /api/hotels/{id}      # Actualizar
+DELETE  /api/hotels/{id}      # Eliminar
+
+# Documentación automática:
+http://localhost:8000/api/docs
+</code></pre>
+
+      <h3>7.4. Personalizar operaciones</h3>
+
+      <pre><code class="language-php">
+&lt;?php
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Delete;
+
+#[ApiResource(
+    operations: [
+        new GetCollection(),
+        new Get(),
+        new Post(security: "is_granted('ROLE_ADMIN')"),
+        new Put(security: "is_granted('ROLE_ADMIN')"),
+        new Delete(security: "is_granted('ROLE_ADMIN')")
+    ]
+)]
+class Hotel
+{
+    // ...
+}
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 8: MANEJO DE ERRORES -->
+    <section id="errores">
+      <h2>8. Manejo de errores</h2>
+
+      <h3>8.1. Event Subscriber para excepciones</h3>
+
+      <pre><code class="language-php">
+&lt;?php
+// src/EventSubscriber/ExceptionSubscriber.php
+
+namespace App\EventSubscriber;
+
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Symfony\Component\HttpKernel\KernelEvents;
+
+class ExceptionSubscriber implements EventSubscriberInterface
+{
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            KernelEvents::EXCEPTION => ['onKernelException', 10],
+        ];
+    }
+
+    public function onKernelException(ExceptionEvent $event): void
+    {
+        $exception = $event->getThrowable();
+        $request = $event->getRequest();
+
+        // Solo para rutas API
+        if (!str_starts_with($request->getPathInfo(), '/api')) {
+            return;
+        }
+
+        $statusCode = $exception instanceof HttpExceptionInterface
+            ? $exception->getStatusCode()
+            : Response::HTTP_INTERNAL_SERVER_ERROR;
+
+        $data = [
+            'success' => false,
+            'message' => $exception->getMessage(),
+            'code' => $statusCode
+        ];
+
+        $response = new JsonResponse($data, $statusCode);
+        $event->setResponse($response);
+    }
+}
+</code></pre>
+
+      <h3>8.2. Formato de respuesta de error</h3>
+
+      <pre><code class="language-json">
+{
+  "success": false,
+  "message": "Hotel no encontrado",
+  "code": 404
+}
+</code></pre>
+    </section>
+
+    <!-- DIAGRAMA -->
+    <section>
+      <h2>Diagrama de flujo API</h2>
+
+      <div class="mermaid">
+sequenceDiagram
+    participant Client
+    participant API
+    participant Security
+    participant Controller
+    participant Doctrine
+    participant DB
+
+    Client->>API: POST /api/login
+    API->>Security: Verificar credenciales
+    Security-->>API: Token JWT
+    API-->>Client: {"token": "..."}
+    
+    Client->>API: GET /api/hoteles + Bearer Token
+    API->>Security: Validar token
+    Security->>Controller: Usuario autenticado
+    Controller->>Doctrine: findAll()
+    Doctrine->>DB: SELECT * FROM hoteles
+    DB-->>Doctrine: Resultados
+    Doctrine-->>Controller: Array de entidades
+    Controller-->>API: JSON serializado
+    API-->>Client: Lista de hoteles
+      </div>
+    </section>
+
+    <!-- RESUMEN -->
+    <section>
+      <div class="info-box">
+        <h3>Resumen rápido</h3>
+
+        <table border="1" style="width:100%; border-collapse:collapse;">
+          <tr><th>Concepto</th><th>Descripción</th></tr>
+          <tr><td>JsonResponse</td><td>Retorna respuestas en formato JSON</td></tr>
+          <tr><td>Serializer</td><td>Convierte entidades a JSON con grupos</td></tr>
+          <tr><td>Validator</td><td>Valida datos antes de persistir</td></tr>
+          <tr><td>JWT</td><td>Autenticación con tokens</td></tr>
+          <tr><td>CORS</td><td>Permite peticiones desde otros dominios</td></tr>
+          <tr><td>API Platform</td><td>Framework para crear APIs automáticamente</td></tr>
+          <tr><td>HTTP Codes</td><td>200 OK, 201 Created, 400 Bad Request, 404 Not Found</td></tr>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>

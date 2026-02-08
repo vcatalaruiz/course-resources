@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laravel API REST</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+<body>
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+  <header>
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1>Laravel API REST</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+
+    <!-- SECCIÓN 1: INTRODUCCIÓN -->
+    <section id="introduccion">
+      <h2>1. Introducción a API REST en Laravel</h2>
+
+      <p>
+        Una <strong>API REST</strong> permite que aplicaciones externas (frontend, móviles, etc.) 
+        se comuniquen con tu backend mediante HTTP y JSON. Laravel ofrece herramientas potentes 
+        para crear APIs: <strong>API Resources</strong>, <strong>Validation</strong> y <strong>Sanctum</strong>.
+      </p>
+
+      <div class="mermaid">
+graph LR
+    A[Cliente/Frontend] -->|HTTP JSON| B[API REST Laravel]
+    B -->|Response JSON| A
+    B --> C[Eloquent]
+    C --> D[(Database)]
+    
+    style A fill:#e1f5ff
+    style B fill:#ffe1e1
+    style C fill:#fff4e1
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: CREAR ENDPOINT -->
+    <section id="endpoints">
+      <h2>2. Crear endpoints API</h2>
+
+      <h3>2.1. Rutas API</h3>
+
+      <pre><code class="language-php">
+&lt;?php
+// routes/api.php
+
+use App\Http\Controllers\Api\HotelController;
+use Illuminate\Support\Facades\Route;
+
+Route::apiResource('hoteles', HotelController::class);
+
+// Genera automáticamente:
+// GET    /api/hoteles          -> index()
+// GET    /api/hoteles/{id}     -> show($id)
+// POST   /api/hoteles          -> store()
+// PUT    /api/hoteles/{id}     -> update($id)
+// DELETE /api/hoteles/{id}     -> destroy($id)
+?&gt;
+</code></pre>
+
+      <h3>2.2. Controlador básico API</h3>
+
+      <pre><code class="language-php">
+&lt;?php
+// app/Http/Controllers/Api/HotelController.php
+
+namespace App\Http\Controllers\Api;
+
+use App\Models\Hotel;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
+
+class HotelController extends Controller
+{
+    public function index(): JsonResponse
+    {
+        $hoteles = Hotel::all();
+        
+        return response()->json($hoteles, 200);
+    }
+
+    public function show(Hotel $hotel): JsonResponse
+    {
+        return response()->json($hotel, 200);
+    }
+
+    public function store(Request $request): JsonResponse
+    {
+        $hotel = Hotel::create([
+            'nombre' => $request->nombre,
+            'direccion' => $request->direccion
+        ]);
+
+        return response()->json($hotel, 201);
+    }
+
+    public function update(Request $request, Hotel $hotel): JsonResponse
+    {
+        $hotel->update($request->only(['nombre', 'direccion']));
+
+        return response()->json($hotel, 200);
+    }
+
+    public function destroy(Hotel $hotel): JsonResponse
+    {
+        $hotel->delete();
+
+        return response()->json(null, 204);
+    }
+}
+?&gt;
+</code></pre>
+
+      <h3>2.2. Probar endpoints</h3>
+
+      <pre><code class="language-bash">
+# GET - Listar todos
+curl http://localhost:8000/api/hoteles
+
+# GET - Obtener uno
+curl http://localhost:8000/api/hoteles/1
+
+# POST - Crear
+curl -X POST http://localhost:8000/api/hoteles \
+  -H "Content-Type: application/json" \
+  -d '{"nombre":"Hotel Central","direccion":"Calle Mayor 10"}'
+
+# PUT - Actualizar
+curl -X PUT http://localhost:8000/api/hoteles/1 \
+  -H "Content-Type: application/json" \
+  -d '{"nombre":"Hotel Modificado"}'
+
+# DELETE - Eliminar
+curl -X DELETE http://localhost:8000/api/hoteles/1
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 3: API RESOURCES -->
+    <section id="serializer">
+      <h2>3. API Resources</h2>
+
+      <h3>3.1. Crear un Resource</h3>
+
+      <pre><code class="language-bash">
+php artisan make:resource HotelResource
+</code></pre>
+
+      <h3>3.2. Definir Resource</h3>
+
+      <pre><code class="language-php">
+&lt;?php
+// app/Http/Resources/HotelResource.php
+
+namespace App\Http\Resources;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class HotelResource extends JsonResource
+{
+    public function toArray(Request $request): array
+    {
+        return [
+            'id' => $this->id,
+            'nombre' => $this->nombre,
+            'direccion' => $this->direccion,
+            'created_at' => $this->created_at->format('Y-m-d H:i:s'),
+            'habitaciones_count' => $this->habitaciones->count(),
+        ];
+    }
+}
+?&gt;
+</code></pre>
+
+      <h3>3.3. Usar Resource en controlador</h3>
+
+      <pre><code class="language-php">
+&lt;?php
+use App\Http\Resources\HotelResource;
+
+public function index(): JsonResponse
+{
+    $hoteles = Hotel::all();
+    
+    return HotelResource::collection($hoteles);
+}
+
+public function show(Hotel $hotel): JsonResponse
+{
+    return new HotelResource($hotel);
+}
+?&gt;
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 4: VALIDACIÓN -->
+    <section id="validacion">
+      <h2>4. Validación de datos</h2>
+
+      <h3>4.1. Crear Form Request</h3>
+
+      <pre><code class="language-bash">
+php artisan make:request StoreHotelRequest
+</code></pre>
+
+      <h3>4.2. Definir reglas de validación</h3>
+
+      <pre><code class="language-php">
+&lt;?php
+// app/Http/Requests/StoreHotelRequest.php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreHotelRequest extends FormRequest
+{
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    public function rules(): array
+    {
+        return [
+            'nombre' => 'required|string|min:3|max:255',
+            'direccion' => 'nullable|string|max:255',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'nombre.required' => 'El nombre es obligatorio',
+            'nombre.min' => 'El nombre debe tener al menos :min caracteres',
+        ];
+    }
+}
+?&gt;
+</code></pre>
+
+      <h3>4.3. Usar validación en controlador</h3>
+
+      <pre><code class="language-php">
+&lt;?php
+use App\Http\Requests\StoreHotelRequest;
+
+public function store(StoreHotelRequest $request): JsonResponse
+{
+    // Los datos ya están validados automáticamente
+    $hotel = Hotel::create($request->validated());
+
+    return response()->json($hotel, 201);
+}
+?&gt;
+</code></pre>
+
+    </section>
+
+    <!-- SECCIÓN 5: AUTENTICACIÓN CON SANCTUM -->
+    <section id="autenticacion">
+      <h2>5. Autenticación con Sanctum</h2>
+
+      <h3>5.1. Instalar y configurar Sanctum</h3>
+
+      <pre><code class="language-bash">
+# Instalar Sanctum
+composer require laravel/sanctum
+
+# Publicar configuración
+php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+
+# Ejecutar migraciones
+php artisan migrate
+</code></pre>
+
+      <h3>5.2. Configurar modelo User</h3>
+
+      <pre><code class="language-php">
+&lt;?php
+// app/Models/User.php
+
+namespace App\Models;
+
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
+
+class User extends Authenticatable
+{
+    use HasApiTokens;
+
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+}
+?&gt;
+
+    api:
+      pattern: ^/api
+</code></pre>
+
+      <h3>5.3. Crear endpoint de login</h3>
+
+      <pre><code class="language-php">
+&lt;?php
+// app/Http/Controllers/Api/AuthController.php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
+
+class AuthController extends Controller
+{
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            throw ValidationException::withMessages([
+                'email' => ['Las credenciales son incorrectas.'],
+            ]);
+        }
+
+        $token = $user->createToken('api-token')->plainTextToken;
+
+        return response()->json([
+            'token' => $token,
+            'user' => $user,
+        ]);
+    }
+
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json(['message' => 'Logout exitoso']);
+    }
+}
+?&gt;
+</code></pre>
+
+      <h3>5.4. Proteger rutas con Sanctum</h3>
+
+      <pre><code class="language-php">
+&lt;?php
+// routes/api.php
+
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\HotelApiController;
+
+// Rutas públicas
+Route::post('/login', [AuthController::class, 'login']);
+
+// Rutas protegidas
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::apiResource('hoteles', HotelApiController::class);
+});
+?&gt;
+</code></pre>
+
+      <h3>5.5. Hacer peticiones autenticadas</h3>
+
+      <pre><code class="language-javascript">
+// Login
+fetch('http://localhost:8000/api/login', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    email: 'admin@example.com',
+    password: 'password'
+  })
+})
+.then(res => res.json())
+.then(data => {
+  // Guardar token
+  localStorage.setItem('token', data.token);
+});
+
+// Usar token en peticiones
+const token = localStorage.getItem('token');
+
+fetch('http://localhost:8000/api/hoteles', {
+  headers: {
+    'Authorization': `Bearer ${token}`,
+    'Accept': 'application/json',
+  }
+})
+.then(res => res.json())
+.then(data => console.log(data));
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 6: CORS -->
+    <section id="cors">
+      <h2>6. CORS (Cross-Origin Resource Sharing)</h2>
+
+      <h3>6.1. Configuración de CORS</h3>
+
+      <p>Laravel incluye CORS configurado por defecto. Editar <code>config/cors.php</code>:</p>
+
+      <pre><code class="language-php">
+&lt;?php
+// config/cors.php
+
+return [
+    'paths' => ['api/*'],
+
+    'allowed_methods' => ['*'],
+
+    'allowed_origins' => ['*'],  // Cambiar en producción
+    // 'allowed_origins' => ['https://tu-frontend.com'],
+
+    'allowed_origins_patterns' => [],
+
+    'allowed_headers' => ['*'],
+
+    'exposed_headers' => [],
+
+    'max_age' => 0,
+
+    'supports_credentials' => false,
+];
+?&gt;
+</code></pre>
+
+      <h3>6.2. Verificar middleware en Kernel</h3>
+
+      <pre><code class="language-php">
+&lt;?php
+// app/Http/Kernel.php
+
+protected $middleware = [
+    // ...
+    \Illuminate\Http\Middleware\HandleCors::class,
+];
+?&gt;
+</code></pre>
+
+      <h3>6.3. Petición desde frontend</h3>
+
+      <pre><code class="language-javascript">
+fetch('http://localhost:8000/api/hoteles', {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+  }
+})
+.then(res => res.json())
+.then(data => console.log(data));
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 7: PAGINACIÓN -->
+    <section id="paginacion">
+      <h2>7. Paginación de resultados</h2>
+
+      <h3>7.1. Paginación simple</h3>
+
+      <pre><code class="language-php">
+&lt;?php
+public function index(): JsonResponse
+{
+    $hoteles = Hotel::paginate(15);
+    
+    return response()->json($hoteles);
+}
+?&gt;
+</code></pre>
+
+      <h3>7.3. Endpoints generados automáticamente</h3>
+
+      <pre><code class="language-plaintext">
+GET     /api/hotels           # Lista
+GET     /api/hotels/{id}      # Detalle
+POST    /api/hotels           # Crear
+PUT     /api/hotels/{id}      # Actualizar
+DELETE  /api/hotels/{id}      # Eliminar
+
+# Documentación automática:
+http://localhost:8000/api/docs
+</code></pre>
+
+      <h3>7.4. Personalizar operaciones</h3>
+
+      <pre><code class="language-php">
+&lt;?php
+    return response()->json($hoteles);
+}
+?&gt;
+</code></pre>
+
+      <h3>7.2. Respuesta de paginación</h3>
+
+      <pre><code class="language-json">
+{
+  "current_page": 1,
+  "data": [
+    {"id": 1, "nombre": "Hotel Plaza"},
+    {"id": 2, "nombre": "Hotel Sol"}
+  ],
+  "first_page_url": "http://localhost:8000/api/hoteles?page=1",
+  "from": 1,
+  "last_page": 5,
+  "last_page_url": "http://localhost:8000/api/hoteles?page=5",
+  "next_page_url": "http://localhost:8000/api/hoteles?page=2",
+  "path": "http://localhost:8000/api/hoteles",
+  "per_page": 15,
+  "prev_page_url": null,
+  "to": 15,
+  "total": 68
+}
+</code></pre>
+
+      <h3>7.3. Paginación con Resource</h3>
+
+      <pre><code class="language-php">
+&lt;?php
+use App\Http\Resources\HotelResource;
+
+public function index(): JsonResponse
+{
+    $hoteles = Hotel::paginate(15);
+    
+    return HotelResource::collection($hoteles);
+}
+?&gt;
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 8: MANEJO DE ERRORES -->
+    <section id="errores">
+      <h2>8. Manejo de errores</h2>
+
+      <h3>8.1. Exception Handler personalizado</h3>
+
+      <pre><code class="language-php">
+&lt;?php
+// app/Exceptions/Handler.php
+
+namespace App\Exceptions;
+
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Throwable;
+
+class Handler extends ExceptionHandler
+{
+    public function register(): void
+    {
+        $this->renderable(function (ModelNotFoundException $e, $request) {
+            if ($request->is('api/*')) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Recurso no encontrado',
+                ], 404);
+            }
+        });
+
+        $this->renderable(function (NotFoundHttpException $e, $request) {
+            if ($request->is('api/*')) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Endpoint no encontrado',
+                ], 404);
+            }
+        });
+    }
+}
+?&gt;
+</code></pre>
+
+      <h3>8.2. Respuesta personalizada de errores</h3>
+
+      <pre><code class="language-php">
+&lt;?php
+// Retornar error manualmente en el controlador
+public function show(int $id): JsonResponse
+{
+    $hotel = Hotel::find($id);
+
+    if (!$hotel) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Hotel no encontrado',
+        ], 404);
+    }
+
+    return response()->json($hotel);
+}
+?&gt;
+</code></pre>
+
+      <h3>8.2. Formato de respuesta de error</h3>
+
+      <pre><code class="language-json">
+{
+  "success": false,
+  "message": "Hotel no encontrado",
+  "code": 404
+}
+</code></pre>
+    </section>
+
+    <!-- DIAGRAMA -->
+    <section>
+      <h2>Diagrama de flujo API</h2>
+
+      <div class="mermaid">
+sequenceDiagram
+    participant Client
+    participant API
+    participant Sanctum
+    participant Controller
+    participant Eloquent
+    participant DB
+
+    Client->>API: POST /api/login
+    API->>Sanctum: Verificar credenciales
+    Sanctum-->>API: Token API
+    API-->>Client: {"token": "..."}
+    
+    Client->>API: GET /api/hoteles + Bearer Token
+    API->>Sanctum: Validar token
+    Sanctum->>Controller: Usuario autenticado
+    Controller->>Eloquent: Hotel::all()
+    Eloquent->>DB: SELECT * FROM hotels
+    DB-->>Eloquent: Resultados
+    Eloquent-->>Controller: Collection de modelos
+    Controller-->>API: JSON Response
+    API-->>Client: Lista de hoteles
+      </div>
+    </section>
+
+    <!-- RESUMEN -->
+    <section>
+      <div class="info-box">
+        <h3>Resumen rápido</h3>
+
+        <table border="1" style="width:100%; border-collapse:collapse;">
+          <tr><th>Concepto</th><th>Descripción</th></tr>
+          <tr><td>apiResource()</td><td>Genera automáticamente rutas RESTful</td></tr>
+          <tr><td>API Resources</td><td>Transforma modelos a JSON con formato personalizado</td></tr>
+          <tr><td>Form Requests</td><td>Valida datos de entrada con reglas</td></tr>
+          <tr><td>Sanctum</td><td>Autenticación con tokens API</td></tr>
+          <tr><td>CORS</td><td>Permite peticiones desde otros dominios</td></tr>
+          <tr><td>Pagination</td><td>Divide resultados en páginas</td></tr>
+          <tr><td>HTTP Codes</td><td>200 OK, 201 Created, 400 Bad Request, 404 Not Found</td></tr>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>
