@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spring Boot ORM Hibernate</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <!-- X SVG -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+  <!-- ===== /VC SIDEBAR ===== -->
+
+  <header>
+
+    <!-- ===== VC SIDEBAR (desde cero) ===== -->
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail"
+      aria-expanded="false">
+      <!--Hamburger icon -->
+      <i class="fa fa-bars" aria-hidden="true"></i>
+
+
+    </button>
+    <h1>Spring Boot ORM Hibernate</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+<main>
+
+<!-- SECCIÓN 1 -->
+<section id="introduccion">
+<h2>1. Introducción a Hibernate ORM</h2>
+
+<p>
+<strong>Hibernate</strong> es el ORM que usa Spring Boot. Permite trabajar con la base de datos
+mediante <strong>entidades Java</strong>, evitando escribir SQL directamente.
+Cada entidad representa una tabla. <strong>Spring Data JPA</strong> proporciona repositorios automáticos.
+</p>
+
+<h3>1.1. Instalación</h3>
+
+<pre><code class="language-xml">
+&lt;!-- pom.xml --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.mysql&lt;/groupId&gt;
+    &lt;artifactId&gt;mysql-connector-j&lt;/artifactId&gt;
+    &lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<h3>1.2. Configuración de la BD</h3>
+
+<pre><code class="language-properties">
+# application.properties
+spring.datasource.url=jdbc:mysql://localhost:3306/hotel_db
+spring.datasource.username=root
+spring.datasource.password=root
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+</code></pre>
+</section>
+
+<!-- SECCIÓN 2 -->
+<section id="entity">
+<h2>2. Entidades Hibernate</h2>
+
+<h3>2.1. Crear una entidad</h3>
+
+<pre><code class="language-bash">
+php bin/console make:entity Hotel
+</code></pre>
+
+<h3>2.2. Entidad básica</h3>
+
+<pre><code class="language-java">
+package com.example.entity;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "hotel")
+public class Hotel {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @Column(nullable = false)
+  private String nombre;
+
+  @Column
+  private String direccion;
+
+  // Constructor vacío (requerido por JPA)
+  public Hotel() {}
+
+  // Getters y Setters
+  public Long getId() { return id; }
+  public void setId(Long id) { this.id = id; }
+
+  public String getNombre() { return nombre; }
+  public void setNombre(String nombre) { this.nombre = nombre; }
+
+  public String getDireccion() { return direccion; }
+  public void setDireccion(String direccion) { this.direccion = direccion; }
+}
+</code></pre>
+
+<h3>2.3. Uso básico del repositorio</h3>
+
+<p>Crear interfaz <code>HotelRepository.java</code>:</p>
+
+<pre><code class="language-java">
+package com.example.repository;
+
+import com.example.entity.Hotel;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface HotelRepository extends JpaRepository&lt;Hotel, Long&gt; {
+  // Métodos automáticos: findAll(), findById(), save(), delete()
+}
+</code></pre>
+
+<p>Uso en el controlador o servicio:</p>
+
+<pre><code class="language-java">
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.List;
+
+@Service
+public class HotelService {
+
+  @Autowired
+  private HotelRepository hotelRepository;
+
+  // Insertar
+  public Hotel crear() {
+    Hotel hotel = new Hotel();
+    hotel.setNombre("Gran Hotel");
+    hotel.setDireccion("Calle Mayor 3");
+    return hotelRepository.save(hotel);
+  }
+
+  // Consultar todos
+  public List&lt;Hotel&gt; obtenerTodos() {
+    return hotelRepository.findAll();
+  }
+
+  // Buscar por ID
+  public Hotel obtenerPorId(Long id) {
+    return hotelRepository.findById(id).orElse(null);
+  }
+
+  // Eliminar
+  public void eliminar(Long id) {
+    hotelRepository.deleteById(id);
+  }
+}
+</code></pre>
+</section>
+
+<!-- SECCIÓN 3 -->
+<section id="hibernate-crud">
+<h2>3. CRUD con Spring Data JPA</h2>
+
+<h3>3.1. CREATE</h3>
+<pre><code class="language-java">
+Hotel hotel = new Hotel();
+hotel.setNombre("Hotel Central");
+hotel.setDireccion("Avenida Principal 10");
+hotelRepository.save(hotel);
+</code></pre>
+
+<h3>3.2. READ</h3>
+<pre><code class="language-java">
+// Buscar todos
+List&lt;Hotel&gt; hoteles = hotelRepository.findAll();
+
+// Buscar por campo (método automático de JPA)
+List&lt;Hotel&gt; hoteles = hotelRepository.findByNombre("Hotel Central");
+
+// Con @Query JPQL personalizado
+@Query("SELECT h FROM Hotel h WHERE h.nombre LIKE %:nombre%")
+List&lt;Hotel&gt; buscarPorNombre(@Param("nombre") String nombre);
+</code></pre>
+
+<h3>3.3. UPDATE</h3>
+<pre><code class="language-java">
+Hotel hotel = hotelRepository.findById(1L).orElse(null);
+if (hotel != null) {
+  hotel.setDireccion("Nueva dirección");
+  hotelRepository.save(hotel);
+}
+</code></pre>
+
+<h3>3.4. DELETE</h3>
+<pre><code class="language-java">
+hotelRepository.deleteById(1L);
+</code></pre>
+</section>
+
+<!-- SECCIÓN 4 -->
+<section id="factory">
+<h2>4. Seeders con DataFaker</h2>
+
+<h3>4.1. Agregar dependencia</h3>
+
+<pre><code class="language-xml">
+&lt;!-- pom.xml --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;net.datafaker&lt;/groupId&gt;
+    &lt;artifactId&gt;datafaker&lt;/artifactId&gt;
+    &lt;version&gt;2.1.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<h3>4.2. Crear seeder con CommandLineRunner</h3>
+
+<pre><code class="language-java">
+package com.example.seeder;
+
+import com.example.entity.Hotel;
+import com.example.repository.HotelRepository;
+import net.datafaker.Faker;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+import java.util.Locale;
+
+@Component
+public class HotelSeeder implements CommandLineRunner {
+
+  private final HotelRepository hotelRepository;
+
+  public HotelSeeder(HotelRepository hotelRepository) {
+    this.hotelRepository = hotelRepository;
+  }
+
+  @Override
+  public void run(String... args) throws Exception {
+    if (hotelRepository.count() == 0) {
+      Faker faker = new Faker(new Locale("es"));
+
+      for (int i = 0; i < 10; i++) {
+        Hotel hotel = new Hotel();
+        hotel.setNombre(faker.company().name());
+        hotel.setDireccion(faker.address().fullAddress());
+        hotelRepository.save(hotel);
+      }
+
+      System.out.println("✅ 10 hoteles creados");
+    }
+  }
+}
+</code></pre>
+
+<h3>4.3. Ejecutar el seeder</h3>
+
+<pre><code class="language-bash">
+mvn spring-boot:run
+</code></pre>
+</section>
+
+<!-- SECCIÓN 5 -->
+<section id="relaciones">
+<h2>5. Relaciones JPA</h2>
+
+<h3>5.1. Relación 1:N</h3>
+
+<pre><code class="language-java">
+// src/main/java/com/example/entity/Hotel.java
+import java.util.List;
+
+@Entity
+public class Hotel {
+  // ... otros campos ...
+
+  @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List&lt;Habitacion&gt; habitaciones;
+
+  public List&lt;Habitacion&gt; getHabitaciones() { return habitaciones; }
+  public void setHabitaciones(List&lt;Habitacion&gt; habitaciones) { this.habitaciones = habitaciones; }
+}
+
+// src/main/java/com/example/entity/Habitacion.java
+@Entity
+public class Habitacion {
+  
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  private String numero;
+
+  @ManyToOne
+  @JoinColumn(name = "hotel_id", nullable = false)
+  private Hotel hotel;
+
+  // Getters y Setters
+}
+</code></pre>
+
+<h3>5.2. Uso de la relación</h3>
+
+<pre><code class="language-java">
+Hotel hotel = hotelRepository.findById(1L).orElse(null);
+
+if (hotel != null) {
+  for (Habitacion habitacion : hotel.getHabitaciones()) {
+    System.out.println(habitacion.getNumero());
+  }
+}
+</code></pre>
+</section>
+
+<!-- SECCIÓN 6 -->
+<section id="seed">
+<h2>6. Repositorios y consultas personalizadas</h2>
+
+<h3>6.1. Repositorio personalizado</h3>
+
+<pre><code class="language-java">
+// src/main/java/com/example/repository/HotelRepository.java
+package com.example.repository;
+
+import com.example.entity.Hotel;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+import java.util.List;
+
+@Repository
+public interface HotelRepository extends JpaRepository&lt;Hotel, Long&gt; {
+
+  // Método automático por nombre de campo
+  List&lt;Hotel&gt; findByNombreContaining(String nombre);
+
+  // Consulta JPQL personalizada
+  @Query("SELECT h FROM Hotel h WHERE h.nombre LIKE %:nombre%")
+  List&lt;Hotel&gt; buscarPorNombre(@Param("nombre") String nombre);
+
+  // Consulta SQL nativa
+  @Query(value = "SELECT * FROM hotel WHERE nombre LIKE %?1%", nativeQuery = true)
+  List&lt;Hotel&gt; buscarPorNombreNativo(String nombre);
+}
+</code></pre>
+
+<h3>6.2. Uso del repositorio</h3>
+
+<pre><code class="language-java">
+List&lt;Hotel&gt; hoteles = hotelRepository.buscarPorNombre("Hotel");
+</code></pre>
+</section>
+
+<!-- DIAGRAMA -->
+<section>
+<h2>Diagrama conceptual</h2>
+
+<div class="mermaid">
+classDiagram
+class Hotel {
+    id
+    nombre
+    direccion
+}
+class Habitacion {
+    id
+    numero
+    hotel_id
+}
+Hotel "1" --> "*" Habitacion
+</div>
+</section>
+
+<!-- RESUMEN -->
+<section>
+<div class="info-box">
+<h3>Resumen rápido</h3>
+
+<table border="1" style="width:100%; border-collapse:collapse;">
+<tr><th>Elemento</th><th>Función</th></tr>
+<tr><td>@Entity</td><td>Representa una tabla en la BD</td></tr>
+<tr><td>Hibernate</td><td>ORM de Spring Boot</td></tr>
+<tr><td>Spring Data JPA</td><td>Repositorios automáticos</td></tr>
+<tr><td>JpaRepository</td><td>CRUD + consultas personalizadas</td></tr>
+<tr><td>@OneToMany / @ManyToOne</td><td>Relaciones entre entidades</td></tr>
+<tr><td>CommandLineRunner</td><td>Genera datos con DataFaker</td></tr>
+</table>
+</div>
+</section>
+
+</main>
+
+<footer>
+<p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+</footer>
+</body>
+</html>

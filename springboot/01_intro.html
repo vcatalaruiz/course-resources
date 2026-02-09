@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducción a Spring Boot</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+  <header>
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1>Introducción a Spring Boot</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+    <p>Spring Boot es un framework Java que simplifica el desarrollo de aplicaciones empresariales modernas. Proporciona configuración automática, servidor embebido y un ecosistema completo para construir aplicaciones robustas con mínimo esfuerzo.</p>
+
+    <!-- SECCIÓN 1: INTRODUCCIÓN BÁSICA -->
+        <section id="introduccion-basica">
+            <h2>1. Introducción básica a Spring Boot</h2>
+
+            <h3>1.1. ¿Qué es Spring Boot?</h3>
+            <p>Spring Boot es un proyecto del ecosistema Spring Framework que facilita la creación de aplicaciones Java standalone y de producción. Elimina la configuración XML compleja mediante <strong>convención sobre configuración</strong> y <strong>auto-configuración</strong>.</p>
+
+            <h3>1.2. Características principales</h3>
+            <ul>
+                <li><strong>Auto-configuración:</strong> configura automáticamente beans según dependencias del classpath</li>
+                <li><strong>Servidor embebido:</strong> Tomcat, Jetty o Undertow incluidos (no necesita WAR)</li>
+                <li><strong>Spring Initializr:</strong> generador de proyectos en start.spring.io</li>
+                <li><strong>Spring Data JPA:</strong> simplifica acceso a bases de datos relacionales</li>
+                <li><strong>Thymeleaf:</strong> motor de plantillas para vistas HTML</li>
+                <li><strong>Spring MVC:</strong> framework web con anotaciones @Controller, @RestController</li>
+                <li><strong>Spring Security:</strong> autenticación y autorización</li>
+                <li><strong>Inyección de Dependencias:</strong> @Autowired, @Component, @Service</li>
+                <li><strong>Actuator:</strong> endpoints de monitorización y salud de la aplicación</li>
+            </ul>
+
+            <h3>1.3. Estructura del proyecto Spring Boot</h3>
+            <pre><code class="language-plaintext">
+mi-proyecto/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/
+│   │   │       └── example/
+│   │   │           └── demo/
+│   │   │               ├── DemoApplication.java       # Clase principal @SpringBootApplication
+│   │   │               ├── controller/                # Controladores @Controller / @RestController
+│   │   │               ├── model/                     # Entidades JPA @Entity
+│   │   │               ├── repository/                # Repositorios @Repository (JpaRepository)
+│   │   │               └── service/                   # Servicios @Service
+│   │   └── resources/
+│   │       ├── static/                    # CSS, JS, imágenes
+│   │       ├── templates/                 # Plantillas Thymeleaf (.html)
+│   │       └── application.properties     # Configuración (DB, puerto, etc.)
+│   └── test/
+│       └── java/                      # Tests JUnit
+├── target/                        # Archivos compilados (.class, .jar)
+├── pom.xml                        # Dependencias Maven
+└── mvnw / mvnw.cmd                # Maven Wrapper
+</code></pre>
+
+            <h3>1.4. Instalación</h3>
+            <pre><code class="language-bash">
+# Opción 1: Spring Initializr (https://start.spring.io)
+# Seleccionar: Maven/Gradle, Java 17+, Spring Boot 3.x
+# Dependencies: Spring Web, Spring Data JPA, Thymeleaf, MySQL Driver
+
+# Opción 2: Spring Boot CLI
+curl -s "https://get.sdkman.io" | bash
+sdk install springboot
+spring init --dependencies=web,data-jpa,thymeleaf mi-proyecto
+cd mi-proyecto
+
+# Opción 3: Maven manual
+mvn archetype:generate -DgroupId=com.example -DartifactId=mi-proyecto \
+  -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+# Ejecutar aplicación
+./mvnw spring-boot:run
+# O con JAR:
+./mvnw clean package
+java -jar target/mi-proyecto-0.0.1-SNAPSHOT.jar
+
+# Visitar: http://localhost:8080
+</code></pre>
+
+            <h3>1.5. Patrón MVC en Spring Boot</h3>
+            <div class="mermaid">
+graph LR
+        A[Usuario/Cliente] -->|HTTP Request| B[DispatcherServlet]
+        B -->|Mapea URL| C[Controller]
+        C -->|Lógica de negocio| D[Service]
+        D -->|CRUD| E[Repository]
+        E -->|JPA/Hibernate| F[(Database)]
+        C -->|Retorna datos| G[View<br/>Thymeleaf]
+        G -->|HTTP Response| A
+    
+        style B fill:#e1f5ff
+        style C fill:#fff4e1
+        style D fill:#ffe1f5
+        style E fill:#ffe1e1
+        style G fill:#e1ffe1
+            </div>
+        </section>
+
+    <!-- SECCIÓN 2: RUTAS -->
+    <section id="web-php">
+      <h2>2. Rutas en Spring Boot</h2>
+
+      <h3>2.1. Mapeo de rutas con anotaciones</h3>
+      <p>En Spring Boot las rutas se definen mediante anotaciones directamente en los métodos del controlador.</p>
+
+      <pre><code class="language-java">
+// src/main/java/com/example/demo/controller/HomeController.java
+
+package com.example.demo.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+@RequestMapping("/")
+public class HomeController {
+
+    @GetMapping
+    public String index() {
+        return "index"; // Retorna templates/index.html
+    }
+
+    @GetMapping("/usuario/{id}")
+    @ResponseBody
+    public String usuario(@PathVariable Long id) {
+        return "Usuario ID: " + id;
+    }
+
+    @GetMapping("/saludo/{nombre}")
+    @ResponseBody
+    public String saludo(@PathVariable(required = false) String nombre) {
+        if (nombre == null) {
+            nombre = "Invitado";
+        }
+        return "Hola, " + nombre;
+    }
+}
+</code></pre>
+
+      <h3>2.2. Verbos HTTP</h3>
+      <pre><code class="language-java">
+package com.example.demo.controller;
+
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+
+@RestController
+@RequestMapping("/articulos")
+public class ArticuloController {
+
+    @GetMapping
+    public ResponseEntity<String> listar() {
+        return ResponseEntity.ok("Lista de artículos");
+    }
+
+    @PostMapping
+    public ResponseEntity<String> crear(@RequestBody String datos) {
+        return ResponseEntity.status(201).body("Artículo creado");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> actualizar(@PathVariable Long id) {
+        return ResponseEntity.ok("Actualizar artículo " + id);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminar(@PathVariable Long id) {
+        return ResponseEntity.ok("Eliminar artículo " + id);
+    }
+}
+</code></pre>
+
+      <h3>2.3. Rutas nombradas y redirecciones</h3>
+      <pre><code class="language-java">
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
+
+@Controller
+public class DashboardController {
+
+    @GetMapping("/dashboard")
+    public String dashboard() {
+        return "dashboard"; // templates/dashboard.html
+    }
+
+    @GetMapping("/perfil/{id}")
+    public String perfil(@PathVariable Long id, Model model) {
+        model.addAttribute("userId", id);
+        return "perfil";
+    }
+
+    // Redirección
+    @GetMapping("/redirigir")
+    public String redirigir() {
+        return "redirect:/dashboard";
+    }
+}
+
+// En Thymeleaf (templates):
+// <a th:href="@{/dashboard}">Dashboard</a>
+// <a th:href="@{/perfil/{id}(id=${userId})}">Ver perfil</a>
+</code></pre>
+
+      <h3>2.4. Agrupación de rutas con @RequestMapping</h3>
+      <pre><code class="language-java">
+package com.example.demo.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+@RequestMapping("/admin")
+public class AdminController {
+
+    @GetMapping("/usuarios")
+    @ResponseBody
+    public String usuarios() {
+        // URL: /admin/usuarios
+        return "Gestión de usuarios";
+    }
+
+    @GetMapping("/productos")
+    @ResponseBody
+    public String productos() {
+        // URL: /admin/productos
+        return "Gestión de productos";
+    }
+}
+</code></pre>
+
+      <h3>2.5. Parámetros de consulta</h3>
+      <pre><code class="language-java">
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class BusquedaController {
+
+    // /buscar?q=laptop&limit=10
+    @GetMapping("/buscar")
+    public String buscar(
+        @RequestParam String q,
+        @RequestParam(defaultValue = "20") int limit
+    ) {
+        return "Buscando: " + q + " (límite: " + limit + ")";
+    }
+}
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 3: CONTROLADORES -->
+    <section id="controllers">
+      <h2>3. Controladores (Controllers)</h2>
+
+      <h3>3.1. Crear un controlador</h3>
+      <p>No hay generador automático como en Symfony, pero es simple crear controladores manualmente:</p>
+
+      <pre><code class="language-java">
+// src/main/java/com/example/demo/controller/ProductoController.java
+
+package com.example.demo.controller;
+
+import com.example.demo.model.Producto;
+import com.example.demo.service.ProductoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
+
+@Controller
+@RequestMapping("/productos")
+public class ProductoController {
+
+    @Autowired
+    private ProductoService productoService;
+
+    @GetMapping
+    public String index(Model model) {
+        List<Producto> productos = productoService.findAll();
+        model.addAttribute("productos", productos);
+        return "productos/index";
+    }
+
+    @GetMapping("/nuevo")
+    public String create(Model model) {
+        model.addAttribute("producto", new Producto());
+        return "productos/create";
+    }
+
+    @PostMapping("/nuevo")
+    public String store(@ModelAttribute Producto producto, RedirectAttributes redirectAttributes) {
+        productoService.save(producto);
+        redirectAttributes.addFlashAttribute("success", "Producto creado");
+        return "redirect:/productos";
+    }
+
+    @GetMapping("/{id}")
+    public String show(@PathVariable Long id, Model model) {
+        Producto producto = productoService.findById(id);
+        model.addAttribute("producto", producto);
+        return "productos/show";
+    }
+}
+</code></pre>
+
+      <h3>3.2. Estructura de un controlador REST</h3>
+      <pre><code class="language-java">
+package com.example.demo.controller;
+
+import com.example.demo.model.Producto;
+import com.example.demo.repository.ProductoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/productos")
+public class ProductoApiController {
+
+    @Autowired
+    private ProductoRepository productoRepository;
+
+    @GetMapping
+    public List<Producto> index() {
+        return productoRepository.findAll();
+    }
+
+    @PostMapping
+    public ResponseEntity<Producto> create(@RequestBody Producto producto) {
+        Producto saved = productoRepository.save(producto);
+        return ResponseEntity.status(201).body(saved);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Producto> show(@PathVariable Long id) {
+        return productoRepository.findById(id)
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Producto> update(@PathVariable Long id, @RequestBody Producto producto) {
+        return productoRepository.findById(id)
+            .map(existing -> {
+                existing.setNombre(producto.getNombre());
+                existing.setPrecio(producto.getPrecio());
+                return ResponseEntity.ok(productoRepository.save(existing));
+            })
+            .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        productoRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+}
+</code></pre>
+
+      <h3>3.3. Controlador simple con vistas</h3>
+      <pre><code class="language-java">
+package com.example.demo.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+@Controller
+public class HomeController {
+
+    @GetMapping("/")
+    public String inicio(Model model) {
+        model.addAttribute("titulo", "Bienvenido a mi sitio");
+        model.addAttribute("descripcion", "Este es un ejemplo de Spring Boot");
+        return "home/index";
+    }
+
+    @GetMapping("/contacto")
+    public String contacto() {
+        return "home/contacto";
+    }
+
+    @PostMapping("/contacto")
+    public String enviarContacto(
+        @RequestParam String nombre,
+        @RequestParam String email,
+        @RequestParam String mensaje,
+        RedirectAttributes redirectAttributes
+    ) {
+        // Procesar formulario...
+        
+        redirectAttributes.addFlashAttribute("success", "Formulario enviado");
+        return "redirect:/contacto";
+    }
+}
+</code></pre>
+
+      <h3>3.4. Tipos de respuestas</h3>
+      <pre><code class="language-java">
+package com.example.demo.controller;
+
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
+
+@Controller
+public class RespuestaController {
+
+    @GetMapping("/vista")
+    public String vista(Model model) {
+        model.addAttribute("dato", "valor");
+        return "ejemplo";
+    }
+
+    @GetMapping("/json")
+    @ResponseBody
+    public Map<String, Object> json() {
+        Map<String, Object> response = new HashMap<>();
+        response.put("success", true);
+        
+        Map<String, Object> data = new HashMap<>();
+        data.put("nombre", "Juan");
+        data.put("edad", 25);
+        response.put("data", data);
+        
+        return response;
+    }
+
+    @GetMapping("/texto")
+    public ResponseEntity<String> texto() {
+        return ResponseEntity.ok()
+            .contentType(MediaType.TEXT_PLAIN)
+            .body("Hola mundo");
+    }
+
+    @GetMapping("/redirigir")
+    public String redirigir() {
+        return "redirect:/";
+    }
+
+    @GetMapping("/descargar")
+    public ResponseEntity<Resource> descargar() throws Exception {
+        Path filePath = Paths.get("src/main/resources/static/documento.pdf");
+        Resource resource = new UrlResource(filePath.toUri());
+        
+        return ResponseEntity.ok()
+            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"documento.pdf\"")
+            .body(resource);
+    }
+}
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 4: THYMELEAF (Motor de plantillas) -->
+    <section id="twig">
+      <h2>4. Thymeleaf (Motor de plantillas)</h2>
+
+      <h3>4.1. Sintaxis básica</h3>
+      <pre><code class="language-html">
+&lt;!-- src/main/resources/templates/ejemplo.html --&gt;
+
+&lt;!-- Imprimir variables (escapa HTML automáticamente) --&gt;
+&lt;h1 th:text="${titulo}"&gt;&lt;/h1&gt;
+&lt;p th:text="${descripcion}"&gt;&lt;/p&gt;
+
+&lt;!-- Imprimir sin escapar (PELIGROSO con datos de usuario) --&gt;
+&lt;div th:utext="${htmlContenido}"&gt;&lt;/div&gt;
+
+&lt;!-- Comentarios Thymeleaf (se eliminan en producción) --&gt;
+&lt;!--/* Este es un comentario de Thymeleaf */--&gt;
+
+&lt;!-- Valor por defecto si variable es null --&gt;
+&lt;p th:text="${variable} ?: 'Valor por defecto'"&gt;&lt;/p&gt;
+</code></pre>
+
+      <h3>4.2. Estructuras de control</h3>
+      <pre><code class="language-html">
+&lt;!-- IF / UNLESS --&gt;
+&lt;div th:if="${edad >= 18}"&gt;
+    &lt;p&gt;Eres mayor de edad&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div th:unless="${edad >= 18}"&gt;
+    &lt;p&gt;Eres menor de edad&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- IF-ELSE con th:switch --&gt;
+&lt;div th:switch="${edad}"&gt;
+    &lt;p th:case="*{edad >= 18}"&gt;Mayor de edad&lt;/p&gt;
+    &lt;p th:case="*{edad >= 13}"&gt;Adolescente&lt;/p&gt;
+    &lt;p th:case="*"&gt;Menor de edad&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- Verificar si existe --&gt;
+&lt;p th:if="${nombre != null}"&gt;
+    El nombre es: &lt;span th:text="${nombre}"&gt;&lt;/span&gt;
+&lt;/p&gt;
+
+&lt;!-- Lista vacía --&gt;
+&lt;p th:if="${#lists.isEmpty(productos)}"&gt;No hay productos&lt;/p&gt;
+
+&lt;!-- Usuario autenticado (con Spring Security) --&gt;
+&lt;div sec:authorize="isAuthenticated()"&gt;
+    &lt;p&gt;Bienvenido, &lt;span sec:authentication="name"&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div sec:authorize="!isAuthenticated()"&gt;
+    &lt;a href="/login"&gt;Iniciar sesión&lt;/a&gt;
+&lt;/div&gt;
+</code></pre>
+
+      <h3>4.3. Bucles</h3>
+      <pre><code class="language-html">
+&lt;!-- FOR con rango --&gt;
+&lt;div th:each="i : ${#numbers.sequence(0, 9)}"&gt;
+    &lt;p th:text="'Número: ' + ${i}"&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- FOREACH --&gt;
+&lt;div th:each="producto : ${productos}"&gt;
+    &lt;h3 th:text="${producto.nombre}"&gt;&lt;/h3&gt;
+    &lt;p th:text="'€' + ${producto.precio}"&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- FOREACH con else (verificar lista vacía) --&gt;
+&lt;ul th:if="${!#lists.isEmpty(usuarios)}"&gt;
+    &lt;li th:each="usuario : ${usuarios}" th:text="${usuario.nombre}"&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p th:unless="${!#lists.isEmpty(usuarios)}"&gt;No hay usuarios registrados&lt;/p&gt;
+
+&lt;!-- Variable de estado en bucles (iterStat) --&gt;
+&lt;div th:each="item, iterStat : ${items}"&gt;
+    &lt;p th:if="${iterStat.first}"&gt;Primer elemento&lt;/p&gt;
+    
+    &lt;p th:text="${iterStat.index + 1} + '. ' + ${item}"&gt;&lt;/p&gt;
+    
+    &lt;p th:if="${iterStat.last}"&gt;Último elemento&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+
+      <h3>4.4. Layouts y herencia con fragments</h3>
+      <pre><code class="language-html">
+&lt;!-- src/main/resources/templates/layout/base.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org" th:fragment="layout(title, content)"&gt;
+&lt;head&gt;
+    &lt;title th:replace="${title}"&gt;Mi Sitio&lt;/title&gt;
+    &lt;link rel="stylesheet" th:href="@{/css/app.css}"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;Mi Aplicación Spring Boot&lt;/h1&gt;
+        &lt;nav&gt;
+            &lt;a th:href="@{/}"&gt;Inicio&lt;/a&gt;
+            &lt;a th:href="@{/productos}"&gt;Productos&lt;/a&gt;
+        &lt;/nav&gt;
+    &lt;/header&gt;
+
+    &lt;main th:replace="${content}"&gt;
+        Contenido por defecto
+    &lt;/main&gt;
+
+    &lt;footer&gt;
+        &lt;p&gt;&amp;copy; 2026 Mi Sitio&lt;/p&gt;
+    &lt;/footer&gt;
+
+    &lt;script th:src="@{/js/app.js}"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+&lt;!-- src/main/resources/templates/productos/index.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::title}, ~{::main})}"&gt;
+&lt;head&gt;
+    &lt;title&gt;Lista de Productos&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;main&gt;
+        &lt;h2&gt;Productos&lt;/h2&gt;
+        &lt;ul&gt;
+            &lt;li th:each="producto : ${productos}"&gt;
+                &lt;span th:text="${producto.nombre}"&gt;&lt;/span&gt; - 
+                &lt;span th:text="'€' + ${producto.precio}"&gt;&lt;/span&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      <h3>4.5. Fragmentos reutilizables</h3>
+      <pre><code class="language-html">
+&lt;!-- templates/fragments/alerta.html --&gt;
+&lt;div th:fragment="alerta(tipo, titulo, mensaje)" th:class="'alert alert-' + ${tipo}"&gt;
+    &lt;strong th:text="${titulo}"&gt;&lt;/strong&gt;
+    &lt;span th:text="${mensaje}"&gt;&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- Usar el fragmento --&gt;
+&lt;div th:replace="~{fragments/alerta :: alerta('success', 'Éxito', 'El producto fue guardado correctamente')}"&gt;&lt;/div&gt;
+
+&lt;div th:replace="~{fragments/alerta :: alerta('danger', 'Error', 'No se pudo completar la operación')}"&gt;&lt;/div&gt;
+</code></pre>
+
+      <h3>4.6. Incluir otras vistas</h3>
+      <pre><code class="language-html">
+&lt;!-- Incluir fragmento --&gt;
+&lt;div th:replace="~{fragments/header}"&gt;&lt;/div&gt;
+
+&lt;!-- Incluir con datos --&gt;
+&lt;div th:replace="~{fragments/producto :: card(producto=${producto})}"&gt;&lt;/div&gt;
+
+&lt;!-- Incluir condicionalmente --&gt;
+&lt;div th:if="${mostrarSidebar}" th:replace="~{fragments/sidebar}"&gt;&lt;/div&gt;
+
+&lt;!-- Con Spring Security --&gt;
+&lt;div sec:authorize="hasRole('ADMIN')" th:replace="~{fragments/admin-menu}"&gt;&lt;/div&gt;
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 5: INTERCEPTORES Y FILTROS -->
+    <section id="middleware">
+      <h2>5. Interceptores y filtros (equivalente a middleware)</h2>
+
+      <h3>5.1. ¿Qué es un interceptor/filtro?</h3>
+    <p>Spring Boot usa <strong>HandlerInterceptor</strong> para interceptar peticiones web y <strong>Filters</strong> para filtrar peticiones HTTP a nivel de servlet.</p>
+
+      <div class="mermaid">
+graph LR
+    A[Request] --> B[Filter]
+    B --> C[DispatcherServlet]
+    C --> D[HandlerInterceptor preHandle]
+    D --> E[Controller]
+    E --> F[HandlerInterceptor postHandle]
+    F --> G[Response]
+    G --> H[Client]
+    
+    style B fill:#e1f5ff
+    style D fill:#ffe1f5
+    style E fill:#ffe1e1
+    style F fill:#ffe1f5
+      </div>
+
+      <h3>5.2. Crear un interceptor</h3>
+      <pre><code class="language-java">
+// src/main/java/com/example/demo/interceptor/EdadInterceptor.java
+
+package com.example.demo.interceptor;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.HandlerInterceptor;
+
+@Component
+public class EdadInterceptor implements HandlerInterceptor {
+
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        String edadParam = request.getParameter("edad");
+        
+        if (edadParam != null) {
+            int edad = Integer.parseInt(edadParam);
+            if (edad < 18) {
+                response.sendRedirect("/");
+                return false; // Detiene la ejecución
+            }
+        }
+        
+        return true; // Continúa con el controlador
+    }
+}
+</code></pre>
+
+      <h3>5.3. Registrar interceptor</h3>
+      <pre><code class="language-java">
+// src/main/java/com/example/demo/config/WebConfig.java
+
+package com.example.demo.config;
+
+import com.example.demo.interceptor.EdadInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+
+    @Autowired
+    private EdadInterceptor edadInterceptor;
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(edadInterceptor)
+                .addPathPatterns("/restringido/**")
+                .excludePathPatterns("/publico/**");
+    }
+}
+</code></pre>
+
+      <h3>5.4. Restringir acceso con Spring Security</h3>
+      <pre><code class="language-java">
+// src/main/java/com/example/demo/config/SecurityConfig.java
+
+package com.example.demo.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+public class SecurityConfig {
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/", "/publico/**").permitAll()
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+                .requestMatchers("/dashboard/**").hasAnyRole("USER", "ADMIN")
+                .anyRequest().authenticated()
+            )
+            .formLogin(form -> form
+                .loginPage("/login")
+                .permitAll()
+            )
+            .logout(logout -> logout.permitAll());
+        
+        return http.build();
+    }
+}
+</code></pre>
+
+      <h3>5.5. Anotaciones de seguridad en controladores</h3>
+      <pre><code class="language-java">
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class SecureController {
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/dashboard")
+    public String dashboard() {
+        return "dashboard";
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/admin")
+    public String admin() {
+        return "admin";
+    }
+}
+
+// Habilitar en clase principal:
+// @EnableMethodSecurity
+</code></pre>
+
+      <h3>5.6. Filtro personalizado</h3>
+      <pre><code class="language-java">
+package com.example.demo.filter;
+
+import jakarta.servlet.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+
+@Component
+public class LoggingFilter implements Filter {
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse res = (HttpServletResponse) response;
+        
+        System.out.println("Request: " + req.getMethod() + " " + req.getRequestURI());
+        
+        chain.doFilter(request, response);
+        
+        System.out.println("Response: " + res.getStatus());
+    }
+}
+</code></pre>
+    </section>
+
+        <!-- SECCIÓN 6: APLICACIÓN PRINCIPAL Y CONFIGURACIÓN -->
+        <section id="kernel">
+            <h2>6. Aplicación principal y configuración</h2>
+
+            <h3>6.1. ¿Qué es la clase principal?</h3>
+            <p>La clase principal anotada con <code>@SpringBootApplication</code> es el punto de entrada de la aplicación. Combina <code>@Configuration</code>, <code>@EnableAutoConfiguration</code> y <code>@ComponentScan</code>.</p>
+
+            <h3>6.2. Estructura de la aplicación principal</h3>
+            <pre><code class="language-java">
+// src/main/java/com/example/demo/DemoApplication.java
+
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class DemoApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
+}
+</code></pre>
+
+            <h3>6.3. Tipos de configuración</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Archivo</th>
+                        <th>Uso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Properties</strong></td>
+                        <td>application.properties</td>
+                        <td>Configuración básica (puerto, DB, etc.)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>YAML</strong></td>
+                        <td>application.yml</td>
+                        <td>Configuración jerárquica alternativa</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Beans</strong></td>
+                        <td>Clases @Configuration</td>
+                        <td>Definir beans personalizados</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dependencias</strong></td>
+                        <td>pom.xml / build.gradle</td>
+                        <td>Gestión de librerías Maven/Gradle</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>6.4. Configuración con application.properties</h3>
+            <pre><code class="language-properties">
+# src/main/resources/application.properties
+
+# Puerto del servidor
+server.port=8080
+
+# Configuración de base de datos
+spring.datasource.url=jdbc:mysql://localhost:3306/mi_db
+spring.datasource.username=root
+spring.datasource.password=password
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# JPA/Hibernate
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
+# Thymeleaf
+spring.thymeleaf.cache=false
+
+# Logging
+logging.level.com.example.demo=DEBUG
+</code></pre>
+
+            <h3>6.5. Crear una clase de configuración</h3>
+            <pre><code class="language-java">
+package com.example.demo.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
+
+@Configuration
+public class AppConfig {
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+}
+</code></pre>
+
+            <h3>6.6. Perfiles de entorno</h3>
+            <pre><code class="language-properties">
+# application.properties (común)
+spring.application.name=Mi Aplicación
+
+# application-dev.properties (desarrollo)
+spring.datasource.url=jdbc:mysql://localhost:3306/mi_db_dev
+logging.level.root=DEBUG
+
+# application-prod.properties (producción)
+spring.datasource.url=jdbc:mysql://prod-server:3306/mi_db_prod
+logging.level.root=WARN
+</code></pre>
+
+            <pre><code class="language-bash">
+# Ejecutar con perfil específico
+./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
+java -jar app.jar --spring.profiles.active=prod
+</code></pre>
+        </section>
+
+    <!-- RESUMEN -->
+        <section id="resumen">
+            <div class="info-box">
+                <h3>Resumen de Spring Boot</h3>
+                <ul>
+                    <li><strong>Spring Boot:</strong> framework Java para aplicaciones standalone con mínima configuración</li>
+                    <li><strong>@RequestMapping, @GetMapping:</strong> mapeo de rutas HTTP en controladores</li>
+                    <li><strong>@Controller / @RestController:</strong> gestionan peticiones web y API REST</li>
+                    <li><strong>Thymeleaf:</strong> motor de plantillas con sintaxis th:text="${}", th:if, th:each</li>
+                    <li><strong>Fragments:</strong> reutilización de vistas con th:fragment y th:replace</li>
+                    <li><strong>HandlerInterceptor / Filter:</strong> interceptan peticiones antes/después del controlador</li>
+                    <li><strong>@SpringBootApplication:</strong> punto de entrada que habilita auto-configuración</li>
+                    <li><strong>application.properties:</strong> configuración de DB, puerto, logging, etc.</li>
+                    <li><strong>Spring Data JPA:</strong> acceso a base de datos con entidades @Entity</li>
+                    <li><strong>Patrón MVC:</strong> DispatcherServlet → Controller → Service → Repository → Entity</li>
+                </ul>
+            </div>
+        </section>
+
+  </main>
+
+</body>
+
+</html>

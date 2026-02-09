@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spring Boot API REST</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+<body>
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+  <header>
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1>Spring Boot API REST</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+
+    <!-- SECCIÓN 1: INTRODUCCIÓN -->
+    <section id="introduccion">
+      <h2>1. Introducción a API REST en Spring Boot</h2>
+
+      <p>
+        Una <strong>API REST</strong> permite que aplicaciones externas (frontend, móviles, etc.) 
+        se comuniquen con tu backend mediante HTTP y JSON. Spring Boot ofrece herramientas potentes 
+        para crear APIs: <strong>@RestController</strong>, <strong>@Validated</strong>, <strong>Spring Security</strong> y <strong>Spring Data JPA</strong>.
+      </p>
+
+      <div class="mermaid">
+graph LR
+    A[Cliente/Frontend] -->|HTTP JSON| B[API REST Spring Boot]
+    B -->|Response JSON| A
+    B --> C[Spring Data JPA]
+    C --> D[(Database)]
+    
+    style A fill:#e1f5ff
+    style B fill:#ffe1e1
+    style C fill:#fff4e1
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: CREAR ENDPOINT -->
+    <section id="endpoints">
+      <h2>2. Crear endpoints API</h2>
+
+      <h3>2.1. Controlador REST básico</h3>
+
+      <pre><code class="language-java">
+// src/main/java/com/example/controller/HotelController.java
+
+package com.example.controller;
+
+import com.example.entity.Hotel;
+import com.example.repository.HotelRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api/hoteles")
+public class HotelController {
+
+    @Autowired
+    private HotelRepository hotelRepository;
+
+    @GetMapping
+    public ResponseEntity&lt;List&lt;Hotel&gt;&gt; index() {
+        List&lt;Hotel&gt; hoteles = hotelRepository.findAll();
+        return ResponseEntity.ok(hoteles);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity&lt;Hotel&gt; show(@PathVariable Long id) {
+        Optional&lt;Hotel&gt; hotel = hotelRepository.findById(id);
+        return hotel.map(ResponseEntity::ok)
+                    .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public ResponseEntity&lt;Hotel&gt; create(@RequestBody Hotel hotel) {
+        Hotel saved = hotelRepository.save(hotel);
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity&lt;Hotel&gt; update(@PathVariable Long id, @RequestBody Hotel hotelDetails) {
+        Optional&lt;Hotel&gt; hotelOpt = hotelRepository.findById(id);
+        if (hotelOpt.isPresent()) {
+            Hotel hotel = hotelOpt.get();
+            hotel.setNombre(hotelDetails.getNombre());
+            hotel.setDireccion(hotelDetails.getDireccion());
+            Hotel updated = hotelRepository.save(hotel);
+            return ResponseEntity.ok(updated);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity&lt;Void&gt; delete(@PathVariable Long id) {
+        if (hotelRepository.existsById(id)) {
+            hotelRepository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+}
+</code></pre>
+
+      <h3>2.2. Probar endpoints</h3>
+
+      <pre><code class="language-bash">
+# GET - Listar todos
+curl http://localhost:8080/api/hoteles
+
+# GET - Obtener uno
+curl http://localhost:8080/api/hoteles/1
+
+# POST - Crear
+curl -X POST http://localhost:8080/api/hoteles \
+  -H "Content-Type: application/json" \
+  -d '{"nombre":"Hotel Central","direccion":"Calle Mayor 10"}'
+
+# PUT - Actualizar
+curl -X PUT http://localhost:8080/api/hoteles/1 \
+  -H "Content-Type: application/json" \
+  -d '{"nombre":"Hotel Modificado"}'
+
+# DELETE - Eliminar
+curl -X DELETE http://localhost:8080/api/hoteles/1
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 3: SERIALIZACIÓN Y DTOs -->
+    <section id="serializer">
+      <h2>3. Serialización con DTOs</h2>
+
+      <h3>3.1. Crear DTOs</h3>
+
+      <pre><code class="language-java">
+// src/main/java/com/example/dto/HotelDTO.java
+
+package com.example.dto;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class HotelDTO {
+    private Long id;
+    private String nombre;
+    private String direccion;
+    
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private String createdAt;  // Solo lectura
+
+    // Constructor
+    public HotelDTO() {}
+
+    public HotelDTO(Long id, String nombre, String direccion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.direccion = direccion;
+    }
+
+    // Getters y Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+
+    public String getDireccion() { return direccion; }
+    public void setDireccion(String direccion) { this.direccion = direccion; }
+
+    public String getCreatedAt() { return createdAt; }
+    public void setCreatedAt(String createdAt) { this.createdAt = createdAt; }
+}
+</code></pre>
+
+      <h3>3.2. Usar DTOs en el controlador</h3>
+
+      <pre><code class="language-java">
+@GetMapping
+public ResponseEntity&lt;List&lt;HotelDTO&gt;&gt; index() {
+    List&lt;Hotel&gt; hoteles = hotelRepository.findAll();
+    List&lt;HotelDTO&gt; dtos = hoteles.stream()
+        .map(h -> new HotelDTO(h.getId(), h.getNombre(), h.getDireccion()))
+        .toList();
+    return ResponseEntity.ok(dtos);
+}
+</code></pre>
+
+      <h3>3.3. Serialización personalizada con @JsonView</h3>
+
+      <pre><code class="language-java">
+// Marcar grupos de serialización
+public class Views {
+    public interface Public {}
+    public interface Internal extends Public {}
+}
+
+// En la entidad
+@Entity
+public class Hotel {
+    @Id
+    @JsonView(Views.Public.class)
+    private Long id;
+
+    @JsonView(Views.Public.class)
+    private String nombre;
+
+    @JsonView(Views.Public.class)
+    private String direccion;
+
+    @JsonView(Views.Internal.class)  // Solo lectura
+    private LocalDateTime createdAt;
+}
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 4: VALIDACIÓN -->
+    <section id="validacion">
+      <h2>4. Validación de datos</h2>
+
+      <h3>4.1. Constraints en la entidad</h3>
+
+      <pre><code class="language-java">
+@Entity
+public class Hotel {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotBlank(message = "El nombre es obligatorio")
+    @Length(min = 3, max = 255)
+    @Column(nullable = false)
+    private String nombre;
+
+    @Length(max = 255)
+    private String direccion;
+}
+</code></pre>
+
+      <h3>4.2. Validar en el controlador</h3>
+
+      <pre><code class="language-java">
+import jakarta.validation.Valid;
+
+@PostMapping
+public ResponseEntity&lt;?&gt; create(@Valid @RequestBody Hotel hotel, BindingResult result) {
+    if (result.hasErrors()) {
+        Map&lt;String, String&gt; errors = new HashMap&lt;&gt;();
+        result.getFieldErrors().forEach(e -&gt; errors.put(e.getField(), e.getDefaultMessage()));
+        return ResponseEntity.badRequest().body(new ApiErrorResponse(false, errors));
+    }
+    Hotel saved = hotelRepository.save(hotel);
+    return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+}
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 5: AUTENTICACIÓN JWT -->
+    <section id="jwt">
+      <h2>5. Autenticación con JWT</h2>
+
+      <h3>5.1. Dependencias pom.xml</h3>
+
+      <pre><code class="language-xml">
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;io.jsonwebtoken&lt;/groupId&gt;
+    &lt;artifactId&gt;jjwt-api&lt;/artifactId&gt;
+    &lt;version&gt;0.12.3&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+      <h3>5.2. Crear utilidad JWT</h3>
+
+      <pre><code class="language-java">
+public class JwtUtil {
+    private String secretKey = "miClaveSecretaMuyLargaParaJWT";
+    private long expirationTime = 86400000; // 24 horas
+
+    public String generateToken(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
+                .signWith(SignatureAlgorithm.HS512, secretKey)
+                .compact();
+    }
+
+    public String getUsernameFromToken(String token) {
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
+    }
+
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+}
+</code></pre>
+
+      <h3>5.3. Endpoint de login</h3>
+
+      <pre><code class="language-java">
+@RestController
+@RequestMapping("/api/auth")
+public class AuthController {
+    @Autowired
+    private JwtUtil jwtUtil;
+
+    @PostMapping("/login")
+    public ResponseEntity&lt;?&gt; login(@RequestBody LoginRequest request) {
+        // Verificar credenciales (simplificado)
+        if ("user@example.com".equals(request.getUsername()) &amp;&amp; "password".equals(request.getPassword())) {
+            String token = jwtUtil.generateToken(request.getUsername());
+            return ResponseEntity.ok(new LoginResponse(token));
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
+}
+</code></pre>
+
+      <h3>5.4. Usar token en peticiones</h3>
+
+      <pre><code class="language-bash">
+# Login
+curl -X POST http://localhost:8080/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"user@example.com","password":"password"}'
+
+# Usar token
+curl http://localhost:8080/api/hoteles \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGc..."
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 6: CORS -->
+    <section id="cors">
+      <h2>6. CORS (Cross-Origin Resource Sharing)</h2>
+
+      <h3>6.1. Configurar CORS en Spring Boot</h3>
+
+      <pre><code class="language-java">
+// src/main/java/com/example/config/CorsConfig.java
+
+package com.example.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class CorsConfig implements WebMvcConfigurer {
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/api/**")
+                .allowedOrigins("http://localhost:3000", "http://localhost:5173")
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH")
+                .allowedHeaders("*")
+                .allowCredentials(true)
+                .maxAge(3600);
+    }
+}
+</code></pre>
+
+      <h3>6.2. Configurar CORS con application.properties</h3>
+
+      <pre><code class="language-properties">
+# application.properties
+spring.web.cors.allowed-origins=http://localhost:3000,http://localhost:5173
+spring.web.cors.allowed-methods=GET,POST,PUT,DELETE,PATCH
+spring.web.cors.allowed-headers=*
+spring.web.cors.allow-credentials=true
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 7: SPRING HATEOAS -->
+    <section id="api-platform">
+      <h2>7. Spring HATEOAS para APIs autodescriptivas</h2>
+
+      <h3>7.1. Agregar dependencia</h3>
+
+      <pre><code class="language-xml">
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-hateoas&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+      <h3>7.2. Usar EntityModel</h3>
+
+      <pre><code class="language-java">
+import org.springframework.hateoas.EntityModel;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+
+@GetMapping("/{id}")
+public EntityModel&lt;Hotel&gt; show(@PathVariable Long id) {
+    Optional&lt;Hotel&gt; hotel = hotelRepository.findById(id);
+    if (hotel.isPresent()) {
+        return EntityModel.of(hotel.get())
+            .add(linkTo(methodOn(HotelController.class).show(id)).withSelfRel())
+            .add(linkTo(methodOn(HotelController.class).index()).withRel("all"));
+    }
+    return null;
+}
+</code></pre>
+
+      <h3>7.3. Respuesta con links HATEOAS</h3>
+
+      <pre><code class="language-json">
+{
+  "id": 1,
+  "nombre": "Hotel Central",
+  "direccion": "Calle Mayor 10",
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/api/hoteles/1"
+    },
+    "all": {
+      "href": "http://localhost:8080/api/hoteles"
+    }
+  }
+}
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 8: MANEJO DE ERRORES -->
+    <section id="errores">
+      <h2>8. Manejo de errores</h2>
+
+      <h3>8.1. GlobalExceptionHandler</h3>
+
+      <pre><code class="language-java">
+// src/main/java/com/example/exception/GlobalExceptionHandler.java
+
+package com.example.exception;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity&lt;ApiErrorResponse&gt; handleNotFound(ResourceNotFoundException ex) {
+        ApiErrorResponse error = new ApiErrorResponse(
+            false,
+            ex.getMessage(),
+            404
+        );
+        return new ResponseEntity&lt;&gt;(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity&lt;ApiErrorResponse&gt; handleGlobalException(Exception ex) {
+        ApiErrorResponse error = new ApiErrorResponse(
+            false,
+            "Error interno del servidor",
+            500
+        );
+        return new ResponseEntity&lt;&gt;(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}
+</code></pre>
+
+      <h3>8.2. Formato de respuesta de error</h3>
+
+      <pre><code class="language-json">
+{
+  "success": false,
+  "message": "Hotel no encontrado",
+  "code": 404
+}
+</code></pre>
+    </section>
+
+    <!-- DIAGRAMA -->
+    <section>
+      <h2>Diagrama de flujo API</h2>
+
+      <div class="mermaid">
+sequenceDiagram
+    participant Client
+    participant API
+    participant Security
+    participant Controller
+    participant JPA
+    participant DB
+
+    Client->>API: POST /api/auth/login
+    API->>Security: Verificar credenciales
+    Security-->>API: Token JWT
+    API-->>Client: {"token": "..."}
+    
+    Client->>API: GET /api/hoteles + Bearer Token
+    API->>Security: Validar token
+    Security->>Controller: Usuario autenticado
+    Controller->>JPA: findAll()
+    JPA->>DB: SELECT * FROM hoteles
+    DB-->>JPA: Resultados
+    JPA-->>Controller: Lista de entidades
+    Controller-->>API: JSON serializado
+    API-->>Client: Lista de hoteles
+      </div>
+    </section>
+
+    <!-- RESUMEN -->
+    <section>
+      <div class="info-box">
+        <h3>Resumen rápido</h3>
+
+        <table border="1" style="width:100%; border-collapse:collapse;">
+          <tr><th>Concepto</th><th>Descripción</th></tr>
+          <tr><td>@RestController</td><td>Retorna JSON automáticamente</td></tr>
+          <tr><td>DTOs</td><td>Objetos de transferencia de datos</td></tr>
+          <tr><td>@Valid</td><td>Valida datos con Bean Validation</td></tr>
+          <tr><td>JWT</td><td>Autenticación con tokens firmados</td></tr>
+          <tr><td>CORS</td><td>Permite peticiones desde otros dominios</td></tr>
+          <tr><td>HATEOAS</td><td>APIs autodescriptivas con links</td></tr>
+          <tr><td>HTTP Codes</td><td>200 OK, 201 Created, 400 Bad Request, 404 Not Found</td></tr>
+          <tr><td>GlobalExceptionHandler</td><td>Manejo centralizado de errores</td></tr>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>

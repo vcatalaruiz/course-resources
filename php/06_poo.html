@@ -872,6 +872,55 @@ $user = new User();                  // Carga src/Models/User.php
     <section id="ejemplo-completo">
       <h2>9. Ejemplo práctico: Sistema de productos</h2>
 
+      <h4>Diagrama de clases del sistema</h4>
+      <div class="mermaid">
+        classDiagram
+          class Producto {
+            &lt;&lt;abstract&gt;&gt;
+            #id
+            #nombre
+            #precio
+            #contador$ int
+            +__construct(nombre, precio)
+            +getId()
+            +getNombre()
+            +getPrecio()
+            +getTotalProductos()$ int
+            +mostrarInfo()
+            +calcularPrecioFinal()*
+          }
+          
+          class ProductoFisico {
+            -peso
+            -costoEnvio
+            +__construct(nombre, precio, peso)
+            -calcularCostoEnvio()
+            +calcularPrecioFinal()
+            +mostrarInfo()
+          }
+          
+          class ProductoDigital {
+            -tamañoMB
+            -descuento
+            +__construct(nombre, precio, tamañoMB)
+            +calcularPrecioFinal()
+            +descargar()
+            +mostrarInfo()
+          }
+          
+          class Carrito {
+            -productos[]
+            +agregarProducto(Producto)
+            +calcularTotal() float
+            +mostrarCarrito()
+            +getCantidadProductos() int
+          }
+          
+          Producto &lt;|-- ProductoFisico: extends
+          Producto &lt;|-- ProductoDigital: extends
+          Carrito o-- Producto: contains
+      </div>
+
       <h3>9.1. Clase base Producto</h3>
       <pre><code class="language-php">
 &lt;?php
