@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UT1 · Fundamentos del desarrollo de Software · LinkiaFP</title>
+    <meta name="description" content="UT1: Fundamentos del desarrollo de Software." />
+    <link rel="stylesheet" href="../style.css" />
+    <script src="../script.js" defer></script>
+</head>
+
+<body>
+    <div class="deck">
+
+        <!-- COVER -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+                </div>
+                <div class="title">UT1 · Fundamentos del desarrollo de Software</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+            </div>
+
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- =======================   TEMA 1   ======================= -->
+        <!-- ========================================================= -->
+
+        <section class="slide" id="t1-0">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>1. El sistema informático y su relación con el software</h2>
+            <div class="diagram">
+                <img src="../../assets/linkia/types of software.gif" style="max-width: 60%;">
+            </div>
+            <p>
+                Un sistema informático está formado por <strong>componentes físicos (hardware) y programas
+                    (software) </strong>que trabajan de forma conjunta para procesar datos y ejecutar aplicaciones.
+            </p>
+            <p>La coordinación entre ambos determina la estabilidad, rendimiento y funcionalidad del sistema:</p>
+            <ul>
+                <li><strong>Hardware:</strong> CPU, memoria, almacenamiento, periféricos.</li>
+                <li><strong>Software:</strong> sistemas operativos, aplicaciones, utilidades.</li>
+            </ul>
+
+        </section>
+
+        <!-- 1.1 -->
+        <section class="slide" id="t1-1">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>1.1 Componentes del sistema: memoria, CPU y periféricos</h2>
+            <p>
+                Los tres pilares fundamentales del sistema informático son la memoria, la CPU y los periféricos.
+                Trabajan en conjunto para ejecutar programas y permitir la interacción con el usuario y el entorno.
+            </p>
+            <div class="diagram">
+                <img src="../../assets/linkia/cpu-memory-peripheral.webp" style="max-width: 60%;">
+            </div>
+            <ul>
+                <li><strong>Memoria:</strong> almacena datos e instrucciones temporal o permanentemente.</li>
+
+                <li><strong>CPU:</strong> ejecuta instrucciones y coordina la actividad interna.</li>
+
+                <li><strong>Periféricos:</strong> permiten la interacción con el exterior. Pueden ser de entrada, salida
+                    o mixtos.</li>
+
+
+            </ul>
+
+        </section>
+
+        <section class="slide" id="t1-1-1">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>1.1.1 Memoria</h2>
+
+            <p>
+                La memoria es indispensable para la ejecución eficiente de programas. Su función principal es almacenar
+                datos e instrucciones que la CPU necesita para procesar información.
+
+            </p>
+            <div class="diagram">
+                <img src="../../assets/linkia/Best-RAM-HyperX-Fury.jpg" style="max-width: 40%;">
+            </div>
+            <p>Se clasifica en:</p>
+            <ul>
+                <li><strong>Memoria volátil (RAM):</strong> rápida y temporal; almacena procesos activos.</li>
+                <li><strong>Memoria no volátil:</strong> HDD, SSD, flash; almacena datos permanentes.</li>
+            </ul>
+            <p>
+                El rendimiento global del sistema depende en gran medida de la capacidad y velocidad de la RAM.
+            </p>
+
+        </section>
+
+        <section class="slide" id="t1-1-2">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>1.1.2 CPU (Unidad Central de Procesamiento)</h2>
+            <p>
+                Es el “cerebro” del sistema. Ejecuta instrucciones y coordina el funcionamiento general. Es la parte más
+                crítica para el rendimiento del sistema, ya que determina la velocidad de procesamiento y la capacidad
+                de multitarea.
+            </p>
+            <p>Se compone de tres partes principales:</p>
+            <div class="diagram">
+                <img src="../../assets/linkia/cpu-alu.gif" style="max-width: 70%;">
+            </div>
+            <ul>
+                <li><strong>Unidad de Control (CU):</strong> gestiona el flujo de instrucciones.</li>
+                <li><strong>ALU:</strong> ejecuta operaciones aritméticas y lógicas.</li>
+                <li><strong>Registros:</strong> almacenamiento interno ultrarrápido.</li>
+            </ul>
+            <p>
+                Sus características clave son: <strong>frecuencia (GHz)</strong> y <strong>número de núcleos</strong>.
+            </p>
+
+        </section>
+
+        <section class="slide" id="t1-1-3">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>1.1.3 Periféricos</h2>
+            <p>Permiten la interacción entre el sistema informático y el exterior. Su función es facilitar la entrada y
+                salida de información. </p>
+            <div class="diagram">
+                <img src="../../assets/linkia/Input-output-1.png" style="max-width: 40%;">
+            </div>
+            <p>Existen tres tipos principales de periféricos:</p>
+            <ul>
+                <li><strong>Entrada:</strong> teclado, ratón, escáner, micrófono.</li>
+                <li><strong>Salida:</strong> pantalla, impresora, altavoces.</li>
+                <li><strong>Mixtos:</strong> webcam, auriculares, mando de juego.</li>
+            </ul>
+
+        </section>
+
+        <section class="slide" id="t1-2">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>1.2 Interacción entre hardware y software</h2>
+            <p>
+                El software da instrucciones y el hardware ejecuta acciones. Cuando un programa se ejecuta, el sistema
+                operativo traduce las instrucciones del software en comandos que el hardware puede entender y ejecutar.
+
+            </p>
+            <div class="diagram">
+                <img src="../../assets/linkia/hardware-software.jpg" style="max-width: 50%;">
+            </div>
+            <p>El sistema operativo controla el flujo de información entre ambos:</p>
+            <ul>
+                <li>Gestiona dispositivos y recursos.</li>
+                <li>Coordina CPU y memoria.</li>
+                <li>Atiende peticiones de aplicaciones.</li>
+            </ul>
+
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- =======================   TEMA 2   ======================= -->
+        <!-- ========================================================= -->
+
+        <section class="slide" id="t2-0">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>2. Tipos de software y clasificación funcional</h2>
+            <p>
+                El software engloba todo el conjunto de programas que permiten realizar tareas.
+                Se clasifica según su propósito y función.
+            </p>
+            <p>Existen tres tipos principales de software:</p>
+            <ul>
+                <li><strong>Software de sistema:</strong> gestiona el hardware y permite ejecutar aplicaciones.</li>
+                <li><strong>Software de aplicación:</strong> realiza tareas específicas solicitadas por el usuario.</li>
+                <li><strong>Software de programación:</strong> herramientas para desarrollar otros programas.</li>
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/linkia/tipossw.png" style="max-width: 60%;">
+            </div>
+
+        </section>
+
+
+        <!-- ========================================================= -->
+        <!-- =======================   TEMA 3   ======================= -->
+        <!-- ========================================================= -->
+
+        <section class="slide" id="t3-0">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>3. Fases del ciclo de vida del software</h2>
+            <div class="two-col" style="    display: flex;">
+                <div>
+                    <p>El ciclo de vida del software (SDLC) es un conjunto de fases que siguen los proyectos de
+                        desarrollo desde
+                        su inicio hasta su despliegue y mantenimiento.</p>
+                    <p>Las etapas típicas del SDLC son:</p>
+                    <ol>
+                        <li><strong>Planificación y análisis:</strong> definición de objetivos, requisitos y viabilidad
+                            del proyecto.</li>
+                        <li><strong>Diseño e Implementación:</strong> creación de la arquitectura, diseño detallado y
+                            escritura del código fuente.</li>
+                        <li><strong>Pruebas:</strong> verificación de la funcionalidad, corrección de errores y
+                            validación del software.</li>
+                        <li><strong>Despliegue:</strong> lanzamiento del software en el entorno de producción.</li>
+                        <li><strong>Mantenimiento:</strong> actualización, mejora y corrección de errores
+                            post-despliegue.</li>
+
+                    </ol>
+                </div>
+
+                <div class="diagram" style="display: flex;
+    justify-content: space-around;
+    margin: 15px 0;
+    align-items: center;">
+                    <img src="../../assets/linkia/etapas-del-sdlc-visualmente.webp" style="max-width: 80%;display: flex;
+    justify-content: space-around;
+    margin: 15px 0;align-items: center;
+    align-items: center;">
+                </div>
+
+        </section>
+
+
+        <!-- ========================================================= -->
+        <!-- =======================   TEMA 4   ======================= -->
+        <!-- ========================================================= -->
+
+        <section class="slide" id="t4-0">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>4. Código fuente, objeto y ejecutable</h2>
+
+            <div class="two-col" style="    display: flex;">
+                <div style="    max-width: 50%;">
+                    <p>
+                        En el proceso de desarrollo de software, el código pasa por varias etapas:
+                    </p>
+                    <ol>
+                        <li><strong>Código fuente:</strong> escrito por el programador en un lenguaje de alto nivel.
+                            Ejemplo: Java, C++, Python.</li>
+                        <li><strong>Código objeto:</strong> resultado de compilar el código fuente, aún no ejecutable.
+                            Ejemplo: archivos .o o .obj.</li>
+                        <li><strong>Código ejecutable:</strong> archivo final listo para ejecutar tras enlazar con
+                            bibliotecas. Ejemplo: archivos .exe o .out.</li>
+                </div>
+
+                <div class="diagram" style="display: flex;
+    justify-content: space-around;
+    margin: 15px 0;
+    align-items: center;">
+                    <img src="../../assets/linkia/fases-codigo.jpeg" style="max-width: 80%;display: flex;
+    justify-content: space-around;
+    margin: 15px 0;align-items: center;
+    align-items: center;">
+                </div>
+
+        </section>
+
+
+
+        <!-- ========================================================= -->
+        <!-- =======================   TEMA 5   ======================= -->
+        <!-- ========================================================= -->
+
+        <section class="slide" id="t5-0">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>5. Máquinas virtuales y código intermedio</h2>
+            <p>
+                Las máquinas virtuales y el código intermedio son conceptos clave en el desarrollo de software moderno,
+                que permiten portabilidad, seguridad y optimización en la ejecución de programas.
+            </p>
+            <ul>
+                <li><strong>Máquinas virtuales:</strong> software que emula un sistema informático completo, permitiendo
+                    ejecutar programas en un entorno aislado.</li>
+                <li><strong>Código intermedio:</strong> formato de código que se encuentra entre el código fuente y el
+                    ejecutable final, diseñado para ser ejecutado por una máquina virtual.</li>
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/linkia/image1-java.png" style="max-width: 60%;">
+            </div>
+        </section>
+
+
+
+        <section class="slide" id="t6-resumen">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+
+            <h2>6. Clasificación de lenguajes de programación</h2>
+
+            <p>
+                Los lenguajes de programación se clasifican según tres criterios principales:
+                
+            </p>
+
+            <p><strong>Nivel de abstracción:</strong></p>
+            <ul>
+                <li>Bajo nivel (Ensamblador), cerca del hardware.</li>
+                <li>Medio nivel (C), equilibrio entre control y facilidad.</li>
+                <li>Alto nivel (Java, Python, C++), más fácil y portable.</li>
+            </ul>
+            <p><strong>Paradigmas:</strong></p>
+            <ul>
+                <li><strong>Imperativo:</strong> describe cómo se debe hacer algo (C, Python).</li>
+                <li><strong>Orientado a Objetos:</strong> organiza el código en objetos con atributos y métodos
+                    (Java, C++).</li>
+                <li><strong>Funcional:</strong> se basa en funciones puras sin estado (Haskell, Lisp).</li>
+                <li><strong>Lógico:</strong> se basa en reglas y hechos para resolver problemas (Prolog).</li>
+            </ul>
+            <p><strong>Forma de ejecución:</strong></p>
+            <ul>
+                <li><strong>Compilados:</strong> generan ejecutables optimizados (C, C++, Rust).</li>
+                <li><strong>Interpretados:</strong> se ejecutan línea a línea (Python, JavaScript).</li>
+            </ul>
+
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- =======================   TEMA 7   ======================= -->
+        <!-- ========================================================= -->
+
+        <section class="slide" id="t7-0">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>7. Herramientas de desarrollo</h2>
+            <p>
+                Las herramientas de desarrollo son esenciales para facilitar el proceso de creación, prueba y
+                mantenimiento del software.
+            </p>
+            <ul>
+                <li><strong>IDEs:</strong> editor, depurador, compilador.</li>
+                <li><strong>Control de versiones:</strong> Git, SVN.</li>
+                <li><strong>Herramientas de depuración:</strong> puntos de ruptura, inspección de variables.</li>
+                <li><strong>Pruebas automatizadas:</strong> unitarias, integración, regresión.</li>
+            </ul>
+            <div class="note">
+                <p>
+                    Las herramientas se evaluan según su facilidad de uso, compatibilidad con el ecosistema, rendimiento y soporte de la comunidad.
+                </p>
+            </div>
+        </section>
+
+        
+
+        
+
+
+
+
+
+    </div>
+
+    <div class="footer">
+        <div class="bar">
+            <small>UT1 · Instalación de sistemas operativos en red · LinkiaFP</small>
+            <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+        </div>
+    </div>
+</body>
+
+</html>

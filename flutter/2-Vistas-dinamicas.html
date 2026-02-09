@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2. Vistas dinámicas (StatefulWidget)</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <!-- X SVG -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+  <!-- ===== /VC SIDEBAR ===== -->
+
+  <header>
+
+    <!-- ===== VC SIDEBAR (desde cero) ===== -->
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+      aria-controls="vc-rail" aria-expanded="false">
+      <!--Hamburger icon -->
+      <i class="fa fa-bars" aria-hidden="true"></i>
+
+
+    </button>
+    <h1>2. Vistas dinámicas (StatefulWidget)</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+
+    <!-- =========================================================
+INTRO · De widgets estáticos a vistas dinámicas
+========================================================= -->
+    <section id="intro-vistas-dinamicas">
+
+      <h2>De widgets estáticos a vistas dinámicas</h2>
+
+      <p>
+        En Flutter, toda la interfaz se construye a partir de widgets. Algunos de ellos
+        representan elementos visuales simples, mientras que otros sirven como
+        contenedores o estructuras de diseño. Dentro de esta variedad encontramos dos
+        familias fundamentales: los <strong>StatelessWidget</strong> y los
+        <strong>StatefulWidget</strong>.
+      </p>
+
+      <div class="diagram">
+        <img src="../assets/statelesswidget-vs-statefulwidget-diagram.webp" alt="Ejemplo de StatelessWidget"
+          style="max-width: 60%;">
+      </div>
+
+      <p>
+        Un <strong>StatelessWidget</strong> es un widget <em>inmutable</em>: su contenido
+        no cambia durante la ejecución de la aplicación. Es ideal para mostrar texto
+        fijo, iconos, estilos, cabeceras o vistas cuyo contenido no depende de
+        interacciones del usuario ni de variables internas.
+      </p>
+
+      <!-- HUECO PARA IMAGEN: ejemplo conceptual de Stateless -->
+      <div class="diagram">
+        <img src="../assets/stateless-widget-flutter.webp" alt="Ejemplo conceptual de StatelessWidget"
+          style="max-width: 60%">
+      </div>
+
+      <p>
+        Sin embargo, muchas aplicaciones requieren que la interfaz responda a la
+        interacción del usuario: pulsar botones, escribir en formularios, aumentar
+        contadores, actualizar valores en pantalla…
+        Es aquí donde entran en juego las <strong>vistas dinámicas</strong>.
+      </p>
+
+      <p>
+        Para poder actualizar partes de la interfaz sin reconstruir toda la
+        aplicación, Flutter utiliza los <strong>StatefulWidget</strong>, widgets capaces
+        de almacenar información interna (estado) y redibujar la vista cuando este
+        cambia.
+      </p>
+
+      <!-- HUECO PARA IMAGEN: comparación Stateless vs Stateful -->
+      <div class="diagram">
+        <!-- ../assets/stateless-vs-stateful.png -->
+      </div>
+
+      <h3>¿Por qué necesitamos vistas dinámicas?</h3>
+
+      <ul>
+        <li>Para manejar eventos del usuario y actualizar la interfaz en tiempo real.</li>
+        <li>Para mostrar datos cambiantes, como contadores, formularios o estados de carga.</li>
+        <li>Para construir experiencias más ricas e interactivas.</li>
+      </ul>
+
+
+    </section>
+
+    <section id="vistas-dinamicas">
+
+      <h2>Vistas dinámicas en Flutter (StatefulWidget)</h2>
+
+      <p>
+        Un <strong>StatefulWidget</strong> es un tipo de widget que puede cambiar durante
+        la ejecución de la app. Es decir, permite modificar la interfaz en respuesta
+        a eventos del usuario, animaciones o cualquier cambio interno.
+      </p>
+
+      <div class="diagram">
+        <img src="../assets/statefulanimation.gif" alt="Ejemplo conceptual de StatefulWidget" style="max-width: 80%">
+      </div>
+
+
+      <h3>1. Composición de un StatefulWidget</h3>
+
+      <ul>
+        <li>Un <strong>StatefulWidget</strong> está compuesto por dos clases:
+          <strong>StatefulWidget</strong> (clase padre) y <strong>State</strong>
+          (estado mutable asociado).
+        </li>
+        <li>La clase <strong>State</strong> contiene el método <code>build()</code>
+          y las variables que pueden cambiar.</li>
+        <li>Cuando alteramos el estado, se llama a <code>setState()</code> y la UI se
+          reconstruye automáticamente.</li>
+      </ul>
+
+
+      <h4>Estructura básica:</h4>
+
+      <pre>
+<p>lib/widgets/ejemplo_stateful.dart</p>
+<code class="language-javascript">
+
+class MiWidget extends StatefulWidget { 
+  const MiWidget({super.key}); // Constructor del widget, recibe opcionalmente una key
+
+  @override
+  State<MiWidget> createState() => _MiWidgetState(); // Crea el estado asociado a este widget
+}
+
+class _MiWidgetState extends State<MiWidget> { 
+  // Esta clase contiene el estado mutable y el método build()
+
+  @override
+  Widget build(BuildContext context) { 
+    // Método que construye la UI; se ejecuta cada vez que hay un setState()
+    return Container(
+      child: Text("Ejemplo básico de StatefulWidget"), // Widget mostrado en pantalla
+    );
+  }
+}
+
+</code>
+    </pre>
+
+      <h3>2. Creación de una aplicación dinámica</h3>
+
+      <p>
+        Para generar una vista interactiva, normalmente seguimos estos pasos:
+      </p>
+
+      <ol>
+        <li>Crear una pantalla base que suele ser un <strong>StatelessWidget</strong>.</li>
+        <li>Definir un <strong>StatefulWidget</strong> como contenido principal de esa pantalla.</li>
+        <li>Actualizar la interfaz llamando a <code>setState()</code> cuando hayan cambios.</li>
+      </ol>
+
+
+      <h4>Ejemplo de contador con FloatingActionButton (el que viene con el ejemplo):</h4>
+
+      <pre>
+<p>lib/pages/contador_page.dart</p>
+<code class="language-javascript">
+class ContadorPage extends StatefulWidget {
+  const ContadorPage({super.key}); // Constructor
+
+  @override
+  State<ContadorPage> createState() => _ContadorPageState(); // Crea el estado asociado
+}
+
+class _ContadorPageState extends State<ContadorPage> {
+  int contador = 0; // Variable de estado: almacena el contador
+
+  void _incrementar() {
+    setState(() => contador++); 
+    // setState() notifica a Flutter que el estado cambió → redibuja la interfaz
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Contador dinámico")), // Barra superior
+
+      body: Center(
+        child: Text(
+          "$contador", // Muestra el valor actual del contador
+          style: Theme.of(context).textTheme.headlineMedium, // Estilo del texto
+        ),
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementar, // Cada pulsación incrementa el contador
+        child: const Icon(Icons.add), // Icono de suma
+      ),
+    );
+  }
+}
+</code>
+    </pre>
+
+
+
+      <h3>3. Ciclo de vida del StatefulWidget</h3>
+
+      <p>
+        La clase <strong>State</strong> tiene un ciclo de vida definido. Algunos métodos
+        relevantes son:
+      </p>
+
+      <ul>
+        <li><strong>initState()</strong>: se ejecuta una única vez al crear el estado.</li>
+        <li><strong>build()</strong>: se ejecuta cada vez que Flutter necesita
+          reconstruir la UI.</li>
+        <li><strong>setState()</strong>: solicita un redibujado.</li>
+        <li><strong>dispose()</strong>: se usa para liberar recursos.</li>
+      </ul>
+
+      <div class="diagram">
+        <img src="../assets/stateful_widget.jpg" alt="Ejemplo conceptual de StatefulWidget" style="max-width: 60%">
+      </div>
+
+      <h3>4. TextField y TextEditingController</h3>
+      <p>En las vistas dinámicas, es común necesitar obtener el valor de un campo de texto introducido por el usuario.
+      </p>
+      <p>
+        Para obtener el texto introducido por el usuario en un <code>TextField</code>,
+        utilizamos un <strong>TextEditingController</strong>.
+      </p>
+
+      <pre>
+<p>lib/widgets/formulario.dart</p>
+<code class="language-javascript">
+class FormPage extends StatefulWidget {
+  const FormPage({super.key}); // Constructor
+
+  @override
+  State<FormPage> createState() => _FormPageState(); // Crea el estado
+}
+
+class _FormPageState extends State<FormPage> {
+  final TextEditingController _controller = TextEditingController();
+  // Controlador que permite leer y modificar el texto del TextField
+
+  @override
+  void dispose() {
+    _controller.dispose(); // Liberamos el recurso cuando el widget desaparece
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Formulario dinámico")), // Barra superior
+
+      body: Padding(
+        padding: const EdgeInsets.all(16), // Margen interno
+        child: Column(
+          children: [
+            TextField(
+              controller: _controller, // Asociamos el controlador
+              decoration: const InputDecoration(
+                labelText: "Escribe tu nombre", // Texto guía
+              ),
+            ),
+            const SizedBox(height: 16), // Espacio entre widgets
+
+            ElevatedButton(
+              onPressed: () {
+                final valor = _controller.text; // Obtenemos el texto del usuario
+                print("Valor introducido: $valor"); // Se imprime en consola
+              },
+              child: const Text("Enviar"), // Texto del botón
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+</code>
+    </pre>
+
+
+    </section>
+<section id="navigator-parametros">
+
+  <h2>Navegación y paso de parámetros con Navigator</h2>
+
+  <p>
+    Al construir aplicaciones con múltiples pantallas en Flutter, es muy común
+    necesitar navegar de una pantalla a otra y, además, <strong>enviar datos</strong>
+    entre ellas. Por ejemplo, abrir una pantalla de detalles con la información de un
+    elemento concreto de una lista.
+  </p>
+  <div class="diagram">
+        <img src="../assets/login_flutter.gif" alt="Ejemplo conceptual de StatefulWidget" style="max-width: 40%">
+      </div>
+
+  <p>
+    Flutter utiliza el widget <code>Navigator</code> para gestionar la pila de pantallas
+    (rutas). Para cambiar de pantalla, solemos usar <code>Navigator.push()</code> y
+    <code>Navigator.pop()</code>. En este proceso, podemos aprovechar para
+    <strong>pasar parámetros</strong> a la nueva ruta.
+  </p>
+
+  <div class="diagram">
+    Navigator.push(...) --> pantalla B (recibe datos) --> Navigator.pop() --> pantalla A (recibe resultado) 
+  </div>
+
+  <h3>1. Paso de parámetros mediante el constructor del widget</h3>
+
+  <p>
+    La forma más directa y habitual de pasar información a otra pantalla es
+    simplemente <strong>usando el constructor</strong> del widget de destino.
+  </p>
+
+  <p>
+    Supongamos que queremos abrir una pantalla de detalles que muestre un mensaje
+    personalizado.
+  </p>
+
+  <h4>1.1. Definir la pantalla de destino con un parámetro</h4>
+
+  <pre>
+<p>lib/pages/detalle_page.dart</p>
+<code class="language-javascript">
+class DetallePage extends StatelessWidget {
+  final String mensaje; // Parámetro recibido desde la pantalla anterior
+
+  const DetallePage({
+    super.key,
+    required this.mensaje, // Campo obligatorio en el constructor
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Detalle")),
+      body: Center(
+        child: Text(
+          mensaje, // Mostramos el mensaje recibido
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+      ),
+    );
+  }
+}
+</code>
+  </pre>
+
+  <h4>1.2. Navegar a la pantalla y pasar el parámetro</h4>
+
+  <p>
+    Desde otra pantalla (por ejemplo, <code>HomePage</code>), podemos utilizar
+    <code>Navigator.push()</code> y crear la ruta con <code>MaterialPageRoute</code>.
+  </p>
+
+  <pre>
+<p>lib/pages/home_page.dart</p>
+<code class="language-javascript">
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  void _abrirDetalle(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =&gt; const DetallePage(
+          mensaje: "Hola desde HomePage", // Enviamos este texto a la otra pantalla
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Home")),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () =&gt; _abrirDetalle(context), // Navega al detalle
+          child: const Text("Ir a detalle"),
+        ),
+      ),
+    );
+  }
+}
+</code>
+  </pre>
+
+  <ul>
+    <li><code>DetallePage</code> recibe el texto mediante su constructor.</li>
+    <li><code>Navigator.push()</code> añade una nueva página a la pila de navegación.</li>
+    <li>Al usar <code>MaterialPageRoute</code>, construimos la pantalla de destino en el
+      parámetro <code>builder</code>.</li>
+  </ul>
+
+  <h3>2. Paso de parámetros usando argumentos en rutas nombradas</h3>
+
+  <p>
+    Cuando usamos <strong>rutas nombradas</strong> (por ejemplo, definidas en
+    <code>MaterialApp.routes</code>), también podemos pasar parámetros con el campo
+    <code>arguments</code> de <code>Navigator.pushNamed()</code>.
+  </p>
+
+  <h4>2.1. Configurar las rutas</h4>
+
+  <pre>
+<p>lib/main.dart</p>
+<code class="language-javascript">
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "Ejemplo Navigator",
+      initialRoute: "/",
+      routes: {
+        "/": (context) =&gt; const HomePage(),
+        "/detalle": (context) =&gt; const DetallePageConArgumentos(),
+      },
+    );
+  }
+}
+</code>
+  </pre>
+
+  <h4>2.2. Enviar argumentos al navegar</h4>
+
+  <pre>
+<p>lib/pages/home_page.dart</p>
+<code class="language-javascript">
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  void _abrirDetalleConArgs(BuildContext context) {
+    Navigator.pushNamed(
+      context,
+      "/detalle", // Nombre de la ruta
+      arguments: "Mensaje enviado con pushNamed", // Datos que queremos pasar
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Home")),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () =&gt; _abrirDetalleConArgs(context), // Navega con argumentos
+          child: const Text("Ir a detalle con args"),
+        ),
+      ),
+    );
+  }
+}
+</code>
+  </pre>
+
+
+  </main>
+
+  <footer>
+    <p>© Vicente Català Ruiz 2025-26. Todos los derechos reservados.</p>
+  </footer>
+</body>
+
+</html>

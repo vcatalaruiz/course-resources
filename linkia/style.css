@@ -1,0 +1,245 @@
+:root {
+    --black: #000000;
+    --white: #ffffff;
+    --magenta: #c00078;
+    /* aproximación al fucsia corporativo */
+    --ink: #111111;
+    --muted: #444;
+    --bar: #5a4a86;
+    /* barra inferior portada */
+    --border: #e9e9e9;
+    --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+    --slide-w: 1180px;
+}
+
+* {
+    box-sizing: border-box
+}
+
+body {
+    margin: 0;
+    font-family: Segoe UI, Roboto, Arial, "Noto Sans", system-ui;
+    color: var(--ink);
+    background: #f6f7fb;
+    justify-content: center;
+}
+
+.deck {
+    max-width: var(--slide-w);
+    margin: 0 auto;
+    padding: 32px 16px 120px
+}
+
+/* ====== SLIDES ====== */
+section.slide {
+    position: relative;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 36px;
+    text-align: justify;
+    margin: 22px 0;
+    box-shadow: var(--shadow)
+}
+
+section.slide.cover {
+    background: var(--black);
+    color: var(--white);
+    overflow: hidden;
+    justify-content: center;
+    align-content: space-between;
+    flex-wrap: nowrap;
+    align-items: center;
+    text-align: left;
+}
+
+section.slide.cover .title {
+    font-size: clamp(26px, 4.6vw, 48px);
+    font-weight: 700;
+    margin: 64px 0 16px
+}
+
+section.slide.cover .subtitle {
+    background: rgba(90, 74, 134, .7);
+    color: #fff;
+    display: inline-block;
+    padding: 10px 14px;
+    border-radius: 12px
+}
+
+section.slide.cover .magenta-shape {
+    position: absolute;
+    right: -6%;
+    top: -6%;
+    width: 70%;
+    height: 130%;
+    background: var(--magenta);
+    border-radius: 36px;
+    transform: rotate(18deg)
+}
+
+section.slide.cover .logo-first-page {
+    position: absolute;
+    right: -5%;
+    top: -16%;
+    width: 50%;
+    justify-content: flex-end;
+    align-items: baseline;
+    align-content: center;
+    flex-wrap: nowrap;
+}
+
+/* Encabezado con logo (todas las diapositivas) */
+.header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px
+}
+
+.logo {
+    width: 120px;
+    height: 28px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--magenta), #ff2fb2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: .4px
+}
+
+.logo small {
+    display: block;
+    font-size: 10px;
+    opacity: .9
+}
+
+h2 {
+    font-size: clamp(22px, 3.2vw, 36px);
+    margin: 12px 0 8px
+}
+
+p {
+    font-size: clamp(15px, 1.5vw, 20px);
+    line-height: 1.5
+}
+
+ul {
+    padding-left: 22px
+}
+
+li {
+    margin: 20px 20px;
+    font-size: clamp(15px, 1.5vw, 20px)
+}
+
+.two-col {
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;
+    gap: 20px
+}
+
+.note {
+    border-left: 4px solid var(--magenta);
+    background: #fff1f8;
+    padding: 10px 35px;
+    border-radius: 8px;
+    color: #6b284e
+}
+
+.toc ul {
+    columns: 2;
+    gap: 20px
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center
+}
+
+.footer .bar {
+    max-width: var(--slide-w);
+    flex: 1;
+    margin: 0 16px 18px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: rgba(0, 0, 0, .65);
+    color: #fff
+}
+
+.kbd {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Courier New", monospace;
+    background: #f1f1f1;
+    border: 1px solid #e1e1e1;
+    padding: 2px 6px;
+    border-radius: 6px
+}
+
+@media print {
+    body {
+        background: #fff
+    }
+
+    .footer {
+        display: none
+    }
+
+    section.slide {
+        page-break-after: always;
+        box-shadow: none
+    }
+
+    section.slide:last-child {
+        page-break-after: auto
+    }
+}
+
+.diagram {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.diagram img {
+    max-width: 60%;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+}
+
+th,
+td {
+    padding: 12px 15px;
+    border: 1px solid #920000;
+}
+
+th {
+    background-color: #00BCD4;
+    color: #ffffff
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}

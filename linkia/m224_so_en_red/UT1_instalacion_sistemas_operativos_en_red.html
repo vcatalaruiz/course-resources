@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UT1 · Instalación de sistemas operativos en red · LinkiaFP</title>
+    <meta name="description"
+        content="Presentación HTML con secciones tipo diapositiva para la UT1: Instalación de sistemas operativos en red (SIMIX)." />
+    <link rel="stylesheet" href="../style.css" />
+    <script src="../script.js" defer></script>
+</head>
+
+<body>
+    <div class="deck">
+
+        <!-- COVER -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+                </div>
+                <div class="title">UT1 · Instalación de sistemas operativos en red</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+            </div>
+
+        </section>
+
+        <!-- ÍNDICE -->
+        <section class="slide" id="slide-2">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>Índice</h2>
+            <div class="toc" style="    text-align: left;
+">
+                <ul>
+                    <li>1. Introducción a los sistemas operativos en red</li>
+                    <li>1.1. Características generales</li>
+                    <li>1.2. Requisitos técnicos y de compatibilidad</li>
+                    <li>2. Modos de instalación del sistema operativo</li>
+                    <li>2.1. Instalación manual (VirtualBox)</li>
+                    <li>2.2. Instalación automatizada</li>
+                    <li>2.3. Instalación desatendida</li>
+                    <li>3. Planificación del particionado de discos</li>
+                    <li>3.1. Tipos de particiones</li>
+                    <li>3.2. Herramientas de particionado</li>
+                    <li>3.3. Asignación de espacio y formatos</li>
+                    <li>4. Sistemas de archivos</li>
+                    <li>4.1. Tipos de sistemas de archivos</li>
+                    <li>4.2. Selección y configuración</li>
+                    <li>5. Componentes y servicios del sistema operativo</li>
+                    <li>5.1. Elección de componentes</li>
+                    <li>5.2. Configuración inicial del entorno</li>
+                    <li>6. Verificación postinstalación</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 1. INTRODUCCIÓN -->
+        <section class="slide" id="slide-3">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>1. Introducción a los sistemas operativos en red</h2>
+
+            <div class="diagram">
+                <img src="../../assets/linkia/equipos_en_red.jpg" style="max-width: 50%;" alt="">
+            </div>
+
+            <div>
+                <p>Los sistemas operativos en red (SON) permiten que múltiples equipos, usuarios y servicios
+                    trabajen de forma coordinada, segura y centralizada, compartiendo archivos, impresoras, usuarios
+                    y aplicaciones, y controlando el acceso entre nodos de la red.</p>
+
+                <ul>
+                    <li>Soporte multiusuario y perfiles con permisos.</li>
+                    <li>Gestión de recursos compartidos en la red.</li>
+                    <li>Seguridad y autenticación integradas.</li>
+                    <li>Estabilidad y tolerancia a fallos.</li>
+                    <li>Servicios de red (DNS, LDAP, NFS/SMB, impresión).</li>
+                    <li>Administración y monitorización remota.</li>
+                </ul>
+
+                <ul class="note">
+                    Ejemplos:
+                    <li><strong>Windows Server:</strong> Active Directory, DNS, DHCP, Hyper-V.</li>
+                    <li><strong>Mac:</strong> Server, AFP, Bonjour, Xsan.</li>
+                    <li><strong>Linux:</strong> Samba, NFS, OpenLDAP, Apache/Nginx, KVM.</li>
+                </ul>
+
+                <div class="diagram">
+                    <img src="../../assets/linkia/logos_so.jpg" style="max-width: 50%;" alt="">
+                </div>
+            </div>
+
+        </section>
+
+        <!-- 1.2 REQUISITOS -->
+        <section class="slide" id="slide-4">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>1.2. Requisitos técnicos y de compatibilidad</h2>
+            <p>Antes de instalar un sistema operativo en red, es fundamental verificar que el hardware y software sean
+                compatibles con el SO deseado.</p>
+            <div class="diagram">
+                <img src="../../assets/linkia/requisitos_check.jpg" style="max-width: 50%;" alt="">
+            </div>
+            <p>Ejemplos:</p>
+            <ul>
+                <li><strong>Hardware:</strong> arquitectura 32 o 64 bits, cantidad de RAM, capacidad de almacenamiento
+                    mínimo, drivers compatibles, etc.</li>
+                <li><strong>Compatibilidad:</strong> coexistencia con sistemas existentes, controladores críticos (RAID,
+                    GPU).</li>
+                <li><strong>Software:</strong> apps y servicios necesarios, licencias y versiones.</li>
+                <li><strong>Red:</strong> direccionamiento IP, máscara, gateway, DNS y posible dominio/grupo de trabajo.
+                </li>
+                <li>Consulta listas de compatibilidad (HCL) y documentación del fabricante antes de instalar.</li>
+            </ul>
+
+        </section>
+
+        <!-- 2. MODOS DE INSTALACIÓN -->
+        <section class="slide" id="slide-5">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>2. Modos de instalación del sistema operativo</h2>
+            <div class="diagram">
+                <img src="../../assets/linkia/instalacion.png" style="max-width: 50%;" alt="">
+            </div>
+            <p>Existen diferentes modos de instalación del sistema operativo:</p>
+
+            <ul>
+                <li><strong>Instalación manual:</strong> proceso tradicional con interacción directa, ideal para
+                    entornos de prueba o aprendizaje.</li>
+                <li><strong>Instalación automatizada:</strong> clonado de imagen maestra con scripts de posinstalación,
+                    eficiente para despliegues masivos.</li>
+                <li><strong>Instalación desatendida:</strong> uso de archivos de respuesta que contienen todas las
+                    decisiones, adecuada para entornos empresariales con requisitos homogéneos.</li>
+            </ul>
+        </section>
+
+        <!-- 2.1 MANUAL (VirtualBox) -->
+        <section class="slide" id="slide-6">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>2.1. Instalación manual</h2>
+
+            <p>La instalación manual consiste en seguir paso a paso el asistente que incluye el propio sistema
+                operativo. Es la forma más sencilla de aprender porque permite ver qué decisiones se toman y por qué.
+            </p>
+
+            </p>
+            <p>A continuación se detallan los pasos para realizar una instalación manual de Windows Server:</p>
+            <ol>
+                <li><strong>Descargar e instalar VMWare o VirtualBox</strong>: Desde la página oficial de VMware o
+                    VirtualBox, descargar e instalar el software necesario para crear máquinas virtuales.</li>
+                <div class="diagram">
+                    <img src="../../assets/linkia/virtualbox-vs-vmware.jpg" style="max-width: 60%;" alt="">
+                </div>
+                <li>
+                    <strong>Descargar la imagen ISO</strong>: obtener la ISO de Windows Server 2022 desde el sitio
+                    oficial de Microsoft o a través de un programa de evaluación. En este caso, descargamos la ISO de
+                    evaluación gratuita de Windows Server 2022, que es válida por 180 días.
+                    <a href="https://www.microsoft.com/es-es/evalcenter/download-windows-server-2022">ISO Windows Server
+                        2022</a>
+                </li>
+                <li>
+                    <strong>Preparar la máquina virtual</strong>: crear una nueva máquina en VirtualBox o VMware,
+                    ponerle un nombre (por ejemplo, “Servidor2022”) y asignarle suficiente memoria (mínimo 4 GB)
+                    y un disco virtual de al menos 40 GB.
+                    <div>
+                        <img src="../../assets/linkia/vbox_1.jpeg" style="max-width: 60%;" alt="">
+                    </div>
+                </li>
+
+                <li>
+                    <strong>Cargar la imagen de instalación</strong>: seleccionar la ISO de Windows Server 2022
+                    para que la máquina arranque desde ella, igual que si fuera un DVD de instalación.
+                    <div class="note">
+                        <p><strong>Nota importante:</strong></p>
+                        <p>Recomiendo no poner la ISO en la configuración de la máquina. Es mejor arrancar sin ISO y que
+                            el asistente nos solicite la carga de la ISO al detectar que no hay un sistema operativo
+                            instalado.
+                            En algunos casos, se han reportado errores relacionados con esto.</p>
+                        </p>
+                    </div>
+                </li>
+
+                <li>
+                    <strong>Seguir el asistente</strong>: elegir el idioma, la zona horaria y la edición de Windows
+                    Server
+                    (por ejemplo, Standard). Después seleccionar la opción de “Instalación limpia” y aceptar
+                    el particionado automático que recomienda el asistente.
+                </li>
+
+                <li>
+                    <strong>Crear la contraseña del administrador</strong>: cuando termine la instalación,
+                    Windows pedirá definir la contraseña del usuario “Administrator”. Es la cuenta principal del
+                    sistema.
+                </li>
+
+                <li>
+                    <strong>Primer arranque y comprobaciones básicas</strong>: comprobar que el servidor arranca,
+                    que se puede abrir el “Administrador del servidor” y que la máquina tiene conexión de red.
+                    Es un buen momento para crear un <span class="kbd">clon de la máquina</span> que permita volver
+                    atrás si es
+                    necesario.
+                </li>
+            </ol>
+            <div class="note">
+                <p><strong>Recomendación:</strong></p>
+                <p>Si no has visualizado la clase donde se explica cómo crear un clon de máquina virtual en VirtualBox
+                    paso a paso, te recomiendo hacerlo antes de continuar con el proceso de instalación.</p>
+                </p>
+            </div>
+        </section>
+
+        <!-- 2.2 AUTOMATIZADA -->
+        <section class="slide" id="slide-7">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>2.2. Instalación automatizada</h2>
+            <p>La instalación automatizada permite configurar un sistema operativo sin necesidad de intervención manual
+                durante
+                el proceso de instalación. Esto se logra mediante archivos de configuración que definen todas las
+                decisiones
+                necesarias para la instalación, como idioma, zona horaria, particionado del disco, y creación de
+                usuarios.</p>
+            <div class="diagram">
+                <img src="../../assets/linkia/installation-automation-devops.jpg" style="max-width: 50%;"
+                    alt="">
+            </div>
+            <p>En entornos empresariales, la instalación automatizada es especialmente útil para desplegar múltiples
+                servidores de forma rápida y consistente, asegurando que todos los sistemas tengan la misma
+                configuración base.</p>
+            <p><strong>Herramientas comunes:</strong></p>
+            <ul>
+                <li>Clonezilla: sistema libre de clonación de particiones y discos.</li>
+                <li>FOG Project: solución de imagen y despliegue de sistemas en red.</li>
+                <li>WDS (Windows Deployment Services): para despliegues automáticos en
+                    redes Windows.</li>
+                <li>Kickstart (para distribuciones Red Hat/CentOS) y Preseed (en
+                    Debian/Ubuntu)</li>
+            </ul>
+
+        </section>
+
+        <!-- 2.3 DESATENDIDA -->
+        <section class="slide" id="slide-8">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>2.3. Instalación desatendida</h2>
+            <p>La instalación desatendida es un proceso de instalación completamente automatizado que utiliza un archivo
+                de respuesta para proporcionar todas las respuestas necesarias durante la instalación del sistema
+                operativo. Este método es ideal para entornos empresariales donde se requiere una configuración
+                homogénea y rápida de múltiples sistemas.</p>
+            <div class="diagram">
+                <img src="../../assets/linkia/desatendida instalacion.png" style="max-width: 50%;" alt="">
+            </div>
+            <p><strong>Ejemplos de archivos de respuesta:</strong></p>
+            <ul>
+                <li><strong>Windows:</strong> Unattend.xml, utilizado por el asistente de instalación de Windows para
+                    definir todas las opciones de configuración.</li>
+                <li><strong>Linux:</strong> Kickstart (Red Hat/CentOS) y Preseed (Debian/Ubuntu), que permiten
+                    automatizar la instalación y configuración de sistemas Linux.</li>
+            </ul>
+
+        </section>
+
+        <!-- 3. PARTICIONADO -->
+
+        <section class="slide" id="slide-3-1">
+            <div class="header">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+                </div>
+            </div>
+            <h2>3. Planificación del particionado de discos</h2>
+
+            <p>
+                Particionar un disco consiste en dividirlo en varias partes lógicas llamadas
+                <strong>particiones</strong>.
+                Esta división permite organizar mejor el sistema operativo, los datos de los usuarios y los servicios
+                del servidor. Un buen particionado mejora la seguridad, el rendimiento y el mantenimiento del sistema.
+            </p>
+            <div class="diagram">
+                <img src="../../assets/linkia/crear-particiones-01.webp" style="max-width: 50%;" alt="">
+            </div>
+
+            <ul>
+                <li>Permite separar sistema, datos y aplicaciones.</li>
+                <li>Facilita copias de seguridad y recuperación.</li>
+                <li>Evita que un fallo afecte a toda la información.</li>
+                <li>Permite adaptar el servidor según su rol.</li>
+            </ul>
+
+            <div class="diagram"></div>
+        </section>
+        <section class="slide" id="slide-3-2">
+            <div class="header">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+                </div>
+            </div>
+            <h2>3.1 · MBR (Master Boot Record)</h2>
+
+            <p>
+                MBR es el método de particionado tradicional. Aunque sigue siendo compatible con muchos sistemas,
+                presenta limitaciones importantes en servidores modernos.
+            </p>
+
+            <div class="diagram">
+                <img src="../../assets/linkia/mbr_structure.jpeg" style="max-width: 60%;" alt="">
+            </div>
+            <ul>
+                <li>Permite un máximo de <strong>4 particiones primarias</strong>.</li>
+                <li>Para crear más, es necesario usar <strong>una partición extendida</strong> con particiones lógicas.
+                </li>
+                <li>Límite de <strong>2 TB</strong> por disco.</li>
+                <li>Menos seguro: una única tabla de particiones.</li>
+                <li>Útil en equipos antiguos o BIOS clásicas.</li>
+            </ul>
+
+            <div class="diagram"></div>
+        </section>
+        <section class="slide" id="slide-3-3">
+            <div class="header">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+                </div>
+            </div>
+            <h2>3.1 · GPT (GUID Partition Table)</h2>
+
+            <p>
+                GPT es el sistema de particionado moderno y recomendado para servidores actuales.
+                Permite trabajar con discos grandes y mejora la integridad de los datos.
+            </p>
+            <div class="diagram">
+                <img src="../../assets/linkia/GUID_Partition_Table_Scheme.svg" style="max-width: 60%;" alt="">
+            </div>
+
+            <ul>
+                <li>Admite <strong>hasta 128 particiones</strong> sin extendidas.</li>
+                <li>Soporta discos de capacidad muy elevada (&gt; 2 TB).</li>
+                <li>Mayor seguridad: usa <strong>copias de la tabla</strong> y <strong>CRC32</strong>.</li>
+                <li>Requiere firmware <strong>UEFI</strong>.</li>
+                <li>Estándar en servidores modernos.</li>
+            </ul>
+
+            <div class="diagram"></div>
+        </section>
+        <section class="slide" id="slide-3-4">
+            <div class="header">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+                </div>
+            </div>
+            <h2>Particiones habituales en Linux</h2>
+
+            <p>Linux organiza los datos en varias particiones según su función dentro del sistema:</p>
+            <div class="diagram">
+                <img src="../../assets/linkia/linux_file_system.webp" style="max-width: 60%;" alt="">
+            </div>
+            <ul>
+                <li><strong>/</strong> → Partición raíz donde vive el sistema operativo.</li>
+                <li><strong>/home</strong> → Datos y configuraciones de los usuarios.</li>
+                <li><strong>/var</strong> → Logs, servicios, webs, bases de datos.</li>
+                <li><strong>/tmp</strong> → Archivos temporales del sistema.</li>
+                <li><strong>/opt</strong> → Aplicaciones adicionales.</li>
+                <li><strong>swap</strong> → Memoria virtual.</li>
+            </ul>
+
+            <div class="diagram"></div>
+        </section>
+        <section class="slide" id="slide-3-5">
+            <div class="header">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+                </div>
+            </div>
+            <h2>Particiones habituales en Windows Server</h2>
+
+            <p>
+                Windows asigna letras para identificar particiones. En servidores es habitual separar
+                sistema, datos y aplicaciones.
+            </p>
+            <div class="diagram">
+                <img src="../../assets/linkia/windows-10-c-drive-full.jpg" style="max-width: 60%;" alt="">
+            </div>
+
+            <ul>
+                <li><strong>C:</strong> Sistema operativo.</li>
+                <li><strong>D:</strong> Datos del servidor o aplicaciones.</li>
+                <li><strong>E:, F:</strong> Almacenamiento adicional o particiones específicas del rol.</li>
+                <li>Recomendado: separar <strong>sistema</strong>, <strong>datos</strong> y <strong>programas</strong>.
+                </li>
+            </ul>
+
+            <div class="diagram"></div>
+        </section>
+        <section class="slide" id="slide-3-6">
+            <div class="header">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+                </div>
+            </div>
+            <h2>3.2 · Herramientas de particionado (GUI)</h2>
+
+            <p>Herramientas gráficas fáciles de usar, ideales para alumnos que comienzan:</p>
+
+            <ul>
+                <li><strong>GParted</strong> — Muy potente en Linux.</li>
+                <li><strong>Disk Management</strong> — Integrada en Windows.</li>
+                <li><strong>Parted Magic</strong> — Entorno especializado de rescate y particionado.</li>
+            </ul>
+
+            <div class="diagram"></div>
+        </section>
+        <section class="slide" id="slide-3-7">
+            <div class="header">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+                </div>
+            </div>
+            <h2>3.2 · Herramientas de particionado (CLI)</h2>
+
+            <p>Herramientas avanzadas usadas en entornos profesionales:</p>
+
+            <ul>
+                <li><strong>Linux:</strong> fdisk, parted, cfdisk, gptfdisk.</li>
+                <li><strong>Windows:</strong> diskpart (potente y scriptable).</li>
+                <li>Permiten crear, borrar y modificar particiones desde la terminal.</li>
+            </ul>
+
+            <div class="diagram"></div>
+        </section>
+        <section class="slide" id="slide-3-8">
+            <div class="header">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+                </div>
+            </div>
+            <h2>3.3 · Asignación de espacio</h2>
+
+            <p>El tamaño de cada partición depende del uso del servidor:</p>
+
+            <ul>
+                <li><strong>Servidor de archivos:</strong> mucho espacio para datos (<code>/home</code>,
+                    <code>D:</code>).
+                </li>
+                <li><strong>Servidor de aplicaciones:</strong> reservar <code>/opt</code> o particiones específicas.
+                </li>
+                <li><strong>Servidor web:</strong> espacio para <code>/var/www</code> y <code>/var/log</code>.</li>
+            </ul>
+
+            <div class="diagram"></div>
+        </section>
+        <section class="slide" id="slide-3-9">
+            <div class="header">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+                </div>
+            </div>
+            <h2>Buenas prácticas de particionado</h2>
+
+            <ul>
+                <li>Separar <strong>sistema</strong> y <strong>datos</strong> para facilitar copias y recuperaciones.
+                </li>
+                <li>Dimensionar bien particiones dinámicas: <strong>/var</strong>, <strong>/tmp</strong>.</li>
+                <li>Elegir GPT siempre que sea posible.</li>
+                <li>Crear particiones según el rol del servidor.</li>
+                <li>Usar el sistema de archivos adecuado para cada situación.</li>
+            </ul>
+
+            <div class="diagram"></div>
+        </section>
+
+        <!-- 4. FS -->
+        <section class="slide" id="slide-12">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>4. Sistemas de archivos</h2>
+            <p>Cada sistema operativo tiene sus propios sistemas de archivos:</p>
+            <ul>
+                <li><strong>Windows:</strong> NTFS (por defecto), ReFS (resiliencia), FAT32/exFAT (portabilidad).</li>
+                <li><strong>Linux:</strong> ext4 (equilibrio), XFS (alto rendimiento), Btrfs (snapshots/RAID), ZFS
+                    (integridad).</li>
+                <li><strong>Multiplataforma:</strong> NFS, SMB/CIFS; ISO 9660/UDF (ópticos).</li>
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/linkia/sistemas_archivos.png" style="max-width: 60%;" alt="">
+            </div>
+        </section>
+
+        <!-- 4.2 SELECCIÓN -->
+        <section class="slide" id="slide-13">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>4.2. Selección y configuración</h2>
+            <ul>
+                <li>Compatibilidad con SO y herramientas.</li>
+                <li>Rendimiento según la carga.</li>
+                <li>Características: cifrado, compresión, cuotas.</li>
+                <li>Seguridad (ACL/POSIX) y recuperación ante fallos.</li>
+            </ul>
+            <p><strong>Tipos de sistemas de archivos recomendados según el SO:</strong></p>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 12px;">
+                <tr>
+                    <th>SO</th>
+                    <th>Sistema de archivos recomendado</th>
+                </tr>
+                <tr>
+                    <td>Windows Server</td>
+                    <td>NTFS (ReFS para entornos de alta resiliencia)</td>
+                </tr>
+                <tr>
+                    <td>Linux</td>
+                    <td>ext4 (XFS o Btrfs para casos específicos)</td>
+                </tr>
+                <tr>
+                    <td>Multiplataforma</td>
+                    <td>NFS, SMB/CIFS para recursos compartidos; ISO 9660/UDF para medios ópticos</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- 5. COMPONENTES -->
+        <section class="slide" id="slide-14">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>5. Componentes y servicios del sistema operativo</h2>
+            <ul>
+                <li><strong>Básicos:</strong> drivers esenciales, herramientas de administración, servicios de red.</li>
+                <li><strong>Según rol:</strong> archivos (SMB/NFS), controlador de dominio (AD, DNS, NTP), aplicaciones
+                    (PHP/Python/BBDD), impresión.</li>
+                <li>Principios: mínima exposición y modularidad.</li>
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/linkia/image14.jpg" style="max-width: 80%;" alt="">
+            </div>
+        </section>
+
+        <!-- 5.2 CONFIG INICIAL -->
+        <section class="slide" id="slide-15">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>5.2. Configuración inicial</h2>
+            <ul>
+                <li>Zona horaria, idioma/teclado y <code>hostname</code>.</li>
+                <li>Red: IP estática/DHCP, máscara, gateway, DNS, dominio/grupo de trabajo.</li>
+                <li>Cuentas administrativas y políticas de acceso.</li>
+                <li>Instalación sin GUI (Linux) o modo Core (Windows) cuando proceda.</li>
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/linkia/image18.jpg" style="max-width: 80%;" alt="">
+            </div>
+        </section>
+
+        <!-- 6. POSTINSTALACIÓN -->
+        <section class="slide" id="slide-16">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>6. Verificación postinstalación</h2>
+            <div class="two-col" style="display: flex;">
+                <div style="max-width: 100%;">
+                    <h3>6.1. Actualización del sistema</h3>
+                    <div class="diagram">
+                        <img src="../../assets/linkia/image15.jpg" style="max-width: 60%;" alt="">
+                    </div>
+                    <p>Siempre que se instale un sistema operativo, es fundamental actualizarlo para asegurar la
+                        seguridad y estabilidad del entorno. Esto implica aplicar las últimas correcciones de seguridad
+                        y mejoras de rendimiento disponibles.</p>
+                </div>
+                <div>
+                    <h3>6.2. Conectividad</h3>
+                    <div class="diagram">
+                        <img src="../../assets/linkia/image5.png" style="max-width: 60%;" alt="">
+                    </div>
+                    <p>Verifica que el sistema tenga conectividad de red mediante comandos como <span
+                            class="kbd">ping</span>, <span class="kbd">traceroute/tracert</span>, y <span
+                            class="kbd">nslookup</span>. Asegúrate de que los servicios de red estén activos y
+                        funcionando correctamente.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ¿QUÉ HAS APRENDIDO? -->
+        <section class="slide" id="slide-17">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>¿Qué has aprendido?</h2>
+            <ul>
+                <li>Concepto y objetivos de un SON.</li>
+                <li>Requisitos previos de compatibilidad.</li>
+                <li>Modos de instalación y su contexto de uso.</li>
+                <li>Particionado y selección de sistemas de archivos.</li>
+                <li>Componentes por rol y configuración inicial.</li>
+                <li>Actualización y verificación de conectividad tras instalar.</li>
+            </ul>
+        </section>
+
+
+
+    </div>
+
+    <div class="footer">
+        <div class="bar">
+            <small>UT1 · Instalación de sistemas operativos en red · LinkiaFP</small>
+            <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+        </div>
+    </div>
+</body>
+
+</html>
