@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-EVTW1307T1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSP y Servlets</title>
+    <script src="/course-resources/index.js" defer></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+    <script src="../index.js" defer></script>
+    <script src="../menu.js" defer></script>
+    <!-- <link rel="stylesheet" href="../index.css"> -->
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+
+    <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+        <div class="vc-rail-head">
+            <span class="vc-rail-title">Índice</span>
+            <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+                <!-- X SVG -->
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+        <ul id="vc-list" class="vc-list"></ul>
+    </nav>
+
+    <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+    <!-- ===== /VC SIDEBAR ===== -->
+
+    <header>
+
+        <!-- ===== VC SIDEBAR (desde cero) ===== -->
+        <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+            aria-controls="vc-rail" aria-expanded="false">
+            <!--Hamburger icon -->
+            <i class="fa fa-bars" aria-hidden="true"></i>
+
+
+        </button>
+        <h1>JSP y Servlets</h1>
+        <img src="" id="logo" alt="Logo" style="display: none;">
+    </header>
+
+    <main>
+
+        <!-- SECCIÓN 1 -->
+        <section id="introduccion">
+            <h2>1. Introducción a JSP y Servlets</h2>
+
+            <p>
+                <strong>JSP (JavaServer Pages)</strong> y <strong>Servlets</strong> son tecnologías Java para crear aplicaciones web dinámicas. 
+                Los <strong>Servlets</strong> son clases Java que manejan peticiones HTTP, mientras que <strong>JSP</strong> 
+                permite incrustar código Java en páginas HTML para generar contenido dinámico.
+            </p>
+
+            <h3>1.1. ¿Qué es un Servlet?</h3>
+            <p>
+                Un <strong>Servlet</strong> es una clase Java que se ejecuta en el servidor y responde a peticiones HTTP. 
+                Extiende la funcionalidad del servidor web y sigue el patrón MVC como controlador.
+            </p>
+
+            <h3>1.2. ¿Qué es JSP?</h3>
+            <p>
+                <strong>JSP (JavaServer Pages)</strong> es una tecnología que permite crear páginas web dinámicas 
+                combinando HTML con código Java. Internamente, un JSP se compila en un Servlet.
+            </p>
+
+            <h3>1.3. Ventajas</h3>
+            <ul>
+                <li><strong>Separación de responsabilidades</strong>: Servlet maneja lógica, JSP presenta datos.</li>
+                <li><strong>Reutilización</strong>: código Java centralizado en Servlets.</li>
+                <li><strong>Portabilidad</strong>: se ejecuta en cualquier servidor compatible con Java EE (Tomcat, GlassFish, etc.).</li>
+                <li><strong>Gestión de sesiones</strong>: integración nativa con HttpSession.</li>
+            </ul>
+
+        </section>
+
+        <!-- SECCIÓN 2 -->
+        <section id="arquitectura">
+            <h2>2. Arquitectura Servlet/JSP</h2>
+
+            <h3>2.1. Flujo de trabajo</h3>
+            <div class="mermaid">
+                sequenceDiagram
+                    participant Cliente
+                    participant Servidor
+                    participant Servlet
+                    participant JSP
+                    
+                    Cliente->>Servidor: Petición HTTP
+                    Servidor->>Servlet: Invoca doGet/doPost
+                    Servlet->>Servlet: Procesa lógica de negocio
+                    Servlet->>JSP: Forward con atributos
+                    JSP->>Servidor: Genera HTML
+                    Servidor->>Cliente: Respuesta HTTP
+            </div>
+
+            <h3>2.2. Patrón MVC</h3>
+            <ul>
+                <li><strong>Modelo</strong>: clases Java (POJOs, DAOs)</li>
+                <li><strong>Vista</strong>: páginas JSP</li>
+                <li><strong>Controlador</strong>: Servlets</li>
+            </ul>
+
+            <h3>2.3. Contenedor Web</h3>
+            <p>
+                El contenedor web (como <strong>Apache Tomcat</strong>) gestiona el ciclo de vida de Servlets y JSPs, 
+                incluyendo instanciación, inicialización y destrucción.
+            </p>
+
+        </section>
+
+        <!-- SECCIÓN 3 -->
+        <section id="servlets">
+            <h2>3. Servlets</h2>
+
+            <h3>3.1. Estructura básica de un Servlet</h3>
+            <p>
+                Un Servlet debe extender <code>HttpServlet</code> e implementar los métodos <code>doGet()</code> 
+                y/o <code>doPost()</code> según el tipo de petición HTTP.
+            </p>
+
+            <pre><code class="language-java">
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
+import java.io.IOException;
+
+@WebServlet("/hello")
+public class HelloServlet extends HttpServlet {
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        
+        response.setContentType("text/html");
+        response.getWriter().println("&lt;h1&gt;¡Hola desde un Servlet!&lt;/h1&gt;");
+    }
+}
+</code></pre>
+
+            <h3>3.2. Ciclo de vida de un Servlet</h3>
+            <ol>
+                <li><strong>init()</strong>: se ejecuta una vez al crear el Servlet</li>
+                <li><strong>service()</strong>: procesa cada petición (llama a doGet, doPost, etc.)</li>
+                <li><strong>destroy()</strong>: se ejecuta al destruir el Servlet</li>
+            </ol>
+
+            <pre><code class="language-java">
+@Override
+public void init() throws ServletException {
+    System.out.println("Servlet inicializado");
+}
+
+@Override
+public void destroy() {
+    System.out.println("Servlet destruido");
+}
+</code></pre>
+
+            <h3>3.3. Parámetros de petición</h3>
+            <pre><code class="language-java">
+@Override
+protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+        throws ServletException, IOException {
+    
+    String nombre = request.getParameter("nombre");
+    int edad = Integer.parseInt(request.getParameter("edad"));
+    
+    response.setContentType("text/html");
+    response.getWriter().println("&lt;h1&gt;Hola " + nombre + ", tienes " + edad + " años&lt;/h1&gt;");
+}
+</code></pre>
+
+        </section>
+
+        <!-- SECCIÓN 4 -->
+        <section id="jsp">
+            <h2>4. JavaServer Pages (JSP)</h2>
+
+            <h3>4.1. Sintaxis básica de JSP</h3>
+            <p>
+                JSP permite incrustar código Java en HTML mediante etiquetas especiales:
+            </p>
+
+            <table style="width:100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: #f0f0f0;">
+                        <th style="border: 1px solid #ddd; padding: 8px;">Etiqueta</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Descripción</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Ejemplo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="border: 1px solid #ddd; padding: 8px;"><code>&lt;% %&gt;</code></td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">Scriptlet (código Java)</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;"><code>&lt;% int x = 5; %&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #ddd; padding: 8px;"><code>&lt;%= %&gt;</code></td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">Expresión (imprime valor)</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;"><code>&lt;%= x * 2 %&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #ddd; padding: 8px;"><code>&lt;%! %&gt;</code></td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">Declaración (variables/métodos)</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;"><code>&lt;%! int count = 0; %&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #ddd; padding: 8px;"><code>&lt;%-- --%&gt;</code></td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">Comentario JSP</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;"><code>&lt;%-- Comentario --%&gt;</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>4.2. Ejemplo de JSP</h3>
+            <pre><code class="language-jsp">
+&lt;%@ page contentType="text/html;charset=UTF-8" language="java" %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Mi primera JSP&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hola desde JSP&lt;/h1&gt;
+    
+    &lt;%
+        String nombre = "Carlos";
+        int edad = 25;
+    %&gt;
+    
+    &lt;p&gt;Usuario: &lt;%= nombre %&gt;&lt;/p&gt;
+    &lt;p&gt;Edad: &lt;%= edad %&gt;&lt;/p&gt;
+    &lt;p&gt;Año de nacimiento: &lt;%= (2026 - edad) %&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+            <h3>4.3. Objetos implícitos en JSP</h3>
+            <p>JSP proporciona objetos predefinidos que se pueden usar directamente:</p>
+            <ul>
+                <li><strong>request</strong>: HttpServletRequest</li>
+                <li><strong>response</strong>: HttpServletResponse</li>
+                <li><strong>session</strong>: HttpSession</li>
+                <li><strong>out</strong>: JspWriter (para escribir en la respuesta)</li>
+                <li><strong>application</strong>: ServletContext</li>
+            </ul>
+
+            <pre><code class="language-jsp">
+&lt;%
+    String usuario = request.getParameter("usuario");
+    session.setAttribute("usuario", usuario);
+    out.println("Sesión iniciada para: " + usuario);
+%&gt;
+</code></pre>
+
+        </section>
+
+        <!-- SECCIÓN 5 -->
+        <section id="integracion">
+            <h2>5. Integración Servlet + JSP</h2>
+
+            <p>
+                El patrón común es que el <strong>Servlet procesa la petición</strong> y el <strong>JSP muestra los resultados</strong>.
+                Se usa <code>RequestDispatcher</code> para redirigir desde el Servlet al JSP.
+            </p>
+
+            <h3>5.1. Servlet que procesa y redirige</h3>
+
+            <pre><code class="language-java">
+@WebServlet("/usuarios")
+public class UsuarioServlet extends HttpServlet {
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        
+        // Lógica de negocio
+        List&lt;String&gt; usuarios = Arrays.asList("Ana", "Juan", "María", "Pedro");
+        
+        // Pasar datos al JSP
+        request.setAttribute("usuarios", usuarios);
+        request.setAttribute("titulo", "Lista de Usuarios");
+        
+        // Forward al JSP
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/usuarios.jsp");
+        dispatcher.forward(request, response);
+    }
+}
+</code></pre>
+
+            <h3>5.2. JSP que muestra los datos</h3>
+            <pre><code class="language-jsp">
+&lt;%@ page contentType="text/html;charset=UTF-8" %&gt;
+&lt;%@ page import="java.util.List" %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;&lt;%= request.getAttribute("titulo") %&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;&lt;%= request.getAttribute("titulo") %&gt;&lt;/h1&gt;
+    
+    &lt;ul&gt;
+        &lt;%
+            List&lt;String&gt; usuarios = (List&lt;String&gt;) request.getAttribute("usuarios");
+            for (String usuario : usuarios) {
+        %&gt;
+            &lt;li&gt;&lt;%= usuario %&gt;&lt;/li&gt;
+        &lt;%
+            }
+        %&gt;
+    &lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+            <h3>5.3. Diferencia entre forward y redirect</h3>
+            <ul>
+                <li><strong>forward</strong>: el servidor redirige internamente, mantiene request y response</li>
+                <li><strong>redirect</strong>: el servidor envía respuesta al cliente para que haga nueva petición</li>
+            </ul>
+
+            <pre><code class="language-java">
+// Forward (interno)
+request.getRequestDispatcher("/vista.jsp").forward(request, response);
+
+// Redirect (externo)
+response.sendRedirect("vista.jsp");
+</code></pre>
+
+        </section>
+
+        <!-- SECCIÓN 6 -->
+        <section id="sesiones">
+            <h2>6. Gestión de sesiones</h2>
+
+            <p>
+                Las <strong>sesiones HTTP</strong> permiten mantener información del usuario entre peticiones.
+                Se accede mediante el objeto <code>HttpSession</code>.
+            </p>
+
+            <h3>6.1. Crear y usar sesiones en Servlet</h3>
+            <pre><code class="language-java">
+@Override
+protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+        throws ServletException, IOException {
+    
+    String usuario = request.getParameter("usuario");
+    
+    // Obtener o crear sesión
+    HttpSession session = request.getSession();
+    
+    // Guardar datos en sesión
+    session.setAttribute("usuarioActual", usuario);
+    session.setAttribute("loginTime", new Date());
+    
+    // Configurar tiempo de expiración (en segundos)
+    session.setMaxInactiveInterval(1800); // 30 minutos
+    
+    response.sendRedirect("inicio.jsp");
+}
+</code></pre>
+
+            <h3>6.2. Recuperar datos de sesión en JSP</h3>
+            <pre><code class="language-jsp">
+&lt;%
+    String usuario = (String) session.getAttribute("usuarioActual");
+    if (usuario != null) {
+%&gt;
+    &lt;p&gt;Bienvenido, &lt;%= usuario %&gt;&lt;/p&gt;
+&lt;%
+    } else {
+%&gt;
+    &lt;p&gt;No has iniciado sesión&lt;/p&gt;
+&lt;%
+    }
+%&gt;
+</code></pre>
+
+            <h3>6.3. Cerrar sesión</h3>
+            <pre><code class="language-java">
+@WebServlet("/logout")
+public class LogoutServlet extends HttpServlet {
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        
+        response.sendRedirect("login.jsp");
+    }
+}
+</code></pre>
+
+        </section>
+
+        <!-- SECCIÓN 7 -->
+        <section id="setup">
+            <h2>7. Puesta a punto (setup)</h2>
+
+            <h3>7.1. Requisitos</h3>
+            <ul>
+                <li>JDK 8 o superior</li>
+                <li>Apache Tomcat 9.0+ o cualquier servidor Java EE</li>
+                <li>IDE (Eclipse, IntelliJ IDEA, NetBeans)</li>
+            </ul>
+
+            <h3>7.2. Dependencias Maven</h3>
+            <p>
+                Añade las dependencias de Servlet API en tu <code>pom.xml</code>:
+            </p>
+
+            <pre><code class="language-xml">
+&lt;dependencies&gt;
+    &lt;!-- Servlet API --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+        &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
+        &lt;version&gt;4.0.1&lt;/version&gt;
+        &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;
+    
+    &lt;!-- JSP API --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;javax.servlet.jsp&lt;/groupId&gt;
+        &lt;artifactId&gt;javax.servlet.jsp-api&lt;/artifactId&gt;
+        &lt;version&gt;2.3.3&lt;/version&gt;
+        &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;
+    
+    &lt;!-- JSTL (opcional, para etiquetas JSP) --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+        &lt;artifactId&gt;jstl&lt;/artifactId&gt;
+        &lt;version&gt;1.2&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+
+            <h3>7.3. Estructura de proyecto</h3>
+            <pre><code class="language-plaintext">
+proyecto-web/
+├── src/
+│   └── main/
+│       ├── java/
+│       │   └── com/
+│       │       └── ejemplo/
+│       │           ├── servlets/
+│       │           │   └── HelloServlet.java
+│       │           └── modelo/
+│       │               └── Usuario.java
+│       └── webapp/
+│           ├── WEB-INF/
+│           │   └── web.xml (opcional con anotaciones)
+│           ├── index.jsp
+│           └── usuarios.jsp
+└── pom.xml
+</code></pre>
+
+            <h3>7.4. Desplegar en Tomcat</h3>
+            <ol>
+                <li>Compila el proyecto: <code>mvn clean package</code></li>
+                <li>Copia el archivo <code>.war</code> generado a <code>tomcat/webapps/</code></li>
+                <li>Inicia Tomcat: <code>./catalina.sh run</code> (Linux/Mac) o <code>catalina.bat run</code> (Windows)</li>
+                <li>Accede a <code>http://localhost:8080/nombre-app</code></li>
+            </ol>
+        </section>
+       
+        <!-- RESUMEN -->
+        <section>
+            <div class="info-box">
+                <h3>Resumen clave</h3>
+                <ul>
+                    <li><strong>Servlets</strong> son clases Java que manejan peticiones HTTP</li>
+                    <li><strong>JSP</strong> combina HTML con código Java para contenido dinámico</li>
+                    <li>Patrón <strong>MVC</strong>: Servlet (controlador) + JSP (vista) + POJOs (modelo)</li>
+                    <li>Uso de <strong>RequestDispatcher</strong> para forward entre Servlet y JSP</li>
+                    <li><strong>HttpSession</strong> para gestionar sesiones de usuario</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+    </footer>
+</body>
+
+</html>

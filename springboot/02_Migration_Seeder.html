@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spring Boot Flyway y Seeders</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <!-- X SVG -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+  <!-- ===== /VC SIDEBAR ===== -->
+
+  <header>
+
+    <!-- ===== VC SIDEBAR (desde cero) ===== -->
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail"
+      aria-expanded="false">
+      <!--Hamburger icon -->
+      <i class="fa fa-bars" aria-hidden="true"></i>
+
+
+    </button>
+    <h1>Spring Boot Flyway y Seeders</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+<main>
+
+<!-- SECCIÓN 1 -->
+<section id="introduccion">
+<h2>1. Introducción</h2>
+
+<p>
+Spring Boot ofrece herramientas para gestionar la base de datos de forma estructurada:
+<strong>Flyway</strong> para las migraciones del esquema, <strong>CommandLineRunner</strong> para insertar datos iniciales (seeders) y
+<strong>DataFaker</strong> para generar información de prueba realista.
+</p>
+</section>
+
+<!-- SECCIÓN 2 -->
+<section id="migrations">
+<h2>2. Migraciones con Flyway</h2>
+
+<h3>2.1. Configurar Flyway</h3>
+
+<pre><code class="language-xml">
+&lt;!-- pom.xml --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.flywaydb&lt;/groupId&gt;
+    &lt;artifactId&gt;flyway-core&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.flywaydb&lt;/groupId&gt;
+    &lt;artifactId&gt;flyway-mysql&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<pre><code class="language-properties">
+# src/main/resources/application.properties
+
+# Configuración de Flyway
+spring.flyway.enabled=true
+spring.flyway.locations=classpath:db/migration
+spring.flyway.baseline-on-migrate=true
+
+# JPA (deshabilitar auto-creación)
+spring.jpa.hibernate.ddl-auto=validate
+</code></pre>
+
+<h3>2.2. Crear archivo de migración</h3>
+
+<p>Las migraciones se guardan en <code>src/main/resources/db/migration/</code> con el formato <code>V{version}__{descripcion}.sql</code></p>
+
+<pre><code class="language-sql">
+-- src/main/resources/db/migration/V1__Create_hoteles_table.sql
+
+CREATE TABLE hoteles (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    direccion VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+</code></pre>
+
+<pre><code class="language-sql">
+-- src/main/resources/db/migration/V2__Create_habitaciones_table.sql
+
+CREATE TABLE habitaciones (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    numero INT NOT NULL,
+    hotel_id BIGINT NOT NULL,
+    FOREIGN KEY (hotel_id) REFERENCES hoteles(id) ON DELETE CASCADE
+);
+</code></pre>
+
+<h3>2.3. Ejecutar migraciones</h3>
+
+<p>Flyway ejecuta automáticamente las migraciones pendientes al iniciar la aplicación:</p>
+
+<pre><code class="language-bash">
+./mvnw spring-boot:run
+
+# O con JAR compilado
+java -jar target/mi-app.jar
+</code></pre>
+
+<p>Flyway verifica qué migraciones ya se aplicaron y ejecuta solo las nuevas.</p>
+
+<h3>2.4. Comandos útiles de Flyway</h3>
+
+<pre><code class="language-bash">
+# Ver estado de migraciones
+./mvnw flyway:info
+
+# Ejecutar migraciones manualmente
+./mvnw flyway:migrate
+
+# Limpiar base de datos (CUIDADO en producción)
+./mvnw flyway:clean
+</code></pre>
+</section>
+
+<!-- SECCIÓN 3 -->
+<section id="fixtures">
+<h2>3. Seeders con CommandLineRunner</h2>
+
+<h3>3.1. Crear un seeder básico</h3>
+
+<p><strong>CommandLineRunner</strong> permite ejecutar código al iniciar la aplicación, ideal para insertar datos iniciales.</p>
+
+<pre><code class="language-java">
+// src/main/java/com/example/demo/seeder/HotelSeeder.java
+
+package com.example.demo.seeder;
+
+import com.example.demo.model.Hotel;
+import com.example.demo.repository.HotelRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+@Component
+public class HotelSeeder implements CommandLineRunner {
+
+    @Autowired
+    private HotelRepository hotelRepository;
+
+    @Override
+    public void run(String... args) throws Exception {
+        // Solo ejecutar si no hay datos
+        if (hotelRepository.count() == 0) {
+            Hotel hotel = new Hotel();
+            hotel.setNombre("Gran Hotel");
+            hotel.setDireccion("Calle Mayor 3");
+            
+            hotelRepository.save(hotel);
+            
+            System.out.println("✓ Datos iniciales insertados");
+        }
+    }
+}
+</code></pre>
+
+<h3>3.2. Seeder con múltiples registros</h3>
+
+<pre><code class="language-java">
+@Component
+public class HotelSeeder implements CommandLineRunner {
+
+    @Autowired
+    private HotelRepository hotelRepository;
+
+    @Override
+    public void run(String... args) throws Exception {
+        if (hotelRepository.count() > 0) {
+            return; // Ya hay datos
+        }
+
+        List<Hotel> hoteles = List.of(
+            crearHotel("Hotel Plaza", "Av. Principal 100"),
+            crearHotel("Hotel Sol", "Calle Luna 45"),
+            crearHotel("Hotel Mar", "Paseo Marítimo 22")
+        );
+
+        hotelRepository.saveAll(hoteles);
+        System.out.println("✓ " + hoteles.size() + " hoteles insertados");
+    }
+
+    private Hotel crearHotel(String nombre, String direccion) {
+        Hotel hotel = new Hotel();
+        hotel.setNombre(nombre);
+        hotel.setDireccion(direccion);
+        return hotel;
+    }
+}
+</code></pre>
+
+<h3>3.3. Ejecutar la aplicación</h3>
+
+<pre><code class="language-bash">
+./mvnw spring-boot:run
+
+# Los seeders se ejecutan automáticamente al iniciar
+</code></pre>
+</section>
+
+<!-- SECCIÓN 4 -->
+<section id="faker">
+<h2>4. Uso de DataFaker</h2>
+
+<p>
+<strong>DataFaker</strong> (anteriormente JavaFaker) permite generar datos realistas para poblar la base de datos.
+</p>
+
+<h3>4.1. Agregar dependencia</h3>
+
+<pre><code class="language-xml">
+&lt;!-- pom.xml --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;net.datafaker&lt;/groupId&gt;
+    &lt;artifactId&gt;datafaker&lt;/artifactId&gt;
+    &lt;version&gt;2.1.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<h3>4.2. Usar DataFaker en un seeder</h3>
+
+<pre><code class="language-java">
+package com.example.demo.seeder;
+
+import com.example.demo.model.Hotel;
+import com.example.demo.repository.HotelRepository;
+import net.datafaker.Faker;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+@Component
+public class HotelSeeder implements CommandLineRunner {
+
+    @Autowired
+    private HotelRepository hotelRepository;
+
+    @Override
+    public void run(String... args) throws Exception {
+        if (hotelRepository.count() > 0) {
+            return;
+        }
+
+        Faker faker = new Faker(new Locale("es"));
+        List<Hotel> hoteles = new ArrayList<>();
+
+        for (int i = 0; i < 20; i++) {
+            Hotel hotel = new Hotel();
+            hotel.setNombre(faker.company().name());
+            hotel.setDireccion(faker.address().fullAddress());
+            
+            hoteles.add(hotel);
+        }
+
+        hotelRepository.saveAll(hoteles);
+        System.out.println("✓ " + hoteles.size() + " hoteles generados con DataFaker");
+    }
+}
+</code></pre>
+
+<h3>4.3. Más ejemplos de DataFaker</h3>
+
+<pre><code class="language-java">
+Faker faker = new Faker(new Locale("es"));
+
+// Nombres
+String nombre = faker.name().fullName();
+String firstName = faker.name().firstName();
+
+// Direcciones
+String ciudad = faker.address().city();
+String calle = faker.address().streetAddress();
+String codigoPostal = faker.address().zipCode();
+
+// Empresas
+String empresa = faker.company().name();
+String industria = faker.company().industry();
+
+// Números
+int numero = faker.number().numberBetween(1, 100);
+
+// Fechas
+String fecha = faker.date().birthday().toString();
+
+// Textos
+String descripcion = faker.lorem().sentence(10);
+</code></pre>
+
+<h3>4.4. Ejecutar con datos generados</h3>
+
+<pre><code class="language-bash">
+./mvnw spring-boot:run
+
+# Los datos se generan automáticamente al iniciar
+</code></pre>
+</section>
+
+<!-- SECCIÓN 5 -->
+<section id="relaciones">
+<h2>5. Relaciones entre tablas</h2>
+
+<h3>5.1. Definir relación 1:N con entidades JPA</h3>
+
+<pre><code class="language-java">
+// src/main/java/com/example/demo/model/Hotel.java
+
+package com.example.demo.model;
+
+import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "hoteles")
+public class Hotel {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String nombre;
+
+    private String direccion;
+
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Habitacion> habitaciones = new ArrayList<>();
+
+    // Getters y setters
+}
+</code></pre>
+
+<pre><code class="language-java">
+// src/main/java/com/example/demo/model/Habitacion.java
+
+package com.example.demo.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "habitaciones")
+public class Habitacion {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private Integer numero;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "hotel_id", nullable = false)
+    private Hotel hotel;
+
+    // Getters y setters
+}
+</code></pre>
+
+<h3>5.2. Crear migración para habitaciones</h3>
+
+<pre><code class="language-sql">
+-- src/main/resources/db/migration/V3__Create_habitaciones_table.sql
+
+CREATE TABLE habitaciones (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    numero INT NOT NULL,
+    hotel_id BIGINT NOT NULL,
+    FOREIGN KEY (hotel_id) REFERENCES hoteles(id) ON DELETE CASCADE
+);
+</code></pre>
+
+<h3>5.3. Seeder con relaciones</h3>
+
+<pre><code class="language-java">
+@Component
+public class HotelHabitacionSeeder implements CommandLineRunner {
+
+    @Autowired
+    private HotelRepository hotelRepository;
+    
+    @Autowired
+    private HabitacionRepository habitacionRepository;
+
+    @Override
+    public void run(String... args) throws Exception {
+        if (habitacionRepository.count() > 0) {
+            return;
+        }
+
+        Faker faker = new Faker(new Locale("es"));
+        List<Hotel> hoteles = hotelRepository.findAll();
+
+        for (Hotel hotel : hoteles) {
+            for (int i = 1; i <= 5; i++) {
+                Habitacion habitacion = new Habitacion();
+                habitacion.setNumero(faker.number().numberBetween(100, 500));
+                habitacion.setHotel(hotel);
+                
+                habitacionRepository.save(habitacion);
+            }
+        }
+
+        System.out.println("✓ Habitaciones generadas para cada hotel");
+    }
+}
+</code></pre>
+</section>
+
+<!-- SECCIÓN 6 -->
+<section id="todo">
+<h2>6. Reinicializar base de datos</h2>
+
+<h3>6.1. Limpiar y recrear con Flyway</h3>
+
+<pre><code class="language-bash">
+# Limpiar base de datos (elimina todas las tablas)
+./mvnw flyway:clean
+
+# Ejecutar migraciones
+./mvnw flyway:migrate
+
+# Iniciar aplicación (ejecuta seeders automáticamente)
+./mvnw spring-boot:run
+</code></pre>
+
+<h3>6.2. Reiniciar desde la aplicación</h3>
+
+<p>Configurar para que se recree automáticamente en desarrollo:</p>
+
+<pre><code class="language-properties">
+# application.properties (solo desarrollo)
+
+# Recrear esquema en cada inicio (CUIDADO: elimina datos)
+spring.jpa.hibernate.ddl-auto=create-drop
+
+# O actualizar solo estructura sin eliminar datos
+spring.jpa.hibernate.ddl-auto=update
+
+# Para producción: solo validar
+spring.jpa.hibernate.ddl-auto=validate
+</code></pre>
+
+<h3>6.3. Script completo de reinicio</h3>
+
+<pre><code class="language-bash">
+#!/bin/bash
+# reset-db.sh
+
+echo "Limpiando base de datos..."
+./mvnw flyway:clean
+
+echo "Aplicando migraciones..."
+./mvnw flyway:migrate
+
+echo "Iniciando aplicación con seeders..."
+./mvnw spring-boot:run
+</code></pre>
+</section>
+
+<!-- DIAGRAMA -->
+<section>
+<h2>Diagrama conceptual</h2>
+
+<div class="mermaid">
+classDiagram
+class Hotel {
+    id
+    nombre
+    direccion
+}
+class Habitacion {
+    id
+    numero
+    hotel_id
+}
+Hotel "1" --> "*" Habitacion
+</div>
+</section>
+
+<!-- RESUMEN -->
+<section>
+<div class="info-box">
+<h3>Resumen rápido</h3>
+
+<table border="1" style="width:100%; border-collapse:collapse;">
+    <tr><th>Acción</th><th>Herramienta/Comando</th></tr>
+    <tr><td>Crear migración SQL</td><td>Archivo V{n}__{descripcion}.sql en db/migration/</td></tr>
+    <tr><td>Ejecutar migraciones</td><td>./mvnw flyway:migrate o iniciar app</td></tr>
+    <tr><td>Ver estado migraciones</td><td>./mvnw flyway:info</td></tr>
+    <tr><td>Crear seeder</td><td>Clase @Component con CommandLineRunner</td></tr>
+    <tr><td>Generar datos falsos</td><td>DataFaker (new Faker())</td></tr>
+    <tr><td>Limpiar BD</td><td>./mvnw flyway:clean</td></tr>
+    <tr><td>Recrear BD completa</td><td>clean + migrate + spring-boot:run</td></tr>
+</table>
+</div>
+</section>
+
+</main>
+
+<footer>
+<p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+</footer>
+</body>
+</html>

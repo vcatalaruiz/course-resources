@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Introducción a Laravel</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+  <header>
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1>Introducción a Laravel</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+    <p>Laravel es el framework PHP más popular para el desarrollo de aplicaciones web modernas. Proporciona una arquitectura elegante y herramientas potentes que facilitan tareas comunes como enrutamiento, autenticación, bases de datos y más.</p>
+
+    <!-- SECCIÓN 1: INTRODUCCIÓN BÁSICA -->
+    <section id="introduccion-basica">
+      <h2>1. Introducción básica a Laravel</h2>
+
+      <h3>1.1. ¿Qué es Laravel?</h3>
+      <p>Laravel es un framework PHP open-source creado por Taylor Otwell en 2011. Sigue el patrón arquitectónico <strong>MVC (Model-View-Controller)</strong> y está diseñado para hacer el desarrollo web más rápido y elegante.</p>
+
+      <h3>1.2. Características principales</h3>
+      <ul>
+        <li><strong>Eloquent ORM:</strong> sistema de mapeo objeto-relacional para bases de datos</li>
+        <li><strong>Blade:</strong> motor de plantillas potente y sencillo</li>
+        <li><strong>Artisan:</strong> interfaz de línea de comandos para generar código</li>
+        <li><strong>Middleware:</strong> filtros HTTP para proteger rutas</li>
+        <li><strong>Routing:</strong> sistema de enrutamiento expresivo</li>
+        <li><strong>Migraciones:</strong> control de versiones para bases de datos</li>
+        <li><strong>Authentication:</strong> sistema de autenticación incluido</li>
+      </ul>
+
+      <h3>1.3. Estructura del proyecto Laravel</h3>
+      <pre><code class="language-plaintext">
+mi-proyecto/
+├── app/                    # Lógica de la aplicación
+│   ├── Http/
+│   │   ├── Controllers/    # Controladores
+│   │   ├── Middleware/     # Middleware personalizados
+│   │   └── Kernel.php      # Kernel HTTP
+│   ├── Models/             # Modelos Eloquent
+│   └── Providers/          # Service providers
+├── bootstrap/              # Archivos de arranque
+├── config/                 # Archivos de configuración
+├── database/               # Migraciones y seeders
+├── public/                 # Punto de entrada (index.php)
+├── resources/              # Vistas, assets sin compilar
+│   └── views/              # Plantillas Blade
+├── routes/                 # Archivos de rutas
+│   ├── web.php             # Rutas web
+│   └── api.php             # Rutas API
+├── storage/                # Archivos generados
+└── vendor/                 # Dependencias Composer
+</code></pre>
+
+      <h3>1.4. Instalación</h3>
+      <pre><code class="language-bash">
+# Opción 1: Con Composer
+composer create-project laravel/laravel mi-proyecto
+
+# Opción 2: Con Laravel Installer
+composer global require laravel/installer
+laravel new mi-proyecto
+
+# Iniciar servidor de desarrollo
+cd mi-proyecto
+php artisan serve
+# Visitar: http://localhost:8000
+</code></pre>
+
+      <h3>1.5. Patrón MVC en Laravel</h3>
+      <div class="mermaid">
+graph LR
+    A[Usuario/Cliente] -->|HTTP Request| B[Routes<br/>web.php]
+    B -->|Llama| C[Controller]
+    C -->|Lee/Escribe| D[Model]
+    D -->|Eloquent ORM| E[(Database)]
+    C -->|Retorna| F[View<br/>Blade]
+    F -->|HTTP Response| A
+    
+    style B fill:#e1f5ff
+    style C fill:#fff4e1
+    style D fill:#ffe1e1
+    style F fill:#e1ffe1
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: RUTAS (web.php) -->
+    <section id="web-php">
+      <h2>2. Rutas en web.php</h2>
+
+      <h3>2.1. Archivo routes/web.php</h3>
+      <p>El archivo <code>routes/web.php</code> define todas las rutas HTTP de la aplicación. Laravel proporciona métodos para cada verbo HTTP.</p>
+
+      <pre><code class="language-php">
+&lt;?php
+// routes/web.php
+
+use Illuminate\Support\Facades\Route;
+
+// Ruta básica
+Route::get('/', function () {
+    return view('welcome');
+});
+
+// Ruta con texto
+Route::get('/hola', function () {
+    return 'Hola Mundo';
+});
+
+// Ruta con parámetros
+Route::get('/usuario/{id}', function ($id) {
+    return "Usuario ID: " . $id;
+});
+
+// Parámetro opcional
+Route::get('/saludo/{nombre?}', function ($nombre = 'Invitado') {
+    return "Hola, " . $nombre;
+});
+
+// Parámetros con restricciones
+Route::get('/producto/{id}', function ($id) {
+    return "Producto: " . $id;
+})->where('id', '[0-9]+');  // Solo números
+
+Route::get('/perfil/{username}', function ($username) {
+    return "Perfil de: " . $username;
+})->where('username', '[A-Za-z]+');  // Solo letras
+?&gt;
+</code></pre>
+
+      <h3>2.2. Verbos HTTP</h3>
+      <pre><code class="language-php">
+&lt;?php
+// GET - Obtener datos
+Route::get('/articulos', function () {
+    return "Lista de artículos";
+});
+
+// POST - Enviar datos
+Route::post('/articulos', function () {
+    return "Crear nuevo artículo";
+});
+
+// PUT/PATCH - Actualizar
+Route::put('/articulos/{id}', function ($id) {
+    return "Actualizar artículo " . $id;
+});
+
+// DELETE - Eliminar
+Route::delete('/articulos/{id}', function ($id) {
+    return "Eliminar artículo " . $id;
+});
+
+// Múltiples verbos
+Route::match(['get', 'post'], '/formulario', function () {
+    return "GET o POST";
+});
+
+// Todos los verbos
+Route::any('/cualquiera', function () {
+    return "Cualquier método HTTP";
+});
+?&gt;
+</code></pre>
+
+      <h3>2.3. Rutas nombradas</h3>
+      <pre><code class="language-php">
+&lt;?php
+// Asignar nombre a una ruta
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
+Route::get('/perfil/{id}', function ($id) {
+    //...
+})->name('perfil.ver');
+
+// Usar rutas nombradas
+// En controlador:
+return redirect()->route('dashboard');
+
+// En vista Blade:
+// &lt;a href="{{ route('dashboard') }}"&gt;Dashboard&lt;/a&gt;
+// &lt;a href="{{ route('perfil.ver', ['id' => 5]) }}"&gt;Ver perfil&lt;/a&gt;
+?&gt;
+</code></pre>
+
+      <h3>2.4. Grupos de rutas</h3>
+      <pre><code class="language-php">
+&lt;?php
+// Prefijo común
+Route::prefix('admin')->group(function () {
+    Route::get('/usuarios', function () {
+        // URL: /admin/usuarios
+    });
+    Route::get('/productos', function () {
+        // URL: /admin/productos
+    });
+});
+
+// Middleware común
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        // Requiere autenticación
+    });
+    Route::get('/perfil', function () {
+        // Requiere autenticación
+    });
+});
+
+// Prefijo + middleware + nombre
+Route::prefix('admin')
+    ->middleware('auth')
+    ->name('admin.')
+    ->group(function () {
+        Route::get('/usuarios', function () {
+            // URL: /admin/usuarios
+            // Nombre: admin.usuarios
+        })->name('usuarios');
+    });
+?&gt;
+</code></pre>
+
+      <h3>2.5. Rutas a controladores</h3>
+      <pre><code class="language-php">
+&lt;?php
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\UserController;
+
+// Método específico
+Route::get('/productos', [ProductoController::class, 'index']);
+
+// CRUD completo con resource
+Route::resource('productos', ProductoController::class);
+// Genera automáticamente:
+// GET    /productos           -> index()
+// GET    /productos/create    -> create()
+// POST   /productos           -> store()
+// GET    /productos/{id}      -> show($id)
+// GET    /productos/{id}/edit -> edit($id)
+// PUT    /productos/{id}      -> update($id)
+// DELETE /productos/{id}      -> destroy($id)
+
+// Resource con solo algunas rutas
+Route::resource('users', UserController::class)
+    ->only(['index', 'show']);
+
+Route::resource('posts', PostController::class)
+    ->except(['destroy']);
+?&gt;
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 3: CONTROLADORES -->
+    <section id="controllers">
+      <h2>3. Controladores (Controllers)</h2>
+
+      <h3>3.1. Crear un controlador</h3>
+      <pre><code class="language-bash">
+# Crear controlador básico
+php artisan make:controller ProductoController
+
+# Crear controlador con métodos resource
+php artisan make:controller ProductoController --resource
+
+# Crear controlador con modelo
+php artisan make:controller ProductoController --model=Producto
+</code></pre>
+
+      <h3>3.2. Estructura de un controlador</h3>
+      <pre><code class="language-php">
+&lt;?php
+// app/Http/Controllers/ProductoController.php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class ProductoController extends Controller
+{
+    // Listar todos los productos
+    public function index()
+    {
+        $productos = [
+            ['id' => 1, 'nombre' => 'Laptop', 'precio' => 999],
+            ['id' => 2, 'nombre' => 'Mouse', 'precio' => 25],
+        ];
+        
+        return view('productos.index', ['productos' => $productos]);
+    }
+    
+    // Mostrar formulario de creación
+    public function create()
+    {
+        return view('productos.create');
+    }
+    
+    // Guardar nuevo producto
+    public function store(Request $request)
+    {
+        // Validar datos
+        $validado = $request->validate([
+            'nombre' => 'required|max:255',
+            'precio' => 'required|numeric|min:0',
+        ]);
+        
+        // Guardar en base de datos (ejemplo)
+        // Producto::create($validado);
+        
+        return redirect()->route('productos.index')
+                         ->with('success', 'Producto creado');
+    }
+    
+    // Mostrar un producto específico
+    public function show($id)
+    {
+        // Producto::findOrFail($id);
+        return view('productos.show', ['id' => $id]);
+    }
+    
+    // Mostrar formulario de edición
+    public function edit($id)
+    {
+        // $producto = Producto::findOrFail($id);
+        return view('productos.edit', ['id' => $id]);
+    }
+    
+    // Actualizar producto
+    public function update(Request $request, $id)
+    {
+        $validado = $request->validate([
+            'nombre' => 'required|max:255',
+            'precio' => 'required|numeric|min:0',
+        ]);
+        
+        // $producto = Producto::findOrFail($id);
+        // $producto->update($validado);
+        
+        return redirect()->route('productos.show', $id)
+                         ->with('success', 'Producto actualizado');
+    }
+    
+    // Eliminar producto
+    public function destroy($id)
+    {
+        // $producto = Producto::findOrFail($id);
+        // $producto->delete();
+        
+        return redirect()->route('productos.index')
+                         ->with('success', 'Producto eliminado');
+    }
+}
+?&gt;
+</code></pre>
+
+      <h3>3.3. Controlador simple</h3>
+      <pre><code class="language-php">
+&lt;?php
+// app/Http/Controllers/HomeController.php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class HomeController extends Controller
+{
+    public function inicio()
+    {
+        $titulo = "Bienvenido a mi sitio";
+        $descripcion = "Este es un ejemplo de Laravel";
+        
+        return view('home', [
+            'titulo' => $titulo,
+            'descripcion' => $descripcion
+        ]);
+    }
+    
+    public function contacto()
+    {
+        return view('contacto');
+    }
+    
+    public function enviarContacto(Request $request)
+    {
+        $nombre = $request->input('nombre');
+        $email = $request->input('email');
+        $mensaje = $request->input('mensaje');
+        
+        // Procesar formulario...
+        
+        return back()->with('mensaje', 'Formulario enviado');
+    }
+}
+
+// routes/web.php
+Route::get('/', [HomeController::class, 'inicio'])->name('home');
+Route::get('/contacto', [HomeController::class, 'contacto'])->name('contacto');
+Route::post('/contacto', [HomeController::class, 'enviarContacto']);
+?&gt;
+</code></pre>
+
+      <h3>3.4. Tipos de respuestas</h3>
+      <pre><code class="language-php">
+&lt;?php
+namespace App\Http\Controllers;
+
+class RespuestaController extends Controller
+{
+    // Retornar vista
+    public function vista()
+    {
+        return view('ejemplo', ['dato' => 'valor']);
+    }
+    
+    // Retornar JSON (para APIs)
+    public function json()
+    {
+        return response()->json([
+            'success' => true,
+            'data' => ['nombre' => 'Juan', 'edad' => 25]
+        ]);
+    }
+    
+    // Retornar texto
+    public function texto()
+    {
+        return response('Hola mundo', 200)
+            ->header('Content-Type', 'text/plain');
+    }
+    
+    // Redirigir
+    public function redirigir()
+    {
+        // A ruta
+        return redirect('/dashboard');
+        
+        // A ruta nombrada
+        return redirect()->route('home');
+        
+        // Atrás
+        return back();
+        
+        // Con datos flash
+        return redirect()->route('home')->with('mensaje', 'Guardado');
+    }
+    
+    // Descargar archivo
+    public function descargar()
+    {
+        $ruta = storage_path('app/documento.pdf');
+        return response()->download($ruta);
+    }
+}
+?&gt;
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 4: BLADE (Motor de plantillas) -->
+    <section id="blade">
+      <h2>4. Blade (Motor de plantillas)</h2>
+
+      <h3>4.1. Sintaxis básica</h3>
+      <pre><code class="language-html">
+{{-- resources/views/ejemplo.blade.php --}}
+
+{{-- Imprimir variables (escapa HTML automáticamente) --}}
+&lt;h1&gt;{{ $titulo }}&lt;/h1&gt;
+&lt;p&gt;{{ $descripcion }}&lt;/p&gt;
+
+{{-- Imprimir sin escapar (PELIGROSO con datos de usuario) --}}
+&lt;div&gt;{!! $htmlContenido !!}&lt;/div&gt;
+
+{{-- Comentarios Blade (no aparecen en HTML) --}}
+{{-- Este es un comentario --}}
+
+{{-- Mostrar valor por defecto si variable no existe --}}
+&lt;p&gt;{{ $variable ?? 'Valor por defecto' }}&lt;/p&gt;
+</code></pre>
+
+      <h3>4.2. Estructuras de control</h3>
+      <pre><code class="language-html">
+{{-- IF / ELSEIF / ELSE --}}
+@if($edad >= 18)
+    &lt;p&gt;Eres mayor de edad&lt;/p&gt;
+@elseif($edad >= 13)
+    &lt;p&gt;Eres adolescente&lt;/p&gt;
+@else
+    &lt;p&gt;Eres menor de edad&lt;/p&gt;
+@endif
+
+{{-- UNLESS (a menos que) --}}
+@unless($usuario->esAdmin())
+    &lt;p&gt;No tienes acceso&lt;/p&gt;
+@endunless
+
+{{-- ISSET / EMPTY --}}
+@isset($nombre)
+    &lt;p&gt;El nombre es: {{ $nombre }}&lt;/p&gt;
+@endisset
+
+@empty($productos)
+    &lt;p&gt;No hay productos&lt;/p&gt;
+@endempty
+
+{{-- AUTH (usuario autenticado) --}}
+@auth
+    &lt;p&gt;Bienvenido, {{ auth()->user()->name }}&lt;/p&gt;
+@endauth
+
+@guest
+    &lt;a href="/login"&gt;Iniciar sesión&lt;/a&gt;
+@endguest
+</code></pre>
+
+      <h3>4.3. Bucles</h3>
+      <pre><code class="language-html">
+{{-- FOR --}}
+@for($i = 0; $i < 10; $i++)
+    &lt;p&gt;Número: {{ $i }}&lt;/p&gt;
+@endfor
+
+{{-- FOREACH --}}
+@foreach($productos as $producto)
+    &lt;div&gt;
+        &lt;h3&gt;{{ $producto->nombre }}&lt;/h3&gt;
+        &lt;p&gt;${{ $producto->precio }}&lt;/p&gt;
+    &lt;/div&gt;
+@endforeach
+
+{{-- FORELSE (con caso de array vacío) --}}
+@forelse($usuarios as $usuario)
+    &lt;li&gt;{{ $usuario->nombre }}&lt;/li&gt;
+@empty
+    &lt;p&gt;No hay usuarios registrados&lt;/p&gt;
+@endforelse
+
+{{-- WHILE --}}
+@while($contador > 0)
+    &lt;p&gt;{{ $contador-- }}&lt;/p&gt;
+@endwhile
+
+{{-- Variable $loop en bucles --}}
+@foreach($items as $item)
+    @if($loop->first)
+        &lt;p&gt;Primer elemento&lt;/p&gt;
+    @endif
+    
+    &lt;p&gt;{{ $loop->iteration }}. {{ $item }}&lt;/p&gt;
+    
+    @if($loop->last)
+        &lt;p&gt;Último elemento&lt;/p&gt;
+    @endif
+@endforeach
+</code></pre>
+
+      <h3>4.4. Layouts y herencia</h3>
+      <pre><code class="language-html">
+{{-- resources/views/layouts/app.blade.php --}}
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;@yield('titulo', 'Mi Sitio')&lt;/title&gt;
+    &lt;link rel="stylesheet" href="/css/app.css"&gt;
+    @stack('styles')
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;Mi Aplicación Laravel&lt;/h1&gt;
+        &lt;nav&gt;
+            &lt;a href="/"&gt;Inicio&lt;/a&gt;
+            &lt;a href="/productos"&gt;Productos&lt;/a&gt;
+        &lt;/nav&gt;
+    &lt;/header&gt;
+    
+    &lt;main&gt;
+        @yield('contenido')
+    &lt;/main&gt;
+    
+    &lt;footer&gt;
+        &lt;p&gt;&amp;copy; 2024 Mi Sitio&lt;/p&gt;
+    &lt;/footer&gt;
+    
+    &lt;script src="/js/app.js"&gt;&lt;/script&gt;
+    @stack('scripts')
+&lt;/body&gt;
+&lt;/html&gt;
+
+{{-- resources/views/productos/index.blade.php --}}
+@extends('layouts.app')
+
+@section('titulo', 'Lista de Productos')
+
+@push('styles')
+    &lt;link rel="stylesheet" href="/css/productos.css"&gt;
+@endpush
+
+@section('contenido')
+    &lt;h2&gt;Productos&lt;/h2&gt;
+    
+    &lt;ul&gt;
+        @foreach($productos as $producto)
+            &lt;li&gt;{{ $producto->nombre }} - ${{ $producto->precio }}&lt;/li&gt;
+        @endforeach
+    &lt;/ul&gt;
+@endsection
+
+@push('scripts')
+    &lt;script src="/js/productos.js"&gt;&lt;/script&gt;
+@endpush
+</code></pre>
+
+      <h3>4.5. Componentes</h3>
+      <pre><code class="language-html">
+{{-- resources/views/components/alerta.blade.php --}}
+&lt;div class="alert alert-{{ $tipo }}"&gt;
+    &lt;strong&gt;{{ $titulo }}&lt;/strong&gt;
+    {{ $slot }}
+&lt;/div&gt;
+
+{{-- Usar el componente --}}
+&lt;x-alerta tipo="success" titulo="Éxito"&gt;
+    El producto fue guardado correctamente.
+&lt;/x-alerta&gt;
+
+&lt;x-alerta tipo="danger" titulo="Error"&gt;
+    No se pudo completar la operación.
+&lt;/x-alerta&gt;
+</code></pre>
+
+      <h3>4.6. Incluir otras vistas</h3>
+      <pre><code class="language-html">
+{{-- Incluir parcial --}}
+@include('partials.header')
+
+{{-- Incluir con datos --}}
+@include('partials.producto', ['producto' => $producto])
+
+{{-- Incluir si existe --}}
+@includeIf('partials.sidebar')
+
+{{-- Incluir cuando condición --}}
+@includeWhen($usuario->esAdmin(), 'partials.admin-menu')
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 5: MIDDLEWARE -->
+    <section id="middleware">
+      <h2>5. Middleware</h2>
+
+      <h3>5.1. ¿Qué es un middleware?</h3>
+      <p>Un middleware es un filtro HTTP que se ejecuta <strong>antes o después</strong> de que una petición llegue al controlador. Se usa para autenticación, logging, CORS, etc.</p>
+
+      <div class="mermaid">
+graph LR
+    A[Request] --> B[Middleware 1]
+    B --> C[Middleware 2]
+    C --> D[Middleware 3]
+    D --> E[Controller]
+    E --> F[Response]
+    F --> G[Middleware 3]
+    G --> H[Middleware 2]
+    H --> I[Middleware 1]
+    I --> J[Client]
+    
+    style B fill:#e1f5ff
+    style C fill:#e1f5ff
+    style D fill:#e1f5ff
+    style E fill:#ffe1e1
+      </div>
+
+      <h3>5.2. Crear un middleware</h3>
+      <pre><code class="language-bash">
+# Crear middleware
+php artisan make:middleware VerificarEdad
+</code></pre>
+
+      <pre><code class="language-php">
+&lt;?php
+// app/Http/Middleware/VerificarEdad.php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+
+class VerificarEdad
+{
+    /**
+     * Handle an incoming request.
+     */
+    public function handle(Request $request, Closure $next, $edadMinima = 18)
+    {
+        // Lógica ANTES del controlador
+        if ($request->input('edad') < $edadMinima) {
+            return redirect('home')->with('error', 'Debes ser mayor de edad');
+        }
+        
+        // Continuar con la petición
+        $response = $next($request);
+        
+        // Lógica DESPUÉS del controlador
+        // (por ejemplo, añadir headers a la respuesta)
+        
+        return $response;
+    }
+}
+?&gt;
+</code></pre>
+
+      <h3>5.3. Registrar middleware</h3>
+      <pre><code class="language-php">
+&lt;?php
+// app/Http/Kernel.php
+
+protected $middlewareAliases = [
+    // Middleware de Laravel
+    'auth' => \App\Http\Middleware\Authenticate::class,
+    'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+    
+    // Tus middleware personalizados
+    'verificar.edad' => \App\Http\Middleware\VerificarEdad::class,
+];
+?&gt;
+</code></pre>
+
+      <h3>5.4. Usar middleware en rutas</h3>
+      <pre><code class="language-php">
+&lt;?php
+// routes/web.php
+
+// Middleware en una ruta
+Route::get('/dashboard', function () {
+    // Solo usuarios autenticados
+})->middleware('auth');
+
+// Múltiples middleware
+Route::get('/admin', function () {
+    //...
+})->middleware(['auth', 'verificar.edad']);
+
+// Middleware con parámetros
+Route::get('/contenido-adulto', function () {
+    //...
+})->middleware('verificar.edad:21');
+
+// Grupo con middleware
+Route::middleware(['auth'])->group(function () {
+    Route::get('/perfil', function () {
+        //...
+    });
+    Route::get('/configuracion', function () {
+        //...
+    });
+});
+
+// Middleware en controlador
+Route::get('/productos', [ProductoController::class, 'index'])
+    ->middleware('auth');
+?&gt;
+</code></pre>
+
+      <h3>5.5. Middleware global</h3>
+      <pre><code class="language-php">
+&lt;?php
+// app/Http/Kernel.php
+
+// Middleware que se ejecuta en TODAS las peticiones
+protected $middleware = [
+    \App\Http\Middleware\TrustProxies::class,
+    \Illuminate\Http\Middleware\HandleCors::class,
+    \App\Http\Middleware\PreventRequestsDuringMaintenance::class,
+    \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
+    \App\Http\Middleware\TrimStrings::class,
+];
+
+// Middleware para rutas web
+protected $middlewareGroups = [
+    'web' => [
+        \App\Http\Middleware\EncryptCookies::class,
+        \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+        \Illuminate\Session\Middleware\StartSession::class,
+        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+        \App\Http\Middleware\VerifyCsrfToken::class,
+    ],
+    
+    'api' => [
+        \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+        'throttle:api',
+    ],
+];
+?&gt;
+</code></pre>
+
+      <h3>5.6. Middleware en controladores</h3>
+      <pre><code class="language-php">
+&lt;?php
+namespace App\Http\Controllers;
+
+class ProductoController extends Controller
+{
+    public function __construct()
+    {
+        // Aplicar a todos los métodos
+        $this->middleware('auth');
+        
+        // Solo a métodos específicos
+        $this->middleware('verificar.edad')->only(['create', 'store']);
+        
+        // Excepto métodos específicos
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+    
+    public function index()
+    {
+        // Sin middleware auth (está en except)
+    }
+    
+    public function create()
+    {
+        // Con middleware auth Y verificar.edad
+    }
+}
+?&gt;
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 6: KERNEL -->
+    <section id="kernel">
+      <h2>6. Kernel HTTP</h2>
+
+      <h3>6.1. ¿Qué es el Kernel?</h3>
+      <p>El Kernel HTTP (<code>app/Http/Kernel.php</code>) es el corazón de la aplicación Laravel. Define qué middleware se ejecuta en cada petición y en qué orden.</p>
+
+      <h3>6.2. Estructura del Kernel</h3>
+      <pre><code class="language-php">
+&lt;?php
+// app/Http/Kernel.php
+
+namespace App\Http;
+
+use Illuminate\Foundation\Http\Kernel as HttpKernel;
+
+class Kernel extends HttpKernel
+{
+    /**
+     * Middleware global: se ejecuta en TODAS las peticiones
+     */
+    protected $middleware = [
+        // Confianza en proxies
+        \App\Http\Middleware\TrustProxies::class,
+        
+        // CORS
+        \Illuminate\Http\Middleware\HandleCors::class,
+        
+        // Modo mantenimiento
+        \App\Http\Middleware\PreventRequestsDuringMaintenance::class,
+        
+        // Validar tamaño POST
+        \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
+        
+        // Limpiar espacios en strings
+        \App\Http\Middleware\TrimStrings::class,
+        
+        // Convertir strings vacíos a null
+        \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+    ];
+
+    /**
+     * Grupos de middleware
+     */
+    protected $middlewareGroups = [
+        'web' => [
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            \App\Http\Middleware\VerifyCsrfToken::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        ],
+
+        'api' => [
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            'throttle:api',
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        ],
+    ];
+
+    /**
+     * Middleware individuales (con alias)
+     */
+    protected $middlewareAliases = [
+        'auth' => \App\Http\Middleware\Authenticate::class,
+        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
+        'can' => \Illuminate\Auth\Middleware\Authorize::class,
+        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
+        'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
+        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+    ];
+}
+?&gt;
+</code></pre>
+
+      <h3>6.3. Tipos de middleware en Kernel</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Propiedad</th>
+            <th>Cuándo se ejecuta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Global</strong></td>
+            <td>$middleware</td>
+            <td>En TODAS las peticiones HTTP</td>
+          </tr>
+          <tr>
+            <td><strong>Grupos</strong></td>
+            <td>$middlewareGroups</td>
+            <td>En rutas de grupos 'web' o 'api'</td>
+          </tr>
+          <tr>
+            <td><strong>Individuales</strong></td>
+            <td>$middlewareAliases</td>
+            <td>Cuando se asignan explícitamente</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>6.4. Orden de ejecución</h3>
+      <pre><code class="language-plaintext">
+1. $middleware (global)
+   ↓
+2. $middlewareGroups['web'] o ['api']
+   ↓
+3. Middleware específicos de la ruta
+   ↓
+4. CONTROLADOR
+   ↓
+5. Respuesta atraviesa middleware en orden inverso
+</code></pre>
+
+      <h3>6.5. Añadir middleware personalizado</h3>
+      <pre><code class="language-php">
+&lt;?php
+// 1. Crear middleware
+// php artisan make:middleware LogRequests
+
+// 2. Implementar lógica
+namespace App\Http\Middleware;
+
+class LogRequests
+{
+    public function handle($request, Closure $next)
+    {
+        // Registrar petición
+        \Log::info('Petición: ' . $request->path());
+        
+        return $next($request);
+    }
+}
+
+// 3. Registrar en Kernel.php
+
+// Opción A: Global (todas las peticiones)
+protected $middleware = [
+    //...
+    \App\Http\Middleware\LogRequests::class,
+];
+
+// Opción B: En grupo 'web'
+protected $middlewareGroups = [
+    'web' => [
+        //...
+        \App\Http\Middleware\LogRequests::class,
+    ],
+];
+
+// Opción C: Con alias (uso selectivo)
+protected $middlewareAliases = [
+    //...
+    'log.requests' => \App\Http\Middleware\LogRequests::class,
+];
+
+// 4. Usar en ruta
+Route::get('/admin', function () {
+    //...
+})->middleware('log.requests');
+?&gt;
+</code></pre>
+
+      <h3>6.6. Prioridad de middleware</h3>
+      <pre><code class="language-php">
+&lt;?php
+// Definir prioridad (los primeros se ejecutan antes)
+protected $middlewarePriority = [
+    \Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests::class,
+    \Illuminate\Cookie\Middleware\EncryptCookies::class,
+    \Illuminate\Session\Middleware\StartSession::class,
+    \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+    \Illuminate\Contracts\Auth\Middleware\AuthenticatesRequests::class,
+    \Illuminate\Routing\Middleware\ThrottleRequests::class,
+    \Illuminate\Session\Middleware\AuthenticateSession::class,
+    \Illuminate\Routing\Middleware\SubstituteBindings::class,
+    \Illuminate\Auth\Middleware\Authorize::class,
+];
+?&gt;
+</code></pre>
+    </section>
+
+    <!-- RESUMEN -->
+    <section id="resumen">
+      <div class="info-box">
+        <h3>Resumen de Laravel</h3>
+        <ul>
+          <li><strong>Laravel:</strong> framework PHP MVC para desarrollo web moderno</li>
+          <li><strong>routes/web.php:</strong> define rutas HTTP (GET, POST, PUT, DELETE)</li>
+          <li><strong>Controladores:</strong> manejan lógica de negocio y retornan respuestas</li>
+          <li><strong>Blade:</strong> motor de plantillas con sintaxis {{ $variable }}, @if, @foreach</li>
+          <li><strong>@extends y @section:</strong> sistema de layouts y herencia de plantillas</li>
+          <li><strong>Middleware:</strong> filtros HTTP para autenticación, validación, logging</li>
+          <li><strong>Kernel.php:</strong> configura middleware global, grupos y aliases</li>
+          <li><strong>php artisan:</strong> CLI para generar controllers, middleware, modelos</li>
+          <li><strong>Route::resource:</strong> genera CRUD completo automáticamente</li>
+          <li><strong>Patrón MVC:</strong> Routes → Controller → Model → View</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+
+</html>

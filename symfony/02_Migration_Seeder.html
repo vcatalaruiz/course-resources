@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Symfony Migrations y Fixtures</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <!-- X SVG -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+  <!-- ===== /VC SIDEBAR ===== -->
+
+  <header>
+
+    <!-- ===== VC SIDEBAR (desde cero) ===== -->
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail"
+      aria-expanded="false">
+      <!--Hamburger icon -->
+      <i class="fa fa-bars" aria-hidden="true"></i>
+
+
+    </button>
+    <h1>Symfony Migrations y Fixtures</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+<main>
+
+<!-- SECCIÓN 1 -->
+<section id="introduccion">
+<h2>1. Introducción</h2>
+
+<p>
+Symfony ofrece herramientas para gestionar la base de datos de forma estructurada:
+<strong>Doctrine Migrations</strong> para el esquema, <strong>Fixtures</strong> para los datos y
+<strong>Faker</strong> para generar información de prueba.
+</p>
+</section>
+
+<!-- SECCIÓN 2 -->
+<section id="migrations">
+<h2>2. Migrations (Doctrine Migrations)</h2>
+
+<h3>2.1. Crear una migración</h3>
+
+<pre><code class="language-bash">
+# Instalar bundle de migraciones
+composer require doctrine/doctrine-migrations-bundle
+
+# Generar migración a partir de las entidades
+php bin/console make:migration
+</code></pre>
+
+<h3>2.2. Definir la estructura</h3>
+
+<pre><code class="language-php">
+&lt;?php
+// migrations/Version20260208xxxxxx.php
+
+declare(strict_types=1);
+
+namespace DoctrineMigrations;
+
+use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
+
+final class Version20260208000000 extends AbstractMigration
+{
+  public function getDescription(): string
+  {
+    return 'Crear tabla hoteles';
+  }
+
+  public function up(Schema $schema): void
+  {
+    $this->addSql('CREATE TABLE hoteles (id INT AUTO_INCREMENT NOT NULL, nombre VARCHAR(255) NOT NULL, direccion VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
+  }
+
+  public function down(Schema $schema): void
+  {
+    $this->addSql('DROP TABLE hoteles');
+  }
+}
+</code></pre>
+
+<h3>2.3. Ejecutar migraciones</h3>
+
+<pre><code class="language-bash">
+php bin/console doctrine:migrations:migrate
+</code></pre>
+</section>
+
+<!-- SECCIÓN 3 -->
+<section id="fixtures">
+<h2>3. Fixtures</h2>
+
+<h3>3.1. Crear una fixture</h3>
+
+<pre><code class="language-bash">
+# Instalar bundle de fixtures
+composer require --dev doctrine/doctrine-fixtures-bundle
+
+# Crear clase de fixtures (con MakerBundle)
+php bin/console make:fixtures HotelFixtures
+</code></pre>
+
+<h3>3.2. Fixture básica</h3>
+
+<pre><code class="language-php">
+&lt;?php
+// src/DataFixtures/HotelFixtures.php
+
+namespace App\DataFixtures;
+
+use App\Entity\Hotel;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Persistence\ObjectManager;
+
+class HotelFixtures extends Fixture
+{
+  public function load(ObjectManager $manager): void
+  {
+    $hotel = new Hotel();
+    $hotel->setNombre('Gran Hotel');
+    $hotel->setDireccion('Calle Mayor 3');
+
+    $manager->persist($hotel);
+    $manager->flush();
+  }
+}
+</code></pre>
+
+<h3>3.3. Ejecutar fixtures</h3>
+
+<pre><code class="language-bash">
+php bin/console doctrine:fixtures:load
+</code></pre>
+</section>
+
+<!-- SECCIÓN 4 -->
+<section id="faker">
+<h2>4. Uso de Faker</h2>
+
+<p>
+<strong>Faker</strong> permite generar datos realistas directamente dentro de una fixture.
+</p>
+
+<h3>4.1. Usar Faker en una Fixture</h3>
+
+<pre><code class="language-php">
+&lt;?php
+// src/DataFixtures/HotelFixtures.php
+
+namespace App\DataFixtures;
+
+use App\Entity\Hotel;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Persistence\ObjectManager;
+use Faker\Factory;
+
+class HotelFixtures extends Fixture
+{
+  public function load(ObjectManager $manager): void
+  {
+    $faker = Factory::create('es_ES');
+
+    for ($i = 0; $i < 10; $i++) {
+      $hotel = new Hotel();
+      $hotel->setNombre($faker->company());
+      $hotel->setDireccion($faker->address());
+
+      $manager->persist($hotel);
+    }
+
+    $manager->flush();
+  }
+}
+</code></pre>
+
+<h3>4.2. Ejecutar fixtures con Faker</h3>
+
+<pre><code class="language-bash">
+composer require --dev fakerphp/faker
+php bin/console doctrine:fixtures:load
+</code></pre>
+</section>
+
+<!-- SECCIÓN 5 -->
+<section id="relaciones">
+<h2>5. Relaciones entre tablas</h2>
+
+<h3>5.1. Definir relación 1:N con entidades</h3>
+
+<pre><code class="language-php">
+&lt;?php
+// src/Entity/Habitacion.php
+
+namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity]
+class Habitacion
+{
+  #[ORM\Id]
+  #[ORM\GeneratedValue]
+  #[ORM\Column]
+  private ?int $id = null;
+
+  #[ORM\Column]
+  private int $numero;
+
+  #[ORM\ManyToOne(inversedBy: 'habitaciones')]
+  #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
+  private ?Hotel $hotel = null;
+}
+
+// src/Entity/Hotel.php
+#[ORM\Entity]
+class Hotel
+{
+  #[ORM\OneToMany(mappedBy: 'hotel', targetEntity: Habitacion::class, orphanRemoval: true)]
+  private Collection $habitaciones;
+}
+</code></pre>
+
+<h3>5.2. Generar migración</h3>
+
+<pre><code class="language-bash">
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate
+</code></pre>
+</section>
+
+<!-- SECCIÓN 6 -->
+<section id="todo">
+<h2>6. Reinicializar base de datos</h2>
+
+<pre><code class="language-bash">
+php bin/console doctrine:database:drop --force
+php bin/console doctrine:database:create
+php bin/console doctrine:migrations:migrate --no-interaction
+php bin/console doctrine:fixtures:load --no-interaction
+</code></pre>
+</section>
+
+<!-- DIAGRAMA -->
+<section>
+<h2>Diagrama conceptual</h2>
+
+<div class="mermaid">
+classDiagram
+class Hotel {
+    id
+    nombre
+    direccion
+}
+class Habitacion {
+    id
+    numero
+    hotel_id
+}
+Hotel "1" --> "*" Habitacion
+</div>
+</section>
+
+<!-- RESUMEN -->
+<section>
+<div class="info-box">
+<h3>Resumen rápido</h3>
+
+<table border="1" style="width:100%; border-collapse:collapse;">
+    <tr><th>Acción</th><th>Comando</th></tr>
+    <tr><td>Crear migración</td><td>make:migration</td></tr>
+    <tr><td>Ejecutar migraciones</td><td>doctrine:migrations:migrate</td></tr>
+    <tr><td>Crear fixture</td><td>make:fixtures</td></tr>
+    <tr><td>Usar Faker</td><td>Factory::create()</td></tr>
+    <tr><td>Recrear BD</td><td>database:drop/create + migrations + fixtures</td></tr>
+</table>
+</div>
+</section>
+
+</main>
+
+<footer>
+<p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+</footer>
+</body>
+</html>

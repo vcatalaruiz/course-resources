@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHP Introducción — Test</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+<body>
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+  <header>
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1>PHP Introducción — Test</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+
+    <section id="intro">
+      <h2>1. Instrucciones</h2>
+      <div class="quiz-intro">
+        <p>Responde las 25 preguntas tipo test sobre <strong>PHP básico</strong>, sintaxis, variables, tipos de datos y funciones. Al final podrás ver tu puntuación y la explicación de cada respuesta.</p>
+        <div class="quiz-meta">
+          <span class="badge">25 preguntas</span>
+          <span>Modo: selección única</span>
+          <span>Corrección inmediata al enviar</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="test">
+      <h2>2. Test de conocimientos</h2>
+
+      <div id="result" class="result-box"></div>
+
+      <form id="quiz-form" class="quiz-container" aria-describedby="result">
+        <!-- Preguntas generadas por JS -->
+      </form>
+
+      <div class="quiz-actions">
+        <button type="button" class="primary" id="check-btn">Corregir</button>
+        <button type="button" class="danger" id="reset-btn">Reiniciar</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const QUESTIONS = [
+      {
+        text: "¿Qué significa PHP?",
+        options: [
+          "Personal Home Page",
+          "PHP: Hypertext Preprocessor",
+          "Professional Hyper Processor",
+          "PHP: Hyper Processor"
+        ],
+        answer: 1,
+        explanation: "PHP significa PHP: Hypertext Preprocessor."
+      },
+      {
+        text: "¿Dónde se ejecuta el código PHP?",
+        options: [
+          "En el navegador del cliente",
+          "En el servidor",
+          "En ambos",
+          "En el router"
+        ],
+        answer: 1,
+        explanation: "PHP se ejecuta en el servidor."
+      },
+      {
+        text: "¿Cuál es la extensión de archivo correcta para PHP?",
+        options: [
+          ".php",
+          ".phps",
+          ".phtml",
+          "Todas las anteriores"
+        ],
+        answer: 0,
+        explanation: ".php es la extensión estándar."
+      },
+      {
+        text: "¿Cómo comienza un script PHP?",
+        options: [
+          "<?",
+          "<?php",
+          "<php>",
+          "<script>"
+        ],
+        answer: 1,
+        explanation: "Los scripts PHP comienzan con <?php"
+      },
+      {
+        text: "¿Cómo termina un script PHP?",
+        options: [
+          "?>",
+          "</php>",
+          "</end>",
+          "; ?>;"
+        ],
+        answer: 0,
+        explanation: "Los scripts PHP terminan con ?>"
+      },
+      {
+        text: "¿Qué símbolo precede a una variable en PHP?",
+        options: [
+          "&",
+          "#",
+          "$",
+          "%"
+        ],
+        answer: 2,
+        explanation: "Las variables comienzan con $"
+      },
+      {
+        text: "¿Qué función se usa para mostrar contenido?",
+        options: [
+          "show()",
+          "display()",
+          "echo",
+          "print()"
+        ],
+        answer: 2,
+        explanation: "echo es la función para mostrar contenido."
+      },
+      {
+        text: "¿Qué función devuelve la longitud de un string?",
+        options: [
+          "len()",
+          "length()",
+          "strlen()",
+          "size()"
+        ],
+        answer: 2,
+        explanation: "strlen() devuelve la longitud de un string."
+      },
+      {
+        text: "¿Cuál es el operador de concatenación en PHP?",
+        options: [
+          "+",
+          "&",
+          ".",
+          "||"
+        ],
+        answer: 2,
+        explanation: "El punto (.) concatena strings."
+      },
+      {
+        text: "¿Son sensibles a mayúsculas las variables en PHP?",
+        options: [
+          "No",
+          "Sí",
+          "Solo en Windows",
+          "Nunca"
+        ],
+        answer: 1,
+        explanation: "Las variables son case-sensitive."
+      },
+      {
+        text: "¿Qué tipo de dato es true?",
+        options: [
+          "Integer",
+          "String",
+          "Boolean",
+          "Array"
+        ],
+        answer: 2,
+        explanation: "true es un valor booleano."
+      },
+      {
+        text: "¿Qué función convierte texto a mayúsculas?",
+        options: [
+          "uppercase()",
+          "toUpper()",
+          "strtoupper()",
+          "upper()"
+        ],
+        answer: 2,
+        explanation: "strtoupper() convierte a mayúsculas."
+      },
+      {
+        text: "¿Qué función busca una subcadena?",
+        options: [
+          "find()",
+          "search()",
+          "strpos()",
+          "locate()"
+        ],
+        answer: 2,
+        explanation: "strpos() busca la posición de una subcadena."
+      },
+      {
+        text: "¿Qué función divide un string en array?",
+        options: [
+          "split()",
+          "divide()",
+          "explode()",
+          "separate()"
+        ],
+        answer: 2,
+        explanation: "explode() divide un string en array."
+      },
+      {
+        text: "¿Qué función une un array en string?",
+        options: [
+          "join()",
+          "merge()",
+          "implode()",
+          "concatenate()"
+        ],
+        answer: 2,
+        explanation: "implode() une un array en string."
+      },
+      {
+        text: "¿Cuál es la diferencia entre echo y print?",
+        options: [
+          "No hay diferencia",
+          "echo es más rápido y acepta múltiples parámetros",
+          "print es más rápido",
+          "print no devuelve valor"
+        ],
+        answer: 1,
+        explanation: "echo es más rápido y acepta múltiples parámetros."
+      },
+      {
+        text: "¿Qué función reemplaza texto en un string?",
+        options: [
+          "replace()",
+          "strreplace()",
+          "str_replace()",
+          "substitute()"
+        ],
+        answer: 2,
+        explanation: "str_replace() reemplaza texto."
+      },
+      {
+        text: "¿Qué función extrae parte de un string?",
+        options: [
+          "extract()",
+          "substring()",
+          "substr()",
+          "cut()"
+        ],
+        answer: 2,
+        explanation: "substr() extrae parte de un string."
+      },
+      {
+        text: "¿Qué función invierte un string?",
+        options: [
+          "reverse()",
+          "strrev()",
+          "backwards()",
+          "flip()"
+        ],
+        answer: 1,
+        explanation: "strrev() invierte un string."
+      },
+      {
+        text: "¿Cuál es el tipo de dato 3.14?",
+        options: [
+          "Integer",
+          "Float",
+          "Double",
+          "Decimal"
+        ],
+        answer: 1,
+        explanation: "3.14 es un float."
+      },
+      {
+        text: "¿Cuál es el tipo de dato null?",
+        options: [
+          "Un valor falso",
+          "Una cadena vacía",
+          "Un valor sin asignar",
+          "Un tipo especial que indica ausencia de valor"
+        ],
+        answer: 3,
+        explanation: "null es un tipo especial que indica ausencia de valor."
+      },
+      {
+        text: "¿Qué hace var_dump()?",
+        options: [
+          "Imprime el valor",
+          "Muestra el tipo y valor",
+          "Elimina la variable",
+          "Verifica el tipo"
+        ],
+        answer: 1,
+        explanation: "var_dump() muestra tipo, longitud y valor."
+      },
+      {
+        text: "¿Qué función crea dinámicamente una variable?",
+        options: [
+          "dynamic_var()",
+          "$${var}",
+          "$$var",
+          "new_var()"
+        ],
+        answer: 2,
+        explanation: "$$var crea variables dinámicas."
+      },
+      {
+        text: "Interpretación: $x = 'nombre'; $$x = 'Juan'; echo $nombre;",
+        options: [
+          "Imprime: nombre",
+          "Imprime: Juan",
+          "Imprime: $nombre",
+          "Error"
+        ],
+        answer: 1,
+        explanation: "$$x crea $nombre = 'Juan'."
+      },
+      {
+        text: "¿Qué resultado da strlen('Hola')?",
+        options: [
+          "3",
+          "4",
+          "5",
+          "0"
+        ],
+        answer: 1,
+        explanation: "strlen('Hola') devuelve 4."
+      }
+    ];
+
+    const quizForm = document.getElementById('quiz-form');
+    const resultBox = document.getElementById('result');
+    const checkBtn = document.getElementById('check-btn');
+    const resetBtn = document.getElementById('reset-btn');
+
+    function renderQuiz() {
+      quizForm.innerHTML = '';
+      QUESTIONS.forEach((q, index) => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.dataset.index = index;
+
+        const title = document.createElement('div');
+        title.className = 'question-title';
+        title.textContent = `${index + 1}. ${q.text}`;
+
+        const options = document.createElement('div');
+        options.className = 'options';
+
+        q.options.forEach((opt, optIndex) => {
+          const label = document.createElement('label');
+          label.className = 'option';
+
+          const input = document.createElement('input');
+          input.type = 'radio';
+          input.name = `q${index}`;
+          input.value = optIndex;
+          input.setAttribute('aria-label', opt);
+
+          const span = document.createElement('span');
+          span.textContent = opt;
+
+          label.appendChild(input);
+          label.appendChild(span);
+          options.appendChild(label);
+        });
+
+        const explanation = document.createElement('div');
+        explanation.className = 'explanation';
+        explanation.hidden = true;
+
+        card.appendChild(title);
+        card.appendChild(options);
+        card.appendChild(explanation);
+        quizForm.appendChild(card);
+      });
+    }
+
+    function checkAnswers() {
+      let correct = 0;
+
+      const cards = quizForm.querySelectorAll('.question-card');
+      cards.forEach((card) => {
+        const index = Number(card.dataset.index);
+        const question = QUESTIONS[index];
+        const selected = card.querySelector('input[type="radio"]:checked');
+        const options = card.querySelectorAll('.option');
+        const explanation = card.querySelector('.explanation');
+
+        options.forEach((opt) => opt.classList.remove('correct', 'incorrect'));
+
+        if (selected) {
+          const selectedIndex = Number(selected.value);
+          if (selectedIndex === question.answer) {
+            correct += 1;
+            options[selectedIndex].classList.add('correct');
+          } else {
+            options[selectedIndex].classList.add('incorrect');
+            options[question.answer].classList.add('correct');
+          }
+        } else {
+          options[question.answer].classList.add('correct');
+        }
+
+        explanation.textContent = `Explicación: ${question.explanation}`;
+        explanation.hidden = false;
+      });
+
+      const total = QUESTIONS.length;
+      const percent = Math.round((correct / total) * 100);
+
+      resultBox.style.display = 'block';
+      resultBox.innerHTML = `
+        <h3>Resultado</h3>
+        <p>Has acertado <strong>${correct}</strong> de <strong>${total}</strong> preguntas (${percent}%).</p>
+        <p>Revisa las explicaciones debajo de cada pregunta.</p>
+      `;
+
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetQuiz() {
+      renderQuiz();
+      resultBox.style.display = 'none';
+      resultBox.innerHTML = '';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    checkBtn.addEventListener('click', checkAnswers);
+    resetBtn.addEventListener('click', resetQuiz);
+
+    renderQuiz();
+  </script>
+</body>
+</html>

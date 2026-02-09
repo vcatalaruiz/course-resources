@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHP Programación Orientada a Objetos — Test</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+<body>
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+  <header>
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1>PHP Programación Orientada a Objetos — Test</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+
+    <section id="intro">
+      <h2>1. Instrucciones</h2>
+      <div class="quiz-intro">
+        <p>Responde las 25 preguntas tipo test sobre <strong>Programación Orientada a Objetos en PHP</strong>: clases, objetos, herencia, modificadores de acceso, métodos estáticos, interfaces y traits. Al final podrás ver tu puntuación y la explicación de cada respuesta.</p>
+        <div class="quiz-meta">
+          <span class="badge">25 preguntas</span>
+          <span>Modo: selección única</span>
+          <span>Corrección inmediata al enviar</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="test">
+      <h2>2. Test de conocimientos</h2>
+
+      <div id="result" class="result-box"></div>
+
+      <form id="quiz-form" class="quiz-container" aria-describedby="result">
+        <!-- Preguntas generadas por JS -->
+      </form>
+
+      <div class="quiz-actions">
+        <button type="button" class="primary" id="check-btn">Corregir</button>
+        <button type="button" class="danger" id="reset-btn">Reiniciar</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const QUESTIONS = [
+      {
+        text: "¿Qué palabra clave se usa para definir una clase en PHP?",
+        options: [
+          "function",
+          "class",
+          "object",
+          "define"
+        ],
+        answer: 1,
+        explanation: "Se usa la palabra clave 'class' para definir una clase."
+      },
+      {
+        text: "¿Cómo se crea un objeto de la clase Persona?",
+        options: [
+          "Persona();",
+          "create Persona();",
+          "new Persona();",
+          "instance Persona();"
+        ],
+        answer: 2,
+        explanation: "Se usa 'new' seguido del nombre de la clase: new Persona();"
+      },
+      {
+        text: "¿Qué referencia se usa dentro de una clase para acceder a sus propias propiedades?",
+        options: [
+          "$self",
+          "$this",
+          "$class",
+          "$me"
+        ],
+        answer: 1,
+        explanation: "$this se refiere al objeto actual dentro de la clase."
+      },
+      {
+        text: "¿Qué método se ejecuta automáticamente al crear un objeto?",
+        options: [
+          "__init()",
+          "__start()",
+          "__construct()",
+          "__create()"
+        ],
+        answer: 2,
+        explanation: "__construct() es el constructor que se ejecuta al instanciar."
+      },
+      {
+        text: "¿Qué método se ejecuta automáticamente al destruir un objeto?",
+        options: [
+          "__delete()",
+          "__end()",
+          "__destruct()",
+          "__remove()"
+        ],
+        answer: 2,
+        explanation: "__destruct() es el destructor que se ejecuta al destruir el objeto."
+      },
+      {
+        text: "¿Qué modificador hace que una propiedad sea accesible solo dentro de la clase?",
+        options: [
+          "public",
+          "protected",
+          "private",
+          "hidden"
+        ],
+        answer: 2,
+        explanation: "private hace que solo sea accesible dentro de la misma clase."
+      },
+      {
+        text: "¿Qué modificador permite acceso desde la clase y clases hijas?",
+        options: [
+          "public",
+          "protected",
+          "private",
+          "internal"
+        ],
+        answer: 1,
+        explanation: "protected permite acceso en la clase actual y en clases heredadas."
+      },
+      {
+        text: "¿Qué son los getters y setters?",
+        options: [
+          "Variables especiales",
+          "Métodos para acceder y modificar propiedades privadas",
+          "Tipos de clases",
+          "Constructores"
+        ],
+        answer: 1,
+        explanation: "Son métodos públicos para acceder (get) y modificar (set) propiedades privadas de forma controlada."
+      },
+      {
+        text: "¿Qué palabra clave se usa para heredar de una clase?",
+        options: [
+          "inherit",
+          "extends",
+          "implements",
+          "from"
+        ],
+        answer: 1,
+        explanation: "Se usa 'extends' para heredar: class Hijo extends Padre"
+      },
+      {
+        text: "¿Cómo se accede al constructor de la clase padre?",
+        options: [
+          "super::__construct()",
+          "parent::__construct()",
+          "$parent->__construct()",
+          "base::__construct()"
+        ],
+        answer: 1,
+        explanation: "parent::__construct() llama al constructor de la clase padre."
+      },
+      {
+        text: "¿Qué es sobrescribir un método (override)?",
+        options: [
+          "Eliminar un método",
+          "Crear un nuevo método",
+          "Redefinir un método heredado en la clase hija",
+          "Copiar un método"
+        ],
+        answer: 2,
+        explanation: "Override es redefinir un método heredado con una nueva implementación en la clase hija."
+      },
+      {
+        text: "¿Cómo se accede a una propiedad estática?",
+        options: [
+          "$objeto->propiedad",
+          "Clase::$propiedad",
+          "Clase->propiedad",
+          "static::propiedad"
+        ],
+        answer: 1,
+        explanation: "Se accede con :: : NombreClase::$propiedadEstatica"
+      },
+      {
+        text: "¿Qué palabra clave se usa dentro de una clase para acceder a propiedades estáticas?",
+        options: [
+          "$this",
+          "static",
+          "self",
+          "parent"
+        ],
+        answer: 2,
+        explanation: "self:: se usa para acceder a propiedades y métodos estáticos dentro de la clase."
+      },
+      {
+        text: "¿Se puede llamar a un método estático sin crear un objeto?",
+        options: [
+          "No, siempre se necesita un objeto",
+          "Sí, con Clase::metodo()",
+          "Solo en PHP 8",
+          "Solo si es public"
+        ],
+        answer: 1,
+        explanation: "Los métodos estáticos se pueden llamar directamente: Clase::metodoEstatico()"
+      },
+      {
+        text: "¿Qué palabra clave define una interfaz?",
+        options: [
+          "class",
+          "interface",
+          "abstract",
+          "trait"
+        ],
+        answer: 1,
+        explanation: "Se usa 'interface' para definir una interfaz."
+      },
+      {
+        text: "¿Qué palabra clave se usa para implementar una interfaz?",
+        options: [
+          "extends",
+          "uses",
+          "implements",
+          "include"
+        ],
+        answer: 2,
+        explanation: "Se usa 'implements': class MiClase implements MiInterfaz"
+      },
+      {
+        text: "¿Una clase puede implementar múltiples interfaces?",
+        options: [
+          "No, solo una",
+          "Sí, separadas por comas",
+          "Solo en PHP 8",
+          "Solo si son abstractas"
+        ],
+        answer: 1,
+        explanation: "Una clase puede implementar múltiples interfaces: class C implements A, B, C"
+      },
+      {
+        text: "¿Qué palabra clave define una clase abstracta?",
+        options: [
+          "interface",
+          "abstract",
+          "virtual",
+          "base"
+        ],
+        answer: 1,
+        explanation: "Se usa 'abstract' antes de class: abstract class MiClase"
+      },
+      {
+        text: "¿Se puede instanciar una clase abstracta directamente?",
+        options: [
+          "Sí, siempre",
+          "No, solo sus clases hijas",
+          "Solo en PHP 7",
+          "Sí, pero con new abstract"
+        ],
+        answer: 1,
+        explanation: "Las clases abstractas no se pueden instanciar, solo heredar."
+      },
+      {
+        text: "¿Qué son los traits?",
+        options: [
+          "Tipos de variables",
+          "Colecciones de métodos reutilizables",
+          "Interfaces especiales",
+          "Clases estáticas"
+        ],
+        answer: 1,
+        explanation: "Los traits son colecciones de métodos que se pueden reutilizar en múltiples clases."
+      },
+      {
+        text: "¿Cómo se usa un trait en una clase?",
+        options: [
+          "extends Trait",
+          "implements Trait",
+          "use Trait;",
+          "include Trait;"
+        ],
+        answer: 2,
+        explanation: "Se usa 'use' dentro de la clase: class C { use MiTrait; }"
+      },
+      {
+        text: "¿Una clase puede usar múltiples traits?",
+        options: [
+          "No, solo uno",
+          "Sí, separados por comas",
+          "Solo dos máximo",
+          "Solo si son abstractos"
+        ],
+        answer: 1,
+        explanation: "Se pueden usar múltiples traits: use Trait1, Trait2, Trait3;"
+      },
+      {
+        text: "¿Cuál es la diferencia principal entre interface y abstract class?",
+        options: [
+          "No hay diferencia",
+          "Interface no tiene código, abstract class puede tenerlo",
+          "Abstract class es más rápida",
+          "Interface solo funciona en PHP 8"
+        ],
+        answer: 1,
+        explanation: "Las interfaces solo declaran métodos sin implementación, las clases abstractas pueden tener código."
+      },
+      {
+        text: "¿Qué operador se usa para verificar si un objeto es de una clase?",
+        options: [
+          "is",
+          "typeof",
+          "instanceof",
+          "class"
+        ],
+        answer: 2,
+        explanation: "Se usa 'instanceof': if ($obj instanceof Clase)"
+      },
+      {
+        text: "Interpretación: class Gato extends Animal { }",
+        options: [
+          "Gato hereda de Animal",
+          "Animal hereda de Gato",
+          "Gato implementa Animal",
+          "Error de sintaxis"
+        ],
+        answer: 0,
+        explanation: "Gato es una clase hija que hereda de la clase padre Animal."
+      }
+    ];
+
+    const quizForm = document.getElementById('quiz-form');
+    const resultBox = document.getElementById('result');
+    const checkBtn = document.getElementById('check-btn');
+    const resetBtn = document.getElementById('reset-btn');
+
+    function renderQuiz() {
+      quizForm.innerHTML = '';
+      QUESTIONS.forEach((q, index) => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.dataset.index = index;
+
+        const title = document.createElement('div');
+        title.className = 'question-title';
+        title.textContent = `${index + 1}. ${q.text}`;
+
+        const options = document.createElement('div');
+        options.className = 'options';
+
+        q.options.forEach((opt, optIndex) => {
+          const label = document.createElement('label');
+          label.className = 'option';
+
+          const input = document.createElement('input');
+          input.type = 'radio';
+          input.name = `q${index}`;
+          input.value = optIndex;
+          input.setAttribute('aria-label', opt);
+
+          const span = document.createElement('span');
+          span.textContent = opt;
+
+          label.appendChild(input);
+          label.appendChild(span);
+          options.appendChild(label);
+        });
+
+        const explanation = document.createElement('div');
+        explanation.className = 'explanation';
+        explanation.hidden = true;
+
+        card.appendChild(title);
+        card.appendChild(options);
+        card.appendChild(explanation);
+        quizForm.appendChild(card);
+      });
+    }
+
+    function checkAnswers() {
+      let correct = 0;
+
+      const cards = quizForm.querySelectorAll('.question-card');
+      cards.forEach((card) => {
+        const index = Number(card.dataset.index);
+        const question = QUESTIONS[index];
+        const selected = card.querySelector('input[type="radio"]:checked');
+        const options = card.querySelectorAll('.option');
+        const explanation = card.querySelector('.explanation');
+
+        options.forEach((opt) => opt.classList.remove('correct', 'incorrect'));
+
+        if (selected) {
+          const selectedIndex = Number(selected.value);
+          if (selectedIndex === question.answer) {
+            correct += 1;
+            options[selectedIndex].classList.add('correct');
+          } else {
+            options[selectedIndex].classList.add('incorrect');
+            options[question.answer].classList.add('correct');
+          }
+        } else {
+          options[question.answer].classList.add('correct');
+        }
+
+        explanation.textContent = `Explicación: ${question.explanation}`;
+        explanation.hidden = false;
+      });
+
+      const total = QUESTIONS.length;
+      const percent = Math.round((correct / total) * 100);
+
+      resultBox.style.display = 'block';
+      resultBox.innerHTML = `
+        <h3>Resultado</h3>
+        <p>Has acertado <strong>${correct}</strong> de <strong>${total}</strong> preguntas (${percent}%).</p>
+        <p>Revisa las explicaciones debajo de cada pregunta.</p>
+      `;
+
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetQuiz() {
+      renderQuiz();
+      resultBox.style.display = 'none';
+      resultBox.innerHTML = '';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    checkBtn.addEventListener('click', checkAnswers);
+    resetBtn.addEventListener('click', resetQuiz);
+
+    renderQuiz();
+  </script>
+</body>
+</html>

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHP Base de Datos — Test</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+<body>
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+  <header>
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1>PHP Base de Datos — Test</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+
+    <section id="intro">
+      <h2>1. Instrucciones</h2>
+      <div class="quiz-intro">
+        <p>Responde las 25 preguntas tipo test sobre <strong>bases de datos en PHP</strong>, MySQLi, PDO, consultas y seguridad. Al final podrás ver tu puntuación y la explicación de cada respuesta.</p>
+        <div class="quiz-meta">
+          <span class="badge">25 preguntas</span>
+          <span>Modo: selección única</span>
+          <span>Corrección inmediata al enviar</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="test">
+      <h2>2. Test de conocimientos</h2>
+
+      <div id="result" class="result-box"></div>
+
+      <form id="quiz-form" class="quiz-container" aria-describedby="result">
+        <!-- Preguntas generadas por JS -->
+      </form>
+
+      <div class="quiz-actions">
+        <button type="button" class="primary" id="check-btn">Corregir</button>
+        <button type="button" class="danger" id="reset-btn">Reiniciar</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const QUESTIONS = [
+      {
+        text: "¿Cuáles son las dos extensiones principales para conectarse a MySQL en PHP?",
+        options: [
+          "MySQL y SQLite",
+          "MySQLi y PDO",
+          "PDO y PostgreSQL",
+          "MySQLi y MySQL"
+        ],
+        answer: 1,
+        explanation: "MySQLi (MySQL Improved) y PDO (PHP Data Objects) son las dos extensiones principales."
+      },
+      {
+        text: "¿Cuál es la principal ventaja de PDO sobre MySQLi?",
+        options: [
+          "Es más rápido",
+          "Solo funciona con MySQL",
+          "Soporta múltiples bases de datos",
+          "Es más fácil"
+        ],
+        answer: 2,
+        explanation: "PDO soporta 12+ bases de datos diferentes, siendo más portable."
+      },
+      {
+        text: "¿Qué clase se usa para crear una conexión MySQLi orientada a objetos?",
+        options: [
+          "new MySQL()",
+          "new mysqli()",
+          "new PDO()",
+          "new Connection()"
+        ],
+        answer: 1,
+        explanation: "Se usa new mysqli() para crear una conexión orientada a objetos."
+      },
+      {
+        text: "¿Qué significa DSN en PDO?",
+        options: [
+          "Database Server Name",
+          "Data Source Name",
+          "Database System Number",
+          "Data SQL Name"
+        ],
+        answer: 1,
+        explanation: "DSN significa Data Source Name."
+      },
+      {
+        text: "¿Cómo se verifica si hay error en una conexión MySQLi?",
+        options: [
+          "$conexion->error",
+          "$conexion->connect_error",
+          "$conexion->check_error",
+          "$conexion->has_error"
+        ],
+        answer: 1,
+        explanation: "Se usa $conexion->connect_error para verificar errores de conexión."
+      },
+      {
+        text: "¿Qué charset se recomienda usar?",
+        options: [
+          "utf8",
+          "latin1",
+          "utf8mb4",
+          "ascii"
+        ],
+        answer: 2,
+        explanation: "utf8mb4 es el charset recomendado porque soporta todos los caracteres Unicode."
+      },
+      {
+        text: "¿Cómo se ejecuta una consulta SELECT en MySQLi?",
+        options: [
+          "$conexion->execute()",
+          "$conexion->query()",
+          "$conexion->select()",
+          "$conexion->run()"
+        ],
+        answer: 1,
+        explanation: "Se usa $conexion->query() para ejecutar consultas."
+      },
+      {
+        text: "¿Qué método obtiene una fila como array asociativo en MySQLi?",
+        options: [
+          "fetch_array()",
+          "fetch_assoc()",
+          "get_row()",
+          "fetch_row()"
+        ],
+        answer: 1,
+        explanation: "fetch_assoc() devuelve una fila como array asociativo."
+      },
+      {
+        text: "¿Qué son los prepared statements?",
+        options: [
+          "Consultas normales",
+          "Consultas preparadas para prevenir SQL injection",
+          "Consultas más rápidas",
+          "Consultas en caché"
+        ],
+        answer: 1,
+        explanation: "Los prepared statements protegen contra SQL injection."
+      },
+      {
+        text: "¿Qué símbolo se usa como placeholder en MySQLi prepared statements?",
+        options: [
+          ":",
+          "$",
+          "?",
+          "@"
+        ],
+        answer: 2,
+        explanation: "MySQLi usa ? como placeholder."
+      },
+      {
+        text: "¿Qué símbolos se pueden usar como placeholders en PDO?",
+        options: [
+          "Solo ?",
+          "Solo :nombre",
+          "? y :nombre",
+          "Solo @"
+        ],
+        answer: 2,
+        explanation: "PDO soporta tanto ? como :nombre (named parameters)."
+      },
+      {
+        text: "¿Qué método vincula parámetros en MySQLi?",
+        options: [
+          "bind()",
+          "bind_param()",
+          "bindParam()",
+          "set_param()"
+        ],
+        answer: 1,
+        explanation: "Se usa bind_param() en MySQLi."
+      },
+      {
+        text: "¿Qué significa 's' en bind_param('si', $nombre, $edad)?",
+        options: [
+          "String",
+          "Small",
+          "Short",
+          "Simple"
+        ],
+        answer: 0,
+        explanation: "Los tipos son: s=string, i=integer, d=double, b=blob."
+      },
+      {
+        text: "¿Qué método ejecuta un prepared statement en MySQLi?",
+        options: [
+          "run()",
+          "execute()",
+          "exec()",
+          "perform()"
+        ],
+        answer: 1,
+        explanation: "Se usa execute() para ejecutar el prepared statement."
+      },
+      {
+        text: "¿Qué modo de error se recomienda en PDO?",
+        options: [
+          "PDO::ERRMODE_SILENT",
+          "PDO::ERRMODE_WARNING",
+          "PDO::ERRMODE_EXCEPTION",
+          "PDO::ERRMODE_ALERT"
+        ],
+        answer: 2,
+        explanation: "PDO::ERRMODE_EXCEPTION es el modo recomendado."
+      },
+      {
+        text: "¿Qué método obtiene todas las filas en PDO?",
+        options: [
+          "getAll()",
+          "fetch_all()",
+          "fetchAll()",
+          "getAllRows()"
+        ],
+        answer: 2,
+        explanation: "fetchAll() devuelve todas las filas."
+      },
+      {
+        text: "¿Qué método obtiene una sola fila en PDO?",
+        options: [
+          "getOne()",
+          "fetch()",
+          "fetchOne()",
+          "getRow()"
+        ],
+        answer: 1,
+        explanation: "fetch() devuelve una sola fila."
+      },
+      {
+        text: "¿Qué devuelve $stmt->rowCount() en un INSERT exitoso?",
+        options: [
+          "0",
+          "El número de filas afectadas",
+          "true",
+          "El ID insertado"
+        ],
+        answer: 1,
+        explanation: "rowCount() devuelve el número de filas afectadas."
+      },
+      {
+        text: "¿Cómo se obtiene el último ID insertado en MySQLi?",
+        options: [
+          "$conexion->last_id",
+          "$conexion->insert_id",
+          "$conexion->lastInsertId()",
+          "$conexion->getId()"
+        ],
+        answer: 1,
+        explanation: "Se usa $conexion->insert_id en MySQLi."
+      },
+      {
+        text: "¿Cómo se obtiene el último ID insertado en PDO?",
+        options: [
+          "$pdo->insert_id",
+          "$pdo->lastId()",
+          "$pdo->lastInsertId()",
+          "$pdo->getId()"
+        ],
+        answer: 2,
+        explanation: "Se usa $pdo->lastInsertId() en PDO."
+      },
+      {
+        text: "¿Qué ataque previenen los prepared statements?",
+        options: [
+          "XSS",
+          "CSRF",
+          "SQL Injection",
+          "DDoS"
+        ],
+        answer: 2,
+        explanation: "Los prepared statements previenen SQL Injection."
+      },
+      {
+        text: "¿Cuál es el modo de fetch por defecto recomendado en PDO?",
+        options: [
+          "PDO::FETCH_NUM",
+          "PDO::FETCH_BOTH",
+          "PDO::FETCH_ASSOC",
+          "PDO::FETCH_OBJ"
+        ],
+        answer: 2,
+        explanation: "PDO::FETCH_ASSOC devuelve arrays asociativos."
+      },
+      {
+        text: "¿Cómo se cierra una conexión MySQLi?",
+        options: [
+          "$conexion->end()",
+          "$conexion->disconnect()",
+          "$conexion->close()",
+          "$conexion->terminate()"
+        ],
+        answer: 2,
+        explanation: "Se usa $conexion->close() para cerrar."
+      },
+      {
+        text: "¿Cómo se cierra una conexión PDO?",
+        options: [
+          "$pdo->close()",
+          "$pdo = null",
+          "$pdo->disconnect()",
+          "$pdo->end()"
+        ],
+        answer: 1,
+        explanation: "Se asigna null: $pdo = null."
+      },
+      {
+        text: "Interpretación: $stmt = $pdo->prepare('SELECT * FROM usuarios WHERE id = ?');",
+        options: [
+          "Ejecuta la consulta inmediatamente",
+          "Prepara la consulta sin ejecutarla",
+          "Error de sintaxis",
+          "Elimina el usuario"
+        ],
+        answer: 1,
+        explanation: "prepare() prepara la consulta sin ejecutarla aún."
+      }
+    ];
+
+    const quizForm = document.getElementById('quiz-form');
+    const resultBox = document.getElementById('result');
+    const checkBtn = document.getElementById('check-btn');
+    const resetBtn = document.getElementById('reset-btn');
+
+    function renderQuiz() {
+      quizForm.innerHTML = '';
+      QUESTIONS.forEach((q, index) => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.dataset.index = index;
+
+        const title = document.createElement('div');
+        title.className = 'question-title';
+        title.textContent = `${index + 1}. ${q.text}`;
+
+        const options = document.createElement('div');
+        options.className = 'options';
+
+        q.options.forEach((opt, optIndex) => {
+          const label = document.createElement('label');
+          label.className = 'option';
+
+          const input = document.createElement('input');
+          input.type = 'radio';
+          input.name = `q${index}`;
+          input.value = optIndex;
+          input.setAttribute('aria-label', opt);
+
+          const span = document.createElement('span');
+          span.textContent = opt;
+
+          label.appendChild(input);
+          label.appendChild(span);
+          options.appendChild(label);
+        });
+
+        const explanation = document.createElement('div');
+        explanation.className = 'explanation';
+        explanation.hidden = true;
+
+        card.appendChild(title);
+        card.appendChild(options);
+        card.appendChild(explanation);
+        quizForm.appendChild(card);
+      });
+    }
+
+    function checkAnswers() {
+      let correct = 0;
+
+      const cards = quizForm.querySelectorAll('.question-card');
+      cards.forEach((card) => {
+        const index = Number(card.dataset.index);
+        const question = QUESTIONS[index];
+        const selected = card.querySelector('input[type="radio"]:checked');
+        const options = card.querySelectorAll('.option');
+        const explanation = card.querySelector('.explanation');
+
+        options.forEach((opt) => opt.classList.remove('correct', 'incorrect'));
+
+        if (selected) {
+          const selectedIndex = Number(selected.value);
+          if (selectedIndex === question.answer) {
+            correct += 1;
+            options[selectedIndex].classList.add('correct');
+          } else {
+            options[selectedIndex].classList.add('incorrect');
+            options[question.answer].classList.add('correct');
+          }
+        } else {
+          options[question.answer].classList.add('correct');
+        }
+
+        explanation.textContent = `Explicación: ${question.explanation}`;
+        explanation.hidden = false;
+      });
+
+      const total = QUESTIONS.length;
+      const percent = Math.round((correct / total) * 100);
+
+      resultBox.style.display = 'block';
+      resultBox.innerHTML = `
+        <h3>Resultado</h3>
+        <p>Has acertado <strong>${correct}</strong> de <strong>${total}</strong> preguntas (${percent}%).</p>
+        <p>Revisa las explicaciones debajo de cada pregunta.</p>
+      `;
+
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetQuiz() {
+      renderQuiz();
+      resultBox.style.display = 'none';
+      resultBox.innerHTML = '';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    checkBtn.addEventListener('click', checkAnswers);
+    resetBtn.addEventListener('click', resetQuiz);
+
+    renderQuiz();
+  </script>
+</body>
+</html>

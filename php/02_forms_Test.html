@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHP Formularios — Test</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+<body>
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+  <header>
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1>PHP Formularios — Test</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+
+    <section id="intro">
+      <h2>1. Instrucciones</h2>
+      <div class="quiz-intro">
+        <p>Responde las 25 preguntas tipo test sobre <strong>formularios en PHP</strong>, métodos GET/POST, validación y procesamiento de datos. Al final podrás ver tu puntuación y la explicación de cada respuesta.</p>
+        <div class="quiz-meta">
+          <span class="badge">25 preguntas</span>
+          <span>Modo: selección única</span>
+          <span>Corrección inmediata al enviar</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="test">
+      <h2>2. Test de conocimientos</h2>
+
+      <div id="result" class="result-box"></div>
+
+      <form id="quiz-form" class="quiz-container" aria-describedby="result">
+        <!-- Preguntas generadas por JS -->
+      </form>
+
+      <div class="quiz-actions">
+        <button type="button" class="primary" id="check-btn">Corregir</button>
+        <button type="button" class="danger" id="reset-btn">Reiniciar</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const QUESTIONS = [
+      {
+        text: "¿Cuál es el atributo que indica dónde se envían los datos del formulario?",
+        options: [
+          "method",
+          "action",
+          "target",
+          "destination"
+        ],
+        answer: 1,
+        explanation: "El atributo action especifica la URL del archivo que procesa los datos."
+      },
+      {
+        text: "¿Qué atributo especifica cómo se envían los datos?",
+        options: [
+          "action",
+          "mode",
+          "method",
+          "type"
+        ],
+        answer: 2,
+        explanation: "El atributo method especifica GET o POST."
+      },
+      {
+        text: "¿Cuál es la diferencia principal entre GET y POST?",
+        options: [
+          "GET es más rápido",
+          "GET envía datos en la URL, POST en el cuerpo",
+          "POST es más rápido",
+          "No hay diferencia"
+        ],
+        answer: 1,
+        explanation: "GET envía datos visibles en la URL, POST en el cuerpo del mensaje."
+      },
+      {
+        text: "¿Cuál es el límite de datos aproximado en GET?",
+        options: [
+          "500 bytes",
+          "1 KB",
+          "2 KB",
+          "Ilimitado"
+        ],
+        answer: 2,
+        explanation: "GET tiene un límite de aproximadamente 2 KB."
+      },
+      {
+        text: "¿Cuál es el super array para acceder a datos GET?",
+        options: [
+          "$_REQUEST",
+          "$_POST",
+          "$_GET",
+          "$_DATA"
+        ],
+        answer: 2,
+        explanation: "$_GET contiene los datos del método GET."
+      },
+      {
+        text: "¿Cuál es el super array para acceder a datos POST?",
+        options: [
+          "$_GET",
+          "$_REQUEST",
+          "$_POST",
+          "$_FORM"
+        ],
+        answer: 2,
+        explanation: "$_POST contiene los datos del método POST."
+      },
+      {
+        text: "¿Qué función verifica si una variable isset está definida?",
+        options: [
+          "exists()",
+          "defined()",
+          "isset()",
+          "check()"
+        ],
+        answer: 2,
+        explanation: "isset() verifica si una variable está definida."
+      },
+      {
+        text: "¿Qué función protege contra ataques XSS?",
+        options: [
+          "strip_tags()",
+          "htmlspecialchars()",
+          "filter_var()",
+          "escape()"
+        ],
+        answer: 1,
+        explanation: "htmlspecialchars() convierte caracteres especiales en entidades HTML."
+      },
+      {
+        text: "¿Qué tipo de entrada HTML es para contraseñas?",
+        options: [
+          "type='secret'",
+          "type='password'",
+          "type='hide'",
+          "type='private'"
+        ],
+        answer: 1,
+        explanation: "type='password' crea un campo de contraseña."
+      },
+      {
+        text: "¿Qué atributo define el nombre del campo en PHP?",
+        options: [
+          "id",
+          "value",
+          "name",
+          "label"
+        ],
+        answer: 2,
+        explanation: "El atributo name es el que se usa para acceder al valor en PHP."
+      },
+      {
+        text: "¿Para qué se usa el atributo id en un campo?",
+        options: [
+          "Para PHP",
+          "Para identificar el elemento en CSS/JavaScript",
+          "Para almacenar datos",
+          "Para validación"
+        ],
+        answer: 1,
+        explanation: "El atributo id se usa para identificar elementos en CSS/JavaScript."
+      },
+      {
+        text: "¿Cuál es el tipo de entrada para selectores radio?",
+        options: [
+          "type='select'",
+          "type='radio'",
+          "type='option'",
+          "type='choice'"
+        ],
+        answer: 1,
+        explanation: "type='radio' crea un botón de opción única."
+      },
+      {
+        text: "¿Cuál es el tipo de entrada para casillas de verificación?",
+        options: [
+          "type='select'",
+          "type='check'",
+          "type='checkbox'",
+          "type='option'"
+        ],
+        answer: 2,
+        explanation: "type='checkbox' crea una casilla de verificación."
+      },
+      {
+        text: "¿Qué elemento HTML crea una lista desplegable?",
+        options: [
+          "<input>",
+          "<dropdown>",
+          "<select>",
+          "<list>"
+        ],
+        answer: 2,
+        explanation: "El elemento <select> crea una lista desplegable."
+      },
+      {
+        text: "¿Qué método es más seguro para datos sensibles como contraseñas?",
+        options: [
+          "GET",
+          "POST",
+          "Ambos igual",
+          "Ninguno"
+        ],
+        answer: 1,
+        explanation: "POST es más seguro porque los datos no aparecen en la URL."
+      },
+      {
+        text: "¿Para qué se usa htmlspecialchars()?",
+        options: [
+          "Validar datos",
+          "Convertir caracteres especiales en entidades HTML",
+          "Encriptar datos",
+          "Comprimir datos"
+        ],
+        answer: 1,
+        explanation: "htmlspecialchars() protege contra XSS."
+      },
+      {
+        text: "¿Cuál es el tipo de entrada para subir archivos?",
+        options: [
+          "type='upload'",
+          "type='file'",
+          "type='document'",
+          "type='attachment'"
+        ],
+        answer: 1,
+        explanation: "type='file' permite subir archivos."
+      },
+      {
+        text: "¿Qué hace el super array $_REQUEST?",
+        options: [
+          "Solo GET",
+          "Solo POST",
+          "GET y POST combinados",
+          "Todas las variables"
+        ],
+        answer: 2,
+        explanation: "$_REQUEST contiene datos de GET y POST."
+      },
+      {
+        text: "¿Qué atributo HTML proporciona un texto de ayuda en el campo?",
+        options: [
+          "help",
+          "title",
+          "placeholder",
+          "hint"
+        ],
+        answer: 2,
+        explanation: "El atributo placeholder muestra un texto de ayuda."
+      },
+      {
+        text: "¿Cuál es el tipo de entrada para direcciones de correo?",
+        options: [
+          "type='mail'",
+          "type='email'",
+          "type='e-mail'",
+          "type='address'"
+        ],
+        answer: 1,
+        explanation: "type='email' valida direcciones de correo."
+      },
+      {
+        text: "Interpretación: <input type='text' name='usuario'> con método GET",
+        options: [
+          "El dato aparece en: procesar.php?usuario=valor",
+          "El dato aparece en el cuerpo",
+          "No se envía el dato",
+          "El dato se encripta"
+        ],
+        answer: 0,
+        explanation: "Con GET, los datos aparecen en la URL."
+      },
+      {
+        text: "¿Qué función valida un email?",
+        options: [
+          "is_email()",
+          "filter_var(\$email, FILTER_VALIDATE_EMAIL)",
+          "validate_email()",
+          "check_email()"
+        ],
+        answer: 1,
+        explanation: "filter_var() con FILTER_VALIDATE_EMAIL valida emails."
+      },
+      {
+        text: "¿Cuál es el tipo de entrada para números?",
+        options: [
+          "type='digit'",
+          "type='numeric'",
+          "type='number'",
+          "type='integer'"
+        ],
+        answer: 2,
+        explanation: "type='number' es para campos numéricos."
+      },
+      {
+        text: "¿Qué atributo limita el rango de un número?",
+        options: [
+          "range",
+          "min y max",
+          "limit",
+          "bounds"
+        ],
+        answer: 1,
+        explanation: "Los atributos min y max limitan el rango."
+      },
+      {
+        text: "¿Qué hace el método strip_tags()?",
+        options: [
+          "Elimina caracteres especiales",
+          "Elimina etiquetas HTML",
+          "Valida el formulario",
+          "Encripta los datos"
+        ],
+        answer: 1,
+        explanation: "strip_tags() elimina etiquetas HTML."
+      }
+    ];
+
+    const quizForm = document.getElementById('quiz-form');
+    const resultBox = document.getElementById('result');
+    const checkBtn = document.getElementById('check-btn');
+    const resetBtn = document.getElementById('reset-btn');
+
+    function renderQuiz() {
+      quizForm.innerHTML = '';
+      QUESTIONS.forEach((q, index) => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.dataset.index = index;
+
+        const title = document.createElement('div');
+        title.className = 'question-title';
+        title.textContent = `${index + 1}. ${q.text}`;
+
+        const options = document.createElement('div');
+        options.className = 'options';
+
+        q.options.forEach((opt, optIndex) => {
+          const label = document.createElement('label');
+          label.className = 'option';
+
+          const input = document.createElement('input');
+          input.type = 'radio';
+          input.name = `q${index}`;
+          input.value = optIndex;
+          input.setAttribute('aria-label', opt);
+
+          const span = document.createElement('span');
+          span.textContent = opt;
+
+          label.appendChild(input);
+          label.appendChild(span);
+          options.appendChild(label);
+        });
+
+        const explanation = document.createElement('div');
+        explanation.className = 'explanation';
+        explanation.hidden = true;
+
+        card.appendChild(title);
+        card.appendChild(options);
+        card.appendChild(explanation);
+        quizForm.appendChild(card);
+      });
+    }
+
+    function checkAnswers() {
+      let correct = 0;
+
+      const cards = quizForm.querySelectorAll('.question-card');
+      cards.forEach((card) => {
+        const index = Number(card.dataset.index);
+        const question = QUESTIONS[index];
+        const selected = card.querySelector('input[type="radio"]:checked');
+        const options = card.querySelectorAll('.option');
+        const explanation = card.querySelector('.explanation');
+
+        options.forEach((opt) => opt.classList.remove('correct', 'incorrect'));
+
+        if (selected) {
+          const selectedIndex = Number(selected.value);
+          if (selectedIndex === question.answer) {
+            correct += 1;
+            options[selectedIndex].classList.add('correct');
+          } else {
+            options[selectedIndex].classList.add('incorrect');
+            options[question.answer].classList.add('correct');
+          }
+        } else {
+          options[question.answer].classList.add('correct');
+        }
+
+        explanation.textContent = `Explicación: ${question.explanation}`;
+        explanation.hidden = false;
+      });
+
+      const total = QUESTIONS.length;
+      const percent = Math.round((correct / total) * 100);
+
+      resultBox.style.display = 'block';
+      resultBox.innerHTML = `
+        <h3>Resultado</h3>
+        <p>Has acertado <strong>${correct}</strong> de <strong>${total}</strong> preguntas (${percent}%).</p>
+        <p>Revisa las explicaciones debajo de cada pregunta.</p>
+      `;
+
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetQuiz() {
+      renderQuiz();
+      resultBox.style.display = 'none';
+      resultBox.innerHTML = '';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    checkBtn.addEventListener('click', checkAnswers);
+    resetBtn.addEventListener('click', resetQuiz);
+
+    renderQuiz();
+  </script>
+</body>
+</html>
