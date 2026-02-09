@@ -324,63 +324,113 @@ class _FormPageState extends State<FormPage> {
 
 
     </section>
-<section id="navigator-parametros">
+<section id="navigator-ejemplo-parametro-textfield">
 
-  <h2>Navegación y paso de parámetros con Navigator</h2>
-
-  <p>
-    Al construir aplicaciones con múltiples pantallas en Flutter, es muy común
-    necesitar navegar de una pantalla a otra y, además, <strong>enviar datos</strong>
-    entre ellas. Por ejemplo, abrir una pantalla de detalles con la información de un
-    elemento concreto de una lista.
-  </p>
-  <div class="diagram">
-        <img src="../assets/login_flutter.gif" alt="Ejemplo conceptual de StatefulWidget" style="max-width: 40%">
-      </div>
+  <h2>Ejemplo: Pasar un nombre desde un TextField a otra página usando Navigator.push</h2>
 
   <p>
-    Flutter utiliza el widget <code>Navigator</code> para gestionar la pila de pantallas
-    (rutas). Para cambiar de pantalla, solemos usar <code>Navigator.push()</code> y
-    <code>Navigator.pop()</code>. En este proceso, podemos aprovechar para
-    <strong>pasar parámetros</strong> a la nueva ruta.
+    En este ejemplo, la primera pantalla recoge el nombre desde un 
+    <code>TextField</code> y navega a una segunda pantalla pasando el dato
+    mediante el constructor. En la segunda pantalla accedemos al valor recibido
+    usando <code>widget.username</code>.
   </p>
 
-  <div class="diagram">
-    Navigator.push(...) --> pantalla B (recibe datos) --> Navigator.pop() --> pantalla A (recibe resultado) 
-  </div>
-
-  <h3>1. Paso de parámetros mediante el constructor del widget</h3>
-
-  <p>
-    La forma más directa y habitual de pasar información a otra pantalla es
-    simplemente <strong>usando el constructor</strong> del widget de destino.
-  </p>
-
-  <p>
-    Supongamos que queremos abrir una pantalla de detalles que muestre un mensaje
-    personalizado.
-  </p>
-
-  <h4>1.1. Definir la pantalla de destino con un parámetro</h4>
+  <h3>1. Primera pantalla — Introducir el nombre y navegar</h3>
 
   <pre>
-<p>lib/pages/detalle_page.dart</p>
 <code class="language-javascript">
-class DetallePage extends StatelessWidget {
-  final String mensaje; // Parámetro recibido desde la pantalla anterior
+// lib/pages/home_page.dart
 
-  const DetallePage({
-    super.key,
-    required this.mensaje, // Campo obligatorio en el constructor
-  });
+import 'package:flutter/material.dart';
+import 'segunda_page.dart';
+
+class HomePage extends StatelessWidget {
+  HomePage({super.key});
+
+  // Controlador para recoger el texto del TextField
+  final TextEditingController _controller = TextEditingController();
+
+  // Función que navega a la segunda página
+  void _irASegundaPage(BuildContext context) {
+
+    // Recuperamos el nombre escrito en el TextField
+    final nombre = _controller.text;
+
+    // Navegación hacia la SegundaPage enviando el dato por el constructor
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SegundaPage(username: nombre),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Detalle")),
+      appBar: AppBar(title: const Text("Página Inicial")),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+
+            // Campo de texto donde el usuario escribe su nombre
+            TextField(
+              controller: _controller,
+              decoration: const InputDecoration(
+                labelText: "Escribe tu nombre",
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            // Botón para navegar a la segunda página
+            ElevatedButton(
+              onPressed: () => _irASegundaPage(context),
+              child: const Text("Ir a la segunda página"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+</code>
+  </pre>
+
+  <h3>2. Segunda pantalla — Recibir y mostrar el nombre</h3>
+
+  <pre>
+<code class="language-javascript">
+// lib/pages/segunda_page.dart
+
+import 'package:flutter/material.dart';
+
+class SegundaPage extends StatefulWidget {
+
+  // Valor recibido desde la primera pantalla
+  final String username;
+
+  // Constructor que exige el parámetro
+  const SegundaPage({
+    super.key,
+    required this.username,
+  });
+
+  @override
+  State<SegundaPage> createState() => _SegundaPageState();
+}
+
+class _SegundaPageState extends State<SegundaPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Segunda Página")),
       body: Center(
         child: Text(
-          mensaje, // Mostramos el mensaje recibido
+          // Accedemos al dato usando widget.username
+          "Hola ${widget.username}",
           style: Theme.of(context).textTheme.headlineMedium,
         ),
       ),
@@ -390,115 +440,7 @@ class DetallePage extends StatelessWidget {
 </code>
   </pre>
 
-  <h4>1.2. Navegar a la pantalla y pasar el parámetro</h4>
-
-  <p>
-    Desde otra pantalla (por ejemplo, <code>HomePage</code>), podemos utilizar
-    <code>Navigator.push()</code> y crear la ruta con <code>MaterialPageRoute</code>.
-  </p>
-
-  <pre>
-<p>lib/pages/home_page.dart</p>
-<code class="language-javascript">
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  void _abrirDetalle(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) =&gt; const DetallePage(
-          mensaje: "Hola desde HomePage", // Enviamos este texto a la otra pantalla
-        ),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Home")),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () =&gt; _abrirDetalle(context), // Navega al detalle
-          child: const Text("Ir a detalle"),
-        ),
-      ),
-    );
-  }
-}
-</code>
-  </pre>
-
-  <ul>
-    <li><code>DetallePage</code> recibe el texto mediante su constructor.</li>
-    <li><code>Navigator.push()</code> añade una nueva página a la pila de navegación.</li>
-    <li>Al usar <code>MaterialPageRoute</code>, construimos la pantalla de destino en el
-      parámetro <code>builder</code>.</li>
-  </ul>
-
-  <h3>2. Paso de parámetros usando argumentos en rutas nombradas</h3>
-
-  <p>
-    Cuando usamos <strong>rutas nombradas</strong> (por ejemplo, definidas en
-    <code>MaterialApp.routes</code>), también podemos pasar parámetros con el campo
-    <code>arguments</code> de <code>Navigator.pushNamed()</code>.
-  </p>
-
-  <h4>2.1. Configurar las rutas</h4>
-
-  <pre>
-<p>lib/main.dart</p>
-<code class="language-javascript">
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Ejemplo Navigator",
-      initialRoute: "/",
-      routes: {
-        "/": (context) =&gt; const HomePage(),
-        "/detalle": (context) =&gt; const DetallePageConArgumentos(),
-      },
-    );
-  }
-}
-</code>
-  </pre>
-
-  <h4>2.2. Enviar argumentos al navegar</h4>
-
-  <pre>
-<p>lib/pages/home_page.dart</p>
-<code class="language-javascript">
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  void _abrirDetalleConArgs(BuildContext context) {
-    Navigator.pushNamed(
-      context,
-      "/detalle", // Nombre de la ruta
-      arguments: "Mensaje enviado con pushNamed", // Datos que queremos pasar
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Home")),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () =&gt; _abrirDetalleConArgs(context), // Navega con argumentos
-          child: const Text("Ir a detalle con args"),
-        ),
-      ),
-    );
-  }
-}
-</code>
-  </pre>
+</section>
 
 
   </main>
