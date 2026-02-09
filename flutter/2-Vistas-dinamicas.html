@@ -324,20 +324,20 @@ class _FormPageState extends State<FormPage> {
 
 
     </section>
-<section id="navigator-ejemplo-parametro-textfield">
+    <section id="navigator-ejemplo-parametro-textfield">
 
-  <h2>Ejemplo: Pasar un nombre desde un TextField a otra página usando Navigator.push</h2>
+      <h2>Ejemplo: Pasar un nombre desde un TextField a otra página usando Navigator.push</h2>
 
-  <p>
-    En este ejemplo, la primera pantalla recoge el nombre desde un 
-    <code>TextField</code> y navega a una segunda pantalla pasando el dato
-    mediante el constructor. En la segunda pantalla accedemos al valor recibido
-    usando <code>widget.username</code>.
-  </p>
+      <p>
+        En este ejemplo, la primera pantalla recoge el nombre desde un
+        <code>TextField</code> y navega a una segunda pantalla pasando el dato
+        mediante el constructor. En la segunda pantalla accedemos al valor recibido
+        usando <code>widget.username</code>.
+      </p>
 
-  <h3>1. Primera pantalla — Introducir el nombre y navegar</h3>
+      <h3>1. Primera pantalla — Introducir el nombre y navegar</h3>
 
-  <pre>
+      <pre>
 <code class="language-javascript">
 // lib/pages/home_page.dart
 
@@ -356,7 +356,8 @@ class HomePage extends StatelessWidget {
     // Recuperamos el nombre escrito en el TextField
     final nombre = _controller.text;
 
-    // Navegación hacia la SegundaPage enviando el dato por el constructor
+    // Navegación hacia la SegundaPage enviando el dato 
+    // por el constructor
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -399,9 +400,9 @@ class HomePage extends StatelessWidget {
 </code>
   </pre>
 
-  <h3>2. Segunda pantalla — Recibir y mostrar el nombre</h3>
+      <h3>2. Segunda pantalla — Recibir y mostrar el nombre</h3>
 
-  <pre>
+      <pre>
 <code class="language-javascript">
 // lib/pages/segunda_page.dart
 
@@ -440,7 +441,7 @@ class _SegundaPageState extends State<SegundaPage> {
 </code>
   </pre>
 
-</section>
+    </section>
 
 
   </main>
