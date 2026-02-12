@@ -1,131 +1,156 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} 
-    gtag('js', new Date());
-    gtag('config', 'G-EVTW1307T1');
-  </script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Base de Datos en PHP</title>
-  <script src="/course-resources/index.js" defer></script>
-  <script type="module">
-    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-    mermaid.initialize({ startOnLoad: true });
-  </script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
-  <script src="../index.js" defer></script>
-  <script src="../menu.js" defer></script>
-  <!-- <link rel="stylesheet" href="../index.css"> -->
-  <link rel="stylesheet" href="../style.css" />
-  <link rel="stylesheet" href="../menu.css">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-EVTW1307T1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base de Datos en PHP</title>
+    <script src="/course-resources/index.js" defer></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+    <script src="../index.js" defer></script>
+    <script src="../menu.js" defer></script>
+    <!-- <link rel="stylesheet" href="../index.css"> -->
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../menu.css">
 </head>
 
 
 <body>
 
-  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
-    <div class="vc-rail-head">
-      <span class="vc-rail-title">Índice</span>
-      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-        </svg>
-      </button>
-    </div>
-    <ul id="vc-list" class="vc-list"></ul>
-  </nav>
+    <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+        <div class="vc-rail-head">
+            <span class="vc-rail-title">Índice</span>
+            <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+        <ul id="vc-list" class="vc-list"></ul>
+    </nav>
 
-  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+    <div id="vc-backdrop" class="vc-backdrop" hidden></div>
 
-  <header>
-    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
-      <i class="fa fa-bars" aria-hidden="true"></i>
-    </button>
-    <h1>Base de Datos MySQL en PHP</h1>
-    <img src="" id="logo" alt="Logo" style="display: none;">
-  </header>
+    <header>
+        <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+            aria-controls="vc-rail" aria-expanded="false">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+        <h1>Base de Datos MySQL en PHP</h1>
+        <img src="" id="logo" alt="Logo" style="display: none;">
+    </header>
 
-  <main>
-    <p>PHP permite conectarse a bases de datos MySQL usando dos extensiones principales: <strong>MySQLi</strong> (MySQL Improved) y <strong>PDO</strong> (PHP Data Objects). Ambas ofrecen funcionalidades similares pero con diferencias importantes en sintaxis y compatibilidad.</p>
+    <main>
 
-    <!-- SECCIÓN 1: INTRODUCCIÓN -->
-    <section id="introduccion">
-      <h2>1. Introducción a bases de datos en PHP</h2>
+        <!-- SECCIÓN 1: INTRODUCCIÓN -->
+        <section id="introduccion">
+            <h2>1. Introducción a bases de datos en PHP</h2>
+            <p>Una <strong>base de datos</strong> es un sistema que permite guardar, organizar y recuperar información de forma eficiente.</p>
+            
+            <p>En PHP se usan bases de datos para:</p>
+            <ul>
+                <li>Usuarios y contraseñas 🔐</li>
+                <li>Productos, pedidos, reservas 🛒</li>
+                <li>Posts, comentarios, mensajes 💬</li>
+                <li>Cualquier información que deba persistir entre sesiones</li>
+            </ul>
+            
+            <p><strong>👉 La más habitual con PHP es MySQL / MariaDB.</strong></p>
+             <div class="diagram">
+                <img src="../assets/php_sql_diagram.png" style="max-width: 75%;" width="auto"
+                alt="diagrama php con sql" />
+            </div>            
+            <p>PHP permite conectarse a bases de datos MySQL usando dos extensiones principales: <strong>MySQLi</strong>
+                (MySQL Improved) y <strong>PDO</strong> (PHP Data Objects). Ambas ofrecen funcionalidades similares pero
+                con diferencias importantes en sintaxis y compatibilidad.</p>
 
-      <h3>1.1. ¿Por qué usar bases de datos?</h3>
-      <ul>
-        <li>Almacenar grandes cantidades de datos de forma estructurada</li>
-        <li>Persistencia de datos entre sesiones</li>
-        <li>Acceso concurrente de múltiples usuarios</li>
-        <li>Búsquedas y consultas complejas eficientes</li>
-        <li>Integridad y seguridad de datos</li>
-      </ul>
+            <h3>1.1. ¿Por qué usar bases de datos?</h3>
+            <ul>
+                <li>Almacenar grandes cantidades de datos de forma estructurada</li>
+                <li>Persistencia de datos entre sesiones</li>
+                <li>Acceso concurrente de múltiples usuarios</li>
+                <li>Búsquedas y consultas complejas eficientes</li>
+                <li>Integridad y seguridad de datos</li>
+            </ul>
 
-      <h3>1.2. MySQLi vs PDO</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Característica</th>
-            <th>MySQLi</th>
-            <th>PDO</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Soporte de bases de datos</td>
-            <td>Solo MySQL</td>
-            <td>12+ bases de datos (MySQL, PostgreSQL, SQLite, etc.)</td>
-          </tr>
-          <tr>
-            <td>Estilo de programación</td>
-            <td>Orientado a objetos y procedural</td>
-            <td>Solo orientado a objetos</td>
-          </tr>
-          <tr>
-            <td>Prepared Statements</td>
-            <td>Sí</td>
-            <td>Sí</td>
-          </tr>
-          <tr>
-            <td>Named parameters</td>
-            <td>No (solo ?)</td>
-            <td>Sí (? y :nombre)</td>
-          </tr>
-          <tr>
-            <td>Portabilidad</td>
-            <td>Baja</td>
-            <td>Alta</td>
-          </tr>
-          <tr>
-            <td>Rendimiento</td>
-            <td>Ligeramente más rápido</td>
-            <td>Similar</td>
-          </tr>
-        </tbody>
-      </table>
+            <h3>1.2. MySQLi vs PDO</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Característica</th>
+                        <th>MySQLi</th>
+                        <th>PDO</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Soporte de bases de datos</td>
+                        <td>Solo MySQL</td>
+                        <td>12+ bases de datos (MySQL, PostgreSQL, SQLite, etc.)</td>
+                    </tr>
+                    <tr>
+                        <td>Estilo de programación</td>
+                        <td>Orientado a objetos y procedural</td>
+                        <td>Solo orientado a objetos</td>
+                    </tr>
+                    <tr>
+                        <td>Prepared Statements</td>
+                        <td>Sí</td>
+                        <td>Sí</td>
+                    </tr>
+                    <tr>
+                        <td>Named parameters</td>
+                        <td>No (solo ?)</td>
+                        <td>Sí (? y :nombre)</td>
+                    </tr>
+                    <tr>
+                        <td>Portabilidad</td>
+                        <td>Baja</td>
+                        <td>Alta</td>
+                    </tr>
+                    <tr>
+                        <td>Rendimiento</td>
+                        <td>Ligeramente más rápido</td>
+                        <td>Similar</td>
+                    </tr>
+                </tbody>
+            </table>
+             <div class="diagram">
+                <img src="../assets/php_sqli_vs_pdo.png" style="max-width: 75%;" width="auto"
+                alt="pdo vs sqli" />
+            </div>  
 
-      <h3>1.3. Requisitos previos</h3>
-      <ul>
-        <li>Servidor MySQL instalado y corriendo</li>
-        <li>PHP con extensión mysqli o PDO habilitada</li>
-        <li>Credenciales de acceso (host, usuario, contraseña, base de datos)</li>
-      </ul>
-    </section>
+            
 
-    <!-- SECCIÓN 2: CONEXIÓN CON MYSQLI -->
-    <section id="mysqli-conexion">
-      <h2>2. Conexión con MySQLi</h2>
+            <h3>1.3. Requisitos previos</h3>
+            <ul>
+                <li>Servidor MySQL instalado y corriendo</li>
+                <li>PHP con extensión mysqli o PDO habilitada</li>
+                <li>Credenciales de acceso (host, usuario, contraseña, base de datos)</li>
+            </ul>
+        </section>
 
-      <h3>2.1. Conexión orientada a objetos</h3>
-      <pre><code class="language-php">
+        <!-- SECCIÓN 2: CONEXIÓN CON MYSQLI -->
+        <section id="mysqli-conexion">
+            <h2>2. Conexión con MySQLi</h2>
+
+            <h3>2.1. Conexión básica</h3>
+            <pre><code class="language-php">
 &lt;?php
 // Datos de conexión
 $host = "localhost";
@@ -149,71 +174,15 @@ $conexion->set_charset("utf8mb4");
 // Cerrar conexión
 $conexion->close();
 ?&gt;
-</code></pre>
+</code></pre>            
+        </section>
 
-      <h3>2.2. Conexión procedural</h3>
-      <pre><code class="language-php">
-&lt;?php
-$host = "localhost";
-$usuario = "root";
-$password = "";
-$base_datos = "mi_base_datos";
+        <!-- SECCIÓN 3: CONEXIÓN CON PDO -->
+        <section id="pdo-conexion">
+            <h2>3. Conexión con PDO</h2>
 
-// Crear conexión
-$conexion = mysqli_connect($host, $usuario, $password, $base_datos);
-
-// Verificar conexión
-if (!$conexion) {
-    die("Error de conexión: " . mysqli_connect_error());
-}
-
-echo "Conexión exitosa";
-
-// Establecer charset
-mysqli_set_charset($conexion, "utf8mb4");
-
-// Cerrar conexión
-mysqli_close($conexion);
-?&gt;
-</code></pre>
-
-      <h3>2.3. Archivo de configuración</h3>
-      <pre><code class="language-php">
-&lt;?php
-// config.php - Archivo de configuración reutilizable
-
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'mi_base_datos');
-
-// Función para obtener conexión
-function getConexion() {
-    $conexion = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-    
-    if ($conexion->connect_error) {
-        die("Error de conexión: " . $conexion->connect_error);
-    }
-    
-    $conexion->set_charset("utf8mb4");
-    return $conexion;
-}
-?&gt;
-
-&lt;!-- Uso en otros archivos --&gt;
-&lt;?php
-require_once 'config.php';
-$conn = getConexion();
-?&gt;
-</code></pre>
-    </section>
-
-    <!-- SECCIÓN 3: CONEXIÓN CON PDO -->
-    <section id="pdo-conexion">
-      <h2>3. Conexión con PDO</h2>
-
-      <h3>3.1. Conexión básica</h3>
-      <pre><code class="language-php">
+            <h3>3.1. Conexión básica</h3>
+            <pre><code class="language-php">
 &lt;?php
 $host = "localhost";
 $db_name = "mi_base_datos";
@@ -242,8 +211,8 @@ try {
 ?&gt;
 </code></pre>
 
-      <h3>3.2. Clase de conexión reutilizable</h3>
-      <pre><code class="language-php">
+            <h3>3.2. Clase de conexión reutilizable</h3>
+            <pre><code class="language-php">
 &lt;?php
 // Database.php
 
@@ -286,8 +255,8 @@ $conn = $database->getConexion();
 ?&gt;
 </code></pre>
 
-      <h3>3.3. Opciones importantes de PDO</h3>
-      <pre><code class="language-php">
+            <h3>3.3. Opciones importantes de PDO</h3>
+            <pre><code class="language-php">
 &lt;?php
 $opciones = [
     // Modo de errores: lanzar excepciones
@@ -309,14 +278,14 @@ $opciones = [
 $pdo = new PDO($dsn, $usuario, $password, $opciones);
 ?&gt;
 </code></pre>
-    </section>
+        </section>
 
-    <!-- SECCIÓN 4: CONSULTAS SELECT CON MYSQLI -->
-    <section id="mysqli-select">
-      <h2>4. Consultas SELECT con MySQLi</h2>
+        <!-- SECCIÓN 4: CONSULTAS SELECT CON MYSQLI -->
+        <section id="mysqli-select">
+            <h2>4. Consultas SELECT con MySQLi</h2>
 
-      <h3>4.1. Consulta simple</h3>
-      <pre><code class="language-php">
+            <h3>4.1. Consulta simple</h3>
+            <pre><code class="language-php">
 &lt;?php
 $conexion = new mysqli("localhost", "root", "", "mi_base_datos");
 
@@ -342,8 +311,8 @@ $conexion->close();
 ?&gt;
 </code></pre>
 
-      <h3>4.2. Prepared Statements (prevenir SQL Injection)</h3>
-      <pre><code class="language-php">
+            <h3>4.2. Prepared Statements (prevenir SQL Injection)</h3>
+            <pre><code class="language-php">
 &lt;?php
 $conexion = new mysqli("localhost", "root", "", "mi_base_datos");
 
@@ -370,8 +339,8 @@ $conexion->close();
 ?&gt;
 </code></pre>
 
-      <h3>4.3. Múltiples parámetros</h3>
-      <pre><code class="language-php">
+            <h3>4.3. Múltiples parámetros</h3>
+            <pre><code class="language-php">
 &lt;?php
 $conexion = new mysqli("localhost", "root", "", "mi_base_datos");
 
@@ -394,8 +363,8 @@ $conexion->close();
 ?&gt;
 </code></pre>
 
-      <h3>4.4. Obtener un solo resultado</h3>
-      <pre><code class="language-php">
+            <h3>4.4. Obtener un solo resultado</h3>
+            <pre><code class="language-php">
 &lt;?php
 $conexion = new mysqli("localhost", "root", "", "mi_base_datos");
 
@@ -421,14 +390,14 @@ $stmt->close();
 $conexion->close();
 ?&gt;
 </code></pre>
-    </section>
+        </section>
 
-    <!-- SECCIÓN 5: CONSULTAS SELECT CON PDO -->
-    <section id="pdo-select">
-      <h2>5. Consultas SELECT con PDO</h2>
+        <!-- SECCIÓN 5: CONSULTAS SELECT CON PDO -->
+        <section id="pdo-select">
+            <h2>5. Consultas SELECT con PDO</h2>
 
-      <h3>5.1. Consulta simple</h3>
-      <pre><code class="language-php">
+            <h3>5.1. Consulta simple</h3>
+            <pre><code class="language-php">
 &lt;?php
 try {
     $pdo = new PDO("mysql:host=localhost;dbname=mi_base_datos", "root", "");
@@ -451,8 +420,8 @@ try {
 ?&gt;
 </code></pre>
 
-      <h3>5.2. Prepared Statements con marcadores posicionales (?)</h3>
-      <pre><code class="language-php">
+            <h3>5.2. Prepared Statements con marcadores posicionales (?)</h3>
+            <pre><code class="language-php">
 &lt;?php
 try {
     $pdo = new PDO("mysql:host=localhost;dbname=mi_base_datos", "root", "");
@@ -477,8 +446,8 @@ try {
 ?&gt;
 </code></pre>
 
-      <h3>5.3. Prepared Statements con parámetros nombrados (:nombre)</h3>
-      <pre><code class="language-php">
+            <h3>5.3. Prepared Statements con parámetros nombrados (:nombre)</h3>
+            <pre><code class="language-php">
 &lt;?php
 try {
     $pdo = new PDO("mysql:host=localhost;dbname=mi_base_datos", "root", "");
@@ -507,8 +476,8 @@ try {
 ?&gt;
 </code></pre>
 
-      <h3>5.4. Diferentes modos de fetch</h3>
-      <pre><code class="language-php">
+            <h3>5.4. Diferentes modos de fetch</h3>
+            <pre><code class="language-php">
 &lt;?php
 try {
     $pdo = new PDO("mysql:host=localhost;dbname=mi_base_datos", "root", "");
@@ -545,14 +514,14 @@ try {
 }
 ?&gt;
 </code></pre>
-    </section>
+        </section>
 
-    <!-- SECCIÓN 6: INSERT, UPDATE, DELETE CON MYSQLI -->
-    <section id="mysqli-crud">
-      <h2>6. INSERT, UPDATE, DELETE con MySQLi</h2>
+        <!-- SECCIÓN 6: INSERT, UPDATE, DELETE CON MYSQLI -->
+        <section id="mysqli-crud">
+            <h2>6. INSERT, UPDATE, DELETE con MySQLi</h2>
 
-      <h3>6.1. INSERT - Insertar datos</h3>
-      <pre><code class="language-php">
+            <h3>6.1. INSERT - Insertar datos</h3>
+            <pre><code class="language-php">
 &lt;?php
 $conexion = new mysqli("localhost", "root", "", "mi_base_datos");
 
@@ -578,8 +547,8 @@ $conexion->close();
 ?&gt;
 </code></pre>
 
-      <h3>6.2. UPDATE - Actualizar datos</h3>
-      <pre><code class="language-php">
+            <h3>6.2. UPDATE - Actualizar datos</h3>
+            <pre><code class="language-php">
 &lt;?php
 $conexion = new mysqli("localhost", "root", "", "mi_base_datos");
 
@@ -604,8 +573,8 @@ $conexion->close();
 ?&gt;
 </code></pre>
 
-      <h3>6.3. DELETE - Eliminar datos</h3>
-      <pre><code class="language-php">
+            <h3>6.3. DELETE - Eliminar datos</h3>
+            <pre><code class="language-php">
 &lt;?php
 $conexion = new mysqli("localhost", "root", "", "mi_base_datos");
 
@@ -630,8 +599,8 @@ $conexion->close();
 ?&gt;
 </code></pre>
 
-      <h3>6.4. Insertar múltiples registros</h3>
-      <pre><code class="language-php">
+            <h3>6.4. Insertar múltiples registros</h3>
+            <pre><code class="language-php">
 &lt;?php
 $conexion = new mysqli("localhost", "root", "", "mi_base_datos");
 
@@ -660,14 +629,14 @@ $stmt->close();
 $conexion->close();
 ?&gt;
 </code></pre>
-    </section>
+        </section>
 
-    <!-- SECCIÓN 7: INSERT, UPDATE, DELETE CON PDO -->
-    <section id="pdo-crud">
-      <h2>7. INSERT, UPDATE, DELETE con PDO</h2>
+        <!-- SECCIÓN 7: INSERT, UPDATE, DELETE CON PDO -->
+        <section id="pdo-crud">
+            <h2>7. INSERT, UPDATE, DELETE con PDO</h2>
 
-      <h3>7.1. INSERT - Insertar datos</h3>
-      <pre><code class="language-php">
+            <h3>7.1. INSERT - Insertar datos</h3>
+            <pre><code class="language-php">
 &lt;?php
 try {
     $pdo = new PDO("mysql:host=localhost;dbname=mi_base_datos", "root", "");
@@ -691,8 +660,8 @@ try {
 ?&gt;
 </code></pre>
 
-      <h3>7.2. UPDATE - Actualizar datos</h3>
-      <pre><code class="language-php">
+            <h3>7.2. UPDATE - Actualizar datos</h3>
+            <pre><code class="language-php">
 &lt;?php
 try {
     $pdo = new PDO("mysql:host=localhost;dbname=mi_base_datos", "root", "");
@@ -716,8 +685,8 @@ try {
 ?&gt;
 </code></pre>
 
-      <h3>7.3. DELETE - Eliminar datos</h3>
-      <pre><code class="language-php">
+            <h3>7.3. DELETE - Eliminar datos</h3>
+            <pre><code class="language-php">
 &lt;?php
 try {
     $pdo = new PDO("mysql:host=localhost;dbname=mi_base_datos", "root", "");
@@ -740,8 +709,8 @@ try {
 ?&gt;
 </code></pre>
 
-      <h3>7.4. Transacciones</h3>
-      <pre><code class="language-php">
+            <h3>7.4. Transacciones</h3>
+            <pre><code class="language-php">
 &lt;?php
 try {
     $pdo = new PDO("mysql:host=localhost;dbname=mi_base_datos", "root", "");
@@ -771,14 +740,14 @@ try {
 }
 ?&gt;
 </code></pre>
-    </section>
+        </section>
 
-    <!-- SECCIÓN 8: EJEMPLO COMPLETO CRUD -->
-    <section id="ejemplo-crud">
-      <h2>8. Ejemplo completo: Sistema CRUD</h2>
+        <!-- SECCIÓN 8: EJEMPLO COMPLETO CRUD -->
+        <section id="ejemplo-crud">
+            <h2>8. Ejemplo completo: Sistema CRUD</h2>
 
-      <h3>8.1. Listar usuarios (index.php)</h3>
-      <pre><code class="language-php">
+            <h3>8.1. Listar usuarios (index.php)</h3>
+            <pre><code class="language-php">
 &lt;?php
 // Conexión PDO
 try {
@@ -835,8 +804,8 @@ try {
 &lt;/html&gt;
 </code></pre>
 
-      <h3>8.2. Crear usuario (crear.php)</h3>
-      <pre><code class="language-php">
+            <h3>8.2. Crear usuario (crear.php)</h3>
+            <pre><code class="language-php">
 &lt;?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
@@ -890,8 +859,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 &lt;/html&gt;
 </code></pre>
 
-      <h3>8.3. Editar usuario (editar.php)</h3>
-      <pre><code class="language-php">
+            <h3>8.3. Editar usuario (editar.php)</h3>
+            <pre><code class="language-php">
 &lt;?php
 try {
     $pdo = new PDO("mysql:host=localhost;dbname=mi_base_datos", "root", "");
@@ -955,8 +924,8 @@ try {
 &lt;/html&gt;
 </code></pre>
 
-      <h3>8.4. Eliminar usuario (eliminar.php)</h3>
-      <pre><code class="language-php">
+            <h3>8.4. Eliminar usuario (eliminar.php)</h3>
+            <pre><code class="language-php">
 &lt;?php
 try {
     $pdo = new PDO("mysql:host=localhost;dbname=mi_base_datos", "root", "");
@@ -976,28 +945,31 @@ try {
 }
 ?&gt;
 </code></pre>
-    </section>
+        </section>
 
-    <!-- RESUMEN -->
-    <section id="resumen">
-      <div class="info-box">
-        <h3>Resumen de Base de Datos en PHP</h3>
-        <ul>
-          <li><strong>MySQLi</strong> solo funciona con MySQL; <strong>PDO</strong> es compatible con múltiples bases de datos</li>
-          <li>Usar <strong>prepared statements</strong> siempre para prevenir SQL Injection</li>
-          <li>MySQLi usa <strong>?</strong> como marcador; PDO permite <strong>?</strong> y <strong>:nombre</strong></li>
-          <li><strong>mysqli->insert_id</strong> o <strong>pdo->lastInsertId()</strong> obtienen el último ID insertado</li>
-          <li><strong>affected_rows</strong> o <strong>rowCount()</strong> indican filas afectadas</li>
-          <li>PDO permite <strong>transacciones</strong> con beginTransaction(), commit() y rollBack()</li>
-          <li>Siempre usar <strong>try-catch</strong> con PDO para manejar errores</li>
-          <li>Establecer <strong>charset UTF-8</strong> para evitar problemas de caracteres</li>
-          <li>Usar <strong>htmlspecialchars()</strong> al mostrar datos de la base de datos</li>
-          <li>PDO es más recomendado por su <strong>portabilidad</strong> y características avanzadas</li>
-        </ul>
-      </div>
-    </section>
+        <!-- RESUMEN -->
+        <section id="resumen">
+            <div class="info-box">
+                <h3>Resumen de Base de Datos en PHP</h3>
+                <ul>
+                    <li><strong>MySQLi</strong> solo funciona con MySQL; <strong>PDO</strong> es compatible con
+                        múltiples bases de datos</li>
+                    <li>Usar <strong>prepared statements</strong> siempre para prevenir SQL Injection</li>
+                    <li>MySQLi usa <strong>?</strong> como marcador; PDO permite <strong>?</strong> y
+                        <strong>:nombre</strong></li>
+                    <li><strong>mysqli->insert_id</strong> o <strong>pdo->lastInsertId()</strong> obtienen el último ID
+                        insertado</li>
+                    <li><strong>affected_rows</strong> o <strong>rowCount()</strong> indican filas afectadas</li>
+                    <li>PDO permite <strong>transacciones</strong> con beginTransaction(), commit() y rollBack()</li>
+                    <li>Siempre usar <strong>try-catch</strong> con PDO para manejar errores</li>
+                    <li>Establecer <strong>charset UTF-8</strong> para evitar problemas de caracteres</li>
+                    <li>Usar <strong>htmlspecialchars()</strong> al mostrar datos de la base de datos</li>
+                    <li>PDO es más recomendado por su <strong>portabilidad</strong> y características avanzadas</li>
+                </ul>
+            </div>
+        </section>
 
-  </main>
+    </main>
 
 </body>
 
