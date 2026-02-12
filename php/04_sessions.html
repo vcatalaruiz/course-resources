@@ -1,129 +1,149 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} 
-    gtag('js', new Date());
-    gtag('config', 'G-EVTW1307T1');
-  </script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sesiones en PHP</title>
-  <script src="/course-resources/index.js" defer></script>
-  <script type="module">
-    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-    mermaid.initialize({ startOnLoad: true });
-  </script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
-  <script src="../index.js" defer></script>
-  <script src="../menu.js" defer></script>
-  <!-- <link rel="stylesheet" href="../index.css"> -->
-  <link rel="stylesheet" href="../style.css" />
-  <link rel="stylesheet" href="../menu.css">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-EVTW1307T1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesiones en PHP</title>
+    <script src="/course-resources/index.js" defer></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+    <script src="../index.js" defer></script>
+    <script src="../menu.js" defer></script>
+    <!-- <link rel="stylesheet" href="../index.css"> -->
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../menu.css">
 </head>
 
 
 <body>
 
-  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
-    <div class="vc-rail-head">
-      <span class="vc-rail-title">Índice</span>
-      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-        </svg>
-      </button>
-    </div>
-    <ul id="vc-list" class="vc-list"></ul>
-  </nav>
+    <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+        <div class="vc-rail-head">
+            <span class="vc-rail-title">Índice</span>
+            <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+        <ul id="vc-list" class="vc-list"></ul>
+    </nav>
 
-  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+    <div id="vc-backdrop" class="vc-backdrop" hidden></div>
 
-  <header>
-    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
-      <i class="fa fa-bars" aria-hidden="true"></i>
-    </button>
-    <h1>Sesiones en PHP</h1>
-    <img src="" id="logo" alt="Logo" style="display: none;">
-  </header>
+    <header>
+        <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+            aria-controls="vc-rail" aria-expanded="false">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+        <h1>Sesiones en PHP</h1>
+        <img src="" id="logo" alt="Logo" style="display: none;">
+    </header>
 
-  <main>
-    <p>Las sesiones permiten mantener información del usuario a través de múltiples páginas. Son esenciales para crear aplicaciones web interactivas como sistemas de login, carritos de compra y preferencias de usuario.</p>
+    <main>
 
-    <!-- SECCIÓN 1: QUÉ SON LAS SESIONES -->
-    <section id="que-son-sesiones">
-      <h2>1. ¿Qué son las sesiones?</h2>
+        <!-- SECCIÓN 1: QUÉ SON LAS SESIONES -->
+        <section id="que-son-sesiones">
+            <h2>1. ¿Qué son las sesiones?</h2>
 
-      <p>Una sesión es una forma de almacenar información (en variables) para usarla en múltiples páginas. A diferencia de las cookies, la información de sesión no se almacena en el ordenador del usuario, sino en el servidor.</p>
+            <p>Una sesión es una forma de almacenar información (en variables) para usarla en múltiples páginas. A
+                diferencia de las cookies, la información de sesión no se almacena en el ordenador del usuario, sino en
+                el servidor.</p>
+            <div class="diagram">
+                <img src="../assets/php_sessions_server.png" style="max-width: 75%;" width="auto"
+                    alt="sesion en servidor" />
+            </div>
+            <p>Las sesiones permiten mantener información del usuario a través de múltiples páginas. Son esenciales para
+                crear aplicaciones web interactivas como sistemas de login, carritos de compra y preferencias de
+                usuario.</p>
+            <p>Pagina web sin session</p>    
+            <div class="diagram">
+                <img src="../assets/php_sessions_without.png" style="max-width: 75%;" width="auto"
+                alt="web sin sesion" />
+            </div>
+            <p>Pagina web con session</p>    
+            <div class="diagram">
+                <img src="../assets/php_sessions_with.png" style="max-width: 75%;" width="auto"
+                    alt="web con sesion" />
+            </div>
 
-      <h3>1.1. ¿Por qué usar sesiones?</h3>
-      <ul>
-        <li>Mantener el estado de autenticación del usuario</li>
-        <li>Almacenar datos temporales entre páginas (carritos de compra)</li>
-        <li>Guardar preferencias del usuario durante la visita</li>
-        <li>Mayor seguridad que las cookies (datos en el servidor)</li>
-      </ul>
+            <h3>1.1. ¿Por qué usar sesiones?</h3>
+            <ul>
+                <li>Mantener el estado de autenticación del usuario</li>
+                <li>Almacenar datos temporales entre páginas (carritos de compra)</li>
+                <li>Guardar preferencias del usuario durante la visita</li>
+                <li>Mayor seguridad que las cookies (datos en el servidor)</li>
+            </ul>
 
-      <h3>1.2. Sesiones vs Cookies</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Característica</th>
-            <th>Sesiones</th>
-            <th>Cookies</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Almacenamiento</td>
-            <td>Servidor</td>
-            <td>Cliente (navegador)</td>
-          </tr>
-          <tr>
-            <td>Seguridad</td>
-            <td>Más seguro</td>
-            <td>Menos seguro</td>
-          </tr>
-          <tr>
-            <td>Límite de datos</td>
-            <td>Sin límite práctico</td>
-            <td>~4KB por cookie</td>
-          </tr>
-          <tr>
-            <td>Duración</td>
-            <td>Hasta cerrar navegador</td>
-            <td>Fecha de expiración configurable</td>
-          </tr>
-          <tr>
-            <td>Acceso desde JS</td>
-            <td>No (solo PHP)</td>
-            <td>Sí (si no es httpOnly)</td>
-          </tr>
-        </tbody>
-      </table>
+            <h3>1.2. Sesiones vs Cookies</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Característica</th>
+                        <th>Sesiones</th>
+                        <th>Cookies</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Almacenamiento</td>
+                        <td>Servidor</td>
+                        <td>Cliente (navegador)</td>
+                    </tr>
+                    <tr>
+                        <td>Seguridad</td>
+                        <td>Más seguro</td>
+                        <td>Menos seguro</td>
+                    </tr>
+                    <tr>
+                        <td>Límite de datos</td>
+                        <td>Sin límite práctico</td>
+                        <td>~4KB por cookie</td>
+                    </tr>
+                    <tr>
+                        <td>Duración</td>
+                        <td>Hasta cerrar navegador</td>
+                        <td>Fecha de expiración configurable</td>
+                    </tr>
+                    <tr>
+                        <td>Acceso desde JS</td>
+                        <td>No (solo PHP)</td>
+                        <td>Sí (si no es httpOnly)</td>
+                    </tr>
+                </tbody>
+            </table>
 
-      <h3>1.3. ¿Cómo funcionan las sesiones?</h3>
-      <ol>
-        <li>Se llama a <code>session_start()</code> en PHP</li>
-        <li>PHP genera un ID de sesión único (PHPSESSID)</li>
-        <li>El ID se envía al navegador como cookie</li>
-        <li>Los datos de sesión se guardan en el servidor</li>
-        <li>En cada petición, PHP lee el ID y carga los datos</li>
-      </ol>
-    </section>
+            <h3>1.3. ¿Cómo funcionan las sesiones?</h3>
+            <ol>
+                <li>Se llama a <code>session_start()</code> en PHP</li>
+                <li>PHP genera un ID de sesión único (PHPSESSID)</li>
+                <li>El ID se envía al navegador como cookie</li>
+                <li>Los datos de sesión se guardan en el servidor</li>
+                <li>En cada petición, PHP lee el ID y carga los datos</li>
+            </ol>
+        </section>
 
-    <!-- SECCIÓN 2: INICIAR UNA SESIÓN -->
-    <section id="iniciar-sesion">
-      <h2>2. Iniciar una sesión</h2>
+        <!-- SECCIÓN 2: INICIAR UNA SESIÓN -->
+        <section id="iniciar-sesion">
+            <h2>2. Iniciar una sesión</h2>
 
-      <h3>2.1. session_start()</h3>
-      <pre><code class="language-php">
+            <h3>2.1. session_start()</h3>
+            <pre><code class="language-php">
 &lt;?php
 // SIEMPRE debe ser la primera línea antes de cualquier salida HTML
 session_start();
@@ -136,12 +156,14 @@ echo "Sesión iniciada correctamente";
 ?&gt;
 </code></pre>
 
-      <div class="warning-box">
-        <strong>⚠️ Importante:</strong> <code>session_start()</code> debe llamarse ANTES de cualquier salida HTML, espacios en blanco o echo. De lo contrario, obtendrás el error: <em>"Cannot send session cookie - headers already sent"</em>.
-      </div>
+            <div class="warning-box">
+                <strong>⚠️ Importante:</strong> <code>session_start()</code> debe llamarse ANTES de cualquier salida
+                HTML, espacios en blanco o echo. De lo contrario, obtendrás el error: <em>"Cannot send session cookie -
+                    headers already sent"</em>.
+            </div>
 
-      <h3>2.2. Verificar si existe una sesión</h3>
-      <pre><code class="language-php">
+            <h3>2.2. Verificar si existe una sesión</h3>
+            <pre><code class="language-php">
 &lt;?php
 // Método 1: Verificar con session_status()
 if (session_status() === PHP_SESSION_NONE) {
@@ -160,8 +182,8 @@ if (session_id() === '') {
 ?&gt;
 </code></pre>
 
-      <h3>2.3. Obtener información de sesión</h3>
-      <pre><code class="language-php">
+            <h3>2.3. Obtener información de sesión</h3>
+            <pre><code class="language-php">
 &lt;?php
 session_start();
 
@@ -181,14 +203,14 @@ echo session_name();  // PHPSESSID (por defecto)
 print_r(session_get_cookie_params());
 ?&gt;
 </code></pre>
-    </section>
+        </section>
 
-    <!-- SECCIÓN 3: TRABAJAR CON VARIABLES DE SESIÓN -->
-    <section id="variables-sesion">
-      <h2>3. Trabajar con variables de sesión</h2>
+        <!-- SECCIÓN 3: TRABAJAR CON VARIABLES DE SESIÓN -->
+        <section id="variables-sesion">
+            <h2>3. Trabajar con variables de sesión</h2>
 
-      <h3>3.1. Crear y almacenar datos</h3>
-      <pre><code class="language-php">
+            <h3>3.1. Crear y almacenar datos</h3>
+            <pre><code class="language-php">
 &lt;?php
 session_start();
 
@@ -216,8 +238,8 @@ $_SESSION['usuario_obj'] = $usuario;
 ?&gt;
 </code></pre>
 
-      <h3>3.2. Leer datos de sesión</h3>
-      <pre><code class="language-php">
+            <h3>3.2. Leer datos de sesión</h3>
+            <pre><code class="language-php">
 &lt;?php
 session_start();
 
@@ -239,8 +261,8 @@ if (isset($_SESSION['carrito']['producto1'])) {
 ?&gt;
 </code></pre>
 
-      <h3>3.3. Modificar datos de sesión</h3>
-      <pre><code class="language-php">
+            <h3>3.3. Modificar datos de sesión</h3>
+            <pre><code class="language-php">
 &lt;?php
 session_start();
 
@@ -261,8 +283,8 @@ $_SESSION['permisos'] = array_merge(
 ?&gt;
 </code></pre>
 
-      <h3>3.4. Eliminar variables de sesión</h3>
-      <pre><code class="language-php">
+            <h3>3.4. Eliminar variables de sesión</h3>
+            <pre><code class="language-php">
 &lt;?php
 session_start();
 
@@ -279,14 +301,14 @@ $_SESSION = [];
 session_unset();  // Equivalente a $_SESSION = []
 ?&gt;
 </code></pre>
-    </section>
+        </section>
 
-    <!-- SECCIÓN 4: DESTRUIR SESIONES -->
-    <section id="destruir-sesion">
-      <h2>4. Destruir una sesión</h2>
+        <!-- SECCIÓN 4: DESTRUIR SESIONES -->
+        <section id="destruir-sesion">
+            <h2>4. Destruir una sesión</h2>
 
-      <h3>4.1. session_destroy()</h3>
-      <pre><code class="language-php">
+            <h3>4.1. session_destroy()</h3>
+            <pre><code class="language-php">
 &lt;?php
 session_start();
 
@@ -306,8 +328,8 @@ echo "Sesión cerrada correctamente";
 ?&gt;
 </code></pre>
 
-      <h3>4.2. Logout completo</h3>
-      <pre><code class="language-php">
+            <h3>4.2. Logout completo</h3>
+            <pre><code class="language-php">
 &lt;?php
 // logout.php
 session_start();
@@ -336,15 +358,15 @@ session_destroy();
 header("Location: login.php");
 exit;
 ?&gt;
-</code></pre>      
-    </section>
+</code></pre>
+        </section>
 
-    <!-- SECCIÓN 5: EJEMPLOS PRÁCTICOS -->
-    <section id="ejemplos-practicos">
-      <h2>5. Ejemplos prácticos</h2>
+        <!-- SECCIÓN 5: EJEMPLOS PRÁCTICOS -->
+        <section id="ejemplos-practicos">
+            <h2>5. Ejemplos prácticos</h2>
 
-      <h3>5.1. Sistema de login simple</h3>
-      <pre><code class="language-php">
+            <h3>5.1. Sistema de login simple</h3>
+            <pre><code class="language-php">
 &lt;?php
 // login.php
 session_start();
@@ -397,8 +419,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 &lt;/html&gt;
 </code></pre>
 
-      <h3>5.2. Verificar autenticación</h3>
-      <pre><code class="language-php">
+            <h3>5.2. Verificar autenticación</h3>
+            <pre><code class="language-php">
 &lt;?php
 // panel.php (página protegida)
 session_start();
@@ -436,8 +458,8 @@ $rol = $_SESSION['rol'];
 &lt;/html&gt;
 </code></pre>
 
-      <h3>5.3. Carrito de compras</h3>
-      <pre><code class="language-php">
+            <h3>5.3. Carrito de compras</h3>
+            <pre><code class="language-php">
 &lt;?php
 // carrito.php
 session_start();
@@ -532,8 +554,8 @@ foreach ($_SESSION['carrito'] as $item) {
 &lt;/html&gt;
 </code></pre>
 
-      <h3>5.4. Contador de visitas</h3>
-      <pre><code class="language-php">
+            <h3>5.4. Contador de visitas</h3>
+            <pre><code class="language-php">
 &lt;?php
 session_start();
 
@@ -558,28 +580,28 @@ $_SESSION['ultima_visita'] = date("Y-m-d H:i:s");
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-    </section>
+        </section>
 
-    <!-- RESUMEN -->
-    <section id="resumen">
-      <div class="info-box">
-        <h3>Resumen de sesiones en PHP</h3>
-        <ul>
-          <li>Las sesiones almacenan datos en el servidor, no en el cliente</li>
-          <li><strong>session_start()</strong> debe ser la primera línea antes de HTML</li>
-          <li><strong>$_SESSION</strong> es un array superglobal para almacenar datos</li>
-          <li><strong>session_destroy()</strong> elimina la sesión completamente</li>
-          <li>Regenerar ID con <strong>session_regenerate_id()</strong> después del login</li>
-          <li>Usar <strong>httponly</strong> y <strong>secure</strong> para cookies de sesión</li>
-          <li>Implementar timeout de inactividad para mayor seguridad</li>
-          <li>Validar información del navegador en cada petición</li>
-          <li>Las sesiones son ideales para login, carritos y preferencias</li>
-          <li>Limpiar <strong>$_SESSION</strong> antes de <strong>session_destroy()</strong></li>
-        </ul>
-      </div>
-    </section>
+        <!-- RESUMEN -->
+        <section id="resumen">
+            <div class="info-box">
+                <h3>Resumen de sesiones en PHP</h3>
+                <ul>
+                    <li>Las sesiones almacenan datos en el servidor, no en el cliente</li>
+                    <li><strong>session_start()</strong> debe ser la primera línea antes de HTML</li>
+                    <li><strong>$_SESSION</strong> es un array superglobal para almacenar datos</li>
+                    <li><strong>session_destroy()</strong> elimina la sesión completamente</li>
+                    <li>Regenerar ID con <strong>session_regenerate_id()</strong> después del login</li>
+                    <li>Usar <strong>httponly</strong> y <strong>secure</strong> para cookies de sesión</li>
+                    <li>Implementar timeout de inactividad para mayor seguridad</li>
+                    <li>Validar información del navegador en cada petición</li>
+                    <li>Las sesiones son ideales para login, carritos y preferencias</li>
+                    <li>Limpiar <strong>$_SESSION</strong> antes de <strong>session_destroy()</strong></li>
+                </ul>
+            </div>
+        </section>
 
-  </main>
+    </main>
 
 </body>
 
