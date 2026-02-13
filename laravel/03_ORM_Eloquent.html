@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} 
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-EVTW1307T1');
   </script>
@@ -51,8 +52,8 @@
   <header>
 
     <!-- ===== VC SIDEBAR (desde cero) ===== -->
-    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail"
-      aria-expanded="false">
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+      aria-controls="vc-rail" aria-expanded="false">
       <!--Hamburger icon -->
       <i class="fa fa-bars" aria-hidden="true"></i>
 
@@ -62,36 +63,45 @@
     <img src="" id="logo" alt="Logo" style="display: none;">
   </header>
 
-<main>
+  <main>
 
-<!-- SECCIÓN 1 -->
-<section id="introduccion">
-<h2>1. Introducción a Eloquent ORM</h2>
+    <!-- SECCIÓN 1 -->
+    <section id="introduccion">
+      <h2>1. Introducción a Eloquent ORM</h2>
 
-<p>
-<strong>Eloquent</strong> es el ORM de Laravel. Permite trabajar con la base de datos
-mediante <strong>modelos PHP</strong>, evitando escribir SQL directamente.
-Cada modelo representa una tabla.
-</p>
+      <p>
+        <strong>Eloquent</strong> es el ORM de Laravel. Permite trabajar con la base de datos
+        mediante <strong>modelos PHP</strong>, evitando escribir SQL directamente.
+        Cada modelo representa una tabla.
+      </p>
 
-<div class="diagram">
-    <img src="../assets/laravel_orm.png" style="max-width:35%;" alt="Laravel Logo">
-</div>
-</section>
+      <div class="diagram">
+        <img src="../assets/laravel_orm.png" style="max-width:35%;" alt="Laravel ORM Logo">
+      </div>
+    </section>
+    <div class="info-box">
+      <h4>⚠️ Importante</h4>
+      <ul>
+        <li>Un registro o fila de la tabla se corresponderá con un objeto de la clase asociada (entidad)</li>
+      </ul>
+    </div>
+    <div class="diagram">
+      <img src="../assets/laravel_orm_intro.png" style="max-width:100%;" alt="Laravel ORM Intro">
+    </div>
 
-<!-- SECCIÓN 2 -->
-<section id="model">
-<h2>2. Modelos Eloquent</h2>
+    <!-- SECCIÓN 2 -->
+    <section id="model">
+      <h2>2. Modelos Eloquent</h2>
 
-<h3>2.1. Crear un modelo</h3>
+      <h3>2.1. Crear un modelo</h3>
 
-<pre><code class="language-bash">
+      <pre><code class="language-bash">
 php artisan make:model Hotel
 </code></pre>
 
-<h3>2.2. Modelo básico</h3>
+      <h3>2.2. Modelo básico</h3>
 
-<pre><code class="language-php">
+      <pre><code class="language-php">
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -107,9 +117,9 @@ class Hotel extends Model
 }
 </code></pre>
 
-<h3>2.3. Uso básico del modelo</h3>
+      <h3>2.3. Uso básico del modelo</h3>
 
-<pre><code class="language-php">
+      <pre><code class="language-php">
 // Insertar
 Hotel::create([
     'nombre' => 'Gran Hotel',
@@ -125,52 +135,55 @@ $hotel = Hotel::find(1);
 // Eliminar
 Hotel::destroy(1);
 </code></pre>
-</section>
+    </section>
 
-<!-- SECCIÓN 3 -->
-<section id="eloquent-crud">
-<h2>3. CRUD con Eloquent</h2>
+    <!-- SECCIÓN 3 -->
+    <section id="eloquent-crud">
+      <h2>3. CRUD con Eloquent</h2>
 
-<h3>3.1. CREATE</h3>
-<pre><code class="language-php">
+      <h3>3.1. CREATE</h3>
+      <pre><code class="language-php">
 Hotel::create([
     'nombre' => 'Hotel Central',
     'direccion' => 'Avenida Principal 10'
 ]);
 </code></pre>
 
-<h3>3.2. READ</h3>
-<pre><code class="language-php">
+      <h3>3.2. READ</h3>
+      <pre><code class="language-php">
+$hoteles = Hotel::all();
+</code></pre>
+      <pre><code class="language-php">
 $hoteles = Hotel::where('nombre', 'like', '%Hotel%')->get();
 </code></pre>
 
-<h3>3.3. UPDATE</h3>
-<pre><code class="language-php">
+      <h3>3.3. UPDATE</h3>
+      <pre><code class="language-php">
 $hotel = Hotel::find(1);
 $hotel->direccion = 'Nueva dirección';
 $hotel->save();
 </code></pre>
 
-<h3>3.4. DELETE</h3>
-<pre><code class="language-php">
+      <h3>3.4. DELETE</h3>
+      <pre><code class="language-php">
 $hotel = Hotel::find(1);
 $hotel->delete();
 </code></pre>
-</section>
+    </section>
 
-<!-- SECCIÓN 4 -->
-<section id="factory">
-<h2>4. Factories con Eloquent</h2>
+    <!-- SECCIÓN 4 -->
+    <section id="factory">
+      <h2>4. Factories con Eloquent</h2>
 
-<h3>4.1. Crear modelo + factory</h3>
+      <h3>4.1. Crear modelo + factory</h3>
 
-<pre><code class="language-bash">
+      <pre><code class="language-bash">
 php artisan make:model Hotel -mf
 </code></pre>
 
-<h3>4.2. Factory con Faker</h3>
+      <h3>4.2. Factory con Faker</h3>
 
-<pre><code class="language-php">
+      <pre><code class="language-php">
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -187,9 +200,9 @@ class HotelFactory extends Factory
 }
 </code></pre>
 
-<h3>4.3. Usar la factory</h3>
+      <h3>4.3. Usar la factory</h3>
 
-<pre><code class="language-php">
+      <pre><code class="language-php">
 use App\Models\Hotel;
 
 // Crear un registro
@@ -198,15 +211,15 @@ Hotel::factory()->create();
 // Crear varios registros
 Hotel::factory()->count(10)->create();
 </code></pre>
-</section>
+    </section>
 
-<!-- SECCIÓN 5 -->
-<section id="relaciones">
-<h2>5. Relaciones Eloquent</h2>
+    <!-- SECCIÓN 5 -->
+    <section id="relaciones">
+      <h2>5. Relaciones Eloquent</h2>
 
-<h3>5.1. Relación 1:N</h3>
+      <h3>5.1. Relación 1:N</h3>
 
-<pre><code class="language-php">
+      <pre><code class="language-php">
 // Hotel.php
 public function habitaciones()
 {
@@ -214,7 +227,7 @@ public function habitaciones()
 }
 </code></pre>
 
-<pre><code class="language-php">
+      <pre><code class="language-php">
 // Habitacion.php
 public function hotel()
 {
@@ -222,30 +235,30 @@ public function hotel()
 }
 </code></pre>
 
-<h3>5.2. Uso de la relación</h3>
+      <h3>5.2. Uso de la relación</h3>
 
-<pre><code class="language-php">
+      <pre><code class="language-php">
 $hotel = Hotel::find(1);
 
 foreach ($hotel->habitaciones as $habitacion) {
     echo $habitacion->numero;
 }
 </code></pre>
-</section>
+    </section>
 
-<!-- SECCIÓN 6 -->
-<section id="seed">
-<h2>6. Seeders con Eloquent</h2>
+    <!-- SECCIÓN 6 -->
+    <section id="seed">
+      <h2>6. Seeders con Eloquent</h2>
 
-<h3>6.1. Crear seeder</h3>
+      <h3>6.1. Crear seeder</h3>
 
-<pre><code class="language-bash">
+      <pre><code class="language-bash">
 php artisan make:seeder HotelSeeder
 </code></pre>
 
-<h3>6.2. Seeder usando Factory</h3>
+      <h3>6.2. Seeder usando Factory</h3>
 
-<pre><code class="language-php">
+      <pre><code class="language-php">
 use App\Models\Hotel;
 
 class HotelSeeder extends Seeder
@@ -257,53 +270,72 @@ class HotelSeeder extends Seeder
 }
 </code></pre>
 
-<h3>6.3. Ejecutar seeders</h3>
+      <h3>6.3. Ejecutar seeders</h3>
 
-<pre><code class="language-bash">
+      <pre><code class="language-bash">
 php artisan db:seed
 </code></pre>
-</section>
+    </section>
 
-<!-- DIAGRAMA -->
-<section>
-<h2>Diagrama conceptual</h2>
+    <!-- DIAGRAMA -->
+    <section>
+      <h2>Diagrama conceptual</h2>
 
-<div class="mermaid">
-classDiagram
-class Hotel {
-    id
-    nombre
-    direccion
-}
-class Habitacion {
-    id
-    numero
-    hotel_id
-}
-Hotel "1" --> "*" Habitacion
-</div>
-</section>
+      <div class="mermaid">
+        classDiagram
+        class Hotel {
+        id
+        nombre
+        direccion
+        }
+        class Habitacion {
+        id
+        numero
+        hotel_id
+        }
+        Hotel "1" --> "*" Habitacion
+      </div>
+    </section>
 
-<!-- RESUMEN -->
-<section>
-<div class="info-box">
-<h3>Resumen rápido</h3>
+    <!-- RESUMEN -->
+    <section>
+      <div class="info-box">
+        <h3>Resumen rápido</h3>
 
-<table border="1" style="width:100%; border-collapse:collapse;">
-<tr><th>Elemento</th><th>Función</th></tr>
-<tr><td>Model</td><td>Representa una tabla</td></tr>
-<tr><td>Eloquent</td><td>ORM de Laravel</td></tr>
-<tr><td>Factory</td><td>Genera datos con Faker</td></tr>
-<tr><td>Seeder</td><td>Inserta datos automáticamente</td></tr>
-<tr><td>CRUD</td><td>Operaciones con objetos</td></tr>
-</table>
-</div>
-</section>
+        <table border="1" style="width:100%; border-collapse:collapse;">
+          <tr>
+            <th>Elemento</th>
+            <th>Función</th>
+          </tr>
+          <tr>
+            <td>Model</td>
+            <td>Representa una tabla</td>
+          </tr>
+          <tr>
+            <td>Eloquent</td>
+            <td>ORM de Laravel</td>
+          </tr>
+          <tr>
+            <td>Factory</td>
+            <td>Genera datos con Faker</td>
+          </tr>
+          <tr>
+            <td>Seeder</td>
+            <td>Inserta datos automáticamente</td>
+          </tr>
+          <tr>
+            <td>CRUD</td>
+            <td>Operaciones con objetos</td>
+          </tr>
+        </table>
+      </div>
+    </section>
 
-</main>
+  </main>
 
-<footer>
-<p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
-</footer>
+  <footer>
+    <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+  </footer>
 </body>
+
 </html>

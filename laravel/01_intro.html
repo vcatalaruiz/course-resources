@@ -1073,6 +1073,36 @@ protected $middlewarePriority = [
           <li><strong>Route::resource:</strong> genera CRUD completo automáticamente</li>
           <li><strong>Patrón MVC:</strong> Routes → Controller → Model → View</li>
         </ul>
+        <table border="1" style="width:100%; border-collapse:collapse;">
+                    <tr>
+                        <th>Acción</th>
+                        <th>Comando</th>
+                    </tr>
+                    <tr>
+                        <td>Iniciar servidor</td>
+                        <td>php artisan serve</td>
+                    </tr>
+                    <tr>
+                        <td>Listar rutas publicadas</td>
+                        <td>php artisan route:list</td>
+                    </tr>
+                    <tr>
+                        <td>Listar rutas publicadas sin las de vendor</td>
+                        <td>php artisan route:list --except-vendor</td>
+                    </tr>
+                    <tr>
+                        <td>Limpiar cache</td>
+                        <td>php artisan cache:clear</td>
+                    </tr>
+                    <tr>
+                        <td>Limpiar toda la cache</td>
+                        <td>php artisan optimize:clear</td>
+                    </tr>
+                    <tr>
+                        <td>Limpiar cache vistas</td>
+                        <td>php artisan view:clear</td>
+                    </tr>                    
+                </table>
       </div>
     </section>
 
