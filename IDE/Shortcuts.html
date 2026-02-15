@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atajos de teclado por IDE</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <!-- X SVG -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+  <!-- ===== /VC SIDEBAR ===== -->
+
+  <header>
+
+    <!-- ===== VC SIDEBAR (desde cero) ===== -->
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail"
+      aria-expanded="false">
+      <!--Hamburger icon -->
+      <i class="fa fa-bars" aria-hidden="true"></i>
+
+
+    </button>
+    <h1>Atajos de teclado por IDE</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+
+    <section id="intro">
+      <h2>Introducción</h2>
+      <p>
+        Aquí tienes una sección por IDE con los atajos más usados para codificación. En macOS, sustituye
+        <strong>Ctrl</strong> por <strong>⌘</strong> (si aplica).
+      </p>
+      <div class="note">
+        <p>
+          Los atajos pueden cambiar según el <em>keymap</em> configurado en cada IDE.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 1: NETBEANS -->
+    <section id="netbeans">
+      <h2>1. NetBeans</h2>
+      <p>Top 25 shortcuts de codificación en NetBeans (Windows).</p>
+
+      <table style="width:100%; border-collapse: collapse;">
+        <tr style="border: 1px solid #ddd;">
+          <th style="border: 1px solid #ddd; padding: 8px;">#</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Atajo</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Acción</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Uso típico</th>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">1</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Space</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Autocompletar</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Sugerencias de métodos, clases y variables</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">2</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + Space</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Parámetros del método</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ver firma y tipos esperados</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">3</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Alt + Insert</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Generar código</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Constructores, getters/setters, override</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">4</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + I</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Fix Imports</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Organizar/importar clases automáticamente</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">5</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Alt + Shift + F</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Reformatear código</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Aplicar formato según el estilo del proyecto</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">6</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + /</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Comentar línea</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Activar/desactivar comentario en la línea</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">7</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + /</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Comentar bloque</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Comentar/Descomentar selección</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">8</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + D</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Duplicar línea</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Replicar una línea o selección</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">9</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + E</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Eliminar línea</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Borrar línea completa sin seleccionar</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">10</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + F</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Buscar</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Buscar texto en el archivo actual</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">11</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + H</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Reemplazar</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Buscar y reemplazar en el archivo</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">12</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + G</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ir a línea</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Saltar a una línea concreta</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">13</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + B</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ir a declaración</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Abrir la definición del símbolo</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">14</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Alt + F7</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Buscar usos</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Localizar referencias del símbolo</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">15</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + O</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ir a tipo/clase</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Buscar y abrir clases rápidamente</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">16</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + O</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ir a archivo</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Buscar cualquier archivo del proyecto</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">17</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Alt + O</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ir a símbolo</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Buscar métodos o variables por nombre</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">18</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + F12</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Miembros del archivo</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Lista de métodos y campos del fichero</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">19</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">F2</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Siguiente error</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Navegar entre errores de compilación</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">20</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + S</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Guardar</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Guardar el archivo actual</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">21</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + S</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Guardar todo</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Guardar todos los archivos abiertos</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">22</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + N</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Nuevo archivo</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Crear clase/archivo desde plantilla</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">23</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + N</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Nuevo proyecto</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Iniciar un proyecto desde cero</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">24</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Tab</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Cambiar de pestaña</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Alternar entre archivos abiertos</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">25</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + R</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Renombrar (refactor)</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Renombrar variables, métodos o clases</td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- SECCIÓN 2: VS CODE -->
+    <section id="vscode">
+      <h2>2. VS Code</h2>
+      <p>Top 25 shortcuts de codificación en Visual Studio Code (Windows).</p>
+
+      <table style="width:100%; border-collapse: collapse;">
+        <tr style="border: 1px solid #ddd;">
+          <th style="border: 1px solid #ddd; padding: 8px;">#</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Atajo</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Acción</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Uso típico</th>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">1</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + P</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Quick Open</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Abrir archivos rápido</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">2</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + P</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Command Palette</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ejecutar comandos y acciones</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">3</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + `</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Terminal integrada</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Mostrar/ocultar terminal</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">4</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + B</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Toggle Sidebar</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Mostrar/ocultar barra lateral</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">5</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + F</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Buscar en proyecto</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Buscar texto en todo el workspace</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">6</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + F</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Buscar</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Buscar texto en el archivo actual</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">7</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + H</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Reemplazar</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Buscar y reemplazar en el archivo</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">8</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Alt + Shift + F</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Format Document</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Formatear el archivo completo</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">9</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + /</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Comentar línea</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Activar/desactivar comentario</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">10</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Shift + Alt + A</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Comentar bloque</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Comentario por selección</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">11</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">F12</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Go to Definition</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ir a la definición del símbolo</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">12</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Alt + F12</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Peek Definition</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ver definición inline</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">13</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + O</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ir a símbolo en archivo</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Buscar funciones o clases del archivo</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">14</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + T</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ir a símbolo en workspace</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Buscar símbolos globales</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">15</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + M</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Problemas</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Mostrar panel de errores</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">16</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + L</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Seleccionar todas</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Seleccionar todas las coincidencias</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">17</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + D</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Seleccionar siguiente</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Añadir siguiente coincidencia</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">18</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Alt + ↑ / ↓</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Mover línea</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Subir o bajar línea actual</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">19</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Shift + Alt + ↑ / ↓</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Duplicar línea</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Copiar línea hacia arriba/abajo</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">20</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Enter</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Insertar línea abajo</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Nueva línea sin romper la actual</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">21</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + Enter</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Insertar línea arriba</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Nueva línea encima</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">22</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + K Ctrl + C</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Comentar selección</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Añadir comentarios en bloque</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">23</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + K Ctrl + U</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Descomentar selección</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Quitar comentarios en bloque</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">24</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + E</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Explorer</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ir al explorador de archivos</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">25</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + `</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Nuevo terminal</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Abrir una nueva terminal</td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- SECCIÓN 3: ECLIPSE -->
+    <section id="eclipse">
+      <h2>3. Eclipse</h2>
+      <p>Top 25 shortcuts de codificación en Eclipse (Windows).</p>
+
+      <table style="width:100%; border-collapse: collapse;">
+        <tr style="border: 1px solid #ddd;">
+          <th style="border: 1px solid #ddd; padding: 8px;">#</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Atajo</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Acción</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Uso típico</th>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">1</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Space</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Content Assist</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Autocompletado de código</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">2</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + 1</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Quick Fix</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Corregir errores y sugerencias</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">3</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + O</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Organize Imports</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Importar clases automáticamente</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">4</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + F</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Format</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Formatear código</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">5</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + /</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Comentar línea</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Activar/desactivar comentario</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">6</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + /</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Comentar bloque</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Añadir comentario en bloque</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">7</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + \</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Descomentar bloque</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Quitar comentario en bloque</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">8</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Alt + Shift + R</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Rename</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Renombrar símbolo</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">9</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Alt + Shift + M</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Extract Method</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Extraer método</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">10</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Alt + Shift + L</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Extract Local Variable</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Extraer variable local</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">11</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Alt + Shift + I</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Inline</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Inline variable/método</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">12</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">F3</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Open Declaration</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ir a definición</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">13</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + T</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Open Type</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Buscar clases rápidamente</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">14</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + R</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Open Resource</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Buscar archivos del proyecto</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">15</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + O</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Quick Outline</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ver miembros del archivo</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">16</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + L</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Go to Line</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ir a línea</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">17</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Alt + Shift + S</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Source</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Generar código (getters, setters...)</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">18</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + D</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Delete Line</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Eliminar línea completa</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">19</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Alt + H</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Call Hierarchy</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ver jerarquía de llamadas</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">20</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + G</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Search References</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Buscar referencias</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">21</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + K</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Find Next</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Siguiente coincidencia</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">22</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + K</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Find Previous</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Anterior coincidencia</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">23</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + F</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Find/Replace</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Buscar y reemplazar</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">24</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + M</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Maximize Editor</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Maximizar editor actual</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">25</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + F11</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Run</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ejecutar la última configuración</td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- SECCIÓN 4: ANDROID STUDIO -->
+    <section id="android-studio">
+      <h2>4. Android Studio</h2>
+      <p>Top 25 shortcuts de codificación en Android Studio (Windows).</p>
+
+      <table style="width:100%; border-collapse: collapse;">
+        <tr style="border: 1px solid #ddd;">
+          <th style="border: 1px solid #ddd; padding: 8px;">#</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Atajo</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Acción</th>
+          <th style="border: 1px solid #ddd; padding: 8px;">Uso típico</th>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">1</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Space</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Basic Completion</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Autocompletado básico</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">2</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + Space</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Smart Completion</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Autocompletado inteligente</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">3</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Alt + Enter</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Intention Actions</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Quick fix y acciones rápidas</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">4</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Alt + L</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Reformat Code</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Formatear el código</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">5</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + /</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Comentar línea</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Activar/desactivar comentario</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">6</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + /</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Comentar bloque</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Comentario por selección</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">7</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Shift + F6</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Rename</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Renombrar símbolos</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">8</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + N</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Go to Class</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Buscar clases</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">9</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + N</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Go to File</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Buscar archivos</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">10</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Alt + Shift + N</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Go to Symbol</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Buscar métodos o variables</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">11</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + B</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Go to Declaration</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ir a la declaración</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">12</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Alt + B</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Go to Implementation</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ir a implementación</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">13</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + U</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Go to Super</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ir a clase/supermétodo</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">14</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + A</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Find Action</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Buscar acciones y ajustes</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">15</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + F</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Find</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Buscar en el archivo</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">16</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + R</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Replace</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Reemplazar en el archivo</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">17</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + F</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Find in Files</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Buscar en el proyecto</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">18</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + R</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Replace in Files</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Reemplazar en el proyecto</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">19</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Alt + F7</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Find Usages</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Buscar usos</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">20</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Alt + O</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Optimize Imports</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Optimizar imports</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">21</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + P</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Parameter Info</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ver parámetros del método</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">22</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Q</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Quick Documentation</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ver documentación rápida</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">23</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Alt + Shift + ↑ / ↓</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Mover línea</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Subir o bajar líneas</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">24</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + Enter</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Complete Statement</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Completar sentencia</td>
+        </tr>
+        <tr style="border: 1px solid #ddd;">
+          <td style="border: 1px solid #ddd; padding: 8px;">25</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Ctrl + Shift + Up/Down</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Mover declaración</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">Mover código entre bloques</td>
+        </tr>
+      </table>
+    </section>
+
+  </main>
+
+</body>
+
+</html>
