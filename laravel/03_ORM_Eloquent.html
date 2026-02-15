@@ -70,6 +70,10 @@
       <h2>1. Introducción a Eloquent ORM</h2>
 
       <p>
+        En esta sección comprenderás qué es Eloquent y por qué simplifica el acceso a datos en Laravel.
+      </p>
+
+      <p>
         <strong>Eloquent</strong> es el ORM de Laravel. Permite trabajar con la base de datos
         mediante <strong>modelos PHP</strong>, evitando escribir SQL directamente.
         Cada modelo representa una tabla.
@@ -92,6 +96,10 @@
     <!-- SECCIÓN 2 -->
     <section id="model">
       <h2>2. Modelos Eloquent</h2>
+
+      <p>
+        Aquí aprenderás a crear y usar modelos para representar tablas y operar con registros.
+      </p>
 
       <h3>2.1. Crear un modelo</h3>
 
@@ -141,6 +149,10 @@ Hotel::destroy(1);
     <section id="eloquent-crud">
       <h2>3. CRUD con Eloquent</h2>
 
+      <p>
+        Verás cómo realizar operaciones básicas de creación, lectura, actualización y borrado con Eloquent.
+      </p>
+
       <h3>3.1. CREATE</h3>
       <pre><code class="language-php">
 Hotel::create([
@@ -174,6 +186,10 @@ $hotel->delete();
     <!-- SECCIÓN 4 -->
     <section id="factory">
       <h2>4. Factories con Eloquent</h2>
+
+      <p>
+        Esta parte te permite generar datos de prueba de forma rápida y consistente para tus modelos.
+      </p>
 
       <h3>4.1. Crear modelo + factory</h3>
 
@@ -217,6 +233,10 @@ Hotel::factory()->count(10)->create();
     <section id="relaciones">
       <h2>5. Relaciones Eloquent</h2>
 
+      <p>
+        Aprenderás a definir relaciones entre modelos para navegar datos conectados.
+      </p>
+
       <h3>5.1. Relación 1:N</h3>
 
       <pre><code class="language-php">
@@ -250,6 +270,10 @@ foreach ($hotel->habitaciones as $habitacion) {
     <section id="seed">
       <h2>6. Seeders con Eloquent</h2>
 
+      <p>
+        Verás cómo poblar la base de datos automáticamente con datos iniciales o de prueba.
+      </p>
+
       <h3>6.1. Crear seeder</h3>
 
       <pre><code class="language-bash">
@@ -280,6 +304,10 @@ php artisan db:seed
     <!-- DIAGRAMA -->
     <section>
       <h2>Diagrama conceptual</h2>
+
+      <p>
+        Este diagrama resume la relación entre modelos para visualizar la estructura de datos.
+      </p>
 
       <div class="mermaid">
         classDiagram

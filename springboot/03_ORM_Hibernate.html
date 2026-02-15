@@ -69,6 +69,10 @@
 <h2>1. Introducción a Hibernate ORM</h2>
 
 <p>
+En esta sección comprenderás qué es Hibernate y cómo facilita el acceso a datos en Spring Boot.
+</p>
+
+<p>
 <strong>Hibernate</strong> es el ORM que usa Spring Boot. Permite trabajar con la base de datos
 mediante <strong>entidades Java</strong>, evitando escribir SQL directamente.
 Cada entidad representa una tabla. <strong>Spring Data JPA</strong> proporciona repositorios automáticos.
@@ -105,6 +109,10 @@ spring.jpa.properties.hibernate.format_sql=true
 <!-- SECCIÓN 2 -->
 <section id="entity">
 <h2>2. Entidades Hibernate</h2>
+
+<p>
+Aquí aprenderás a crear entidades y repositorios para representar tablas y operar con registros.
+</p>
 
 <h3>2.1. Crear una entidad</h3>
 
@@ -208,6 +216,10 @@ public class HotelService {
 <section id="hibernate-crud">
 <h2>3. CRUD con Spring Data JPA</h2>
 
+<p>
+Verás cómo realizar altas, consultas, actualizaciones y borrados con Spring Data JPA.
+</p>
+
 <h3>3.1. CREATE</h3>
 <pre><code class="language-java">
 Hotel hotel = new Hotel();
@@ -247,6 +259,10 @@ hotelRepository.deleteById(1L);
 <!-- SECCIÓN 4 -->
 <section id="factory">
 <h2>4. Seeders con DataFaker</h2>
+
+<p>
+Esta parte te permite generar datos de prueba de forma rápida y consistente.
+</p>
 
 <h3>4.1. Agregar dependencia</h3>
 
@@ -309,6 +325,10 @@ mvn spring-boot:run
 <section id="relaciones">
 <h2>5. Relaciones JPA</h2>
 
+<p>
+Aprenderás a definir relaciones entre entidades para navegar datos conectados.
+</p>
+
 <h3>5.1. Relación 1:N</h3>
 
 <pre><code class="language-java">
@@ -361,6 +381,10 @@ if (hotel != null) {
 <section id="seed">
 <h2>6. Repositorios y consultas personalizadas</h2>
 
+<p>
+Verás cómo crear métodos de búsqueda específicos y consultas personalizadas.
+</p>
+
 <h3>6.1. Repositorio personalizado</h3>
 
 <pre><code class="language-java">
@@ -400,6 +424,10 @@ List&lt;Hotel&gt; hoteles = hotelRepository.buscarPorNombre("Hotel");
 <!-- DIAGRAMA -->
 <section>
 <h2>Diagrama conceptual</h2>
+
+<p>
+Este diagrama resume la relación entre entidades para visualizar la estructura de datos.
+</p>
 
 <div class="mermaid">
 classDiagram
