@@ -84,12 +84,12 @@
       {
         text: "¿Qué es un array en PHP?",
         options: [
-          "Una función",
           "Una colección de elementos almacenados bajo un único nombre",
+          "Una función",
           "Un tipo de variable booleana",
           "Un operador matemático"
         ],
-        answer: 1,
+        answer: 0,
         explanation: "Un array es una colección de elementos bajo un único nombre de variable."
       },
       {
@@ -106,20 +106,20 @@
       {
         text: "¿Cuál es la sintaxis moderna para crear un array vacío?",
         options: [
+          "<array>",
           "array()",
           "new Array()",
-          "[]",
-          "<array>"
+          "[]"
         ],
-        answer: 2,
+        answer: 3,
         explanation: "La sintaxis moderna es usar []."
       },
       {
         text: "¿Qué es un array indexado?",
         options: [
-          "Un array con claves de texto",
-          "Un array con índices numéricos (0, 1, 2, ...)",
           "Un array multidimensional",
+          "Un array con índices numéricos (0, 1, 2, ...)",
+          "Un array con claves de texto",
           "Un array vacío"
         ],
         answer: 1,
@@ -128,10 +128,10 @@
       {
         text: "¿Qué es un array asociativo?",
         options: [
-          "Un array con índices numéricos",
+          "Un array ordenado",
           "Un array con claves de cadena personalizadas",
-          "Un array multidimensional",
-          "Un array ordenado"
+          "Un array con índices numéricos",
+          "Un array multidimensional"
         ],
         answer: 1,
         explanation: "Los arrays asociativos usan claves de texto como 'nombre' o 'edad'."
@@ -139,222 +139,222 @@
       {
         text: "¿Cuál es la función para contar elementos?",
         options: [
+          "total()",
           "length()",
-          "size()",
           "count()",
-          "total()"
+          "size()"
         ],
         answer: 2,
         explanation: "count() devuelve el número de elementos del array."
       },
       {
-        text: "¿Qué función agrega un elemento al final del array?",
+        text: "CREATE: ¿Cuál es el resultado de: $arr = [10, 20, 30]; $arr[] = 40;?",
         options: [
-          "add()",
-          "array_push()",
-          "append()",
-          "insert()"
+          "[10, 20, 30, 40]",
+          "[40]",
+          "Error",
+          "[10, 20, 30]"
         ],
-        answer: 1,
-        explanation: "array_push() agrega uno o más elementos al final."
+        answer: 0,
+        explanation: "La sintaxis $arr[] agrega 40 al final del array: [10, 20, 30, 40]."
       },
       {
-        text: "¿Qué función elimina el último elemento?",
+        text: "READ: ¿Cuál es el resultado de: $arr = ['x' => 5, 'y' => 10]; echo $arr['x'];?",
         options: [
-          "array_shift()",
-          "array_pop()",
-          "unset()",
-          "array_splice()"
-        ],
-        answer: 1,
-        explanation: "array_pop() elimina y devuelve el último elemento."
-      },
-      {
-        text: "¿Qué función elimina el primer elemento?",
-        options: [
-          "array_pop()",
-          "array_shift()",
-          "unset()",
-          "array_delete()"
-        ],
-        answer: 1,
-        explanation: "array_shift() elimina el primer elemento."
-      },
-      {
-        text: "¿Qué función verifica si una clave existe en un array?",
-        options: [
-          "isset()",
-          "array_key_exists()",
-          "in_array()",
-          "array_search()"
-        ],
-        answer: 1,
-        explanation: "array_key_exists() verifica la existencia de una clave."
-      },
-      {
-        text: "¿Qué función verifica si un valor existe en un array?",
-        options: [
-          "array_key_exists()",
-          "isset()",
-          "in_array()",
-          "array_find()"
-        ],
-        answer: 2,
-        explanation: "in_array() verifica si un valor existe en el array."
-      },
-      {
-        text: "¿Cuál es la estructura de bucle ideal para arrays?",
-        options: [
-          "while",
-          "for",
-          "foreach",
-          "do...while"
-        ],
-        answer: 2,
-        explanation: "foreach es la estructura ideal para iterar arrays."
-      },
-      {
-        text: "¿Qué hace array_map()?",
-        options: [
-          "Filtra elementos",
-          "Aplica una función a cada elemento",
-          "Ordena el array",
-          "Busca un elemento"
-        ],
-        answer: 1,
-        explanation: "array_map() aplica una función a cada elemento del array."
-      },
-      {
-        text: "¿Qué hace array_filter()?",
-        options: [
-          "Ordena elementos",
-          "Filtra elementos según una condición",
-          "Busca elementos",
-          "Combina arrays"
-        ],
-        answer: 1,
-        explanation: "array_filter() devuelve elementos que cumplen una condición."
-      },
-      {
-        text: "¿Qué hace array_merge()?",
-        options: [
-          "Ordena arrays",
-          "Filtra arrays",
-          "Combina dos o más arrays",
-          "Elimina duplicados"
-        ],
-        answer: 2,
-        explanation: "array_merge() combina dos o más arrays en uno solo."
-      },
-      {
-        text: "¿Qué hace array_keys()?",
-        options: [
-          "Devuelve los valores",
-          "Devuelve las claves",
-          "Ordena el array",
-          "Busca una clave"
-        ],
-        answer: 1,
-        explanation: "array_keys() devuelve todas las claves del array."
-      },
-      {
-        text: "¿Qué hace array_values()?",
-        options: [
-          "Devuelve las claves",
-          "Devuelve los valores",
-          "Ordena el array",
-          "Filtra valores"
-        ],
-        answer: 1,
-        explanation: "array_values() devuelve todos los valores del array."
-      },
-      {
-        text: "¿Qué hace sort()?",
-        options: [
-          "Ordena de forma descendente",
-          "Ordena de forma ascendente",
-          "Busca un elemento",
-          "Elimina duplicados"
-        ],
-        answer: 1,
-        explanation: "sort() ordena el array de forma ascendente."
-      },
-      {
-        text: "¿Qué hace rsort()?",
-        options: [
-          "Ordena de forma ascendente",
-          "Ordena de forma descendente",
-          "Invierte el array",
-          "Busca un elemento"
-        ],
-        answer: 1,
-        explanation: "rsort() ordena el array de forma descendente."
-      },
-      {
-        text: "¿Qué es un array multidimensional?",
-        options: [
-          "Un array con un elemento",
-          "Un array dentro de otro array",
-          "Un array con claves",
-          "Un array vacío"
-        ],
-        answer: 1,
-        explanation: "Un array multidimensional es un array que contiene otros arrays."
-      },
-      {
-        text: "Interpretación: $lista = ['a', 'b', 'c']; echo $lista[1];",
-        options: [
-          "Imprime: a",
-          "Imprime: b",
-          "Imprime: c",
+          "x",
+          "5",
+          "y",
           "Error"
         ],
         answer: 1,
-        explanation: "El índice 1 corresponde al segundo elemento 'b'."
+        explanation: "Accedemos a la clave 'x' que tiene el valor 5."
       },
       {
-        text: "¿Qué función busca la posición de un valor?",
+        text: "UPDATE: ¿Cuál es el resultado de: $arr = [1, 2, 3]; $arr[1] = 99; echo $arr[1];?",
         options: [
-          "array_find()",
-          "in_array()",
-          "array_search()",
-          "array_locate()"
+          "2",
+          "99",
+          "1",
+          "Error"
+        ],
+        answer: 1,
+        explanation: "Actualizamos el índice 1 con 99, por lo que se imprime 99."
+      },
+      {
+        text: "DELETE: ¿Cuál es el resultado de: $arr = ['a', 'b', 'c']; unset($arr[1]); echo count($arr);?",
+        options: [
+          "1",
+          "Error",
+          "2",
+          "3"
         ],
         answer: 2,
-        explanation: "array_search() devuelve la clave del primer valor encontrado."
+        explanation: "unset() elimina el elemento en la posición 1, quedando 2 elementos."
       },
       {
-        text: "¿Qué función invierte el orden de un array?",
+        text: "CREATE + READ: ¿Cuál es el resultado de: $arr = ['name' => 'Ana', 'age' => 25]; echo $arr['name'];?",
         options: [
-          "sort()",
-          "array_reverse()",
-          "rsort()",
-          "array_flip()"
+          "Ana",
+          "name",
+          "25",
+          "Error"
         ],
-        answer: 1,
-        explanation: "array_reverse() devuelve el array en orden inverso."
+        answer: 0,
+        explanation: "Creamos un array asociativo y leemos el valor de 'name' que es 'Ana'."
       },
       {
-        text: "¿Qué hace array_slice()?",
+        text: "UPDATE múltiple: ¿Cuál es el resultado de: $arr = [1, 2, 3]; $arr[0] = 100; $arr[2] = 300; echo $arr[0] + $arr[2];?",
         options: [
-          "Ordena el array",
-          "Extrae una porción del array",
-          "Elimina elementos",
-          "Filtra el array"
+          "103",
+          "400",
+          "301",
+          "Error"
         ],
         answer: 1,
-        explanation: "array_slice() extrae una porción del array."
+        explanation: "Actualizamos índices 0 y 2 a 100 y 300. 100 + 300 = 400."
       },
       {
-        text: "¿Qué hace array_unique()?",
+        text: "DELETE con foreach: ¿Cuál es el resultado de: $arr = [1, 2, 3]; unset($arr[0]); foreach ($arr as $v) echo $v;?",
         options: [
-          "Ordena el array",
-          "Elimina duplicados",
-          "Busca valores únicos",
-          "Cuenta valores únicos"
+          "13",
+          "Error",
+          "23",
+          "123"
+        ],
+        answer: 2,
+        explanation: "Eliminamos índice 0, al iterar quedan 2 y 3, imprime: 23."
+      },
+      {
+        text: "CREATE anidado: ¿Cuál es el resultado de: $arr = [[1, 2], [3, 4]]; echo $arr[0][1];?",
+        options: [
+          "3",
+          "4",
+          "2",
+          "1"
+        ],
+        answer: 2,
+        explanation: "Accedemos a primer array, segundo elemento: $arr[0][1] = 2."
+      },
+      {
+        text: "READ y UPDATE: ¿Cuál es el resultado de: $arr = ['x' => 10]; $arr['x'] = $arr['x'] + 5; echo $arr['x'];?",
+        options: [
+          "Error",
+          "5",
+          "15",
+          "10"
+        ],
+        answer: 2,
+        explanation: "Leemos 10, lo sumamos a 5 y asignamos el resultado: 15."
+      },
+      {
+        text: "DELETE y CREATE: ¿Cuál es el resultado de: $arr = [1, 2, 3]; unset($arr[1]); $arr[] = 4; echo count($arr);?",
+        options: [
+          "3",
+          "4",
+          "2",
+          "Error"
+        ],
+        answer: 0,
+        explanation: "Eliminamos 1 elemento y agregamos 1, quedamos con 3 elementos."
+      },
+      {
+        text: "READ múltiple: ¿Cuál es el resultado de: $arr = [5, 10, 15, 20]; echo $arr[0] + $arr[3];?",
+        options: [
+          "20",
+          "Error",
+          "25",
+          "15"
+        ],
+        answer: 2,
+        explanation: "Leemos índices 0 y 3: 5 + 20 = 25."
+      },
+      {
+        text: "CREATE asociativo UPDATE: ¿Cuál es el resultado de: $arr = ['p1' => 10, 'p2' => 20]; $arr['p1'] += 5; echo $arr['p1'];?",
+        options: [
+          "Error",
+          "15",
+          "20",
+          "10"
         ],
         answer: 1,
-        explanation: "array_unique() elimina valores duplicados del array."
+        explanation: "Leemos 10, añadimos 5: 10 + 5 = 15."
+      },
+      {
+        text: "DELETE selectivo: ¿Cuál es el resultado de: $arr = [10, 20, 30, 40]; unset($arr[1], $arr[3]); echo count($arr);?",
+        options: [
+          "4",
+          "3",
+          "Error",
+          "2"
+        ],
+        answer: 3,
+        explanation: "Eliminamos dos elementos (índices 1 y 3), quedan 2 activos."
+      },
+      {
+        text: "READ condicional: ¿Cuál es el resultado de: $arr = [0, 5, 10]; if($arr[1] > 3) echo 'Sí'; else echo 'No';?",
+        options: [
+          "5",
+          "Sí",
+          "Error",
+          "No"
+        ],
+        answer: 1,
+        explanation: "Leemos índice 1 (5), es mayor que 3, por lo que imprime 'Sí'."
+      },
+      {
+        text: "CREATE y DELETE anidado: ¿Cuál es el resultado de: $arr = [[1, 2], [3, 4]]; unset($arr[0][1]); echo count($arr[0]);?",
+        options: [
+          "Error",
+          "1",
+          "3",
+          "2"
+        ],
+        answer: 1,
+        explanation: "Eliminamos el elemento en [0][1], quedando 1 elemento en $arr[0]."
+      },
+      {
+        text: "UPDATE con concatenación: ¿Cuál es el resultado de: $arr = ['s' => 'Hola']; $arr['s'] .= ' Mundo'; echo $arr['s'];?",
+        options: [
+          "Mundo",
+          "Hola Mundo",
+          "Error",
+          "Hola"
+        ],
+        answer: 1,
+        explanation: "Concatenamos ' Mundo' a 'Hola': resultado 'Hola Mundo'."
+      },
+      {
+        text: "READ índice variable: ¿Cuál es el resultado de: $arr = [7, 8, 9]; $i = 1; echo $arr[$i];?",
+        options: [
+          "Error",
+          "8",
+          "9",
+          "7"
+        ],
+        answer: 1,
+        explanation: "Usamos variable $i = 1 como índice, accedemos a $arr[1] = 8."
+      },
+      {
+        text: "CREATE condicional: ¿Cuál es el resultado de: $arr = []; if(empty($arr)) $arr[] = 'inicio'; echo count($arr);?",
+        options: [
+          "Error",
+          "1",
+          "2",
+          "0"
+        ],
+        answer: 1,
+        explanation: "Array vacío, agregamos un elemento, count = 1."
+      },
+      {
+        text: "DELETE y READ: ¿Cuál es el resultado de: $arr = ['a'=>1, 'b'=>2, 'c'=>3]; unset($arr['b']); echo isset($arr['b']) ? 'Existe' : 'No existe';?",
+        options: [
+          "Existe",
+          "b",
+          "No existe",
+          "Error"
+        ],
+        answer: 2,
+        explanation: "Eliminamos 'b', verificamos si existe: No existe."
       }
     ];
 

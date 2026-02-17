@@ -170,191 +170,191 @@
         explanation: "session_unset() libera todas las variables de sesión."
       },
       {
-        text: "¿Cuál es más seguro?",
+        text: "CREATE SESSION: ¿Qué hace: session_start(); $_SESSION['user'] = 'Juan';?",
         options: [
-          "Cookies",
-          "Sesiones",
-          "Ambos igual",
-          "Ninguno"
-        ],
-        answer: 1,
-        explanation: "Las sesiones son más seguras porque los datos están en el servidor."
-      },
-      {
-        text: "¿Cuánto tiempo dura una sesión por defecto?",
-        options: [
-          "1 hora",
-          "24 horas",
-          "Hasta cerrar el navegador",
-          "Permanente"
-        ],
-        answer: 2,
-        explanation: "Por defecto, la sesión dura hasta cerrar el navegador."
-      },
-      {
-        text: "¿Qué función devuelve el ID de sesión?",
-        options: [
-          "get_session_id()",
-          "session_id()",
-          "session_get_id()",
-          "get_id()"
-        ],
-        answer: 1,
-        explanation: "session_id() devuelve el identificador de sesión actual."
-      },
-      {
-        text: "¿Qué devuelve session_status() cuando hay sesión activa?",
-        options: [
-          "PHP_SESSION_NONE",
-          "PHP_SESSION_ACTIVE",
-          "PHP_SESSION_DISABLED",
-          "true"
-        ],
-        answer: 1,
-        explanation: "session_status() devuelve PHP_SESSION_ACTIVE = 2 cuando está activa."
-      },
-      {
-        text: "¿Cómo verificar si existe una variable de sesión?",
-        options: [
-          "exists($_SESSION['var'])",
-          "isset($_SESSION['var'])",
-          "session_exists('var')",
-          "check($_SESSION['var'])"
-        ],
-        answer: 1,
-        explanation: "isset() verifica si una variable de sesión existe."
-      },
-      {
-        text: "¿Cuál es el límite de datos en sesiones?",
-        options: [
-          "4 KB",
-          "10 KB",
-          "Sin límite práctico",
-          "1 MB"
-        ],
-        answer: 2,
-        explanation: "Las sesiones no tienen límite práctico de datos."
-      },
-      {
-        text: "¿Cuál es el límite de datos en cookies?",
-        options: [
-          "Sin límite",
-          "~4 KB",
-          "10 KB",
-          "1 MB"
-        ],
-        answer: 1,
-        explanation: "Las cookies tienen un límite de aproximadamente 4 KB."
-      },
-      {
-        text: "¿Dónde se almacenan las cookies?",
-        options: [
-          "En el servidor",
-          "En el navegador del cliente",
-          "En la base de datos",
-          "En la RAM"
-        ],
-        answer: 1,
-        explanation: "Las cookies se almacenan en el navegador del cliente."
-      },
-      {
-        text: "¿Qué función regenera el ID de sesión?",
-        options: [
-          "session_regenerate()",
-          "regenerate_session()",
-          "session_regenerate_id()",
-          "new_session_id()"
-        ],
-        answer: 2,
-        explanation: "session_regenerate_id() genera un nuevo ID de sesión."
-      },
-      {
-        text: "¿Para qué se usa session_regenerate_id()?",
-        options: [
-          "Para crear una nueva sesión",
-          "Para prevenir ataques de secuestro de sesión",
-          "Para destruir la sesión",
-          "Para limpiar variables"
-        ],
-        answer: 1,
-        explanation: "Se usa para prevenir secuestro de sesión cambiando el ID."
-      },
-      {
-        text: "¿Qué función devuelve el nombre de la sesión?",
-        options: [
-          "get_session_name()",
-          "session_get_name()",
-          "session_name()",
-          "get_name()"
-        ],
-        answer: 2,
-        explanation: "session_name() devuelve el nombre de la sesión actual."
-      },
-      {
-        text: "¿Se puede almacenar un array en $_SESSION?",
-        options: [
-          "No",
-          "Sí",
-          "Solo arrays indexados",
-          "Solo arrays asociativos"
-        ],
-        answer: 1,
-        explanation: "Sí, se pueden almacenar arrays completos en $_SESSION."
-      },
-      {
-        text: "¿Se puede almacenar un objeto en $_SESSION?",
-        options: [
-          "No",
-          "Sí",
-          "Solo objetos simples",
-          "Solo con serialize()"
-        ],
-        answer: 1,
-        explanation: "Sí, PHP serializa automáticamente los objetos."
-      },
-      {
-        text: "¿Qué hace $_SESSION = []?",
-        options: [
+          "Error",
+          "Crea una sesión y almacena el usuario 'Juan'",
           "Destruye la sesión",
-          "Limpia todas las variables de sesión",
-          "Crea una nueva sesión",
-          "Error de sintaxis"
+          "Elimina el usuario"
         ],
         answer: 1,
-        explanation: "$_SESSION = [] limpia todas las variables pero mantiene la sesión."
+        explanation: "Crea una sesión y guarda la variable 'user' con valor 'Juan'."
       },
       {
-        text: "Interpretación: session_start(); $_SESSION['contador'] = ($_SESSION['contador'] ?? 0) + 1;",
+        text: "READ SESSION: ¿Cuál es el resultado de: session_start(); $_SESSION['edad'] = 25; echo $_SESSION['edad'];?",
         options: [
-          "Crea un contador que aumenta en cada visita",
-          "Error de sintaxis",
-          "Destruye la sesión",
-          "Elimina el contador"
+          "Error",
+          "25",
+          "edad",
+          "null"
+        ],
+        answer: 1,
+        explanation: "Accedemos a la variable de sesión 'edad' que contiene 25."
+      },
+      {
+        text: "UPDATE SESSION: ¿Cuál es el resultado de: session_start(); $_SESSION['contador'] = 5; $_SESSION['contador'] += 3; echo $_SESSION['contador'];?",
+        options: [
+          "5",
+          "Error",
+          "8",
+          "3"
+        ],
+        answer: 2,
+        explanation: "Incrementamos el contador de 5 a 8: resultado 8."
+      },
+      {
+        text: "DELETE SESSION VAR: ¿Cuál es el resultado de: session_start(); $_SESSION['temp'] = 'dato'; unset($_SESSION['temp']); echo isset($_SESSION['temp']) ? 'Existe' : 'No existe';?",
+        options: [
+          "Existe",
+          "No existe",
+          "Error",
+          "temp"
+        ],
+        answer: 1,
+        explanation: "Eliminamos 'temp', isset() devuelve false, imprime 'No existe'."
+      },
+      {
+        text: "CREATE ARRAY SESSION: ¿Qué hace: session_start(); $_SESSION['datos'] = ['id' => 1, 'nombre' => 'Ana']; echo $_SESSION['datos']['nombre'];?",
+        options: [
+          "Error",
+          "Ana",
+          "1",
+          "datos"
+        ],
+        answer: 1,
+        explanation: "Almacenamos un array en sesión y accedemos a 'nombre': 'Ana'."
+      },
+      {
+        text: "UPDATE SESSION ARRAY: ¿Cuál es el resultado de: session_start(); $_SESSION['carrito'] = []; $_SESSION['carrito'][] = 'producto1'; echo count($_SESSION['carrito']);?",
+        options: [
+          "Error",
+          "1",
+          "0",
+          "2"
+        ],
+        answer: 1,
+        explanation: "Agregamos 1 elemento al array de sesión, count = 1."
+      },
+      {
+        text: "READ SESSION MULTIPLE: ¿Cuál es el resultado de: session_start(); $_SESSION['x'] = 10; $_SESSION['y'] = 20; echo $_SESSION['x'] + $_SESSION['y'];?",
+        options: [
+          "10",
+          "Error",
+          "30",
+          "20"
+        ],
+        answer: 2,
+        explanation: "Leemos dos variables: 10 + 20 = 30."
+      },
+      {
+        text: "DELETE ALL SESSIONS: ¿Qué hace: session_start(); $_SESSION = []; echo empty($_SESSION) ? 'Vacío' : 'Con datos';?",
+        options: [
+          "Con datos",
+          "Vacío",
+          "Error",
+          "null"
+        ],
+        answer: 1,
+        explanation: "Vaciamos el array $_SESSION, empty() retorna true, imprime 'Vacío'."
+      },
+      {
+        text: "CREATE WITH CONDITION: ¿Cuál es el resultado de: session_start(); if (!isset($_SESSION['logins'])) $_SESSION['logins'] = 0; $_SESSION['logins']++; echo $_SESSION['logins'];?",
+        options: [
+          "Error",
+          "1",
+          "0",
+          "2"
+        ],
+        answer: 1,
+        explanation: "Primera visita: inicializamos a 0 e incrementamos a 1."
+      },
+      {
+        text: "READ SESSION CHAIN: ¿Cuál es el resultado de: session_start(); $_SESSION['perfil'] = ['rol' => 'admin']; echo $_SESSION['perfil']['rol'];?",
+        options: [
+          "perfil",
+          "admin",
+          "Error",
+          "rol"
+        ],
+        answer: 1,
+        explanation: "Accedemos a perfil['rol'] que contiene 'admin'."
+      },
+      {
+        text: "UPDATE WITH CONCATENATION: ¿Cuál es el resultado de: session_start(); $_SESSION['msg'] = 'Hola'; $_SESSION['msg'] .= ' Mundo'; echo $_SESSION['msg'];?",
+        options: [
+          "Hola",
+          "Error",
+          "Hola Mundo",
+          "Mundo"
+        ],
+        answer: 2,
+        explanation: "Concatenamos ' Mundo' a 'Hola': resultado 'Hola Mundo'."
+      },
+      {
+        text: "DELETE SELECTIVE: ¿Cuál es el resultado de: session_start(); $_SESSION['a']=1; $_SESSION['b']=2; unset($_SESSION['a']); echo isset($_SESSION['b']) ? 'b existe' : 'b no existe';?",
+        options: [
+          "b existe",
+          "Error",
+          "a existe",
+          "b no existe"
         ],
         answer: 0,
-        explanation: "Incrementa un contador, inicializándolo a 0 si no existe."
+        explanation: "Eliminamos 'a' pero 'b' sigue existiendo."
       },
       {
-        text: "¿Cuál es mejor para un carrito de compra?",
+        text: "CREATE SESSION STATUS: ¿Qué resultado da: session_start(); echo session_status() === PHP_SESSION_ACTIVE ? 'Activa' : 'Inactiva';?",
         options: [
-          "Cookies",
-          "Sesiones",
-          "Variables globales",
-          "URL"
+          "Inactiva",
+          "Error",
+          "Activa",
+          "null"
         ],
-        answer: 1,
-        explanation: "Las sesiones son mejores para carritos por seguridad y capacidad."
+        answer: 2,
+        explanation: "Después de session_start(), la sesión está activa."
       },
       {
-        text: "¿Qué pasa si olvidas session_start()?",
+        text: "READ SESSION ID: ¿Cuál es el resultado de: session_start(); $_SESSION['id'] = session_id(); echo strlen($_SESSION['id']) > 0 ? 'Tiene ID' : 'Sin ID';?",
         options: [
-          "La sesión funciona igual",
-          "No puedes usar $_SESSION",
-          "Se crea automáticamente",
-          "Error fatal"
+          "Sin ID",
+          "Tiene ID",
+          "Error",
+          "null"
         ],
         answer: 1,
-        explanation: "Sin session_start(), $_SESSION no está disponible."
+        explanation: "session_id() devuelve una cadena con caracteres, es verdadera."
+      },
+      {
+        text: "UPDATE SESSION CONDITIONAL: ¿Cuál es el resultado de: session_start(); $_SESSION['count'] = $_SESSION['count'] ?? 0; $_SESSION['count']++; echo $_SESSION['count'];?",
+        options: [
+          "0",
+          "Error",
+          "1",
+          "2"
+        ],
+        answer: 2,
+        explanation: "Primera vez: inicializa a 0 e incrementa a 1."
+      },
+      {
+        text: "CREATE NESTED SESSION: ¿Cuál es el resultado de: session_start(); $_SESSION['user'] = ['perfil' => ['rol' => 'guest']]; echo $_SESSION['user']['perfil']['rol'];?",
+        options: [
+          "user",
+          "Error",
+          "guest",
+          "perfil"
+        ],
+        answer: 2,
+        explanation: "Accedemos a user['perfil']['rol'] que contiene 'guest'."
+      },
+      {
+        text: "DELETE AND CREATE: ¿Cuál es el resultado de: session_start(); $_SESSION['temp'] = 'valor'; unset($_SESSION['temp']); $_SESSION['temp'] = 'nuevo'; echo $_SESSION['temp'];?",
+        options: [
+          "valor",
+          "nuevo",
+          "Error",
+          "null"
+        ],
+        answer: 1,
+        explanation: "Eliminamos 'temp' y lo recreamos con 'nuevo'."
       }
     ];
 
