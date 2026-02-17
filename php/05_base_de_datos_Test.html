@@ -18,6 +18,9 @@
   <script src="../menu.js" defer></script>
   <link rel="stylesheet" href="../style.css" />
   <link rel="stylesheet" href="../menu.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-php.min.js"></script>
 </head>
 
 <body>
@@ -346,7 +349,8 @@
         explanation: "Se asigna null: $pdo = null."
       },
       {
-        text: "Interpretación: $stmt = $pdo->prepare('SELECT * FROM usuarios WHERE id = ?');",
+        text: "¿Cuál es el resultado?",
+        codeBlock: "$stmt = $pdo->prepare('SELECT * FROM usuarios WHERE id = ?');",
         options: [
           "Ejecuta la consulta inmediatamente",
           "Prepara la consulta sin ejecutarla",
@@ -373,6 +377,20 @@
         const title = document.createElement('div');
         title.className = 'question-title';
         title.textContent = `${index + 1}. ${q.text}`;
+
+        card.appendChild(title);
+
+        if (q.codeBlock) {
+          const codeDiv = document.createElement('div');
+          codeDiv.className = 'question-text-code';
+          const pre = document.createElement('pre');
+          const code = document.createElement('code');
+          code.className = 'language-php';
+          code.textContent = q.codeBlock;
+          pre.appendChild(code);
+          codeDiv.appendChild(pre);
+          card.appendChild(codeDiv);
+        }
 
         const options = document.createElement('div');
         options.className = 'options';
@@ -404,6 +422,7 @@
         card.appendChild(explanation);
         quizForm.appendChild(card);
       });
+      Prism.highlightAllUnder(quizForm);
     }
 
     function checkAnswers() {
@@ -446,7 +465,7 @@
         <p>Revisa las explicaciones debajo de cada pregunta.</p>
       `;
 
-      resultBox.scrollIntoView({ behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function resetQuiz() {
