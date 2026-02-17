@@ -460,3 +460,23 @@ code { white-space: pre-wrap; word-break: break-word; }
     font-weight: 600;
     font-size: 0.85rem;
 }
+
+.question-text-code {
+    background-color: transparent;
+    border-left: 4px solid #0066cc;
+    margin: 15px 0;
+    padding: 12px;
+    border-radius: 4px;
+}
+
+.question-text-code pre {
+    margin: 0;
+    overflow-x: auto;
+    background-color: #282c34 !important;
+    border-radius: 4px;
+}
+
+.question-text-code code {
+    font-size: 0.9em;
+    line-height: 1.5;
+}

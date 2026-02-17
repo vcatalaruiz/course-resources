@@ -18,6 +18,9 @@
   <script src="../menu.js" defer></script>
   <link rel="stylesheet" href="../style.css" />
   <link rel="stylesheet" href="../menu.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-php.min.js"></script>
 </head>
 
 <body>
@@ -170,7 +173,8 @@
         explanation: "session_unset() libera todas las variables de sesión."
       },
       {
-        text: "CREATE SESSION: ¿Qué hace: session_start(); $_SESSION['user'] = 'Juan';?",
+        text: "¿Qué hace este código?",
+        codeBlock: "session_start();\n$_SESSION['user'] = 'Juan';",
         options: [
           "Error",
           "Crea una sesión y almacena el usuario 'Juan'",
@@ -181,7 +185,8 @@
         explanation: "Crea una sesión y guarda la variable 'user' con valor 'Juan'."
       },
       {
-        text: "READ SESSION: ¿Cuál es el resultado de: session_start(); $_SESSION['edad'] = 25; echo $_SESSION['edad'];?",
+        text: "¿Cuál es el resultado?",
+        codeBlock: "session_start();\n$_SESSION['edad'] = 25;\necho $_SESSION['edad'];",
         options: [
           "Error",
           "25",
@@ -192,7 +197,8 @@
         explanation: "Accedemos a la variable de sesión 'edad' que contiene 25."
       },
       {
-        text: "UPDATE SESSION: ¿Cuál es el resultado de: session_start(); $_SESSION['contador'] = 5; $_SESSION['contador'] += 3; echo $_SESSION['contador'];?",
+        text: "¿Cuál es el resultado?",
+        codeBlock: "session_start();\n$_SESSION['contador'] = 5;\n$_SESSION['contador'] += 3;\necho $_SESSION['contador'];",
         options: [
           "5",
           "Error",
@@ -203,7 +209,8 @@
         explanation: "Incrementamos el contador de 5 a 8: resultado 8."
       },
       {
-        text: "DELETE SESSION VAR: ¿Cuál es el resultado de: session_start(); $_SESSION['temp'] = 'dato'; unset($_SESSION['temp']); echo isset($_SESSION['temp']) ? 'Existe' : 'No existe';?",
+        text: "¿Cuál es el resultado?",
+        codeBlock: "session_start();\n$_SESSION['temp'] = 'dato';\nunset($_SESSION['temp']);\necho isset($_SESSION['temp']) ? 'Existe' : 'No existe';",
         options: [
           "Existe",
           "No existe",
@@ -214,7 +221,8 @@
         explanation: "Eliminamos 'temp', isset() devuelve false, imprime 'No existe'."
       },
       {
-        text: "CREATE ARRAY SESSION: ¿Qué hace: session_start(); $_SESSION['datos'] = ['id' => 1, 'nombre' => 'Ana']; echo $_SESSION['datos']['nombre'];?",
+        text: "¿Cuál es el resultado?",
+        codeBlock: "session_start();\n$_SESSION['datos'] = ['id' => 1, 'nombre' => 'Ana'];\necho $_SESSION['datos']['nombre'];",
         options: [
           "Error",
           "Ana",
@@ -225,7 +233,8 @@
         explanation: "Almacenamos un array en sesión y accedemos a 'nombre': 'Ana'."
       },
       {
-        text: "UPDATE SESSION ARRAY: ¿Cuál es el resultado de: session_start(); $_SESSION['carrito'] = []; $_SESSION['carrito'][] = 'producto1'; echo count($_SESSION['carrito']);?",
+        text: "¿Cuál es el resultado?",
+        codeBlock: "session_start();\n$_SESSION['carrito'] = [];\n$_SESSION['carrito'][] = 'producto1';\necho count($_SESSION['carrito']);",
         options: [
           "Error",
           "1",
@@ -236,7 +245,8 @@
         explanation: "Agregamos 1 elemento al array de sesión, count = 1."
       },
       {
-        text: "READ SESSION MULTIPLE: ¿Cuál es el resultado de: session_start(); $_SESSION['x'] = 10; $_SESSION['y'] = 20; echo $_SESSION['x'] + $_SESSION['y'];?",
+        text: "¿Cuál es el resultado?",
+        codeBlock: "session_start();\n$_SESSION['x'] = 10;\n$_SESSION['y'] = 20;\necho $_SESSION['x'] + $_SESSION['y'];",
         options: [
           "10",
           "Error",
@@ -247,7 +257,8 @@
         explanation: "Leemos dos variables: 10 + 20 = 30."
       },
       {
-        text: "DELETE ALL SESSIONS: ¿Qué hace: session_start(); $_SESSION = []; echo empty($_SESSION) ? 'Vacío' : 'Con datos';?",
+        text: "¿Cuál es el resultado?",
+        codeBlock: "session_start();\n$_SESSION = [];\necho empty($_SESSION) ? 'Vacío' : 'Con datos';",
         options: [
           "Con datos",
           "Vacío",
@@ -258,7 +269,8 @@
         explanation: "Vaciamos el array $_SESSION, empty() retorna true, imprime 'Vacío'."
       },
       {
-        text: "CREATE WITH CONDITION: ¿Cuál es el resultado de: session_start(); if (!isset($_SESSION['logins'])) $_SESSION['logins'] = 0; $_SESSION['logins']++; echo $_SESSION['logins'];?",
+        text: "¿Cuál es el resultado?",
+        codeBlock: "session_start();\nif (!isset($_SESSION['logins'])) $_SESSION['logins'] = 0;\n$_SESSION['logins']++;\necho $_SESSION['logins'];",
         options: [
           "Error",
           "1",
@@ -269,7 +281,8 @@
         explanation: "Primera visita: inicializamos a 0 e incrementamos a 1."
       },
       {
-        text: "READ SESSION CHAIN: ¿Cuál es el resultado de: session_start(); $_SESSION['perfil'] = ['rol' => 'admin']; echo $_SESSION['perfil']['rol'];?",
+        text: "¿Cuál es el resultado?",
+        codeBlock: "session_start();\n$_SESSION['perfil'] = ['rol' => 'admin'];\necho $_SESSION['perfil']['rol'];",
         options: [
           "perfil",
           "admin",
@@ -280,7 +293,8 @@
         explanation: "Accedemos a perfil['rol'] que contiene 'admin'."
       },
       {
-        text: "UPDATE WITH CONCATENATION: ¿Cuál es el resultado de: session_start(); $_SESSION['msg'] = 'Hola'; $_SESSION['msg'] .= ' Mundo'; echo $_SESSION['msg'];?",
+        text: "¿Cuál es el resultado?",
+        codeBlock: "session_start();\n$_SESSION['msg'] = 'Hola';\n$_SESSION['msg'] .= ' Mundo';\necho $_SESSION['msg'];",
         options: [
           "Hola",
           "Error",
@@ -291,7 +305,8 @@
         explanation: "Concatenamos ' Mundo' a 'Hola': resultado 'Hola Mundo'."
       },
       {
-        text: "DELETE SELECTIVE: ¿Cuál es el resultado de: session_start(); $_SESSION['a']=1; $_SESSION['b']=2; unset($_SESSION['a']); echo isset($_SESSION['b']) ? 'b existe' : 'b no existe';?",
+        text: "¿Cuál es el resultado?",
+        codeBlock: "session_start();\n$_SESSION['a']=1;\n$_SESSION['b']=2;\nunset($_SESSION['a']);\necho isset($_SESSION['b']) ? 'b existe' : 'b no existe';",
         options: [
           "b existe",
           "Error",
@@ -302,7 +317,8 @@
         explanation: "Eliminamos 'a' pero 'b' sigue existiendo."
       },
       {
-        text: "CREATE SESSION STATUS: ¿Qué resultado da: session_start(); echo session_status() === PHP_SESSION_ACTIVE ? 'Activa' : 'Inactiva';?",
+        text: "¿Cuál es el resultado?",
+        codeBlock: "session_start();\necho session_status() === PHP_SESSION_ACTIVE ? 'Activa' : 'Inactiva';",
         options: [
           "Inactiva",
           "Error",
@@ -313,7 +329,8 @@
         explanation: "Después de session_start(), la sesión está activa."
       },
       {
-        text: "READ SESSION ID: ¿Cuál es el resultado de: session_start(); $_SESSION['id'] = session_id(); echo strlen($_SESSION['id']) > 0 ? 'Tiene ID' : 'Sin ID';?",
+        text: "¿Cuál es el resultado?",
+        codeBlock: "session_start();\n$_SESSION['id'] = session_id();\necho strlen($_SESSION['id']) > 0 ? 'Tiene ID' : 'Sin ID';",
         options: [
           "Sin ID",
           "Tiene ID",
@@ -324,7 +341,8 @@
         explanation: "session_id() devuelve una cadena con caracteres, es verdadera."
       },
       {
-        text: "UPDATE SESSION CONDITIONAL: ¿Cuál es el resultado de: session_start(); $_SESSION['count'] = $_SESSION['count'] ?? 0; $_SESSION['count']++; echo $_SESSION['count'];?",
+        text: "¿Cuál es el resultado?",
+        codeBlock: "session_start();\n$_SESSION['count'] = $_SESSION['count'] ?? 0;\n$_SESSION['count']++;\necho $_SESSION['count'];",
         options: [
           "0",
           "Error",
@@ -335,7 +353,8 @@
         explanation: "Primera vez: inicializa a 0 e incrementa a 1."
       },
       {
-        text: "CREATE NESTED SESSION: ¿Cuál es el resultado de: session_start(); $_SESSION['user'] = ['perfil' => ['rol' => 'guest']]; echo $_SESSION['user']['perfil']['rol'];?",
+        text: "¿Cuál es el resultado?",
+        codeBlock: "session_start();\n$_SESSION['user'] = ['perfil' => ['rol' => 'guest']];\necho $_SESSION['user']['perfil']['rol'];",
         options: [
           "user",
           "Error",
@@ -346,7 +365,8 @@
         explanation: "Accedemos a user['perfil']['rol'] que contiene 'guest'."
       },
       {
-        text: "DELETE AND CREATE: ¿Cuál es el resultado de: session_start(); $_SESSION['temp'] = 'valor'; unset($_SESSION['temp']); $_SESSION['temp'] = 'nuevo'; echo $_SESSION['temp'];?",
+        text: "¿Cuál es el resultado?",
+        codeBlock: "session_start();\n$_SESSION['temp'] = 'valor';\nunset($_SESSION['temp']);\n$_SESSION['temp'] = 'nuevo';\necho $_SESSION['temp'];",
         options: [
           "valor",
           "nuevo",
@@ -373,6 +393,20 @@
         const title = document.createElement('div');
         title.className = 'question-title';
         title.textContent = `${index + 1}. ${q.text}`;
+
+        card.appendChild(title);
+
+        if (q.codeBlock) {
+          const codeDiv = document.createElement('div');
+          codeDiv.className = 'question-text-code';
+          const pre = document.createElement('pre');
+          const code = document.createElement('code');
+          code.className = 'language-php';
+          code.textContent = q.codeBlock;
+          pre.appendChild(code);
+          codeDiv.appendChild(pre);
+          card.appendChild(codeDiv);
+        }
 
         const options = document.createElement('div');
         options.className = 'options';
@@ -404,6 +438,7 @@
         card.appendChild(explanation);
         quizForm.appendChild(card);
       });
+      Prism.highlightAllUnder(quizForm);
     }
 
     function checkAnswers() {
