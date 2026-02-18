@@ -129,8 +129,9 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('hoteles', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            $table->string('nombre',255);
             $table->string('direccion')->nullable();
+            $table->integer('categoria');
             $table->timestamps();
         });
     }
@@ -175,6 +176,7 @@ class HotelSeeder extends Seeder {
         DB::table('hoteles')->insert([
             'nombre' => 'Gran Hotel',
             'direccion' => 'Calle Mayor 3',
+            'categoria' => 5,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -218,6 +220,7 @@ class HotelSeeder extends Seeder {
             DB::table('hoteles')->insert([
                 'nombre' => $faker->company(),
                 'direccion' => $faker->address(),
+                'categoria' => $faker->numberBetween(1,5),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
@@ -256,8 +259,10 @@ php artisan make:migration create_habitaciones_table
 Schema::create('habitaciones', function (Blueprint $table) {
     $table->id();
     $table->integer('numero');
+    $table->unsignedBigInteger('hotel_id')
     $table->foreignId('hotel_id')
-          ->constrained()
+          ->references('id')
+          ->on('hoteles')
           ->onDelete('cascade');
     $table->timestamps();
 });
@@ -288,6 +293,7 @@ php artisan migrate:fresh --seed
                 id
                 nombre
                 direccion
+                categoria
                 }
                 class Habitacion {
                 id
