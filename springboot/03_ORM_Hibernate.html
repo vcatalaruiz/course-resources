@@ -257,14 +257,444 @@ hotelRepository.deleteById(1L);
 </section>
 
 <!-- SECCIÓN 4 -->
+<section id="relaciones">
+<h2>4. Relaciones JPA</h2>
+
+<p>
+Aprenderás a definir relaciones entre entidades para navegar datos conectados.
+</p>
+
+<h3>4.1. Relación 1:1 (Uno a Uno)</h3>
+
+<p>
+Una relación 1:1 significa que un registro en una tabla está asociado con exactamente un registro en otra tabla.
+Ejemplo: Un hotel tiene un único gerente.
+</p>
+
+<h4>Definición en entidades</h4>
+
+<pre><code class="language-java">
+// src/main/java/com/example/entity/Hotel.java
+@Entity
+public class Hotel {
+  // ... otros campos ...
+
+  @OneToOne(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Gerente gerente;
+
+  public Gerente getGerente() { return gerente; }
+  
+  public void setGerente(Gerente gerente) { 
+    this.gerente = gerente;
+    if (gerente != null) {
+      gerente.setHotel(this);
+    }
+  }
+}
+</code></pre>
+
+<pre><code class="language-java">
+// src/main/java/com/example/entity/Gerente.java
+@Entity
+public class Gerente {
+  
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @Column(nullable = false)
+  private String nombre;
+
+  private String email;
+
+  @OneToOne
+  @JoinColumn(name = "hotel_id", nullable = false)
+  private Hotel hotel;
+
+  // Constructor vacío
+  public Gerente() {}
+
+  // Getters y Setters
+  public Long getId() { return id; }
+  public void setId(Long id) { this.id = id; }
+
+  public String getNombre() { return nombre; }
+  public void setNombre(String nombre) { this.nombre = nombre; }
+
+  public String getEmail() { return email; }
+  public void setEmail(String email) { this.email = email; }
+
+  public Hotel getHotel() { return hotel; }
+  public void setHotel(Hotel hotel) { this.hotel = hotel; }
+}
+</code></pre>
+
+<h4>Uso de la relación 1:1</h4>
+
+<pre><code class="language-java">
+// Obtener el gerente de un hotel
+Hotel hotel = hotelRepository.findById(1L).orElse(null);
+if (hotel != null && hotel.getGerente() != null) {
+  System.out.println(hotel.getGerente().getNombre());
+}
+
+// Crear un gerente para un hotel
+Hotel hotel = hotelRepository.findById(1L).orElse(null);
+if (hotel != null) {
+  Gerente gerente = new Gerente();
+  gerente.setNombre("Juan Pérez");
+  gerente.setEmail("juan@hotel.com");
+  hotel.setGerente(gerente);
+  hotelRepository.save(hotel);
+}
+</code></pre>
+
+<h3>4.2. Relación 1:N (Uno a Muchos)</h3>
+
+<p>
+Una relación 1:N significa que un registro puede tener múltiples registros relacionados.
+Ejemplo: Un hotel tiene muchas habitaciones.
+</p>
+
+<h4>Definición en entidades</h4>
+
+<pre><code class="language-java">
+// src/main/java/com/example/entity/Hotel.java
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+public class Hotel {
+  // ... otros campos ...
+
+  @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List&lt;Habitacion&gt; habitaciones = new ArrayList&lt;&gt;();
+
+  public List&lt;Habitacion&gt; getHabitaciones() { 
+    return habitaciones; 
+  }
+  
+  public void setHabitaciones(List&lt;Habitacion&gt; habitaciones) { 
+    this.habitaciones = habitaciones; 
+  }
+
+  // Método helper para agregar habitación
+  public void addHabitacion(Habitacion habitacion) {
+    habitaciones.add(habitacion);
+    habitacion.setHotel(this);
+  }
+
+  // Método helper para eliminar habitación
+  public void removeHabitacion(Habitacion habitacion) {
+    habitaciones.remove(habitacion);
+    habitacion.setHotel(null);
+  }
+}
+</code></pre>
+
+<pre><code class="language-java">
+// src/main/java/com/example/entity/Habitacion.java
+@Entity
+public class Habitacion {
+  
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @Column(nullable = false)
+  private String numero;
+
+  private String tipo;
+
+  @ManyToOne
+  @JoinColumn(name = "hotel_id", nullable = false)
+  private Hotel hotel;
+
+  // Constructor vacío
+  public Habitacion() {}
+
+  // Getters y Setters
+  public Long getId() { return id; }
+  public void setId(Long id) { this.id = id; }
+
+  public String getNumero() { return numero; }
+  public void setNumero(String numero) { this.numero = numero; }
+
+  public String getTipo() { return tipo; }
+  public void setTipo(String tipo) { this.tipo = tipo; }
+
+  public Hotel getHotel() { return hotel; }
+  public void setHotel(Hotel hotel) { this.hotel = hotel; }
+}
+</code></pre>
+
+<h4>Uso de la relación 1:N</h4>
+
+<pre><code class="language-java">
+// Obtener todas las habitaciones de un hotel
+Hotel hotel = hotelRepository.findById(1L).orElse(null);
+if (hotel != null) {
+  for (Habitacion habitacion : hotel.getHabitaciones()) {
+    System.out.println(habitacion.getNumero());
+  }
+}
+
+// Obtener el hotel de una habitación
+Habitacion habitacion = habitacionRepository.findById(1L).orElse(null);
+if (habitacion != null) {
+  System.out.println(habitacion.getHotel().getNombre());
+}
+
+// Crear habitaciones para un hotel
+Hotel hotel = hotelRepository.findById(1L).orElse(null);
+if (hotel != null) {
+  Habitacion habitacion = new Habitacion();
+  habitacion.setNumero("101");
+  habitacion.setTipo("Doble");
+  hotel.addHabitacion(habitacion);
+  hotelRepository.save(hotel);
+}
+
+// Contar habitaciones de un hotel
+int cantidad = hotel.getHabitaciones().size();
+
+// Eliminar una habitación
+hotel.removeHabitacion(habitacion);
+hotelRepository.save(hotel);
+</code></pre>
+
+<h3>4.3. Relación N:M (Muchos a Muchos)</h3>
+
+<p>
+Una relación N:M significa que múltiples registros pueden estar relacionados con múltiples registros.
+Ejemplo: Un hotel puede tener muchos servicios, y un servicio puede estar en muchos hoteles.
+JPA crea automáticamente una <strong>tabla intermedia</strong>.
+</p>
+
+<h4>Definición en entidades</h4>
+
+<pre><code class="language-java">
+// src/main/java/com/example/entity/Hotel.java
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+public class Hotel {
+  // ... otros campos ...
+
+  @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+  @JoinTable(
+    name = "hotel_servicio",
+    joinColumns = @JoinColumn(name = "hotel_id"),
+    inverseJoinColumns = @JoinColumn(name = "servicio_id")
+  )
+  private Set&lt;Servicio&gt; servicios = new HashSet&lt;&gt;();
+
+  public Set&lt;Servicio&gt; getServicios() { 
+    return servicios; 
+  }
+  
+  public void setServicios(Set&lt;Servicio&gt; servicios) { 
+    this.servicios = servicios; 
+  }
+
+  // Método helper para agregar servicio
+  public void addServicio(Servicio servicio) {
+    servicios.add(servicio);
+    servicio.getHoteles().add(this);
+  }
+
+  // Método helper para eliminar servicio
+  public void removeServicio(Servicio servicio) {
+    servicios.remove(servicio);
+    servicio.getHoteles().remove(this);
+  }
+}
+</code></pre>
+
+<pre><code class="language-java">
+// src/main/java/com/example/entity/Servicio.java
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+public class Servicio {
+  
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @Column(nullable = false)
+  private String nombre;
+
+  private String descripcion;
+
+  @ManyToMany(mappedBy = "servicios")
+  private Set&lt;Hotel&gt; hoteles = new HashSet&lt;&gt;();
+
+  // Constructor vacío
+  public Servicio() {}
+
+  // Getters y Setters
+  public Long getId() { return id; }
+  public void setId(Long id) { this.id = id; }
+
+  public String getNombre() { return nombre; }
+  public void setNombre(String nombre) { this.nombre = nombre; }
+
+  public String getDescripcion() { return descripcion; }
+  public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+
+  public Set&lt;Hotel&gt; getHoteles() { return hoteles; }
+  public void setHoteles(Set&lt;Hotel&gt; hoteles) { this.hoteles = hoteles; }
+}
+</code></pre>
+
+<h4>Uso de la relación N:M</h4>
+
+<pre><code class="language-java">
+// Obtener servicios de un hotel
+Hotel hotel = hotelRepository.findById(1L).orElse(null);
+if (hotel != null) {
+  for (Servicio servicio : hotel.getServicios()) {
+    System.out.println(servicio.getNombre());
+  }
+}
+
+// Obtener hoteles que tienen un servicio
+Servicio servicio = servicioRepository.findById(1L).orElse(null);
+if (servicio != null) {
+  for (Hotel hotel : servicio.getHoteles()) {
+    System.out.println(hotel.getNombre());
+  }
+}
+
+// Asociar servicios a un hotel
+Hotel hotel = hotelRepository.findById(1L).orElse(null);
+Servicio servicio = servicioRepository.findById(1L).orElse(null);
+if (hotel != null && servicio != null) {
+  hotel.addServicio(servicio);
+  hotelRepository.save(hotel);
+}
+
+// Desasociar servicios
+hotel.removeServicio(servicio);
+hotelRepository.save(hotel);
+
+// Verificar si tiene un servicio
+if (hotel.getServicios().contains(servicio)) {
+  System.out.println("El hotel tiene este servicio");
+}
+
+// Contar servicios de un hotel
+int cantidadServicios = hotel.getServicios().size();
+</code></pre>
+
+<h4>Relación N:M con atributos extra</h4>
+
+<p>
+Para agregar campos adicionales en la tabla intermedia (como precio_adicional), debes crear una entidad intermedia explícita:
+</p>
+
+<pre><code class="language-java">
+// src/main/java/com/example/entity/HotelServicio.java
+import jakarta.persistence.*;
+import java.math.BigDecimal;
+
+@Entity
+@Table(name = "hotel_servicio")
+public class HotelServicio {
+  
+  @EmbeddedId
+  private HotelServicioId id;
+
+  @ManyToOne
+  @MapsId("hotelId")
+  @JoinColumn(name = "hotel_id")
+  private Hotel hotel;
+
+  @ManyToOne
+  @MapsId("servicioId")
+  @JoinColumn(name = "servicio_id")
+  private Servicio servicio;
+
+  @Column(name = "precio_adicional")
+  private BigDecimal precioAdicional;
+
+  // Constructor vacío
+  public HotelServicio() {}
+
+  public HotelServicio(Hotel hotel, Servicio servicio, BigDecimal precioAdicional) {
+    this.hotel = hotel;
+    this.servicio = servicio;
+    this.precioAdicional = precioAdicional;
+    this.id = new HotelServicioId(hotel.getId(), servicio.getId());
+  }
+
+  // Getters y Setters
+}
+
+// Clase para la clave compuesta
+@Embeddable
+public class HotelServicioId implements Serializable {
+  
+  private Long hotelId;
+  private Long servicioId;
+
+  public HotelServicioId() {}
+
+  public HotelServicioId(Long hotelId, Long servicioId) {
+    this.hotelId = hotelId;
+    this.servicioId = servicioId;
+  }
+
+  // Getters, Setters, equals y hashCode
+}
+</code></pre>
+
+<pre><code class="language-java">
+// Uso con entidad intermedia
+Hotel hotel = hotelRepository.findById(1L).orElse(null);
+Servicio servicio = servicioRepository.findById(1L).orElse(null);
+
+if (hotel != null && servicio != null) {
+  HotelServicio hotelServicio = new HotelServicio(
+    hotel, 
+    servicio, 
+    new BigDecimal("15.00")
+  );
+  hotelServicioRepository.save(hotelServicio);
+}
+</code></pre>
+
+<h4>Consultas avanzadas con relaciones N:M</h4>
+
+<pre><code class="language-java">
+// En HotelRepository.java
+
+// Filtrar hoteles por servicios
+@Query("SELECT h FROM Hotel h JOIN h.servicios s WHERE s.nombre = :nombre")
+List&lt;Hotel&gt; findByServicioNombre(@Param("nombre") String nombre);
+
+// Contar hoteles con un servicio específico
+@Query("SELECT COUNT(h) FROM Hotel h JOIN h.servicios s WHERE s.id = :servicioId")
+Long countByServicioId(@Param("servicioId") Long servicioId);
+
+// Hoteles con más de X servicios
+@Query("SELECT h FROM Hotel h WHERE SIZE(h.servicios) > :cantidad")
+List&lt;Hotel&gt; findHotelesConMasDeNServicios(@Param("cantidad") int cantidad);
+</code></pre>
+</section>
+
+<!-- SECCIÓN 5 -->
 <section id="factory">
-<h2>4. Seeders con DataFaker</h2>
+<h2>5. Seeders con DataFaker</h2>
 
 <p>
 Esta parte te permite generar datos de prueba de forma rápida y consistente.
 </p>
 
-<h3>4.1. Agregar dependencia</h3>
+<h3>5.1. Agregar dependencia</h3>
 
 <pre><code class="language-xml">
 &lt;!-- pom.xml --&gt;
@@ -275,7 +705,7 @@ Esta parte te permite generar datos de prueba de forma rápida y consistente.
 &lt;/dependency&gt;
 </code></pre>
 
-<h3>4.2. Crear seeder con CommandLineRunner</h3>
+<h3>5.2. Crear seeder con CommandLineRunner</h3>
 
 <pre><code class="language-java">
 package com.example.seeder;
@@ -314,66 +744,10 @@ public class HotelSeeder implements CommandLineRunner {
 }
 </code></pre>
 
-<h3>4.3. Ejecutar el seeder</h3>
+<h3>5.3. Ejecutar el seeder</h3>
 
 <pre><code class="language-bash">
 mvn spring-boot:run
-</code></pre>
-</section>
-
-<!-- SECCIÓN 5 -->
-<section id="relaciones">
-<h2>5. Relaciones JPA</h2>
-
-<p>
-Aprenderás a definir relaciones entre entidades para navegar datos conectados.
-</p>
-
-<h3>5.1. Relación 1:N</h3>
-
-<pre><code class="language-java">
-// src/main/java/com/example/entity/Hotel.java
-import java.util.List;
-
-@Entity
-public class Hotel {
-  // ... otros campos ...
-
-  @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true)
-  private List&lt;Habitacion&gt; habitaciones;
-
-  public List&lt;Habitacion&gt; getHabitaciones() { return habitaciones; }
-  public void setHabitaciones(List&lt;Habitacion&gt; habitaciones) { this.habitaciones = habitaciones; }
-}
-
-// src/main/java/com/example/entity/Habitacion.java
-@Entity
-public class Habitacion {
-  
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-
-  private String numero;
-
-  @ManyToOne
-  @JoinColumn(name = "hotel_id", nullable = false)
-  private Hotel hotel;
-
-  // Getters y Setters
-}
-</code></pre>
-
-<h3>5.2. Uso de la relación</h3>
-
-<pre><code class="language-java">
-Hotel hotel = hotelRepository.findById(1L).orElse(null);
-
-if (hotel != null) {
-  for (Habitacion habitacion : hotel.getHabitaciones()) {
-    System.out.println(habitacion.getNumero());
-  }
-}
 </code></pre>
 </section>
 
@@ -436,12 +810,33 @@ class Hotel {
     nombre
     direccion
 }
+class Gerente {
+    id
+    nombre
+    email
+    hotel_id
+}
 class Habitacion {
     id
     numero
+    tipo
     hotel_id
 }
-Hotel "1" --> "*" Habitacion
+class Servicio {
+    id
+    nombre
+    descripcion
+}
+class HotelServicio {
+    hotel_id
+    servicio_id
+    precio_adicional
+}
+Hotel "1" --> "1" Gerente : tiene
+Hotel "1" --> "*" Habitacion : tiene
+Hotel "*" --> "*" Servicio : ofrece
+HotelServicio --> Hotel
+HotelServicio --> Servicio
 </div>
 </section>
 

@@ -184,20 +184,241 @@ $hotel->delete();
     </section>
 
     <!-- SECCIÓN 4 -->
+    <section id="relaciones">
+      <h2>4. Relaciones Eloquent</h2>
+
+      <p>
+        Aprenderás a definir relaciones entre modelos para navegar datos conectados.
+      </p>
+
+      <h3>4.1. Relación 1:1 (Uno a Uno)</h3>
+
+      <p>
+        Una relación 1:1 significa que un registro en una tabla está asociado con exactamente un registro en otra tabla.
+        Ejemplo: Un hotel tiene un único gerente.
+      </p>
+
+      <h4>Definición en modelos</h4>
+
+      <pre><code class="language-php">
+// Hotel.php
+public function gerente()
+{
+    return $this->hasOne(Gerente::class);
+}
+</code></pre>
+
+      <pre><code class="language-php">
+// Gerente.php
+public function hotel()
+{
+    return $this->belongsTo(Hotel::class);
+}
+</code></pre>
+
+      <h4>Uso de la relación 1:1</h4>
+
+      <pre><code class="language-php">
+// Obtener el gerente de un hotel
+$hotel = Hotel::find(1);
+echo $hotel->gerente->nombre;
+
+// Obtener el hotel de un gerente
+$gerente = Gerente::find(1);
+echo $gerente->hotel->nombre;
+
+// Crear un gerente para un hotel
+$hotel = Hotel::find(1);
+$hotel->gerente()->create([
+    'nombre' => 'Juan Pérez',
+    'email' => 'juan@hotel.com'
+]);
+</code></pre>
+
+      <h3>4.2. Relación 1:N (Uno a Muchos)</h3>
+
+      <p>
+        Una relación 1:N significa que un registro puede tener múltiples registros relacionados.
+        Ejemplo: Un hotel tiene muchas habitaciones.
+      </p>
+
+      <h4>Definición en modelos</h4>
+
+      <pre><code class="language-php">
+// Hotel.php
+public function habitaciones()
+{
+    return $this->hasMany(Habitacion::class);
+}
+</code></pre>
+
+      <pre><code class="language-php">
+// Habitacion.php
+public function hotel()
+{
+    return $this->belongsTo(Hotel::class);
+}
+</code></pre>
+
+      <h4>Uso de la relación 1:N</h4>
+
+      <pre><code class="language-php">
+// Obtener todas las habitaciones de un hotel
+$hotel = Hotel::find(1);
+foreach ($hotel->habitaciones as $habitacion) {
+    echo $habitacion->numero;
+}
+
+// Obtener el hotel de una habitación
+$habitacion = Habitacion::find(1);
+echo $habitacion->hotel->nombre;
+
+// Crear habitaciones para un hotel
+$hotel = Hotel::find(1);
+$hotel->habitaciones()->create([
+    'numero' => '101',
+    'tipo' => 'Doble'
+]);
+
+// Contar habitaciones de un hotel
+$cantidad = $hotel->habitaciones()->count();
+</code></pre>
+
+      <h3>4.3. Relación N:M (Muchos a Muchos)</h3>
+
+      <p>
+        Una relación N:M significa que múltiples registros pueden estar relacionados con múltiples registros.
+        Ejemplo: Un hotel puede tener muchos servicios, y un servicio puede estar en muchos hoteles.
+        Requiere una <strong>tabla intermedia</strong> (pivot).
+      </p>
+
+      <h4>Estructura de tablas</h4>
+
+      <pre><code class="language-php">
+// Migración: create_hoteles_table
+Schema::create('hoteles', function (Blueprint $table) {
+    $table->id();
+    $table->string('nombre');
+    $table->string('direccion');
+    $table->timestamps();
+});
+
+// Migración: create_servicios_table
+Schema::create('servicios', function (Blueprint $table) {
+    $table->id();
+    $table->string('nombre');
+    $table->text('descripcion')->nullable();
+    $table->timestamps();
+});
+
+// Migración: create_hotel_servicio_table (tabla pivot)
+Schema::create('hotel_servicio', function (Blueprint $table) {
+    $table->id();
+    $table->foreignId('hotel_id')->constrained()->onDelete('cascade');
+    $table->foreignId('servicio_id')->constrained()->onDelete('cascade');
+    $table->decimal('precio_adicional', 8, 2)->nullable(); // Campo extra
+    $table->timestamps();
+});
+</code></pre>
+
+      <h4>Definición en modelos</h4>
+
+      <pre><code class="language-php">
+// Hotel.php
+public function servicios()
+{
+    return $this->belongsToMany(Servicio::class)
+                ->withPivot('precio_adicional')  // Campos extra de la tabla pivot
+                ->withTimestamps();              // Incluir timestamps de pivot
+}
+</code></pre>
+
+      <pre><code class="language-php">
+// Servicio.php
+public function hoteles()
+{
+    return $this->belongsToMany(Hotel::class)
+                ->withPivot('precio_adicional')
+                ->withTimestamps();
+}
+</code></pre>
+
+      <h4>Uso de la relación N:M</h4>
+
+      <pre><code class="language-php">
+// Obtener servicios de un hotel
+$hotel = Hotel::find(1);
+foreach ($hotel->servicios as $servicio) {
+    echo $servicio->nombre;
+    // Acceder a campos de la tabla pivot
+    echo $servicio->pivot->precio_adicional;
+}
+
+// Obtener hoteles que tienen un servicio
+$servicio = Servicio::find(1);
+foreach ($servicio->hoteles as $hotel) {
+    echo $hotel->nombre;
+}
+
+// Asociar servicios a un hotel
+$hotel = Hotel::find(1);
+$hotel->servicios()->attach(1); // Agregar servicio con ID 1
+$hotel->servicios()->attach(2, ['precio_adicional' => 15.00]); // Con datos extra
+
+// Asociar múltiples servicios
+$hotel->servicios()->attach([1, 2, 3]);
+
+// Sincronizar servicios (elimina los que no estén en el array)
+$hotel->servicios()->sync([1, 2, 3]);
+
+// Desasociar servicios
+$hotel->servicios()->detach(1); // Quitar servicio específico
+$hotel->servicios()->detach();  // Quitar todos los servicios
+
+// Alternar asociación (si existe lo quita, si no existe lo agrega)
+$hotel->servicios()->toggle([1, 2]);
+
+// Verificar si tiene un servicio
+if ($hotel->servicios()->where('servicio_id', 1)->exists()) {
+    echo "El hotel tiene este servicio";
+}
+</code></pre>
+
+      <h4>Consultas avanzadas con relaciones N:M</h4>
+
+      <pre><code class="language-php">
+// Filtrar por campos de la tabla pivot
+$hotelesConServicioCaro = Hotel::whereHas('servicios', function ($query) {
+    $query->where('precio_adicional', '>', 20);
+})->get();
+
+// Contar servicios de un hotel
+$hotel = Hotel::find(1);
+$cantidadServicios = $hotel->servicios()->count();
+
+// Actualizar campos de la tabla pivot
+$hotel->servicios()->updateExistingPivot($servicioId, [
+    'precio_adicional' => 25.00
+]);
+</code></pre>
+    </section>
+
+
+    <!-- SECCIÓN 5 -->
     <section id="factory">
-      <h2>4. Factories con Eloquent</h2>
+      <h2>5. Factories con Eloquent</h2>
 
       <p>
         Esta parte te permite generar datos de prueba de forma rápida y consistente para tus modelos.
       </p>
 
-      <h3>4.1. Crear modelo + factory</h3>
+      <h3>5.1. Crear modelo + factory</h3>
 
       <pre><code class="language-bash">
 php artisan make:model Hotel -mf
 </code></pre>
 
-      <h3>4.2. Factory con Faker</h3>
+      <h3>5.2. Factory con Faker</h3>
 
       <pre><code class="language-php">
 namespace Database\Factories;
@@ -216,7 +437,7 @@ class HotelFactory extends Factory
 }
 </code></pre>
 
-      <h3>4.3. Usar la factory</h3>
+      <h3>5.3. Usar la factory</h3>
 
       <pre><code class="language-php">
 use App\Models\Hotel;
@@ -229,43 +450,7 @@ Hotel::factory()->count(10)->create();
 </code></pre>
     </section>
 
-    <!-- SECCIÓN 5 -->
-    <section id="relaciones">
-      <h2>5. Relaciones Eloquent</h2>
-
-      <p>
-        Aprenderás a definir relaciones entre modelos para navegar datos conectados.
-      </p>
-
-      <h3>5.1. Relación 1:N</h3>
-
-      <pre><code class="language-php">
-// Hotel.php
-public function habitaciones()
-{
-    return $this->hasMany(Habitacion::class);
-}
-</code></pre>
-
-      <pre><code class="language-php">
-// Habitacion.php
-public function hotel()
-{
-    return $this->belongsTo(Hotel::class);
-}
-</code></pre>
-
-      <h3>5.2. Uso de la relación</h3>
-
-      <pre><code class="language-php">
-$hotel = Hotel::find(1);
-
-foreach ($hotel->habitaciones as $habitacion) {
-    echo $habitacion->numero;
-}
-</code></pre>
-    </section>
-
+    
     <!-- SECCIÓN 6 -->
     <section id="seed">
       <h2>6. Seeders con Eloquent</h2>
@@ -316,12 +501,33 @@ php artisan db:seed
         nombre
         direccion
         }
+        class Gerente {
+        id
+        nombre
+        email
+        hotel_id
+        }
         class Habitacion {
         id
         numero
+        tipo
         hotel_id
         }
-        Hotel "1" --> "*" Habitacion
+        class Servicio {
+        id
+        nombre
+        descripcion
+        }
+        class HotelServicio {
+        hotel_id
+        servicio_id
+        precio_adicional
+        }
+        Hotel "1" --> "1" Gerente : tiene
+        Hotel "1" --> "*" Habitacion : tiene
+        Hotel "*" --> "*" Servicio : ofrece
+        HotelServicio --> Hotel
+        HotelServicio --> Servicio
       </div>
     </section>
 

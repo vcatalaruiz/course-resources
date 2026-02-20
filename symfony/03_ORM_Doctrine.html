@@ -190,14 +190,357 @@ $em->flush();
 </section>
 
 <!-- SECCIÓN 4 -->
+<section id="relaciones">
+<h2>4. Relaciones Doctrine</h2>
+
+<p>
+Aprenderás a definir relaciones entre entidades para modelar datos conectados.
+</p>
+
+<h3>4.1. Relación 1:1 (Uno a Uno)</h3>
+
+<p>
+Una relación 1:1 significa que un registro en una tabla está asociado con exactamente un registro en otra tabla.
+Ejemplo: Un hotel tiene un único gerente.
+</p>
+
+<h4>Definición en entidades</h4>
+
+<pre><code class="language-php">
+// src/Entity/Hotel.php
+#[ORM\OneToOne(mappedBy: 'hotel', cascade: ['persist', 'remove'])]
+private ?Gerente $gerente = null;
+
+public function getGerente(): ?Gerente
+{
+    return $this->gerente;
+}
+
+public function setGerente(?Gerente $gerente): static
+{
+    if ($gerente === null && $this->gerente !== null) {
+        $this->gerente->setHotel(null);
+    }
+    
+    if ($gerente !== null && $gerente->getHotel() !== $this) {
+        $gerente->setHotel($this);
+    }
+    
+    $this->gerente = $gerente;
+    return $this;
+}
+</code></pre>
+
+<pre><code class="language-php">
+// src/Entity/Gerente.php
+#[ORM\OneToOne(inversedBy: 'gerente', cascade: ['persist', 'remove'])]
+#[ORM\JoinColumn(nullable: false)]
+private ?Hotel $hotel = null;
+
+public function getHotel(): ?Hotel
+{
+    return $this->hotel;
+}
+
+public function setHotel(?Hotel $hotel): static
+{
+    $this->hotel = $hotel;
+    return $this;
+}
+</code></pre>
+
+<h4>Uso de la relación 1:1</h4>
+
+<pre><code class="language-php">
+// Obtener el gerente de un hotel
+$hotel = $hotelRepository->find(1);
+echo $hotel->getGerente()->getNombre();
+
+// Obtener el hotel de un gerente
+$gerente = $gerenteRepository->find(1);
+echo $gerente->getHotel()->getNombre();
+
+// Crear un gerente para un hotel
+$hotel = $hotelRepository->find(1);
+$gerente = new Gerente();
+$gerente->setNombre('Juan Pérez');
+$gerente->setEmail('juan@hotel.com');
+$hotel->setGerente($gerente);
+$em->flush();
+</code></pre>
+
+<h3>4.2. Relación 1:N (Uno a Muchos)</h3>
+
+<p>
+Una relación 1:N significa que un registro puede tener múltiples registros relacionados.
+Ejemplo: Un hotel tiene muchas habitaciones.
+</p>
+
+<h4>Definición en entidades</h4>
+
+<pre><code class="language-php">
+// src/Entity/Hotel.php
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
+#[ORM\OneToMany(mappedBy: 'hotel', targetEntity: Habitacion::class, orphanRemoval: true)]
+private Collection $habitaciones;
+
+public function __construct()
+{
+    $this->habitaciones = new ArrayCollection();
+}
+
+public function getHabitaciones(): Collection
+{
+    return $this->habitaciones;
+}
+
+public function addHabitacion(Habitacion $habitacion): static
+{
+    if (!$this->habitaciones->contains($habitacion)) {
+        $this->habitaciones->add($habitacion);
+        $habitacion->setHotel($this);
+    }
+    return $this;
+}
+
+public function removeHabitacion(Habitacion $habitacion): static
+{
+    if ($this->habitaciones->removeElement($habitacion)) {
+        if ($habitacion->getHotel() === $this) {
+            $habitacion->setHotel(null);
+        }
+    }
+    return $this;
+}
+</code></pre>
+
+<pre><code class="language-php">
+// src/Entity/Habitacion.php
+#[ORM\ManyToOne(inversedBy: 'habitaciones')]
+#[ORM\JoinColumn(nullable: false)]
+private ?Hotel $hotel = null;
+
+public function getHotel(): ?Hotel
+{
+    return $this->hotel;
+}
+
+public function setHotel(?Hotel $hotel): static
+{
+    $this->hotel = $hotel;
+    return $this;
+}
+</code></pre>
+
+<h4>Uso de la relación 1:N</h4>
+
+<pre><code class="language-php">
+// Obtener todas las habitaciones de un hotel
+$hotel = $hotelRepository->find(1);
+foreach ($hotel->getHabitaciones() as $habitacion) {
+    echo $habitacion->getNumero();
+}
+
+// Obtener el hotel de una habitación
+$habitacion = $habitacionRepository->find(1);
+echo $habitacion->getHotel()->getNombre();
+
+// Crear habitaciones para un hotel
+$hotel = $hotelRepository->find(1);
+$habitacion = new Habitacion();
+$habitacion->setNumero('101');
+$habitacion->setTipo('Doble');
+$hotel->addHabitacion($habitacion);
+$em->flush();
+
+// Contar habitaciones de un hotel
+$cantidad = $hotel->getHabitaciones()->count();
+
+// Eliminar una habitación de un hotel
+$hotel->removeHabitacion($habitacion);
+$em->flush();
+</code></pre>
+
+<h3>4.3. Relación N:M (Muchos a Muchos)</h3>
+
+<p>
+Una relación N:M significa que múltiples registros pueden estar relacionados con múltiples registros.
+Ejemplo: Un hotel puede tener muchos servicios, y un servicio puede estar en muchos hoteles.
+Doctrine crea automáticamente una <strong>tabla intermedia</strong>.
+</p>
+
+<h4>Definición en entidades</h4>
+
+<pre><code class="language-php">
+// src/Entity/Hotel.php
+#[ORM\ManyToMany(targetEntity: Servicio::class, inversedBy: 'hoteles')]
+#[ORM\JoinTable(name: 'hotel_servicio')]
+private Collection $servicios;
+
+public function __construct()
+{
+    $this->servicios = new ArrayCollection();
+}
+
+public function getServicios(): Collection
+{
+    return $this->servicios;
+}
+
+public function addServicio(Servicio $servicio): static
+{
+    if (!$this->servicios->contains($servicio)) {
+        $this->servicios->add($servicio);
+    }
+    return $this;
+}
+
+public function removeServicio(Servicio $servicio): static
+{
+    $this->servicios->removeElement($servicio);
+    return $this;
+}
+</code></pre>
+
+<pre><code class="language-php">
+// src/Entity/Servicio.php
+#[ORM\ManyToMany(targetEntity: Hotel::class, mappedBy: 'servicios')]
+private Collection $hoteles;
+
+public function __construct()
+{
+    $this->hoteles = new ArrayCollection();
+}
+
+public function getHoteles(): Collection
+{
+    return $this->hoteles;
+}
+
+public function addHotel(Hotel $hotel): static
+{
+    if (!$this->hoteles->contains($hotel)) {
+        $this->hoteles->add($hotel);
+        $hotel->addServicio($this);
+    }
+    return $this;
+}
+
+public function removeHotel(Hotel $hotel): static
+{
+    if ($this->hoteles->removeElement($hotel)) {
+        $hotel->removeServicio($this);
+    }
+    return $this;
+}
+</code></pre>
+
+<h4>Uso de la relación N:M</h4>
+
+<pre><code class="language-php">
+// Obtener servicios de un hotel
+$hotel = $hotelRepository->find(1);
+foreach ($hotel->getServicios() as $servicio) {
+    echo $servicio->getNombre();
+}
+
+// Obtener hoteles que tienen un servicio
+$servicio = $servicioRepository->find(1);
+foreach ($servicio->getHoteles() as $hotel) {
+    echo $hotel->getNombre();
+}
+
+// Asociar servicios a un hotel
+$hotel = $hotelRepository->find(1);
+$servicio = $servicioRepository->find(1);
+$hotel->addServicio($servicio);
+$em->flush();
+
+// Desasociar servicios
+$hotel->removeServicio($servicio);
+$em->flush();
+
+// Verificar si tiene un servicio
+if ($hotel->getServicios()->contains($servicio)) {
+    echo "El hotel tiene este servicio";
+}
+
+// Contar servicios de un hotel
+$cantidadServicios = $hotel->getServicios()->count();
+</code></pre>
+
+<h4>Relación N:M con atributos extra</h4>
+
+<p>
+Para agregar campos adicionales en la tabla intermedia (como precio_adicional), debes crear una entidad intermedia explícita:
+</p>
+
+<pre><code class="language-php">
+// src/Entity/HotelServicio.php
+#[ORM\Entity]
+#[ORM\Table(name: 'hotel_servicio')]
+class HotelServicio
+{
+    #[ORM\Id]
+    #[ORM\ManyToOne(targetEntity: Hotel::class, inversedBy: 'hotelServicios')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Hotel $hotel = null;
+
+    #[ORM\Id]
+    #[ORM\ManyToOne(targetEntity: Servicio::class, inversedBy: 'hotelServicios')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Servicio $servicio = null;
+
+    #[ORM\Column(type: 'decimal', precision: 8, scale: 2, nullable: true)]
+    private ?float $precioAdicional = null;
+
+    // Getters y setters...
+}
+</code></pre>
+
+<pre><code class="language-php">
+// Uso con entidad intermedia
+$hotelServicio = new HotelServicio();
+$hotelServicio->setHotel($hotel);
+$hotelServicio->setServicio($servicio);
+$hotelServicio->setPrecioAdicional(15.00);
+$em->persist($hotelServicio);
+$em->flush();
+</code></pre>
+
+<h4>Consultas avanzadas con relaciones N:M</h4>
+
+<pre><code class="language-php">
+// Filtrar hoteles por servicios
+$hoteles = $hotelRepository->createQueryBuilder('h')
+    ->innerJoin('h.servicios', 's')
+    ->where('s.nombre = :nombre')
+    ->setParameter('nombre', 'WiFi')
+    ->getQuery()
+    ->getResult();
+
+// Contar hoteles con un servicio específico
+$cantidad = $hotelRepository->createQueryBuilder('h')
+    ->select('COUNT(h.id)')
+    ->innerJoin('h.servicios', 's')
+    ->where('s.id = :servicioId')
+    ->setParameter('servicioId', 1)
+    ->getQuery()
+    ->getSingleScalarResult();
+</code></pre>
+</section>
+
+<!-- SECCIÓN 5 -->
 <section id="factory">
-<h2>4. Fixtures con Faker</h2>
+<h2>5. Fixtures con Faker</h2>
 
 <p>
 Esta parte te permite generar datos de prueba de forma rápida para tus entidades.
 </p>
 
-<h3>4.1. Crear fixtures</h3>
+<h3>5.1. Crear fixtures</h3>
 
 <pre><code class="language-bash">
 composer require --dev doctrine/doctrine-fixtures-bundle
@@ -205,7 +548,7 @@ php bin/console make:fixtures HotelFixtures
 composer require --dev fakerphp/faker
 </code></pre>
 
-<h3>4.2. Fixture con Faker</h3>
+<h3>5.2. Fixture con Faker</h3>
 
 <pre><code class="language-php">
 &lt;?php
@@ -235,42 +578,10 @@ class HotelFixtures extends Fixture
 }
 </code></pre>
 
-<h3>4.3. Cargar fixtures</h3>
+<h3>5.3. Cargar fixtures</h3>
 
 <pre><code class="language-bash">
 php bin/console doctrine:fixtures:load
-</code></pre>
-</section>
-
-<!-- SECCIÓN 5 -->
-<section id="relaciones">
-<h2>5. Relaciones Doctrine</h2>
-
-<p>
-Aprenderás a definir relaciones entre entidades para modelar datos conectados.
-</p>
-
-<h3>5.1. Relación 1:N</h3>
-
-<pre><code class="language-php">
-// src/Entity/Hotel.php
-#[ORM\OneToMany(mappedBy: 'hotel', targetEntity: Habitacion::class, orphanRemoval: true)]
-private Collection $habitaciones;
-
-// src/Entity/Habitacion.php
-#[ORM\ManyToOne(inversedBy: 'habitaciones')]
-#[ORM\JoinColumn(nullable: false)]
-private ?Hotel $hotel = null;
-</code></pre>
-
-<h3>5.2. Uso de la relación</h3>
-
-<pre><code class="language-php">
-$hotel = $hotelRepository->find(1);
-
-foreach ($hotel->getHabitaciones() as $habitacion) {
-  echo $habitacion->getNumero();
-}
 </code></pre>
 </section>
 
@@ -332,12 +643,33 @@ class Hotel {
     nombre
     direccion
 }
+class Gerente {
+    id
+    nombre
+    email
+    hotel_id
+}
 class Habitacion {
     id
     numero
+    tipo
     hotel_id
 }
-Hotel "1" --> "*" Habitacion
+class Servicio {
+    id
+    nombre
+    descripcion
+}
+class HotelServicio {
+    hotel_id
+    servicio_id
+    precio_adicional
+}
+Hotel "1" --> "1" Gerente : tiene
+Hotel "1" --> "*" Habitacion : tiene
+Hotel "*" --> "*" Servicio : ofrece
+HotelServicio --> Hotel
+HotelServicio --> Servicio
 </div>
 </section>
 
