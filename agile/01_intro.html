@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducción a Agile</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+  <header>
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1>Introducción a Agile</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+      
+      <!-- SECCIÓN 1: ¿QUÉ ES AGILE? -->
+      <section id="que-es-agile">
+        <h2>1. ¿Qué es Agile?</h2>
+        <p>Agile es una metodología de gestión de proyectos que enfatiza la flexibilidad, la colaboración del equipo y la entrega incremental de valor. Se centra en adaptar el producto a las necesidades cambiantes del cliente y en mejorar continuamente el proceso de desarrollo.</p>
+        <div class="diagram">
+            <img src="../assets/agile_logo.png" style="max-width:50%;" alt="Agile Logo">
+        </div>
+
+
+      <h3>1.1. Definición</h3>
+      <p>Agile es un conjunto de principios y valores para el desarrollo de software que enfatiza:</p>
+      <ul>
+        <li><strong>Individuos e interacciones:</strong> más que procesos y herramientas</li>
+        <li><strong>Software funcional:</strong> más que documentación exhaustiva</li>
+        <li><strong>Respuesta al cambio:</strong> más que seguir un plan</li>
+        <li><strong>Colaboración del cliente:</strong> más que negociación de contratos</li>
+      </ul>
+
+      <h3>1.2. Características principales</h3>
+      <ul>
+        <li><strong>Iterativo:</strong> desarrollo en ciclos cortos (sprints)</li>
+        <li><strong>Incremental:</strong> entrega de valor de forma progresiva</li>
+        <li><strong>Flexible:</strong> adapta cambios en los requisitos</li>
+        <li><strong>Colaborativo:</strong> comunicación constante con el cliente</li>
+        <li><strong>Autogestionable:</strong> equipos con autonomía</li>
+        <li><strong>Mejora continua:</strong> retrospectivas y reflexión del proceso</li>
+      </ul>
+
+      <h3>1.3. Historia de Agile</h3>
+      <p>Agile surge en 2001 cuando 17 expertos en software crearon el <strong>Manifiesto Ágil</strong> como respuesta a los problemas de las metodologías tradicionales (Waterfall) que generaban productos que no satisfacían las necesidades del cliente.</p>
+    </section>
+
+    <!-- SECCIÓN 2: AGILE VS WATERFALL -->
+    <section id="agile-vs-waterfall">
+      <h2>2. Agile vs Waterfall</h2>
+      <div class="diagram">
+            <img src="../assets/agile_vs_waterfall.png" style="max-width:100%;" alt="Agile VS Waterfall">
+        </div>
+
+      <h3>2.1. Comparativa</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Aspecto</th>
+            <th>Waterfall</th>
+            <th>Agile</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Estructura</strong></td>
+            <td>Lineal y secuencial</td>
+            <td>Iterativa e incremental</td>
+          </tr>
+          <tr>
+            <td><strong>Cambios</strong></td>
+            <td>Difíciles y costosos</td>
+            <td>Esperados y bienvenidos</td>
+          </tr>
+          <tr>
+            <td><strong>Requisitos</strong></td>
+            <td>Definidos al inicio</td>
+            <td>Evolucionan durante el proyecto</td>
+          </tr>
+          <tr>
+            <td><strong>Entregas</strong></td>
+            <td>Única entrega al final</td>
+            <td>Entregas frecuentes (cada sprint)</td>
+          </tr>
+          <tr>
+            <td><strong>Cliente</strong></td>
+            <td>Involucrado al inicio y final</td>
+            <td>Colaboración continua</td>
+          </tr>
+          <tr>
+            <td><strong>Feedback</strong></td>
+            <td>Tardío, costoso de implementar</td>
+            <td>Temprano, fácil de adaptar</td>
+          </tr>
+          <tr>
+            <td><strong>Documentación</strong></td>
+            <td>Extensa y formal</td>
+            <td>Mínima y esencial</td>
+          </tr>
+          <tr>
+            <td><strong>Testing</strong></td>
+            <td>Fase final después del desarrollo</td>
+            <td>Continuo durante el desarrollo</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>2.2. Flujo de Waterfall</h3>
+      <div class="mermaid">
+graph LR
+    A["1. Requisitos"] --> B["2. Diseño"]
+    B --> C["3. Desarrollo"]
+    C --> D["4. Testing"]
+    D --> E["5. Deployment"]
+    E --> F["6. Mantenimiento"]
+    
+    style A fill:#e1f5ff
+    style B fill:#ffe1e1
+    style C fill:#fff4e1
+    style D fill:#ffe1f5
+    style E fill:#e1ffe1
+    style F fill:#f5e1ff
+      </div>
+
+      <h3>2.3. Flujo de Agile</h3>
+      <div class="mermaid">
+graph LR
+    A["Backlog"] --> B["Sprint Planning"]
+    B --> C["Sprint 1-4 semanas"]
+    C --> D["Daily Standup"]
+    D --> C
+    C --> E["Sprint Review"]
+    E --> F["Sprint Retrospective"]
+    F --> G{"¿Más sprints?"}
+    G -->|Sí| B
+    G -->|No| H["Release"]
+    
+    style A fill:#e1f5ff
+    style B fill:#ffe1e1
+    style C fill:#fff4e1
+    style D fill:#ffe1f5
+    style E fill:#e1ffe1
+    style F fill:#f5e1ff
+    style H fill:#90EE90
+      </div>
+
+      <h3>2.4. ¿Cuándo usar cada uno?</h3>
+      <p><strong>Waterfall:</strong> Proyectos con requisitos claros y fijos, pocas probabilidades de cambio, regulaciones estrictas (defensa, aviación).</p>
+      <p><strong>Agile:</strong> Proyectos con requisitos inciertos, cambios frecuentes, startups, desarrollo web/mobile, necesidad de entrega rápida.</p>
+      <div class="diagram">
+            <img src="../assets/agile_vs_waterfall2.png" style="max-width:100%;" alt="Agile VS Waterfall 2">
+        </div>
+    </section>
+
+    <!-- SECCIÓN 3: MANIFIESTO ÁGIL -->
+    <section id="manifiesto-agil">
+      <h2>3. Manifiesto Ágil</h2>
+
+      <h3>3.1. Los 4 valores</h3>
+      <div class="info-box">
+        <p><strong>Valoramos:</strong></p>
+        <ul>
+          <li><strong>Individuos e interacciones</strong> sobre procesos y herramientas</li>
+          <li><strong>Software funcionando</strong> sobre documentación exhaustiva</li>
+          <li><strong>Colaboración con el cliente</strong> sobre negociación de contratos</li>
+          <li><strong>Respuesta al cambio</strong> sobre seguir un plan</li>
+        </ul>
+      </div>
+
+      <h3>3.2. Los 12 principios</h3>
+      <ol>
+        <li><strong>Satisfacción del cliente</strong> mediante entrega temprana y continua de software</li>
+        <li><strong>Cambios de requisitos</strong> incluso en etapas tardías del desarrollo</li>
+        <li><strong>Entregar</strong> software funcional frecuentemente (semanas a meses)</li>
+        <li><strong>Colaboración</strong> diaria entre el equipo y el cliente</li>
+        <li>Proyectos construidos con individuos <strong>motivados</strong> (confía en ellos)</li>
+        <li>Comunicación <strong>cara a cara</strong> (lo más eficaz)</li>
+        <li>El software <strong>funcionando</strong> es la medida principal del progreso</li>
+        <li>Desarrollo sostenible (<strong>ritmo constante</strong> indefinidamente)</li>
+        <li>Atención continua a la <strong>excelencia técnica</strong></li>
+        <li><strong>Simplicidad</strong> (maximizar el trabajo no realizado)</li>
+        <li>Equipos <strong>autogestionables</strong></li>
+        <li><strong>Reflexión regular</strong> sobre cómo mejorar el proceso</li>
+      </ol>
+    </section>
+
+    <!-- SECCIÓN 4: ENTREGAS INCREMENTALES -->
+    <section id="entregas-incrementales">
+      <h2>4. Entregas Incrementales</h2>
+
+      <h3>4.1. ¿Qué es incremental?</h3>
+      <p>Incremental significa entregar funcionalidad de forma progresiva. En lugar de esperar 6 meses para una versión completa, entregas pequeños aumentos cada 2-4 semanas.</p>
+      
+      <div class="info-box">
+      <h4>⚠️ Importante</h4>
+      <p>MVP Minimum Value Product</p>
+    </div>
+    <div class="diagram">
+            <img src="../assets/agile_mvp.png" style="max-width:100%;" alt="Agile MVP">
+        </div>
+
+      <h3>4.2. Beneficios</h3>
+      <ul>
+        <li><strong>Feedback temprano:</strong> el cliente ve avances y da feedback</li>
+        <li><strong>ROI rápido:</strong> obtiene valor del software antes</li>
+        <li><strong>Riesgos reducidos:</strong> problemas se detectan pronto</li>
+        <li><strong>Motivación:</strong> el equipo ve resultados tangibles</li>
+        <li><strong>Adaptabilidad:</strong> fácil cambiar prioridades</li>
+      </ul>
+
+      <h3>4.3. Ejemplo: Desarrollo de un carrito de compras</h3>
+      <pre><code class="language-plaintext">
+Sprint 1 (1-2 semanas):
+  ✓ Listar productos
+  ✓ Ver detalles de producto
+
+Sprint 2:
+  ✓ Añadir al carrito
+  ✓ Ver carrito
+
+Sprint 3:
+  ✓ Actualizar cantidades
+  ✓ Eliminar productos
+
+Sprint 4:
+  ✓ Checkout
+  ✓ Procesar pago
+
+Cada sprint genera una versión funcional que el cliente puede usar.
+      </code></pre>
+
+      <h3>4.4. Velocidad y burndown</h3>
+      <p>Se mide la <strong>velocidad</strong> del equipo (cantidad de trabajo completado por sprint) y se utiliza un <strong>gráfico de burndown</strong> para visualizar el progreso.</p>
+      <div class="diagram">
+            <img src="../assets/agile_burndown.png" style="max-width:100%;" alt="Agile Burndown">
+        </div>
+    </section>
+
+    <!-- SECCIÓN 5: CEREMONIAS ÁGILES -->
+    <section id="ceremonias-agiles">
+      <h2>5. Ceremonias Ágiles</h2>
+      <div class="diagram">
+            <img src="../assets/agile_ceremonies.png" style="max-width:80%;" alt="Agile Ceremonies">
+        </div>
+
+      <h3>5.1. Sprint Planning</h3>
+      <p><strong>Cuándo:</strong> Al inicio de cada sprint (primera reunión del sprint).</p>
+      <p><strong>Duración:</strong> 2-4 horas para sprints de 2 semanas.</p>
+      <p><strong>Participantes:</strong> Product Owner, Scrum Master, Equipo de desarrollo.</p>
+      <p><strong>Objetivo:</strong> Seleccionar qué se trabajará en el sprint y hacer un plan.</p>
+      <p><strong>Actividades:</strong></p>
+      <ul>
+        <li>El Product Owner prioriza y explica los requisitos del backlog</li>
+        <li>El equipo estima el esfuerzo de cada tarea</li>
+        <li>Se negocia qué se puede hacer en el sprint según la velocidad</li>
+        <li>Se crean tareas técnicas detalladas desde las historias de usuario</li>
+        <li>Se define la meta del sprint (qué valor se va a entregar)</li>
+      </ul>
+
+      <h3>5.2. Daily Standup (Scrum diario)</h3>
+      <p><strong>Cuándo:</strong> Todos los días a la misma hora.</p>
+      <p><strong>Duración:</strong> 15 minutos máximo.</p>
+      <p><strong>Participantes:</strong> Equipo de desarrollo (el Product Owner es opcional).</p>
+      <p><strong>Objetivo:</strong> Sincronización diaria del equipo.</p>
+      <p><strong>Estructura - Cada persona responde 3 preguntas:</strong></p>
+      <ul>
+        <li><strong>¿Qué hice ayer?</strong> Describe el trabajo completado (tareas finalizadas, bugs arreglados, código revisado)</li>
+        <li><strong>¿Qué haré hoy?</strong> Plan para las próximas 24 horas (tareas a realizar, features a implementar)</li>
+        <li><strong>¿Qué me bloquea?</strong> Obstáculos que impiden el progreso (dependencias, bugs, falta de información, recursos)</li>
+      </ul>
+      <p><strong>Ejemplo de Daily:</strong></p>
+      <pre><code class="language-plaintext">
+Juan: "Ayer terminé la autenticación de usuarios. Hoy voy a 
+       trabajar en la validación de formularios. Me bloquea 
+       que necesito acceso a la API de terceros."
+
+María: "Ayer hice los estilos CSS del login. Hoy haré el 
+        responsive design. Sin blockers."
+
+Pedro: "Ayer arreglé 2 bugs del carrito. Hoy empiezo con 
+        el checkout. Bloqueado: espero claridad en requisitos 
+        de pago del cliente."
+      </code></pre>
+
+      <h3>5.3. Sprint Review (Demostración)</h3>
+      <p><strong>Cuándo:</strong> Al final del sprint (penúltima reunión).</p>
+      <p><strong>Duración:</strong> 1-2 horas.</p>
+      <p><strong>Participantes:</strong> Equipo completo, cliente, stakeholders.</p>
+      <p><strong>Objetivo:</strong> Mostrar el trabajo completado y recopilar feedback.</p>
+      <p><strong>Actividades:</strong></p>
+      <ul>
+        <li>El equipo demuestra las funcionalidades completadas</li>
+        <li>El cliente ve el software funcionando en directo</li>
+        <li>Se recibe feedback sobre lo que está bien y qué mejorar</li>
+        <li>Se comentan cambios que surgieron durante el sprint</li>
+        <li>Se actualiza el backlog con nuevos requisitos o prioridades</li>
+      </ul>
+
+      <h3>5.4. Sprint Retrospective</h3>
+      <p><strong>Cuándo:</strong> Al final del sprint, después de la review (última reunión).</p>
+      <p><strong>Duración:</strong> 1-1.5 horas.</p>
+      <p><strong>Participantes:</strong> Solo el equipo de desarrollo (sin cliente ni stakeholders externos).</p>
+      <p><strong>Objetivo:</strong> Mejorar el proceso y la forma de trabajar del equipo.</p>
+      <p><strong>Preguntas clave (Starfish Retrospective):</strong></p>
+      <ul>
+        <li><strong>¿Qué debemos SEGUIR haciendo?</strong> (Prácticas que funcionan bien)</li>
+        <li><strong>¿Qué debemos DEJAR de hacer?</strong> (Lo que no agrega valor)</li>
+        <li><strong>¿Qué debemos EMPEZAR a hacer?</strong> (Nuevas prácticas)</li>
+        <li><strong>¿Qué nos BLOQUEA?</strong> (Problemas recurrentes)</li>
+      </ul>
+      <p><strong>Ejemplo de retrospective:</strong></p>
+      <pre><code class="language-plaintext">
+SEGUIR haciendo:
+  - Daily standups: son efectivos
+  - Pair programming: encuentra bugs temprano
+
+DEJAR de hacer:
+  - Reuniones largas sin agenda
+  - Cambios de requisitos a mitad de sprint
+
+EMPEZAR a hacer:
+  - Testing automatizado
+  - Documentación de decisiones técnicas
+
+BLOQUEA:
+  - Lentitud en aprobaciones del cliente
+  - Falta de acceso a algunos servidores
+      </code></pre>
+
+      <h3>5.5. Sprint de refinamiento (Backlog Refinement)</h3>
+      <p><strong>Cuándo:</strong> Durante el sprint (usualmente al final).</p>
+      <p><strong>Participantes:</strong> Product Owner y equipo.</p>
+      <p><strong>Objetivo:</strong> Preparar requisitos para el próximo sprint (estimar, desglosar, aclarar).</p>
+    </section>
+
+    <!-- SECCIÓN 6: ROLES EN AGILE -->
+    <section id="roles-agile">
+      <h2>6. Roles en Agile (Scrum)</h2>
+      <div class="diagram">
+            <img src="../assets/agile_roles.png" style="max-width:80%;" alt="Agile Roles">
+        </div>
+
+
+      <h3>6.1. Product Owner</h3>
+      <ul>
+        <li>Representa los intereses del cliente y stakeholders</li>
+        <li>Gestiona y prioriza el backlog de producto</li>
+        <li>Define y clarifica requisitos</li>
+        <li>Acepta o rechaza el trabajo completado</li>
+        <li>Es responsable del ROI (retorno de inversión)</li>
+      </ul>
+
+      <h3>6.2. Scrum Master</h3>
+      <ul>
+        <li>Facilita el proceso Scrum</li>
+        <li>Elimina impedimentos del equipo</li>
+        <li>Entrena al equipo en prácticas ágiles</li>
+        <li>Protege al equipo de interrupciones externas</li>
+        <li>No es jefe del equipo, es un facilitador</li>
+      </ul>
+
+      <h3>6.3. Equipo de Desarrollo</h3>
+      <ul>
+        <li>Auto-organizable y multidisciplinario</li>
+        <li>Responsable de entregar el incremento de producto</li>
+        <li>Estima el esfuerzo del trabajo</li>
+        <li>Participa en todas las ceremonias</li>
+        <li>Busca mejorar continuamente</li>
+      </ul>
+    </section>
+
+    <!-- SECCIÓN 7: ARTEFACTOS ÁGILES - KANBAN BOARD -->
+    <section id="artefactos-agiles">
+      <h2>7. Artefactos Ágiles - Kanban Board</h2>
+
+      <h3>7.1. ¿Qué es un Kanban Board?</h3>
+      <p>Un Kanban Board es una herramienta visual que organiza el trabajo en columnas que representan diferentes estados del trabajo. Permite ver el flujo del trabajo en tiempo real y limitar el trabajo en progreso (WIP - Work In Progress).</p>
+
+      <h3>7.2. Tablero Kanban típico</h3>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin: 20px 0;">
+        
+        <!-- Columna: Backlog -->
+        <div style="background: #f5f5f5; border-left: 4px solid #9e9e9e; border-radius: 8px; padding: 15px;">
+          <h4 style="margin-top: 0; color: #666;">📋 BACKLOG</h4>
+          <p style="font-size: 0.9em; color: #888; margin-bottom: 10px;">Historias pendientes de priorizar</p>
+          <div style="background: white; border: 1px solid #ddd; border-radius: 4px; padding: 10px; margin-bottom: 8px;">
+            <strong>US-05: Reportes avanzados</strong>
+            <p style="font-size: 0.85em; margin: 5px 0; color: #666;">8 puntos</p>
+          </div>
+          <div style="background: white; border: 1px solid #ddd; border-radius: 4px; padding: 10px; margin-bottom: 8px;">
+            <strong>US-06: Integración con API</strong>
+            <p style="font-size: 0.85em; margin: 5px 0; color: #666;">5 puntos</p>
+          </div>
+          <div style="background: white; border: 1px solid #ddd; border-radius: 4px; padding: 10px;">
+            <strong>US-07: Notificaciones email</strong>
+            <p style="font-size: 0.85em; margin: 5px 0; color: #666;">3 puntos</p>
+          </div>
+        </div>
+
+        <!-- Columna: In Progress -->
+        <div style="background: #fff3e0; border-left: 4px solid #ff9800; border-radius: 8px; padding: 15px;">
+          <h4 style="margin-top: 0; color: #e65100;">🔨 IN PROGRESS</h4>
+          <p style="font-size: 0.9em; color: #888; margin-bottom: 10px;">Límite: 3 tareas</p>
+          <div style="background: white; border: 1px solid #ffe0b2; border-radius: 4px; padding: 10px; margin-bottom: 8px; border-left: 3px solid #ff9800;">
+            <strong>US-01: Autenticación</strong>
+            <p style="font-size: 0.85em; margin: 5px 0; color: #666;">Asignado: Juan</p>
+            <p style="font-size: 0.8em; margin: 5px 0; color: #ff9800;">70% completado</p>
+          </div>
+          <div style="background: white; border: 1px solid #ffe0b2; border-radius: 4px; padding: 10px; margin-bottom: 8px; border-left: 3px solid #ff9800;">
+            <strong>US-02: Validación formularios</strong>
+            <p style="font-size: 0.85em; margin: 5px 0; color: #666;">Asignado: María</p>
+            <p style="font-size: 0.8em; margin: 5px 0; color: #ff9800;">50% completado</p>
+          </div>
+          <div style="background: white; border: 1px solid #ffe0b2; border-radius: 4px; padding: 10px; border-left: 3px solid #ff9800;">
+            <strong>US-03: Dashboard</strong>
+            <p style="font-size: 0.85em; margin: 5px 0; color: #666;">Asignado: Pedro</p>
+            <p style="font-size: 0.8em; margin: 5px 0; color: #ff9800;">30% completado</p>
+          </div>
+        </div>
+
+        <!-- Columna: Review -->
+        <div style="background: #f3e5f5; border-left: 4px solid #9c27b0; border-radius: 8px; padding: 15px;">
+          <h4 style="margin-top: 0; color: #6a1b9a;">👀 REVIEW</h4>
+          <p style="font-size: 0.9em; color: #888; margin-bottom: 10px;">Esperando aprobación</p>
+          <div style="background: white; border: 1px solid #e1bee7; border-radius: 4px; padding: 10px; margin-bottom: 8px; border-left: 3px solid #9c27b0;">
+            <strong>US-04: Filtros búsqueda</strong>
+            <p style="font-size: 0.85em; margin: 5px 0; color: #666;">Code Review: ✓</p>
+            <p style="font-size: 0.8em; margin: 5px 0; color: #9c27b0;">En QA Testing</p>
+          </div>
+          <div style="background: white; border: 1px solid #e1bee7; border-radius: 4px; padding: 10px; border-left: 3px solid #9c27b0;">
+            <strong>US-02b: Validación (continuación)</strong>
+            <p style="font-size: 0.85em; margin: 5px 0; color: #666;">Esperando feedback cliente</p>
+          </div>
+        </div>
+
+        <!-- Columna: Done -->
+        <div style="background: #e8f5e9; border-left: 4px solid #4caf50; border-radius: 8px; padding: 15px;">
+          <h4 style="margin-top: 0; color: #1b5e20;">✅ DONE</h4>
+          <p style="font-size: 0.9em; color: #888; margin-bottom: 10px;">Completadas este sprint</p>
+          <div style="background: white; border: 1px solid #c8e6c9; border-radius: 4px; padding: 10px; margin-bottom: 8px; opacity: 0.8;">
+            <strong>US-01: Autenticación</strong>
+            <p style="font-size: 0.85em; margin: 5px 0; color: #666;">✓ Mergeado en main</p>
+          </div>
+          <div style="background: white; border: 1px solid #c8e6c9; border-radius: 4px; padding: 10px;">
+            <strong>US-00: Setup inicial</strong>
+            <p style="font-size: 0.85em; margin: 5px 0; color: #666;">✓ En producción</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>7.3. Estados del Kanban</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Estado</th>
+            <th>Descripción</th>
+            <th>Criterio de entrada</th>
+            <th>Criterio de salida</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>📋 Backlog</strong></td>
+            <td>Tareas sin iniciar</td>
+            <td>Creada y priorizada</td>
+            <td>Asignada al equipo</td>
+          </tr>
+          <tr>
+            <td><strong>🔨 In Progress</strong></td>
+            <td>Se está trabajando</td>
+            <td>Asignada a alguien</td>
+            <td>Code review completado</td>
+          </tr>
+          <tr>
+            <td><strong>👀 Review</strong></td>
+            <td>Esperando aprobación</td>
+            <td>Código listo para revisar</td>
+            <td>Aprobado por revisor</td>
+          </tr>
+          <tr>
+            <td><strong>✅ Done</strong></td>
+            <td>Completada y mergeada</td>
+            <td>Aprobada por revisor</td>
+            <td>En rama main o producción</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>7.4. WIP Limit (Work In Progress Limit)</h3>
+      <p>El <strong>WIP Limit</strong> es el número máximo de tareas que pueden estar en una columna simultáneamente. Evita que el equipo se sobrecargue y mejora el flujo.</p>
+      <ul>
+        <li><strong>In Progress:</strong> Máximo 3 tareas (una por cada developer)</li>
+        <li><strong>Review:</strong> Máximo 2 tareas en paralelo</li>
+        <li><strong>Backlog:</strong> Sin límite (todo lo que falta por hacer)</li>
+      </ul>
+
+      <h3>7.5. Historia de Usuario (User Story)</h3>
+      <pre><code class="language-plaintext">
+Como [tipo de usuario]
+Quiero [acción que quiero realizar]
+Para [beneficio/valor que obtengo]
+
+Criterios de aceptación:
+- [ ] Criterio 1
+- [ ] Criterio 2
+- [ ] Criterio 3
+
+Ejemplo:
+Como cliente
+Quiero poder filtrar productos por precio
+Para encontrar fácilmente lo que puedo pagar
+
+Criterios:
+- [ ] Mostrar slider de rango de precios
+- [ ] Actualizar lista al cambiar valores
+- [ ] Guardar filtro en URL
+      </code></pre>
+
+      <h3>7.6. Ventajas del Kanban Board</h3>
+      <ul>
+        <li>✅ <strong>Visibilidad:</strong> Todos ven el estado del proyecto en tiempo real</li>
+        <li>✅ <strong>Límites de WIP:</strong> Evita que el trabajo se acumule</li>
+        <li>✅ <strong>Flexibilidad:</strong> No requiere sprints, flujo continuo</li>
+        <li>✅ <strong>Identificar cuellos de botella:</strong> Si Review está lleno, hay un problema</li>
+        <li>✅ <strong>Reducir tiempo de ciclo:</strong> Menos trabajo acumulado = entregas más rápidas</li>
+      </ul>
+    </section>
+
+    <!-- RESUMEN -->
+    <section id="resumen">
+      <div class="info-box">
+        <h3>Resumen de Agile</h3>
+        <ul>
+          <li><strong>Agile:</strong> Metodología flexible, iterativa e incremental</li>
+          <li><strong>Valores:</strong> Individuos, software funcional, colaboración, cambio</li>
+          <li><strong>Waterfall:</strong> Lineal, requisitos fijos, una entrega final</li>
+          <li><strong>Agile:</strong> Iterativo, requisitos flexibles, entregas frecuentes</li>
+          <li><strong>Sprint:</strong> Ciclo de 1-4 semanas de desarrollo</li>
+          <li><strong>Sprint Planning:</strong> Seleccionar y planificar el trabajo del sprint</li>
+          <li><strong>Daily Standup:</strong> Sincronización diaria (qué hice, qué haré, qué me bloquea)</li>
+          <li><strong>Sprint Review:</strong> Demostración del trabajo al cliente</li>
+          <li><strong>Sprint Retrospective:</strong> Mejora del proceso del equipo</li>
+          <li><strong>Product Owner:</strong> Gestiona requisitos y prioridades</li>
+          <li><strong>Scrum Master:</strong> Facilita el proceso y elimina impedimentos</li>
+          <li><strong>Equipo:</strong> Auto-organizable, multidisciplinario y comprometido</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+
+</html>
