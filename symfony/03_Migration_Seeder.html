@@ -224,55 +224,8 @@ php bin/console doctrine:fixtures:load
 </section>
 
 <!-- SECCIÓN 5 -->
-<section id="relaciones">
-<h2>5. Relaciones entre tablas</h2>
-
-<h3>5.1. Definir relación 1:N con entidades</h3>
-
-<pre><code class="language-php">
-&lt;?php
-// src/Entity/Habitacion.php
-
-namespace App\Entity;
-
-use Doctrine\ORM\Mapping as ORM;
-
-#[ORM\Entity]
-class Habitacion
-{
-  #[ORM\Id]
-  #[ORM\GeneratedValue]
-  #[ORM\Column]
-  private ?int $id = null;
-
-  #[ORM\Column]
-  private int $numero;
-
-  #[ORM\ManyToOne(inversedBy: 'habitaciones')]
-  #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
-  private ?Hotel $hotel = null;
-}
-
-// src/Entity/Hotel.php
-#[ORM\Entity]
-class Hotel
-{
-  #[ORM\OneToMany(mappedBy: 'hotel', targetEntity: Habitacion::class, orphanRemoval: true)]
-  private Collection $habitaciones;
-}
-</code></pre>
-
-<h3>5.2. Generar migración</h3>
-
-<pre><code class="language-bash">
-php bin/console make:migration
-php bin/console doctrine:migrations:migrate
-</code></pre>
-</section>
-
-<!-- SECCIÓN 6 -->
 <section id="todo">
-<h2>6. Reinicializar base de datos</h2>
+<h2>5. Reinicializar base de datos</h2>
 
 <pre><code class="language-bash">
 php bin/console doctrine:database:drop --force
@@ -313,7 +266,6 @@ Hotel "1" --> "*" Habitacion
     <tr><td>Ejecutar migraciones</td><td>doctrine:migrations:migrate</td></tr>
     <tr><td>Crear fixture</td><td>make:fixtures</td></tr>
     <tr><td>Usar Faker</td><td>Factory::create()</td></tr>
-    <tr><td>Recrear BD</td><td>database:drop/create + migrations + fixtures</td></tr>
 </table>
 </div>
 </section>

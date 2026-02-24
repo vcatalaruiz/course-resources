@@ -77,6 +77,45 @@ En esta sección comprenderás qué es Doctrine y por qué es el ORM estándar e
 mediante <strong>entidades PHP</strong>, evitando escribir SQL directamente.
 Cada entidad representa una tabla.
 </p>
+<div class="diagram">
+        <img src="../assets/symfony_orm.png" style="max-width:35%;" alt="Symfony ORM Logo">
+      </div>
+<div class="info-box">
+      <h4>⚠️ Importante</h4>
+      <ul>
+        <li>Un registro o fila de la tabla se corresponderá con un objeto de la clase asociada (entidad)</li>
+      </ul>
+    </div>
+    <div class="diagram">
+      <img src="../assets/symfony_orm_intro.png" style="max-width:100%;" alt="Symfony ORM Intro">
+    </div>
+
+<h3>1.1. Instalación y configuración básica</h3>
+
+<p>
+Instala el paquete ORM y configura la conexión a la base de datos en el fichero
+<strong>.env</strong>.
+</p>
+
+<pre><code class="language-bash">
+    composer require symfony/orm-pack
+</code></pre>
+
+<p>
+    Después, edita el fichero <strong>.env</strong> para ajustar la variable <strong>DATABASE_URL</strong>
+    con tus credenciales.
+<pre><code class="language-bash">
+    DATABASE_URL="mysql://root:@127.0.0.1:3306/ddbbname?serverVersion=10.4.32-MariaDB&charset=utf8mb4"
+</code></pre>
+</p>
+
+<p>
+    Ya puedes crear la base de datos o eliminarla.
+<pre><code class="language-bash">
+php bin/console doctrine:database:create
+php bin/console doctrine:database:drop --force
+</code></pre>
+</p>
 </section>
 
 <!-- SECCIÓN 2 -->
@@ -533,67 +572,14 @@ $cantidad = $hotelRepository->createQueryBuilder('h')
 </section>
 
 <!-- SECCIÓN 5 -->
-<section id="factory">
-<h2>5. Fixtures con Faker</h2>
-
-<p>
-Esta parte te permite generar datos de prueba de forma rápida para tus entidades.
-</p>
-
-<h3>5.1. Crear fixtures</h3>
-
-<pre><code class="language-bash">
-composer require --dev doctrine/doctrine-fixtures-bundle
-php bin/console make:fixtures HotelFixtures
-composer require --dev fakerphp/faker
-</code></pre>
-
-<h3>5.2. Fixture con Faker</h3>
-
-<pre><code class="language-php">
-&lt;?php
-namespace App\DataFixtures;
-
-use App\Entity\Hotel;
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
-use Faker\Factory;
-
-class HotelFixtures extends Fixture
-{
-  public function load(ObjectManager $manager): void
-  {
-    $faker = Factory::create('es_ES');
-
-    for ($i = 0; $i < 10; $i++) {
-      $hotel = new Hotel();
-      $hotel->setNombre($faker->company());
-      $hotel->setDireccion($faker->address());
-
-      $manager->persist($hotel);
-    }
-
-    $manager->flush();
-  }
-}
-</code></pre>
-
-<h3>5.3. Cargar fixtures</h3>
-
-<pre><code class="language-bash">
-php bin/console doctrine:fixtures:load
-</code></pre>
-</section>
-
-<!-- SECCIÓN 6 -->
 <section id="seed">
-<h2>6. Repositorios y consultas</h2>
+<h2>5. Repositorios y consultas</h2>
 
 <p>
 Aquí aprenderás a crear repositorios personalizados y consultas específicas.
 </p>
 
-<h3>6.1. Repositorio personalizado</h3>
+<h3>5.1. Repositorio personalizado</h3>
 
 <pre><code class="language-php">
 // src/Repository/HotelRepository.php
@@ -621,7 +607,7 @@ class HotelRepository extends ServiceEntityRepository
 }
 </code></pre>
 
-<h3>6.2. Uso del repositorio</h3>
+<h3>5.2. Uso del repositorio</h3>
 
 <pre><code class="language-php">
 $hoteles = $hotelRepository->buscarPorNombre('Hotel');
@@ -682,7 +668,6 @@ HotelServicio --> Servicio
 <tr><th>Elemento</th><th>Función</th></tr>
 <tr><td>Entity</td><td>Representa una tabla</td></tr>
 <tr><td>Doctrine</td><td>ORM de Symfony</td></tr>
-<tr><td>Fixtures</td><td>Genera datos con Faker</td></tr>
 <tr><td>Repository</td><td>Consultas personalizadas</td></tr>
 <tr><td>CRUD</td><td>Operaciones con entidades</td></tr>
 </table>
