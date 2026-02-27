@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MongoDB — Test</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+</head>
+
+<body>
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+  <header>
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1>MongoDB — Test</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+
+    <section id="intro">
+      <h2>1. Instrucciones</h2>
+      <div class="quiz-intro">
+        <p>Responde las 25 preguntas tipo test sobre <strong>MongoDB</strong>, bases de datos NoSQL, documentos, colecciones y operaciones CRUD. Al final podrás ver tu puntuación y la explicación de cada respuesta.</p>
+        <div class="quiz-meta">
+          <span class="badge">25 preguntas</span>
+          <span>Modo: selección única</span>
+          <span>Corrección inmediata al enviar</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="test">
+      <h2>2. Test de conocimientos</h2>
+
+      <div id="result" class="result-box"></div>
+
+      <form id="quiz-form" class="quiz-container" aria-describedby="result">
+        <!-- Preguntas generadas por JS -->
+      </form>
+
+      <div class="quiz-actions">
+        <button type="button" class="primary" id="check-btn">Corregir</button>
+        <button type="button" class="danger" id="reset-btn">Reiniciar</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const QUESTIONS = [
+      {
+        text: "¿Qué tipo de base de datos es MongoDB?",
+        options: [
+          "Base de datos relacional",
+          "Base de datos NoSQL orientada a documentos",
+          "Base de datos en memoria",
+          "Base de datos de grafos"
+        ],
+        answer: 1,
+        explanation: "MongoDB es una base de datos NoSQL que almacena datos en documentos similares a JSON."
+      },
+      {
+        text: "¿En qué formato almacena MongoDB los documentos?",
+        options: [
+          "XML",
+          "JSON",
+          "BSON (Binary JSON)",
+          "CSV"
+        ],
+        answer: 2,
+        explanation: "MongoDB almacena documentos en formato BSON, que es una representación binaria de JSON."
+      },
+      {
+        text: "¿Qué es una colección en MongoDB?",
+        options: [
+          "Una tabla equivalente a SQL",
+          "Un grupo de documentos",
+          "Un índice de búsqueda",
+          "Una vista materializada"
+        ],
+        answer: 1,
+        explanation: "Una colección es un grupo de documentos, similar a una tabla en bases de datos relacionales."
+      },
+      {
+        text: "¿Qué campo actúa como clave primaria en MongoDB?",
+        options: [
+          "id",
+          "primary_key",
+          "_id",
+          "key"
+        ],
+        answer: 2,
+        explanation: "El campo _id actúa como clave primaria y es generado automáticamente si no se especifica."
+      },
+      {
+        text: "¿Qué método se usa para insertar un documento?",
+        options: [
+          "db.collection.add()",
+          "db.collection.insert()",
+          "db.collection.insertOne()",
+          "db.collection.create()"
+        ],
+        answer: 2,
+        explanation: "insertOne() es el método moderno para insertar un solo documento."
+      },
+      {
+        text: "¿Qué hace este código?",
+        codeBlock: "db.usuarios.insertMany([\n  {nombre: 'Ana', edad: 25},\n  {nombre: 'Luis', edad: 30}\n])",
+        options: [
+          "Inserta un array con dos usuarios",
+          "Inserta dos documentos separados en la colección usuarios",
+          "Crea una colección llamada usuarios",
+          "Actualiza dos usuarios existentes"
+        ],
+        answer: 1,
+        explanation: "insertMany() inserta múltiples documentos de forma individual en la colección. Cada objeto del array se convierte en un documento separado."
+      },
+      {
+        text: "¿Qué método se usa para buscar todos los documentos?",
+        options: [
+          "db.collection.getAll()",
+          "db.collection.findAll()",
+          "db.collection.find()",
+          "db.collection.select()"
+        ],
+        answer: 2,
+        explanation: "find() sin parámetros devuelve todos los documentos de la colección."
+      },
+      {
+        text: "¿Qué método se usa para buscar un solo documento?",
+        options: [
+          "db.collection.findFirst()",
+          "db.collection.findOne()",
+          "db.collection.getOne()",
+          "db.collection.selectOne()"
+        ],
+        answer: 1,
+        explanation: "findOne() devuelve el primer documento que coincide con los criterios de búsqueda."
+      },
+      {
+        text: "¿Qué devuelve?",
+        codeBlock: "db.productos.find({\n  precio: {$gt: 100, $lte: 500}\n})",
+        options: [
+          "Productos con precio mayor que 100 o menor/igual que 500",
+          "Productos con precio mayor que 100 y menor/igual que 500",
+          "Productos con precio exactamente 100 o 500",
+          "Productos con precio entre 100 y 500 (excluyendo ambos)"
+        ],
+        answer: 1,
+        explanation: "La consulta usa AND implícito: precio > 100 Y precio <= 500, devolviendo productos entre 101 y 500."
+      },
+      {
+        text: "¿Qué operador se usa para 'mayor que'?",
+        options: [
+          "$gt",
+          "$greater",
+          "$>",
+          "$more"
+        ],
+        answer: 0,
+        explanation: "$gt (greater than) se usa para comparaciones 'mayor que'."
+      },
+      {
+        text: "¿Qué operador se usa para 'menor o igual que'?",
+        options: [
+          "$lte",
+          "$lessequal",
+          "$<=",
+          "$le"
+        ],
+        answer: 0,
+        explanation: "$lte (less than or equal) se usa para 'menor o igual que'."
+      },
+      {
+        text: "¿Qué método actualiza un solo documento?",
+        options: [
+          "db.collection.update()",
+          "db.collection.modify()",
+          "db.collection.updateOne()",
+          "db.collection.change()"
+        ],
+        answer: 2,
+        explanation: "updateOne() actualiza el primer documento que coincide con el filtro."
+      },
+      {
+        text: "¿Qué hace?",
+        codeBlock: "db.empleados.updateOne(\n  {nombre: 'Juan'},\n  {$set: {edad: 35, ciudad: 'Madrid'}}\n)",
+        options: [
+          "Actualiza todos los empleados llamados Juan",
+          "Actualiza el primer empleado llamado Juan, estableciendo edad y ciudad",
+          "Crea un nuevo empleado si Juan no existe",
+          "Solo actualiza la edad, ignora la ciudad"
+        ],
+        answer: 1,
+        explanation: "updateOne() actualiza solo el primer documento que coincide. $set actualiza los campos especificados sin afectar otros campos del documento."
+      },
+      {
+        text: "¿Qué método elimina un documento?",
+        options: [
+          "db.collection.remove()",
+          "db.collection.deleteOne()",
+          "db.collection.drop()",
+          "db.collection.erase()"
+        ],
+        answer: 1,
+        explanation: "deleteOne() elimina el primer documento que coincide con el filtro."
+      },
+      {
+        text: "¿Qué método elimina múltiples documentos?",
+        options: [
+          "db.collection.deleteMany()",
+          "db.collection.removeAll()",
+          "db.collection.deleteMultiple()",
+          "db.collection.clearMany()"
+        ],
+        answer: 0,
+        explanation: "deleteMany() elimina todos los documentos que coinciden con el filtro."
+      },
+      {
+        text: "¿Qué devuelve?",
+        codeBlock: "db.estudiantes.find({\n  edad: {$in: [18, 20, 22]}\n})",
+        options: [
+          "Estudiantes entre 18 y 22 años",
+          "Estudiantes con edad exactamente 18, 20 o 22",
+          "Estudiantes con edad mayor o igual a 18",
+          "Solo estudiantes de 18 años"
+        ],
+        answer: 1,
+        explanation: "$in busca documentos donde el campo tenga exactamente alguno de los valores especificados en el array. Es como un OR para valores específicos."
+      },
+      {
+        text: "¿Qué operador lógico se usa para AND?",
+        options: [
+          "$and",
+          "$&&",
+          "No necesita operador, se usa coma",
+          "Ambas b y c son correctas"
+        ],
+        answer: 3,
+        explanation: "AND puede expresarse con comas en el query o explícitamente con $and."
+      },
+      {
+        text: "¿Qué operador se usa para OR lógico?",
+        options: [
+          "$or",
+          "$||",
+          "$either",
+          "$any"
+        ],
+        answer: 0,
+        explanation: "$or permite especificar múltiples condiciones donde al menos una debe cumplirse."
+      },
+      {
+        text: "¿Qué método se usa para contar documentos?",
+        options: [
+          "db.collection.count()",
+          "db.collection.countDocuments()",
+          "db.collection.size()",
+          "db.collection.length()"
+        ],
+        answer: 1,
+        explanation: "countDocuments() es el método recomendado para contar documentos."
+      },
+      {
+        text: "¿Qué método ordena los resultados?",
+        options: [
+          "db.collection.find().orderBy()",
+          "db.collection.find().sort()",
+          "db.collection.find().arrange()",
+          "db.collection.find().order()"
+        ],
+        answer: 1,
+        explanation: "sort() se encadena a find() para ordenar resultados. 1 = ascendente, -1 = descendente."
+      },
+      {
+        text: "¿Qué hace?",
+        codeBlock: "db.ventas.find({cantidad: {$gt: 100}})\n  .sort({fecha: -1})\n  .limit(5)",
+        options: [
+          "Las 5 ventas más antiguas con cantidad > 100",
+          "Las 5 ventas más recientes con cantidad > 100",
+          "Todas las ventas > 100 ordenadas descendentemente",
+          "Solo ventas del top 5 en cantidad"
+        ],
+        answer: 1,
+        explanation: "Busca ventas > 100, las ordena por fecha descendente (-1 = más reciente primero) y devuelve solo las primeras 5."
+      },
+      {
+        text: "¿Qué método salta documentos en los resultados?",
+        options: [
+          "db.collection.find().jump()",
+          "db.collection.find().skip()",
+          "db.collection.find().offset()",
+          "db.collection.find().pass()"
+        ],
+        answer: 1,
+        explanation: "skip() omite un número específico de documentos, útil para paginación."
+      },
+      {
+        text: "¿Qué resultado tiene?",
+        codeBlock: "db.productos.updateOne(\n  {nombre: 'Laptop'},\n  {$inc: {stock: -5, ventas: 1}}\n)",
+        options: [
+          "Establece stock en -5 y ventas en 1",
+          "Reduce stock en 5 unidades e incrementa ventas en 1",
+          "Incrementa stock en -5 (sin cambios) y ventas en 1",
+          "Da error porque -5 es negativo"
+        ],
+        answer: 1,
+        explanation: "$inc puede usar valores positivos o negativos. Aquí reduce stock en 5 (stock - 5) e incrementa ventas en 1."
+      },
+      {
+        text: "¿Qué hace?",
+        codeBlock: "db.usuarios.deleteMany({\n  activo: false,\n  ultimoAcceso: {$lt: new Date('2024-01-01')}\n})",
+        options: [
+          "Elimina un usuario inactivo antiguo",
+          "Elimina todos los usuarios inactivos desde 2024",
+          "Elimina todos los usuarios inactivos con último acceso antes del 1/1/2024",
+          "Marca usuarios como eliminados sin borrarlos"
+        ],
+        answer: 2,
+        explanation: "deleteMany() elimina todos los documentos que cumplen ambas condiciones: activo=false Y ultimoAcceso < 1 enero 2024."
+      },
+      {
+        text: "¿Qué característica NO tiene MongoDB?",
+        options: [
+          "Joins complejos nativos como SQL",
+          "Escalabilidad horizontal",
+          "Replicación",
+          "Sharding"
+        ],
+        answer: 0,
+        explanation: "MongoDB no soporta joins complejos como SQL, aunque tiene $lookup para operaciones similares."
+      }
+    ];
+
+    const quizForm = document.getElementById('quiz-form');
+    const resultBox = document.getElementById('result');
+    const checkBtn = document.getElementById('check-btn');
+    const resetBtn = document.getElementById('reset-btn');
+
+    function renderQuiz() {
+      quizForm.innerHTML = '';
+      QUESTIONS.forEach((q, index) => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.dataset.index = index;
+
+        const title = document.createElement('div');
+        title.className = 'question-title';
+        title.textContent = `${index + 1}. ${q.text}`;
+
+        card.appendChild(title);
+
+        if (q.codeBlock) {
+          const codeDiv = document.createElement('div');
+          codeDiv.className = 'question-text-code';
+          const pre = document.createElement('pre');
+          const code = document.createElement('code');
+          code.className = 'language-javascript';
+          code.textContent = q.codeBlock;
+          pre.appendChild(code);
+          codeDiv.appendChild(pre);
+          card.appendChild(codeDiv);
+        }
+
+        const options = document.createElement('div');
+        options.className = 'options';
+
+        q.options.forEach((opt, optIndex) => {
+          const label = document.createElement('label');
+          label.className = 'option';
+
+          const input = document.createElement('input');
+          input.type = 'radio';
+          input.name = `q${index}`;
+          input.value = optIndex;
+          input.setAttribute('aria-label', opt);
+
+          const span = document.createElement('span');
+          span.textContent = opt;
+
+          label.appendChild(input);
+          label.appendChild(span);
+          options.appendChild(label);
+        });
+
+        const explanation = document.createElement('div');
+        explanation.className = 'explanation';
+        explanation.hidden = true;
+
+        card.appendChild(title);
+        card.appendChild(options);
+        card.appendChild(explanation);
+        quizForm.appendChild(card);
+      });
+      Prism.highlightAllUnder(quizForm);
+    }
+
+    function checkAnswers() {
+      let correct = 0;
+
+      const cards = quizForm.querySelectorAll('.question-card');
+      cards.forEach((card) => {
+        const index = Number(card.dataset.index);
+        const question = QUESTIONS[index];
+        const selected = card.querySelector('input[type="radio"]:checked');
+        const options = card.querySelectorAll('.option');
+        const explanation = card.querySelector('.explanation');
+
+        options.forEach((opt) => opt.classList.remove('correct', 'incorrect'));
+
+        if (selected) {
+          const selectedIndex = Number(selected.value);
+          if (selectedIndex === question.answer) {
+            correct += 1;
+            options[selectedIndex].classList.add('correct');
+          } else {
+            options[selectedIndex].classList.add('incorrect');
+            options[question.answer].classList.add('correct');
+          }
+        } else {
+          options[question.answer].classList.add('correct');
+        }
+
+        explanation.textContent = `Explicación: ${question.explanation}`;
+        explanation.hidden = false;
+      });
+
+      const total = QUESTIONS.length;
+      const percent = Math.round((correct / total) * 100);
+
+      resultBox.style.display = 'block';
+      resultBox.innerHTML = `
+        <h3>Resultado</h3>
+        <p>Has acertado <strong>${correct}</strong> de <strong>${total}</strong> preguntas (${percent}%).</p>
+        <p>Revisa las explicaciones debajo de cada pregunta.</p>
+      `;
+
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetQuiz() {
+      renderQuiz();
+      resultBox.style.display = 'none';
+      resultBox.innerHTML = '';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    checkBtn.addEventListener('click', checkAnswers);
+    resetBtn.addEventListener('click', resetQuiz);
+
+    renderQuiz();
+  </script>
+</body>
+</html>

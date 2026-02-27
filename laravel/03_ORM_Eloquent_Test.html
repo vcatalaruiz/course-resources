@@ -18,6 +18,9 @@
   <script src="../menu.js" defer></script>
   <link rel="stylesheet" href="../style.css" />
   <link rel="stylesheet" href="../menu.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-php.min.js"></script>
 </head>
 
 <body>
@@ -126,7 +129,8 @@
         explanation: "$fillable permite asignar masivamente esos campos."
       },
       {
-        text: "¿Qué hace Hotel::create([...])?",
+        text: "¿Qué hace este código?",
+        codeBlock: "Hotel::create([\n    'nombre' => 'Hotel Sol',\n    'direccion' => 'Calle Principal 123',\n    'estrellas' => 4\n]);",
         options: [
           "Actualiza un registro",
           "Crea un nuevo registro",
@@ -134,7 +138,7 @@
           "Busca un registro"
         ],
         answer: 1,
-        explanation: "create inserta un nuevo registro con asignación masiva."
+        explanation: "create() inserta un nuevo registro con asignación masiva en la base de datos."
       },
       {
         text: "¿Qué devuelve Hotel::all()?",
@@ -170,15 +174,16 @@
         explanation: "destroy elimina el registro con ese ID."
       },
       {
-        text: "¿Qué devuelve Hotel::where('nombre','like','%Hotel%')->get()?",
+        text: "¿Qué devuelve?",
+        codeBlock: "Hotel::where('nombre', 'like', '%Hotel%')->get();",
         options: [
           "Un solo registro",
-          "Una colección de registros",
+          "Una colección de registros que contienen 'Hotel' en el nombre",
           "Un booleano",
           "Un entero"
         ],
         answer: 1,
-        explanation: "get() devuelve una colección con los resultados."
+        explanation: "where() filtra y get() devuelve una colección con todos los registros que cumplen la condición."
       },
       {
         text: "¿Qué hace $hotel->save()?",
@@ -247,15 +252,16 @@
         explanation: "create genera y guarda un registro con la factory."
       },
       {
-        text: "¿Qué hace Hotel::factory()->count(10)->create()?",
+        text: "¿Qué hace?",
+        codeBlock: "Hotel::factory()->count(10)->create();",
         options: [
           "Crea 1 registro",
-          "Crea 10 registros",
+          "Crea 10 registros falsos en la base de datos",
           "Elimina 10 registros",
           "Actualiza 10 registros"
         ],
         answer: 1,
-        explanation: "count(10) crea diez registros."
+        explanation: "factory()->count(10)->create() genera e inserta 10 registros de prueba usando la factory."
       },
       {
         text: "¿Qué relación define hasMany en un modelo?",
@@ -280,15 +286,16 @@
         explanation: "belongsTo indica que el modelo pertenece a otro."
       },
       {
-        text: "¿Qué devuelve $hotel->habitaciones?",
+        text: "Si Hotel tiene hasMany('Habitacion'), ¿qué devuelve?",
+        codeBlock: "$hotel = Hotel::find(1);\n$habitaciones = $hotel->habitaciones;",
         options: [
-          "Una colección de habitaciones",
+          "Una colección con todas las habitaciones de ese hotel",
           "Un booleano",
           "Un entero",
           "Una migración"
         ],
         answer: 0,
-        explanation: "Accede a la relación hasMany."
+        explanation: "Accede a la relación hasMany y devuelve todas las habitaciones asociadas al hotel."
       },
       {
         text: "¿Dónde se registra un seeder para ejecutarlo en bloque?",
@@ -313,15 +320,16 @@
         explanation: "db:seed ejecuta los seeders."
       },
       {
-        text: "En un seeder: Hotel::factory()->count(20)->create(); ¿qué hace?",
+        text: "En un seeder, ¿qué hace?",
+        codeBlock: "public function run(): void\n{\n    Hotel::factory()->count(20)->create();\n}",
         options: [
-          "Crea 20 registros usando la factory",
+          "Crea 20 registros falsos de hoteles en la base de datos",
           "Elimina 20 registros",
           "Actualiza 20 registros",
           "Crea 1 registro"
         ],
         answer: 0,
-        explanation: "count(20) crea veinte registros con la factory."
+        explanation: "El seeder usa la factory para generar e insertar 20 registros de prueba en la tabla hoteles."
       },
       {
         text: "Si un modelo tiene protected $table = 'hoteles';, ¿qué indica?",
@@ -346,7 +354,8 @@
         explanation: "UPDATE corresponde a actualizar."
       },
       {
-        text: "Interpretación: $hotel = Hotel::find(1); $hotel->direccion = 'Nueva'; $hotel->save();",
+        text: "¿Qué hace?",
+        codeBlock: "$hotel = Hotel::find(1);\n$hotel->direccion = 'Nueva Dirección';\n$hotel->save();",
         options: [
           "Crea un nuevo hotel",
           "Actualiza la dirección del hotel con id 1",
@@ -354,7 +363,7 @@
           "Busca hoteles por nombre"
         ],
         answer: 1,
-        explanation: "Se modifica la dirección y se guarda."
+        explanation: "Busca el hotel con id 1, modifica su dirección y persiste los cambios con save()."
       }
     ];
 
@@ -373,6 +382,20 @@
         const title = document.createElement('div');
         title.className = 'question-title';
         title.textContent = `${index + 1}. ${q.text}`;
+
+        card.appendChild(title);
+
+        if (q.codeBlock) {
+          const codeDiv = document.createElement('div');
+          codeDiv.className = 'question-text-code';
+          const pre = document.createElement('pre');
+          const code = document.createElement('code');
+          code.className = 'language-php';
+          code.textContent = q.codeBlock;
+          pre.appendChild(code);
+          codeDiv.appendChild(pre);
+          card.appendChild(codeDiv);
+        }
 
         const options = document.createElement('div');
         options.className = 'options';
@@ -399,11 +422,11 @@
         explanation.className = 'explanation';
         explanation.hidden = true;
 
-        card.appendChild(title);
         card.appendChild(options);
         card.appendChild(explanation);
         quizForm.appendChild(card);
       });
+      Prism.highlightAllUnder(quizForm);
     }
 
     function checkAnswers() {
