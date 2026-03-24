@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-EVTW1307T1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maven, Dependencias y Gestión de Proyectos en Java</title>
+    <script src="/course-resources/index.js" defer></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+    <script src="../index.js" defer></script>
+    <script src="../menu.js" defer></script>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../menu.css">
+</head>
+
+<body>
+
+    <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+        <div class="vc-rail-head">
+            <span class="vc-rail-title">Índice</span>
+            <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+        <ul id="vc-list" class="vc-list"></ul>
+    </nav>
+
+    <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+    <header>
+        <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+            aria-controls="vc-rail" aria-expanded="false">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+        <h1>Maven, Dependencias y Gestión de Proyectos en Java</h1>
+        <img src="" id="logo" alt="Logo" style="display: none;">
+    </header>
+
+    <main>
+
+        <!-- SECCIÓN 1: INTRODUCCIÓN A MAVEN -->
+        <section id="introduccion-maven">
+            <h2>1. ¿Qué es Maven?</h2>
+             <div class="diagram">
+                <img src="../assets/java_maven.png" style="max-width:60%;" alt="PHP Logo">
+            </div>
+
+            <p>
+                <strong>Maven</strong> es una herramienta de automatización y gestión de proyectos Java.
+                Permite compilar, probar, empaquetar y distribuir proyectos de forma consistente y automatizada.
+            </p>
+
+            <h3>1.1. Funciones principales de Maven</h3>
+            <ul>
+                <li><strong>Gestión de dependencias:</strong> Descarga e integra librerías automáticamente</li>
+                <li><strong>Compilación:</strong> Compila el código Java de forma automática</li>
+                <li><strong>Testing:</strong> Ejecuta tests unitarios automáticamente</li>
+                <li><strong>Empaquetado:</strong> Crea archivos JAR, WAR o EAR</li>
+                <li><strong>Construcción:</strong> Automatiza todo el ciclo de vida del proyecto</li>
+                <li><strong>Documentación:</strong> Genera sitios de documentación automáticamente</li>
+            </ul>
+
+            <h3>1.2. Ventajas de usar Maven</h3>
+            <ul>
+                <li>Estructura estándar de proyectos (convención sobre configuración)</li>
+                <li>Gestión centralizada de dependencias</li>
+                <li>Ciclo de vida del proyecto bien definido</li>
+                <li>Integración con IDEs (Eclipse, IntelliJ, NetBeans)</li>
+                <li>Disponibilidad de miles de dependencias en Maven Central</li>
+                <li>Fácil distribución y compartición de proyectos</li>
+            </ul>
+
+            <h3>1.3. Maven vs otras herramientas</h3>
+            <ul>
+                <li><strong>Ant:</strong> Más antiguo, requiere más configuración manual</li>
+                <li><strong>Gradle:</strong> Más moderno, más flexible, sintaxis con Groovy</li>
+                <li><strong>Maven:</strong> Estándar de la industria, muy documentado</li>
+            </ul>
+        </section>
+
+        <!-- SECCIÓN 2: INSTALACIÓN DE MAVEN -->
+        <section id="instalacion-maven">
+            <h2>2. Instalación de Maven</h2>
+
+            <h3>2.1. Requisitos previos</h3>
+            <ul>
+                <li>Java JDK 1.7 o superior instalado</li>
+                <li>Variable de entorno JAVA_HOME configurada</li>
+                <li>Acceso a internet (para descargar dependencias)</li>
+            </ul>
+
+            <h3>2.2. Instalación en Windows</h3>
+            <p>Sigue estos pasos:</p>
+            <ol>
+                <li>Descarga Maven desde <code>https://maven.apache.org/download.cgi</code></li>
+                <li>Descomprime el archivo en una carpeta (ej: <code>C:\maven</code>)</li>
+                <li>Agrega <code>C:\maven\bin</code> a la variable PATH del sistema</li>
+                <li>Verifica: Abre CMD y ejecuta <code>mvn --version</code></li>
+            </ol>
+
+            <h3>2.3. Instalación en macOS/Linux</h3>
+            <pre><code class="language-bash">
+# Opción 1: Descargar manualmente
+wget https://archive.apache.org/dist/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz
+tar xzf apache-maven-3.8.6-bin.tar.gz
+sudo mv apache-maven-3.8.6 /opt/maven
+
+# Opción 2: Usando package manager (macOS)
+brew install maven
+
+# Opción 3: Usando package manager (Linux - Ubuntu/Debian)
+sudo apt-get install maven
+
+# Verifica la instalación
+mvn --version
+</code></pre>
+
+            <h3>2.4. Configurar JAVA_HOME</h3>
+            <pre><code class="language-bash">
+# En Linux/macOS - Añade al archivo ~/.bashrc o ~/.zshrc
+export JAVA_HOME=/usr/libexec/java_home
+export PATH=$JAVA_HOME/bin:$PATH
+
+# En Windows - Crea variable de entorno
+# JAVA_HOME = C:\Program Files\Java\jdk1.8.0_201
+</code></pre>
+
+            <h3>2.5. Verificar la instalación</h3>
+            <pre><code class="language-bash">
+mvn --version
+# Apache Maven 3.8.6
+# Maven home: /opt/maven
+# Java version: 11.0.15
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 3: ESTRUCTURA DE UN PROYECTO MAVEN -->
+        <section id="estructura-proyecto">
+            <h2>3. Estructura de un proyecto Maven</h2>
+
+            <h3>3.1. Estructura estándar</h3>
+            <pre><code class="language-bash">
+mi-proyecto/
+├── src/
+│   ├── main/
+│   │   ├── java/              # Código fuente principal
+│   │   │   └── com/ejemplo/
+│   │   │       └── Main.java
+│   │   ├── resources/         # Archivos de configuración
+│   │   │   └── application.properties
+│   │   └── webapp/            # Para proyectos web (WEB-INF, JSP, etc.)
+│   └── test/
+│       ├── java/              # Código de tests
+│       │   └── com/ejemplo/
+│       │       └── MainTest.java
+│       └── resources/         # Recursos para tests
+├── pom.xml                    # Archivo de configuración principal
+├── target/                    # Archivos compilados (generado)
+│   ├── classes/
+│   ├── test-classes/
+│   └── mi-proyecto-1.0.jar
+└── README.md
+</code></pre>
+
+            <h3>3.2. Convención sobre configuración</h3>
+            <p>
+                Maven utiliza <strong>convención sobre configuración</strong>. Esto significa que asume
+                una estructura estándar y no requiere configuración explícita para directorios:
+            </p>
+            <ul>
+                <li>Código fuente: <code>src/main/java</code></li>
+                <li>Recursos: <code>src/main/resources</code></li>
+                <li>Tests: <code>src/test/java</code></li>
+                <li>Archivos compilados: <code>target</code></li>
+                <li>JAR final: <code>target/nombreproyecto.jar</code></li>
+            </ul>
+
+            <h3>3.3. Crear un proyecto rápidamente</h3>
+            <pre><code class="language-bash">
+# Crear proyecto usando un archetype (plantilla)
+mvn archetype:generate -DgroupId=com.ejemplo -DartifactId=mi-app -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+# Esto crea la estructura completa automáticamente
+cd mi-app
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 4: ARCHIVO pom.xml -->
+        <section id="pom-xml">
+            <h2>4. Archivo pom.xml</h2>
+
+            <p>
+                El archivo <code>pom.xml</code> (Project Object Model) es el corazón de cualquier proyecto Maven.
+                Define las dependencias, plugins y configuración del proyecto.
+            </p>
+
+            <h3>4.1. Estructura básica de pom.xml</h3>
+            <pre><code class="language-xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;groupId&gt;com.ejemplo&lt;/groupId&gt;
+    &lt;artifactId&gt;mi-proyecto&lt;/artifactId&gt;
+    &lt;version&gt;1.0.0&lt;/version&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+
+    &lt;name&gt;Mi Proyecto&lt;/name&gt;
+    &lt;description&gt;Descripción del proyecto&lt;/description&gt;
+
+    &lt;properties&gt;
+        &lt;maven.compiler.source&gt;11&lt;/maven.compiler.source&gt;
+        &lt;maven.compiler.target&gt;11&lt;/maven.compiler.target&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;!-- Aquí van las dependencias --&gt;
+    &lt;/dependencies&gt;
+
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;!-- Aquí van los plugins --&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
+
+            <h3>4.2. Explicación de elementos principales</h3>
+            <ul>
+                <li><strong>groupId:</strong> Identificador único del grupo (similar a package Java)</li>
+                <li><strong>artifactId:</strong> Nombre único del proyecto dentro del grupo</li>
+                <li><strong>version:</strong> Versión del proyecto (ej: 1.0.0)</li>
+                <li><strong>packaging:</strong> Tipo de empaquetado (jar, war, ear)</li>
+                <li><strong>properties:</strong> Variables reutilizables en el pom.xml</li>
+                <li><strong>dependencies:</strong> Lista de dependencias del proyecto</li>
+                <li><strong>build:</strong> Configuración de compilación y plugins</li>
+            </ul>
+
+            <h3>4.3. Identificador único (GAV)</h3>
+            <p>
+                GroupId + ArtifactId + Version forman un identificador único:
+            </p>
+            <pre><code class="language-bash">
+com.ejemplo:mi-proyecto:1.0.0
+  ↑           ↑           ↑
+groupId   artifactId   version
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 5: GESTIÓN DE DEPENDENCIAS -->
+        <section id="gestionar-dependencias">
+            <h2>5. Gestión de dependencias</h2>
+
+            <h3>5.1. Añadir dependencias</h3>
+            <pre><code class="language-xml">
+&lt;dependencies&gt;
+    &lt;!-- JUnit para testing --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;junit&lt;/groupId&gt;
+        &lt;artifactId&gt;junit&lt;/artifactId&gt;
+        &lt;version&gt;4.13.2&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+
+    &lt;!-- Log4j para logging --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;
+        &lt;artifactId&gt;log4j-core&lt;/artifactId&gt;
+        &lt;version&gt;2.20.0&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;!-- JDBC Driver para MySQL --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;mysql&lt;/groupId&gt;
+        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+        &lt;version&gt;8.0.33&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+
+            <h3>5.2. Scopes (Alcances) de dependencias</h3>
+            <ul>
+                <li><strong>compile (default):</strong> Disponible en compilación, testing y runtime</li>
+                <li><strong>test:</strong> Solo disponible en tests (ej: JUnit, Mockito)</li>
+                <li><strong>runtime:</strong> Disponible en runtime, no en compilación</li>
+                <li><strong>provided:</strong> Proporcionado por el contenedor (ej: servlet-api en Tomcat)</li>
+                <li><strong>system:</strong> Hacer referencia a un JAR en el sistema de archivos</li>
+            </ul>
+
+            <h3>5.3. Especificar versiones</h3>
+            <pre><code class="language-xml">
+&lt;dependencies&gt;
+    &lt;!-- Versión exacta --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
+        &lt;artifactId&gt;junit-jupiter&lt;/artifactId&gt;
+        &lt;version&gt;5.9.0&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;!-- Rango de versiones --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;commons-lang&lt;/groupId&gt;
+        &lt;artifactId&gt;commons-lang&lt;/artifactId&gt;
+        &lt;version&gt;[2.6,)&lt;/version&gt; &lt;!-- >= 2.6 --&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-core&lt;/artifactId&gt;
+        &lt;version&gt;[4.0,5.0)&lt;/version&gt; &lt;!-- >= 4.0 y < 5.0 --&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+
+            <h3>5.4. Propiedades para versiones</h3>
+            <pre><code class="language-xml">
+&lt;properties&gt;
+    &lt;junit.version&gt;5.9.0&lt;/junit.version&gt;
+    &lt;spring.version&gt;6.0.0&lt;/spring.version&gt;
+&lt;/properties&gt;
+
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
+        &lt;artifactId&gt;junit-jupiter&lt;/artifactId&gt;
+        &lt;version&gt;${junit.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-core&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 6: CICLO DE VIDA DE MAVEN -->
+        <section id="ciclo-vida">
+            <h2>6. Ciclo de vida de Maven</h2>
+
+            <h3>6.1. Fases principales</h3>
+            <p>
+                Maven tiene un ciclo de vida predefinido con varias fases.
+                Ejecutar una fase ejecuta también todas las fases anteriores:
+            </p>
+            <ul>
+                <li><strong>validate:</strong> Valida que el proyecto sea correcto</li>
+                <li><strong>compile:</strong> Compila el código fuente</li>
+                <li><strong>test:</strong> Ejecuta los tests unitarios</li>
+                <li><strong>package:</strong> Empaqueta el código compilado (JAR, WAR, etc.)</li>
+                <li><strong>integration-test:</strong> Ejecuta tests de integración</li>
+                <li><strong>verify:</strong> Verifica que el paquete es válido</li>
+                <li><strong>install:</strong> Instala el paquete en el repositorio local</li>
+                <li><strong>deploy:</strong> Copia el paquete al repositorio remoto</li>
+            </ul>
+
+            <h3>6.2. Ejecutar fases</h3>
+            <pre><code class="language-bash">
+# Compilar código
+mvn compile
+
+# Ejecutar tests
+mvn test
+
+# Empaquetar (compila, testa y empaqueta)
+mvn package
+
+# Instalar en repositorio local
+mvn install
+
+# Desplegar en repositorio remoto
+mvn deploy
+
+# Limpiar archivos generados
+mvn clean
+
+# Combinaciones útiles
+mvn clean compile        # Limpia y compila
+mvn clean test          # Limpia y ejecuta tests
+mvn clean package       # Limpia, compila, testa y empaqueta
+mvn clean install       # Limpia, compila, testa, empaqueta e instala
+</code></pre>
+
+            <h3>6.3. Visualizar ciclo de vida</h3>
+            <pre><code class="language-bash">
+# Ver todas las fases disponibles
+mvn help:describe -Dcmd=clean
+mvn help:describe -Dcmd=compile
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 7: PLUGINS Y CONFIGURACIÓN -->
+        <section id="plugins">
+            <h2>7. Plugins y configuración de build</h2>
+
+            <h3>7.1. Compilador Java</h3>
+            <pre><code class="language-xml">
+&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+            &lt;version&gt;3.10.1&lt;/version&gt;
+            &lt;configuration&gt;
+                &lt;source&gt;11&lt;/source&gt;
+                &lt;target&gt;11&lt;/target&gt;
+                &lt;encoding&gt;UTF-8&lt;/encoding&gt;
+            &lt;/configuration&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;
+</code></pre>
+
+            <h3>7.2. Plugin Surefire (Testing)</h3>
+            <pre><code class="language-xml">
+&lt;plugin&gt;
+    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+    &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
+    &lt;version&gt;3.0.0-M8&lt;/version&gt;
+    &lt;configuration&gt;
+        &lt;includes&gt;
+            &lt;include&gt;**/*Test.java&lt;/include&gt;
+            &lt;include&gt;**/*Tests.java&lt;/include&gt;
+        &lt;/includes&gt;
+    &lt;/configuration&gt;
+&lt;/plugin&gt;
+</code></pre>
+
+            <h3>7.3. Plugin Jar (Empaquetado)</h3>
+            <pre><code class="language-xml">
+&lt;plugin&gt;
+    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+    &lt;artifactId&gt;maven-jar-plugin&lt;/artifactId&gt;
+    &lt;version&gt;3.3.0&lt;/version&gt;
+    &lt;configuration&gt;
+        &lt;archive&gt;
+            &lt;manifest&gt;
+                &lt;mainClass&gt;com.ejemplo.Main&lt;/mainClass&gt;
+            &lt;/manifest&gt;
+        &lt;/archive&gt;
+    &lt;/configuration&gt;
+&lt;/plugin&gt;
+</code></pre>
+
+            <h3>7.4. Plugin Assembly (Empaquetar con dependencias)</h3>
+            <pre><code class="language-xml">
+&lt;plugin&gt;
+    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+    &lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt;
+    &lt;version&gt;3.4.2&lt;/version&gt;
+    &lt;configuration&gt;
+        &lt;descriptorRefs&gt;
+            &lt;descriptorRef&gt;jar-with-dependencies&lt;/descriptorRef&gt;
+        &lt;/descriptorRefs&gt;
+        &lt;archive&gt;
+            &lt;manifest&gt;
+                &lt;mainClass&gt;com.ejemplo.Main&lt;/mainClass&gt;
+            &lt;/manifest&gt;
+        &lt;/archive&gt;
+    &lt;/configuration&gt;
+    &lt;executions&gt;
+        &lt;execution&gt;
+            &lt;phase&gt;package&lt;/phase&gt;
+            &lt;goals&gt;
+                &lt;goal&gt;single&lt;/goal&gt;
+            &lt;/goals&gt;
+        &lt;/execution&gt;
+    &lt;/executions&gt;
+&lt;/plugin&gt;
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 8: REPOSITORIOS Y DEPENDENCIAS TRANSITIVAS -->
+        <section id="repositorios">
+            <h2>8. Repositorios y dependencias transitivas</h2>
+
+            <h3>8.1. Repositorio local y remoto</h3>
+            <p>
+                Maven mantiene una caché local de dependencias descargadas:
+            </p>
+            <ul>
+                <li><strong>Repositorio local:</strong> <code>~/.m2/repository</code> (tu máquina)</li>
+                <li><strong>Repositorio remoto:</strong> Maven Central, repositorios corporativos</li>
+            </ul>
+
+            <h3>8.2. Configurar repositorios personalizados</h3>
+            <pre><code class="language-xml">
+&lt;repositories&gt;
+    &lt;repository&gt;
+        &lt;id&gt;central&lt;/id&gt;
+        &lt;url&gt;https://repo.maven.apache.org/maven2&lt;/url&gt;
+    &lt;/repository&gt;
+
+    &lt;repository&gt;
+        &lt;id&gt;repositorio-corporativo&lt;/id&gt;
+        &lt;url&gt;https://repo.miempresa.com/maven&lt;/url&gt;
+    &lt;/repository&gt;
+&lt;/repositories&gt;
+</code></pre>
+
+            <h3>8.3. Dependencias transitivas</h3>
+            <p>
+                Si tu proyecto depende de Spring, y Spring depende de Commons Logging,
+                Maven descarga automáticamente Commons Logging para ti:
+            </p>
+            <pre><code class="language-bash">
+Tu proyecto
+    ↓ depende de
+Spring
+    ↓ depende de
+Commons Logging ← Maven la descarga automáticamente
+</code></pre>
+
+            <h3>8.4. Visualizar árbol de dependencias</h3>
+            <pre><code class="language-bash">
+# Ver árbol de dependencias
+mvn dependency:tree
+
+# Ejemplo de salida:
+# [INFO] +- org.springframework:spring-core:jar:6.0.0:compile
+# [INFO] |  +- org.springframework:spring-jcl:jar:6.0.0:compile
+# [INFO] |  \- org.springframework:spring-aop:jar:6.0.0:compile
+# [INFO] +- junit:junit:jar:4.13.2:test
+</code></pre>
+
+            <h3>8.5. Gestionar conflictos de versiones</h3>
+            <pre><code class="language-bash">
+# Ver dependencias no utilizadas
+mvn dependency:analyze
+
+# Limpiar dependencias no usadas
+# Revisar el archivo pom.xml manualmente
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 9: PERFILES (PROFILES) -->
+        <section id="perfiles">
+            <h2>9. Perfiles (Profiles) en Maven</h2>
+
+            <h3>9.1. ¿Qué son los perfiles?</h3>
+            <p>
+                Los perfiles permiten tener diferentes configuraciones para diferentes contextos
+                (desarrollo, testing, producción):
+            </p>
+
+            <h3>9.2. Configurar perfiles</h3>
+            <pre><code class="language-xml">
+&lt;profiles&gt;
+    &lt;profile&gt;
+        &lt;id&gt;desarrollo&lt;/id&gt;
+        &lt;activation&gt;
+            &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;
+        &lt;/activation&gt;
+        &lt;properties&gt;
+            &lt;maven.compiler.debug&gt;true&lt;/maven.compiler.debug&gt;
+        &lt;/properties&gt;
+    &lt;/profile&gt;
+
+    &lt;profile&gt;
+        &lt;id&gt;produccion&lt;/id&gt;
+        &lt;properties&gt;
+            &lt;maven.compiler.debug&gt;false&lt;/maven.compiler.debug&gt;
+            &lt;maven.compiler.optimize&gt;true&lt;/maven.compiler.optimize&gt;
+        &lt;/properties&gt;
+    &lt;/profile&gt;
+&lt;/profiles&gt;
+</code></pre>
+
+            <h3>9.3. Activar perfiles</h3>
+            <pre><code class="language-bash">
+# Activar perfil específico
+mvn clean package -P produccion
+
+# Activar múltiples perfiles
+mvn clean package -P desarrollo,testing
+
+# Ver perfiles activos
+mvn help:active-profiles
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 10: GESTIÓN DE ARCHIVOS Y RECURSOS -->
+        <section id="recursos">
+            <h2>10. Gestión de archivos y recursos</h2>
+
+            <h3>10.1. Archivos de configuración</h3>
+            <p>
+                Los archivos en <code>src/main/resources</code> se copian automáticamente al JAR:
+            </p>
+            <pre><code class="language-bash">
+src/main/resources/
+├── application.properties
+├── log4j2.xml
+├── config/
+│   └── database.properties
+└── static/
+    └── logo.png
+</code></pre>
+
+            <h3>10.2. Leer archivos de configuración en Java</h3>
+            <pre><code class="language-java">
+import java.io.InputStream;
+import java.util.Properties;
+
+public class Config {
+    public static Properties cargarPropiedades() throws Exception {
+        Properties props = new Properties();
+        InputStream input = Config.class.getClassLoader()
+            .getResourceAsStream("application.properties");
+        props.load(input);
+        return props;
+    }
+}
+</code></pre>
+
+            <h3>10.3. Filtering (Reemplazos en recursos)</h3>
+            <pre><code class="language-xml">
+&lt;build&gt;
+    &lt;resources&gt;
+        &lt;resource&gt;
+            &lt;directory&gt;src/main/resources&lt;/directory&gt;
+            &lt;filtering&gt;true&lt;/filtering&gt;
+        &lt;/resource&gt;
+    &lt;/resources&gt;
+&lt;/build&gt;
+
+&lt;properties&gt;
+    &lt;app.name&gt;Mi Aplicación&lt;/app.name&gt;
+    &lt;app.version&gt;1.0.0&lt;/app.version&gt;
+&lt;/properties&gt;
+</code></pre>
+
+            <p>En <code>application.properties</code>:</p>
+            <pre><code class="language-properties">
+app.name=${app.name}
+app.version=${app.version}
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 11: MEJORES PRÁCTICAS -->
+        <section id="mejores-practicas">
+            <h2>11. Mejores prácticas con Maven</h2>
+
+            <h3>11.1. Estructura de directorios</h3>
+            <ul>
+                <li>Siempre seguir la estructura estándar de Maven</li>
+                <li>Usar paquetes en Java siguiendo el patrón <code>com.empresa.proyecto</code></li>
+                <li>Mantener tests en <code>src/test/java</code></li>
+                <li>Recursos de configuración en <code>src/main/resources</code></li>
+            </ul>
+
+            <h3>11.2. Versionado de pom.xml</h3>
+            <ul>
+                <li>Usar versionado semántico: MAJOR.MINOR.PATCH</li>
+                <li>Especificar versiones explícitamente (evitar LATEST, RELEASE)</li>
+                <li>Usar propiedades para versiones comunes</li>
+                <li>Incluir pom.xml en control de versiones (git)</li>
+            </ul>
+
+            <h3>11.3. Gestión de dependencias</h3>
+            <ul>
+                <li>Mantener dependencias actualizadas pero probadas</li>
+                <li>Usar scope adecuado para cada dependencia</li>
+                <li>Revisar regularmente dependencias transitivas</li>
+                <li>Evitar dependencias no utilizadas</li>
+            </ul>
+
+            <h3>11.4. Testing con Maven</h3>
+            <pre><code class="language-xml">
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
+        &lt;artifactId&gt;junit-jupiter&lt;/artifactId&gt;
+        &lt;version&gt;5.9.0&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.mockito&lt;/groupId&gt;
+        &lt;artifactId&gt;mockito-core&lt;/artifactId&gt;
+        &lt;version&gt;5.0.0&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+
+            <h3>11.5. Control de versiones (git)</h3>
+            <ul>
+                <li><strong>Incluir:</strong> <code>pom.xml</code>, <code>src/</code>, <code>README.md</code></li>
+                <li><strong>Excluir:</strong> <code>target/</code>, <code>.classpath</code>, <code>.project</code></li>
+            </ul>
+
+            <pre><code class="language-bash">
+# .gitignore recomendado para Maven
+target/
+.classpath
+.project
+.settings/
+*.class
+*.jar
+*.war
+*.ear
+.DS_Store
+.idea/
+*.iml
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 12: COMANDOS ÚTILES -->
+        <section id="comandos-utiles">
+            <h2>12. Comandos útiles de Maven</h2>
+
+            <pre><code class="language-bash">
+# Información general
+mvn --version                   # Ver versión de Maven
+mvn help:describe -Dcmd=clean   # Ayuda de un comando
+
+# Ciclo de vida
+mvn clean                       # Limpia el directorio target/
+mvn compile                     # Compila el código
+mvn test                        # Ejecuta tests
+mvn package                     # Empaqueta (jar/war)
+mvn install                     # Instala en repositorio local
+mvn deploy                      # Despliega en repositorio remoto
+
+# Combinaciones útiles
+mvn clean compile
+mvn clean test
+mvn clean package
+mvn clean install
+
+# Dependencias
+mvn dependency:tree             # Ver árbol de dependencias
+mvn dependency:analyze          # Analizar dependencias
+mvn dependency:resolve          # Resolver todas las dependencias
+
+# Plugins
+mvn help:active-profiles        # Ver perfiles activos
+mvn help:describe -Dcmd=help    # Descripción de plugins
+
+# Generar proyecto
+mvn archetype:generate -DgroupId=com.ejemplo -DartifactId=mi-app
+
+# Ejecutar aplicación
+mvn exec:java -Dexec.mainClass="com.ejemplo.Main"
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 13: RESUMEN -->
+        <section id="resumen">
+            <h2>13. Resumen</h2>
+
+            <h3>13.1. Puntos clave</h3>
+            <ul>
+                <li><strong>Maven</strong> es el estándar de automatización en Java</li>
+                <li><strong>pom.xml</strong> define todas las configuraciones del proyecto</li>
+                <li><strong>Dependencias</strong> se descargan automáticamente del repositorio</li>
+                <li><strong>Ciclo de vida</strong> define las fases de compilación, testing y empaquetado</li>
+                <li><strong>Convención sobre configuración</strong> simplifica la configuración</li>
+            </ul>
+
+            <h3>13.2. Flujo típico de trabajo</h3>
+            <ol>
+                <li>Generar proyecto: <code>mvn archetype:generate</code></li>
+                <li>Definir dependencias en <code>pom.xml</code></li>
+                <li>Escribir código en <code>src/main/java</code></li>
+                <li>Escribir tests en <code>src/test/java</code></li>
+                <li>Compilar y probar: <code>mvn clean test</code></li>
+                <li>Empaquetar: <code>mvn clean package</code></li>
+                <li>Instalar: <code>mvn clean install</code></li>
+            </ol>
+
+            <h3>13.3. Estructura recomendada</h3>
+            <pre><code class="language-bash">
+proyecto/
+├── src/
+│   ├── main/
+│   │   ├── java/com/ejemplo/
+│   │   │   └── Main.java
+│   │   └── resources/
+│   └── test/
+│       ├── java/com/ejemplo/
+│       │   └── MainTest.java
+│       └── resources/
+├── pom.xml
+├── README.md
+└── .gitignore
+</code></pre>
+
+            <h3>13.4. Comandos esenciales</h3>
+            <ul>
+                <li><code>mvn clean</code> - Limpiar</li>
+                <li><code>mvn compile</code> - Compilar</li>
+                <li><code>mvn test</code> - Probar</li>
+                <li><code>mvn package</code> - Empaquetar</li>
+                <li><code>mvn install</code> - Instalar</li>
+                <li><code>mvn dependency:tree</code> - Ver dependencias</li>
+            </ul>
+        </section>
+
+    </main>
+
+</body>
+
+</html>
