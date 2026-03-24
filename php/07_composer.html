@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-EVTW1307T1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Composer, Autoload y PSR-4 en PHP</title>
+    <script src="/course-resources/index.js" defer></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+    <script src="../index.js" defer></script>
+    <script src="../menu.js" defer></script>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../menu.css">
+</head>
+
+<body>
+
+    <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+        <div class="vc-rail-head">
+            <span class="vc-rail-title">Índice</span>
+            <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+        <ul id="vc-list" class="vc-list"></ul>
+    </nav>
+
+    <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+    <header>
+        <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+            aria-controls="vc-rail" aria-expanded="false">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+        <h1>Composer, Autoload y PSR-4 en PHP</h1>
+        <img src="" id="logo" alt="Logo" style="display: none;">
+    </header>
+
+    <main>
+
+        <!-- SECCIÓN 1: INTRODUCCIÓN A COMPOSER -->
+        <section id="introduccion-composer">
+            <h2>1. ¿Qué es Composer?</h2>
+             <div class="diagram">
+                <img src="../assets/php_composer.png" style="max-width:30%;" alt="PHP Logo">
+            </div>
+
+            <p>
+                <strong>Composer</strong> es un gestor de dependencias para PHP. Permite instalar, gestionar y actualizar
+                las librerías y paquetes que tu proyecto necesita de forma automática y centralizada.
+            </p>
+
+            <h3>1.1. ¿Por qué usar Composer?</h3>
+            <ul>
+                <li><strong>Gestión centralizada:</strong> Todas las dependencias en un archivo <code>composer.json</code></li>
+                <li><strong>Instalación automática:</strong> Descarga todas las librerías necesarias automáticamente</li>
+                <li><strong>Versionado:</strong> Control de versiones de dependencias</li>
+                <li><strong>Autoloading:</strong> Carga automática de clases mediante PSR-4</li>
+                <li><strong>Actualizaciones:</strong> Gestiona actualizaciones de dependencias fácilmente</li>
+                <li><strong>Evita duplicados:</strong> Cada dependencia se descarga una sola vez</li>
+            </ul>
+
+            <h3>1.2. Composer vs otros métodos</h3>
+            <p>
+                Antes de Composer, los desarrolladores PHP:
+            </p>
+            <ul>
+                <li>Descargaban archivos .zip manualmente</li>
+                <li>Usaban <code>require()</code> o <code>include()</code> para cargar archivos individuales</li>
+                <li>Tenían que resolver manualmente las dependencias entre librerías</li>
+                <li>No tenían control de versiones consistente</li>
+            </ul>
+
+            <p><strong>Composer resuelve todos estos problemas</strong> automáticamente.</p>
+        </section>
+
+        <!-- SECCIÓN 2: INSTALACIÓN DE COMPOSER -->
+        <section id="instalacion-composer">
+            <h2>2. Instalación de Composer</h2>
+
+            <h3>2.1. Requisitos previos</h3>
+            <ul>
+                <li>PHP 5.3.2 o superior instalado</li>
+                <li>Acceso a internet (para descargar paquetes)</li>
+                <li>Línea de comandos (terminal/CMD)</li>
+            </ul>
+
+            <h3>2.2. Instalación en Windows</h3>
+            <p>
+                La forma más fácil es descargar el instalador desde <code>https://getcomposer.org</code>
+            </p>
+            <ul>
+                <li>Descarga el archivo <code>Composer-Setup.exe</code></li>
+                <li>Ejecuta el instalador</li>
+                <li>Sigue los pasos del asistente de instalación</li>
+                <li>Verifica la instalación abriendo CMD y ejecutando: <code>composer --version</code></li>
+            </ul>
+
+            <h3>2.3. Instalación en macOS/Linux</h3>
+            <p>Abre la terminal y ejecuta los siguientes comandos:</p>
+            <pre><code class="language-bash">
+# Descargar el instalador
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+
+# Ejecutar el instalador
+php composer-setup.php
+
+# Mover Composer a una ubicación global
+sudo mv composer.phar /usr/local/bin/composer
+
+# Verificar la instalación
+composer --version
+</code></pre>
+
+            <h3>2.4. Verificar la instalación</h3>
+            <pre><code class="language-bash">
+composer --version
+# Resultado: Composer version 2.x.x 2024-xx-xx
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 3: ARCHIVO composer.json -->
+        <section id="composer-json">
+            <h2>3. Archivo composer.json</h2>
+
+            <p>
+                El archivo <code>composer.json</code> es el corazón de cualquier proyecto que usa Composer.
+                Define las dependencias y configuración de tu proyecto.
+            </p>
+
+            <h3>3.1. Crear un nuevo proyecto</h3>
+            <pre><code class="language-bash">
+# Crea un directorio para el proyecto
+mkdir mi-proyecto
+cd mi-proyecto
+
+# Inicializar Composer
+composer init
+
+# Se te pedirá información:
+# - Nombre del proyecto
+# - Descripción
+# - Autor
+# - Licencia
+# - Dependencias (initially empty)
+</code></pre>
+
+            <h3>3.2. Estructura básica de composer.json</h3>
+            <pre><code class="language-json">
+{
+    "name": "nombre/proyecto",
+    "description": "Descripción del proyecto",
+    "type": "project",
+    "require": {
+        "php": ">=7.4",
+        "monolog/monolog": "^2.0",
+        "symfony/console": "^5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0",
+        "squizlabs/php_codesniffer": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tu Nombre",
+            "email": "tu@email.com"
+        }
+    ]
+}
+</code></pre>
+
+            <h3>3.3. Partes principales</h3>
+            <ul>
+                <li><strong>name:</strong> Identificador único del paquete (vendor/package)</li>
+                <li><strong>require:</strong> Dependencias necesarias para producción</li>
+                <li><strong>require-dev:</strong> Dependencias solo para desarrollo (tests, linters, etc.)</li>
+                <li><strong>autoload:</strong> Configuración del cargador automático de clases</li>
+                <li><strong>license:</strong> Licencia del proyecto (MIT, Apache, etc.)</li>
+            </ul>
+
+            <h3>3.4. Versiones en composer.json</h3>
+            <p>Ejemplos de especificación de versiones:</p>
+            <pre><code class="language-json">
+{
+    "require": {
+        "monolog/monolog": "1.0.0",           // Versión exacta
+        "symfony/console": "^5.0",             // Máximo ^5.x (compatible)
+        "phpunit/phpunit": "~9.5",             // Máximo ~9.x
+        "laravel/framework": ">=8.0",          // Versión 8.0 o superior
+        "doctrine/orm": "2.7.*",               // Versión 2.7.x
+        "guzzlehttp/guzzle": "^7.0 || ^8.0"  // Versión 7.x o 8.x
+    }
+}
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 4: INSTALACIÓN DE DEPENDENCIAS -->
+        <section id="instalar-dependencias">
+            <h2>4. Instalar y gestionar dependencias</h2>
+
+            <h3>4.1. Instalar dependencias</h3>
+            <pre><code class="language-bash">
+# Instala todas las dependencias definidas en composer.json
+composer install
+
+# Crea dos archivos importantes:
+# - composer.lock: Versiones exactas instaladas (para reproducibilidad)
+# - vendor/: Carpeta con todos los paquetes descargados
+</code></pre>
+
+            <h3>4.2. Añadir nuevas dependencias</h3>
+            <pre><code class="language-bash">
+# Instala una nueva dependencia y la añade a composer.json
+composer require monolog/monolog
+
+# Con versión específica
+composer require symfony/console:^6.0
+
+# Múltiples paquetes
+composer require phpunit/phpunit guzzlehttp/guzzle
+</code></pre>
+
+            <h3>4.3. Dependencias de desarrollo</h3>
+            <pre><code class="language-bash">
+# Instala como dependencia de desarrollo (--dev o -d)
+composer require --dev phpunit/phpunit
+
+# Estas dependencias no se instalan en producción
+</code></pre>
+
+            <h3>4.4. Actualizar dependencias</h3>
+            <pre><code class="language-bash">
+# Actualiza todas las dependencias
+composer update
+
+# Actualiza un paquete específico
+composer update symfony/console
+
+# Actualiza y bloquea versiones en composer.lock
+</code></pre>
+
+            <h3>4.5. Eliminar dependencias</h3>
+            <pre><code class="language-bash">
+# Elimina un paquete
+composer remove monolog/monolog
+
+# Elimina dependencia de desarrollo
+composer remove --dev phpunit/phpunit
+</code></pre>
+
+            <h3>4.6. Verificar dependencias</h3>
+            <pre><code class="language-bash">
+# Muestra todas las dependencias instaladas
+composer show
+
+# Muestra información de un paquete específico
+composer show monolog/monolog
+
+# Valida composer.json y composer.lock
+composer validate
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 5: AUTOLOAD Y PSR-4 -->
+        <section id="autoload-psr4">
+            <h2>5. Autoload y PSR-4</h2>
+
+            <h3>5.1. ¿Qué es el Autoload?</h3>
+            <p>
+                El <strong>autoload</strong> es un mecanismo que carga automáticamente las clases PHP cuando las necesitas,
+                sin tener que usar <code>require()</code> o <code>include()</code> manualmente.
+            </p>
+
+            <h3>5.2. Sin Composer (forma antigua)</h3>
+            <pre><code class="language-php">
+&lt;?php
+// Sin autoload, hay que incluir manualmente cada archivo
+require 'src/Usuario.php';
+require 'src/Producto.php';
+require 'src/Database/Conexion.php';
+require 'vendor/monolog/monolog/src/Monolog/Logger.php';
+require 'vendor/monolog/monolog/src/Monolog/Handler/StreamHandler.php';
+// ... y muchos más archivos
+
+// Luego usar las clases
+$usuario = new Usuario();
+$producto = new Producto();
+$logger = new Logger('app');
+?&gt;
+</code></pre>
+
+            <h3>5.3. Con Composer y Autoload (forma moderna)</h3>
+            <pre><code class="language-php">
+&lt;?php
+// Una sola línea de autoload de Composer
+require 'vendor/autoload.php';
+
+// Y ya puedes usar todas las clases automáticamente
+$usuario = new App\Usuario();
+$producto = new App\Producto();
+$conexion = new App\Database\Conexion();
+$logger = new Monolog\Logger('app');
+?&gt;
+</code></pre>
+
+            <h3>5.4. ¿Qué es PSR-4?</h3>
+            <p>
+                <strong>PSR-4</strong> (PHP Standards Recommendation 4) es un estándar que define cómo organizar y nombrar
+                el espacio de nombres (namespace) de tus clases para que Composer las encuentre automáticamente.
+            </p>
+
+            <p>PSR-4 mapea namespaces a directorios del proyecto:</p>
+            <ul>
+                <li>Namespace: <code>App\Usuario</code> → Archivo: <code>src/Usuario.php</code></li>
+                <li>Namespace: <code>App\Database\Conexion</code> → Archivo: <code>src/Database/Conexion.php</code></li>
+                <li>Namespace: <code>App\Models\User</code> → Archivo: <code>src/Models/User.php</code></li>
+            </ul>
+        </section>
+
+        <!-- SECCIÓN 6: CONFIGURAR PSR-4 -->
+        <section id="configurar-psr4">
+            <h2>6. Configurar PSR-4 en composer.json</h2>
+
+            <h3>6.1. Estructura básica</h3>
+            <pre><code class="language-json">
+{
+    "name": "mi-app/proyecto",
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/",
+            "App\\Models\\": "src/Models/",
+            "Tests\\": "tests/"
+        }
+    }
+}
+</code></pre>
+
+            <h3>6.2. Explicación de PSR-4</h3>
+            <p>
+                La sintaxis <code>"Namespace\\": "directorio/"</code> significa:
+            </p>
+            <ul>
+                <li><code>"App\\"</code>: El namespace raíz es <code>App</code></li>
+                <li><code>"src/"</code>: Mapea al directorio <code>src</code></li>
+                <li>Una clase en <code>src/Usuario.php</code> tendrá namespace <code>App\Usuario</code></li>
+                <li>Una clase en <code>src/Database/Conexion.php</code> tendrá namespace <code>App\Database\Conexion</code></li>
+            </ul>
+
+            <h3>6.3. Estructura de proyecto recomendada</h3>
+            <pre><code class="language-bash">
+mi-proyecto/
+├── src/                      # Código de la aplicación
+│   ├── Usuario.php
+│   ├── Producto.php
+│   ├── Database/
+│   │   └── Conexion.php
+│   └── Models/
+│       ├── User.php
+│       └── Post.php
+├── tests/                    # Tests unitarios
+│   ├── UserTest.php
+│   └── ProductoTest.php
+├── vendor/                   # Dependencias (generado por Composer)
+├── composer.json
+├── composer.lock
+└── index.php
+</code></pre>
+
+            <h3>6.4. Ejemplo de archivo Usuario.php</h3>
+            <pre><code class="language-php">
+&lt;?php
+// src/Usuario.php
+namespace App;
+
+class Usuario {
+    private $nombre;
+    private $email;
+    
+    public function __construct($nombre, $email) {
+        $this->nombre = $nombre;
+        $this->email = $email;
+    }
+    
+    public function getNombre() {
+        return $this->nombre;
+    }
+    
+    public function getEmail() {
+        return $this->email;
+    }
+}
+?&gt;
+</code></pre>
+
+            <h3>6.5. Usar la clase desde index.php</h3>
+            <pre><code class="language-php">
+&lt;?php
+// index.php
+require 'vendor/autoload.php';
+
+// Usar la clase Usuario - se carga automáticamente gracias a PSR-4
+$usuario = new App\Usuario('Juan', 'juan@ejemplo.com');
+
+echo "Nombre: " . $usuario->getNombre() . "&lt;br&gt;";
+echo "Email: " . $usuario->getEmail() . "&lt;br&gt;";
+?&gt;
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 7: CASOS DE USO AVANZADOS -->
+        <section id="casos-uso-avanzados">
+            <h2>7. Casos de uso avanzados</h2>
+
+            <h3>7.1. Múltiples namespaces</h3>
+            <pre><code class="language-json">
+{
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Src\\": "src/",
+            "Config\\": "config/",
+            "Tests\\": "tests/"
+        }
+    }
+}
+</code></pre>
+
+            <h3>7.2. Autoload de archivos simples</h3>
+            <pre><code class="language-json">
+{
+    "autoload": {
+        "files": [
+            "helpers/funciones.php",
+            "helpers/constantes.php"
+        ],
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
+</code></pre>
+
+            <h3>7.3. Autoload de desarrollo</h3>
+            <pre><code class="language-json">
+{
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    }
+}
+</code></pre>
+
+            <h3>7.4. PSR-0 (legacy)</h3>
+            <p>
+                PSR-0 es el estándar anterior a PSR-4. Hoy en día se recomienda usar PSR-4.
+            </p>
+            <pre><code class="language-json">
+{
+    "autoload": {
+        "psr-0": {
+            "Vendor_Prefix_": "src/"
+        }
+    }
+}
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 8: REGENERAR AUTOLOAD -->
+        <section id="regenerar-autoload">
+            <h2>8. Regenerar el autoload</h2>
+
+            <h3>8.1. Cuándo regenerar</h3>
+            <p>
+                Después de cambiar la configuración de <code>autoload</code> en <code>composer.json</code>,
+                debes regenerar el archivo de autoload:
+            </p>
+            <pre><code class="language-bash">
+# Regenera el archivo vendor/autoload.php
+composer dump-autoload
+
+# Opción: Optimizar para producción
+composer dump-autoload --optimize
+composer dump-autoload -o
+</code></pre>
+
+            <h3>8.2. Optimizar para producción</h3>
+            <pre><code class="language-bash">
+# Usa classmaps en producción (más rápido)
+composer install --no-dev --optimize-autoloader
+
+# Usa el archivo optimizado
+composer dump-autoload --optimize --no-dev
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 9: ARCHIVO AUTOLOAD.PHP -->
+        <section id="archivo-autoload">
+            <h2>9. Entender vendor/autoload.php</h2>
+
+            <h3>9.1. ¿Qué es vendor/autoload.php?</h3>
+            <p>
+                <code>vendor/autoload.php</code> es un archivo generado automáticamente por Composer que:
+            </p>
+            <ul>
+                <li>Define una función de carga automática (autoloader) de Composer</li>
+                <li>Carga el autoloader de cada dependencia</li>
+                <li>Registra los namespaces según tu configuración PSR-4</li>
+            </ul>
+
+            <h3>9.2. Estructura de vendor/</h3>
+            <pre><code class="language-bash">
+vendor/
+├── autoload.php                  # SIEMPRE incluye este archivo
+├── composer/
+│   ├── autoload_classmap.php     # Mapa de clases (producción)
+│   ├── autoload_files.php        # Archivos automáticos
+│   ├── autoload_namespaces.php   # Namespaces PSR-0
+│   ├── autoload_psr4.php         # Namespaces PSR-4
+│   └── installed.json            # Información de paquetes
+├── monolog/                      # Paquete 1
+├── symfony/                      # Paquete 2
+└── ...
+</code></pre>
+
+            <h3>9.3. El archivo composer/autoload_psr4.php (generado)</h3>
+            <pre><code class="language-php">
+&lt;?php
+
+// autoload_psr4.php @generated by Composer
+
+$vendorDir = dirname(__DIR__);
+$baseDir = dirname($vendorDir);
+
+return array(
+    'Tests\\' => array($baseDir . '/tests'),
+    'App\\' => array($baseDir . '/src'),
+    'Monolog\\' => array($vendorDir . '/monolog/monolog/src'),
+    'Symfony\\' => array($vendorDir . '/symfony/console/src'),
+    // ... más namespaces
+);
+?&gt;
+</code></pre>
+
+            <h3>9.4. No modificar archivos generados</h3>
+            <p>
+                <strong>NUNCA</strong> edites los archivos en <code>vendor/</code> o <code>vendor/composer/</code>
+                manualmente. Se regeneran automáticamente y perderías los cambios.
+            </p>
+            <p>Si necesitas cambiar algo, modifica <code>composer.json</code> y ejecuta <code>composer update</code> o <code>composer dump-autoload</code>.</p>
+        </section>
+
+        <!-- SECCIÓN 10: CASOS COMUNES -->
+        <section id="casos-comunes">
+            <h2>10. Casos comunes y soluciones</h2>
+
+            <h3>10.1. "Class not found" - La clase no se encuentra</h3>
+            <p><strong>Problema:</strong> Composer no encuentra una clase que debería existir.</p>
+            <p><strong>Solución:</strong></p>
+            <ol>
+                <li>Verifica que el archivo existe en la ubicación correcta</li>
+                <li>Verifica que el namespace coincide con la configuración PSR-4</li>
+                <li>Regenera el autoload: <code>composer dump-autoload</code></li>
+                <li>Limpia la caché: <code>composer clear-cache</code></li>
+            </ol>
+
+            <pre><code class="language-bash">
+# Ejemplo: si tienes src/Usuario.php con namespace App\
+# Asegúrate de que en composer.json está: "App\\": "src/"
+# Y que el archivo empieza con: &lt;?php namespace App;
+</code></pre>
+
+            <h3>10.2. Conflictos de dependencias</h3>
+            <p><strong>Problema:</strong> Dos paquetes requieren versiones incompatibles del mismo paquete.</p>
+            <p><strong>Solución:</strong></p>
+            <ul>
+                <li>Revisa el error que muestra Composer</li>
+                <li>Considera usar una versión compatible</li>
+                <li>Actualiza los paquetes a versiones más nuevas</li>
+            </ul>
+
+            <h3>10.3. composer.lock no sincronizado</h3>
+            <p><strong>Problema:</strong> El equipo de desarrollo tiene versiones diferentes de paquetes.</p>
+            <p><strong>Solución:</strong></p>
+            <pre><code class="language-bash">
+# Elimina vendor/ y composer.lock
+rm -rf vendor/ composer.lock
+
+# Reinstala exactamente como está definido
+composer install
+</code></pre>
+
+            <h3>10.4. Memoria insuficiente</h3>
+            <p><strong>Problema:</strong> "Fatal error: Allowed memory size exhausted"</p>
+            <p><strong>Solución:</strong></p>
+            <pre><code class="language-bash">
+# Aumenta el límite de memoria
+php -d memory_limit=-1 composer install
+
+# O establécelo en php.ini
+memory_limit = 2G
+</code></pre>
+
+            <h3>10.5. No cargar dependencias de desarrollo en producción</h3>
+            <pre><code class="language-bash">
+# En desarrollo
+composer install
+
+# En producción
+composer install --no-dev
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 11: MEJORES PRÁCTICAS -->
+        <section id="mejores-practicas">
+            <h2>11. Mejores prácticas con Composer</h2>
+
+            <h3>11.1. Control de versiones (git)</h3>
+            <ul>
+                <li><strong>Incluir:</strong> <code>composer.json</code> y <code>composer.lock</code></li>
+                <li><strong>Excluir:</strong> <code>vendor/</code> directorio (muy grande)</li>
+            </ul>
+
+            <pre><code class="language-bash">
+# En .gitignore
+/vendor/
+</code></pre>
+
+            <h3>11.2. composer.lock en repositorio</h3>
+            <p>
+                <strong>Siempre</strong> incluye <code>composer.lock</code> en tu repositorio Git.
+                Esto garantiza que todos los desarrolladores usen exactamente las mismas versiones de dependencias.
+            </p>
+
+            <h3>11.3. Actualizar versus instalar</h3>
+            <ul>
+                <li><strong><code>composer install</code>:</strong> Instala exactamente lo que está en <code>composer.lock</code></li>
+                <li><strong><code>composer update</code>:</strong> Actualiza dependencias (crea nuevo <code>composer.lock</code>)</li>
+            </ul>
+
+            <h3>11.4. Especificar versiones</h3>
+            <pre><code class="language-json">
+{
+    "require": {
+        "monolog/monolog": "^2.0",          // Recomendado para librerías
+        "laravel/framework": ">=8.0,<9.0",  // Alternativa segura
+        "phpunit/phpunit": "~9.5"           // ~9.5 = >=9.5,<10.0
+    }
+}
+</code></pre>
+
+            <h3>11.5. Organización de código</h3>
+            <ul>
+                <li>Usa namespaces consistentes con la estructura de directorios</li>
+                <li>Un namespace por archivo (generalmente)</li>
+                <li>Nombres de clases deben ser CamelCase</li>
+                <li>Nombres de archivos deben coincidir con el nombre de la clase</li>
+            </ul>
+
+            <h3>11.6. Documentar dependencias</h3>
+            <pre><code class="language-json">
+{
+    "name": "miempresa/proyecto",
+    "description": "Descripción clara del proyecto",
+    "require": {
+        "php": ">=7.4",
+        "monolog/monolog": "^2.0"  // Logging
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0"   // Testing
+    }
+}
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 12: COMANDOS ÚTILES -->
+        <section id="comandos-utiles">
+            <h2>12. Comandos útiles de Composer</h2>
+
+            <pre><code class="language-bash">
+# Información general
+composer --version              # Ver versión de Composer
+composer list                   # Listar todos los comandos
+composer help [comando]         # Ayuda de un comando
+
+# Instalación
+composer install               # Instalar dependencias
+composer update                # Actualizar dependencias
+
+# Añadir/Remover
+composer require paquete       # Añadir dependencia
+composer require --dev paquete # Añadir dependencia de desarrollo
+composer remove paquete        # Remover dependencia
+
+# Información
+composer show                  # Listar dependencias instaladas
+composer show paquete          # Info detallada de un paquete
+composer outdated              # Mostrar versiones desactualizadas
+
+# Validación y limpieza
+composer validate              # Validar composer.json
+composer dump-autoload         # Regenerar autoload
+composer clear-cache           # Limpiar caché
+
+# Búsqueda
+composer search termino        # Buscar paquetes en Packagist
+
+# Desarrollo
+composer require --dev phpunit/phpunit  # Para testing
+composer require --dev squizlabs/php_codesniffer  # Para análisis
+</code></pre>
+        </section>
+
+        <!-- SECCIÓN 13: RESUMEN -->
+        <section id="resumen">
+            <h2>13. Resumen</h2>
+
+            <h3>13.1. Puntos clave</h3>
+            <ul>
+                <li><strong>Composer</strong> es el gestor de dependencias estándar en PHP</li>
+                <li><strong>composer.json</strong> define las dependencias de tu proyecto</li>
+                <li><strong>vendor/autoload.php</strong> carga todas las clases automáticamente</li>
+                <li><strong>PSR-4</strong> es el estándar para organizar namespaces y clases</li>
+                <li><strong>Autoload</strong> elimina la necesidad de require/include manuales</li>
+            </ul>
+
+            <h3>13.2. Flujo típico de trabajo</h3>
+            <ol>
+                <li>Ejecuta <code>composer init</code> para crear composer.json</li>
+                <li>Configura <code>autoload</code> con PSR-4 en tu composer.json</li>
+                <li>Ejecuta <code>composer install</code> para instalar dependencias</li>
+                <li>Incluye <code>require 'vendor/autoload.php'</code> en tu código</li>
+                <li>Usa las clases con sus namespaces automáticamente</li>
+            </ol>
+
+            <h3>13.3. Estructura recomendada</h3>
+            <pre><code class="language-bash">
+proyecto/
+├── src/                       # Tu código (PSR-4)
+│   ├── Models/
+│   └── Controllers/
+├── tests/                     # Tests
+├── vendor/                    # Dependencias (generado)
+├── .gitignore
+├── composer.json
+└── composer.lock
+</code></pre>
+
+            <h3>13.4. Comandos esenciales</h3>
+            <ul>
+                <li><code>composer init</code> - Crear nuevo proyecto</li>
+                <li><code>composer install</code> - Instalar dependencias</li>
+                <li><code>composer require paquete</code> - Añadir dependencia</li>
+                <li><code>composer update</code> - Actualizar todo</li>
+                <li><code>composer dump-autoload</code> - Regenerar autoload</li>
+            </ul>
+        </section>
+
+    </main>
+
+</body>
+
+</html>
