@@ -74,6 +74,9 @@
                 Los <strong>Servlets</strong> son clases Java que manejan peticiones HTTP, mientras que <strong>JSP</strong> 
                 permite incrustar código Java en páginas HTML para generar contenido dinámico.
             </p>
+            <div class="diagram">
+                    <img src="../assets/jsp_logo.png" style="max-width:100%;" alt="IDE version">
+            </div>
 
             <h3>1.1. ¿Qué es un Servlet?</h3>
             <p>
@@ -123,12 +126,18 @@
                 <li><strong>Vista</strong>: páginas JSP</li>
                 <li><strong>Controlador</strong>: Servlets</li>
             </ul>
+            <div class="diagram">
+                    <img src="../assets/jsp_mvc.png" style="max-width:100%;" alt="IDE version">
+            </div>
 
             <h3>2.3. Contenedor Web</h3>
             <p>
                 El contenedor web (como <strong>Apache Tomcat</strong>) gestiona el ciclo de vida de Servlets y JSPs, 
                 incluyendo instanciación, inicialización y destrucción.
             </p>
+            <div class="diagram">
+                    <img src="../assets/jsp_tomcat.png" style="max-width:100%;" alt="IDE version">
+            </div>
 
         </section>
 
@@ -428,8 +437,11 @@ public class LogoutServlet extends HttpServlet {
             <h3>7.1. Requisitos</h3>
             <ul>
                 <li>JDK 8 o superior</li>
-                <li>Apache Tomcat 9.0+ o cualquier servidor Java EE</li>
-                <li>IDE (Eclipse, IntelliJ IDEA, NetBeans)</li>
+                <li>Apache Tomcat 10.1+</li>
+                <li>J2EE (Eclipse IDE for Enterprise Java and Web Developers)</li>
+                <div class="diagram">
+                    <img src="../assets/jsp_ide_version.png" style="max-width:100%;" alt="IDE version">
+                </div>
             </ul>
 
             <h3>7.2. Dependencias Maven</h3>
@@ -483,12 +495,21 @@ proyecto-web/
 │           └── usuarios.jsp
 └── pom.xml
 </code></pre>
+                <p>Ejemplo estructura de proyecto</p>
+                <div class="diagram">
+                    <img src="../assets/jsp_structure.png" style="max-width:100%;" alt="Run server">
+                </div>
 
             <h3>7.4. Desplegar en Tomcat</h3>
             <ol>
-                <li>Compila el proyecto: <code>mvn clean package</code></li>
-                <li>Copia el archivo <code>.war</code> generado a <code>tomcat/webapps/</code></li>
-                <li>Inicia Tomcat: <code>./catalina.sh run</code> (Linux/Mac) o <code>catalina.bat run</code> (Windows)</li>
+                <li>En el proyecto botón derecho <code>run as on server</code></li>
+                <div class="diagram">
+                    <img src="../assets/jsp_run_server.png" style="max-width:100%;" alt="Run server">
+                </div>
+                <li>Verificar server esta iniciado</li>
+                <div class="diagram">
+                    <img src="../assets/jsp_verify_server.png" style="max-width:100%;" alt="Run server">
+                </div>
                 <li>Accede a <code>http://localhost:8080/nombre-app</code></li>
             </ol>
         </section>
