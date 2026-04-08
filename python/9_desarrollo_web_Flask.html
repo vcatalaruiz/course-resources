@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-EVTW1307T1');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Desarrollo Web con Flask</title>
+    <script src="../../index.js" defer></script>
+
+    <!-- Mermaid -->
+    <script type="module">
+        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+
+    <!-- HighlightJS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+    <script src="../index.js" defer></script>
+    <script src="../menu.js" defer></script>
+    <!-- <link rel="stylesheet" href="../index.css"> -->
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+
+    <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+        <div class="vc-rail-head">
+            <span class="vc-rail-title">Índice</span>
+            <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+                <!-- X SVG -->
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+        <ul id="vc-list" class="vc-list"></ul>
+    </nav>
+
+    <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+    <!-- ===== /VC SIDEBAR ===== -->
+
+    <header>
+
+        <!-- ===== VC SIDEBAR (desde cero) ===== -->
+        <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+            aria-controls="vc-rail" aria-expanded="false">
+            <!--Hamburger icon -->
+            <i class="fa fa-bars" aria-hidden="true"></i>
+
+
+        </button>
+        <h1>Desarrollo Web con Flask</h1>
+        <img src="" id="logo" alt="Logo" style="display: none;">
+    </header>
+
+    <main>
+
+        <!-- 1. Conceptos básicos de programación web -->
+        <section class="slide" id="aplicacion-web">
+            <img src="../../ia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>¿Qué es una aplicación web?</h2>
+            <p>
+                Una aplicación web es un software que se ejecuta en un servidor y se accede a través de un navegador
+                web.
+                No necesita instalación en el equipo del usuario y funciona mediante internet o una red local.
+            </p>
+            <ul>
+                <li>Se accede mediante un navegador (Chrome, Firefox, Edge…)</li>
+                <li>El usuario interactúa mediante páginas web</li>
+                <li>El procesamiento principal ocurre en el servidor</li>
+            </ul>
+            <div class="diagram">
+                <img src="../assets/aplicacion_web.png" alt="Embedding models diagram">
+            </div>
+        </section>
+
+        <section class="slide" id="web-estatica-dinamica">
+            
+            <h2>Web estática vs web dinámica</h2>
+            <p>
+                Una web estática muestra siempre el mismo contenido, mientras que una web dinámica genera contenido
+                diferente según el usuario o la información recibida.
+            </p>
+            <ul>
+                <li><strong>Estática:</strong> HTML y CSS sin lógica (ej. una página informativa)</li>
+                <li><strong>Dinámica:</strong> Contenido generado por el servidor (ej. formularios, usuarios)</li>
+            </ul>
+            <div class="diagram">
+                <img src="../assets/Web-estatica-o-dinamica.jpg" alt="Embedding models diagram">
+            </div>
+        </section>
+
+        <section class="slide" id="modelo-cliente-servidor">
+            
+            <h2>Modelo cliente–servidor</h2>
+            <p>
+                El modelo cliente–servidor separa responsabilidades: el cliente solicita información y el servidor la
+                procesa
+                y responde.
+            </p>
+            <ul>
+                <li>Cliente: navegador web</li>
+                <li>Servidor: aplicación web (Flask)</li>
+                <li>Comunicación mediante peticiones HTTP</li>
+            </ul>
+            <div class="diagram">
+                <img src="../assets/diagrama-cliente-servidor.jpeg.webp" alt="Embedding models diagram">
+            </div>
+        </section>
+
+        <section class="slide" id="rol-backend">
+            
+            <h2>Rol del backend</h2>
+            <p>
+                El backend se encarga de la lógica de la aplicación: procesa datos, toma decisiones y genera respuestas.
+            </p>
+            <ul>
+                <li>Gestión de rutas</li>
+                <li>Procesamiento de formularios</li>
+                <li>Generación de contenido dinámico</li>
+            </ul>
+            <div class="diagram">
+                <img src="../assets/backend.jpg" alt="Embedding models diagram">
+            </div>
+        </section>
+
+        <!-- 2. Flask -->
+        <section class="slide" id="que-es-flask">
+            
+            <h2>¿Qué es Flask?</h2>
+            <div class="diagram">
+                <img src="../assets/flasck.jpg" alt="Embedding models diagram">
+            </div>
+            <p>
+                Flask es un framework web ligero escrito en Python que permite crear aplicaciones web de forma sencilla
+                y
+                flexible.
+
+            </p>
+            <p><strong>Características:</strong></p>
+            <ul>
+                <li>Framework minimalista</li>
+                <li>Basado en Python</li>
+                <li>Ideal para aprender desarrollo web</li>
+            </ul>
+
+        </section>
+
+        <section class="slide" id="caracteristicas-flask">
+            
+            <h2>Características principales de Flask</h2>
+            <ul>
+                <li>Ligero y minimalista</li>
+                <li>Fácil de aprender</li>
+                <li>Extensible mediante librerías</li>
+                <li>Control total sobre la estructura</li>
+            </ul>
+        </section>
+
+        <section class="slide" id="casos-uso-flask">
+            
+            <h2>Casos de uso de Flask</h2>
+            <p>
+                Flask se utiliza tanto para proyectos pequeños como para aplicaciones más completas. Suele ser la opción
+                preferida para:
+            </p>
+            <ul>
+                <li>Aplicaciones educativas</li>
+                <li>APIs sencillas</li>
+                <li>Prototipos rápidos</li>
+            </ul>
+            <div class="diagram">
+                <img src="../assets/flask-example2.png" alt="Embedding models diagram">
+            </div>
+        </section>
+
+        <section class="slide" id="ventajas-flask">
+            
+            <h2>Ventajas frente a otros frameworks</h2>
+            <ul>
+                <li>Menor complejidad inicial</li>
+                <li>No impone una estructura rígida</li>
+                <li>Ideal para aprender backend</li>
+            </ul>
+        </section>
+
+        <!-- 3. Estructura del proyecto -->
+        <section class="slide" id="estructura-proyecto">
+            
+            <h2>Estructura básica de un proyecto Flask</h2>
+            <p>
+                Un proyecto Flask se organiza en archivos y carpetas para separar lógica, plantillas y recursos.
+            </p>
+            <ul>
+                <li><code>app.py</code>: archivo principal</li>
+                <li><code>templates/</code>: HTML</li>
+                <li><code>static/</code>: CSS, imágenes</li>
+            </ul>
+
+            <div class="diagram">
+                <img src="../assets/flask-estructura.png" alt="Embedding models diagram">
+            </div>
+        </section>
+
+        <!-- Introducción -->
+        <section class="slide" id="intro-flask">
+            
+
+            <h2>Tutorial</h2>
+            <p>
+                En este tutorial aprenderás a crear una aplicación web sencilla con Flask que tendrá dos pantallas:
+                una página principal y una página de saludo personalizada.
+                El objetivo es entender el flujo completo de una aplicación web backend con Python.
+            </p>
+            <ul>
+                <li>Crear una aplicación Flask desde cero</li>
+                <li>Trabajar con rutas</li>
+                <li>Usar plantillas HTML</li>
+                <li>Mostrar información dinámica</li>
+            </ul>
+        </section>
+
+        <!-- Requisitos -->
+        <section class="slide" id="requisitos">
+            
+
+            <h2>Requisitos previos</h2>
+            <p>
+                Antes de comenzar, es necesario tener preparado el entorno de trabajo.
+            </p>
+            <ul>
+                <li>Python instalado (versión 3.x)</li>
+                <li>Editor de código (VS Code recomendado)</li>
+                <li>Conocimientos básicos de Python</li>
+            </ul>
+        </section>
+
+        <!-- Instalación Flask -->
+        <section class="slide" id="instalacion-flask">
+            
+
+            <h2>Instalación de Flask</h2>
+            <p>
+                Flask se instala fácilmente usando el gestor de paquetes de Python.
+            </p>
+            <pre class="language-python"><code>pip install flask</code></pre>
+        </section>
+
+        <!-- Estructura del proyecto -->
+        <section class="slide" id="estructura-proyecto">
+            
+
+            <h2>Estructura del proyecto</h2>
+            <p>
+                Organizaremos el proyecto separando la lógica Python de las páginas HTML.
+            </p>
+            <pre class="language-python"><code>proyecto_flask/
+│
+├── app.py
+└── templates/
+    ├── index.html
+    └── saludo.html</code></pre>
+        </section>
+
+        <!-- App principal -->
+        <section class="slide" id="app-principal">
+            
+
+            <h2>Archivo principal app.py</h2>
+            <p>
+                Este archivo contiene la lógica principal de la aplicación Flask y define las rutas.
+            </p>
+            <pre class="language-python"><code>from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+@app.route('/')
+def inicio():
+    return render_template('index.html')
+
+@app.route('/saludo', methods=['POST'])
+def saludo():
+    nombre = request.form['nombre']
+    return render_template('saludo.html', nombre=nombre)
+
+if __name__ == '__main__':
+    app.run(debug=True)</code></pre>
+        </section>
+
+        <!-- Primera pantalla -->
+        <section class="slide" id="pantalla-1">
+            
+
+            <h2>Pantalla 1: Página principal</h2>
+            <p>
+                La primera pantalla muestra un formulario donde el usuario introduce su nombre.
+            </p>
+        </section>
+
+        <section class="slide" id="html-index">
+            
+
+            <h2>Archivo index.html</h2>
+            <p>
+                Este HTML contiene el formulario que envía datos al servidor.
+            </p>
+            <pre class="language-python"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Inicio&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Bienvenido&lt;/h1&gt;
+    &lt;form action="/saludo" method="post"&gt;
+        &lt;input type="text" name="nombre" placeholder="Introduce tu nombre"&gt;
+        &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </section>
+
+        <!-- Segunda pantalla -->
+        <section class="slide" id="pantalla-2">
+            
+
+            <h2>Pantalla 2: Página de saludo</h2>
+            <p>
+                La segunda pantalla muestra un mensaje personalizado utilizando el dato introducido por el usuario.
+            </p>
+        </section>
+
+        <section class="slide" id="html-saludo">
+            
+
+            <h2>Archivo saludo.html</h2>
+            <p>
+                Flask envía el nombre a la plantilla y esta lo muestra dinámicamente.
+            </p>
+            <pre class="language-python"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Saludo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hola {{ nombre }}&lt;/h1&gt;
+    &lt;p&gt;Gracias por usar nuestra web con Flask.&lt;/p&gt;
+    &lt;a href="/"&gt;Volver&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </section>
+
+        <!-- Flujo -->
+        <section class="slide" id="flujo-app">
+            
+
+            <h2>Flujo de la aplicación</h2>
+            <p>
+                El funcionamiento completo de la web sigue estos pasos:
+            </p>
+            <ul>
+                <li>El usuario accede a la página principal</li>
+                <li>Introduce su nombre en el formulario</li>
+                <li>El servidor recibe el dato</li>
+                <li>Se genera una respuesta personalizada</li>
+            </ul>
+        </section>
+
+        <!-- Ejecución -->
+        <section class="slide" id="ejecucion">
+            
+
+            <h2>Ejecución de la aplicación</h2>
+            <p>
+                Para arrancar la web, ejecuta el archivo principal y accede desde el navegador.
+            </p>
+            <pre class="language-python"><code>python app.py</code></pre>
+            <p>
+                Accede a: <strong>http://127.0.0.1:5000</strong>
+            </p>
+        </section>
+
+        <!-- Cierre -->
+        <section class="slide" id="cierre">
+            
+
+            <h2>Mini proyecto</h2>
+            <p><strong>Ejercicio práctico:</strong></p>
+            <p>
+                Crea una aplicación web con Flask que realice lo siguiente:
+            </p>
+            <ul>
+                <li>Mostrar una página de inicio con un formulario para introducir el nombre de un producto y su precio.</li>
+                <li>Al enviar el formulario, mostrar una página de resumen con el nombre del producto, su precio.</li>
+                <li>Indicar si el producto es caro (precio > 100) o barato (precio <= 100).</li>
+                <li>Incluir CSS para mejorar la apariencia de la aplicación.</li>
+            </ul>
+
+            <p><strong>Entrega:</strong></p>
+            <p>
+                Documento que contenga:</p>
+            <ul>
+                <li>Capturas de pantalla de la instalación y la aplicación funcionando</li>
+                <li>Explicación del código y la estructura del proyecto</li>
+            </ul>
+
+        </section>
+
+
+        <footer>
+            <p>Profesor: Vicente Català — ®Todos los derechos reservados.</p>
+        </footer>
+    </main>
+</body>
+
+
+
+</html>
