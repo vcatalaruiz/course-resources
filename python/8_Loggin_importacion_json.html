@@ -172,7 +172,45 @@ def cargar_config(ruta):
 cargar_config("config.json")</code></pre>
     </div>
 </section>
+<section class="slide" id="json-errores-validacion">
+    
 
+    <h2>JSON: Ejemplo de recorrido de un array dentro de un JSON</h2>
+    <p>
+        En este ejemplo se muestra cómo recorrer un array de objetos dentro de un JSON para acceder 
+        a sus valores. Por ejemplo, una lista de tareas con una etiqueta "completada" que indica si 
+        la tarea está hecha o no.
+    </p>
+
+    <div class="ejemplo">
+        <strong>Explicación</strong>
+        <p>
+            Se carga un JSON con una lista de tareas y se recorre para mostrar solo las tareas no completadas.
+
+        </p>
+
+        <p><strong>Ejemplo de JSON de tareas</strong></p>
+        <pre class="language-json"><code>{
+    "tareas": [
+        {"nombre": "Comprar leche", "completada": false},
+        {"nombre": "Lavar el coche", "completada": true},
+        {"nombre": "Hacer ejercicio", "completada": false}
+    ]
+}</code></pre>
+
+        <strong>Ejemplo</strong>
+        <pre class="language-python"><code>import json
+
+# Supongamos que tenemos un JSON con una lista de tareas
+with open("tareas.json", "r", encoding="utf-8") as f:
+    data = json.load(f)
+
+# Recorremos la lista de tareas y mostramos solo las no completadas
+for tarea in data["tareas"]:
+    if not tarea["completada"]:
+        print(f"Tarea: {tarea['nombre']}")</code></pre>
+    </div>
+</section>
 <section class="slide" id="logging-python">
     
 
