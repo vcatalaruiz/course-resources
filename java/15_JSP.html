@@ -501,6 +501,8 @@ proyecto-web/
                 </div>
 
             <h3>7.4. Desplegar en Tomcat</h3>
+
+            <h4>7.4.1. Desde Eclipse (Run on Server)</h4>
             <ol>
                 <li>En el proyecto botón derecho <code>run as on server</code></li>
                 <div class="diagram">
@@ -510,7 +512,37 @@ proyecto-web/
                 <div class="diagram">
                     <img src="../assets/jsp_verify_server.png" style="max-width:100%;" alt="Run server">
                 </div>
-                <li>Accede a <code>http://localhost:8080/nombre-app</code></li>
+<li>Accede a <code>http://localhost:8080/nombre-app</code> definida en etiqueta <code>display-name</code> de <code>WEB-INF/web.xml</code></li>            </ol>
+
+            <h4>7.4.2. Despliegue manual (exportar WAR)</h4>
+            <p>
+                Si estás usando <strong>Dynamic Web Project</strong> en Eclipse, puedes generar un archivo
+                <code>.war</code> y desplegarlo manualmente en Tomcat.
+            </p>
+            <ol>
+                <li>En <strong>Project Explorer</strong>, haz clic derecho sobre tu proyecto web.</li>
+                <li>Selecciona <strong>Export...</strong> en el menú contextual.</li>
+                <li>En la ventana, expande <strong>Web</strong>, elige <strong>WAR file</strong> y pulsa <strong>Next</strong>.</li>
+                <div class="diagram">
+                    <img src="../assets/jsp_war.png" style="max-width:100%;" alt="Generate war">
+                </div>
+                <li>Configura la exportación:
+                    <ul>
+                        <li><strong>Web project</strong>: verifica que esté seleccionado tu proyecto.</li>
+                        <li><strong>Destination</strong>: pulsa <strong>Browse</strong> para elegir dónde guardar el WAR en  <code>C:\...\tomcat\webapps</code>).</li>
+                    </ul>
+                </li>
+                 <div class="diagram">
+                    <img src="../assets/jsp_war_tomcat.png" style="max-width:100%;" alt="Generate war tomcat">
+                </div>
+                <div class="diagram">
+                    <img src="../assets/jsp_war_tomcat2.png" style="max-width:100%;" alt="Generate war tomcat 2">
+                </div>
+                <li>Inicia (o reinicia) Tomcat dentro de la carpeta <code>bin</code>startup.bat </li>
+                <div class="diagram">
+                    <img src="../assets/jsp_tomcat_start.png" style="max-width:100%;" alt="Start tomcat">
+                </div>
+                <li>Accede a <code>http://localhost:8080/nombre-app</code> definida en etiqueta <code>display-name</code> de <code>WEB-INF/web.xml</code></li>
             </ol>
         </section>
        
