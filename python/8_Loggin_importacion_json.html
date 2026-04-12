@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Representaciones Semánticas y Deep Learning</title>
+  <script src="../../index.js" defer></script>
+
+  <!-- Mermaid -->
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+
+  <!-- HighlightJS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <!-- X SVG -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+  <!-- ===== /VC SIDEBAR ===== -->
+
+  <header>
+
+    <!-- ===== VC SIDEBAR (desde cero) ===== -->
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail"
+      aria-expanded="false">
+      <!--Hamburger icon -->
+      <i class="fa fa-bars" aria-hidden="true"></i>
+
+
+    </button>
+    <h1>Loggin, importación de librerías y manipulación de datos en JSON</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+
+    <section class="slide" id="introduccion-json-logging-terceros">
+    
+
+    <h2>Introducción: JSON, logging y librerías de terceros</h2>
+    <p>
+        En esta píldora se presentan tres elementos clave que usarás de forma habitual en Python: el trabajo con
+        <strong>ficheros JSON</strong>, el uso de <strong>logging</strong> para registrar el comportamiento del programa
+        y la <strong>importación de librerías de terceros</strong> para resolver tareas comunes sin reinventar código.
+        Estos conceptos son básicos para desarrollar aplicaciones reales y mantenibles.
+    </p>
+
+    <ul>
+        <li>Persistencia de datos con JSON.</li>
+        <li>Seguimiento y depuración con logging.</li>
+        <li>Uso de librerías externas en el día a día.</li>
+    </ul>
+</section>
+
+<section class="slide" id="json-python">
+    
+
+    <h2>Ficheros JSON en Python</h2>
+    <p>
+        JSON es un formato de texto muy utilizado para almacenar y compartir datos estructurados.
+        Python dispone del módulo estándar <code>json</code> para convertir diccionarios y listas
+        a JSON y viceversa. Es habitual usarlo para ficheros de configuración o datos sencillos.
+    </p>
+
+    <div class="ejemplo">
+        <strong>Explicación</strong>
+        <p>
+            En este ejemplo se crea un diccionario con datos de configuración, se guarda en un fichero JSON
+            y posteriormente se vuelve a cargar para acceder a sus valores.
+        </p>
+
+        <strong>Ejemplo</strong>
+        <pre class="language-python"><code>import json  # Importamos el módulo estándar json
+
+# Diccionario con datos de configuración
+configuracion = {
+    "app": "MiAplicacion",
+    "version": 1,
+    "modo": "produccion",
+    "debug": False
+}
+
+# Escritura del diccionario en un fichero JSON
+with open("config.json", "w", encoding="utf-8") as f:
+    json.dump(configuracion, f, indent=4, ensure_ascii=False)
+
+# Lectura del fichero JSON y conversión a diccionario Python
+with open("config.json", "r", encoding="utf-8") as f:
+    datos = json.load(f)
+
+# Acceso a un valor concreto
+print("Modo:", datos["modo"])</code></pre>
+    </div>
+</section>
+
+<section class="slide" id="json-errores-validacion">
+    
+
+    <h2>JSON: control de errores y validación básica</h2>
+    <p>
+        Al trabajar con ficheros externos es importante controlar posibles errores: el fichero puede no existir,
+        estar mal formado o no contener las claves necesarias. Por ello se recomienda usar excepciones y
+        validaciones simples antes de utilizar los datos.
+    </p>
+
+    <div class="ejemplo">
+        <strong>Explicación</strong>
+        <p>
+            La función intenta cargar un fichero JSON y comprueba que exista una clave obligatoria.
+            Si ocurre algún error, se muestra un mensaje adecuado.
+        </p>
+
+        <strong>Ejemplo</strong>
+        <pre class="language-python"><code>import json
+
+def cargar_config(ruta):
+    try:
+        # Intentamos abrir y leer el fichero JSON
+        with open(ruta, "r", encoding="utf-8") as f:
+            config = json.load(f)
+
+        # Validación básica de la estructura
+        if "modo" not in config:
+            raise ValueError("Falta la clave 'modo'")
+
+        return config
+
+    except FileNotFoundError:
+        print("El fichero no existe")
+    except json.JSONDecodeError:
+        print("El fichero no es un JSON válido")
+    except ValueError as e:
+        print("Error de configuración:", e)
+
+cargar_config("config.json")</code></pre>
+    </div>
+</section>
+<section class="slide" id="json-errores-validacion">
+    
+
+    <h2>JSON: Ejemplo de recorrido de un array dentro de un JSON</h2>
+    <p>
+        En este ejemplo se muestra cómo recorrer un array de objetos dentro de un JSON para acceder 
+        a sus valores. Por ejemplo, una lista de tareas con una etiqueta "completada" que indica si 
+        la tarea está hecha o no.
+    </p>
+
+    <div class="ejemplo">
+        <strong>Explicación</strong>
+        <p>
+            Se carga un JSON con una lista de tareas y se recorre para mostrar solo las tareas no completadas.
+
+        </p>
+
+        <p><strong>Ejemplo de JSON de tareas</strong></p>
+        <pre class="language-json"><code>{
+    "tareas": [
+        {"nombre": "Comprar leche", "completada": False},
+        {"nombre": "Lavar el coche", "completada": True},
+        {"nombre": "Hacer ejercicio", "completada": False}
+    ]
+}</code></pre>
+
+        <strong>Ejemplo</strong>
+        <pre class="language-python"><code>import json
+
+# Supongamos que tenemos un JSON con una lista de tareas
+with open("tareas.json", "r", encoding="utf-8") as f:
+    data = json.load(f)
+
+# Recorremos la lista de tareas y mostramos solo las no completadas
+for tarea in data["tareas"]:
+    if not tarea["completada"]:
+        print(f"Tarea: {tarea['nombre']}")</code></pre>
+    </div>
+</section>
+<section class="slide" id="logging-python">
+    
+
+    <h2>Logging en Python</h2>
+    <p>
+        El módulo <code>logging</code> permite registrar información sobre la ejecución del programa.
+        Es una alternativa profesional a <code>print()</code>, ya que permite clasificar los mensajes
+        por nivel y controlar su formato y destino.
+    </p>
+
+    <div class="ejemplo">
+        <strong>Explicación</strong>
+        <p>
+            Se configura el sistema de logging para mostrar mensajes informativos y se registran
+            distintos tipos de mensajes según su importancia.
+        </p>
+
+        <strong>Ejemplo</strong>
+        <pre class="language-python"><code>import logging
+
+# Configuración básica del sistema de logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(message)s"
+)
+
+# Registro de distintos mensajes
+logging.info("Aplicación iniciada correctamente")
+logging.warning("Falta un valor opcional, se usará uno por defecto")
+logging.error("Se ha producido un error en la operación")</code></pre>
+    </div>
+</section>
+
+<section class="slide" id="logging-fichero">
+    
+
+    <h2>Logging en ficheros</h2>
+    <p>
+        En aplicaciones reales es muy habitual guardar los logs en un fichero para poder revisarlos más tarde.
+        Esto permite analizar errores y el comportamiento del programa tras su ejecución.
+    </p>
+
+    <div class="ejemplo">
+        <strong>Explicación</strong>
+        <p>
+            En este ejemplo los mensajes se guardan en un fichero <code>app.log</code> y se registra
+            automáticamente el error completo cuando ocurre una excepción.
+        </p>
+
+        <strong>Ejemplo</strong>
+        <pre class="language-python"><code>import logging
+
+# Configuración del logging para escribir en un fichero
+logging.basicConfig(
+    filename="app.log",
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(message)s"
+)
+
+logger = logging.getLogger(__name__)
+
+def dividir(a, b):
+    try:
+        # Operación que puede provocar un error
+        return a / b
+    except Exception:
+        # Registro del error con información completa
+        logger.exception("Error al dividir %s entre %s", a, b)
+        return None
+
+dividir(10, 0)</code></pre>
+    </div>
+</section>
+
+<section class="slide" id="modulos-terceros">
+    
+
+    <h2>Librerías de terceros</h2>
+    <p>
+        Python permite ampliar sus funcionalidades mediante librerías externas que resuelven tareas comunes.
+        Estas librerías se instalan con <code>pip</code> y se importan como cualquier otro módulo.
+        Su uso ahorra tiempo y simplifica el desarrollo.
+    </p>
+    <p><strong>Instalación de una librería:</strong></p>
+    <pre class="language-bash"><code>pip install nombre_de_la_librería</code></pre>
+
+    <p><strong>Algunas librerías populares:</strong></p>
+    <ul>
+        <li><strong>requests</strong>: consumo de APIs y peticiones HTTP.</li>
+        <li><strong>python-dotenv</strong>: gestión de variables de entorno. Ejemplo: <a href="https://learn.microsoft.com/es-es/azure/developer/azure-developer-cli/environment-variables-faq" target="_blank">Microsoft Azure .env</a></li>
+        <li><strong>rich</strong>: salida por consola más clara y legible.</li>
+        <li><strong>tabulate</strong>: presentación de datos en tablas de texto.</li>
+        <li><strong>click</strong>: creación de programas de línea de comandos.</li>
+        <li><strong>schedule</strong>: ejecución de tareas periódicas.</li>
+    </ul>
+
+    <div class="ejemplo">
+        <strong>Explicación</strong>
+        <p>
+            A continuación se muestran ejemplos sencillos de uso de algunas librerías habituales
+            en tareas cotidianas como peticiones web, configuración y presentación de datos.
+        </p>
+
+        <strong>Ejemplo</strong>
+        <pre class="language-python"><code># Petición HTTP sencilla con requests
+import requests
+
+respuesta = requests.get("https://swapi.dev/api/people/1/")
+print(respuesta.name)  # Imprime el nombre del personaje
+
+# Carga de variables de entorno desde un fichero .env
+from dotenv import load_dotenv
+import os
+# Cargar variables de entorno desde el fichero .env
+# Acceso al fichero en el directorio actual
+fichero_env = os.path.join(os.getcwd(), ".env")
+load_dotenv(fichero_env)
+clave_api = os.getenv("CLAVE_API")
+print("Clave API:", clave_api)
+
+# Mostrar datos en forma de tabla por consola
+from tabulate import tabulate
+
+datos = [["Ana", 8.5], ["Luis", 6.0]]
+print(tabulate(datos, headers=["Nombre", "Nota"]))</code></pre>
+    </div>
+</section>
+
+<section class="slide" id="ejercicios">
+    
+
+    <h2>Ejercicios propuestos</h2>
+    <p>
+        Realiza los siguientes ejercicios para afianzar los conceptos de JSON, logging y librerías de terceros.
+        Intenta aplicar buenas prácticas y comentar tu código.
+    </p>
+
+    <ol>
+        <li>Crea un diccionario con datos personales y guárdalo en un fichero JSON.</li>
+        <li>Lee el fichero JSON anterior y muestra los datos por pantalla.</li>
+        <li>Guarda una lista de tareas en JSON y carga solo las no completadas.</li>
+        <li>Controla el error cuando el fichero JSON no existe.</li>
+        <li>Valida que un JSON tenga una clave obligatoria llamada <code>version</code>.</li>
+        <li>Configura logging para mostrar mensajes INFO y WARNING.</li>
+        <li>Registra en un fichero cada llamada a una función.</li>
+        <li>Usa <code>logger.exception()</code> para registrar un error controlado.</li>
+        <li>Instala <code>requests</code> y realiza una petición al API de Star Wars.</li>
+        <li>Instala <code>tabulate</code> y muestra contenido del API de Star Wars de forma ordenada.</li>
+        <li>Usa <code>python-dotenv</code> para leer una variable desde un fichero <code>.env</code> (puedes inventar el contenido).</li>
+    </ol>
+</section>
+
+    <footer>
+      <p>Profesor: Vicente Català — ®Todos los derechos reservados.</p>
+    </footer>
+  </main>
+</body>
+
+
+
+</html>
