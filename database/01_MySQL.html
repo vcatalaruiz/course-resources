@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-EVTW1307T1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bases de Datos - MySQL</title>
+    <script src="/course-resources/index.js" defer></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+    <script src="../index.js" defer></script>
+    <script src="../menu.js" defer></script>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../menu.css">
+</head>
+
+<body>
+
+    <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+        <div class="vc-rail-head">
+            <span class="vc-rail-title">Índice</span>
+            <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+        <ul id="vc-list" class="vc-list"></ul>
+    </nav>
+
+    <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+    <header>
+        <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+            aria-controls="vc-rail" aria-expanded="false">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+        <h1>Bases de Datos - MySQL</h1>
+        <img src="" id="logo" alt="Logo" style="display: none;">
+    </header>
+
+    <main>
+        <!-- SECCIÓN 1: INTRODUCCIÓN -->
+        <section id="introduccion">
+            <h2>1. Introducción a MySQL</h2>
+            <p>
+                <strong>MySQL</strong> es un sistema de gestión de bases de datos relacional (RDBMS) de código abierto.
+                Es una de las bases de datos más populares en el mundo del desarrollo web debido a su facilidad de uso,
+                rendimiento y confiabilidad.
+            </p>
+            <div class="diagram">
+                    <img src="../assets/mysql_logo.png" style="max-width:100%;" alt="MySQL logo">
+                </div>
+            <p>
+                Una base de datos es una colección organizada de datos estructurados que permite almacenar, recuperar,
+                actualizar y eliminar información de manera eficiente.
+            </p>
+
+            <h3>1.1. Conceptos fundamentales</h3>
+            <ul>
+                <li><strong>Base de datos:</strong> Conjunto de tablas relacionadas.</li>
+                <li><strong>Tabla:</strong> Estructura bidimensional con filas y columnas.</li>
+                <li><strong>Fila (registro):</strong> Cada registro dentro de una tabla.</li>
+                <li><strong>Columna (campo):</strong> Atributo o propiedad de los datos.</li>
+                <li><strong>Clave primaria:</strong> Identificador único de cada registro.</li>
+                <li><strong>Clave foránea:</strong> Referencia a la clave primaria de otra tabla.</li>
+            </ul>
+
+            <h3>1.2. Modelo relacional</h3>
+            <p>
+                MySQL utiliza el modelo relacional, donde los datos se organizan en tablas y las relaciones
+                entre tablas se establecen mediante claves. Este modelo garantiza la integridad y consistencia de los datos.
+            </p>
+            <div class="mermaid">
+                erDiagram
+                    CLIENTE ||--o{ PEDIDO : realiza
+                    PEDIDO ||--|{ PRODUCTO : contiene
+                    CLIENTE {
+                        int id PK
+                        string nombre
+                        string email
+                        string telefono
+                    }
+                    PEDIDO {
+                        int id PK
+                        int cliente_id FK
+                        date fecha
+                        decimal total
+                    }
+                    PRODUCTO {
+                        int id PK
+                        string nombre
+                        decimal precio
+                        int stock
+                    }
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: CREACIÓN DE BASES DE DATOS Y TABLAS -->
+        <section id="crear-bases-datos">
+            <h2>2. Creación de Bases de Datos y Tablas</h2>
+            <p>
+                Antes de almacenar datos, debemos crear una base de datos y las tablas que la compondrán.
+                Las tablas definen la estructura de los datos mediante columnas con tipos de datos específicos.
+            </p>
+
+            <h3>2.1. Crear una base de datos</h3>
+            <pre><code class="language-sql">
+-- Crear una nueva base de datos
+CREATE DATABASE tienda;
+
+-- Crear una base de datos solo si no existe
+CREATE DATABASE IF NOT EXISTS tienda;
+
+-- Ver todas las bases de datos
+SHOW DATABASES;
+
+-- Seleccionar una base de datos para trabajar con ella
+USE tienda;
+            </code></pre>
+
+            <h3>2.2. Tipos de datos comunes</h3>
+            <table border="1" style="width:100%; border-collapse:collapse; text-align:left;">
+                <thead>
+                    <tr>
+                        <th>Tipo de dato</th>
+                        <th>Descripción</th>
+                        <th>Ejemplo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>INT</code></td>
+                        <td>Número entero</td>
+                        <td>42, -10</td>
+                    </tr>
+                    <tr>
+                        <td><code>VARCHAR(n)</code></td>
+                        <td>Texto variable hasta n caracteres</td>
+                        <td>'Juan', 'María López'</td>
+                    </tr>
+                    <tr>
+                        <td><code>DECIMAL(p,s)</code></td>
+                        <td>Número decimal con precisión</td>
+                        <td>99.99, 1234.56</td>
+                    </tr>
+                    <tr>
+                        <td><code>DATE</code></td>
+                        <td>Fecha (YYYY-MM-DD)</td>
+                        <td>'2025-01-15'</td>
+                    </tr>
+                    <tr>
+                        <td><code>DATETIME</code></td>
+                        <td>Fecha y hora</td>
+                        <td>'2025-01-15 14:30:00'</td>
+                    </tr>
+                    <tr>
+                        <td><code>BOOLEAN</code></td>
+                        <td>Verdadero (1) o falso (0)</td>
+                        <td>TRUE, FALSE</td>
+                    </tr>
+                    <tr>
+                        <td><code>TEXT</code></td>
+                        <td>Texto largo</td>
+                        <td>Descripciones, comentarios</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>2.3. Crear tablas</h3>
+            <pre><code class="language-sql">
+-- Crear tabla de clientes
+CREATE TABLE clientes (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    telefono VARCHAR(15),
+    fecha_registro DATE DEFAULT CURDATE(),
+    activo BOOLEAN DEFAULT TRUE
+);
+
+-- Crear tabla de productos
+CREATE TABLE productos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(150) NOT NULL,
+    descripcion TEXT,
+    precio DECIMAL(10, 2) NOT NULL,
+    stock INT NOT NULL DEFAULT 0,
+    fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Crear tabla de pedidos con claves foráneas
+CREATE TABLE pedidos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    cliente_id INT NOT NULL,
+    fecha_pedido DATE NOT NULL,
+    total DECIMAL(10, 2),
+    estado VARCHAR(20) DEFAULT 'pendiente',
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+);
+
+-- Ver estructura de una tabla
+DESCRIBE clientes;
+-- o
+SHOW COLUMNS FROM clientes;
+            </code></pre>
+
+            <div class="info-box">
+                <p><strong>Nota:</strong> <code>NOT NULL</code> obliga a que el campo siempre tenga un valor.
+                    <code>UNIQUE</code> asegura que no haya duplicados. <code>AUTO_INCREMENT</code> genera
+                    automáticamente valores secuenciales para identificadores.</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: INSERCIÓN DE DATOS -->
+        <section id="insertar-datos">
+            <h2>3. Inserción de Datos</h2>
+            <p>
+                Una vez creadas las tablas, podemos insertar datos usando la sentencia <code>INSERT INTO</code>.
+                Los datos deben respetar los tipos y restricciones definidos en la tabla.
+            </p>
+
+            <h3>3.1. Insertar un registro</h3>
+            <pre><code class="language-sql">
+-- Insertar un cliente
+INSERT INTO clientes (nombre, email, telefono)
+VALUES ('Juan García', 'juan@email.com', '612345678');
+
+-- Insertar especificando todas las columnas en orden
+INSERT INTO clientes
+VALUES (NULL, 'María López', 'maria@email.com', '687654321', '2025-01-15', TRUE);
+            </code></pre>
+
+            <h3>3.2. Insertar múltiples registros</h3>
+            <pre><code class="language-sql">
+-- Insertar varios clientes a la vez
+INSERT INTO clientes (nombre, email, telefono) VALUES
+('Carlos Martínez', 'carlos@email.com', '655555555'),
+('Ana Fernández', 'ana@email.com', '666666666'),
+('Pedro Sánchez', 'pedro@email.com', '677777777');
+
+-- Insertar productos
+INSERT INTO productos (nombre, descripcion, precio, stock) VALUES
+('Laptop', 'Computadora portátil de 15 pulgadas', 799.99, 5),
+('Mouse', 'Mouse inalámbrico', 29.99, 50),
+('Teclado', 'Teclado mecánico RGB', 149.99, 10);
+            </code></pre>
+
+            <h3>3.3. Insertar con referencias (claves foráneas)</h3>
+            <pre><code class="language-sql">
+-- Insertar pedidos asociados a clientes
+INSERT INTO pedidos (cliente_id, fecha_pedido, total, estado) VALUES
+(1, '2025-01-15', 829.98, 'completado'),
+(2, '2025-01-16', 179.98, 'pendiente'),
+(3, '2025-01-17', 949.97, 'en envío');
+            </code></pre>
+        </section>
+
+        <!-- SECCIÓN 4: CONSULTAS SELECT -->
+        <section id="consultas-select">
+            <h2>4. Consultas - SELECT</h2>
+            <p>
+                La sentencia <code>SELECT</code> es la más utilizada en SQL. Permite recuperar y filtrar datos
+                de una o más tablas de manera flexible y poderosa.
+            </p>
+
+            <h3>4.1. Consultas básicas</h3>
+            <pre><code class="language-sql">
+-- Seleccionar todas las columnas de una tabla
+SELECT * FROM clientes;
+
+-- Seleccionar columnas específicas
+SELECT nombre, email FROM clientes;
+
+-- Seleccionar con alias (renombrar columnas)
+SELECT nombre AS 'Nombre del Cliente', email AS 'Correo Electrónico' FROM clientes;
+            </code></pre>
+
+            <h3>4.2. Filtrado con WHERE</h3>
+            <pre><code class="language-sql">
+-- Buscar un cliente específico
+SELECT * FROM clientes WHERE nombre = 'Juan García';
+
+-- Buscar clientes con email específico
+SELECT * FROM clientes WHERE email LIKE '%gmail.com';
+
+-- Buscar productos con precio mayor a 100
+SELECT * FROM productos WHERE precio > 100;
+
+-- Buscar con múltiples condiciones (AND, OR)
+SELECT * FROM productos WHERE precio > 50 AND stock > 0;
+SELECT * FROM clientes WHERE nombre LIKE 'Juan%' OR nombre LIKE 'María%';
+
+-- Buscar con negación (NOT)
+SELECT * FROM clientes WHERE NOT activo = FALSE;
+            </code></pre>
+
+            <h3>4.3. Ordenamiento y límite</h3>
+            <pre><code class="language-sql">
+-- Ordenar resultados de forma ascendente
+SELECT * FROM productos ORDER BY precio ASC;
+
+-- Ordenar de forma descendente
+SELECT * FROM productos ORDER BY precio DESC;
+
+-- Ordenar por múltiples columnas
+SELECT * FROM clientes ORDER BY nombre ASC, email DESC;
+
+-- Limitar el número de resultados
+SELECT * FROM productos LIMIT 5;
+
+-- Obtener los 10 productos más caros
+SELECT * FROM productos ORDER BY precio DESC LIMIT 10;
+
+-- Paginación (mostrar resultados del 11 al 20)
+SELECT * FROM productos LIMIT 10, 10;
+            </code></pre>
+
+            <h3>4.4. Funciones de agregación</h3>
+            <pre><code class="language-sql">
+-- Contar registros
+SELECT COUNT(*) FROM clientes;
+SELECT COUNT(*) AS total_clientes FROM clientes;
+
+-- Obtener el precio máximo y mínimo
+SELECT MAX(precio) AS precio_maximo FROM productos;
+SELECT MIN(precio) AS precio_minimo FROM productos;
+
+-- Sumar valores
+SELECT SUM(stock) AS stock_total FROM productos;
+
+-- Calcular el promedio
+SELECT AVG(precio) AS precio_promedio FROM productos;
+
+-- Agrupar datos
+SELECT estado, COUNT(*) AS cantidad FROM pedidos GROUP BY estado;
+SELECT precio, COUNT(*) AS cantidad FROM productos GROUP BY precio;
+            </code></pre>
+        </section>
+
+        <!-- SECCIÓN 5: ACTUALIZACIONES Y ELIMINACIONES -->
+        <section id="actualizar-eliminar">
+            <h2>5. Actualización y Eliminación de Datos</h2>
+            <p>
+                Las sentencias <code>UPDATE</code> y <code>DELETE</code> permiten modificar o eliminar datos
+                de las tablas. Es importante usar <code>WHERE</code> para especificar qué registros afectar.
+            </p>
+
+            <h3>5.1. Actualizar registros</h3>
+            <pre><code class="language-sql">
+-- Actualizar el email de un cliente
+UPDATE clientes SET email = 'juan.nuevo@email.com' WHERE id = 1;
+
+-- Actualizar múltiples columnas
+UPDATE clientes
+SET email = 'maria.nueva@email.com', telefono = '699999999'
+WHERE nombre = 'María López';
+
+-- Actualizar con expresiones
+UPDATE productos SET precio = precio * 1.10 WHERE stock < 5;
+
+-- Actualizar múltiples registros basándose en una condición
+UPDATE pedidos SET estado = 'completado' WHERE fecha_pedido < '2025-01-15';
+            </code></pre>
+
+            <div class="info-box">
+                <p><strong>⚠️ Advertencia:</strong> Siempre usa <code>WHERE</code> en UPDATE y DELETE.
+                    Sin <code>WHERE</code>, afectarás <strong>todos</strong> los registros de la tabla.</p>
+            </div>
+
+            <h3>5.2. Eliminar registros</h3>
+            <pre><code class="language-sql">
+-- Eliminar un cliente específico
+DELETE FROM clientes WHERE id = 5;
+
+-- Eliminar múltiples registros
+DELETE FROM pedidos WHERE estado = 'cancelado';
+
+-- Eliminar productos sin stock
+DELETE FROM productos WHERE stock = 0;
+
+-- Vaciar una tabla completa (¡ten cuidado!)
+DELETE FROM clientes; -- Elimina todos los clientes
+            </code></pre>
+        </section>
+
+        <!-- SECCIÓN 6: JOINS -->
+        <section id="joins">
+            <h2>6. Combinación de Tablas - JOINS</h2>
+            <p>
+                Los <strong>JOINs</strong> permiten combinar datos de múltiples tablas basándose en relaciones
+                entre ellas. Son fundamentales para trabajar con bases de datos relacionales.
+            </p>
+
+            <h3>6.1. INNER JOIN</h3>
+            <p>
+                Devuelve solo los registros que tienen coincidencias en ambas tablas.
+            </p>
+            <pre><code class="language-sql">
+-- Obtener pedidos con información del cliente
+SELECT pedidos.id, clientes.nombre, pedidos.fecha_pedido, pedidos.total
+FROM pedidos
+INNER JOIN clientes ON pedidos.cliente_id = clientes.id;
+
+-- Obtener pedidos con detalles del cliente (usando alias)
+SELECT p.id AS pedido_id, c.nombre, c.email, p.fecha_pedido
+FROM pedidos p
+INNER JOIN clientes c ON p.cliente_id = c.id
+ORDER BY p.fecha_pedido DESC;
+            </code></pre>
+
+            <h3>6.2. LEFT JOIN</h3>
+            <p>
+                Devuelve todos los registros de la tabla izquierda, incluso si no tienen coincidencia en la derecha.
+            </p>
+            <pre><code class="language-sql">
+-- Obtener todos los clientes y sus pedidos (si los tienen)
+SELECT c.nombre, p.id AS pedido_id, p.total
+FROM clientes c
+LEFT JOIN pedidos p ON c.id = p.cliente_id
+ORDER BY c.nombre;
+
+-- Encontrar clientes sin pedidos
+SELECT c.nombre
+FROM clientes c
+LEFT JOIN pedidos p ON c.id = p.cliente_id
+WHERE p.id IS NULL;
+            </code></pre>
+
+            <h3>6.3. JOIN con múltiples tablas</h3>
+            <pre><code class="language-sql">
+-- Obtener información completa de pedidos con cliente y producto
+SELECT 
+    p.id AS pedido_id,
+    c.nombre AS cliente,
+    prod.nombre AS producto,
+    p.total,
+    p.fecha_pedido
+FROM pedidos p
+INNER JOIN clientes c ON p.cliente_id = c.id
+INNER JOIN productos prod ON p.id = prod.id
+ORDER BY p.fecha_pedido DESC;
+            </code></pre>
+        </section>
+
+        <!-- SECCIÓN 7: ÍNDICES -->
+        <section id="indices">
+            <h2>7. Índices</h2>
+            <p>
+                Los <strong>índices</strong> son estructuras de datos que mejoran la velocidad de búsqueda en las tablas.
+                Sin embargo, ralentizan las inserciones y actualizaciones, por lo que deben usarse estratégicamente.
+            </p>
+
+            <h3>7.1. Crear índices</h3>
+            <pre><code class="language-sql">
+-- Crear un índice simple
+CREATE INDEX idx_email ON clientes(email);
+
+-- Crear un índice en múltiples columnas
+CREATE INDEX idx_nombre_apellido ON clientes(nombre, email);
+
+-- Crear un índice único
+CREATE UNIQUE INDEX idx_email_unico ON clientes(email);
+
+-- Ver los índices de una tabla
+SHOW INDEX FROM clientes;
+
+-- Eliminar un índice
+DROP INDEX idx_email ON clientes;
+            </code></pre>
+
+            <h3>7.2. Cuándo usar índices</h3>
+            <ul>
+                <li>En columnas que se usan frecuentemente en cláusulas <code>WHERE</code>.</li>
+                <li>En claves foráneas.</li>
+                <li>En columnas usadas en <code>JOIN</code> y <code>ORDER BY</code>.</li>
+                <li>Evitar en columnas con pocos valores únicos.</li>
+                <li>Evitar crear demasiados índices (impacta en el rendimiento de inserciones).</li>
+            </ul>
+        </section>
+
+        <!-- SECCIÓN 8: VISTAS -->
+        <section id="vistas">
+            <h2>8. Vistas (Views)</h2>
+            <p>
+                Una <strong>vista</strong> es una consulta SQL almacenada que se puede usar como si fuera una tabla virtual.
+                Las vistas no almacenan datos, sino que los generan dinámicamente al consultarlos.
+            </p>
+
+            <h3>8.1. Crear vistas</h3>
+            <pre><code class="language-sql">
+-- Crear una vista simple
+CREATE VIEW vista_clientes_activos AS
+SELECT id, nombre, email FROM clientes WHERE activo = TRUE;
+
+-- Consultar una vista (como si fuera una tabla)
+SELECT * FROM vista_clientes_activos;
+
+-- Crear una vista con JOINs
+CREATE VIEW vista_pedidos_completo AS
+SELECT 
+    p.id AS pedido_id,
+    c.nombre AS cliente,
+    p.fecha_pedido,
+    p.total,
+    p.estado
+FROM pedidos p
+INNER JOIN clientes c ON p.cliente_id = c.id;
+
+-- Consultar la vista
+SELECT * FROM vista_pedidos_completo WHERE estado = 'completado';
+
+-- Ver todas las vistas
+SHOW FULL TABLES WHERE TABLE_TYPE = 'VIEW';
+
+-- Eliminar una vista
+DROP VIEW vista_clientes_activos;
+            </code></pre>
+        </section>
+
+        <!-- SECCIÓN 9: TRANSACCIONES -->
+        <section id="transacciones">
+            <h2>9. Transacciones</h2>
+            <p>
+                Una <strong>transacción</strong> es un conjunto de operaciones SQL que se ejecutan como una unidad.
+                Si algo falla, se puede deshacer todo (ROLLBACK) para mantener la integridad de los datos.
+            </p>
+
+            <h3>9.1. Control de transacciones</h3>
+            <pre><code class="language-sql">
+-- Iniciar una transacción
+START TRANSACTION;
+
+-- Operaciones
+INSERT INTO clientes (nombre, email, telefono)
+VALUES ('Nuevo Cliente', 'nuevo@email.com', '600000000');
+
+UPDATE productos SET stock = stock - 1 WHERE id = 1;
+
+-- Confirmar los cambios
+COMMIT;
+
+-- O deshacer los cambios si hay error
+ROLLBACK;
+
+-- Ejemplo con error
+START TRANSACTION;
+INSERT INTO pedidos (cliente_id, fecha_pedido, total)
+VALUES (1, '2025-01-20', 1500.00);
+
+-- Si algo falla
+ROLLBACK; -- Deshace la inserción
+
+-- Si todo es correcto
+COMMIT; -- Confirma los cambios
+            </code></pre>
+
+            <h3>9.2. Niveles de aislamiento</h3>
+            <p>
+                Los niveles de aislamiento controlan cómo interactúan las transacciones concurrentes:
+            </p>
+            <ul>
+                <li><strong>READ UNCOMMITTED:</strong> Menos restrictivo, permite lecturas sucias.</li>
+                <li><strong>READ COMMITTED:</strong> Lee solo datos confirmados.</li>
+                <li><strong>REPEATABLE READ:</strong> Evita lecturas no repetibles (predeterminado en MySQL).</li>
+                <li><strong>SERIALIZABLE:</strong> Más restrictivo, simula ejecución secuencial.</li>
+            </ul>
+        </section>
+
+        <!-- SECCIÓN 10: BUENAS PRÁCTICAS -->
+        <section id="buenas-practicas">
+            <h2>10. Buenas Prácticas en MySQL</h2>
+            <p>
+                Seguir buenas prácticas asegura que tu base de datos sea eficiente, segura y fácil de mantener.
+            </p>
+
+            <h3>10.1. Normas de normalización</h3>
+            <ul>
+                <li><strong>Primera Forma Normal (1NF):</strong> Elimina repeticiones, cada campo contiene valores atómicos.</li>
+                <li><strong>Segunda Forma Normal (2NF):</strong> Cumple 1NF y elimina dependencias parciales.</li>
+                <li><strong>Tercera Forma Normal (3NF):</strong> Cumple 2NF y elimina dependencias transitivas.</li>
+            </ul>
+
+            <h3>10.2. Convenciones de nombres</h3>
+            <pre><code class="language-sql">
+-- ✓ Nombres descriptivos en minúsculas
+CREATE TABLE clientes_pedidos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    cliente_id INT NOT NULL,
+    fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+);
+
+-- ✗ Evita nombres genéricos o abreviados
+CREATE TABLE t1 (id INT, nm VARCHAR(50)); -- Malo
+            </code></pre>
+
+            <h3>10.3. Seguridad</h3>
+            <ul>
+                <li>Usa <strong>prepared statements</strong> para evitar inyecciones SQL.</li>
+                <li>Nunca concatenes valores directamente en queries.</li>
+                <li>Restringe permisos de usuarios según necesidad.</li>
+                <li>Realiza backups regularmente.</li>
+                <li>Valida datos en la aplicación antes de insertar.</li>
+            </ul>
+
+            <h3>10.4. Rendimiento</h3>
+            <ul>
+                <li>Usa índices en columnas de búsqueda frecuente.</li>
+                <li>Evita SELECT * si no necesitas todas las columnas.</li>
+                <li>Limita los resultados con LIMIT cuando sea posible.</li>
+                <li>Monitoriza consultas lentas con el log de MySQL.</li>
+                <li>Usa JOINs en lugar de múltiples queries.</li>
+            </ul>
+
+            <h3>10.5. Ejemplo de estructura de base de datos bien diseñada</h3>
+            <pre><code class="language-sql">
+-- Base de datos completa y bien estructurada
+CREATE DATABASE tienda_online DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE tienda_online;
+
+-- Tabla de clientes con buenas prácticas
+CREATE TABLE clientes (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    telefono VARCHAR(15),
+    fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
+    activo BOOLEAN DEFAULT TRUE,
+    INDEX idx_email (email),
+    INDEX idx_fecha_registro (fecha_registro)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Tabla de categorías
+CREATE TABLE categorias (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(80) UNIQUE NOT NULL,
+    descripcion TEXT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Tabla de productos con referencias
+CREATE TABLE productos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(150) NOT NULL,
+    descripcion TEXT,
+    precio DECIMAL(10, 2) NOT NULL,
+    stock INT NOT NULL DEFAULT 0,
+    categoria_id INT NOT NULL,
+    fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (categoria_id) REFERENCES categorias(id),
+    INDEX idx_categoria (categoria_id),
+    INDEX idx_precio (precio)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Tabla de pedidos
+CREATE TABLE pedidos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    cliente_id INT NOT NULL,
+    fecha_pedido DATETIME DEFAULT CURRENT_TIMESTAMP,
+    total DECIMAL(10, 2) NOT NULL,
+    estado ENUM('pendiente', 'procesando', 'enviado', 'entregado', 'cancelado') DEFAULT 'pendiente',
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id),
+    INDEX idx_cliente (cliente_id),
+    INDEX idx_estado (estado)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+            </code></pre>
+        </section>
+
+        <!-- DIAGRAMA CONCEPTUAL -->
+        <section>
+            <h2>Diagrama de la estructura de base de datos</h2>
+            <div class="mermaid">
+                erDiagram
+                    CLIENTE ||--o{ PEDIDO : realiza
+                    CATEGORIA ||--o{ PRODUCTO : contiene
+                    PEDIDO ||--o{ DETALLE_PEDIDO : incluye
+                    PRODUCTO ||--o{ DETALLE_PEDIDO : es
+                    
+                    CLIENTE {
+                        int id PK
+                        string nombre
+                        string apellido
+                        string email
+                        string telefono
+                        datetime fecha_registro
+                        boolean activo
+                    }
+                    PEDIDO {
+                        int id PK
+                        int cliente_id FK
+                        datetime fecha_pedido
+                        decimal total
+                        string estado
+                    }
+                    PRODUCTO {
+                        int id PK
+                        string nombre
+                        text descripcion
+                        decimal precio
+                        int stock
+                        int categoria_id FK
+                    }
+                    CATEGORIA {
+                        int id PK
+                        string nombre
+                        text descripcion
+                    }
+                    DETALLE_PEDIDO {
+                        int id PK
+                        int pedido_id FK
+                        int producto_id FK
+                        int cantidad
+                        decimal precio_unitario
+                    }
+            </div>
+        </section>
+
+        <!-- SECCIÓN 11: TROUBLESHOOTING XAMPP -->
+        <section id="troubleshooting-xampp">
+            <h2>11. Solución de Problemas - XAMPP MySQL</h2>
+            <p>
+                Cuando trabajas con XAMPP, es común encontrar problemas con MySQL, especialmente cuando el puerto está ocupado
+                o hay archivos de registro corruptos. Esta sección te enseña cómo resolver los problemas más comunes.
+            </p>
+
+            <h3>11.1. Puerto en uso - Liberar puerto con netstat</h3>
+            <div class="diagram">
+                    <img src="../assets/mysql_netstat.jpg" style="max-width:100%;" alt="Run server">
+                </div>
+            <p>
+                Si MySQL no inicia porque el puerto 3306 está ocupado, puedes usar <code>netstat</code> para identificar
+                qué proceso está usando el puerto y luego eliminarlo.
+            </p>
+
+            <h4>Paso 1: Identificar el proceso usando el puerto</h4>
+            <pre><code class="language-bash">
+-- En Windows (PowerShell o CMD con permisos de administrador)
+netstat -ano | findstr :3306
+
+-- Salida esperada:
+-- TCP    0.0.0.0:3306           0.0.0.0:0              LISTENING       5796
+-- El número al final (5796) es el PID (Process ID)
+            </code></pre>
+
+            <h4>Paso 2: Terminar el proceso</h4>
+            <pre><code class="language-bash">
+-- Matar el proceso usando su PID
+taskkill /F /PID 5796
+
+-- Ejemplo con otros PIDs comunes
+taskkill /F /PID 8432
+taskkill /F /PID 9876
+
+-- En caso de error de permisos, ejecuta CMD como administrador
+            </code></pre>
+
+            <div class="info-box">
+                <p><strong>Nota:</strong> El parámetro <code>/F</code> fuerza la terminación. Si prefieres una terminación suave,
+                    omítelo: <code>taskkill /PID 5796</code></p>
+            </div>            
+
+            <h3>11.2. Limpiar archivos de registro (Aria Log)</h3>
+            <p>
+                Los archivos de registro de Aria (aria_log.****) pueden crecer demasiado o corromperse, causando problemas
+                al iniciar MySQL. Limpiarlos resuelve muchos problemas.
+            </p>
+
+            <h4>Paso 1: Detener MySQL</h4>
+            <pre><code class="language-bash">
+-- Detén MySQL desde el panel de XAMPP o usa:
+taskkill /F /PID [PID_DE_MYSQL]
+
+-- O con netstat:
+netstat -ano | findstr :3306
+-- Luego mata el proceso encontrado
+            </code></pre>
+
+            <h4>Paso 2: Eliminar archivos de registro</h4>
+            <div class="diagram">
+                    <img src="../assets/mysql_aria_log.jpg" style="max-width:100%;" alt="Run server">
+                </div>
+            <pre><code class="language-bash">
+-- Navega a la carpeta de datos de MySQL
+cd C:\xampp\mysql\data
+
+-- Elimina todos los archivos aria_log.*
+del aria_log.*
+
+-- Alternativamente, desde PowerShell:
+Remove-Item -Path "C:\xampp\mysql\data\aria_log.*"
+
+-- Verifica que estén eliminados:
+dir | findstr aria_log
+            </code></pre>
+
+            <h4>Paso 3: Reiniciar MySQL</h4>
+            <pre><code class="language-bash">
+-- Abre el panel de control de XAMPP y reinicia MySQL
+-- O ejecuta:
+C:\xampp\mysql\bin\mysqld.exe
+            </code></pre>
+
+            <div class="info-box">
+                <p><strong>⚠️ Advertencia:</strong> Los archivos aria_log.* son logs de transacciones. Eliminarlos es seguro
+                    si MySQL no está corriendo, pero nunca lo hagas mientras MySQL esté activo.</p>
+            </div>
+
+            <h3>11.3. Restaurar desde backup</h3>
+            <p>
+                XAMPP mantiene una carpeta de backup de las bases de datos. Si tus datos están corruptos, puedes copiar
+                los archivos de backup a la carpeta de datos.
+            </p>            
+
+            <h4>Paso 1: Detener MySQL</h4>
+            <pre><code class="language-bash">
+-- Detén MySQL desde el panel de XAMPP o:
+taskkill /F /PID [PID_DE_MYSQL]
+            </code></pre>
+
+            <h4>Paso 2: Copiar archivos de backup (excepto ibdata1)</h4>
+             <div class="diagram">
+                    <img src="../assets/mysql_backup.jpg" style="max-width:100%;" alt="Run server">
+                </div>
+            <pre><code class="language-bash">
+-- Opción 1: Con exclusión de ibdata1 (PowerShell)
+Copy-Item -Path "C:\xampp\mysql\backup\*" -Destination "C:\xampp\mysql\data\" -Exclude "ibdata1" -Force
+
+-- Opción 2: Copiar manualmente desde explorador
+-- 1. Abre: C:\xampp\mysql\backup
+-- 2. Selecciona todos los archivos EXCEPTO ibdata1
+-- 3. Cópialo
+-- 4. Pégalo en: C:\xampp\mysql\data (sobrescribir si se pide)
+            </code></pre>
+
+            <h4>Paso 3: Reiniciar MySQL</h4>
+            <pre><code class="language-bash">
+-- Abre el panel de XAMPP y hace clic en Start en MySQL
+-- O ejecuta:
+C:\xampp\mysql\bin\mysqld.exe
+            </code></pre>
+           
+            <div class="info-box">
+                <p><strong>Consejo:</strong> Si los problemas persisten, prueba crear un backup de tu carpeta
+                    <code>C:\xampp\mysql\data</code>, elimina completamente MySQL de XAMPP y reinstálalo.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; Vicente Català Ruiz 2025-26. Todos los derechos reservados.</p>
+    </footer>
+</body>
+
+</html>
