@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UT2 · Gestión de usuarios y grupos · LinkiaFP</title>
+    <meta name="description"
+        content="Presentación HTML con secciones tipo diapositiva para la UT2: Gestión de usuarios y grupos." />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link rel="stylesheet" href="../style.css" />
+    <script src="../script.js" defer></script>
+</head>
+
+<body>
+    <div class="deck">
+
+        <!-- COVER -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+                </div>
+                <div class="title">UT2 · Gestión de usuarios y grupos</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+            </div>
+
+        </section>
+
+        <!-- ÍNDICE -->
+        <section class="slide" id="slide-2">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            </div>
+            <h2>Índice</h2>
+            <div class="toc" style="text-align:left;">
+                <ul>
+                    <li>1. Cuentas de usuario y de equipo</li>
+                    <li>1.1. Creación y gestión de cuentas</li>
+                    <li>1.2. Perfiles de usuario</li>
+                    <li>1.3. Perfiles móviles</li>
+                    <li>2. Grupos y pertenencia</li>
+                    <li>2.1. Tipos y ámbitos de grupos</li>
+                    <li>2.2. Asignación de usuarios a grupos</li>
+                    <li>2.3. Usuarios y grupos especiales</li>
+                    <li>3. Herramientas de administración</li>
+                    <li>3.1. Consolas GUI y CLI</li>
+                    <li>3.2. Scripts y automatización</li>
+                    <li>Actividades y rúbrica</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 1. CUENTAS -->
+        <section class="slide" id="u2-1">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt=""></div>
+            <h2>1. Cuentas de usuario y de equipo</h2>
+            <div class="diagram">
+                <img src="../../assets/linkia/Users-Icons.jpg" style="max-width:30%;" alt="">
+            </div>
+            <p>El acceso a un sistema operativo en red se apoya en identidades bien gestionadas. Cada persona o
+                dispositivo dispone de una cuenta para asignar permisos, controlar accesos y registrar actividad. La
+                creación y el mantenimiento correcto de estas cuentas es responsabilidad clave del administrador.</p>
+            <h3>Tipos de cuentas:</h3>
+            <ul>
+                <li><strong>Locales</strong>: existen solo en un equipo.</li>
+                <li><strong>De dominio</strong>: centralizadas (AD, LDAP) y válidas en toda la red. En Windows Server,
+                    se
+                    gestionan desde Active Directory. En GNU/Linux, se usan servicios como LDAP o SSSD.</li>
+                <li><strong>Cuentas de equipo</strong>: representan a cada máquina unida al dominio.</li>
+            </ul>
+            <div class="note">Buenas prácticas: nomenclatura consistente, contraseñas robustas, deshabilitar inactivas y
+                principio de mínimos privilegios.</div>
+        </section>
+        <section class="slide" id="u2-1-0">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt=""></div>
+            <h2>1.1 Creación y gestión de cuentas</h2>
+            <p>La creación de cuentas de usuario y equipo se realiza mediante herramientas específicas del sistema
+                operativo.
+            <ul>
+                <li>
+                    En GNU/Linux, se usan comandos CLI como <code>useradd</code> o <code>adduser</code>
+                </li>
+                <li>En Windows Server se usa la consola de Active Directory o las cuentas locales (no confundir entre
+                    ellas).
+                </li>
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/linkia/linuxvswindows.jpg" style="max-width: 50%;" alt="">
+            </div>
+        </section>
+
+        <!-- 1.1 CREACIÓN Y GESTIÓN -->
+        <section class="slide" id="u2-1-1">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt=""></div>
+            <h2>1.1.1 Cuentas en GNU/Linux</h2>
+            <p>En GNU/Linux, las cuentas de usuario se gestionan mediante comandos CLI o herramientas gráficas.</p>
+            <div class="note"><strong>Importante utilizar adduser en lugar de useradd para facilitar la creación de cuentas con configuración adecuada.</strong></div>
+            <ul>
+                <li><strong>Crear cuenta de usuario:</strong>
+                    <pre><code>sudo adduser juan</code></pre>
+                    <p>Contestar al formulario</p>
+                </li>
+                <li><strong>Crear un grupo:</strong>
+                    <pre><code>sudo groupadd docentes</code></pre>
+                </li>
+                <li><strong>Añadir a un grupo existente:</strong>
+                    <pre><code>sudo usermod -aG docentes juan</code></pre>
+                </li>
+                <li><strong>Eliminar cuenta:</strong>
+                    <pre><code>sudo deluser juan</code></pre>
+                </li>
+            <div class="note"><strong>Recomendación:</strong> Usar sudo para privilegios administrativos, validar cada
+                comando y mantener un registro de cambios.</div>
+        </section>
+        <section class="slide" id="u2-1-1b">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt=""></div>
+            <h2>1.1.2 Cuentas en Windows Server</h2>
+            <p>En Windows Server, las cuentas de usuario y equipo se gestionan principalmente a través de Active
+                Directory Users and Computers (ADUC).</p>
+            <div class="note">
+                <p><strong>En este tema no utilizarems AD, puesto que se necesita promover el dominio. Se verá en el
+                        siguiente tema.</strong></p>
+            </div>
+            <ul>
+                <li><strong>Crear cuenta de usuario:</strong> ADUC → Usuarios → Nuevo → Usuario.</li>
+                <li><strong>Crear cuenta de equipo:</strong> ADUC → Equipos → Nuevo → Equipo.</li>
+                <li><strong>Configurar propiedades:</strong> establecer contraseña, grupo, perfil, etc.</li>
+                <li><strong>Eliminar cuenta:</strong> ADUC → Usuario/Equipo → Eliminar.</li>
+            </ul>
+            <div class="note"><strong>Recomendación:</strong> Seguir políticas de seguridad, usar contraseñas robustas y
+                mantener un inventario actualizado de cuentas.</div>
+        </section>
+        <section class="slide" id="u2-1-1c">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt=""></div>
+            <h2>1.1.3 Creación de cuentas locales / Windows</h2>
+            <p>En Windows, las cuentas locales se gestionan desde el Panel de Control o mediante la consola de
+                Administración de equipos.</p>
+            <ul>
+                <li><strong>Panel de Control:</strong> Cuentas de usuario → Administrar otra cuenta → Agregar nuevo
+                    usuario.</li>
+                <li><strong>Administración de equipos:</strong> Usuarios y grupos locales → Usuarios → Nuevo usuario.
+                </li>
+                <li><strong>Configurar propiedades:</strong> establecer contraseña, grupo, etc.</li>
+                <li><strong>Eliminar cuenta:</strong> Panel de Control o Administración de equipos → Usuario → Eliminar.
+                </li>
+            </ul>
+            <div class="note"><strong>Importante:</strong> Este tipo de cuentas es el que se pide en la actividad de
+                esta UT.</div>
+
+        </section>
+
+        <!-- 1.2 PERFILES -->
+        <section class="slide" id="u2-1-2">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="" h2>
+                <h2>1.2. Tipos de perfiles de usuario</h2>
+                <div class="two-col">
+                    <div>
+                        <p>El perfil de usuario define el entorno de trabajo, incluyendo configuraciones, archivos y
+                            preferencias. Existen varios tipos:</p>
+                        <ul>
+                            <li><strong>Local</strong>: almacenado en el equipo cliente, no se sincroniza.</li>
+                            <li><strong>Móvil</strong>: almacenado en servidor, sincronizado al iniciar/cerrar sesión.
+                            </li>
+                            <li><strong>Obligatorio</strong>: no modificable por el usuario, ideal para entornos
+                                controlados.</li>
+                            <li><strong>Temporal</strong>: se descarta si no puede cargarse el perfil, útil para
+                                sesiones
+                                puntuales.</li>
+                        </ul>
+                    </div>
+                    <div class="diagram">
+                        <img src="../../assets/linkia/perfil-usuario.png" style="max-width:50%;" alt="">
+                    </div>
+
+                </div>
+
+
+                <div class="note">Gestionar tamaño, tiempos de carga y consistencia del entorno.</div>
+        </section>
+
+        <!-- 1.3 PERFILES MÓVILES -->
+        <section class="slide" id="u2-1-3">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt=""></div>
+            <h2>1.3. Perfil móvil / Windows Server</h2>
+            <p>El perfil móvil permite a los usuarios mantener su entorno de trabajo consistente en cualquier equipo del
+                dominio. Se almacena en un recurso compartido del servidor y se sincroniza al iniciar/cerrar sesión.</p>
+            <ul>
+                <li><strong>Configuración:</strong> ADUC → Usuario → Propiedades → Perfil → Ruta del perfil.</li>
+                <li><strong>Almacenamiento:</strong> recurso compartido con permisos adecuados (ej.
+                    <code>\\servidor\perfiles</code>).
+                </li>
+                <li><strong>Consideraciones:</strong> tamaño del perfil, tiempos de carga y sincronización de datos.
+                </li>
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/linkia/perfil movil ejemplo.png" style="max-width:50%;" alt="">
+            </div>
+            <div class="note">Recomendar limitar el tamaño del perfil y excluir carpetas pesadas (ej. Descargas) para
+                mejorar rendimiento.</div>
+
+        </section>
+
+        <!-- 2. GRUPOS -->
+        <section class="slide" id="u2-2">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="" 2>
+                <h2>2. Grupos</h2>
+                <p>Los grupos son conjuntos de usuarios que comparten permisos y configuraciones. Facilitan la gestión
+                    de accesos y recursos al asignar permisos a un grupo en lugar de a cada usuario individualmente.
+                </p>
+                <div class="diagram">
+                    <img src="../../assets/linkia/group-membership.gif" style="max-width:50%;" alt="">
+                </div>
+                <div class="note">Usar grupos para aplicar el principio de mínimos privilegios y mantener una gestión
+                    ordenada.</div>
+
+        </section>
+
+        <!-- 2.2 ASIGNACIÓN -->
+        <section class="slide" id="u2-2-2">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt=""></div>
+            <h2>2.1. Asignación de usuarios a grupos / Linux</h2>
+            <p>En GNU/Linux, los usuarios se asignan a grupos para gestionar permisos de manera eficiente. Cada usuario
+                puede pertenecer a varios grupos, y cada grupo puede tener múltiples usuarios.</p>
+            <ul>
+                <li><strong>Comando <code>usermod</code>:</strong> para añadir un usuario a un grupo:
+                    <pre><code>sudo usermod -aG grupo usuario</code></pre>
+                </li>
+                <li><strong>Archivo <code>/etc/group</code>:</strong> contiene la información de grupos y sus miembros.
+                </li>
+                <li><strong>Ejemplo:</strong> para añadir el usuario “juan” al grupo “docentes”:
+                    <pre><code>sudo usermod -aG docentes juan</code></pre>
+                </li>
+                <li><strong>Ver grupos de un usuario:</strong>
+                    <pre><code># Ver grupos de un usuario
+groups juan
+# Ver información detallada
+id juan
+</code></pre>
+                </li>
+            </ul>
+            <div class="note">Es importante usar el modificador <code>-a</code> para evitar eliminar al usuario de otros
+                grupos.</div>
+
+        </section>
+
+        <!-- 2.3 ESPECIALES -->
+        <section class="slide" id="u2-2-3">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt=""></div>
+            <h2>2.2. Usuarios y grupos especiales (Windows/Linux)</h2>
+            <p>Los sistemas operativos incorporan cuentas y grupos especiales que cumplen funciones clave en la
+                administración o en la operación del sistema:</p>
+            <ol>
+                <li><strong>Cuentas especiales comunes:</strong> Administradores, invitados y de sistema</li>
+                <li><strong>Grupos predeterminados Windows:</strong> Administradores, Usuarios, Usuarios autenticados,
+                    etc.</li>
+                <li><strong>Grupos predeterminados Linux:</strong> root, wheel, adm, etc.</li>
+
+            </ol>
+
+            <div class="note">No usar cuentas privilegiadas para tareas ordinarias; no eliminar grupos
+                predeterminados;
+                deshabilitar Invitado.</div>
+        </section>
+
+        <!-- 3. HERRAMIENTAS -->
+        <section class="slide" id="u2-3">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt=""></div>
+            <h2>3. Herramientas de administración</h2>
+            <p>La gestión de usuarios y grupos se apoya en diversas herramientas, tanto gráficas (GUI) como de línea de
+                comandos (CLI). La elección depende del entorno, la tarea y las preferencias del administrador.</p>
+
+            <div class="two-col">
+                <div>
+                    <h3>Windows</h3>
+                    <ul>
+                        <li>ADUC (dsa.msc), Editor de GPO (gpmc.msc/gpedit.msc).</li>
+                        <li>MMC personalizada con complementos: Servicios, Visor de eventos, Monitor de rendimiento,
+                            etc.</li>
+                        <li>CLI: <code>net</code>, <code>ds*</code>, y PowerShell (<code>Get-ADUser</code>,
+                            <code>New-ADUser</code>...).
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>GNU/Linux</h3>
+                    <ul>
+                        <li>CLI: <code>adduser</code>, <code>usermod</code>, <code>groupadd</code>,
+                            <code>getent</code>,
+                            etc.
+                        </li>
+                        <li>Herramientas gráficas en entornos de escritorio (Gnome/KDE).</li>
+                        <li>Entornos centralizados: LDAP, Samba/AD, FreeIPA.</li>
+                        <li>htop: herramienta interactiva para visualizar procesos en tiempo real.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!-- 3. HERRAMIENTAS MMC-->
+        <section class="slide" id="u2-3.1">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt=""></div>
+            <h2>3.1 MMC (Microsoft Management Console)</h2>
+            <p>La MMC es una plataforma de administración modular que permite crear consolas personalizadas con diversos
+                complementos para gestionar diferentes aspectos del sistema.</p>
+                <p>Son útiles para centralizar tareas administrativas y evitar tener que abrir múltiples herramientas.</p>
+                <div class="diagram">
+                    <img src="../../assets/linkia/mmc.jpg" style="max-width:50%;" alt="">
+                </div>
+                <p>Creación de la consola:</p>
+            <ol>
+                <li>Ejecutar <code>mmc</code>.</li>
+                <li>Ir a <strong>Archivo</strong> > <strong>Agregar/quitar complemento</strong>.</li>
+                <li>Añadir los complementos necesarios (por ejemplo, Usuarios y equipos de Active Directory).</li>
+                <li>Guardar la consola con un nombre descriptivo.</li>
+            </ol>
+            <div class="note">Se recomienda crear consolas específicas para tareas frecuentes y mantenerlas organizadas.
+            </div>
+        </section>
+        <!-- 3. HERRAMIENTAS MMC-->
+        <section class="slide" id="u2-3.2">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt=""></div>
+            <h2>3.2. HTOP </h2>
+            <p>htop es una herramienta interactiva para visualizar procesos en tiempo real en sistemas GNU/Linux.</p>
+            <div class="diagram">
+                <img src="../../assets/linkia/htop.jpg" style="max-width:50%;" alt="">
+                </div>
+                <p>Funcionalidades:</p>
+            <ol>
+                <li>Ejecutar <code>htop</code>: En la terminal, simplemente escribir <code>htop</code>.</li>
+                <li>Visualizar procesos en tiempo real con colores y barras de uso de CPU y memoria.</li>
+                <li>Ordenar procesos por CPU, memoria o tiempo de ejecución.</li>
+                <li>Terminar procesos seleccionados con una pulsación de tecla.</li>
+                <li>Para "matar" un proceso, seleccionarlo y pulsar la tecla "K" o "F9".</li>
+            </ol>
+            <div class="note">Se recomienda crear consolas específicas para tareas frecuentes y mantenerlas organizadas.
+            </div>
+        </section>
+
+        <!-- 3.2 AUTOMATIZACIÓN -->
+        <section class="slide" id="u2-3-2">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt=""></div>
+            <h2>3.2. Scripts y automatización</h2>
+            <p>La automatización de tareas administrativas mediante scripts es fundamental para mejorar la eficiencia y
+                reducir errores. Tanto en Windows como en GNU/Linux, existen potentes herramientas para crear y
+                ejecutar scripts.</p>
+            <div class="two-col">
+                <div>
+                    <h3>En Windows PowerShell</h3>
+                        <pre><code># Crear usuarios desde CSV
+Import-Csv usuarios.csv | ForEach-Object {
+  New-ADUser -Name $_.Nombre -SamAccountName $_.Usuario \
+    -AccountPassword (ConvertTo-SecureString $_.Contraseña 
+    -AsPlainText -Force) \
+    -Enabled $true
+}</code></pre>
+                </div>
+                <div>
+                    <h3>En Linux Bash</h3>
+                    <pre><code># Crear múltiples usuarios desde un script
+for u in alumno{01..10}; do
+  sudo useradd -m "$u" && echo "$u:PwdTemporal#2026" | sudo chpasswd
+done</code></pre>
+                </div>
+            </div>
+            <div class="note">Validar en entorno de pruebas, controlar permisos de ejecución y documentar cada proceso.
+                Copias de seguridad antes de cambios masivos.</div>
+        </section>
+
+        
+
+
+        <div class="footer">
+            <div class="bar">
+                <small>UT1 · Instalación de sistemas operativos en red · LinkiaFP</small>
+                <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

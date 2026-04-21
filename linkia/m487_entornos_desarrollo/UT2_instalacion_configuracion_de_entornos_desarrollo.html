@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UT2 · Instalación y configuración de entornos de desarrollo · LinkiaFP</title>
+  <meta name="description" content="UT2: Instalación y configuración de entornos de desarrollo." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <link rel="stylesheet" href="../style.css" />
+  <script src="../script.js" defer></script>
+</head>
+
+<body>
+  <div class="deck">
+    <!-- ======================= TEMA 2 ======================= -->
+    <!-- COVER -->
+    <section class="slide cover" id="slide-1">
+      <div style="max-width: 60%;">
+        <div>
+          <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+        </div>
+        <div class="title">UT2 · Instalación y configuración de entornos de desarrollo</div>
+        <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+
+      </div>
+      <div class="logo-first-page">
+        <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+      </div>
+
+    </section>
+    <!-- ÍNDICE -->
+    <section class="slide" id="slide-2">
+      <div>
+        <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+      </div>
+      <h2>Índice</h2>
+      <div class="toc" style="text-align:left;">
+        <ol>
+          <li>Instalación de Entornos de Desarrollo Integrados (IDE)</li>
+          <li>Configuración de herramientas de desarrollo</li>
+          <li>Gestión de complementos y plugins</li>
+          <li>Automatización del entorno de desarrollo</li>
+          <li>Generación de ejecutables y compilación</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- CONTENIDO -->
+    <!-- ========================================================= -->
+    <!-- ======================= TEMA 2 ======================= -->
+    <!-- ========================================================= -->
+
+    <!-- 1. INSTALACIÓN DE IDE -->
+    <section class="slide" id="t2-1">
+      <div>
+        <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+      </div>
+      <h2>1. Instalación de Entornos de Desarrollo Integrados (IDE)</h2>
+      <p>
+        Un IDE es una herramienta que integra editor, compilador, depurador y utilidades para facilitar el
+        desarrollo. Permite escribir, compilar, ejecutar y depurar código en un entorno unificado.
+      </p>
+      <div class="diagram">
+        <img src="../../assets/linkia/IDES.avif" style="max-width:40%;" alt="Diagrama de componentes de un IDE">
+      </div>
+      <h3>Tipos de IDE</h3>
+      <ul>
+        <li><strong>Libres</strong>: Eclipse, NetBeans, PyCharm Community, Visual Studio Code.</li>
+        <li><strong>Propietarios</strong>: Visual Studio, IntelliJ IDEA, PyCharm Professional.</li>
+      </ul>
+
+    </section>
+    <section class="slide" id="t2-1-0">
+      <div>
+        <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+      </div>
+      <h2>1. Comparativa entre IDEs</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>IDE</th>
+            <th>Lenguajes soportados</th>
+            <th>Características destacadas</th>
+            <th>Licencia</th>
+            <th>Tipo</th>
+            <th>Precio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Eclipse</td>
+            <td>Java, C/C++, Python (con plugins)</td>
+            <td>Gran ecosistema de plugins, soporte para múltiples lenguajes, integración con Git</td>
+            <td>Libre (EPL)</td>
+            <td>Libre</td>
+            <td>Gratis</td>
+          </tr>
+          <tr>
+            <td>Visual Studio Code</td>
+            <td>Multilenguaje (con extensiones)</td>
+            <td>Ligero, gran cantidad de extensiones, integración con Git</td>
+            <td>Libre (MIT)</td>
+            <td>Libre</td>
+            <td>Gratis</td>
+          </tr>
+          <tr>
+            <td>PyCharm</td>
+            <td>Python</td>
+            <td>Inteligencia de código avanzada, integración con frameworks web, herramientas de testing</td>
+            <td>Libre (Community) / Propietario (Professional)</td>
+            <td>Mixto</td>
+            <td>Gratis (Community) / Pago (Professional)</td>
+          </tr>
+          <tr>
+            <td>IntelliJ IDEA</td>
+            <td>Java, Kotlin, Groovy, Scala (con plugins)</td>
+            <td>Inteligencia de código avanzada, integración con sistemas de build, soporte para desarrollo web</td>
+            <td>Libre (Community) / Propietario (Ultimate)</td>
+            <td>Mixto</td>
+            <td>Gratis (Community) / Pago (Ultimate)</td>
+        </tbody>
+      </table>
+
+    </section>
+
+    <!-- 1.1 Instalación en Windows / Linux / macOS -->
+    <section class="slide" id="t2-1-1">
+      <div>
+        <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+      </div>
+      <h2>1.1 Instalación y configuración básica</h2>
+
+      <h3>1. Eclipse</h3>
+      <div class="diagram">
+        <img src="../../assets/linkia/eclipse-logo.png" style="max-width:40%;" alt="Diagrama de instalación de Eclipse">
+      </div>
+      <ul>
+        <li>Descargar desde <a href="https://www.eclipse.org/downloads/">https://www.eclipse.org/downloads/</a>.</li>
+        <li>Instalar y seleccionar workspace.</li>
+        <li>Configurar plugins necesarios (Maven, Git, etc.).</li>
+      </ul>
+    </section>
+    <!-- 1.1 Instalación en Windows / Linux / macOS -->
+    <section class="slide" id="t2-1-1">
+      <div>
+        <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+      </div>
+      <h2>1.1 Instalación y configuración básica</h2>
+
+      <h3>2. Visual Studio Code </h3>
+      <div class="diagram">
+        <img src="../../assets/linkia/Visual_Studio_Icon_2022.svg.png" style="max-width:40%;"
+          alt="Diagrama de instalación de Visual Studio">
+      </div>
+      <ul>
+        <li>Descargar desde <a href="https://code.visualstudio.com/download">https://code.visualstudio.com/download</a>.
+        </li>
+        <li>Instalar y configurar extensiones (Python, C++, GitLens...).</li>
+        <li>Personalizar configuración de usuario (settings.json).</li>
+
+
+      </ul>
+    </section>
+    <section class="slide" id="t2-1-1">
+      <div>
+        <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+      </div>
+      <h2>1.1 Instalación y configuración básica</h2>
+
+      <h3>3. PyCharm</h3>
+      <div class="diagram">
+        <img src="../../assets/linkia/pycharm.png" style="max-width:30%;" alt="Diagrama de instalación de PyCharm">
+      </div>
+      <ul>
+        <li>Descargar desde <a
+            href="https://www.jetbrains.com/pycharm/download/">https://www.jetbrains.com/pycharm/download/</a>.</li>
+        <li>Seleccionar versión (Community o Professional).</li>
+        <li>Configurar intérprete de Python y plugins necesarios.</li>
+
+
+      </ul>
+    </section>
+    <!-- 2. CONFIGURACIÓN DEL IDE -->
+    <section class="slide" id="t2-2">
+      <div>
+        <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+        <h2>2. Configuración de herramientas de desarrollo</h2>
+
+
+        <h3>2.1 Personalización</h3>
+        <p>Los IDEs permiten personalizar la interfaz de usuario para adaptarla a las preferencias del desarrollador.
+        </p>
+        <ul>
+          <li>Temas claros/oscuros.</li>
+          <li>Reorganización de paneles.</li>
+          <li>Fuentes monoespaciadas.</li>
+        </ul>
+
+        <div class="diagram">
+          <img src="../../assets/linkia/darkest-dark.png" style="max-width:60%;"
+            alt="Diagrama de personalización de un IDE">
+        </div>
+    </section>
+
+    <!-- 3. PLUGINS -->
+    <section class=" slide" id="t2-3">
+      <div>
+        <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+        <h2>3. Gestión de complementos y plugins</h2>
+        <ul>
+          <li><strong>Eclipse</strong>: Eclipse Marketplace (EGit, M2E...).</li>
+          <li><strong>Visual Studio Code:</strong> Marketplace (Python, C/C++, GitLens...).</li>
+          <li><strong>PyCharm</strong>: Marketplace (Django, Database Tools...).</li>
+        </ul>
+        <p>
+          Instalación, activación/desactivación y actualización desde las secciones de plugins del IDE.
+        </p>
+    </section>
+
+    <!-- 4. AUTOMATIZACIÓN -->
+    <section class=" slide" id="t2-4">
+      <div>
+        <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+        <h2>4. Automatización del entorno de desarrollo</h2>
+
+
+        <h3>4.1 Scripts</h3>
+        <p>Un script es un archivo de texto que contiene instrucciones ejecutables. Se utilizan para automatizar tareas
+          repetitivas.</p>
+        <p>Tipos de scripts:</p>
+        <ul>
+          <li><strong>Shell scripts</strong>: Para sistemas Unix/Linux (Bash, Zsh).</li>
+          <li><strong>Batch scripts</strong>: Para Windows (.bat, .cmd).</li>
+          <li><strong>Python scripts</strong>: Multiplataforma, versátiles para tareas de automatización.</li>
+        </ul>
+        <p>Ejemplo de script Python:</p>
+        <pre><code class="language-python">#!/usr/bin/env python3
+import os
+
+def main():
+    print("Hola desde un script Python")
+    os.system("ls -l")
+
+if __name__ == "__main__":
+    main()</code></pre>
+    </section>
+
+    <!-- 5. COMPILACIÓN -->
+    <section class="slide" id="t2-5">
+      <div>
+        <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+      </div>
+      <h2>4.2 Integración con GIT</h2>
+      <p>GIT es un sistema de control de versiones distribuido que permite gestionar el historial de cambios en
+        proyectos de software.</p>
+      <p>Integración en IDEs:</p>
+      <ul>
+        <li><strong>Eclipse</strong>: EGit plugin para gestión de repositorios.</li>
+        <li><strong>Visual Studio Code</strong>: Extensión GitLens para visualización
+          de cambios y gestión de repositorios.</li>
+        <li><strong>PyCharm</strong>: Integración nativa con Git para control
+          de versiones.</li>
+      </ul>
+
+    </section>
+    <!-- 5. COMPILACIÓN -->
+    <section class="slide" id="t2-5">
+      <div>
+        <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+      </div>
+      <h2>4.3 Integración VSCode con GIT</h2>
+      <div class="two-col">
+
+        <div>
+          <p>Ejemplo de integración de GIT en Visual Studio Code:</p>
+          <ul>
+            <li>Instalar extensión GitLens.</li>
+            <li>Clonar un repositorio desde GitHub.</li>
+            <li>Realizar cambios en el código y hacer commit.</li>
+            <li>Subir cambios al repositorio remoto.</li>
+          </ul>
+          <a href="https://code.visualstudio.com/docs/editor/versioncontrol" target="_blank">Tutorial: más información
+            sobre integración de GIT en Visual Studio Code</a>
+        </div>
+        <div class="diagram">
+          <img src="../../assets/linkia/githubvscode.jpg" alt="Diagrama de integración de GIT en un IDE">
+        </div>
+
+      </div>
+
+
+    </section>
+    <!-- 4. TUTORIAL GIT + GITHUB (PASO A PASO) -->
+    <section class="slide" id="t2-6">
+      <div>
+        <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+        <h2>4.4 Tutorial de integración con GIT + GITHUB paso a paso</h2>
+
+        <h3>4.1 ¿Qué es GitHub?</h3>
+        <p>GitHub es una plataforma de alojamiento de código que utiliza Git para el control de versiones. Permite a los
+          desarrolladores colaborar en proyectos, gestionar repositorios y compartir código de forma eficiente.</p>
+        <p><strong>A continuación, se detallan los pasos para integrar Git con GitHub desde un entorno de desarrollo local.</strong></p>
+
+        <h3>4.2 Crear cuenta en GitHub</h3>
+        <ol>
+          <li>Accede a <em>github.com</em> y regístrate con tu email institucional.</li>
+          <li>Confirma el correo y completa el perfil (usuario y 2FA recomendado).</li>
+        </ol>
+
+        <h3>4.3 Crear un repositorio remoto</h3>
+        <ol>
+          <li>En GitHub: <strong>New &gt; Repository</strong>.</li>
+          <li>Asigna nombre (p. ej. <code>entorno-desarrollo</code>), visibilidad (privado/público) y, opcionalmente,
+            marca “Add a README”.</li>
+          <li>Guarda la URL del repo (HTTPS o SSH) para el <em>push</em>.</li>
+        </ol>
+
+        <h3>4.4 Primer commit &amp; push (línea de comandos)</h3>
+        <ol>
+          <li>Configura tu identidad (una vez por equipo):
+            <pre><code>git config --global user.name "Tu Nombre"
+git config --global user.email "tu_email@dominio.com"</code></pre>
+          </li>
+          <p><em>Opción 2 si no se ha desarrollado nada, para la primera vez que trabajamos en el proyecto:</em></p>
+          <p><em>Opcion 3 si en el repositorio ya existe contenido y nos incorporamos al proyecto:</em></p>
+          <li>Prepara el proyecto local (si es la primera vez, crea un nuevo directorio, crea contenido y haz commit & push):
+            <pre><code>mkdir entorno-desarrollo
+cd entorno-desarrollo
+git init
+echo "# Entorno de desarrollo" &gt; README.md
+git add .
+git commit -m "chore: primer commit"
+git push -u origin main</code></pre>
+          </li>
+          <li>Si el proyecto ya existe y queremos incorporarnos, clona el repositorio remoto:
+          <pre><code>cd entorno-desarrollo
+git clone https://github.com/usuario/entorno-desarrollo.git</code></pre></li>
+          <li>Conecta con el repositorio remoto (sustituye la URL):
+            <pre><code>git remote add origin https://github.com/usuario/entorno-desarrollo.git
+git branch -M main
+git push -u origin main</code></pre>
+          </li>
+        </ol>
+
+        <h3>6.5 Primer commit &amp; push (desde el IDE)</h3>
+        <ul>
+          <li><strong>Eclipse (EGit)</strong>: Importa o crea proyecto → <em>Team &gt; Share Project… &gt; Git</em> →
+            prepara cambios en <em>Git Staging</em> (add/commit) → <em>Commit and Push…</em> → pega la URL del repo y
+            confirma. </li>
+          <li><strong>Visual Studio</strong>: Abre proyecto → <em>Git &gt; Create Git Repository</em> o <em>Clone</em> →
+            realiza cambios → <em>Git &gt; Commit</em> → <em>Push</em>. </li>
+          <li><strong>PyCharm / IntelliJ</strong>: <em>VCS &gt; Enable Version Control Integration</em> (Git) →
+            <em>Commit</em> (selecciona archivos y mensaje) → <em>Push</em> (configura remoto si es necesario). </li>
+            <li><strong>Línea de comandos</strong>: Ubicarse dentro del directorio del proyecto y ejecutar los comandos de Git vistos anteriormente.</li>
+        </ul>
+
+        <div class="note">
+          <p>
+            Consejos: usa HTTPS con Git Credential Manager o SSH con claves; incluye <code>.gitignore</code> para omitir 
+            archivos de configuración local; realiza commits pequeños y
+            con mensajes claros.
+          </p>
+        </div>
+    </section>
+    <section class="slide" id="t2-5">
+      <div>
+        <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+      </div>
+      <h2>5. Compilación de código</h2>
+      <p>La compilación es el proceso de transformar código fuente en código ejecutable. Los IDEs integran herramientas
+        para compilar y ejecutar proyectos.</p>
+      <p>Los pasos para compilar un proyecto en un IDE típico son:</p>
+      <ul>
+        <li>Configurar el proyecto (definir dependencias, rutas de compilación, etc.).</li>
+        <li>Escribir o modificar el código fuente.</li>
+        <li>Compilar el código fuente (normalmente con un botón "Build" o "Compile").</li>
+        <li>Ejecutar el programa compilado (con un botón "Run" o "Execute").</li>
+      </ul>
+
+    </section>
+
+    
+    <div class="footer">
+      <div class="bar">
+        <small>UT1 · Instalación de sistemas operativos en red · LinkiaFP</small>
+        <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+      </div>
+    </div>
+</body>
+
+</html>

@@ -243,3 +243,60 @@ tr:nth-child(even) {
 tr:hover {
     background-color: #f1f1f1;
 }
+/* Cuadros de código con highlight.js */
+.hljs-comment {
+    color: #6a9955;
+    font-style: italic;
+}
+
+.hljs-variable {
+    color: #9cdcfe;
+}
+
+.hljs-keyword {
+    color: #c586c0;
+    font-weight: bold;
+}
+
+.hljs-string {
+    color: #ce9178;
+}
+
+.hljs {
+    background-color: #1e1e1e;
+    color: #b3d6ff;
+}
+
+.hljs-number {
+    color: #cdc172;
+}
+
+.hljs-built_in,
+.hljs-bullet,
+.hljs-code {
+    color: #cdc172;
+}
+
+.hljs-title {
+    color: #c6c961;
+    font-weight: 700;
+}
+
+.hljs-type {
+    color: #b3d6ff;
+}
+
+.hljs-tag .hljs-attr,
+.hljs-tag .hljs-name {
+    color: #009688;
+}
+
+.hljs-punctuation,
+.hljs-tag {
+    color: #03A9F4;
+}
+
+.column{
+    display: flex;
+    align-items: center;
+}

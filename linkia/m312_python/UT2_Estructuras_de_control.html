@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UT2 · Estructuras de control · LinkiaFP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link rel="stylesheet" href="../style.css" />
+    <script src="../script.js" defer></script>
+</head>
+
+<body>
+    <div class="deck">
+
+        <!-- COVER -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+                </div>
+                <div class="title">UT2 · Estructuras de control</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+            </div>
+
+        </section>
+
+        <!-- Contenido principal desarrollado -->
+        <section class="slide" id="estructuras-seleccion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Estructuras de selección</h2>
+
+            <h3>1.1 Condicional simple if</h3>
+            <p>
+                La estructura <code>if</code> permite ejecutar un bloque de código cuando una condición booleana es
+                verdadera.
+                Se usa para tomar decisiones simples sin alternativa explícita.
+            </p>
+            <div class="ejemplo">
+                <strong>Descripción</strong>
+                <p>Se evalúa la condición y si es verdadera se ejecuta el bloque indentado; si no, se continúa con el
+                    flujo.</p>
+                <strong>Ejemplo</strong>
+                <pre class="language-python"><code>numero = int(input('Introduce un número: '))
+if numero % 2 == 0:
+    print('Bienvenido, has introducido un número par')</code></pre>
+            </div>
+
+        </section>
+        <section class="slide" id="estructuras-seleccion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h3>1.2 Condicional doble if-else</h3>
+            <p>
+                <code>if-else</code> ofrece una alternativa cuando la condición es falsa. Siempre se ejecuta exactamente
+                uno de
+                los dos bloques.
+            </p>
+
+            <div class="diagram">
+                <img src="../../assets/linkia/python-if-else.png" width="550px" alt="python-if-else">
+            </div>
+        </section>
+        <section class="slide" id="estructuras-seleccion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>1.3 Condicional múltiple if-elif-else</h3>
+            <p>
+                Cuando hay más de dos opciones, <code>elif</code> permite evaluar condiciones adicionales de forma
+                ordenada.
+                El primer <code>if/elif</code> verdadero ejecuta su bloque y se ignoran los siguientes.
+            </p>
+
+            <div class="diagram">
+                <img src="../../assets/linkia/python-elif.png" width="700px" alt="python-elif">
+            </div>
+        </section>
+
+        <section class="slide" id="estructuras-repeticion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Estructuras de repetición</h2>
+
+            <h3>2.1 Bucle while</h3>
+            <p>
+                <code>while</code> repite un bloque mientras la condición sea verdadera. Es útil cuando no se conoce de
+                antemano
+                el número de iteraciones.
+                Hay que cuidar que la condición cambie en algún momento para evitar bucles infinitos.
+            </p>
+            <div class="ejemplo">
+                <strong>Ejemplo</strong>
+                <pre class="language-python"><code>contador = 0
+while contador &lt; 5:
+    print('contador =', contador)
+    contador += 1</code></pre>
+            </div>
+        </section>
+        <section class="slide" id="estructuras-seleccion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+
+            <h3>2.2 Bucle for y función range()</h3>
+            <p>
+                <code>for</code> itera sobre secuencias (listas, cadenas, ranges). <code>range()</code> genera
+                secuencias
+                numéricas eficientemente.
+            </p>
+            <div class="ejemplo">
+                <strong>Ejemplo</strong>
+                <pre class="language-python"><code>for i in range(5):           # 0 1 2 3 4
+    print('i =', i)
+
+# recorrer lista
+nombres = ['Ana', 'Luis', 'Marta']
+for n in nombres:
+    print(n)</code></pre>
+            </div>
+        </section>
+        <section class="slide" id="estructuras-seleccion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+
+            <h3>2.3 Bucle anidado</h3>
+            <p>
+                Un bucle anidado es un bucle dentro de otro. Se usa para recorrer estructuras bidimensionales o para
+                algoritmos
+                que combinan iteraciones.
+                Tener en cuenta la complejidad temporal que aumenta multiplicativamente.
+            </p>
+            <div class="ejemplo">
+                <strong>Ejemplo</strong>
+                <pre class="language-python"><code>for i in range(3):
+    for j in range(2):
+        print('i =', i, 'j =', j)</code></pre>
+            </div>
+
+        </section>
+
+        <section class="slide" id="sentencias-salto">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Sentencias de salto (break, continue)</h2>
+            <p>
+                Estas sentencias alteran el flujo dentro de bucles y bloques:
+            </p>
+            <ul>
+                <li><code>break</code> interrumpe el bucle más cercano inmediatamente.</li>
+                <li><code>continue</code> salta a la siguiente iteración del bucle, omitiendo el resto del bloque
+                    actual.</li>               
+            </ul>
+            <div class="ejemplo">
+                <strong>Ejemplo</strong>
+                <pre class="language-python"><code>for n in range(10):
+    if n == 5:
+        break          # sale del for
+    if n % 2 == 0:
+        continue       # omite imprimir pares
+    print(n)
+</code></pre>
+            </div>
+        </section>
+        <section class="slide" id="estructuras-seleccion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+
+            <h3>3.2 Control del flujo de ejecución</h3>
+            <p>
+                El control de flujo combina condicionales, bucles y sentencias de salto para modelar la lógica del
+                programa.
+                Diseñar claramente las condiciones y evitar bucles infinitos o rutas lógicas inaccesibles es clave para
+                programas
+                correctos y mantenibles.
+            </p>
+            <div class="diagram">
+                <img src="../../assets/linkia/loop_animation.gif" width="450px" alt="loop_animation">
+            </div>
+        </section>
+
+        <section class="slide" id="control-errores">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Control de errores</h2>
+
+            <h3>4.1 Estructura try-except</h3>
+            <p>
+                <code>try</code> permite ejecutar código que puede generar excepciones y atraparlas con bloques
+                <code>except</code>
+                para evitar que el programa termine abruptamente. Es fundamental validar entradas externas o realizar
+                operaciones
+                inseguras.
+            </p>
+            <div class="ejemplo">
+                <strong>Ejemplo</strong>
+                <pre class="language-python"><code>try:
+    x = int(input('Introduce un entero: '))
+    print('Has escrito', x)
+except ValueError:
+    print('No has introducido un entero válido')</code></pre>
+            </div>
+        </section>
+        <section class="slide" id="estructuras-seleccion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>4.2 Captura de errores comunes</h3>
+            <p>
+                Algunos errores frecuentes y su manejo:
+            </p>
+            <ul>
+                <li><strong>ValueError</strong> al convertir cadenas a números: usar <code>try-except ValueError</code>.
+                </li>
+                <li><strong>ZeroDivisionError</strong> al dividir por cero: comprobar divisor o capturar la excepción.
+                </li>
+                
+            </ul>
+            <div class="ejemplo">
+                <strong>Ejemplo</strong>
+                <pre class="language-python"><code>try:
+    a = int(input('a: '))
+    b = int(input('b: '))
+    result = a // b
+except ZeroDivisionError:
+    print('Error: división por cero')
+except ValueError:
+    print('Error: entrada no entera')
+else:
+    print('Resultado', result)</code></pre>
+            </div>
+        </section>
+        <section class="slide" id="estructuras-seleccion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>4.3 Cláusulas finally y excepciones personalizadas</h3>
+            <p>
+                <code>finally</code> se ejecuta siempre, ocurra o no una excepción, útil para liberar recursos.
+                También podemos definir excepciones personalizadas heredando de <code>Exception</code> para casos
+                específicos de
+                la aplicación.
+            </p>
+            <div class="ejemplo">
+                <strong>Ejemplo</strong>
+                <pre class="language-python"><code>class MiError(Exception):
+    pass
+
+try:
+    raise MiError('Algo específico ha fallado')
+except MiError as e:
+    print('MiError capturado:', e)
+finally:
+    print('Cierre de recursos o limpieza')</code></pre>
+            </div>
+
+        </section>
+
+        <section class="slide" id="prueba-depuracion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Prueba y depuración</h2>
+
+            <h3>5.1 Mensajes de error y advertencias</h3>
+            <p>
+                Mensajes claros ayudan a identificar la causa del fallo. Usar mensajes que indiquen la entrada esperada
+                y la
+                acción a tomar facilita la corrección por parte del usuario.
+                Las advertencias (por ejemplo con el módulo <code>warnings</code>) sirven para alertar sin detener la
+                ejecución.
+            </p>
+            <div class="ejemplo">
+                <strong>Ejemplo</strong>
+                <pre class="language-python"><code>import warnings
+
+def dividir(a, b):
+    if b == 0:
+        warnings.warn('División por cero, se devolverá None', UserWarning)
+        return None
+    return a / b</code></pre>
+            </div>
+        </section>
+        <section class="slide" id="estructuras-seleccion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>5.2 Técnicas de depuración manual</h3>
+            <p>
+                Técnicas útiles:
+            </p>
+            <ul>
+                <li>Insertar <code>print()</code> para inspeccionar valores intermedios.</li>
+                <li>Verificar supuestos y precondiciones con aserciones <code>assert</code>.</li>
+                <li>Reducir el código a un ejemplo mínimo que reproduzca el fallo.</li>
+            </ul>
+            <div class="ejemplo">
+                <strong>Ejemplo de aserción</strong>
+                <pre class="language-python"><code>def suma_lista(lst):
+    assert isinstance(lst, list), 'lst debe ser una lista'
+    return sum(lst)</code></pre>
+            </div>
+        </section>
+        <section class="slide" id="estructuras-seleccion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>5.3 Uso del depurador en el IDE (Thonny, VSCode)</h3>
+            <p>
+                Los IDEs ofrecen herramientas visuales para depurar:
+            </p>
+            <ul>
+                <li>Puntos de interrupción (breakpoints) para detener la ejecución en una línea.</li>
+                <li>Inspección de variables en tiempo de ejecución.</li>
+                <li>Ejecutar paso a paso (step into, step over, step out) para entender el flujo.</li>
+            </ul>
+            <div class="diagram" >
+                <img src="../../assets/linkia/depurator_python.gif" style="max-width: 45%;" alt="depurator_python">
+            </div>
+           
+        </section>
+
+
+
+
+
+
+
+    </div>
+
+    <div class="footer">
+        <div class="bar">
+            <small>UT2 · Estructuras de control</small>
+            <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+        </div>
+    </div>
+</body>
+
+</html>

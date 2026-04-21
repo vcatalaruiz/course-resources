@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Píldoras formativas · LinkiaFP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link rel="stylesheet" href="../style.css" />
+    <script src="../script.js" defer></script>
+</head>
+
+<body>
+    <div class="deck">
+
+        <!-- COVER -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+                </div>
+                <div class="title">Píldora 1: Fundamentos de programación y entorno</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+            </div>
+
+        </section>
+
+
+        <!-- ========================================================= -->
+<!-- PÍLDORA 1 · Fundamentos de programación y entorno -->
+<!-- ========================================================= -->
+
+
+
+<section class="slide" id="pildora1-introduccion-programacion">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>Introducción a la programación</h2>
+    <p>
+        La programación es el proceso de diseñar y crear instrucciones que indican a un ordenador
+        cómo realizar tareas, desde acciones simples hasta sistemas complejos.
+    </p>
+    <ul>
+        <li>Permite automatizar procesos.</li>
+        <li>Se basa en la lógica y el razonamiento estructurado.</li>
+        <li>Es una herramienta clave en el desarrollo de software.</li>
+    </ul>
+     <div class="diagram">
+        <img src="../../assets/aplicacion_web.png" style="max-width: 50%;" alt="Diagrama algoritmo">
+    </div>
+</section>
+
+<section class="slide" id="pildora1-algoritmo">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>Concepto de algoritmo</h2>
+    <p>
+        Un algoritmo es una secuencia finita y ordenada de pasos que permite resolver un problema
+        concreto a partir de unos datos de entrada.
+    </p>
+    <ul>
+        <li>Debe ser finito.</li>
+        <li>Debe estar bien definido.</li>
+        <li>Debe producir un resultado.</li>
+    </ul>
+    <div class="diagram">
+        <img src="../../assets/linkia/LampFlowchart-es.svg" style="max-width: 30%;" alt="Diagrama algoritmo">
+    </div>
+</section>
+
+<section class="slide" id="pildora1-entorno-python">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>Entorno de desarrollo en Python (IDE)</h2>
+    <p>
+        Un entorno de desarrollo integra las herramientas necesarias para escribir, ejecutar y depurar
+        programas en Python.
+    </p>
+    <div class="diagram">
+        <img src="../../assets/linkia/Best-Python-IDE-for-Development_1.2.png" style="max-width: 30%;" alt="">
+    </div>
+    <ul>
+        <li><strong>Editor o IDE (VS Code, Thonny, IDLE):</strong> permite escribir código con resaltado de sintaxis y autocompletado.</li>
+        <li><strong>Intérprete de Python:</strong> ejecuta el código Python.</li>
+        <li><strong>Consola y depurador:</strong> permite ejecutar y depurar el código Python.</li>
+    </ul>
+    <div class="diagram">
+        <img src="../../assets/linkia/Spyder.png" style="max-width: 50%;" alt="">
+    </div>
+</section>
+
+<section class="slide" id="pildora1-sintaxis-identacion">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>Sintaxis e identación</h2>
+    <p>
+        Python utiliza la identación para definir bloques de código, en lugar de llaves.
+        Una identación incorrecta provoca errores.
+    </p>
+    <p><strong>¿Qué es la identación?</strong></p>
+    <ul>
+        <li>Es el espacio en blanco al inicio de una línea de código.</li>
+        <li>Indica que las líneas pertenecen al mismo bloque de código.</li>
+    </ul>
+    <div class="diagram">
+        <img src="../../assets/linkia/Indentation-in-python.webp" style="max-width: 50%;" alt="">
+    </div>
+    <pre class="language-python"><code># Ejemplo de identación correcta. En la siguientes estructura condicional, el bloque de código dentro del 'if' está correctamente indentado.
+if x > 0:
+    print("positivo")
+else:
+    print("negativo o cero")</code></pre>
+</section>
+
+<section class="slide" id="pildora1-variables-tipos">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>Variables y tipos de datos</h2>
+    <p>
+        Las variables almacenan datos y se crean al asignarles un valor.
+        Python utiliza tipado dinámico, lo que significa que no es necesario especificar el tipo de dato al declarar una variable (a diferencia de otros lenguajes como Java o C++).
+    </p>
+    <p><strong>Tipos de variables:</strong></p>
+    <div class="diagram">
+        <img src="../../assets/linkia/Python-Variables-and-Data-Types-scaled.jpg.webp" style="max-width: 80%;" alt="">
+    </div>
+    
+    <div>
+        <pre class="language-python"><code># Ejemplo de variables y constantes
+PI = 3.14159  # Constante tipo float
+radio = 5  # Variable tipo int
+area = PI * radio ** 2 # Cálculo del área del círculo
+print("El área del círculo es:", area) # Imprime el resultado</code></pre>
+<div class="note">
+        <p><strong>Nota: Las constantes se definen con nombres en mayúsculas, el resto de las variables con nombres en minúsculas. 
+            Si el nombre es compuesto, se utilizan guiones bajos (snake_case) para separar las palabras.</strong></p>
+        
+    </div>
+</div>
+    </div>
+
+    <div class="footer">
+        <div class="bar">
+            <small>Píldora 1 · Fundamentos de programación y entorno</small>
+            <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+        </div>
+    </div>
+</body>
+
+</html>

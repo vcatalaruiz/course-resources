@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UT2 · Programación de eventos y aplicaciones visuales · LinkiaFP</title>
+  <meta name="description"
+    content="Presentación HTML con secciones tipo diapositiva para la UT2: Programación de eventos y aplicaciones visuales." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <link rel="stylesheet" href="../style.css" />
+  <script src="../script.js" defer></script>
+</head>
+
+<body>
+  <div class="deck">
+    <!-- ====================== COVER ====================== -->
+    <section class="slide cover" id="slide-1">
+      <div style="max-width: 60%;">
+        <div>
+          <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+        </div>
+        <div class="title">UT2 · Programación de eventos y construcción de aplicaciones visuales</div>
+        <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+      </div>
+      <div class="logo-first-page">
+        <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;" alt="">
+      </div>
+    </section>
+
+    <!-- ====================== INTRODUCCIÓN AL MODELO DE EVENTOS ====================== -->
+    <section class="slide" id="eventos-intro-1">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+      <h2>¿Qué es un evento en desarrollo web?</h2>
+      <p>
+        Un evento es cualquier acción que ocurre en la página web y que puede ser detectada mediante JavaScript
+        para responder de forma interactiva.</p>
+      <p>Permiten crear aplicaciones web interactivas y dinámicas. </p>
+      <div class=" diagram">
+        <img src="../../assets/linkia/figure_3_event.png" style="max-width: 40%;" alt="Diagrama de constructor">
+      </div>
+    </section>
+
+    <section class="slide" id="eventos-intro-2">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+      <h2>Elementos que intervienen</h2>
+      <p>
+        En el modelo de eventos intervienen tres elementos clave:
+      </p>
+      <ul>
+        <li><strong>Elemento:</strong> nodo HTML que genera el evento (button, input, form).</li>
+        <li><strong>Evento:</strong> acción que ocurre (click, input, submit...).</li>
+        <li><strong>Manejador:</strong> función JavaScript que responde al evento.</li>
+      </ul>
+      <p>Ejemplo de un evento asociado a un botón:</p>
+      <pre><code class="language-html">&lt;button id="btn"&gt;Haz clic aquí&lt;/button&gt;
+&lt;script&gt;
+  const btn = document.getElementById('btn');
+  btn.addEventListener('click', function() {
+    alert('¡Botón clickeado!');
+  });
+</code></pre>
+    </section>
+
+    <section class="slide" id="eventos-tipos-1">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+      <h2>Tipos de eventos frecuentes</h2>
+      <p>Existen varios tipos de eventos en el modelo de eventos, pero algunos son más comunes:</p>
+      <ul>
+        <li><strong>Mouse (interacción con el ratón):</strong> click, dblclick, mouseover, mouseout…</li>
+        <pre><code class="language-html">&lt;button id="btn"&gt;Haz clic aquí&lt;/button&gt;</code></pre>
+        <pre><code class="language-javascript">btn.addEventListener('click', function() {
+  // Código para responder al evento
+});</code></pre>
+        <li><strong>Teclado (interacción con el teclado):</strong> keydown, keyup.</li>
+        <pre><code class="language-html">&lt;input type="text" id="input"&gt;</code></pre>
+        <pre><code class="language-javascript">input.addEventListener('keydown', function(event) {
+  // Código para responder al evento
+});</code></pre>
+        <li><strong>Formulario (interacción con formularios):</strong> input, change, submit, focus, blur.</li>
+        <pre><code class="language-html">&lt;form id="form"&gt;
+  &lt;input type="text" name="nombre"&gt;
+  &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+        <pre><code class="language-javascript">form.addEventListener('submit', function(event) {
+  event.preventDefault(); // Evita el envío del formulario
+  // Código para validar y procesar el formulario
+});</code></pre>
+        <li><strong>Ventana (interacción con la ventana del navegador):</strong> load, resize, scroll.</li>
+
+        <pre><code class="language-javascript">window.addEventListener('resize', function() {
+  // Código para responder al cambio de tamaño
+});</code></pre>
+
+      </ul>
+    </section>
+
+    <section class="slide" id="eventos-ciclo-vida">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+      <h2>Ciclo de vida de una aplicación basada en eventos</h2>
+      <p>
+        El ciclo de vida de una aplicación basada en eventos sigue varias etapas:
+      <ol>
+        <li><strong>Carga del DOM (Document Object Model) y scripts:</strong> el navegador carga la estructura HTML y los scripts JavaScript.</li>
+         <li><strong>Asignación de eventos:</strong> se asocian los manejadores a los eventos correspondientes.</li>
+        <li><strong>Propagación:</strong> capturing ➝ target ➝ bubbling.</li>
+        <li><strong>Ejecución del manejador:</strong> el navegador ejecuta el código asociado al evento.</li>
+        <li><strong>Actualización del DOM:</strong> se actualiza la estructura del documento según los cambios realizados.</li>
+      </ol>
+    </section>
+
+    <!-- ====================== ASOCIACIÓN DE ACCIONES A EVENTOS ====================== -->
+    <section class="slide" id="eventos-ciclo-vida">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+      <h3>1.Carga del DOM</h3>
+      <p>
+        Es importante asegurarse de que el DOM esté completamente cargado antes de asignar eventos a los elementos, para
+        evitar errores.
+        Esto se puede lograr utilizando el evento 'DOMContentLoaded' o colocando el script al final del body.
+      </p>
+      <pre><code class="language-javascript">document.addEventListener('DOMContentLoaded', function() {
+  // Código para asignar eventos
+});</code></pre>
+
+    </section>
+    <section class="slide" id="eventos-ciclo-vida">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+      <h3>2.Asignación de eventos</h3>
+      <p>
+        Existen varias formas de asignar eventos a los elementos, pero la más recomendada es utilizando el método
+        addEventListener, ya que permite asignar múltiples manejadores a un mismo evento y ofrece mayor flexibilidad.
+      </p>
+      <pre><code class="language-javascript">const btn = document.getElementById('btn');
+btn.addEventListener('click', function() {
+  // Código para responder al evento
+});</code></pre>
+    </section>
+    <section class="slide" id="eventos-ciclo-vida">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+      <h3>3.Carga del DOM</h3>
+      <p>
+        Es importante asegurarse de que el DOM esté completamente cargado antes de asignar eventos a los elementos, para
+        evitar errores.
+        Esto se puede lograr utilizando el evento 'DOMContentLoaded' o colocando el script al final del body.
+      </p>
+      <pre><code class="language-javascript">document.addEventListener('DOMContentLoaded', function() {
+  // Código para asignar eventos
+});</code></pre>
+
+    </section>
+
+    <section class="slide" id="asociacion-eventos-1">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+      
+      <h2>Propagación</h2>
+      <p>
+        La propagación de eventos sigue un modelo de tres fases: Es útil para controlar el flujo de eventos en el DOM,
+        por ejemplo, en la vida real, si haces clic en un botón dentro de un formulario, el evento de clic se propaga
+        desde el botón hasta el formulario y luego al documento. Esto permite manejar eventos de manera eficiente y
+        controlar su comportamiento mediante métodos como preventDefault() y stopPropagation().
+      </p>
+      <ol>
+        <li><strong>Capturing:</strong> el evento baja por la jerarquía del DOM desde el documento hasta el elemento
+          objetivo.</li>
+        <li><strong>Target:</strong> el evento llega al elemento que lo generó.</li>
+        <li><strong>Bubbling:</strong> el evento sube por la jerarquía del DOM desde el elemento objetivo hasta el
+          documento.</li>
+      </ol>
+      <pre><code class="language-html">&lt;div id="parent"&gt;
+  &lt;button id="child"&gt;Haz clic&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+      <pre><code class="language-javascript">element.addEventListener('click', function() {
+  // Código para responder al evento
+}, true); // Capturing
+element.addEventListener('click', function() {
+  // Código para responder al evento
+}, false); // Bubbling</code></pre>
+      <div class="diagram">
+        <img src="../../assets/linkia/capturing-bubbling.png" style="max-width: 50%;"
+          alt="Diagrama de propagación de eventos">
+      </div>
+    </section>
+    <section class="slide" id="eventos-ciclo-vida">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+      <h3>4. Ejecución del manejador de eventos</h3>
+      <p>
+        Cuando un evento se dispara, el navegador ejecuta el manejador asociado al evento. Es importante que el código
+        dentro del manejador sea eficiente y no bloquee la interfaz de usuario, para mantener una buena experiencia de
+        usuario.
+      </p>
+      <pre><code class="language-html">&lt;button id="myButton"&gt;Haz clic&lt;/button&gt;</code> </pre>
+      <pre><code class="language-javascript">element.addEventListener('click', function() {  
+  // Código para responder al evento
+});</code></pre>
+
+    </section>
+    <section class="slide" id="eventos-ciclo-vida">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+      <h3>5. Actualización del DOM</h3>
+      <p>
+        Después de que el manejador de eventos se ejecuta, es común que se realicen cambios en el DOM para reflejar la
+        respuesta al evento. Esto puede incluir mostrar u ocultar elementos, actualizar contenido o modificar estilos.
+        Es importante manipular el DOM de manera eficiente para evitar problemas de rendimiento.
+      </p>
+      <pre><code class="language-html">&lt;div id="content"&gt;Contenido original&lt;/div&gt;</code></pre>
+      <pre><code class="language-javascript">element.addEventListener('click', function() {
+  const content = document.getElementById('content');
+  content.textContent = '¡Has hecho clic!';
+});</code></pre>
+    </section>
+
+    <section class="slide" id="asociacion-eventos-2">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+      <h2>Buenas prácticas</h2>
+      <ul>
+        <li><strong>Separar HTML, CSS y JavaScript:</strong> mantener el código organizado.</li>
+        <li><strong>Usar addEventListener:</strong> para asignar eventos de forma flexible.</li>
+        <li><strong>Evitar eventos inline:</strong> no usar atributos como onclick en el HTML.</li>
+        <li><strong>Optimizar manejadores:</strong> evitar código pesado dentro de los manejadores de eventos.</li>
+        <li><strong>Controlar la propagación:</strong> usar preventDefault() y stopPropagation() cuando sea necesario.
+        </li>
+        <li><strong>Usar delegación de eventos:</strong> para manejar eventos en elementos dinámicos.</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="delegacion-eventos">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+      <h2>Delegación de eventos</h2>
+      <p>
+        La delegación de eventos es una técnica que consiste en asignar un manejador de eventos a un elemento padre en
+        lugar de a cada elemento hijo individualmente. Esto es especialmente útil cuando se tienen muchos elementos
+        dinámicos, ya que permite manejar eventos de manera eficiente sin necesidad de asignar un manejador a cada
+        elemento.
+      </p>
+      <pre><code class="language-html">&lt;ul id="list"&gt;
+  &lt;li&gt;Elemento 1&lt;/li&gt;
+  &lt;li&gt;Elemento 2&lt;/li&gt;
+  &lt;li&gt;Elemento 3&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+      <pre><code class="language-javascript">const list = document.getElementById('list');
+list.addEventListener('click', function(event) {
+  if (event.target && event.target.nodeName === 'LI') {
+    // Código para responder al clic en un elemento de la lista
+  }
+});</code></pre>
+
+    </section>
+
+    <!-- ====================== DESARROLLO DE UNA APLICACIÓN WEB COMPLETA ====================== -->
+    <section class="slide" id="app-web-1">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+      
+      <h2>Componentes de una aplicación web</h2>
+      <div class="diagram">
+        <img src="../../assets/linkia/logos html css y js.png" style="max-width: 40%;" alt="Diagrama de componentes de una aplicación web">
+      </div>
+      <p>Una aplicación web está compuesta por tres componentes principales:</p>
+      <p>Los navegadores, por convenio, interpretan el código HTML, CSS y JavaScript para construir la interfaz visual y
+        el comportamiento de la aplicación. </p>
+      <ul>
+        <li><strong>HTML:</strong> estructura.</li>
+        <li><strong>CSS:</strong> estilos y apariencia.</li>
+        <li><strong>JavaScript:</strong> comportamiento y validación dinámica.</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="app-web-validacion-1">
+     <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+      
+      <h2>Validación dinámica</h2>
+      <p>
+        La validación se realiza en tiempo real, sin recargar la página, mostrando mensajes de error
+        y guiando al usuario de forma inmediata.
+        </p>
+      <p>Ejemplo de validación de un formulario de registro:</p>
+      <pre><code class="language-html">&lt;form id="registerForm"&gt;
+  &lt;input type="text" id="username" name="username" placeholder="Nombre de usuario"&gt;
+  &lt;input type="email" id="email" name="email" placeholder="Correo electrónico"&gt;   
+  &lt;input type="password" id="password" name="password" placeholder="Contraseña"&gt;
+  &lt;button type="submit"&gt;Registrar&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+      <pre><code class="language-javascript">const form = document.getElementById('registerForm');
+form.addEventListener('submit', function(event) {
+  event.preventDefault(); // Evita el envío del formulario
+  const username = document.getElementById('username').value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  let errors = [];
+  if (username.length < 3) {
+    errors.push('El nombre de usuario debe tener al menos 3 caracteres.');
+  }
+  if (!email.includes('@')) {
+    errors.push('El correo electrónico no es válido.');
+  }
+  if (password.length < 6) {
+    errors.push('La contraseña debe tener al menos 6 caracteres.');
+  }
+  if (errors.length > 0) {
+    alert(errors.join('\\n'));
+  } else {
+    alert('¡Registro exitoso!');
+  }
+});</code></pre>
+    </section>
+
+    <section class="slide" id="app-web-validacion-2">
+     <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+      
+      <h2>Ventajas de validar sin recargar</h2>
+      <ul>
+        <li>Mejora la experiencia del usuario.</li>
+        <li>Interacciones más rápidas.</li>
+        <li>Evita pérdida de datos en formularios.</li>
+        <li>Feedback instantáneo.</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="app-web-pruebas">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+      
+      <h2>Prueba y depuración</h2>
+      <ul>
+        <li>Probar campos vacíos y verificar errores.</li>
+        <li>Introducir datos incorrectos.</li>
+        <li>Comprobar mensaje de éxito.</li>
+        <li>Observar actualización sin recarga.</li>
+      </ul>
+    </section>
+
+  </div>
+
+  <div class="footer">
+    <div class="bar">
+      <small>UT2 · Programación de eventos y componentes visuales</small>
+      <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+    </div>
+  </div>
+</body>
+
+</html>

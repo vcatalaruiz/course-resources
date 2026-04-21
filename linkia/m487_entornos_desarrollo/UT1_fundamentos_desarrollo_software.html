@@ -169,6 +169,53 @@
             </ul>
 
         </section>
+        <section class="slide" id="t1-2-1">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>1.2.1 Relación entre componentes físicos y lógicos</h2>
+            <p>El software (lógico) solicita servicios que el hardware (físico) ejecuta. Esta relación se canaliza a
+                través del sistema operativo y las APIs.</p>
+            <ul>
+                <li>Abstracciones: archivos, procesos, hilos, sockets. </li>
+                <li>Interfaces: llamadas al sistema, bibliotecas y controladores.</li>
+            </ul>
+
+            <p><strong>Ejemplos de abstracciones:</strong> archivos, procesos, hilos, sockets.</p>
+            <p><strong>Ejemplos de interfaces:</strong> llamadas al sistema, bibliotecas y controladores.</p>
+            <p>
+                El software no interactúa directamente con el hardware, sino a través de capas de abstracción que
+                facilitan la portabilidad y seguridad.
+            </p>
+        </section>
+
+        <section class="slide" id="t1-2-2">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>1.2.2 Coordinación por el sistema operativo</h2>
+            <p>El SO planifica CPU, gestiona memoria, y orquesta E/S de periféricos, resolviendo concurrencia y
+                protegiendo recursos.</p>
+            <ul>
+                <li>Planificación de CPU (quantum, cambio de contexto).</li>
+                <li>Gestión de memoria (segmentación/paginación, memoria virtual).</li>
+                <li>E/S e interrupciones; cola de dispositivos.</li>
+            </ul>
+        </section>
+
+        <section class=" slide" id="t1-2-3">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>1.2.3 Papel del sistema operativo y controladores</h2>
+            <p>El SO ofrece servicios y seguridad; los <strong>drivers</strong> traducen las órdenes del SO al
+                lenguaje del dispositivo.</p>
+            <ul>
+                <li>Servicios del SO: archivos, procesos, red, seguridad.</li>
+                <li>Controladores: impresora, GPU, cámara, NIC.</li>
+            </ul>
+        </section>
+
 
         <!-- ========================================================= -->
         <!-- =======================   TEMA 2   ======================= -->
@@ -194,7 +241,65 @@
             </div>
 
         </section>
+        <section class="slide" id="t2-1">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>2.1 Software de sistema</h2>
+            <ul>
+                <li><strong>Sistema operativo</strong>: Windows, Linux, macOS, Android.</li>
+                <li><strong>Controladores</strong>: impresoras, GPU, audio, red.</li>
+            </ul>
+        </section>
 
+        <section class="slide" id="t2-2">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>2.2 Software de aplicación</h2>
+            <ul>
+                <li>Productividad: Word/Docs, Excel/Sheets, Presentaciones.</li>
+                <li>Específicas: ERP/CRM, CAD, edición multimedia.</li>
+            </ul>
+        </section>
+
+        <section class="slide" id="t2-3">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>2.3 Software de programación</h2>
+            <ul>
+                <li>Lenguajes: Java, Python, C#, C++.</li>
+                <li>IDEs: VS Code, Visual Studio, IntelliJ, Eclipse.</li>
+            </ul>
+        </section>
+
+        <section class=" slide" id="t2-4">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>2.4 Software de utilidades</h2>
+            <ul>
+                <li>Seguridad: antivirus, antimalware.</li>
+                <li>Mantenimiento: desfragmentación, limpieza de disco.</li>
+                <li>Copias de seguridad y recuperación.</li>
+            </ul>
+        </section>
+
+        <section class="slide" id="t2-5">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>2.5 Clasificación según licencia</h2>
+            <ul>
+                <li><strong>Propietario</strong>: uso bajo licencia; código cerrado.</li>
+                <li><strong>Software libre</strong>: libertades de uso, estudio, modificación y distribución.</li>
+                <li><strong>Open‑source</strong>: código disponible con condiciones de la licencia.</li>
+            </ul>
+            <div class=" note">
+                <p>Ejemplos: Windows (propietario), GNU/Linux (libre), Firefox (open‑source).</p>
+            </div>
+        </section>
 
         <!-- ========================================================= -->
         <!-- =======================   TEMA 3   ======================= -->
@@ -236,7 +341,42 @@
                 </div>
 
         </section>
+        <section class="slide" id="t3-1">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>3.1 Modelos del ciclo de vida</h2>
+            <h3>Modelo en cascada</h3>
+            <ul>
+                <li><strong>Pros</strong>: simple, fases claras, documentación fuerte.</li>
+                <li><strong>Contras</strong>: poca flexibilidad ante cambios, feedback tardío.</li>
+                <li><strong>Uso</strong>: entornos muy regulados o requisitos estables.</li>
+            </ul>
+        </section>
 
+        <section class="slide" id="t3-2">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>3.2 Modelo ágil (iterativo e incremental)</h2>
+            <ul>
+                <li><strong>Pros</strong>: adaptación al cambio, entregas frecuentes, feedback continuo.</li>
+                <li><strong>Contras</strong>: requiere disciplina, difícil escalar sin prácticas sólidas.</li>
+                <li><strong>Uso</strong>: producto evolutivo, requisitos cambiantes.</li>
+            </ul>
+        </section>
+
+        <section class="slide" id="t3-3">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>3.3 Modelo de prototipos</h2>
+            <ul>
+                <li><strong>Pros</strong>: valida requisitos temprano, mejora usabilidad.</li>
+                <li><strong>Contras</strong>: expectativas irreales si se confunde prototipo con producto.</li>
+                <li><strong>Uso</strong>: requisitos poco definidos al inicio.</li>
+            </ul>
+        </section>
 
         <!-- ========================================================= -->
         <!-- =======================   TEMA 4   ======================= -->
@@ -300,7 +440,28 @@
             </div>
         </section>
 
+        <section class="slide" id="t5-1">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>5.1 Ventajas y desventajas (VM y código intermedio)</h2>
+            <ul>
+                <li><strong>Ventajas</strong>: portabilidad, aislamiento/seguridad, optimización JIT.</li>
+                <li><strong>Desventajas</strong>: sobrecarga en tiempo de ejecución, dependencia de la VM.</li>
+            </ul>
+        </section>
 
+        <section class="slide" id="t5-2">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>5.2 Ejemplos prácticos</h2>
+            <ul>
+                <li><strong>Java</strong>: fuente → <code>.class</code> (bytecode) → JVM.</li>
+                <li><strong>.NET</strong>: fuente C# → IL → CLR (JIT a nativo).</li>
+                <li><strong>Python</strong>: <code>.py</code> → bytecode <code>.pyc</code> → PVM.</li>
+            </ul>
+        </section>
 
         <section class="slide" id="t6-resumen">
             <div>
@@ -311,7 +472,7 @@
 
             <p>
                 Los lenguajes de programación se clasifican según tres criterios principales:
-                
+
             </p>
 
             <p><strong>Nivel de abstracción:</strong></p>
@@ -335,7 +496,20 @@
             </ul>
 
         </section>
-
+        <section class="slide" id="t6-1">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>6.1 Ejemplos y usos típicos</h2>
+            <ul>
+                <li><strong>C</strong>: sistemas embebidos, SO, control de hardware.</li>
+                <li><strong>Java</strong>: backend empresarial, Android (Kotlin/Java).</li>
+                <li><strong>Python</strong>: ciencia de datos, scripting, automatización.</li>
+                <li><strong>JavaScript</strong>: front-end web, Node.js en servidor.</li>
+                <li><strong>Haskell</strong>: programación funcional pura, investigación.</li>
+                <li><strong>Prolog</strong>: lógica, IA simbólica, rule‑based.</li>
+            </ul>
+        </section>
         <!-- ========================================================= -->
         <!-- =======================   TEMA 7   ======================= -->
         <!-- ========================================================= -->
@@ -357,14 +531,65 @@
             </ul>
             <div class="note">
                 <p>
-                    Las herramientas se evaluan según su facilidad de uso, compatibilidad con el ecosistema, rendimiento y soporte de la comunidad.
+                    Las herramientas se evaluan según su facilidad de uso, compatibilidad con el ecosistema, rendimiento
+                    y soporte de la comunidad.
                 </p>
             </div>
         </section>
 
-        
+        <section class="slide" id="t7-1">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>7.1 Control de versiones (Git)</h2>
+            <div class="diagram">
+                <img src="../../assets/linkia/Git-logo.svg.png" style="max-width: 20%;">
+            </div>
+            <ul>
+                <li>Historial de cambios, ramas (branching) y fusiones (merging).</li>
+                <li>Trabajo colaborativo: repos remotos (GitHub, GitLab).</li>
+            </ul>
+        </section>
 
-        
+        <section class="slide" id="t7-2">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>7.2 Depuración</h2>
+            <ul>
+                <li>Breakpoints, inspección de variables, ejecución paso a paso.</li>
+                <li>Watch/trace, evaluación de expresiones, call stack.</li>
+            </ul>
+        </section>
+
+        <section class="slide" id="t7-3">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>7.3 Pruebas automatizadas e integración continua</h2>
+            <ul>
+                <li>Pruebas: unitarias, integración, regresión.</li>
+                <li>CI: builds y tests automáticos (Jenkins, GitHub Actions).</li>
+            </ul>
+        </section>
+
+        <section class="slide" id="t7-4">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            </div>
+            <h2>7.4 Criterios para evaluar herramientas</h2>
+            <ul>
+                <li>Facilidad de uso y curva de aprendizaje.</li>
+                <li>Compatibilidad, rendimiento y ecosistema de plugins.</li>
+                <li>Soporte y comunidad.</li>
+            </ul>
+            <div class="note">
+                <p>Ejemplos: Visual Studio, Eclipse/IntelliJ, VS Code, Jenkins.</p>
+            </div>
+        </section>
+
+
+
 
 
 

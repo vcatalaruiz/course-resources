@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UT 5. Monitorización · LinkiaFP</title>
+    <meta name="description" content="Presentación HTML con secciones tipo diapositiva para la UT5: Monitorización." />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link rel="stylesheet" href="../style.css" />
+    <script src="../script.js" defer></script>
+</head>
+
+<body>
+    <div class="deck">
+
+        <!-- COVER -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+                </div>
+                <div class="title">UT5 · Monitorización</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+            </div>
+
+        </section>
+
+
+
+
+        <!-- Herramientas de monitorización -->
+        <section class="slide" id="herramientas-monitorizacion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Herramientas de monitorización</h2>
+            <p>
+                La monitorización del sistema operativo en red permite observar el uso de recursos,
+                el estado de los servicios y el comportamiento general del sistema con el fin de
+                anticipar incidencias y garantizar la estabilidad y el rendimiento.
+            </p>
+            <ul>
+                <li>Registro de métricas clave (CPU, memoria, disco y red).</li>
+                <li>Detección de anomalías y generación de alertas.</li>
+                <li>Análisis de tendencias de rendimiento.</li>
+            </ul>
+        </section>
+
+
+        <!-- Interfaces gráficas -->
+        <section class="slide" id="interfaces-graficas">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>Interfaces gráficas de monitorización</h3>
+            <p>
+                Las herramientas gráficas facilitan la visualización del rendimiento mediante gráficos
+                y paneles en tiempo real, siendo especialmente útiles en entornos formativos y de laboratorio.
+            </p>
+            <ul>
+                <li>Monitor de rendimiento (PerfMon) en Windows.</li>
+
+                <class div="diagram">
+                    <img src="../../assets/linkia/Monitor de rendimiento (PerfMon).jpg" alt="Diagrama de monitorización"
+                        width="50%">
+                </class>
+                <li>Administrador de tareas y Monitor de recursos.</li>
+
+                <class div="diagram">
+                    <img src="../../assets/linkia/TaskManager_5.jpg" alt="Diagrama de monitorización" width="50%">
+                </class>
+                <li>GNOME System Monitor en Linux.</li>
+            </ul>
+            <p>Visor de eventos en Windows</p>
+            <class div="diagram">
+                <img src="../../assets/linkia/visor_eventos_windows.png" alt="Diagrama de monitorización" width="50%">
+            </class>
+        </section>
+
+        <!-- Línea de comandos -->
+        <section class="slide" id="linea-comandos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>Herramientas de línea de comandos</h3>
+            <p>
+                Las herramientas CLI ofrecen mayor precisión y automatización, siendo habituales
+                en servidores sin entorno gráfico y en entornos de producción.
+            </p>
+            <div class="ejemplo">
+                <strong>Ejemplo en Linux</strong>
+                <pre class="language-bash"><code>top # Visualiza procesos en tiempo real
+htop # Versión mejorada de top
+iostat -x 5 # Estadísticas de I/O cada 5 segundos
+df -h # Muestra el uso del espacio en disco</code></pre>
+                <strong>Ejemplo en Windows (PowerShell)</strong>
+                <pre class="language-powershell"><code>Get-Process # Lista los procesos en ejecución
+Get-Service # Lista los servicios instalados
+Get-EventLog -LogName System -Newest 10 # Muestra los 10 registros más recientes del registro del sistema</code></pre>
+            </div>
+        </section>
+
+        <!-- Análisis de procesos -->
+        <section class="slide" id="analisis-procesos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Análisis de procesos y servicios</h2>
+            <p>
+                La supervisión de procesos permite identificar consumos anómalos de CPU o memoria
+                y detectar aplicaciones o servicios que degradan el rendimiento del sistema.
+            </p>
+            <div class="ejemplo">
+                <strong>Ejemplo en Linux</strong>
+                <pre class="language-bash"><code>ps aux | head
+renice -n 5 -p 1234
+kill -9 1234</code></pre>
+            </div>
+        </section>
+
+        <!-- Detección de incidencias -->
+        <section class="slide" id="deteccion-incidencias">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Detección de incidencias</h2>
+            <p>
+                Detectar incidencias consiste en observar métricas, identificar comportamientos
+                anómalos y diagnosticar sus causas antes de que afecten al servicio.
+            </p>
+            <ul>
+                <li>Problemas de rendimiento (CPU, memoria, disco).</li>
+                <li>Fallos físicos o lógicos en almacenamiento.</li>
+            </ul>
+        </section>
+
+        <!-- Fallos en almacenamiento -->
+        <section class="slide" id="fallos-almacenamiento">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>Fallos en almacenamiento</h3>
+            <p>
+                Los fallos en discos pueden ser físicos, lógicos o de configuración y comprometen
+                la integridad de los datos y la disponibilidad del sistema.
+            </p>
+            <div class="ejemplo">
+                <strong>Ejemplo de diagnóstico en Linux</strong>
+                <pre class="language-bash"><code>smartctl -a /dev/sda
+fsck /dev/sda1
+iotop</code></pre>
+                <strong>Ejemplo en Windows</strong>
+                <pre class="language-batch"><code>chkdsk C:
+wmic diskdrive get status</code></pre>
+            </div>
+        </section>
+
+        <!-- Tareas de mantenimiento -->
+        <section class="slide" id="tareas-mantenimiento">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Tareas de mantenimiento</h2>
+            <p>
+                El mantenimiento preventivo y correctivo preserva la estabilidad, seguridad y
+                rendimiento del sistema operativo en red.
+            </p>
+            <ul>
+                <li>Actualizaciones del sistema y del software.</li>
+                <li>Limpieza de archivos temporales y logs.</li>
+                <li>Documentación de cada intervención.</li>
+            </ul>
+        </section>
+        <section class="slide" id="automatizacion-tareas">
+            <h2>5. Automatización de tareas con cron</h2>
+            <div class="diagram">
+                <img src="../../assets/Programar-Tareas-Automaticas-y-Scripts-con-Crontab-en-Linux.webp"
+                    alt="Cron y automatización">
+            </div>
+
+            <p>
+                <code>cron</code> es un servicio que permite ejecutar comandos o scripts de forma automática
+                en momentos previamente programados. Cada usuario puede definir sus propias tareas
+                programadas mediante el <code>crontab</code>.
+            </p>
+
+            <p>La sintaxis básica de una tarea cron es:</p>
+
+            <pre><code>* * * * * comando</code></pre>
+
+            <p>
+                Cada asterisco representa un campo temporal que define cuándo se ejecutará la tarea
+                (minuto, hora, día del mes, mes y día de la semana).
+            </p>
+            <div class="diagram">
+                <img src="../../assets/crontabejemplo2.jpeg" alt="Cron y automatización">
+            </div>
+
+            <p>Ejemplo real:</p>
+            <div class="diagram">
+                <img src="../../assets/crontab-ejemplo-e.jpeg" alt="Cron y automatización">
+            </div>
+
+
+
+            <p>
+                Una práctica habitual es probar primero las tareas con una ejecución frecuente y,
+                una vez verificado su funcionamiento, ajustar la programación definitiva.
+            </p>
+
+            <h2>Utilización de crontab.guru</h2>
+            <p>
+                Para comprobar y entender el funcionamiento de las expresiones <strong>cron</strong>,
+                se recomienda utilizar la herramienta online <strong>crontab.guru</strong>.
+                Esta herramienta permite ver de forma inmediata <em>cuándo</em> se ejecutará
+                una tarea cron a partir de su expresión.
+            </p>
+            <a href="https://crontab.guru/">https://crontab.guru/</a> es una herramienta útil para generar y entender
+            expresiones cron.
+
+
+
+            <div class="callout">
+                <strong>Nota:</strong> crontab.guru es una herramienta externa y se abre en una nueva pestaña.
+                Esto es intencionado y refleja su uso habitual en entornos reales de administración de sistemas.
+            </div>
+
+            <h3>Cómo utilizar crontab.guru</h3>
+
+            <ol>
+                <li>Escribe la expresión cron en el campo de texto.</li>
+                <li>Observa la descripción en lenguaje natural que aparece debajo.</li>
+                <li>Comprueba si la ejecución coincide con lo que esperas.</li>
+            </ol>
+
+            <h3>Ejemplos habituales</h3>
+
+            <p>Cada minuto:</p>
+            <pre><code>* * * * *</code></pre>
+
+            <p>Cada día a las 03:00:</p>
+            <pre><code>0 3 * * *</code></pre>
+
+            <p>
+                Cada lunes a las 08:30:
+            </p>
+            <pre><code>30 8 * * 1</code></pre>
+
+            <div class="callout">
+                <strong>IMPORTANTE:</strong> usar crontab.guru para validar expresiones cron
+                antes de configurarlas en el sistema.
+            </div>
+            <br>
+            <div class="callout">
+                <strong>Idea clave:</strong> las tareas automatizadas deben usar rutas absolutas y ejecutarse sin
+                interacción.
+            </div>
+        </section>
+        <!-- Automatización -->
+        <section class="slide" id="automatizacion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Automatización y programación de tareas</h2>
+            <p>
+                La automatización permite ejecutar tareas repetitivas de forma periódica,
+                reduciendo errores humanos y mejorando la eficiencia.
+            </p>
+            <p><strong>Pasos para configurar crontab en Linux</strong></p>
+            <ul>
+                <li>Editar el archivo de crontab: <code>crontab -e</code></li>
+                <li>Definir la programación con el formato: <code>minuto hora día_mes mes día_semana comando</code></li>
+                <li>Guardar y salir para activar la tarea programada.</li>
+            </ul>
+            <div class="ejemplo">
+                <strong>Ejemplo de cron en Linux</strong>
+                <pre class="language-bash"><code>0 3 * * * /usr/bin/backup.sh # Ejecuta el script de backup cada día a las 3 AM
+0 1 * * 0 /usr/sbin/logrotate # Ejecuta logrotate cada domingo</code></pre>
+                <strong>Ejemplo en Windows (PowerShell)</strong>
+                <pre class="language-powershell"><code>Register-ScheduledTask -TaskName "LimpiezaLogs" `
+-Action (New-ScheduledTaskAction -Execute "cleanmgr.exe") `
+-Trigger (New-ScheduledTaskTrigger -Weekly -DaysOfWeek Sunday)</code></pre>
+            </div>
+        </section>
+
+        <!-- Interpretación de trazas -->
+        <section class="slide" id="interpretacion-trazas">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Interpretación de trazas del sistema</h2>
+            <p>
+                Los registros de eventos son la fuente principal para el diagnóstico de errores,
+                accesos no autorizados y fallos de servicios.
+            </p>
+            <div class="ejemplo">
+                <strong>Ejemplo en Linux</strong>
+                <pre class="language-bash"><code>journalctl -xe
+grep "Failed password" /var/log/auth.log</code></pre>
+                <strong>Ejemplo en Windows</strong>
+                <pre
+                    class="language-powershell"><code>Get-EventLog -LogName Security -EntryType Error -Newest 5</code></pre>
+            </div>
+        </section>
+
+
+        <div class=" footer">
+            <div class="bar">
+                <small>UT5 · Monitorización · LinkiaFP</small>
+                <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

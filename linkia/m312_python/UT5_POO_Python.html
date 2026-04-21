@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UT5 · POO en Python · LinkiaFP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link rel="stylesheet" href="../style.css" />
+    <script src="../script.js" defer></script>
+</head>
+
+<body>
+    <div class="deck">
+
+        <!-- COVER -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+                </div>
+                <div class="title">UT5 · Programación orientada a objetos en Python</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+            </div>
+
+        </section>
+
+
+        <!-- Introducción a la POO -->
+        <section class="slide" id="introduccion-poo">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Programación orientada a objetos (POO)</h2>
+            <p>
+                La programación orientada a objetos es un paradigma que organiza el software en torno
+                a objetos que combinan datos y comportamiento. En Python, la POO facilita la creación
+                de aplicaciones más organizadas, reutilizables y fáciles de mantener.
+            </p>
+            <ul>
+                <li>Modela entidades del mundo real mediante clases y objetos.</li>
+                <li>Mejora la escalabilidad y el mantenimiento del código.</li>
+                <li>Favorece la reutilización y el trabajo colaborativo.</li>
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/linkia/object.png" alt="Diagrama de POO" width="50%">
+            </div>
+        </section>
+
+        <!-- Conceptos básicos -->
+        <section class="slide" id="conceptos-basicos-poo">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>Conceptos básicos de la POO</h3>
+            <p>
+                La POO se basa en varios conceptos fundamentales que permiten estructurar
+                correctamente los programas en Python.
+            </p>
+            <ul>
+                <li><strong>Clase</strong>: plantilla que define atributos y métodos comunes.</li>
+                <li><strong>Objeto</strong>: instancia concreta de una clase.</li>
+                <li><strong>Atributo</strong>: variable que representa el estado del objeto.</li>
+                <li><strong>Método</strong>: función que define el comportamiento del objeto.</li>
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/clase_vs_objeto.jpg" alt="Diagrama de POO" width="50%">
+            </div>
+        </section>
+
+        <!-- Definición de clases -->
+        <section class="slide" id="definicion-clases">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Definición de clases en Python</h2>
+            <p>
+                Una clase actúa como un molde a partir del cual se crean objetos. En Python,
+                se define utilizando la palabra clave <code>class</code> y una indentación adecuada.
+            </p>
+            <div class="ejemplo">
+                <strong>Ejemplo</strong>
+                <pre class="language-python"><code>"""Clase que representa a un animal""" 
+class Animal:
+    nombre = "Desconocido" """Atributo de clase"""
+    edad = 0 """Atributo de clase"""
+
+    def sonido(self): """Método que simula el sonido del animal"""
+        print("El animal hace un sonido")</code></pre>
+            </div>
+        </section>
+
+        <!-- Constructores -->
+        <section class="slide" id="constructores">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>Constructor __init__</h3>
+            <p>
+                El constructor es un método especial que se ejecuta automáticamente al crear
+                una instancia de la clase y se utiliza para inicializar sus atributos.
+            </p>
+            <p>Al defninir el constructor ya no hace falta inicializar los atributos de clase.</p>
+            <div class="ejemplo">
+                <strong>Ejemplo</strong>
+                <pre class="language-python"><code>class Animal: 
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad</code></pre>
+            </div>
+        </section>
+
+        <!-- Uso de objetos -->
+        <section class="slide" id="uso-objetos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Uso de objetos</h2>
+            <p>
+                Los objetos se crean a partir de una clase mediante un proceso llamado instanciación.
+                Cada objeto tiene sus propios valores de atributos.
+            </p>
+            <div class="ejemplo">
+                <strong>Ejemplo</strong>
+                <pre class="language-python"><code>animal1 = Animal("León", 5)
+print(animal1.nombre)
+print(animal1.edad)
+animal1.sonido()
+</code></pre>
+            </div>
+        </section>
+
+        <!-- Métodos especiales -->
+        <section class="slide" id="metodos-especiales">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>Métodos especiales</h3>
+            <p>
+                Los métodos especiales permiten personalizar el comportamiento de los objetos
+                en situaciones concretas, como su representación en pantalla.
+            </p>
+            <ul><strong>Ejemplos:</strong></ul>
+            <li><code><strong>__str__</strong></code>: Define la representación en cadena de un objeto.</li>
+            <li><code><strong>__repr__</strong></code>: Define la representación oficial de un objeto.</li>
+            <li><code><strong>__eq__</strong></code>: Define la comparación de igualdad entre objetos.</li>
+            <li><code><strong>__len__</strong></code>: Define el comportamiento de la función <code>len()</code>.</li>
+            <li><code><strong>__add__</strong></code>: Define el comportamiento de la suma entre objetos.</li>
+            <li><code><strong>__getitem__</strong></code>: Define el comportamiento de acceso a elementos con corchetes.</li>
+            <li><code><strong>__call__</strong></code>: Permite que un objeto sea llamado como una función.</li>
+            <li><code><strong>__enter__</strong><code> y <code><strong>__exit__</strong></code>: Permiten usar objetos en contextos de gestión de recursos.</li>
+            <li>...</li>
+            <div class="ejemplo">
+                <strong>Ejemplos:</strong>
+                <pre class="language-python"><code>class Animal:
+    def __init__(self, nombre, edad): # Constructor para inicializar los atributos
+        self.nombre = nombre
+        self.edad = edad
+    def __str__(self): # Representación en cadena para el usuario
+        return f"{self.nombre} tiene {self.edad} años"
+    def __eq__(self, other): # Comparación de igualdad entre objetos
+        return self.nombre == other.nombre and self.edad == other.edad
+    def __add__(self, other): # Suma de edades entre dos objetos
+        return self.edad + other.edad
+    def __getitem__(self, index): # Acceso a atributos con corchetes
+        return (self.nombre, self.edad)[index]
+    def __call__(self): # Permite que el objeto sea llamado como una función
+        print(f"{self.nombre} está siendo llamado como una función")
+    # Hay muchos más métodos especiales que permiten personalizar el comportamiento de los objetos en diferentes contextos. Revisad la documentación oficial de Python para más detalles.
+
+    </code></pre>
+            </div>
+
+        <!-- Encapsulamiento -->
+        <section class="slide" id="encapsulamiento">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Encapsulamiento y visibilidad</h2>
+            <p>
+                El encapsulamiento protege los datos internos de los objetos, limitando el acceso
+                directo a sus atributos y controlando cómo se modifican.
+            </p>
+            <ul>
+                <li><strong>Atributos públicos:</strong> accesibles sin restricciones, definidos sin guion bajo. <strong><code>especie</code></strong></li>
+                <li><strong>Atributos privados:</strong> definidos con doble guion bajo. <strong><code>__nombre</code>, <code>__edad</code></strong></li>
+            </ul>
+
+            <div class="diagram">
+                <img src="../../assets/encapsulamiento_2.jpg" width="40%" alt="Diagrama de encapsulamiento">
+            </div>
+             <div class="ejemplo">
+                <strong>Ejemplos:</strong>
+                <pre class="language-python"><code>class Animal:
+    def __init__(self, nombre, edad, especie):
+        self.__nombre = nombre # Atributo privado
+        self.__edad = edad # Atributo privado
+        self.especie = especie # Atributo público
+    def get_nombre(self): # Método getter para acceder al nombre
+        return self.__nombre
+    def set_nombre(self, nombre): # Método setter para modificar el nombre
+        self.__nombre = nombre
+    def get_edad(self): # Método getter para acceder a la edad
+        return self.__edad
+    def set_edad(self, edad): # Método setter para modificar la edad
+        if edad >= 0:
+            self.__edad = edad
+    def get_especie(self): # Método getter para acceder a la especie
+        return self.__especie
+    def set_especie(self, especie): # Método setter para modificar la especie
+        self.__especie = especie</code></pre>
+            </div>
+
+        </section>
+
+        <!-- Getters y setters -->
+        <section class="slide" id="getters-setters">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>Métodos get y set</h3>
+            <p>
+                Los métodos get y set permiten acceder y modificar atributos privados de forma
+                controlada, mejorando la seguridad y consistencia del código.
+            </p>
+            <div class="diagram">
+                <img src="../../assets/getter-setter.png" width="40%" alt="Diagrama de getters y setters">
+            </div>
+
+            <div class="ejemplo">
+                <pre class="language-python"><code>class Cuenta:
+    def __init__(self, saldo):
+        self.__saldo = saldo
+
+    def get_saldo(self):
+        return self.__saldo
+
+    def set_saldo(self, saldo):
+        if saldo >= 0:
+            self.__saldo = saldo</code></pre>
+            </div>
+        </section>
+
+        <!-- Decoradores -->
+        <section class="slide" id="decoradores">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>Decoradores @property</h3>
+            <p>
+                Los decoradores permiten definir métodos de acceso con una sintaxis más clara,
+                simulando el acceso directo a atributos.
+            </p>
+            <div class="ejemplo">
+                <pre class="language-python"><code>class Producto:
+    def __init__(self, precio):
+        self.__precio = precio
+
+    @property
+    def precio(self):
+        return self.__precio
+
+    @precio.setter
+    def precio(self, valor):
+        if valor > 0:
+            self.__precio = valor</code></pre>
+            </div>
+        </section>
+
+        <!-- Herencia -->
+        <section class="slide" id="herencia">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Herencia y reutilización</h2>
+            <p>
+                La herencia permite crear nuevas clases a partir de otras existentes,
+                reutilizando atributos y métodos sin duplicar código.
+            </p>
+            <div class="diagram">
+                <img src="../../assets/Herencia_ejemplo-1024x501.png" width="40%" alt="Diagrama de herencia">
+            </div>
+            <div class="ejemplo">
+                <pre class="language-python"><code>class Mamifero:
+    def sonido(self):
+        print("Sonido genérico")
+
+class Perro(Mamifero):
+    def sonido(self):
+        print("Guau")</code></pre>
+            </div>
+        </section>
+
+        <!-- super() -->
+        <section class="slide" id="super">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>Uso de super()</h3>
+            <p>
+                La función <code>super()</code> permite acceder a métodos de la clase base
+                desde una subclase, manteniendo el comportamiento original.
+            </p>
+            <div class="ejemplo">
+                <pre class="language-python"><code>class Vehiculo:
+    def descripcion(self):
+        print("Vehículo genérico")
+
+class Coche(Vehiculo):
+    def descripcion(self):
+        super().descripcion() # Llama al método de la clase base
+        print("Es un coche")</code></pre>
+            </div>
+        </section>
+<!-- Herencia -->
+        <section class="slide" id="herencia">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Herencia múltiple</h2>
+            <p>
+                La herencia múltiple permite crear clases que heredan de varias clases base,
+                combinando sus atributos y métodos.
+            </p>
+            <div class="diagram">
+                <img src="../../assets/multiple_inheritance.png" width="40%" alt="Diagrama de herencia múltiple">
+            </div>
+            <div class="ejemplo">
+                <pre class="language-python"><code>
+# En este ejemplo, la clase Murcielago hereda de Mamifero y Volador, combinando sus comportamientos
+
+# Mamifero define un método sonido. 
+class Mamifero:
+    def sonido(self):
+        print("Sonido genérico")
+
+# Volador define un método volar
+class Volador:
+    def volar(self):
+        print("Estoy volando")
+
+# Murcielago puede usar ambos métodos y también personalizar el método sonido para su propio comportamiento.
+# La clase Murcielago hereda de Mamifero y Volador, combinando sus comportamientos
+class Murcielago(Mamifero, Volador):
+    def sonido(self):
+        print("Chillido de murciélago")</code>
+
+    </code></pre>
+            </div>
+
+            
+        </section>
+
+
+
+    </div>
+
+    <div class="footer">
+        <div class="bar">
+            <small>UT5 · Programación orientada a objetos en Python</small>
+            <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+        </div>
+    </div>
+</body>
+
+</html>

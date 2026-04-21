@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>M224 · Píldoras formativas · SO en Red · LinkiaFP</title>
+    <meta name="description" content="Pildora 1: Fundamentos para afrontar el curso (SIMIX)." />
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="../../script.js" defer></script>
+</head>
+
+<body>
+    <div class="deck">
+
+        <!-- COVER -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+                </div>
+                <div class="title">M224 · Píldoras formativas · SO en Red</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+
+            </div>
+            <div class="logo-first-page">
+                <img src="../../../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+            </div>
+
+        </section>
+
+
+
+<!-- ========================================================= -->
+<!-- PÍLDORA 3 · VISIÓN GLOBAL DEL CURSO Y TRABAJO REAL        -->
+<!-- Vídeo 3 (~10 min)                                        -->
+<!-- ========================================================= -->
+
+<section class="slide cover" id="p3-cover">
+    <div style="max-width: 60%;">
+        <div>
+            <img src="../../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+        </div>
+        <div class="title">M224 · Píldora 3 · Administración en red</div>
+        <div class="subtitle">Configuración y gestión de recursos</div>
+    </div>
+    <div class="logo-first-page">
+        <img src="../../../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+    </div>
+</section>
+
+<section class="slide" id="p3-vision-general">
+    <img src="../../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>El trabajo de un administrador de sistemas</h2>
+    <p>
+       Los profesionales de la administración de sistemas en red se encargan de configurar, gestionar y mantener los recursos compartidos en una red.
+       Esto incluye la gestión de usuarios, grupos, permisos, recursos compartidos y la seguridad de la red.
+    </p>
+    <p><strong>Principales tareas de un administrador de sistemas en red:</strong></p>
+    <ul>
+        <li>Gestión de usuarios y grupos.</li>
+        <li>Configuración de recursos compartidos.</li>
+        <li>Seguridad y control de accesos.</li>
+        <li>Mantenimiento y resolución de problemas.</li>
+    </ul>
+    <div class="diagram">
+        <img src="../../../assets/linkia/Administración_2.jpg" style="max-width: 40%;" alt="Diagrama de un administrador de sistemas en red">
+    </div>
+</section>
+<section class="slide" id="p3-usuarios-grupos">
+    <img src="../../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>Administración de dominios</h2>
+    <p>
+        En un entorno de dominio, los administradores gestionan usuarios, grupos y recursos de forma centralizada. 
+        Esto facilita la administración y mejora la seguridad al controlar el acceso a los recursos de la red.
+    </p>
+    <p><strong>Funciones clave en la administración de dominios:</strong></p>
+    <ul>
+        <li>Creación y gestión de cuentas de usuario.</li>
+        <li>Organización de usuarios en grupos para facilitar la administración.</li>
+        <li>Asignación de permisos y derechos de acceso a recursos compartidos.</li>
+        <li>Monitoreo y mantenimiento de la seguridad de la red.</li>
+    </ul>
+    <p><strong>En windows, la administración de dominios se realiza a través del Directorio Activo (Active Directory).</strong></p>
+    <div class="diagram">
+        <img src="../../../assets/linkia/active-directory-domain.webp" style="max-width: 50%;" alt="Diagrama de administración de dominios con Active Directory">
+    </div>
+</section>
+
+<section class="slide" id="p3-usuarios-grupos">
+    <img src="../../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>Gestión de usuarios, grupos, equipos y unidades organizativas</h2>
+    <p>
+        En la administración de sistemas en red, es fundamental gestionar correctamente los usuarios, 
+        grupos, equipos y unidades organizativas para garantizar un acceso seguro y eficiente 
+        a los recursos compartidos.
+    </p>
+    <ul>
+        <li><strong>Usuarios:</strong> cuentas individuales que representan a personas o servicios en la red.</li>
+        <li><strong>Grupos:</strong> colecciones de usuarios que comparten permisos y derechos de acceso.</li>
+        <li><strong>Equipos:</strong> dispositivos conectados a la red que pueden ser gestionados centralmente.</li>
+        <li><strong>Unidades organizativas:</strong> contenedores dentro del directorio activo que permiten organizar usuarios, grupos y equipos de forma jerárquica.</li>
+    </ul>
+    <div class="diagram">
+        <img src="../../../assets/linkia/usuarios y grupos dominio.jpg" style="max-width: 50%;" alt="Diagrama de gestión de usuarios, grupos, equipos y unidades organizativas en Active Directory">
+    </div>
+</section>
+
+<section class="slide" id="p3-recursos">
+    <img src="../../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>Recursos compartidos</h2>
+    <p>
+        Para que un entorno de red funcione correctamente, es necesario configurar recursos compartidos como impresoras, carpetas y unidades de red.
+        Esto permite a los usuarios acceder a estos recursos desde cualquier dispositivo conectado a la red, facilitando la colaboración y mejorando la eficiencia.
+    </p>
+    <ul>
+        <li><strong>Impresoras compartidas:</strong> permiten a los usuarios imprimir desde cualquier dispositivo conectado a la red.</li>
+        <li><strong>Carpetas compartidas:</strong> facilitan el acceso a archivos y documentos desde diferentes dispositivos.</li>
+        <li><strong>Unidades de red:</strong> asignan letras de unidad a recursos compartidos para un acceso más fácil y rápido.</li>
+    </ul>
+    <div class="diagram">
+        <img src="../../../assets/linkia/recursos_compartidos.jpg" style="max-width: 50%;" alt="Diagrama de recursos compartidos en una red informática">
+    </div>
+</section>
+<section class="slide" id="p3-seguridad">
+    <img src="../../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>Compartición de directorio en Windows</h2>
+    <p>
+        Ejemplo de compartición de un directorio en Windows desde el menú de propiedades.
+    </p>
+    <div class="diagram">
+        <img src="../../../assets/linkia/compartir-windows.jpg" style="max-width: 60%;" alt="Diagrama de compartición de un directorio en Windows">
+    </div>
+</section>
+<section class="slide" id="p3-seguridad">
+    <img src="../../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>Seguridad y control de accesos</h2>
+    <p>
+        Para garantizar la seguridad de la red, es fundamental implementar un control de accesos adecuado.
+        Esto implica asignar permisos y derechos de acceso a los usuarios y grupos de forma cuidadosa,
+        asegurando que solo las personas autorizadas puedan acceder a los recursos compartidos.
+    </p>
+    <p><strong>Buenas prácticas para el control de accesos:</strong></p>
+    <ul>
+        <li>Asignar permisos mínimos necesarios para realizar las tareas requeridas.</li>
+        <li>Utilizar grupos para gestionar permisos de forma más eficiente.</li>
+        <li>Revisar y actualizar regularmente los permisos asignados.</li>
+        <li>Implementar políticas de seguridad para proteger la red contra accesos no autorizados.</li>
+    </ul>
+    <div class="diagram">
+        <img src="../../../assets/linkia/sistemasyoperativos_permisosNTFS.jpg" style="max-width: 50%;" alt="Diagrama de seguridad y control de accesos en una red informática">
+    </div>
+</section>
+
+<section class="slide" id="p3-mantenimiento">
+    <img src="../../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>Monitorización y mantenimiento</h2>
+    <p>
+        Un administrador de sistemas en red también se encarga de monitorizar el rendimiento de la red y realizar tareas de mantenimiento para garantizar su correcto funcionamiento.
+        <strong>Esto incluye la resolución de problemas, la actualización de software y la implementación de medidas de seguridad para proteger la red contra amenazas.</strong>
+    </p>
+    <p><strong>Herramientas comunes para la monitorización y mantenimiento:</strong></p>
+    <ul>
+        <li>Herramientas de monitorización de red para detectar problemas de rendimiento.</li>
+        <li>Software de gestión de parches para mantener el sistema actualizado.</li>
+        <li>Antivirus y firewalls para proteger la red contra amenazas.</li>
+        <li>Utilidades de diagnóstico para resolver problemas de conectividad y rendimiento.</li>
+    </ul>
+    <div class="diagram">
+        <img src="../../../assets/linkia/monitorizacion.png" style="max-width: 50%;" alt="Diagrama de monitorización y mantenimiento en una red informática">
+    </div>
+</section>
+
+<section class="slide" id="p3-cierre">
+    <img src="../../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>Integración de sistemas</h2>
+    <p>
+        En un entorno de red, es común que coexistan diferentes sistemas operativos y plataformas. 
+        La integración y gestión de estos sistemas de forma eficiente es fundamental para garantizar 
+        la interoperabilidad y el correcto funcionamiento de la red.
+    </p>
+    <p><strong>Desafíos de la integración de sistemas:</strong></p>
+    <ul>
+        <li>Compatibilidad entre diferentes sistemas operativos.</li>
+        <li>Gestión de recursos compartidos entre plataformas.</li>
+        <li>Implementación de soluciones de seguridad que funcionen en todos los sistemas.</li>
+        <li>Facilitación de la comunicación y colaboración entre usuarios de diferentes sistemas.</li>
+    </ul>
+    <div class="diagram">
+        <img src="../../../assets/linkia/network.webp" style="max-width: 40%;" alt="Diagrama de integración de sistemas en una red informática">
+    </div>
+</section>
+
+<section class="slide" id="p3-cierre">
+    <img src="../../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>Herramientas de integración de sistemas</h2>
+    <p>
+       Dependiendo del entorno y los sistemas operativos involucrados, existen diversas herramientas y soluciones para facilitar la integración de sistemas en una red.
+       Estas herramientas permiten gestionar recursos compartidos, controlar el acceso y garantizar la seguridad en un entorno heterogéneo.
+    </p>
+    <p><strong>Ejemplos de herramientas de integración de sistemas:</strong></p>
+    <ul>
+        <li><strong>Samba:</strong> permite compartir archivos e impresoras entre sistemas Windows y Linux.</li>
+        <li><strong>Active Directory (Windows server):</strong> facilita la gestión de usuarios y recursos en entornos mixtos.</li>
+        <li><strong>VPN:</strong> permite la conexión segura entre diferentes redes y sistemas operativos.</li>
+        <li><strong>Software de gestión de parches:</strong> ayuda a mantener todos los sistemas actualizados y seguros.</li>
+    </ul>
+    <div class="diagram">
+        <img src="../../../assets/linkia/vpn-ad-samba.jpg" style="max-width: 50%;" alt="Diagrama de herramientas de integración de sistemas en una red informática">
+
+    </div>
+    
+</section>
+
+    </div>
+
+    <div class="footer">
+        <div class="bar">
+            <small>M224 · Pildora 3 · SO en Red - LinkiaFP</small>
+            <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>M224 · Píldoras formativas · SO en Red · LinkiaFP</title>
+    <meta name="description" content="Pildora 1: Fundamentos para afrontar el curso (SIMIX)." />
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="../../script.js" defer></script>
+</head>
+
+<body>
+    <div class="deck">
+
+        <!-- COVER -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+                </div>
+                <div class="title">M224 · Píldoras formativas · SO en Red</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+
+            </div>
+            <div class="logo-first-page">
+                <img src="../../../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+            </div>
+
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- PÍLDORA 1 · INTRODUCCIÓN Y CONCEPTOS PREVIOS              -->
+        <!-- Vídeo 1 (~10 min)                                        -->
+        <!-- ========================================================= -->
+
+        <section class="slide cover" id="p1-cover">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+                </div>
+                <div class="title">M224 · Píldora 1 · Introducción a los Sistemas Operativos en Red</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+            </div>
+            <div class="logo-first-page">
+                <img src="../../../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+            </div>
+        </section>
+
+        <section class="slide" id="p1-que-es-so">
+            <img src="../../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>¿Qué es un sistema operativo?</h2>
+            <p>
+                Un sistema operativo es el software principal de un ordenador. Se encarga de gestionar
+                el hardware, permitir la ejecución de programas y facilitar la interacción con el usuario.
+                Sin sistema operativo, un ordenador no es funcional.
+            </p>
+            <div class="diagram">
+                <img src="../../../assets/linkia/Sistema_Operativo_2.webp" style="max-width: 50%;"
+                    alt="Diagrama de un sistema operativo">
+            </div>
+        </section>
+
+        <section class="slide" id="p1-so-escritorio-servidor">
+            <img src="../../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Sistema operativo de escritorio vs servidor</h2>
+            <p>
+                No todos los sistemas operativos están pensados para lo mismo. Existen sistemas operativos de
+                escritorio, diseñados para un uso personal, y sistemas operativos de servidor, optimizados para ofrecer
+                servicios a múltiples usuarios y equipos en red.
+            </p>
+            <ul>
+                <li><strong>Escritorio:</strong> pensado para un único usuario (Windows 10/11).</li>
+                <li><strong>Servidor:</strong> pensado para dar servicio a muchos usuarios y equipos (Linux Server,
+                    Windows Server).</li>
+            </ul>
+            <div class="diagram">
+                <img src="../../../assets/linkia/server vs desktop.png" style="max-width: 50%;"
+                    alt="Comparativa entre sistema operativo de escritorio y servidor">
+            </div>
+        </section>
+
+        <section class="slide" id="p1-que-es-red">
+            <img src="../../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>¿Qué es una red informática?</h2>
+            <p>
+                Es un conjunto de equipos conectados entre sí para compartir recursos e información.
+                Las redes pueden ser tan pequeñas como una red doméstica o tan grandes como Internet.
+                Existen diferentes tipos de redes según su alcance y propósito, pero todas comparten el objetivo de
+                facilitar la comunicación entre dispositivos.
+            </p>
+            <ul>
+                <li><strong>Red local (LAN):</strong> red que cubre un área geográfica limitada, como una oficina o una
+                    casa.</li>
+                <li><strong>Relación cliente – servidor (Dominio):</strong> modelo de comunicación donde los clientes
+                    solicitan servicios y los servidores los proporcionan.</li>
+                <li><strong>Comunicación entre equipos (Workgroup):</strong> intercambio de información entre
+                    dispositivos conectados a la red.</li>
+            </ul>
+            <div class="diagram">
+                <img src="../../../assets/linkia/domain-workgroup.jpg" style="max-width: 50%;"
+                    alt="Diagrama de una red informática">
+            </div>
+        </section>
+
+        <section class="slide" id="p1-conceptos-red">
+            <img src="../../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Conceptos básicos de red que debes conocer</h2>
+            <p>
+                Para comprender como funcionan los sistemas operativos en red,
+                es importante tener claros algunos conceptos básicos de redes.
+                Estos elementos son fundamentales para configurar y administrar una red correctamente.
+            </p>
+            <ul>
+                <li><strong>Dirección IP:</strong> es la identificación única de un dispositivo en una red.</li>
+                <li><strong>Máscara de subred:</strong> se utiliza para determinar a qué red pertenece una dirección IP.
+                </li>
+                <li><strong>Puerta de enlace:</strong> es el dispositivo que permite la comunicación entre diferentes
+                    redes.</li>
+                <li><strong>Servidor DNS:</strong> traduce nombres de dominio en direcciones IP.</li>
+                <li><strong>DHCP:</strong> protocolo que asigna automáticamente direcciones IP a los dispositivos en una
+                    red.</li>
+            </ul>
+            <div class="diagram">
+                <img src="../../../assets/linkia/ip configuration.png" style="max-width: 50%;"
+                    alt="Diagrama de conceptos básicos de red">
+            </div>
+        </section>
+
+        <section class="slide" id="p1-terminal">
+            <img src="../../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Uso básico de la terminal</h2>
+            <p>
+                La terminal es una herramienta esencial para administrar sistemas operativos en red.
+                Permite ejecutar comandos de texto para realizar tareas de configuración, administración y resolución
+                de problemas.
+                Aunque puede parecer intimidante al principio, aprender a usar la terminal te dará un control total
+                sobre el sistema.
+            </p>
+            <p><strong>Dependiendo del sistema operativo:</strong></p>
+            <ul>
+                <li><strong>Linux:</strong>ifconfig, ls, ping, telnet, etc. </li>
+                <li><strong>Windows (PowerShell):</strong> ipconfig, ping, dir, Get-Process, etc.</li>
+            </ul>
+            <div class="ejemplo">
+                <strong>Ejemplo</strong>
+                <pre class="language-bash"><code># Comandos básicos en Linux
+ifconfig
+ping google.com
+# Comandos básicos en Windows PowerShell
+ipconfig
+ping google.com</code></pre>
+            </div>
+        </section>
+
+
+
+
+    </div>
+
+    <div class="footer">
+        <div class="bar">
+            <small>M224 · Pildora 1 · SO en Red - LinkiaFP</small>
+            <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+        </div>
+    </div>
+</body>
+
+</html>

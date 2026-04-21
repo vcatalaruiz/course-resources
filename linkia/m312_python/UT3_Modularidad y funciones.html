@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UT3 · Funciones, modularidad y tipos compuestos · LinkiaFP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link rel="stylesheet" href="../style.css" />
+    <script src="../script.js" defer></script>
+</head>
+
+<body>
+    <div class="deck">
+
+        <!-- COVER -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+                </div>
+                <div class="title">UT3 · Funciones, modularidad y tipos compuestos</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+            </div>
+
+        </section>
+
+        <section class="slide" id="ut3-introduccion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>UT3. Funciones, modularidad y tipos compuestos</h2>
+            <p>
+                En esta unidad aprenderás a organizar el código en funciones y a utilizar estructuras de datos
+                compuestas
+                (listas, diccionarios y cadenas) para escribir programas en Python más limpios, modulares y
+                reutilizables.
+            </p>
+            <ul>
+                <li>Definición y uso de funciones en Python.</li>
+                <li>Recursividad: funciones que se llaman a sí mismas.</li>
+                <li>Listas, diccionarios y cadenas de texto avanzadas.</li>
+            </ul>
+        </section>
+
+        <section class="slide" id="funciones-python-definicion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            
+            <h3>1.1 Definición y llamada a funciones</h3>
+            <p>
+                Una función es un bloque de código reutilizable que realiza una tarea específica. Se define con la
+                palabra clave
+                <code>def</code>, un nombre, paréntesis y dos puntos; el cuerpo debe ir correctamente indentado.
+            </p>
+            <ul>
+                <li>Mejora la legibilidad y mantenimiento del código.</li>
+                <li>Permite reutilizar lógica en distintos puntos del programa.</li>
+                <li>Se invoca escribiendo su nombre seguido de paréntesis.</li>
+            </ul>
+            <pre class="language-python"><code>def saludar():
+    print("Hola, mundo")
+
+# Llamada a la función
+saludar()</code></pre>
+        </section>
+
+        <section class="slide" id="funciones-python-parametros-retorno">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            
+            <h3>1.2 Parámetros y retorno de valores</h3>
+            <p>
+                Las funciones pueden recibir información mediante parámetros y devolver resultados con la instrucción
+                <code>return</code>. También es posible definir valores por defecto para algunos parámetros.
+            </p>
+            <ul>
+                <li>Los parámetros permiten personalizar el comportamiento de la función.</li>
+                <li><code>return</code> finaliza la función y devuelve un valor.</li>
+                <li>Los parámetros con valor por defecto se indican como <code>param=valor</code>.</li>
+            </ul>
+            <pre class="language-python"><code>def sumar(a, b=0):
+    """Devuelve la suma de a y b."""
+    return a + b
+
+print(sumar(3, 5))   # 8
+print(sumar(10))     # 10, usa el valor por defecto de b</code></pre>
+        </section>
+
+        <section class="slide" id="funciones-python-ambito-variables">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            
+            <h3>1.3 Variables locales y globales</h3>
+            <p>
+                Las variables locales solo existen dentro de la función donde se declaran; las variables globales se
+                definen fuera de cualquier función y son accesibles desde distintos puntos del programa.
+            </p>
+            <ul>
+                <li>Una variable local deja de existir al terminar la función.</li>
+                <li>Una variable global puede leerse desde funciones.</li>
+                <li>Para modificar una global dentro de una función se usa la palabra clave <code>global</code>.</li>
+            </ul>
+            <pre class="language-python"><code>mensaje = "Hola desde fuera"
+def mostrar():
+    global mensaje
+    mensaje = "Hola desde la función"
+    print(mensaje)
+mostrar()
+print(mensaje)</code></pre>
+        </section>
+
+        <section class="slide" id="funciones-python-paso-referencia">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            
+            <h3>1.4 Paso por valor y por referencia</h3>
+            <p>
+                En Python los argumentos se pasan por asignación de referencia. Pueden ser:
+            </p>
+            <ul>
+                <li>Objetos mutables (listas, diccionarios) pueden modificarse dentro de la función.</li>
+                <li>Objetos inmutables (enteros, cadenas) no cambian su valor original.</li>
+                <li>Es importante conocer el tipo de dato para evitar efectos secundarios inesperados.</li>
+            </ul>
+            <pre class="language-python"><code>def agregar_elemento(lista):
+    lista.append(4)  # Modifica la lista original
+def incrementar(numero):
+    numero += 1      # No modifica el entero original
+    return numero
+datos = [1, 2, 3]
+agregar_elemento(datos)
+print(datos)   # [1, 2, 3, 4]
+n = 10
+print(incrementar(n))  # 11
+print(n)               # 10</code></pre>
+
+        </section>
+
+        <section class="slide" id="recursividad-concepto">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>2. Recursividad</h2>
+            <h3>2.1 Concepto y ejemplos básicos</h3>
+            <p>
+                La recursividad es una técnica en la que una función se llama a sí misma para resolver un problema.
+            </p>
+            <ul>
+                <li>Cada llamada recursiva trabaja con una versión más simple del problema.</li>
+                <li>Debe existir siempre un caso base que detenga la recursión.</li>
+                <li>Es especialmente útil en problemas definidos de forma inductiva (factoriales, recorridos, etc.).
+                </li>
+            </ul>
+            <pre class="language-python"><code>def factorial(n):
+    if n == 0:            # Caso base
+        return 1
+    else:                 # Llamada recursiva
+        return n * factorial(n - 1)
+
+print(factorial(5))  # 120</code></pre>
+        </section>
+
+        <section class="slide" id="recursividad-caso-base-llamadas">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            
+            <h3>2.2 Casos base y llamadas recursivas</h3>
+            <p>
+                El caso base determina cuándo se detiene la recursión. La llamada recursiva debe modificar los
+                parámetros para
+                acercar el problema a ese caso base y evitar bucles infinitos.
+            </p>
+            <ul>
+                <li>Sin caso base, la recursión produce un desbordamiento de pila (<em>stack overflow</em>).</li>
+                <li>El caso base debe alcanzarse tras un número finito de llamadas.</li>
+                <li>La llamada recursiva reduce el problema en cada paso.</li>
+            </ul>
+            <pre class="language-python"><code>def suma_recursiva(n):
+    if n == 1:           # Caso base
+        return 1
+    else:                # Llamada recursiva
+        return n + suma_recursiva(n - 1)
+
+print(suma_recursiva(5))  # 15</code></pre>
+        </section>
+
+        <section class="slide" id="listas-creacion-metodos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>3. Listas</h2>
+            <h3>3.1 Creación, recorrido y métodos básicos</h3>
+            <p>
+                Una lista permite almacenar múltiples elementos en una única variable. Es
+                ordenada y mutable, por lo que se pueden añadir, modificar y eliminar elementos.
+            </p>
+            <ul>
+                <li>Se define entre corchetes <code>[]</code> separados por comas.</li>
+                <li>Se recorre fácilmente con un bucle <code>for</code>.</li>
+                <li>Dispone de métodos como <code>append()</code>, <code>remove()</code>, <code>sort()</code>, etc.
+                </li>
+            </ul>
+            <pre class="language-python"><code>frutas = ["manzana", "plátano", "naranja"]
+for fruta in frutas:
+    print(fruta)
+frutas.append("pera")
+frutas.sort()
+print(frutas)</code></pre>
+        </section>
+
+        <section class="slide" id="listas-comprension">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            
+            <h3>3.3 Comprensión de listas</h3>
+            <p>
+                La comprensión de listas permite crear listas de forma compacta y legible a partir de iteraciones y
+                condiciones,
+                en una sola línea de código.
+            </p>
+            <ul>
+                <li>Sintaxis general: <code>[expresion for elemento in iterable if condicion]</code>.</li>
+                <li>Facilita transformaciones y filtrados sobre colecciones.</li>
+                <li>Hace el código más conciso que los bucles tradicionales en muchos casos.</li>
+            </ul>
+            <pre class="language-python"><code>numeros = [1, 2, 3, 4, 5]
+
+cuadrados = [n ** 2 for n in numeros]
+pares = [n for n in numeros if n % 2 == 0]
+
+print(cuadrados)  # [1, 4, 9, 16, 25]
+print(pares)      # [2, 4]</code></pre>
+        </section>
+
+        <section class="slide" id="diccionarios-estructura-metodos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>4. Diccionarios</h2>
+            <h3>4.1 Estructura clave–valor y métodos</h3>
+            <p>
+                Un diccionario almacena pares <strong>clave–valor</strong>. Cada clave es única y sirve para acceder
+                rápidamente a su valor asociado. Es una estructura mutable y muy eficiente para búsquedas.
+            </p>
+            <ul>
+                <li>Se definen con llaves <code>{}</code> y pares <code>clave: valor</code>.</li>
+                <li>Acceso directo mediante <code>dic["clave"]</code> o <code>dic.get("clave")</code>.</li>
+                <li>Métodos útiles: <code>keys()</code>, <code>values()</code>, <code>items()</code>,
+                    <code>pop()</code>, <code>update()</code>.
+                </li>
+            </ul>
+            <pre class="language-python"><code>persona = {"nombre": "Ana", "edad": 30, "activo": True}
+
+print(persona.get("nombre", "Sin nombre"))
+
+for clave, valor in persona.items():
+    print(clave, "=", valor)</code></pre>
+        </section>
+
+        <section class="slide" id="diccionarios-anidados">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            
+            <h3>4.4 Anidamiento y usos prácticos</h3>
+            <p>
+                Los diccionarios pueden contener otros diccionarios, listas u otras estructuras complejas, lo que
+                permite
+                representar información estructurada como la de varios estudiantes o registros.
+            </p>
+            <ul>
+                <li>Permiten modelar datos similares a estructuras JSON.</li>
+                <li>Facilitan agrupar información relacionada bajo una misma clave principal.</li>
+                <li>Son muy útiles en programas que gestionan datos estructurados.</li>
+            </ul>
+            <pre class="language-python"><code>estudiantes = {
+    "001": {"nombre": "Ana", "nota": 8.5},
+    "002": {"nombre": "Luis", "nota": 7.0}
+}
+
+print(estudiantes["001"]["nombre"])  # Ana</code></pre>
+        </section>
+
+        <section class="slide" id="cadenas-metodos-avanzados">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>5. Cadenas de texto avanzadas</h2>
+            <h3>5.1 Métodos de transformación y búsqueda</h3>
+            <p>
+                Las cadenas de texto (strings) son secuencias de caracteres inmutables. Python ofrece numerosos métodos
+                para
+                transformarlas y buscar información dentro de ellas.
+            </p>
+            <ul>
+                <li>Transformación: <code>lower()</code>, <code>upper()</code>, <code>capitalize()</code>,
+                    <code>title()</code>, <code>strip()</code>, <code>replace()</code>.
+                </li>
+                <li>Búsqueda: <code>find()</code>, <code>count()</code>, <code>startswith()</code>,
+                    <code>endswith()</code>.
+                </li>
+                <li>Permiten normalizar texto, limpiar espacios y localizar subcadenas.</li>
+            </ul>
+            <pre class="language-python"><code>texto = "  Programación en Python  "
+
+print(texto.strip().upper())
+print(texto.find("Python"))
+print(texto.count("o"))</code></pre>
+        </section>
+
+        <section class="slide" id="cadenas-segmentacion-formateo">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>5.2 Segmentación y formateo de cadenas</h3>
+            <p>
+                Las cadenas permiten realizar las siguientes operaciones:
+            </p>
+            <ul>
+                <li><strong>Segmentación:</strong> <code>texto[i]</code>, <code>texto[inicio:fin]</code>.</li>
+                <li><strong>División y unión:</strong> <code>split()</code> y <code>join()</code>.</li>
+                <li><strong>Formateo:</strong> <code>"{}".format(valor)</code> y <code>f"{valor}"</code>.</li>
+            </ul>
+            <pre class="language-python"><code>nombre_completo = "Ana García López"
+partes = nombre_completo.split()
+apellido = partes[-1]
+mensaje1 = "Hola, {} {}".format(partes[0], apellido)
+mensaje2 = f"Hola, {partes[0]} {apellido}"
+print(apellido, mensaje1, mensaje2)
+</code></pre>
+        </section>
+    </div>
+
+    <div class="footer">
+        <div class="bar">
+            <small>UT3 · Funciones, modularidad y tipos compuestos</small>
+            <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+        </div>
+    </div>
+</body>
+
+</html>

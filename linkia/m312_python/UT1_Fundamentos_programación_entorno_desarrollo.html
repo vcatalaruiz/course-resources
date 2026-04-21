@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UT1 · Fundamentos de programación y entorno de desarrollo · LinkiaFP</title>
+    <meta name="description"
+        content="Presentación HTML con secciones tipo diapositiva para la UT1: Fundamentos de programación y entorno de desarrollo." />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link rel="stylesheet" href="../style.css" />
+    <script src="../script.js" defer></script>
+</head>
+
+<body>
+    <div class="deck">
+
+        <!-- COVER -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+                </div>
+                <div class="title">UT1 · Fundamentos de programación y entorno de desarrollo</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+            </div>
+
+        </section>
+
+        <!-- ===========================
+  1. INTRODUCCIÓN A LA PROGRAMACIÓN
+=========================== -->
+        <section class="slide">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+                <h2>Introducción a la programación</h2>
+
+                <div class=" diagram">
+                    <img src="../../assets/linkia/automatizar-tareas.jpg" style="max-width: 30%;" alt="resolver tareas">
+                </div>
+
+                <div>
+                    <p>
+                        La programación es el proceso de <strong>diseñar y crear instrucciones</strong> que indican a un
+                        ordenador cómo realizar tareas,
+                        desde acciones simples hasta sistemas complejos, con el objetivo de resolver problemas de forma
+                        <strong>lógica y estructurada</strong>.
+                    </p>
+                    <ul>
+                        <li>Transforma necesidades en software que ejecuta pasos precisos.</li>
+                        <li>Se apoya en algoritmos, lenguajes y buenas prácticas.</li>
+                        <li>Permite automatizar procesos, crear aplicaciones y analizar datos.</li>
+                    </ul>
+
+                    <ul class="note">
+                        Ejemplos:
+                        <li><strong>Tarea simple:</strong> calcular el total de una compra con impuestos.</li>
+                        <li><strong>Tarea compleja:</strong> coordinar resultados en un buscador web.</li>
+                    </ul>
+
+
+                </div>
+        </section>
+
+        <!-- 1.1 CONCEPTO DE ALGORITMO -->
+        <section class="slide">
+
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Logo Linkia">
+            <h2>Concepto de algoritmo</h2>
+
+
+            <p>
+                Un <strong>algoritmo</strong> es una <em>secuencia finita y ordenada de pasos</em> para resolver
+                un problema específico.
+                Debe ser claro, preciso y producir un resultado a partir de datos de entrada.
+            </p>
+            <ul>
+                <li><strong>Finito:</strong> termina en un número limitado de pasos.</li>
+                <li><strong>Definido:</strong> cada paso es inequívoco.</li>
+                <li><strong>Ordenado:</strong> se ejecuta en un orden concreto.</li>
+            </ul>
+            <ul class="note">
+                En el siguiente ejemplo, se muestra un algoritmo para comprobar el estado de una lámpara.
+                <div class="diagram">
+                    <img src="../../assets/linkia/LampFlowchart-es.svg" style="max-width: 30%;"
+                        alt="Diagrama de flujo simple de un algoritmo">
+                </div>
+            </ul>
+
+        </section>
+
+        <!-- 1.2 FASES DE DESARROLLO DE UN PROGRAMA -->
+        <section class="slide">
+            <div>
+                <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Logo Linkia">
+            </div>
+            <h2>Fases de desarrollo de un programa</h2>
+
+
+            <p>
+                El ciclo de desarrollo asegura que la solución cumpla requisitos, sea de calidad y se mantenga en el
+                tiempo.
+            </p>
+            <div class=" diagram">
+                <img src="../../assets/linkia/fase_desarrollo_programa.jpg" style="max-width: 30%;"
+                    alt="Ciclo: análisis → diseño → implementación → pruebas → mantenimiento">
+            </div>
+            <ul>
+                <li><strong>Análisis:</strong> comprensión del problema y recogida de requisitos.</li>
+                <li><strong>Diseño:</strong> planificación con diagramas de flujo y/o pseudocódigo.</li>
+                <li><strong>Implementación:</strong> escritura del código en el lenguaje elegido.</li>
+                <li><strong>Verificación:</strong> depuración y validación de entradas y salidas.</li>
+                <li><strong>Mantenimiento:</strong> correcciones y nuevas funcionalidades.</li>
+            </ul>
+            <ul class="note">
+                Ejemplo:
+                <li>Para una app de notas: análisis (funcionalidades), diseño (pantallas/datos), implementación
+                    (código), pruebas (corrección de fallos), mantenimiento (nuevas vistas/filtros).</li>
+            </ul>
+
+        </section>
+
+        <!-- 1.3 LENGUAJES: TIPOS Y EVOLUCIÓN -->
+        <section class="slide">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Logo Linkia"></div>
+            <h2>Lenguajes de programación: tipos y evolución</h2>
+            <div class=" diagram">
+                <img src="../../assets/linkia/abstraction_level.jpg" style="max-width: 30%;"
+                    alt="Evolución de bajo nivel a alto nivel; Python como alto nivel e interpretado">
+            </div>
+            <div>
+                <p>
+                    Los lenguajes han evolucionado desde <strong>bajo nivel</strong> (ensamblador) hasta <strong>alto
+                        nivel</strong> (p. ej., Python),
+                    equilibrando cercanía al hardware y productividad del desarrollador.
+                </p>
+                <ul>
+                    <li><strong>Bajo nivel:</strong> lenguajes de máquina y ensamblador. Se ejecutan directamente en el
+                        hardware y "hablan" directamente al procesador.</li>
+                    <li><strong>Alto nivel:</strong> lenguajes como Python, Java o C#. Abstracción de detalles de
+                        hardware, más legibles y fáciles de escribir.</li>
+                </ul>
+                <p><strong>Tipos de lenguajes</strong></p>
+
+                <ul>
+                    <li><strong>Interpretados:</strong> se ejecutan sin compilación previa; favorecen rapidez de
+                        desarrollo (Python, JavaScript, Ruby, ...).</li>
+                    <li><strong>Compilados:</strong> requieren traducción a código máquina antes de ejecutar; suelen
+                        ser más rápidos en ejecución (Java, C++, Go, ...).</li>
+                </ul>
+                <ul class="note">
+                    Ejemplos:
+                    <li><strong>Python:</strong> alto nivel, interpretado, fácil de aprender y con gran ecosistema.</li>
+                    <li><strong>C:</strong> medio nivel, compilado, potente para sistemas y aplicaciones de alto
+                        rendimiento.</li>
+                    <li><strong>Ensamblador:</strong> bajo nivel, específico para cada arquitectura, usado para tareas
+                        críticas de rendimiento o control de hardware.</li>
+
+                </ul>
+
+            </div>
+        </section>
+
+        <!-- ===========================
+  2. ENTORNO DE DESARROLLO EN PYTHON
+=========================== -->
+        <section class="slide">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Logo Linkia"></div>
+            <h2>El entorno de desarrollo en Python</h2>
+
+            <div>
+                <p>
+                    Un entorno de desarrollo integra herramientas para <strong>escribir, depurar y ejecutar</strong>
+                    programas.
+                    Elegir y configurar bien el entorno aumenta la productividad y la calidad del código.
+                </p>
+                <ul>
+                    <li>Editor/IDE, intérprete de Python, depurador, gestor de proyectos y extensiones.</li>
+                    <li>Permite probar código, aislar errores y documentar de forma eficiente.</li>
+                </ul>
+                <ul class="note">
+                    Top editores/IDEs para Python:
+                    <li><strong>IDLE:</strong> integrado con Python, ideal para principiantes.</li>
+                    <li><strong>Thonny:</strong> sencillo y orientado a la enseñanza.</li>
+                    <li><strong>VSCode:</strong> potente, con soporte avanzado para Python. <strong>[Lo utilizaremos en
+                            clase]</strong></strong></li>
+                    <li><strong>PyCharm:</strong> completo, con soporte para proyectos grandes.</li>
+                    <li>Muchas más..</li>
+                    <div class=" diagram">
+                        <img src="../../assets/linkia/Best-Python-IDE-for-Development_1.2.png" style="max-width: 50%;"
+                            alt="IDE/editor + intérprete + herramientas">
+                    </div>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 2.1 INSTALACIÓN DE PYTHON -->
+        <section class="slide">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Logo Linkia"></div>
+            <h2>Instalación de Python</h2>
+
+            <div>
+                <p>Es muy sencillo instalar Python desde el sitio oficial. Pasos para su instalación:</p>
+                <ol>
+                    <li>Descarga el instalador desde <a href="https://www.python.org/downloads/"
+                            target="_blank">python.org/downloads</a>.</li>
+                    <li>Ejecuta el instalador como administrador.</li>
+                    <li>Marca la opción "Add Python to PATH" durante la instalación.</li>
+                    <li>Completa la instalación y reinicia el sistema si es necesario.</li>
+                </ol>
+                <div class="diagram">
+                    <img src="../../assets/linkia/python-installation-options.png" style="max-width: 30%;"
+                        alt="Descarga e instalación desde python.org">
+                </div>
+                <ul class="note">
+                    <li>Verifica la versión con <code>python --version</code> o <code>py --version</code> (Windows).
+                    </li>
+                    <li>Descarga la última versión estable de Python. La versión de la imagen puede estar
+                        desactualizada.</li>
+                </ul>
+            </div>
+        </section>
+
+
+
+        <!-- ===========================
+  3. ESTRUCTURA BÁSICA DE UN PROGRAMA EN PYTHON
+=========================== -->
+        <section class="slide">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Logo Linkia"></div>
+
+            <h2>Estructura básica de un programa en Python</h2>
+            <div class="diagram">
+                <img src="../../assets/linkia/Python-logo.png" style="max-width: 50%;"
+                    alt="Secuencia de instrucciones y estructuras de control">
+            </div>
+            <div>
+                <p>
+                    Un programa en Python sigue una <strong>lógica definida por su sintaxis</strong> y se ejecuta de
+                    forma secuencial,
+                    salvo que se indiquen <strong>estructuras de control</strong> (condicionales, bucles, etc.).
+                </p>
+                <ul>
+                    <li>Bloques claros y legibles.</li>
+                    <li>Uso de comentarios para documentar.</li>
+                    <li>Ejecución secuencial + control de flujo cuando se necesita.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 3.1 COMENTARIOS Y SINTAXIS GENERAL -->
+        <section class="slide">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Logo Linkia"></div>
+            <h2>Comentarios y sintaxis general</h2>
+            <pre><code class="language-python">
+        # Comentario de una sola línea con el corchete
+        """Si necesito escribir en varias líneas, 
+        uso comillas triples."""
+    </code></pre>
+
+            <div>
+                <p>
+                    Los <strong>comentarios</strong> explican el código y no se ejecutan. En Python se escriben con
+                    <code>#</code>.
+                    La sintaxis favorece instrucciones claras y legibles.
+                </p>
+                <ul class="note">
+                    Ejemplos:
+                    <li><code># Este es un comentario</code></li>
+                    <li><code>print("Hola Mundo")  # Imprime un mensaje</code></li>
+                </ul>
+                
+            </div>
+        </section>
+
+        <!-- 3.2 IDENTACIÓN Y NORMAS DE ESTILO -->
+        <section class="slide">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Logo Linkia"></div>
+            <h2>Identación y normas de estilo</h2>
+
+            <div>
+                <p>
+                    Python usa la <strong>identación</strong> para delimitar bloques (no emplea llaves). La guía PEP 8
+                    recomienda
+                    <strong>4 espacios</strong> por nivel para mejorar la legibilidad y evitar errores.
+                </p>
+                <p>En el siguiente ejemplo se puede ver cómo se identan los bloques <em>(ahora no es necesario entender
+                        el código, solo observar la estructura y ver que el bloque del <code>if</code> está indentado
+                        respecto a la condición,
+                        y el bloque del <code>else</code> también está indentado pero al mismo nivel que el bloque del
+                        <code>if</code>)</em>.
+
+                </p>
+                <pre><code class="language-python">
+if x > 0:                       
+    print("positivo")       
+else:                       
+    print("negativo o cero")
+                </code></pre>
+            </div>
+        </section>
+
+        <!-- 3.3 ESTRUCTURA LÓGICA DEL CÓDIGO FUENTE -->
+        <section class="slide">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Logo Linkia"></div>
+            <h2>Estructura lógica del código fuente</h2>
+
+            <div>
+                <p>
+                    Las instrucciones se organizan en líneas y bloques. Por defecto se ejecutan en
+                    <strong>secuencia</strong>;
+                    los <strong>condicionales</strong> y <strong>bucles</strong> modifican ese flujo según la lógica del
+                    programa.
+                </p>
+                <ul>
+                    <li>Estructuras de control para tomar decisiones y repetir tareas.</li>
+                    <li>Claridad en bloques para facilitar mantenimiento y depuración.</li>
+                </ul>
+                <p><strong>Ejemplo:</strong></p>
+                <pre><code class="language-python">
+for i in range(5):              #línea 1
+    if i % 2 == 0:              #línea 2
+        print(f"{i} es par")    #línea 3
+    else:                       #línea 4
+        print(f"{i} es impar")  #línea 5
+                </code></pre>
+            </div>
+        </section>
+<!-- ===========================
+  5. VARIABLES, CONSTANTES Y OPERADORES
+=========================== -->
+        <section class="slide">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Logo Linkia"></div>
+    <h2>Variables, constantes y operadores</h2>
+    
+            <div>
+                <p>En Python existen tres tipos de elementos fundamentales para almacenar y manipular datos: <strong>variables</strong>, <strong>constantes</strong> y <strong>operadores</strong>.</p>
+                <ul>
+                    <li><strong>Variables:</strong> espacios de memoria con un nombre que pueden contener datos que cambian durante la ejecución del programa. Las iremos viendo en los siguientes apartados de este tema.</li>
+                    <pre><code class="language-python">
+edad = 25           # Declaración de una variable llamada edad y asignación del valor 25
+nombre = "Ana"      # Declaración de una variable llamada nombre y asignación del valor
+                    </code></pre>
+                    <li><strong>Constantes:</strong> valores fijos que no cambian durante la ejecución. En Python no hay una sintaxis específica para definir constantes, pero se suele usar mayúsculas para indicar que un valor es constante (p. ej., <code>PI = 3.14159</code>).</li>
+                    <pre><code class="language-python">
+PI = 3.14159       # Constante llamada PI
+                    </code></pre>
+                    <li><strong>Operadores:</strong> símbolos o palabras clave que realizan operaciones sobre variables y constantes, como suma (<code>+</code>), comparación (<code>==</code>) o lógica (<code>and</code>).</li>
+                    <pre><code class="language-python">
+x = 5
+y = 3
+print(x + y)        # Salida: 8
+                    </code></pre>
+                </ul>
+                
+                
+            </div>
+        </section>
+
+        <!-- 5.1 DECLARACIÓN E INICIALIZACIÓN DE VARIABLES -->
+        <section class="slide">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Logo Linkia"></div>
+            <h2>Declaración e inicialización de variables</h2>
+            
+            <div>
+                <p>
+                    En Python las variables se <strong>crean al asignarles un valor</strong>, sin declarar el tipo
+                    explícitamente. <strong>Este tipo de asignación se denomina tipado dinámico</strong>.
+                </p>
+                <ul class="note">
+                   
+                    <p><strong>Ejemplo:</strong></p>
+                <div class=" diagram">
+                <img src="../../assets/linkia/variable_python.png" style="max-width: 50%;" alt="Variables almacenan datos; operadores realizan operaciones">
+            </div>
+                </ul>
+            </div>
+        </section>
+
+        
+
+        <!-- 5.3 CONSTANTES Y LITERALES -->
+        <section class="slide">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Logo Linkia"></div>
+
+                <h2>Constantes y literales</h2>
+                
+                <div>
+                    <p>
+                        Una <strong>constante</strong> es un valor que no cambia durante la ejecución.
+                        Los <strong>literales</strong> son valores escritos directamente en el código (números, cadenas,
+                        booleanos). Se utilizan para asignar valores a variables o para representar datos fijos en el programa que no deben modificarse.
+                    </p>
+                    <ul class="note">
+                        Ejemplos:
+                        <li><code>PI = 3.14159</code></li>
+                        <li><code>MENSAJE = "Bienvenido"</code></li>
+                        <li><code>ACTIVO = True</code></li>
+                    </ul>
+                </div>
+        </section>
+        <!-- ===========================
+  4. TIPOS DE DATOS SIMPLES
+=========================== -->
+        <section class="slide">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Logo Linkia"></div>
+            <h2>Tipos de datos simples</h2>
+            
+            <div>
+                <p>
+                    Python utiliza <strong>tipado dinámico</strong> y ofrece tipos básicos para representar números,
+                    texto y valores lógicos.
+                </p>
+                <p>El tipado dinámico significa que el tipo de una variable se determina en tiempo de ejecución según el valor asignado. No es 
+                    necesario declarar el tipo explícitamente, lo que facilita la escritura de código pero requiere cuidado para evitar errores de tipo.
+                </p>
+                <p>Los tipos más utilizados son los siguientes:</p>
+                <ul>
+                    <li><strong>int</strong>: para números enteros, como 5, -3, 0.</li>
+                    <li><strong>float</strong>: para números con decimales, como 3.14, -0.001.</li>
+                    <li><strong>str</strong>: para cadenas de texto, como "Hola", 'Python'.</li>
+                    <li><strong>bool</strong>: para valores lógicos, que pueden ser <code>True</code> o <code>False</code>.</li>
+                    <li><strong>NoneType</strong>: representa la ausencia de valor, con el único valor posible <code>None</code>.</li>
+                    <li><strong>Otros tipos:</strong> listas, tuplas, diccionarios, conjuntos, etc., que veremos en unidades posteriores.</li>
+                </ul>
+                <div class=" diagram">
+                <img src="../../assets/linkia/tipado_dinamico.jpg" style="max-width: 50%;" alt="Resumen de int, float, str, bool">
+            </div>
+            </div>
+        </section>
+
+        <!-- 4.1 NÚMEROS ENTEROS Y DECIMALES -->
+        <section class="slide">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Logo Linkia"></div>
+            <h2>Números enteros y decimales</h2>
+                
+                <div>
+                    <p>
+                        Python trabaja con <strong>enteros (int)</strong> y <strong>flotantes (float)</strong> para
+                        representar cantidades con y sin decimales.
+                    </p>
+                    <ul class="note">
+                        Ejemplo declaración de variables numéricas:
+                        <pre><code class="language-python">
+edad = 30           # int
+precio = 19.99      # float
+                        </code></pre>
+                        Ejemplo de operaciones:
+                        <pre><code class="language-python">
+suma = edad + 5             # operación aritmética con enteros
+print(suma)                 # Imprime 35
+descuento = precio * 0.1    # operación aritmética con flotantes
+print(descuento)            # Imprime 1.999
+                        </code></pre>
+
+                    </ul>
+                    
+                </div>
+        </section>
+
+        <!-- 4.2 CADENAS DE TEXTO -->
+        <section class="slide">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Logo Linkia"></div>
+            <h2>Cadenas de texto (str)</h2>
+            <p>
+                    Las <strong>cadenas (str)</strong> son secuencias de caracteres entre comillas simples o dobles.
+                </p>
+            <div class=" diagram">
+                <img src="../../assets/linkia/str_python.webp" style="max-width: 50%;"
+                    alt="Representación de cadenas con comillas">
+            </div>
+            <div>
+                <p>Se pueden unir varias palabras con el operador <code>+</code>. <strong>A esta acción se le llama concatenación de cadenas.</strong></p>
+                <ul class="note">
+                    Ejemplo:
+                    <pre><code class="language-python">
+nombre = "Ana"                  # Declaración de una cadena y asignación a la variable nombre el valor "Ana"
+saludo = 'Hola, ' + nombre      # Operación con una cadena literal y una variable, concatenando "Hola, " con el valor de nombre
+print(saludo)                   # Imprime "Hola, Ana"
+                    </code></pre>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 4.3 BOOLEANOS -->
+        <section class="slide">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Logo Linkia"></div>
+            <h2>Booleanos</h2>
+            
+            <div>
+                <p>
+                    Los valores <strong>booleanos (bool)</strong> representan lógica <code>True</code> o
+                    <code>False</code> y se usan en decisiones del programa.
+                </p>
+                <p> Estos resultados se usan en estructuras de control (que iremos viendo en el tema de control de flujo) como <code>if</code>, <code>while</code>, etc.</p>
+                <p> En el siguiente ejemplo vemos cuál es el resultado de unas operación lógicas. <strong>No os preocupéis por entender el código, lo importante es observar que el resultado de estas operaciones es un valor booleano (True o False).</strong></p>
+                <div class="diagram">
+                <img src="../../assets/linkia/python-boolean-operators.webp" style="max-width: 50%;" alt="True/False aplicado a condiciones">
+            </div>
+                <ul class="note">
+                    Ejemplo de operaciones lógicas que producen valores booleanos:
+                    <pre><code class="language-python">
+es_mayor = edad > 18                                        # Evaluación de una condición, el resultado es un valor booleano
+print(es_mayor)                                             # Imprime True si edad es mayor que 18, False en caso contrario
+es_adulto_residente_ES = (edad >= 18) and (pais == "ES")    # Evaluación de una condición compuesta, el resultado es un valor booleano
+                    </code></pre>
+                </ul>
+            </div>
+        </section>
+
+        
+
+        <!-- 5.4 OPERADORES: ARITMÉTICOS, LÓGICOS Y RELACIONALES -->
+        <section class="slide">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Logo Linkia"></div>
+    <h2>Operadores: aritméticos, lógicos y relacionales</h2>
+    
+            <div>
+                <p>
+                    Los <strong>operadores</strong> permiten construir expresiones y realizar cálculos y comparaciones.
+                </p>
+                <table>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Operadores</th>
+                        <th>Ejemplo</th>
+                    </tr>
+                    <tr>
+                        <td>Aritméticos</td>
+                        <td><code>+ (suma)</code><br><code>- (resta)</code><br><code>* (multiplicación)</code><br><code>/ (división)</code><br><code>% (módulo)</code></td>
+                        <td><code>sumar = precio + cantidad</code><br><code>restar = total - precio</code><code>multiplica = precio * cantidad</code><br><code>divide = total / cantidad</code><br><code>resto = 10 % 2</code></td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Relacionales</td>
+                        <td><code>== (igualar)</code><br><code>!= (distinto)</code><br><code>&gt; (mayor que)</code><br><code>&lt; (menor que)</code><br><code>&gt;= (mayor o igual que)</code><br><code>&lt;= (menor o igual que)</code></td>
+                        <td><code>mismo = a == b</code></td>
+                    </tr>
+                    <tr>
+                        <td>Lógicos</td>
+                        <td><code>and (y)</code><br><code>or (o)</code><br><code>not (no)</code></td>
+                        <td><code>es_adulto_y_residente_ES = edad >= 18 and pais == "ES"</code><br><code>es_adulto_o_residente = edad >= 18 or pais == "ES"</code><br><code>no_es_adulto = not (edad >= 18) # es una negación de lo que se indica. Utilizado en lógica más avanzada.</code></td>
+                    </tr>
+                </table>
+                <ul class="note">
+                    <strong>Keep calm! :) <em>La lógica de programación no es sencilla, aquí vemos las reglas básicas, pero hay muchas más que iremos viendo durante el curso.</em></strong>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ===========================
+  6. ENTRADA Y SALIDA BÁSICA
+=========================== -->
+        <section class="slide">
+            <div><img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Logo Linkia"></div>
+            <h2>Entrada y salida básica</h2>
+                
+                <div>
+                    <p>
+                        La interacción con el usuario se realiza a través de <strong>entrada</strong> y
+                        <strong>salida</strong> por consola u otros medios.
+                        En esta unidad trabajamos con funciones para leer y mostrar información.
+                    </p>
+                    <ul>
+                        <li><strong>Entrada:</strong> capturar datos con <code>input()</code>. Se producen dos acciones, mostrar mensaje y obtención de información introducida por teclado.</li>
+                        <li><strong>Salida:</strong> visualizar resultados con <code>print()</code>. Mostrará información en la consola.</li>
+                    </ul>
+                </div>
+                <div class="note">
+                    <strong>Ejemplo de interacción:</strong>
+                    <pre><code class="language-python">
+nombre = input("¿Cómo te llamas? ")  # Entrada de datos
+print("Hola, " + nombre)              # Salida de datos
+                    </code></pre>
+                </div>
+        </section>
+
+        
+
+        
+
+
+
+    </div>
+
+    <div class="footer">
+        <div class="bar">
+            <small>UT1 · Fundamentos de programación y entorno de desarrollo</small>
+            <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+        </div>
+    </div>
+</body>
+
+</html>

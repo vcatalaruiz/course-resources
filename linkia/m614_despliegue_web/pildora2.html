@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>M614 Despliegue Web · Píldoras formativas</title>
+    <meta name="description" content="Presentación HTML con secciones tipo diapositiva para la píldora formativa." />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link rel="stylesheet" href="../style.css" />
+    <script src="../script.js" defer></script>
+</head>
+
+<body>
+    <div class="deck">
+        <!-- ====================== COVER ====================== -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+                </div>
+                <div class="title">M614 Despliegue Web Píldoras formativas </div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;" alt="">
+            </div>
+        </section>
+
+        
+
+
+        <!-- ========================================================= -->
+        <!-- PÍLDORA 2 – CONFIGURACIÓN DE APACHE                        -->
+        <!-- ========================================================= -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+                </div>
+                <div class="title">Píldora 2: Configuración de Apache, servidor de aplicaciones y LAMP</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;" alt="">
+            </div>
+        </section>
+        <!-- Virtual Hosts -->
+        <section class="slide" id="p2-virtualhosts">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>Sitios virtuales (VirtualHost)</h2>
+            <p>Apache permite alojar varios sitios en un mismo servidor mediante VirtualHosts.</p>
+            <ul>
+                <li>Archivos en <code>/etc/apache2/sites-available/</code></li>
+                <li>Habilitar con <code>a2ensite</code></li>
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/linkia/VirtualHost.jpg" style="max-width: 60%;" alt="Diagrama de Virtual Hosts">
+            </div>
+            <div class="ejemplo">
+                <pre class="language-bash">
+<code>#Ejemplo de configuración de VirtualHost:
+&lt;VirtualHost *:80&gt;
+    ServerName empresa.local
+    DocumentRoot /var/www/empresa
+&lt;/VirtualHost&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Archivo hosts -->
+        <section class="slide" id="p2-hosts">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>Archivo hosts para dominios locales</h2>
+            <p>El archivo hosts permite simular dominios sin usar un servidor DNS. Es muy útil para el desarrollo y
+                pruebas, vinculando direcciones IP con nombres de dominio.</p>
+            <ul>
+                <li><strong>Windows:</strong> <code>C:\Windows\System32\drivers\etc\hosts</code></li>
+                <li><strong>Linux:</strong> <code>/etc/hosts</code></li>
+            </ul>
+            <div class="ejemplo">
+                <pre class="language-bash"><code>192.168.1.10  empresa.local
+192.168.1.10  intranet.local</code></pre>
+            </div>
+        </section>
+
+        <!-- HTTPS -->
+        <section class="slide" id="p2-https">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>Configurar HTTPS en Apache</h2>
+            <p>En desarrollo puedes usar un certificado autofirmado generado con OpenSSL. En ocasiones, para producción
+                se requiere un certificado emitido por una Autoridad de Certificación (CA), pero en entornos de prueba
+                puedes usar uno autofirmado.</p>
+            <ul>
+                <li>Habilitar SSL: <code>a2enmod ssl</code></li>
+                <li>VirtualHost en puerto 443</li>
+            </ul>
+            <div class="ejemplo">
+                <pre class="language-bash"><code># Crear certificado autofirmado
+sudo openssl req -x509 -nodes -days 365 \
+ -newkey rsa:2048 -keyout empresa.key -out empresa.crt</code></pre>
+            </div>
+        </section>
+
+        <!-- Diagnóstico -->
+        <section class="slide" id="p2-diagnostico">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>Diagnóstico de Apache</h2>
+            <p>Tras cada cambio, valida la configuración y revisa los logs.</p>
+            <ul>
+                <li><code>apachectl configtest</code></li>
+                <li>Logs: <code>/var/log/apache2/error.log</code></li>
+            </ul>
+        </section>
+
+        <!-- Servidores de aplicaciones -->
+        <section class="slide" id="p3-servidores-aplicaciones">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>¿Qué es un servidor de aplicaciones?</h2>
+            <p>Un servidor de aplicaciones es un componente de software que proporciona el entorno necesario para
+                ejecutar aplicaciones web y empresariales, gestionando la lógica de negocio, la conexión a bases de
+                datos y la generación dinámica de contenido (como HTML).
+                <strong>A diferencia de un servidor web estático, procesa peticiones complejas y ejecuta código de
+                    backend.</strong>
+            </p>
+            <ul>
+                <li>Tomcat, WildFly, Payara...</li>
+                <li>Gestionan sesiones, seguridad, recursos.</li>
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/linkia/diferencia-entre-un-servidor-web-y-un-servidor-de-aplicaciones.png"
+                    style="max-width: 50%;" alt="Diagrama de servidor de aplicaciones">
+            </div>
+        </section>
+
+        <!-- Tomcat instalación -->
+        <section class="slide" id="p3-tomcat">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>Tomcat</h2>
+            <p>Tomcat es un servidor de aplicaciones open source desarrollado por Apache. Se utiliza principalmente para
+                ejecutar aplicaciones Java (WAR).</p>
+            <p>Un caso de uso sería en entornos de desarrollo o prueba, para que los desarrolladores puedan probar sus
+                aplicaciones Java sin necesidad de un entorno de producción completo.</p>
+            <p><strong>Tomcat se instala como servicio y ejecuta aplicaciones Java (WAR):</strong></p>
+            <ul>
+                <li>Carpeta: <code>/opt/tomcat/</code></li>
+                <li>Aplicaciones: <code>webapps/</code></li>
+            </ul>
+
+        </section>
+
+        <!-- Integración Apache Tomcat -->
+        <section class="slide" id="p3-integracion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>Integración Apache + Tomcat</h2>
+            <p>Apache actúa como frontal y redirige peticiones hacia Tomcat mediante proxy.</p>
+            <ul>
+                <li>Peticiones HTTP desde cliente</li>
+                <li>Apache recibe la petición y decide si es estática o dinámica</li>
+                <li>Si es dinámica, Apache la redirige a Tomcat</li>
+                <li>Tomcat procesa la lógica de negocio y devuelve la respuesta a Apache</li>
+                <li>Apache envía la respuesta al cliente</li>
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/linkia/tomcat_architecture.gif" style="max-width: 50%;"
+                    alt="Tomcat server architecture diagram showing the Java application server with webapps directory structure, illustrating how Tomcat processes and serves Java applications within the enterprise deployment environment">
+            </div>
+        </section>
+
+        <!-- LAMP -->
+        <section class="slide" id="p3-lamp">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>Pila LAMP</h2>
+            <p>Conjunto Linux + Apache + MySQL + PHP para aplicaciones web dinámicas. Es muy utilizado en entornos de
+                desarrollo y producción.</p>
+            <ul>
+                <li>Linux proporciona el sistema operativo</li>
+                <li>Apache gestiona las peticiones HTTP</li>
+                <li>PHP procesa lógica de servidor</li>
+                <li>MySQL almacena datos</li>
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/linkia/LAMP.png" style="max-width: 50%;"
+                    alt="LAMP stack diagram showing the integration of Linux, Apache, MySQL, and PHP for web application development">
+            </div>
+        </section>
+
+   
+
+
+
+
+
+    </div>
+
+    <div class="footer">
+        <div class="bar">
+            <small>Píldoras formativas · LinkiaFP</small>
+            <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UT6. Modelado Dinámico: Diagramas de Comportamiento y su Integración</title>
+  <meta name="description" content="UT6: Modelado dinámico. Diagramas de comportamiento." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <link rel="stylesheet" href="../style.css" />
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../script.js" defer></script>
+</head>
+
+<body>
+  <div class="deck">
+    <!-- ======================= TEMA 3 ======================= -->
+    <!-- COVER -->
+    <section class="slide cover" id="slide-1">
+      <div style="max-width: 60%;">
+        <div>
+          <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+        </div>
+        <div class="title">UT6 · Modelado dinámico. Diagramas de comportamiento</div>
+        <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+
+      </div>
+      <div class="logo-first-page">
+        <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+      </div>
+
+    </section>
+
+    <!-- UT6. Modelado Dinámico: Diagramas de Comportamiento y su Integración -->
+
+<section class="slide" id="ut6-introduccion">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>UT6. Modelado Dinámico: Diagramas de Comportamiento</h2>
+    <p>
+        El modelado dinámico permite representar cómo se comporta un sistema a lo largo del tiempo,
+        mostrando procesos, interacciones y cambios de estado. En esta unidad se estudian los
+        principales diagramas de comportamiento UML y su integración con el resto del diseño del software.
+    </p>
+</section>
+
+<section class="slide" id="diagramas-dinamicos">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>1. Tipos de Diagramas de Comportamiento</h2>
+    <p>
+        Los diagramas de comportamiento describen la parte dinámica del sistema: cómo reaccionan los
+        elementos ante eventos y cómo interactúan entre sí. Complementan a los diagramas estructurales
+        como el diagrama de clases.
+    </p>
+    <p><strong>Los principales tipos son:</strong></p>
+    <ul>
+        <li><strong>Diagramas de casos de uso:</strong> Representan las funcionalidades del sistema desde el punto de vista del usuario.</li>
+        <li><strong>Diagramas de interacción:</strong> Muestran cómo se intercambian mensajes entre objetos en un escenario concreto.</li>
+        <li><strong>Diagramas de actividades:</strong> Representan el flujo de trabajo de un proceso interno del sistema.</li>
+        <li><strong>Diagramas de estados:</strong> Muestran los diferentes estados que puede tener un objeto a lo largo del tiempo.</li>
+    </ul>
+</section>
+
+
+
+<section class="slide" id="casos-uso">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>1.1 Diagramas de casos de uso</h3>
+    <p>
+        Los diagramas de casos de uso describen las funcionalidades del sistema desde el punto de vista
+        del usuario o actor externo. Responden a la pregunta: <em>¿qué hace el sistema?</em>
+    </p>
+    <ul>
+        <li>Actor: rol externo que interactúa con el sistema</li>
+        <li>Caso de uso: funcionalidad ofrecida</li>
+        <li>Relaciones: asociación, include, extend y generalización</li>
+    </ul>
+    <p>
+        <strong>Ejemplo:</strong> 
+    </p>
+    <div class="diagram">
+        <img src="../../assets/linkia/UML_diagrama_caso_de_uso.svg" width="60%" alt="Diagrama de modelado orientado a objetos">
+      </div>
+</section>
+
+<section class="slide" id="interaccion">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>1.2 Diagramas de interacción</h3>
+    <p>
+        Los diagramas de interacción muestran cómo se intercambian mensajes entre objetos en un
+        escenario concreto. Son clave para entender la lógica interna de una funcionalidad.
+    </p>
+    <ul>
+        <li>Diagrama de secuencia: orden temporal de los mensajes</li>
+        <li>Diagrama de comunicación: relaciones y flujo de mensajes</li>
+    </ul>
+    <p>
+        <strong>Ejemplo:</strong> Proceso de compra de un cliente.
+    </p>
+    <div class="diagram">
+        <img src="../../assets/linkia/diagrama interaccion.jpg" width="60%" alt="Diagrama de modelado orientado a objetos">
+      </div>
+</section>
+<section class="slide" id="actividades">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>1.3 Diagramas de secuencia</h3>
+    <p>
+        Los diagramas de secuencia representan el flujo de mensajes entre objetos en un escenario concreto,
+        mostrando la interacción en orden temporal.
+    </p>
+    <ul>
+        <li>Objetos participantes</li>
+        <li>Mensajes intercambiados</li>
+        <li>Orden temporal</li>
+    </ul>
+    <p>
+        <strong>Ejemplo:</strong> Proceso de login.
+    </p>
+    <div class="diagram">
+        <img src="../../assets/linkia/diagrama de secuencia.png" width="40%" alt="Diagrama de modelado orientado a objetos">
+      </div>
+</section>
+<section class="slide" id="actividades">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>1.4 Diagramas de actividades</h3>
+    <p>
+        Los diagramas de actividades representan el flujo de trabajo de un proceso interno del sistema,
+        mostrando acciones, decisiones y posibles ejecuciones paralelas.
+    </p>
+    <ul>
+        <li>Inicio y fin del proceso</li>
+        <li>Acciones o actividades</li>
+        <li>Decisiones y bifurcaciones</li>
+        <li>Flujos paralelos</li>
+    </ul>
+    <p>
+        <strong>Ejemplo:</strong> Proceso de autenticación con validación correcta o mensaje de error.
+    </p>
+    <div class="diagram">
+        <img src="../../assets/linkia/diagrama de actividades.png" width="60%" alt="Diagrama de modelado orientado a objetos">
+      </div>
+</section>
+
+<section class="slide" id="estados">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>1.5 Diagramas de estados</h3>
+    <p>
+        Los diagramas de estados modelan el ciclo de vida de un objeto, representando los distintos
+        estados por los que puede pasar y las transiciones provocadas por eventos.
+    </p>
+    <ul>
+        <li>Estados</li>
+        <li>Eventos</li>
+        <li>Transiciones</li>
+        <li>Acciones asociadas</li>
+    </ul>
+    <p>
+        <strong>Ejemplo:</strong> Un Pedido puede estar en los estados Creado, Pagado, Enviado,
+        Entregado o Cancelado.
+    </p>
+     <div class="diagram">
+        <img src="../../assets/linkia/diagrama-de-estados-de-universidad.png" width="60%" alt="Diagrama de modelado orientado a objetos">
+      </div>
+</section>
+
+<section class="slide" id="herramientas">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>2. Interpretación y Creación de Diagramas</h2>
+    <p>
+        Además de saber crear diagramas, es fundamental interpretarlos correctamente para comprender
+        el funcionamiento del sistema y detectar errores de diseño o requisitos incompletos.
+    </p>
+
+</section>
+
+<section class="slide" id="visual-paradigm">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>2.1 Herramientas UML: Visual Paradigm</h3>
+    <p>
+        Visual Paradigm es una herramienta de modelado UML muy utilizada en el ámbito educativo y
+        profesional. Permite crear todos los diagramas de comportamiento y mantener coherencia
+        entre ellos.
+    </p>
+    <ul>
+        <li>Soporte completo UML 2.x</li>
+        <li>Ingeniería directa e inversa</li>
+        <li>Exportación a PDF, Word e imágenes</li>
+        <li>Versión gratuita para uso educativo</li>
+    </ul>
+    <div class="diagram">
+        <img src="../../assets/linkia/visual-paradigm-diagram.png" width="60%" alt="Diagrama de modelado orientado a objetos">
+      </div>
+</section>
+
+<section class="slide" id="interpretacion-diagramas">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>2.2 Interpretación de diagramas de comportamiento</h3>
+    <p>
+        Interpretar un diagrama implica analizar actores, flujos, mensajes, decisiones y estados,
+        asegurando que el comportamiento representado es coherente con los requisitos del sistema.
+    </p>
+    <p>
+        Es importante identificar posibles inconsistencias, como mensajes que no tienen receptor o
+        estados sin transiciones, para mejorar el diseño antes de la implementación.
+
+    </p>
+    <p><strong>Aspectos clave a analizar:</strong></p>
+    <ul>
+        <li>Analizar actores y casos de uso (un actor es un rol que interactúa con el sistema)</li>
+        <li>Seguir el flujo de mensajes en diagramas de interacción</li>
+        <li>Identificar decisiones y bifurcaciones en diagramas de actividades</li>
+        <li>Revisar estados y transiciones en diagramas de estados</li>
+    </ul>
+</section>
+
+<section class="slide" id="elaboracion">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>2.3 Elaboración de diagramas</h3>
+    <p>
+        La creación de diagramas sigue una serie de pasos: comprender el sistema, identificar los
+        elementos clave, seleccionar el diagrama adecuado y revisar la coherencia del modelo.
+        Se pueden construir diagramas básicos y avanzados según la complejidad del sistema.
+    </p>
+    <p><strong>Pasos para elaborar diagramas de comportamiento:</strong></p>
+    <ol>
+        <li>Identificar los actores y casos de uso</li>
+        <li>Definir los flujos de mensajes</li>
+        <li>Representar las decisiones y bifurcaciones</li>
+        <li>Modelar los estados y transiciones</li>
+    </ol>
+</section>
+
+<section class="slide" id="aplicacion-proyectos">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>3. Aplicación Práctica en Proyectos Reales</h2>
+    <p>
+        En proyectos reales, los diagramas de comportamiento se utilizan desde el análisis de
+        requisitos hasta el mantenimiento del sistema, facilitando la comunicación y la validación
+        del diseño.
+    </p>
+    <p><strong>Beneficios en proyectos reales:</strong></p>
+    <ul>
+        <li>Mejora la comunicación entre equipos</li>
+        <li>Facilita la identificación de problemas</li>
+        <li>Proporciona una base sólida para el desarrollo</li>
+    </ul>
+</section>
+
+<section class="slide" id="integracion">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>3.1 Integración en el ciclo de desarrollo</h3>
+    <p>
+        Los diagramas de comportamiento se emplean en análisis, diseño, desarrollo, pruebas y
+        mantenimiento, sirviendo como guía para implementar y validar el software.
+    </p>
+    <p><strong>Ejemplo de integración:</strong> En la fase de análisis se crean diagramas de casos de uso para definir funcionalidades, en diseño se elaboran diagramas de interacción para detallar la lógica, y en pruebas se utilizan diagramas de actividades para validar flujos de trabajo.</p>
+</section>
+
+<section class="slide" id="relacion-clases">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>3.2 Relación con diagramas de clases</h3>
+    <p>
+        Los modelos dinámicos deben ser coherentes con los diagramas de clases: los actores y objetos
+        se corresponden con clases, las acciones con métodos y los estados con atributos o condiciones.
+    </p>
+    <p>
+        Es fundamental mantener esta coherencia para asegurar que el diseño es consistente y que la
+        implementación se ajusta a los requisitos definidos.
+    </p>
+</section>
+
+<section class="slide" id="buenas-practicas-dinamico">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>3.3 Buenas prácticas en el modelado dinámico</h3>
+    <p>
+        Para un modelado eficaz se recomienda claridad, simplicidad, coherencia entre diagramas,
+        nomenclatura uniforme y validación continua con el equipo y el cliente.
+    </p>
+    <p>
+        Estas prácticas ayudan a crear modelos comprensibles, mantenibles y alineados con los objetivos
+        del proyecto, facilitando el desarrollo y la evolución del software.
+    </p>
+    
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="footer">
+      <div class="bar">
+        <small>UT6 · Modelado dinámico. Diagramas de comportamiento · LinkiaFP</small>
+        <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+      </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>UT6 · Tipos de datos compuestos y colecciones · LinkiaFP</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link href="../style.css" rel="stylesheet">
+    <script defer="" src="../script.js"></script>
+    </link>
+</head>
+
+<body>
+    <div class="deck">
+        <!-- COVER -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img alt="" src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" />
+                </div>
+                <div class="title">UT6 · Tipos de datos compuestos y colecciones · LinkiaFP</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;" />
+            </div>
+        </section>
+        <!-- ============================= -->
+        <!-- 1. ARRAYS Y SU MANIPULACIÓN  -->
+        <!-- ============================= -->
+
+        <section class="slide" id="arrays-definicion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>1. Arrays y su manipulación</h2>
+            <p>
+                Un array es una estructura de datos fija que almacena valores del mismo tipo en posiciones consecutivas
+                indexadas. Su tamaño no puede cambiar tras la creación y permite acceso rápido mediante índices.
+            </p>
+
+            <div class="diagram">
+                <img src="../../assets/linkia/2022_05_Arrays-in-Java-1.jpg" style="max-width: 60%;" alt="depurator_python">
+            </div>
+        </section>
+
+        <section class="slide" id="arrays-declaracion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>1.2 Declaración e inicialización</h3>
+            <p>
+                Para usar un array hay que declararlo, reservar memoria e inicializar sus valores. Puede contener tipos
+                primitivos u objetos.
+            </p>
+            <pre class="language-java"><code>// Declaración
+int[] edades = new int[3];
+
+// Inicialización directa
+int[] edades = {21, 30, 25};</code></pre>
+        </section>
+
+        <section class="slide" id="arrays-acceso">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>1.3 Acceso y modificación</h3>
+            <p>
+                El acceso se realiza mediante índices comenzando en 0. Intentar acceder fuera del rango provoca error.
+            </p>
+            <pre class="language-java"><code>//Acceso al primer elemento
+System.out.println(edades[0]);
+//Modificación del segundo elemento
+edades[1] = 31;</code></pre>
+        </section>
+
+        <section class="slide" id="arrays-recorrido">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>1.4 Recorrido de arrays</h3>
+            <p>
+                Los arrays pueden recorrerse con bucles tradicionales o estructuras for-each que simplifican la lectura.
+            </p>
+            <pre class="language-java"><code>
+//Recorrido con for tradicional
+for (int i = 0; i < edades.length; i++) {
+    System.out.println(edades[i]);
+}
+//Recorrido con for-each
+for (int edad : edades) {
+    System.out.println(edad);
+}</code></pre>
+        </section>
+
+        <section class="slide" id="arrays-multidimensionales">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>1.5 Arrays multidimensionales</h3>
+            <p>
+                Son arrays de arrays. El más común es el bidimensional, usado para representar tablas o matrices. Un ejemplo es un array de notas de estudiantes en diferentes asignaturas.
+            </p>
+            <pre class="language-java"><code>int[][] notas = [
+    [5, 6, 7],// Notas de estudiante 1 en asignaturas A, B, C
+    [8, 9, 10]// Notas de estudiante 2 en asignaturas A, B, C
+]</code></pre>
+                <p>Para acceder a los elementos de un array multidimensional, se utilizan dos índices: uno para la fila y otro para la columna.</p>
+            <pre class="language-java"><code>// Acceso a la nota del estudiante 1 en la asignatura B
+int nota = notas[0][1]; // Devuelve 6
+// Acceso a la nota del estudiante 2 en la asignatura C
+int nota = notas[1][2]; // Devuelve 10</code></pre>
+        </section>
+
+        <section class="slide" id="arrays-clonado-comparacion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>1.6 Clonado y comparación</h3>
+            <p>
+                En Java si se asigna un array a otro, ambos apuntan al mismo objeto. Esto puede causar problemas si se modifica uno de ellos. Para crear una copia independiente se usa <code>clone()</code>. La comparación con <code>==</code> verifica si son el mismo objeto, no su contenido.
+            </p>
+            <pre class="language-java"><code>copia = edades.clone()
+if (edades == copia) {
+    System.out.println("Mismo objeto");
+} else {
+    System.out.println("Objetos diferentes");
+}</code></pre>
+            <p>Para comparar el contenido de dos arrays se puede usar <code>Arrays.equals()</code> que devuelve true si ambos arrays tienen el mismo tamaño y los mismos elementos en el mismo orden.</p>
+            <pre class="language-java"><code>if (Arrays.equals(edades, copia)) {
+    System.out.println("Contenido igual");
+} else {
+    System.out.println("Contenido diferente");
+}
+            </code></pre>
+        </section>
+
+
+        <!-- ============================= -->
+        <!-- 2. LISTAS Y COLECCIONES       -->
+        <!-- ============================= -->
+
+        <section class="slide" id="colecciones-introduccion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>2. Listas y colecciones dinámicas</h2>
+            <p>
+                Las colecciones permiten almacenar datos de forma dinámica sin tamaño fijo. Pertenecen al framework
+                de colecciones e incluyen listas, mapas y estructuras complejas.
+            </p>
+            <div class="diagram">
+                <img src="../../assets/linkia/collections-java.svg"  alt="collections_framework">
+            </div>
+        </section>
+
+        <section class="slide" id="arraylist-definicion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>2.2 Uso de ArrayList</h3>
+            <ul>
+                <li>Estructura dinámica ordenada que permite añadir, eliminar y acceder a elementos sin restricciones de
+                tamaño.</li>
+                <li>Permite almacenar elementos duplicados y mantiene el orden de inserción.</li>
+                <li>Ideal para listas de objetos donde se requiere flexibilidad.</li>
+                <li>Únicamente almacena objetos, por lo que para tipos primitivos se usan sus clases envolventes (Integer, Double, etc.).</li>
+                <li>Ejemplo de uso:</li>
+            </ul>
+            
+            <pre class="language-java"><code>ArrayList< String> nombres = new ArrayList< String>();
+nombres.add("Laura");
+nombres.add("Marc");
+nombres.add("Elena");
+nombres.add("Mario");</code></pre>
+        </section>
+
+        <section class="slide" id="hashmap-definicion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>2.3 Uso de HashMap</h3>
+            <ul>
+                <li>Implementa la interfaz Map, almacena pares clave-valor sin orden específico.</li>
+                <li>Permite acceso rápido a los valores mediante sus claves, ideal para búsquedas.</li>
+                <li>No permite claves duplicadas, pero sí valores duplicados. Si se inserta una clave existente, su valor se actualiza.</li>
+                <li>Ejemplo de uso:</li>
+            </ul>
+            <pre class="language-java"><code>HashMap< String, Integer> edades = new HashMap< String, Integer>();
+edades.put("Lucía", 23); // Clave: "Lucía", Valor: 23
+edades.put("David", 31); // Clave: "David", Valor: 31
+edades.put("Lucía", 24); // Clave: "Lucía", Valor: 24 (actualiza el valor)
+System.out.println(edades.get("Lucía")); // Devuelve 24
+System.out.println(edades.get("David")); // Devuelve 31</code></pre>
+        </section>
+        <section class="slide" id="operaciones-basicas-colecciones">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h3>2.4 Operaciones básicas</h3>
+            <p>
+                Las colecciones permiten múltiples operaciones fundamentales.
+            </p>
+            <ul>
+                <li>Añadir elementos</li>
+                <li>Eliminar elementos</li>
+                <li>Comprobar existencia</li>
+                <li>Obtener tamaño</li>
+            </ul>
+        </section>
+
+        <section class="slide" id="arrays-colecciones-conversion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>2.5 Conversión entre arrays y colecciones</h3>
+            <p>
+                Es posible cambiar entre arrays y listas dinámicas para aprovechar las ventajas de cada estructura.
+            </p>
+            <pre class="language-python"><code>frutas = ["Manzana", "Pera", "Naranja"]
+lista = list(frutas)
+nuevo_array = list(lista)</code></pre>
+        </section>
+
+        <section class="slide" id="colecciones-anidadas">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>2.6 Colecciones anidadas</h3>
+            <p>
+                Las colecciones pueden contener otras colecciones, lo que permite modelar estructuras complejas como
+                matrices, agendas o grafos.
+            </p>
+            <pre class="language-python"><code>matriz = [
+    [1, 2, 3],
+    [4, 5, 6]
+]</code></pre>
+
+            <div class="diagram">
+                <img src="../../assets/linkia/depurator_python.gif" style="max-width: 45%;" alt="depurator_python">
+            </div>
+        </section>
+
+
+        <!-- ============================= -->
+        <!-- 3. USO DE ITERADORES         -->
+        <!-- ============================= -->
+
+        <section class="slide" id="iteradores-intro">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>3. Uso de iteradores</h2>
+            <p>
+                Los iteradores permiten recorrer colecciones sin exponer su estructura interna, y permiten eliminar
+                elementos con seguridad.
+            </p>
+        </section>
+
+        <section class="slide" id="iterador-simple">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>3.1 Iterador simple</h3>
+            <p>
+                Un iterador recorre la colección paso a paso mediante <code>hasNext</code> y <code>next</code>.
+            </p>
+            <pre class="language-python"><code>for nombre in nombres:
+    print(nombre)</code></pre>
+        </section>
+
+        <section class="slide" id="iterador-for-each">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h3>3.2 Iteración con for-each</h3>
+            <p>
+                La opción más simple, ideal cuando solo se leen datos.
+            </p>
+            <pre class="language-python"><code>for numero in numeros:
+    print(numero)</code></pre>
+        </section>
+
+        <section class="slide" id="listiterator">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h3>3.3 ListIterator</h3>
+            <p>
+                Permite recorrer listas en ambas direcciones y modificar elementos durante el recorrido.
+            </p>
+        </section>
+
+        <section class="slide" id="iteradores-buenas-practicas">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h3>3.4 Buenas prácticas</h3>
+            <ul>
+                <li>No modificar colecciones dentro de un for-each.</li>
+                <li>Usar remove del iterador para eliminar elementos.</li>
+                <li>Usar ListIterator para recorrer hacia atrás.</li>
+            </ul>
+        </section>
+
+        <section class="slide" id="iteradores-anidados">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h3>3.5 Iteradores en estructuras anidadas</h3>
+            <p>
+                Para listas dentro de listas puede utilizarse un iterador o un for-each anidado.
+            </p>
+            <pre class="language-python"><code>for fila in matriz:
+    for numero in fila:
+        print(numero)</code></pre>
+        </section>
+
+
+        <!-- ============================= -->
+        <!-- 4. COMPARACIÓN DE COLECCIONES -->
+        <!-- ============================= -->
+
+        <section class="slide" id="comparacion-estructuras">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>4. Comparación de colecciones</h2>
+            <p>
+                Cada colección destaca en ciertos escenarios. La elección depende de orden, duplicados, rendimiento
+                y tipo de acceso.
+            </p>
+            <ul>
+                <li>Array → tamaño fijo, acceso rápido</li>
+                <li>ArrayList → tamaño dinámico</li>
+                <li>HashMap → búsqueda por clave</li>
+            </ul>
+        </section>
+
+
+        <!-- ============================= -->
+        <!-- 5. GENÉRICOS                  -->
+        <!-- ============================= -->
+
+        <section class="slide" id="genericos-intro">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>5. Métodos y clases genéricos</h2>
+            <p>
+                Los genéricos permiten crear clases y métodos que trabajan con distintos tipos sin duplicar código,
+                garantizando seguridad de tipos.
+            </p>
+        </section>
+
+        <section class="slide" id="genericos-ejemplo">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h3>5.2 Ejemplo de método genérico</h3>
+            <pre class="language-python"><code>def mostrar(elemento):
+    print(elemento)</code></pre>
+        </section>
+
+        <section class="slide" id="genericos-clases">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h3>5.3 Clases genéricas</h3>
+            <pre class="language-python"><code>class Caja:
+    def __init__(self, contenido):
+        self.contenido = contenido</code></pre>
+        </section>
+
+
+        <!-- ============================= -->
+        <!-- 6. EXPRESIONES REGULARES      -->
+        <!-- ============================= -->
+
+        <section class="slide" id="regex-intro">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>6. Expresiones regulares</h2>
+            <p>
+                Una expresión regular define un patrón para validar, buscar o transformar texto.
+                En Java se usa Pattern y Matcher.
+            </p>
+        </section>
+
+        <section class="slide" id="regex-ejemplo">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h3>Validación básica</h3>
+            <pre class="language-python"><code>import re
+re.match(r"\w+@\w+\.\w+", "info@linkiafp.es")</code></pre>
+        </section>
+
+
+        <!-- ============================= -->
+        <!-- 7. XML                        -->
+        <!-- ============================= -->
+
+        <section class="slide" id="xml-introduccion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>7. XML y su tratamiento</h2>
+            <p>
+                XML es un formato de datos estructurado y jerárquico utilizado para intercambio de información.
+                En Java puede leerse o generarse mediante DOM, SAX o StAX.
+            </p>
+            <div class="diagram">
+                <img src="../../assets/linkia/depurator_python.gif" style="max-width: 45%;" alt="depurator_python">
+            </div>
+        </section>
+
+
+
+
+    </div>
+    <div class="footer">
+        <div class="bar">
+            <small>UT6 · Tipos de datos compuestos y colecciones · LinkiaFP</small>
+            <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+        </div>
+    </div>
+</body>
+
+</html>

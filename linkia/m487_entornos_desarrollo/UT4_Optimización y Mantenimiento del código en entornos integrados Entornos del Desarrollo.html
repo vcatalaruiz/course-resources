@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UT4. Optimización y mantenimiento del código en entornos integrados</title>
+  <meta name="description" content="UT4: Optimización y mantenimiento del código en entornos integrados." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <link rel="stylesheet" href="../style.css" />
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../script.js" defer></script>
+</head>
+
+<body>
+  <div class="deck">
+    <!-- ======================= TEMA 3 ======================= -->
+    <!-- COVER -->
+    <section class="slide cover" id="slide-1">
+      <div style="max-width: 60%;">
+        <div>
+          <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+        </div>
+        <div class="title">UT4 · Optimización y mantenimiento del código en entornos integrados</div>
+        <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+
+      </div>
+      <div class="logo-first-page">
+        <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+      </div>
+
+    </section>
+
+
+    <!-- Tema 1: Refactorización de Código en Java -->
+    <section class="slide" id="refactorizacion-codigo-java">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h2>1. Refactorización de Código en Java</h2>
+      <p>
+        La refactorización mejora la estructura interna del código sin alterar su comportamiento externo.
+        Facilita la legibilidad, el mantenimiento y la eficiencia del software.
+      </p>
+      <p>
+        Consiste en reorganizar el código para hacerlo más claro y fácil de modificar. No añade nuevas funcionalidades,
+        sino que optimiza las existentes para minimizar la complejidad y evitar errores a largo plazo.
+      </p>
+
+      <h3>Beneficios de la Refactorización</h3>
+      <div class="column">
+        <div class="diagram">
+          <img src="../../assets/linkia/refactoringspagueti.png" style="max-width: 100%;" alt="depurator_python">
+        </div>
+        <ul>
+          <li><strong>Mejora la legibilidad:</strong> facilita la comprensión del código por parte de todo el equipo.
+          </li>
+          <li><strong>Optimización del rendimiento:</strong> eliminación de redundancias y estructuras ineficientes.
+          </li>
+          <li><strong>Facilita el mantenimiento:</strong> el código más claro es más fácil de actualizar y escalar.</li>
+        </ul>
+
+      </div>
+
+
+    </section>
+
+    <section class="slide" id="tecnicas-refactorizacion">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h3>1.3 Técnicas Comunes de Refactorización</h3>
+      <ul>
+        <li><strong>Renombrado de variables y métodos:</strong> hace el código más comprensible.</li>
+        <li><strong>Extracción de métodos:</strong> divide lógica compleja en funciones más pequeñas.</li>
+        <li><strong>Eliminación de código duplicado:</strong> reduce errores y mejora la consistencia.</li>
+        <li><strong>Reemplazo de condicionales complejos:</strong> simplifica la lógica usando polimorfismo o patrones.
+        </li>
+        <li><strong>Uso de clases y objetos:</strong> modulariza y organiza la estructura del código.</li>
+      </ul>
+
+      <div class="ejemplo">
+        <p><strong>Ejemplo sin simplificar:</strong></p>
+        <pre class="language-python"><code>
+def realizar_pedido():
+    # Verifica el stock disponible
+    if not verificar_stock():
+        raise Exception("Stock insuficiente")
+    # Calcula el total del pedido
+    total = calcular_total()
+    if total > 100:
+        total_desc = total * 0.9 # Aplica un descuento del 10% para pedidos mayores a 100
+    else:
+        total_desc = total # No se aplica descuento
+    # Procesa el pago con el total después de descuentos
+    procesar_pago(total_desc)
+    </code></pre>
+        <p><strong>Ejemplo simplificado:</strong></p>
+        <pre class="language-python"><code>
+# Antes de refactorizar, el código puede ser difícil de entender y mantener. 
+def realizar_pedido():
+    verificar_stock() # Verifica el stock disponible
+    total = calcular_total() # Calcula el total del pedido
+    total_desc = aplicar_descuentos(total) # Aplica descuentos al total
+    procesar_pago(total_desc) # Procesa el pago con el total después de descuentos
+        </code></pre>
+      </div>
+    </section>
+
+    <section class="slide" id="herramientas-refactorizacion">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h3>1.4 Herramientas de Refactorización</h3>
+      <ul>
+        <li><strong>IDEs con soporte integrado:</strong> Eclipse, IntelliJ, Visual Studio.</li>
+        <li><strong>SonarQube:</strong> identifica duplicación, complejidad y malas prácticas.</li>
+        <li><strong>JUnit y JRebel:</strong> pruebas unitarias y recarga rápida de código.</li>
+      </ul>
+
+     
+    </section>
+
+    <!-- Tema 2: Patrones de Refactorización -->
+    <section class="slide" id="patrones-refactorizacion">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h2>2. Patrones de Refactorización</h2>
+      <p>
+        Conjunto de principios que ayudan a mejorar la estructura del código eliminando duplicación,
+        reduciendo complejidad y facilitando el mantenimiento.
+      </p>
+      <div class="diagram">
+        <img src="../../assets/linkia/principles code.webp" style="max-width: 60%;" alt="patrones_refactorizacion">
+      </div>
+    </section>
+
+    <section class="slide" id="patron-dry">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h3>2.1 DRY (Don’t Repeat Yourself)</h3>
+      <p>
+        Evita la duplicación de lógica o datos en el código centralizando la funcionalidad común.
+      </p>
+
+      <ul>
+        <li>Reduce errores al modificar un único punto.</li>
+        <li>Mejora la mantenibilidad.</li>
+      </ul>
+
+      <pre class="language-python"><code>
+def calcular_descuento(precio, descuento):
+    return precio - (precio * descuento / 100)
+    </code></pre>
+    </section>
+
+    <section class="slide" id="patron-kiss">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h3>2.2 KISS (Keep It Simple, Stupid)</h3>
+      <p>
+        Promueve escribir código simple, claro y directo. Evita condiciones innecesariamente complejas.
+      </p>
+
+      <pre class="language-python"><code>
+def calcular_desc(precio, descuento):
+    if descuento < 0 or descuento > 100:
+        return precio
+    return precio - precio * descuento / 100
+    </code></pre>
+    </section>
+
+    <section class="slide" id="patron-yagni">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h3>2.3 YAGNI (You Aren’t Gonna Need It)</h3>
+      <p>
+        No implementes características que aún no son necesarias. Reduce complejidad y evita código muerto.
+      </p>
+      <div class="diagram">
+        <img src="../../assets/linkia/yagni example.png" style="max-width: 60%;" alt="yagni">
+      </div>
+    </section>
+
+    <section class="slide" id="eliminacion-duplicado">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h3>2.4 Eliminación de Código Duplicado</h3>
+      <p>
+        Centraliza lógica repetida para evitar inconsistencias y reducir errores.
+      </p>
+
+      <pre class="language-python"><code>
+def realizar_proceso():
+    verificar_stock()
+    total = calcular_total()
+    procesar_pago(total)
+    </code></pre>
+    </section>
+
+    <section class="slide" id="resumen-patrones">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h3>2.5 Resumen de Patrones de Refactorización</h3>
+      <ul>
+        <li><strong>DRY:</strong> elimina duplicación.</li>
+        <li><strong>KISS:</strong> simplicidad ante todo.</li>
+        <li><strong>YAGNI:</strong> evita sobreimplementación.</li>
+        <li><strong>Eliminación de duplicado:</strong> centraliza código común.</li>
+      </ul>
+    </section>
+
+    <!-- Tema 3: Análisis de Código Estático -->
+    <section class="slide" id="analisis-estatico">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h2>3. Análisis de Código Estático</h2>
+      <p>
+        Revisa el código sin ejecutarlo para detectar errores, vulnerabilidades y mala calidad estructural.
+        Herramientas populares: SonarQube y ESLint.
+      </p>
+    </section>
+
+    <section class="slide" id="sonarqube">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h3>3.1 SonarQube</h3>
+      <ul>
+        <li>Detecta duplicación y complejidad.</li>
+        <li>Analiza calidad y seguridad del código.</li>
+        <li>Compatible con múltiples lenguajes.</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="eslint">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h3>3.1 ESLint</h3>
+      <ul>
+        <li>Detecta errores de sintaxis en JavaScript.</li>
+        <li>Aplica reglas de estilo configurables.</li>
+        <li>Detecta variables no usadas y malas prácticas.</li>
+      </ul>
+    </section>
+
+    <!-- Tema 4: Control de Versiones -->
+    <section class="slide" id="control-versiones">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h2>4. Control de Versiones: Git en el IDE</h2>
+      <p>
+        Git permite gestionar cambios, trabajar con ramas y colaborar en equipo. Integrarlo en el IDE facilita su uso
+        mediante interfaces visuales.
+      </p>
+      <div class="diagram">
+        <img src="../../assets/linkia/gitq720.jpg" style="max-width: 60%;" alt="git_workflow">
+      </div>
+    </section>
+
+    <section class="slide" id="flujo-git">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h3>4.1 Flujo Básico con Git</h3>
+      <ul>
+        <li>Inicializar repositorio.</li>
+        <li>Clonar repositorio remoto.</li>
+        <li>Realizar cambios y hacer commits.</li>
+        <li>Enviar cambios (push) y traer actualizaciones (pull).</li>
+        <li>Gestionar ramas y resolver conflictos.</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="flujo-git">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h3>4.1.1 Inicializar Repositorio</h3>
+      <pre class="language-bash"><code>git init
+      </code></pre>
+      <h3>4.1.2 Clonar Repositorio Remoto</h3>
+      <pre class="language-bash"><code>git clone &lt;url&gt;
+      </code></pre>
+      <h3>4.1.3 Realizar Cambios y Hacer Commits</h3>
+      <pre class="language-bash"><code>git add &lt;archivo&gt;
+git commit -m "Mensaje del commit"
+      </code></pre>
+      <h3>4.1.4 Enviar Cambios (Push) y Traer Actualizaciones (Pull)</h3>
+      <pre class="language-bash"><code>git push origin &lt;rama&gt;
+git pull origin &lt;rama&gt;
+      </code></pre>
+      <h3>4.1.5 Gestionar Ramas y Resolver Conflictos</h3>
+      <pre class="language-bash"><code>git branch &lt;nombre-rama&gt;
+git checkout &lt;nombre-rama&gt;
+git merge &lt;rama-a-unir&gt;
+      </code></pre>
+      
+    </section>
+
+    <!-- Tema 5: Generación Automática de Documentación -->
+    <section class="slide" id="doc-automatica">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h2>5. Generación Automática de Documentación</h2>
+      <p>
+        Javadoc y Sphinx permiten generar documentación clara y navegable a partir del propio código fuente,
+        manteniendo la coherencia entre implementación y documentación.
+      </p>
+    </section>
+
+    <section class="slide" id="javadoc">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h3>5.1 Javadoc</h3>
+      <p>Documenta proyectos Java usando comentarios estructurados.</p>
+      <pre class="language-python"><code>
+/**
+ * Calcula el área.
+ * @param r radio
+ * @return área
+ */
+public double calcularArea(double r) {
+    return Math.PI * r * r;
+}
+
+    </code></pre>
+    </section>
+
+    <section class="slide" id="sphinx">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h3>5.2 Sphinx</h3>
+      <p>Genera documentación en HTML, PDF o LaTeX a partir de docstrings y archivos reStructuredText.</p>
+      <pre class="language-python"><code>
+def calcular_area(r):
+    """Calcula el área de un círculo.
+    Args:
+        r (float): radio del círculo
+    Returns:
+        float: área del círculo
+    """ 
+    return math.pi * r * r
+    </code></pre>
+    
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="footer">
+      <div class="bar">
+        <small>UT4 · Optimización y mantenimiento del código en entornos integrados · LinkiaFP</small>
+        <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+      </div>
+    </div>
+</body>
+
+</html>

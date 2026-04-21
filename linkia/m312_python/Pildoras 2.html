@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Píldoras formativas · LinkiaFP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link rel="stylesheet" href="../style.css" />
+    <script src="../script.js" defer></script>
+</head>
+
+<body>
+    <div class="deck">
+
+        <!-- COVER -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+                </div>
+                <div class="title">Píldora 2: Estructuras de control</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+            </div>
+
+        </section>
+
+
+        <!-- ========================================================= -->
+        <!-- PÍLDORA 2 · Estructuras de control -->
+        <!-- ========================================================= -->
+
+        <section class="slide" id="pildora2-if">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Estructuras de control</h2>
+            <p>
+                Las estructuras de control permiten dirigir el flujo de ejecución de un programa. Son fundamentales para crear programas que puedan tomar decisiones y repetir acciones.
+            </p>
+             <div class="diagram">
+                <img src="../../assets/linkia/estructuras-de-control.jpg" width="550px" alt="if-else">
+            </div>
+            <p><strong>Existen tres tipos principales de estructuras de control:</strong></p>
+            <ul>
+                <li><strong>Selección:</strong> if, if-else, if-elif-else</li>
+                <li><strong>Iteración:</strong> while, for</li>
+                <li><strong>Secuencial:</strong> flujo normal de ejecución</li>
+            </ul>
+        </section>
+
+        <section class="slide" id="pildora2-if">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Condicional simple if</h2>
+            <p>
+                La estructura <code>if</code> permite ejecutar un bloque de código cuando una condición
+                booleana es verdadera.
+            </p>
+            <pre class="language-python"><code>numero = int(input("Introduce un número: "))
+if numero % 2 == 0:
+    print("Has introducido un número par")</code></pre>
+        </section>
+
+       
+
+        <section class="slide" id="pildora2-if">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Condicional if-else</h2>
+            <p>
+                La estructura <code>if-else</code> permite ejecutar un bloque u otro según se cumpla
+                o no la condición.
+            </p>
+             <div class="diagram">
+                <img src="../../assets/linkia/python-if-else.png" width="550px" alt="if-else">
+            </div>
+            <pre class="language-python"><code>numero = int(input("Introduce un número: "))
+if numero % 2 == 0:
+    print("Has introducido un número par")
+else:
+    print("Has introducido un número impar")</code></pre>
+        </section>
+
+        <section class="slide" id="pildora2-if-else">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Condicional if-elif-else</h2>
+            <p>
+                La estructura <code>if-elif-else</code> permite evaluar múltiples condiciones de forma secuencial.
+            </p>
+            <div class="diagram">
+                <img src="../../assets/linkia/python-elif.png" width="550px" alt="if-else">
+            </div>
+        <pre class="language-python"><code>numero = int(input("Introduce un número: "))
+if numero > 0:
+    print("Número positivo")
+elif numero < 0:    
+    print("Número negativo")
+else:
+    print("Número cero")</code></pre>
+        </section>
+
+        <section class="slide" id="pildora2-bucles">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Estructuras de repetición</h2>
+            <p>
+                Los bucles permiten repetir un bloque de código varias veces.
+            </p>
+            
+            <ul>
+                <li><code><strong>while</strong></code>: número de iteraciones desconocido.</li>
+                <div class="diagram">
+                <img src="../../assets/linkia/loop_animation.gif" width="30%" alt="if-else">
+            </div>
+                <li><code><strong>for</strong></code>: recorrido de secuencias.</li>
+                <pre class="language-python"><code>for i in range(5):
+    print(i)</code></pre>
+            </ul>
+            
+        </section>
+
+        <section class="slide" id="pildora2-errores">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Control de errores</h2>
+            <p>
+                La estructura <code>try-except</code> permite capturar errores y evitar que el programa
+                finalice de forma abrupta.
+            </p>
+             <div class="diagram">
+                <img src="../../assets/linkia/try_except_else_finally.a7fac6c36c55.png" width="30%" alt="if-else">
+            </div>
+            <pre class="language-python"><code>try:
+    x = int(input("Número: "))
+except ValueError:
+    print("No es un entero válido")</code></pre>
+        </section>
+
+        <div class="footer">
+            <div class="bar">
+                <small>Píldora 2 · Estructuras de control</small>
+                <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+            </div>
+        </div>
+</body>
+
+</html>

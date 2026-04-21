@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UT3 · Interfaces naturales de usuario e interacción avanzada · LinkiaFP</title>
+  <meta name="description"
+    content="Presentación HTML con secciones tipo diapositiva para la UT3: Interfaces naturales de usuario e interacción avanzada." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <link rel="stylesheet" href="../style.css" />
+  <script src="../script.js" defer></script>
+</head>
+
+<body>
+  <div class="deck">
+    <!-- ====================== COVER ====================== -->
+    <section class="slide cover" id="slide-1">
+      <div style="max-width: 60%;">
+        <div>
+          <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+        </div>
+        <div class="title">UT3 · Interfaces naturales de usuario e interacción avanzada</div>
+        <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+      </div>
+      <div class="logo-first-page">
+        <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;" alt="">
+      </div>
+    </section>
+
+
+
+    <section class="slide" id="introduccion-interfaces-naturales">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h2>1. Introducción a interfaces naturales</h2>
+      <p>
+        Las <strong>interfaces naturales de usuario (NUI)</strong> representan un cambio de paradigma respecto a las
+        GUI,
+        permitiendo interactuar con los sistemas mediante formas de comunicación propias del comportamiento humano:
+        hablar, señalar, tocar, mirar o moverse.
+      </p>
+      <ul>
+        <li>Se busca mayor <strong>accesibilidad</strong>, <strong>eficiencia</strong> y <strong>naturalidad</strong>.
+        </li>
+        <li>Las NUI reducen la distancia entre la intención del usuario y la acción sobre el sistema.</li>
+        <li>Se apoyan en tecnologías como visión artificial, reconocimiento de voz y aprendizaje automático.</li>
+      </ul>
+
+    </section>
+    <section class="slide" id="introduccion-interfaces-naturales">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h2>1. Introducción a interfaces naturales</h2>
+      <p>En la siguiente imagen, se muestra los distintos tipos de interfaces de usuario:</p>
+
+      <div class="diagram">
+        <img src="../../assets/linkia/evolucion_ui.jpg" style="max-width: 40%;"
+          alt="Diagrama de evolución de interfaces">
+      </div>
+    </section>
+    <section class="slide" id="evolucion-interaccion-persona-ordenador">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>1.1 Evolución de la interacción persona-ordenador</h3>
+      <p>
+        La interacción persona-ordenador ha evolucionado desde entornos muy técnicos hasta interfaces gráficas
+        y, más recientemente, hacia interfaces naturales que aprovechan las capacidades sensoriales del usuario.
+      </p>
+      <ul>
+        <li>Años 50–60: interacción mediante <strong>tarjetas perforadas</strong> y consolas de texto.</li>
+        <li>Posteriormente: aparición de <strong>GUI</strong> con ventanas, iconos, ratón y teclado.</li>
+        <li>Con los dispositivos móviles: pantallas táctiles y sensores de movimiento.</li>
+        <li>Estado actual: interacción mediante voz, gestos, visión, movimiento corporal y realidad aumentada.</li>
+      </ul>
+
+    </section>
+    <section class="slide" id="evolucion-interaccion-persona-ordenador">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>1.1 Evolución de la interacción persona-ordenador</h3>
+      <p>Desde las tarjetas perforadas hasta la interacción natural con el sistema:</p>
+      <div class="diagram">
+        <img src="../../assets/linkia/Evolution-of-User-Interfaces.webp" style="max-width: 60%;"
+          alt="Diagrama de evolución de interfaces">
+
+      </div>
+
+    </section>
+    <section class="slide" id="concepto-nui">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>1.2 Concepto de interfaz natural de usuario (NUI)</h3>
+      <p>
+        Una <strong>interfaz natural de usuario</strong> es aquella que permite interactuar con el sistema de forma
+        similar a cómo lo haríamos con otra persona o con el entorno físico, minimizando la mediación de elementos
+        artificiales como botones o menús convencionales.
+      </p>
+      <ul>
+        <li>No requiere conocimientos técnicos avanzados para su uso.</li>
+        <li>Utiliza tecnologías de reconocimiento del entorno, análisis del comportamiento y aprendizaje automático.
+        </li>
+        <li>Ejemplos: asistentes de voz, control por gestos, reconocimiento facial, aplicaciones de RA.</li>
+      </ul>
+
+
+    </section>
+    <section class="slide" id="concepto-nui">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>1.2 Concepto de interfaz natural de usuario (NUI)</h3>
+      <p>
+        Las NUI buscan que la interacción sea lo más fluida, intuitiva y directa posible, eliminando barreras entre el
+        usuario
+      </p>
+
+      <div class="diagram">
+        <img src="../../assets/linkia/natural-user-interface-nui-mc-slide1.png" style="max-width: 50%;"
+          alt="Ejemplo de interfaz natural de usuario">
+      </div>
+
+    </section>
+
+    <section class="slide" id="requisitos-nui">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>1.2 Requisitos de una NUI funcional</h3>
+      <p>
+        Para que una NUI sea funcional en entornos reales, debe cumplir una serie de requisitos que afectan tanto
+        a la experiencia de usuario como al rendimiento del sistema.
+      </p>
+      <ul>
+        <li><strong>Intuitividad</strong>: el usuario comprende su uso sin manuales complejos.</li>
+        <li><strong>Inmediatez</strong>: respuesta en tiempo real o con latencia mínima.</li>
+        <li><strong>Adaptabilidad</strong>: se ajusta a capacidades, limitaciones y contexto del usuario.</li>
+        <li><strong>Multimodalidad</strong>: permite combinar varios canales (voz, gestos, visión, tacto, etc.).</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="comparativa-gui-nui">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>1.3 Comparativa entre GUI y NUI</h3>
+      <p>
+        Las <strong>GUI</strong> y las <strong>NUI</strong> son modelos de interacción complementarios que pueden
+        convivir en una misma aplicación, combinando elementos gráficos tradicionales con interacción natural.
+      </p>
+      <ul>
+        <li><strong>Entrada</strong>: GUI usa ratón y teclado; NUI usa voz, gestos, visión y movimiento.</li>
+        <li><strong>Curva de aprendizaje</strong>: en NUI se busca que sea baja o casi nula.</li>
+        <li><strong>Realismo</strong>: bajo en GUI frente a alto en NUI.</li>
+        <li><strong>Accesibilidad</strong>: las NUI amplían las posibilidades para distintos perfiles de usuario.</li>
+        <li>Ejemplos: escritorios Windows/macOS (GUI) frente a asistentes de voz y RA (NUI).</li>
+      </ul>
+
+    </section>
+    <section class="slide" id="comparativa-gui-nui">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>1.3 Comparativa entre GUI y NUI</h3>
+      <p>
+        La siguiente imagen muestra una comparativa entre CLI, GUI y NUI, destacando sus diferencias en términos de interacción, experiencia de usuario y casos de uso típicos:
+      </p>
+      <div class="diagram">
+        <img src="../../assets/linkia/NUI VS GUI.webp" style="max-width: 60%;"
+          alt="Comparativa entre GUI y NUI">
+      </div>
+
+    </section>
+    <section class="slide" id="tipos-interfaces-naturales">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h2>2. Definición y tipos de interfaces naturales</h2>
+      <p>
+        El concepto de interfaz natural de usuario abarca diversas <strong>modalidades</strong> de interacción que
+        utilizan canales de comunicación humanos como la voz, los gestos o la percepción visual del entorno.
+      </p>
+      <ul>
+        <li>Interfaces basadas en voz.</li>
+        <li>Interfaces basadas en gestos.</li>
+        <li>Interfaces basadas en visión por computador.</li>
+        <li>Interfaces de realidad aumentada (RA).</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="interfaces-voz">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>2.1 Interfaces basadas en voz</h3>
+      <p>
+        Las interfaces por voz permiten al usuario comunicarse con el sistema mediante <strong>lenguaje
+          hablado</strong>,
+        utilizando técnicas de procesamiento del lenguaje natural (NLP) y aprendizaje automático.
+      </p>
+      <ul>
+        <li>Aplicaciones: asistentes virtuales, control por voz en vehículos, dictado de texto, atención telefónica
+          automatizada.</li>
+        <li>Componentes: reconocimiento de voz, interpretación semántica e integración con síntesis de voz (TTS).</li>
+        <li>Ventajas: interacción sin manos ni vista, gran utilidad en accesibilidad.</li>
+        <li>Desventajas: dependencia de entornos silenciosos y dificultades con acentos o modismos.</li>
+      </ul>
+
+    </section>
+<section class="slide" id="interfaces-voz">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>2.1 Interfaces basadas en voz</h3>
+      <p>
+        Un ejemplo de interfaz por voz es el asistente virtual, que combina reconocimiento de voz, NLP y TTS para ofrecer una interacción fluida y natural con el usuario, permitiendo realizar tareas, responder preguntas o controlar dispositivos mediante comandos hablados.
+      </p>
+      <div class="diagram">
+        <img src="../../assets/linkia/voice-command-control-user-interface-260nw-1139588135.webp" style="max-width: 40%;"
+          alt="Diagrama de componentes de una interfaz por voz">
+      </div>
+
+    </section>
+    <section class="slide" id="interfaces-gestos">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>2.2 Interfaces basadas en gestos</h3>
+      <p>
+        Estas interfaces permiten controlar un sistema mediante <strong>movimientos corporales</strong>, especialmente
+        de manos, brazos, cabeza o cuerpo completo, interpretados a partir de cámaras o sensores de profundidad.
+      </p>
+      <ul>
+        <li>Ejemplos: control de videojuegos con Kinect, navegación sin contacto en quirófanos, instalaciones
+          interactivas.</li>
+        <li>Tipos de gestos: estáticos, dinámicos y combinados (posición + trayectoria).</li>
+        <li>Tecnologías: sensores de profundidad (Kinect, RealSense) y visión por computador (OpenCV, MediaPipe).</li>
+        <li>Factores clave: iluminación, distancia, calibración y definición de gestos reconocibles.</li>
+      </ul>
+
+    </section>
+<section class="slide" id="interfaces-gestos">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>2.2 Interfaces basadas en gestos</h3>
+      <p>
+        En la siguiente imagen vemos algunos ejemplos de interfaces por gestos, desde el control de videojuegos con Kinect hasta aplicaciones de RA que permiten manipular objetos virtuales con las manos:
+      </p>
+      <div class="diagram">
+        <img src="../../assets/linkia/Interfaces basadas en gestos.jpg" style="max-width: 60%;"
+          alt="Diagrama de componentes de una interfaz por gestos">
+      </div>
+
+    </section>
+    <section class="slide" id="interfaces-vision-computador">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>2.3 Interfaces basadas en visión por computador</h3>
+      <p>
+        Las interfaces basadas en <strong>visión por computador</strong> capturan, analizan y procesan imágenes o
+        vídeo en tiempo real para extraer información del entorno o del usuario, habilitando interacciones basadas
+        en reconocimiento visual.
+      </p>
+      <ul>
+        <li>Aplicaciones: desbloqueo facial en móviles, seguimiento ocular, control de accesos.</li>
+        <li>Tecnologías: OpenCV, TensorFlow con redes neuronales, MediaPipe para manos, rostro y postura.</li>
+        <li>Retos: alta carga computacional en tiempo real y necesidad de datasets específicos de entrenamiento.</li>
+      </ul>
+
+    </section>
+<section class="slide" id="interfaces-vision-computador">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>2.3 Interfaces basadas en visión por computador</h3>
+      <p>
+        Ejemplo de MediaPipe para detección de manos en tiempo real, que permite reconocer la posición y movimiento de las manos para habilitar interacciones gestuales sin necesidad de hardware especializado:
+      </p>
+      <div class="diagram">
+        <img src="../../assets/linkia/20593face_mesh_ar_effects.gif" style="max-width: 60%;"
+          alt="Ejemplo de detección de manos con MediaPipe">
+      </div>
+
+    </section>
+    <section class="slide" id="interfaces-ra">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>2.4 Interfaces de realidad aumentada (RA)</h3>
+      <p>
+        La <strong>realidad aumentada (RA)</strong> superpone información virtual sobre la realidad física en tiempo
+        real, de modo que el usuario percibe el entorno enriquecido con elementos gráficos interactivos.
+      </p>
+      <ul>
+        <li>Ejemplos: IKEA Place, Pokémon GO, aplicaciones educativas y de soporte a mantenimiento.</li>
+        <li>Tecnologías: ARCore, ARKit, Vuforia y motores de videojuegos como Unity.</li>
+        <li>Ventajas: experiencia inmersiva y contextual; limitaciones: requisitos de hardware y condiciones de entorno.
+        </li>
+      </ul>
+      
+
+    </section>
+<section class="slide" id="interfaces-ra">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>2.4 Interfaces de realidad aumentada (RA)</h3>
+      <p>
+        Ejemplo de RA del videjuego Pokémon GO, que superpone criaturas virtuales en el entorno real a través de la cámara del dispositivo móvil, permitiendo a los usuarios interactuar con ellas mediante movimientos y gestos:
+      </p>
+      <div class="diagram">
+        <img src="../../assets/linkia/pokemon_go.webp" style="max-width: 60%;"
+          alt="Ejemplo de realidad aumentada en Pokémon GO">
+      </div>
+      
+      
+
+    </section>
+    <section class="slide" id="ambitos-aplicacion-nui">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h2>3. Ámbitos de aplicación de las NUI</h2>
+      <p>
+        Las interfaces naturales de usuario se integran progresivamente en distintos sectores, aportando experiencias
+        más <strong>intuitivas</strong>, <strong>inclusivas</strong> y <strong>eficientes</strong> en escenarios
+        de consumo y profesionales.
+      </p>
+      <ul>
+        <li>Aplicaciones móviles.</li>
+        <li>Accesibilidad digital.</li>
+        <li>Videojuegos y entornos inmersivos.</li>
+        <li>Automatización del hogar y entornos industriales.</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="ambito-aplicaciones-moviles">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>3.1 Aplicaciones móviles</h3>
+      <p>
+        Los dispositivos móviles son uno de los principales impulsores de las NUI, al integrar cámara, micrófono,
+        pantalla táctil y sensores de movimiento en un único dispositivo.
+      </p>
+      <ul>
+        <li>Asistentes por voz integrados en smartphones.</li>
+        <li>Reconocimiento facial para desbloqueo.</li>
+        <li>Aplicaciones de RA como IKEA Place o Google Lens.</li>
+        <li>Juegos que utilizan acelerómetro y giroscopio para el control.</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="ambito-accesibilidad-digital">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>3.2 Accesibilidad digital</h3>
+      <p>
+        En el ámbito de la <strong>accesibilidad</strong>, las NUI permiten sustituir, ampliar o complementar formas
+        tradicionales de interacción, promoviendo la inclusión digital de personas con diversidad funcional.
+      </p>
+      <ul>
+        <li>Control por voz para personas con movilidad reducida.</li>
+        <li>Seguimiento ocular (eye-tracking) para quienes no pueden usar ratón o teclado.</li>
+        <li>Reconocimiento de gestos faciales o corporales como alternativa al habla.</li>
+        <li>Navegación háptica mediante vibraciones o señales sonoras.</li>
+        <li>Ejemplo: proyecto “Look to Speak” de Google.</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="ambito-videojuegos-entornos-inmersivos">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>3.3 Videojuegos y entornos inmersivos</h3>
+      <p>
+        El sector de los <strong>videojuegos</strong> ha sido pionero en explorar interfaces naturales, buscando
+        experiencias de usuario más inmersivas y dinámicas que trasciendan el mando o el teclado tradicionales.
+      </p>
+      <ul>
+        <li>Tecnologías: reconocimiento de movimiento (Kinect, PlayStation Move), RA (ARKit, ARCore, Vuforia), realidad
+          virtual.</li>
+        <li>Aplicaciones: juegos de baile y ejercicio, escape rooms virtuales, juegos de RA.</li>
+        <li>Ventajas: mayor implicación del jugador y potencial educativo.</li>
+        <li>Retos: coste del hardware, calibración frecuente y posible fatiga física.</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="ambito-automatizacion-hogar-industria">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>3.4 Automatización del hogar y entornos industriales</h3>
+      <p>
+        En domótica e industria 4.0, las NUI facilitan el control de sistemas complejos mediante <strong>voz</strong>,
+        <strong>gestos</strong> y <strong>visión artificial</strong>, mejorando la ergonomía y la eficiencia de los
+        procesos.
+      </p>
+      <ul>
+        <li>Hogar: control de luces, temperatura y electrodomésticos con asistentes de voz, acceso mediante
+          reconocimiento facial.</li>
+        <li>Industria: supervisión de maquinaria con interfaces gestuales, RA para mantenimiento y control de calidad.
+        </li>
+        <li>Ventajas: reducción de tiempos de intervención y mayor precisión en procesos automatizados.</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="deteccion-movimiento-gestos-corporales">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h2>4. Detección de movimiento y gestos corporales</h2>
+      <p>
+        El <strong>reconocimiento del movimiento</strong> y de los <strong>gestos corporales</strong> permite a los
+        usuarios interactuar con sistemas mediante posturas, trayectorias o acciones capturadas por cámaras o
+        sensores especializados, sin contacto físico directo.
+      </p>
+      <ul>
+        <li>Es un componente clave de las NUI.</li>
+        <li>Está estrechamente ligado a la visión artificial y al aprendizaje automático.</li>
+        <li>Se usa en videojuegos, accesibilidad, automatización y entornos interactivos.</li>
+      </ul>
+      
+
+    </section>
+
+    <section class="slide" id="vision-artificial-gestos">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>4.1 Principios de visión artificial aplicada a gestos</h3>
+      <p>
+        La <strong>VA</strong> permite a un sistema identificar partes
+        del cuerpo, movimiento y patrones como gestos.
+      </p>
+      <ul>
+        <li><strong>Proceso generalpara detectar los gestos</strong> 
+          <ol>
+            <li>Captura de imagen o vídeo.</li>
+            <li>Preprocesamiento (filtrado, normalización).</li>
+            <li>Detección de características (puntos clave, contornos).</li>
+            <li>Seguimiento de movimiento.</li>
+            <li>Clasificación del gesto mediante modelos entrenados.</li>
+          </ol>
+        </li>
+        <li><strong>Tipos de gestos</strong>: estáticos, dinámicos y combinados (posición + trayectoria).</li>
+        <li><strong>Problemas habituales</strong>: cambios de iluminación, ambigüedad gestual y calibración.
+        </li>
+      </ul>
+
+    </section>
+<section class="slide" id="vision-artificial-gestos">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>4.1 Principios de visión artificial aplicada a gestos</h3>
+      <p>
+        Pasos para detectar gestos con visión artificial:
+      </p>
+      <div class="diagram">
+        <img src="../../assets/linkia/Etapas_vision_artificial.png" style="max-width: 60%;"
+          alt="Diagrama de proceso de detección de gestos con visión artificial">
+      </div>
+    </section>
+    <section class="slide" id="librerias-especializadas-gestos">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>4.2 Librerías especializadas: OpenCV, Kinect SDK y MediaPipe</h3>
+      <p>
+        Diferentes librerías y frameworks facilitan la implementación de sistemas de detección gestual en entornos
+        educativos y profesionales.
+      </p>
+      <ul>
+        <li><strong>OpenCV</strong>: biblioteca de código abierto para procesamiento de imágenes y vídeo.</li>
+        <li><strong>Kinect SDK</strong>: kit de Microsoft para sensores Kinect con captura de profundidad y esqueleto
+          3D.</li>
+        <li><strong>MediaPipe</strong>: framework de Google con modelos preentrenados para manos, rostro y postura en
+          tiempo real.</li>
+      </ul>
+     
+    </section>
+
+    <section class="slide" id="comparativa-librerias-gestos">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>4.3 Comparativa de capacidades y casos de uso</h3>
+      <p>
+        Cada librería presenta un equilibrio distinto entre dificultad de uso, requisitos de hardware y capacidades,
+        por lo que su elección depende del tipo de proyecto y del contexto.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Librería</th>
+            <th>Facilidad de uso</th>
+            <th>Requisitos de hardware</th>
+            <th>Capacidades principales</th>
+            <th>Casos de uso típicos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>OpenCV</td>
+            <td>Media</td>
+            <td>Bajo a medio (cámara estándar)</td>
+            <td>Procesamiento de imágenes, detección de contornos, seguimiento de objetos</td>
+            <td>Proyectos educativos, prototipos de visión artificial, análisis de vídeo</td>
+          </tr>
+          <tr>
+            <td>Kinect SDK</td>
+            <td>Baja (requiere hardware específico)</td>
+            <td>Alto (sensor Kinect)</td>
+            <td>Captura de profundidad, seguimiento esquelético 3D, reconocimiento de gestos complejos</td>
+            <td>Videojuegos, instalaciones interactivas, aplicaciones de rehabilitación física</td>
+          </tr>
+          <tr>
+            <td>MediaPipe</td>
+            <td>Alta (modelos preentrenados y fácil integración)</td>
+            <td>Bajo a medio (cámara estándar)</td>
+            <td>Detección de manos, rostro y postura en tiempo real con modelos optimizados</td>
+            <td>Aplicaciones móviles, prototipos rápidos, proyectos educativos y experimentales</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </section>
+
+    <section class="slide" id="ejemplos-codigo-mediapipe">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>4.4 Ejemplo básico de código con MediaPipe</h3>
+      <p>
+        Un ejemplo típico en Python con <strong>MediaPipe</strong> consiste en detectar manos usando la webcam,
+        dibujando
+        los puntos clave y sus conexiones sobre el vídeo para visualizar la detección en tiempo real.
+      </p>
+      <pre class="language-python"><code>import cv2
+
+import mediapipe as mp
+
+cap = cv2.VideoCapture(0)
+hands = mp.solutions.hands.Hands()
+draw = mp.solutions.drawing\_utils
+
+while True:
+ret, frame = cap.read()
+if not ret:
+break
+
+    frame = cv2.flip(frame, 1)
+    rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    results = hands.process(rgb)
+
+    if results.multi_hand_landmarks:
+        for hand_landmarks in results.multi_hand_landmarks:
+            draw.draw_landmarks(frame, hand_landmarks, mp.solutions.hands.HAND_CONNECTIONS)
+
+    cv2.imshow("Detección de manos", frame)
+    if cv2.waitKey(1) == 27:  # ESC
+        break
+
+cap.release()
+cv2.destroyAllWindows()</code></pre>
+
+    </section>
+
+    <section class="slide" id="implementacion-basica-interaccion-gestual">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h2>5. Implementación básica de interacción gestual</h2>
+      <p>
+        Con los fundamentos y tecnologías de reconocimiento de gestos es posible diseñar <strong>interacciones simples
+          controladas con el cuerpo</strong>, sin contacto físico con el dispositivo, integrando NUI en aplicaciones
+        reales.
+      </p>
+      <ul>
+        <li>Mover el cursor con la mano.</li>
+        <li>Disparar eventos mediante gestos.</li>
+        <li>Controlar el scroll vertical con movimientos.</li>
+        <li>Combinar MediaPipe, OpenCV o Kinect con bibliotecas de eventos del sistema operativo.</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="mover-cursor-con-la-mano">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>5.1 Mover el cursor con la mano</h3>
+      <p>
+        Una aplicación directa del seguimiento de manos es controlar el <strong>cursor del ratón</strong> obteniendo
+        las coordenadas de un punto de referencia (por ejemplo, la punta del dedo índice) y mapeándolas al tamaño de la
+        pantalla.
+      </p>
+      <ul>
+        <li>Capturar vídeo de la cámara en tiempo real.</li>
+        <li>Detectar la posición del dedo índice con MediaPipe.</li>
+        <li>Normalizar coordenadas al tamaño de pantalla.</li>
+        <li>Mover el cursor con una biblioteca como PyAutoGUI.</li>
+      </ul>
+      <pre class="language-python"><code>import cv2
+
+import mediapipe as mp
+import pyautogui
+
+cap = cv2.VideoCapture(0)
+hands = mp.solutions.hands.Hands()
+screen\_w, screen\_h = pyautogui.size()
+
+while True:
+ret, frame = cap.read()
+if not ret:
+break
+
+    frame = cv2.flip(frame, 1)
+    rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    results = hands.process(rgb)
+
+    if results.multi_hand_landmarks:
+        for hand in results.multi_hand_landmarks:
+            x = int(hand.landmark[8].x * screen_w)
+            y = int(hand.landmark[8].y * screen_h)
+            pyautogui.moveTo(x, y)
+
+    cv2.imshow("Cursor con la mano", frame)
+    if cv2.waitKey(1) == 27:  # ESC
+        break
+
+cap.release()
+cv2.destroyAllWindows()</code></pre>
+
+    </section>
+
+    <section class="slide" id="disparar-eventos-mediante-gestos">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>5.2 Disparar eventos mediante gestos</h3>
+      <p>
+        Además de mover el cursor, es posible <strong>activar acciones concretas</strong> mediante la detección de
+        gestos
+        definidos, asociando cada gesto con un evento de la interfaz o del sistema.
+      </p>
+      <ul>
+        <li>Ejemplos: cerrar puño para cerrar ventana, gesto de pinza para clic, mano abierta para iniciar una acción.
+        </li>
+        <li>Flujo: identificar puntos clave → calcular distancias/relaciones → definir condiciones → disparar el evento.
+        </li>
+        <li>Es recomendable usar umbrales y filtros para evitar falsos positivos.</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="control-scroll-con-movimientos">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>5.3 Control de scroll con movimientos</h3>
+      <p>
+        El <strong>scroll vertical</strong> en páginas web, documentos o menús puede controlarse mediante gestos,
+        utilizando el movimiento de la mano como entrada natural para desplazar contenido.
+      </p>
+      <ul>
+        <li>Movimiento suave hacia arriba o abajo → scroll continuo.</li>
+        <li>Gestos verticales definidos → scroll por bloques.</li>
+        <li>Número de dedos visibles → velocidad de desplazamiento.</li>
+        <li>Recomendaciones: establecer umbrales mínimos y limitar la frecuencia de eventos.</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="realidad-aumentada-ut3">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h2>6. Realidad aumentada</h2>
+      <p>
+        La <strong>realidad aumentada (RA)</strong> es una tecnología clave dentro del desarrollo de interfaces
+        naturales, ya que permite al usuario <strong>interactuar con objetos virtuales integrados en el entorno
+          físico</strong>
+        en tiempo real.
+      </p>
+      <ul>
+        <li>Complementa la realidad física, a diferencia de la realidad virtual que la sustituye.</li>
+        <li>Integra contenidos visuales, sonoros o táctiles sobre la escena capturada por la cámara.</li>
+        <li>Tiene aplicaciones en educación, turismo, industria y entretenimiento.</li>
+      </ul>
+      
+
+    </section>
+
+    <section class="slide" id="fundamentos-ra">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>6.1 Fundamentos y definición de RA</h3>
+      <p>
+        La RA se define como la tecnología que <strong>superpone contenidos virtuales sobre una imagen del mundo
+          real</strong>,
+        manteniendo una sincronización espacial y temporal con el entorno para enriquecer la percepción del usuario.
+      </p>
+      <ul>
+        <li>Componentes esenciales: cámara, sistema de localización (GPS, sensores), unidad de procesamiento y motor
+          gráfico.</li>
+        <li>Tipos: RA basada en marcadores, basada en localización, sin marcadores (markerless) y con dispositivos
+          especializados.</li>
+        <li>Limitaciones: alta demanda de recursos, dependencia de condiciones de luz y calidad de sensores.</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="plataformas-sdks-ra">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>6.2 Plataformas y SDKs: ARCore y Vuforia</h3>
+      <p>
+        Para desarrollar aplicaciones de RA es habitual utilizar SDKs que facilitan el reconocimiento del entorno,
+        la gestión de objetos virtuales y su integración con aplicaciones móviles o con motores como Unity.
+      </p>
+      <ul>
+        <li><strong>ARCore</strong>: orientado a Android y Unity, especializado en RA sin marcadores (markerless).</li>
+        <li><strong>Vuforia</strong>: multiplataforma (Android, iOS, Unity), compatible con marcadores, superficies,
+          texto e imágenes.</li>
+        <li>Ambos permiten posicionar y anclar objetos 3D, texto e incluso vídeo sobre el entorno físico.</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="superposicion-elementos-graficos-ra">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>6.3 Superposición de elementos gráficos</h3>
+      <p>
+        Una tarea central en RA es posicionar elementos virtuales <strong>alineados con la imagen real</strong>
+        capturada
+        por la cámara, de forma estable y coherente para el usuario.
+      </p>
+      <ul>
+        <li>Tipos de elementos: imágenes, modelos 3D, etiquetas de texto, animaciones.</li>
+        <li>Principios: anclaje a referencias estables, adaptación de escala/perspectiva y baja latencia.</li>
+        <li>Ejemplo: al apuntar a una ilustración impresa de un corazón humano, se muestra un modelo 3D interactivo.
+        </li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="prototipo-simple-ar">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h3>6.4 Prototipo simple de aplicación con AR</h3>
+      <p>
+        Un prototipo típico en Unity utilizando <strong>Vuforia</strong> consiste en mostrar un modelo 3D al enfocar
+        con la cámara un marcador predefinido.
+      </p>
+      <ul>
+        <li>Instalar Unity con soporte móvil e integrar Vuforia.</li>
+        <li>Configurar una escena con ARCamera e ImageTarget asociado a un marcador.</li>
+        <li>Importar un modelo 3D, vincularlo al marcador y compilar la aplicación.</li>
+        <li>Al enfocar el marcador, el modelo 3D se superpone y se observa desde distintas perspectivas.</li>
+      </ul>
+
+    </section>
+
+    
+
+
+    <section class="slide" id="actividades-evaluacion-ut3">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+      <h2>Actividades de evaluación</h2>
+      <p>
+        Las actividades propuestas permiten comprobar el grado de comprensión de los conceptos de la UT3 y su
+        relación con los criterios de evaluación del resultado de aprendizaje RA2.
+      </p>
+      <ul>
+        <li><strong>Actividad 1</strong>: relacionar tipos de interfaces naturales con su función principal.</li>
+        <li><strong>Actividad 2</strong>: clasificar ejemplos según el ámbito de aplicación (móviles, accesibilidad,
+          videojuegos, industria).</li>
+        <li><strong>Actividad 3</strong>: ordenar los pasos necesarios para detectar un gesto corporal con visión
+          artificial.</li>
+        <li><strong>Actividad 4</strong>: completar una tabla indicando qué tipo de interacción permite cada acción
+          (voz, gestos, visión, RA).</li>
+      </ul>
+
+    </section>
+
+  
+
+
+  </div>
+
+  <div class="footer">
+    <div class="bar">
+      <small>UT3 · Interfaces naturales de usuario e interacción avanzada</small>
+      <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+    </div>
+  </div>
+</body>
+
+</html>

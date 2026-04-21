@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>UT5 · Operaciones de entrada/salida e interfaces gráficas · LinkiaFP</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link href="../style.css" rel="stylesheet">
+    <script defer="" src="../script.js"></script>
+    </link>
+</head>
+
+<body>
+    <div class="deck">
+        <!-- COVER -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img alt="" src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" />
+                </div>
+                <div class="title">UTT5 · Operaciones de entrada/salida e interfaces gráficas · LinkiaFP</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;" />
+            </div>
+        </section>
+        <!-- Contenido principal desarrollado -->
+        <section class="slide" id="intro-es">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h2>1. Introducción general a la entrada y salida de información</h2>
+            <p>
+                En programación, la <strong>E/S (entrada/salida)</strong> describe cómo un programa se comunica con el
+                exterior:
+                teclado, pantalla, archivos, periféricos o interfaces gráficas. La entrada permite recibir datos del
+                usuario u
+                otras fuentes, mientras que la salida muestra resultados, mensajes o informes.
+            </p>
+            <ul>
+                <li>Java ofrece mecanismos de E/S desde la <strong>consola</strong> hasta <strong>GUIs</strong> y
+                    ficheros persistentes.</li>
+                <li>Esta unidad recorre E/S por consola, manejo de archivos y E/S en interfaces gráficas con Swing.</li>
+                <li>El objetivo es implementar soluciones de E/S <strong>efectivas</strong> y <strong>adaptadas al
+                        contexto</strong> del programa.</li>
+            </ul>
+
+        </section>
+
+        <section class="slide" id="consola-systemout">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h2>2. Entrada y salida por consola</h2>
+            <h3>2.1 Salida de datos con <code>System.out</code></h3>
+            <p>
+                La salida estándar en Java está representada por <code>System.out</code>, utilizada para mostrar
+                mensajes en la consola.
+                Los métodos más habituales son <code>print()</code>, <code>println()</code> y <code>printf()</code>.
+            </p>
+            <ul>
+                <li><code>print()</code>: imprime sin salto de línea final.</li>
+                <li><code>println()</code>: imprime y añade un salto de línea.</li>
+                <li><code>printf()</code>: permite imprimir texto con formato.</li>
+            </ul>
+            <pre class="language-java"><code>System.out.print("Bienvenido ");
+
+System.out.println("al programa de ejemplo.");
+System.out.println("Esta línea aparece debajo.");</code></pre>
+
+        </section>
+
+        <section class="slide" id="consola-bufferedreader">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h3>2.2 Entrada con <code>BufferedReader</code> y conversión de tipos</h3>
+            <p>
+                Java no dispone de una función única para leer del teclado; en su lugar utiliza clases como
+                <code>BufferedReader</code>, que permite leer texto de forma eficiente desde <code>System.in</code>,
+                devolviendo
+                siempre cadenas (<code>String</code>) que suelen necesitar conversión a tipos numéricos.
+            </p>
+            <ul>
+                <li><code>BufferedReader</code> se combina con <code>InputStreamReader</code> para leer líneas.</li>
+                <li>Los datos leídos se convierten con métodos como <code>Integer.parseInt()</code> o
+                    <code>Double.parseDouble()</code>.
+                </li>
+                <li>Es importante capturar errores de formato con <code>try-catch</code> para evitar excepciones.</li>
+            </ul>
+            <pre class="language-java"><code>BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+System.out.print("Introduce tu edad: ");
+try {
+    int edad = Integer.parseInt(br.readLine());
+    System.out.println("Tienes " + edad + " años.");
+} catch (NumberFormatException e) {
+    System.out.println("Error: no has introducido un número válido.");
+}</code></pre>
+
+        </section>
+
+        <section class="slide" id="entrada-validacion-funcion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+
+            <h3>2.3 Función de lectura con validación</h3>
+            <p>
+                Un patrón didáctico habitual consiste en encapsular la lectura y validación en una función que repita la
+                petición hasta obtener un valor correcto. Esto refuerza la robustez de la entrada y mejora la
+                experiencia de usuario.
+            </p>
+            <ul>
+                <li>Se utiliza un bucle con un flag de validez (<code>boolean valido</code>).</li>
+                <li>Se controla la excepción <code>NumberFormatException</code> para entradas no numéricas.</li>
+                <li>Se aplican condiciones adicionales (por ejemplo, valores positivos).</li>
+            </ul>
+            <pre class="language-java"><code>public static int pedirEntero() throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int numero = -1;
+    boolean valido = false;
+
+    while (!valido) {
+        try {
+            System.out.print("Introduce un número entero positivo: ");
+            numero = Integer.parseInt(br.readLine());
+            if (numero &gt;= 0) {
+                valido = true;
+            } else {
+                System.out.println("Debe ser un número positivo.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Entrada no válida. Intenta de nuevo.");
+        }
+    }
+    return numero;
+
+}</code></pre>
+
+        </section>
+
+        <section class="slide" id="formatos-salida-basicos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h2>3. Formatos de salida personalizados</h2>
+            <h3>3.1 Concatenación de texto</h3>
+            <p>
+                La forma más sencilla de personalizar la salida es <strong>concatenar</strong> texto con el operador
+                <code>+</code>. Es intuitivo, pero puede volverse poco legible en salidas complejas o con muchos datos.
+            </p>
+            <ul>
+                <li>Adecuado para mensajes simples o pruebas rápidas.</li>
+                <li>No ofrece control fino sobre alineación o formato numérico.</li>
+                <li>Se recomienda evolucionar hacia <code>printf()</code> en salidas más elaboradas.</li>
+            </ul>
+            <pre class="language-java"><code>String nombre = "Laura";
+
+int edad = 24;
+System.out.println("Hola, " + nombre + ". Tienes " + edad + " años.");</code></pre>
+
+        </section>
+
+        <section class="slide" id="formatos-salida-printf">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+
+            <h3>3.2 Uso de <code>printf</code> y especificadores de formato</h3>
+            <p>
+                Para salidas más controladas, <code>System.out.printf()</code> permite definir el formato de cada valor
+                mediante especificadores similares a los del lenguaje C, controlando decimales, anchura y alineación.
+            </p>
+            <ul>
+                <li><code>%d</code>: entero decimal.</li>
+                <li><code>%f</code>: número con decimales (<code>%.2f</code> limita a 2 decimales).</li>
+                <li><code>%s</code>: cadena de texto; <code>%n</code>: salto de línea independiente del sistema.</li>
+            </ul>
+            <pre class="language-java"><code>double pi = 3.14159265;
+
+System.out.printf("Valor de PI: %.2f%n", pi);
+
+System.out.printf("%-10s %5s%n", "Nombre", "Edad");
+System.out.printf("%-10s %5d%n", "Carlos", 30);
+System.out.printf("%-10s %5d%n", "Marta", 25);</code></pre>
+
+        </section>
+
+        <section class="slide" id="formatos-salida-string-format">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h3>3.3 Formateo avanzado con <code>String.format()</code></h3>
+            <p>
+                Cuando se necesita generar texto formateado sin imprimirlo inmediatamente, se puede utilizar
+                <code>String.format()</code>. Permite reutilizar el mensaje en múltiples contextos: logs, GUIs o
+                archivos.
+            </p>
+            <ul>
+                <li>Devuelve una <code>String</code> ya formateada.</li>
+                <li>Es útil para almacenar mensajes y mostrarlos posteriormente.</li>
+                <li>Comparte la misma sintaxis de formato que <code>printf()</code>.</li>
+            </ul>
+            <pre class="language-java"><code>double total = 24.5;
+
+String mensaje = String.format("El precio final es %.2f euros", total);
+System.out.println(mensaje);</code></pre>
+
+        </section>
+
+        <section class="slide" id="librerias-es-io-util">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h2>4. Librerías estándar para E/S</h2>
+            <h3>4.1 Paquetes <code>java.io</code> y <code>java.util</code></h3>
+            <p>
+                Java ofrece librerías estándar que proporcionan clases y herramientas para gestionar la entrada/salida,
+                procesar datos y organizar la información leída desde consola, archivos u otras fuentes.
+            </p>
+            <ul>
+                <li><strong><code>java.io</code></strong>: flujos de datos, archivos de texto y binarios, buffers,
+                    consola.</li>
+                <li><strong><code>java.util</code></strong>: colecciones, fechas, formateadores y clases como
+                    <code>Scanner</code>.
+                </li>
+                <li>El uso combinado de ambos paquetes permite construir soluciones de E/S robustas y eficientes.</li>
+            </ul>
+            <pre class="language-java"><code>import java.io.BufferedReader;
+
+import java.io.InputStreamReader;
+
+BufferedReader br = new BufferedReader(
+new InputStreamReader(System.in));</code></pre>
+
+        </section>
+
+        <section class="slide" id="librerias-importacion-comparativa">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+
+            <h3>4.2 Importación de clases y comparativa <code>Scanner</code> vs <code>BufferedReader</code></h3>
+            <p>
+                Para usar estas clases hay que <strong>importarlas</strong> al inicio del archivo Java. Además, es
+                importante
+                elegir la herramienta de lectura adecuada según el contexto: simplicidad (<code>Scanner</code>) o
+                rendimiento
+                y control (<code>BufferedReader</code>).
+            </p>
+            <ul>
+                <li>Importación individual: <code>import java.io.BufferedReader;</code></li>
+                <li>Importación por paquete: <code>import java.io.*;</code></li>
+                <li><strong>Scanner</strong>: muy fácil de usar, conversión automática, rendimiento menor.</li>
+                <li><strong>BufferedReader</strong>: más eficiente, requiere <code>parse</code> manual y manejo de
+                    <code>IOException</code>.
+                </li>
+            </ul>
+            <pre class="language-java"><code>import java.util.Scanner;
+
+Scanner sc = new Scanner(System.in);
+System.out.print("Introduce tu nombre: ");
+String nombre = sc.nextLine();</code></pre>
+
+        </section>
+
+        <section class="slide" id="archivos-lectura-secuencial">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h2>5. Manipulación de archivos</h2>
+            <h3>5.1 Lectura secuencial de archivos de texto</h3>
+            <p>
+                La <strong>persistencia de datos</strong> se logra guardando información en archivos. Para leer ficheros
+                de texto
+                en Java es habitual combinar <code>FileReader</code> y <code>BufferedReader</code> y procesar el
+                contenido
+                línea a línea.
+            </p>
+            <ul>
+                <li><code>readLine()</code> devuelve <code>null</code> al llegar al final del archivo.</li>
+                <li>Es imprescindible cerrar el fichero con <code>close()</code> tras su uso.</li>
+                <li>La lectura secuencial es eficiente y adecuada para archivos grandes.</li>
+            </ul>
+            <pre class="language-java"><code>import java.io.*;
+
+public class LectorArchivo {
+    public static void main(String[] args) {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("alumnos.txt"));
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                System.out.println("Línea: " + linea);
+            }
+            br.close();
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo: " + e.getMessage());
+        }
+    }
+}</code></pre>
+
+        </section>
+
+        <section class="slide" id="archivos-escritura-modificacion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h3>5.2 Escritura y modificación de archivos de texto</h3>
+            <p>
+                Para escribir en archivos se usan <code>FileWriter</code> junto con <code>BufferedWriter</code> o
+                <code>PrintWriter</code>. Java no modifica líneas “in situ”; la estrategia habitual es leer, modificar
+                en
+                memoria y reescribir el archivo, o bien abrir en modo <em>append</em> para añadir contenido al final.
+            </p>
+            <ul>
+                <li><code>BufferedWriter.newLine()</code> añade saltos de línea.</li>
+                <li>El modo <code>append</code> permite añadir información sin borrar el contenido previo.</li>
+                <li>Útil para registros, logs o historiales de ejecución.</li>
+            </ul>
+            <pre class="language-java"><code>// Escritura básica
+
+BufferedWriter bw = new BufferedWriter(new FileWriter("salida.txt"));
+bw.write("Primera línea.");
+bw.newLine();
+bw.write("Segunda línea.");
+bw.close();
+
+// Añadir al final (append)
+BufferedWriter bw2 = new BufferedWriter(new FileWriter("registro.txt", true));
+bw2.write("Nueva entrada");
+bw2.newLine();
+bw2.close();</code></pre>
+
+        </section>
+
+        <section class="slide" id="archivos-gestion-file">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h3>5.4 Acceso y gestión de ficheros con <code>File</code></h3>
+            <p>
+                La clase <code>File</code> permite gestionar archivos y directorios: comprobar si existen, obtener su
+                ruta,
+                tamaño, permisos o eliminarlos. Es fundamental para una administración avanzada de recursos de
+                almacenamiento.
+            </p>
+            <ul>
+                <li><code>exists()</code>, <code>delete()</code>, <code>length()</code>, <code>getAbsolutePath()</code>,
+                    <code>renameTo()</code> son métodos clave.
+                </li>
+                <li>Permite construir utilidades para mantenimiento de datos y limpieza de archivos temporales.</li>
+                <li>Se integra con las clases de lectura/escritura para flujos completos de E/S.</li>
+            </ul>
+            <pre class="language-java"><code>File archivo = new File("datos.txt");
+// Comprobar existencia
+if (archivo.exists()) {
+    System.out.println("El archivo existe: " +
+    archivo.getAbsolutePath());
+} else {
+    System.out.println("El archivo no se encuentra.");
+}</code></pre>
+            
+        </section>
+
+        <section class="slide" id="swing-intro">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h2>6. Introducción a interfaces gráficas con Swing</h2>
+            <h3>6.1 ¿Qué es Swing?</h3>
+            <p>
+                <strong>Swing</strong> es una biblioteca de Java (<code>javax.swing</code>) que permite crear
+                <strong>interfaces gráficas de usuario (GUI)</strong> basadas en ventanas, botones, campos de texto,
+                menús y otros componentes. Se apoya en <code>java.awt</code> y es independiente del sistema operativo.
+            </p>
+            <ul>
+                <li>Permite crear formularios, cuadros de diálogo, menús y paneles.</li>
+                <li>Maneja datos en tablas, listas y áreas de texto.</li>
+                <li>Captura eventos generados por el usuario (clics, escritura, selección, etc.).</li>
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/linkia/swingclassesnew.png" style="max-width: 50%;" alt="Diagrama de Swing">
+            </div>
+
+        </section>
+
+        <section class="slide" id="swing-estructura-gui-basica">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h3>6.2 Estructura de una GUI básica</h3>
+            <p>
+                Toda interfaz gráfica en Java parte de una <strong>ventana principal</strong> (<code>JFrame</code>)
+                sobre la que
+                se añaden componentes (etiquetas, botones, campos de texto, paneles...). Entender este esqueleto es
+                esencial para
+                estructurar GUIs más complejas.
+            </p>
+            <ul>
+                <li><code>JFrame</code>: contenedor principal.</li>
+                <li><code>setSize()</code>, <code>setDefaultCloseOperation()</code>, <code>setVisible(true)</code> como
+                    métodos básicos.</li>
+                <li>Uso de <code>JPanel</code> para agrupar componentes.</li>
+            </ul>
+            <pre class="language-java"><code>import javax.swing.*;
+
+public class MiVentana { 
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Mi primera ventana"); // Crear ventana
+        frame.setSize(400, 200); // Establecer tamaño
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Cerrar al salir
+        frame.setVisible(true); // Hacer visible
+    }
+}</code></pre>
+
+        </section>
+
+        <section class="slide" id="swing-componentes-layout">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            
+            <h3>6.3 Componentes fundamentales y LayoutManagers</h3>
+            <p>
+                Swing ofrece numerosos componentes reutilizables (<code>JLabel</code>, <code>JButton</code>,
+                <code>JTextField</code>,
+                <code>JTextArea</code>, <code>JCheckBox</code>, <code>JComboBox</code>, etc.) y gestores de disposición
+                (<em>LayoutManagers</em>) para organizar la interfaz de forma limpia y profesional.
+            </p>
+            <ul>
+                <li><strong>Componentes</strong>: etiquetas, botones, campos de texto, áreas de texto, paneles, listas,
+                    combos.</li>
+                <li><strong>LayoutManagers</strong>: <code>FlowLayout</code>, <code>BorderLayout</code>,
+                    <code>GridLayout</code>, <code>BoxLayout</code>.
+                </li>
+                <li>El diseño de la GUI se basa en combinar componentes y layouts según la estructura deseada.</li>
+            </ul>
+            <pre class="language-java"><code>import javax.swing.*;
+
+import java.awt.*;
+
+public class FormularioSimple {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Formulario");
+        frame.setSize(300, 150);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel panel = new JPanel(); // Panel para organizar componentes
+        panel.setLayout(new GridLayout(2, 2)); // Layout de 2 filas y 2 columnas
+
+        JLabel etiqueta = new JLabel("Nombre:"); // Etiqueta para el campo de texto
+        JTextField campoTexto = new JTextField(10); // Campo de texto para entrada de nombre
+        JButton boton = new JButton("Enviar"); // Botón para enviar el formulario
+
+        panel.add(etiqueta); // Añadir etiqueta al panel
+        panel.add(campoTexto); // Añadir campo de texto al panel
+        panel.add(boton); // Añadir botón al panel
+
+        frame.add(panel); // Añadir panel a la ventana
+        frame.setVisible(true); // Hacer visible la ventana
+    }
+
+}</code></pre>
+
+        </section>
+
+        <section class="slide" id="eventos-modelo-swing">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h2>7. Controladores de eventos</h2>
+            <h3>7.1 El modelo de eventos en Swing</h3>
+            <p>
+                En una GUI, las acciones del usuario (clics, escritura, selección) generan <strong>eventos</strong>.
+                Java utiliza
+                un modelo de <strong>programación dirigida por eventos</strong>, donde el código permanece a la espera
+                hasta que
+                el usuario realiza una acción.
+            </p>
+            <ul>
+                <li><strong>Origen del evento</strong>: componente que genera el evento (por ejemplo, un
+                    <code>JButton</code>).
+                </li>
+                <li><strong>Evento</strong>: objeto que representa la acción (<code>ActionEvent</code>, etc.).</li>
+                <li><strong>Escuchador (Listener)</strong>: objeto que contiene el código a ejecutar
+                    (<code>ActionListener</code>).</li>
+                <li>La interfaz <code>ActionListener</code> es la más común para capturar eventos de tipo “acción
+                    realizada”.</li>
+            </ul>
+            
+
+        </section>
+
+        <section class="slide" id="eventos-actionlistener-ejemplo">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h3>7.2 Implementación de <code>ActionListener</code></h3>
+            <p>
+                <code>ActionListener</code> se utiliza para responder a clics de botones, acciones de menús y algunos
+                campos
+                de texto. Se asocia al componente con <code>addActionListener()</code> y se implementa el método
+                <code>actionPerformed()</code> con la lógica deseada.
+            </p>
+            <ul>
+                <li>El botón “escucha” el evento y dispara el código cuando el usuario hace clic.</li>
+                <li>Es posible usar clases anónimas, internas o externas para organizar el código.</li>
+                <li>Puede mostrar mensajes, actualizar componentes o cambiar de ventana.</li>
+            </ul>
+            <pre class="language-java"><code>import javax.swing.*;
+
+import java.awt.event.*;
+
+public class EventoBasico { 
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Evento Básico");
+        frame.setSize(300, 150);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JButton boton = new JButton("Haz clic");
+        boton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frame, "¡Has hecho clic en el botón!");
+            }
+        });
+
+        frame.add(boton);
+        frame.setVisible(true);
+    }
+
+}
+ 
+    
+
+</code></pre>
+
+        </section>
+
+        <section class="slide" id="eventos-actualizacion-interfaz">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            
+            <h3>7.3 Actualización de la interfaz mediante eventos</h3>
+            <p>
+                Los eventos no solo muestran mensajes: también permiten <strong>modificar dinámicamente</strong> la
+                interfaz,
+                cambiando textos, colores, visibilidad de componentes o contenido de campos según las acciones del
+                usuario.
+            </p>
+            <ul>
+                <li>Lectura de texto con <code>getText()</code> desde un <code>JTextField</code>.</li>
+                <li>Modificación de etiquetas con <code>setText()</code>.</li>
+                <li>Gestión de errores mediante mensajes contextuales (<code>JOptionPane</code> o <code>JLabel</code> de
+                    error).</li>
+            </ul>
+            <pre class="language-java"><code>JTextField campo = new JTextField(10);
+JLabel resultado = new JLabel();
+JButton boton = new JButton("Calcular");
+boton.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e) {
+        try {
+            int numero = Integer.parseInt(campo.getText());
+            resultado.setText("Número al cuadrado: " + (numero * numero));
+        } catch (NumberFormatException ex) {
+            resultado.setText("Error: introduce un número válido.");
+        }
+    }
+});
+
+
+
+</code></pre>
+
+        </section>
+
+        <section class="slide" id="gui-io-lectura-campos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h2>8. Entrada y salida a través de interfaces gráficas</h2>
+            <h3>8.1 Lectura de campos de texto</h3>
+            <p>
+                En las interfaces gráficas, la entrada de datos se realiza mediante componentes visuales
+                (<code>JTextField</code>, <code>JTextArea</code>, etc.). El contenido introducido se recupera con
+                <code>getText()</code>, habitualmente dentro del manejador de eventos de un botón.
+            </p>
+            <ul>
+                <li>El valor devuelto es siempre de tipo <code>String</code>.</li>
+                <li>Si se espera un número, hay que convertir el texto (<code>Integer.parseInt()</code>,
+                    <code>Double.parseDouble()</code>).
+                </li>
+                <li>La conversión debe ir acompañada de control de errores (<code>try-catch</code>).</li>
+            </ul>
+            <pre class="language-java"><code>JTextField entrada = new JTextField(10);
+JButton boton = new JButton("Procesar");
+boton.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e) {
+        try {
+            int valor = Integer.parseInt(entrada.getText());
+            // Procesar el valor...
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Introduce un número válido.");
+        }
+    }
+});
+
+            </code></pre>
+
+        </section>
+
+        <section class="slide" id="gui-io-salida-validacion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+           
+            <h3>8.2 Presentación de resultados y validación</h3>
+            <p>
+                La salida en GUIs se muestra mediante etiquetas (<code>JLabel</code>), áreas de texto
+                (<code>JTextArea</code>)
+                o cuadros de diálogo (<code>JOptionPane</code>). Además, una GUI profesional valida las entradas y
+                notifica los
+                errores de forma clara al usuario.
+            </p>
+            <ul>
+                <li><code>JLabel.setText()</code> y <code>JTextArea.setText()</code> para mostrar resultados.</li>
+                <li><code>JOptionPane.showMessageDialog()</code> para mensajes emergentes.</li>
+                <li>Validaciones típicas: campos vacíos, formatos numéricos, rangos y restricciones de contenido.</li>
+            </ul>
+            <pre class="language-java"><code>if (campo.getText().trim().isEmpty()) {
+    JOptionPane.showMessageDialog(null, "El campo no puede estar vacío.");
+} else {
+    double valor;
+    try {
+        valor = Double.parseDouble(campo.getText());
+        resultado.setText("Valor: " + valor);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Introduce un número válido.");
+    }
+}</code></pre>
+            
+
+        </section>
+
+        
+
+        <section class="slide" id="actividades-evaluacion-ut5">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h2>Actividades de evaluación (resumen)</h2>
+           
+            <ul>
+                <li><strong>Actividad 1</strong>: crear la interfaz de login (JFrame con campos de usuario y contraseña,
+                    etiquetas y botón).</li>
+                <li><strong>Actividad 2</strong>: programar el evento del botón para validar usuario/contraseña y
+                    mostrar mensajes con <code>JOptionPane</code>.</li>
+                <li><strong>Actividad 3</strong>: crear una ventana de bienvenida con mensaje personalizado y botón para
+                    cerrar.</li>
+                <li><strong>Actividad 4</strong>: integrar todo el flujo: cierre de login, apertura de bienvenida y
+                    finalización correcta de la aplicación.</li>
+            </ul>
+
+        </section>
+
+
+
+
+    </div>
+    <div class="footer">
+        <div class="bar">
+            <small>UT5 · Operaciones de entrada/salida e interfaces gráficas · LinkiaFP</small>
+            <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+        </div>
+    </div>
+</body>
+
+</html>

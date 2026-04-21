@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>M224 · Píldoras formativas · SO en Red · LinkiaFP</title>
+    <meta name="description" content="Pildora 1: Fundamentos para afrontar el curso (SIMIX)." />
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="../../script.js" defer></script>
+</head>
+
+<body>
+    <div class="deck">
+
+        <!-- COVER -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+                </div>
+                <div class="title">M224 · Píldoras formativas · SO en Red</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+
+            </div>
+            <div class="logo-first-page">
+                <img src="../../../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+            </div>
+
+        </section>
+
+    
+
+
+<!-- ========================================================= -->
+<!-- PÍLDORA 2 · ENTORNO DE PRÁCTICAS CON VIRTUALBOX           -->
+<!-- Vídeo 2 (~10 min)                                        -->
+<!-- ========================================================= -->
+
+<section class="slide cover" id="p2-cover">
+    <div style="max-width: 60%;">
+        <div>
+            <img src="../../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+        </div>
+        <div class="title">M224 · Píldora 2 · Virtualización y laboratorio</div>
+        <div class="subtitle">Preparación del entorno de prácticas</div>
+    </div>
+    <div class="logo-first-page">
+        <img src="../../../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+    </div>
+</section>
+
+<section class="slide" id="p2-virtualizacion">
+    <img src="../../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>¿Qué es la virtualización?</h2>
+    <p>
+        La virtualización es una tecnología que permite crear máquinas virtuales, es decir, 
+        sistemas operativos completos que se ejecutan dentro de otro sistema operativo. 
+        Esto es especialmente útil para practicar y aprender sin necesidad de tener múltiples ordenadores 
+        físicos.
+    </p>
+    <p><strong>Beneficios de la virtualización:</strong></p>
+    <ul>
+        <li>Permite crear múltiples entornos de práctica en un solo ordenador.</li>
+        <li>Facilita la experimentación sin riesgo de dañar el sistema principal.</li>
+        <li>Es ideal para aprender administración de sistemas en red.</li>
+    </ul>
+    <div class="diagram">
+        <img src="../../../assets/linkia/Virtu.jpeg" style="max-width: 50%;" alt="Diagrama de virtualización">
+    </div>
+</section>
+
+<section class="slide" id="p2-virtualbox">
+    <img src="../../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>VirtualBox como herramienta de trabajo</h2>
+    <p>
+        Una buena opción para crear y gestionar máquinas virtuales es VirtualBox, un software gratuito y de código abierto. 
+        VirtualBox es fácil de usar y compatible con una amplia variedad de sistemas operativos, 
+        lo que lo convierte en una excelente herramienta para un laboratorio de prácticas.
+    </p>
+    <p><strong>Ventajas de VirtualBox:</strong></p>
+    <ul>
+        <li>Permite crear múltiples máquinas virtuales.</li>
+        <li>No afecta al sistema principal.</li>
+        <li>Facilita repetir prácticas y pruebas.</li>
+    </ul>
+    <div class="diagram">
+        <img src="../../../assets/linkia/VirtualBox-2h30.webp" style="max-width: 50%;" alt="Diagrama de VirtualBox">
+    </div>
+</section>
+
+<section class="slide" id="p2-instalar-vbox">
+    <img src="../../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>Instalación de VirtualBox</h2>
+    <p>
+        Instalar VirtualBox es similar a cualquier otro programa.
+    </p>
+    <ul>
+        <li><strong>Descargar el instalador:</strong> Visita el sitio web oficial de VirtualBox y 
+            descarga el instalador para tu sistema operativo. <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank">https://www.virtualbox.org/wiki/Downloads</a></li>
+        <li><strong>Ejecutar y aceptar opciones por defecto.</strong></li>
+        <li><strong>Finalizar instalación.</strong></li>
+    </ul>
+    <div class="diagram">
+        <img src="../../../assets/linkia/Instalacin-VirtualBox-1.jpg" style="max-width: 50%;" alt="Diagrama de instalación de VirtualBox">
+    </div>
+</section>
+
+<section class="slide" id="p2-crear-vm">
+    <img src="../../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>Crear una máquina virtual</h2>
+    <p>
+        El primer paso para crear una máquina virtual es configurar sus características básicas. 
+        Esto incluye:
+        
+    </p>
+    <ul>
+        <li><strong>Nombre y tipo de sistema operativo:</strong> elige un nombre descriptivo y selecciona el tipo de sistema operativo que vas a instalar (Windows, Linux, etc.).</li>
+        <li><strong>Memoria RAM:</strong> asigna una cantidad adecuada de memoria para que la máquina virtual funcione correctamente.</li>
+        <li><strong>Disco duro virtual:</strong> crea un disco duro virtual donde se instalará el sistema operativo. Puedes elegir entre diferentes formatos y tamaños según tus necesidades.</li>
+    </ul>
+    <div class="diagram">
+        <img src="../../../assets/linkia/instalar-maquina-virtual.webp" style="max-width: 50%;" alt="Diagrama de creación de una máquina virtual en VirtualBox">
+    </div>
+    <p><strong>En este enlace tenéis un tutorial completo:</strong></p>
+    <ul>
+        <li><a href="https://codigoelectronica.com/blog/crear-maquina-virtual-con-virtualbox-7" target="_blank">Ejemplo de creación de máquina virtual</a></li>
+    </ul>
+</section>
+
+<section class="slide" id="p2-instalar-windows">
+    <img src="../../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>Instalar Windows en una máquina virtual</h2>
+    <p>
+        Una práctica habitual será instalar Windows (por ejemplo Windows Server) dentro
+        de VirtualBox, como base para aprender administración en red.
+    </p>
+    <p>Para realizar la instalación necesitamos una ISO (independientemente del SO). Para ello, accediendo a la página oficial del SO o realizando una simple búsqueda en Google: por ejemplo (ISO Windows 11)</p>
+    <a href="https://www.microsoft.com/es-es/software-download/windows11" target="_blank">https://www.microsoft.com/es-es/software-download/windows11</a>
+    
+    <div class="diagram">
+        <img src="../../../assets/linkia/iso-w11.jpg" style="max-width: 50%;" alt="Diagrama de instalación de Windows en VirtualBox">
+    </div>
+    <p>Una vez descargada la ISO, seguimos estos pasos:</p>
+    <ul>
+        <li>Montar la imagen ISO.</li>
+        <li>Iniciar la máquina virtual.</li>
+        <li>Seguir el asistente de instalación.</li>
+    </ul>
+    
+</section>
+
+<section class="slide" id="p2-snapshots">
+    <img src="../../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>Snapshots y pruebas seguras</h2>
+    <p>
+        Los snapshots permiten guardar un estado de la máquina virtual y volver atrás
+        si algo sale mal durante una instalación o configuración.
+    </p>
+    <p><strong>Ventajas de los snapshots:</strong></p>
+    <ul>
+        <li>Permiten experimentar sin miedo a cometer errores.</li>
+        <li>Facilitan la repetición de prácticas para afianzar conocimientos.</li>
+        <li>Son ideales para probar configuraciones y soluciones a problemas.</li>
+    </ul>
+    <div class="diagram">
+        <img src="../../../assets/linkia/pic_snapshot.jpg" style="max-width: 50%;" alt="Diagrama de snapshots en VirtualBox">
+    </div>
+</section>
+
+
+
+
+    </div>
+
+    <div class="footer">
+        <div class="bar">
+            <small>M224 · Pildora 2 · SO en Red - LinkiaFP</small>
+            <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+        </div>
+    </div>
+</body>
+
+</html>

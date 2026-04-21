@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>M614 Despliegue Web · Píldoras formativas</title>
+    <meta name="description" content="Presentación HTML con secciones tipo diapositiva para la píldora formativa." />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link rel="stylesheet" href="../style.css" />
+    <script src="../script.js" defer></script>
+</head>
+
+<body>
+    <div class="deck">
+        <!-- ====================== COVER ====================== -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+                </div>
+                <div class="title">M614 Despliegue Web Píldoras formativas </div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;" alt="">
+            </div>
+        </section>
+
+       
+        <!-- ========================================================= -->
+        <!-- PÍLDORA 4 – SEGURIDAD, TRANSFERENCIA, DOCUMENTACIÓN       -->
+        <!-- ========================================================= -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+                </div>
+                <div class="title">Píldora 3: Seguridad, Transferencia y Documentación</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;" alt="">
+            </div>
+        </section>
+        <!-- DNS -->
+        <section class="slide" id="p4-dns">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>Domain Name System (DNS)</h2>
+            <p>El DNS es un sistema que traduce nombres de dominio en direcciones IP. El cliente envía una solicitud al
+                servidor DNS, que responde con la dirección IP correspondiente.</p>
+            <ul>
+                <li><strong>Tipos de registros:</strong> A (direcciones IP), CNAME (alias), MX (correos)</li>
+                <li><strong>Zonas directas e inversas:</strong> la zona directa traduce nombres a IP, la inversa traduce
+                    IP a nombres</li>
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/linkia/how-dns-works.png" style="max-width: 50%;" alt="How DNS works diagram">
+            </div>
+        </section>
+
+        <!-- Autenticación -->
+        <section class="slide" id="p4-autenticacion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>Autenticación y control de acceso</h2>
+            <p>Apache permite proteger directorios mediante autenticación básica, digest o LDAP.</p>
+            <ul>
+                <li><code>htpasswd</code> para crear usuarios</li>
+                <li>Requiere HTTPS para seguridad</li>
+            </ul>
+        </section>
+
+        <!-- FTP vs SFTP -->
+        <section class="slide" id="p4-sftp">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>FTP y SFTP (Transferencia de archivos)</h2>
+            <p>FTP es un protocolo antiguo que transmite datos en texto plano, lo que lo hace inseguro para transferir
+                archivos a servidores remotos. SFTP, por otro lado, es una opción segura que utiliza cifrado sobre SSH
+                (puerto 22) para proteger la transferencia de datos.</p>
+            <p>Para transferir archivos a un servidor remoto: SFTP es la opción segura.</p>
+            <ul>
+                <li>FTP: texto plano</li>
+                <li>SFTP: cifrado sobre SSH (puerto 22)</li>
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/linkia/fpt.png" style="max-width: 50%;" alt="FTP vs SFTP diagram">
+            </div>
+        </section>
+
+        <!-- Documentación y Git -->
+        <!-- ========================================================= -->
+        <!-- DOCUMENTACIÓN — UNA SECTION POR CADA SUBAPARTADO         -->
+        <!-- ========================================================= -->
+
+        <!-- 1. Documentación técnica -->
+        <section class="slide" id="doc-tecnica">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Documentación técnica</h2>
+
+            <p>
+                <strong>La documentación técnica explica cómo instalar, configurar y ejecutar un proyecto.
+                Debe permitir que cualquier desarrollador pueda reproducir el entorno sin dificultad.</strong>
+                Es esencial en despliegues, mantenimiento de servidores y entregas profesionales.
+            </p>
+
+            <ul>
+                <li>Instrucciones de instalación paso a paso.</li>
+                <li>Requisitos del sistema y dependencias.</li>
+                <li>Configuraciones especiales (Apache, Tomcat, BBDD).</li>
+                <li>Estructura del proyecto y rutas relevantes.</li>
+            </ul>
+
+            <div class="diagram">
+                <img src="../../assets/linkia/documentacion-tecnica.jpeg" style="max-width: 45%;" alt="depurator_python">
+            </div>
+
+        </section>
+
+
+        <!-- 2. Documentación del código -->
+        <section class="slide" id="doc-codigo">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Documentación del código</h2>
+
+            <p>
+                <strong>Documentar el código significa explicar lo necesario para que un tercero
+                pueda entender qué hace cada función, clase y módulo</strong>. No se trata de describir lo obvio,
+                sino de aclarar la intención, flujos y decisiones técnicas.
+            </p>
+
+            <ul>
+                <li>Comentarios claros y breves.</li>
+                <li>Nombres descriptivos en variables y funciones.</li>
+                <li>Explicación de bloques complejos.</li>
+                <li>Uso de estándares como docstrings o PHPDoc.</li>
+            </ul>
+
+            <div class="ejemplo">
+                <strong>Ejemplo</strong>
+                <pre class="language-python"><code>def generar_usuario(nombre, rol):
+    """
+    Genera un usuario del sistema con el rol especificado.
+    Parámetros:
+        nombre (str): nombre del usuario
+        rol (str): rol asignado (admin, editor, lector)
+    """
+    return {"nombre": nombre, "rol": rol}</code></pre>
+            </div>
+
+        </section>
+
+
+        <!-- 3. Control de versiones con Git -->
+        <section class="slide" id="git-control-versiones">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Control de versiones con Git</h2>
+
+            <h3>¿Qué es Git?</h3>
+            <p>Git es un sistema de control de versiones distribuido que permite rastrear los cambios en los archivos y coordinar el trabajo en equipo.
+                <div class="diagram">
+                <img src="../../assets/linkia/git-commit.jpg" style="max-width: 55%;" alt="depurator_python">
+            </div>
+            </p>
+            <p>
+                Git permite registrar cada cambio realizado en un proyecto, retroceder si algo falla
+                y trabajar en equipo sin sobrescribir archivos. Es una herramienta imprescindible en
+                cualquier entorno de desarrollo moderno.
+            </p>
+
+            <ul>
+                <li>Registra el historial de cambios.</li>
+                <li>Permite trabajar con ramas para nuevas funcionalidades.</li>
+                <li>Facilita la colaboración entre varios desarrolladores.</li>
+                <li>Garantiza trazabilidad y control.</li>
+            </ul>
+
+            
+
+        </section>
+
+
+        <!-- 4. Buenas prácticas con Git -->
+        <section class="slide" id="git-buenas-practicas">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Buenas prácticas con Git</h2>
+
+            <p>
+                Para aprovechar Git correctamente es importante seguir normas que faciliten el trabajo
+                en equipo y la comprensión del proyecto a largo plazo.
+            </p>
+
+            
+
+            <div class="diagram">
+                <img src="../../assets/linkia/buenas-practicas-git.png" style="max-width: 55%;" alt="Buenas prácticas con Git">
+            </div>
+        </section>
+
+
+        <!-- 5. Repositorios remotos -->
+        <section class="slide" id="git-remotos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Repositorios remotos</h2>
+
+            <p>
+                Un repositorio remoto es una versión del proyecto alojada en un servidor externo (GitHub, GitLab, Bitbucket).
+                Permite colaborar con otros desarrolladores, mantener copias de seguridad y trabajar desde cualquier lugar.
+            </p>
+
+            <p><strong>
+                Los repositorios remotos permiten:
+                </strong>
+            </p>
+
+            <ul>
+                <li>Guardar proyectos de forma centralizada.</li>
+                <li>Compartir el repositorio con el equipo.</li>
+                <li>Crear issues, wikis y documentación.</li>
+                <li>Integración con pipelines y automatizaciones.</li>
+            </ul>
+
+            <div class="diagram">
+                <img src="../../assets/linkia/repos-git.png" style="max-width: 55%;" alt="Repositorios remotos">
+            </div>
+
+        </section>
+
+
+        <!-- 6. Integración continua (CI) -->
+        <section class="slide" id="integracion-continua">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Integración continua (CI)</h2>
+
+            <p>Es la práctica de integrar cambios en el código de forma frecuente y automatizada. Consiste en ejecutar pruebas, análisis de calidad y despliegues cada vez que se actualiza el repositorio, asegurando que el software se mantiene en un estado funcional.</p>
+           
+            <ul>
+                <li>Automatiza pruebas en cada commit.</li>
+                <li>Detecta errores antes de desplegar.</li>
+                <li>Herramientas: Jenkins, GitHub Actions, GitLab CI.</li>
+            </ul>
+
+            <div class="diagram">
+                <img src="../../assets/linkia/git-flow-ci-cd-1.jpg" style="max-width: 45%;" alt="depurator_python">
+            </div>
+
+        </section>
+
+
+
+
+
+    </div>
+
+    <div class="footer">
+        <div class="bar">
+            <small>Píldoras formativas · LinkiaFP</small>
+            <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+        </div>
+    </div>
+</body>
+
+</html>

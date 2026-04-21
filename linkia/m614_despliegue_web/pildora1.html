@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>M614 Despliegue Web · Píldoras formativas</title>
+    <meta name="description" content="Presentación HTML con secciones tipo diapositiva para la píldora formativa." />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link rel="stylesheet" href="../style.css" />
+    <script src="../script.js" defer></script>
+</head>
+
+<body>
+    <div class="deck">
+        <!-- ====================== COVER ====================== -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+                </div>
+                <div class="title">M614 Despliegue Web Píldoras formativas </div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;" alt="">
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- PÍLDORA 1 – BASES PARA AFRONTAR EL CURSO                  -->
+        <!-- ========================================================= -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+                </div>
+                <div class="title">Píldora 1: Bases para afrontar el curso</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;" alt="">
+            </div>
+        </section>
+        <!-- Refuerzo inicial: Linux y terminal -->
+        <section class="slide" id="p1-linux-terminal-basico">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>Refrescando conceptos de Linux y terminal</h2>
+            <p>En este módulo trabajarás constantemente en Linux. Antes de instalar y configurar servidores web,
+                repasamos los comandos esenciales para manejar el sistema desde la terminal.</p>
+            <ul>
+                <li><strong>pwd</strong>: muestra la ruta actual.</li>
+                <li><strong>ls</strong>: lista archivos de un directorio.</li>
+                <li><strong>cd</strong>: permite cambiar de carpeta.</li>
+                <li><strong>sudo</strong>: ejecuta tareas administrativas.</li>
+                <li><strong>nano / vim</strong>: editar archivos de texto.</li>
+            </ul>
+
+            <div class="ejemplo">
+                <pre class="language-bash"><code># Navegar y editar una página en Apache
+pwd
+cd /var/www/html
+ls -l
+sudo nano index.html</code></pre>
+            </div>
+        </section>
+
+        <!-- Qué es un servidor web -->
+        <section class="slide" id="p1-introduccion-servidores-web">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>¿Qué es un servidor web?</h2>
+            <p>Un servidor web recibe peticiones de los navegadores y devuelve páginas, imágenes o recursos. Es la base
+                de cualquier aplicación web.</p>
+            <ul>
+                <li>Entrega contenido mediante HTTP/HTTPS.</li>
+                <li>Gestiona múltiples peticiones simultáneamente.</li>
+                <li>Almacena los archivos públicos del sitio (DocumentRoot).</li>
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/linkia/servidor-web.png" style="max-width: 60%;" alt="Diagrama de servidor web">
+            </div>
+
+        </section>
+
+        <!-- Tipos de servidores web -->
+        <section class="slide" id="p1-tipos-servidores">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>Tipos de servidores web</h2>
+            <p>Existen múltiples servidores web, todos válidos pero con propósitos diferentes.</p>
+            <ul>
+                <li><strong>Apache:</strong> robusto, modular, muy usado.</li>
+                <li><strong>Nginx:</strong> excelente rendimiento en archivos estáticos.</li>
+                <li><strong>IIS:</strong> integrado en Windows Server.</li>
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/linkia/Types-of-Web-Servers.webp" style="max-width: 60%;"
+                    alt="Diagrama de servidor web">
+            </div>
+        </section>
+
+        <!-- Instalación Apache Windows -->
+        <section class="slide" id="p1-instalacion-windows">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>Instalación de Apache en Windows (XAMPP)</h2>
+            <p>En Windows, la forma más sencilla de instalar Apache es mediante XAMPP, que incluye Apache, MySQL y PHP.
+                Es una solución todo en uno que facilita el desarrollo local sin complicaciones.
+            </p>
+            <p>URL de descarga: <a href="https://www.apachefriends.org/download.html"
+                    target="_blank">https://www.apachefriends.org/download.html</a></p>
+            <ul>
+                <li>Descarga desde apachefriends.org</li>
+                <li>Instalación guiada</li>
+                <li>Carpeta pública: <code>C:\xampp\htdocs</code></li>
+            </ul>
+            <div class="ejemplo">
+                <pre class="language-bash"><code># Crear una página en XAMPP
+C:\xampp\htdocs\prueba.html
+&lt;h1&gt;Apache funciona en Windows&lt;/h1&gt;</code></pre>
+            </div>
+        </section>
+        <!-- Instalación Apache MAC -->
+        <section class="slide" id="p1-instalacion-mac">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>Instalación de Apache en macOS (MAMP)</h2>
+            <p>En MAC existe una solución similar llamada MAMP. Es similar a XAMPP pero diseñada para el sistema
+                operativo macOS.</p>
+            <p>URL de descarga: <a href="https://www.mamp.info/en/downloads/"
+                    target="_blank">https://www.mamp.info/en/downloads/</a></p>
+            <div class="ejemplo">
+                <pre class="language-bash"><code># Crear una página en MAMP
+/Applications/MAMP/htdocs/prueba.html
+&lt;h1&gt;Apache funciona en macOS&lt;/h1&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Instalación Apache Linux -->
+        <section class="slide" id="p1-instalacion-linux">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>Instalar Apache en Linux (Ubuntu/Debian)</h2>
+            <p>Apache se instala fácilmente mediante el gestor de paquetes del sistema.</p>
+            <ul>
+                <li><code>sudo apt update && sudo apt install apache2</code></li>
+                <li>Carpeta pública: <code>/var/www/html</code></li>
+                <li>Control del servicio: <code>systemctl</code></li>
+            </ul>
+            <div class="ejemplo">
+                <pre class="language-bash"><code># Probar Apache en Linux
+echo "&lt;h1&gt;Hola desde Linux&lt;/h1&gt;" | sudo tee /var/www/html/prueba.html</code></pre>
+            </div>
+        </section>
+
+        <!-- HTTP y HTTPS -->
+        <section class="slide" id="p1-http-https">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>Protocolos HTTP y HTTPS</h2>
+            <ul>
+                <li><strong>HTTP (HyperText Transfer Protocol):</strong> protocolo de comunicación para la web. Es
+                    sencillo pero no seguro, ya que transmite datos en texto plano.</li>
+                <li><strong>HTTPS (HTTP Secure):</strong> versión segura de HTTP que utiliza TLS para cifrar la
+                    comunicación entre el navegador y el servidor, protegiendo la confidencialidad e integridad de
+                    los datos.</li>
+                <li>Los puertos por defecto son:</li>
+                <ul>
+                    <li>HTTP → puerto 80</li>
+                    <li>HTTPS → puerto 443</li>
+                    <li>HTTPS usa criptografía simétrica + asimétrica</li>
+                    <li>Requiere certificado digital</li>
+                </ul>
+            </ul>
+
+            <div class="diagram">
+                <img src="../../assets/linkia/http-vs-https.jpg" style="max-width: 60%;" alt="Diagrama HTTP vs HTTPS">
+            </div>
+
+        </section>
+
+
+
+
+
+
+
+
+    </div>
+
+    <div class="footer">
+        <div class="bar">
+            <small>Píldoras formativas · LinkiaFP</small>
+            <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>UT8 · Persistencia con bases de datos orientadas a objetos · LinkiaFP</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <link href="../style.css" rel="stylesheet">
+  <script defer="" src="../script.js"></script>
+  </link>
+</head>
+
+<body>
+  <div class="deck">
+    <!-- COVER -->
+    <section class="slide cover" id="slide-1">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <div style="max-width: 60%;">
+        <div>
+          <img alt="" src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" />
+        </div>
+        <div class="title">UT8 · Persistencia con bases de datos orientadas a objetos · LinkiaFP</div>
+        <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+      </div>
+      <div class="logo-first-page">
+        <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;" />
+      </div>
+    </section>
+    <!-- ============================= -->
+    <!-- 1. ARRAYS Y SU MANIPULACIÓN  -->
+    <!-- ============================= -->
+
+
+    <!-- 1. INTRODUCCIÓN A LA HERENCIA -->
+    <section class="slide" id="comparativa-rdb-oodb">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h2>Introducción a la persistencia en POO</h2>
+      
+      <h2>Bases de datos relacionales vs orientadas a objetos</h2>
+      <p>
+        Las bases de datos relacionales almacenan información en tablas y requieren un mapeo entre objetos y registros.
+        Las bases de datos orientadas a objetos almacenan directamente los objetos del programa, eliminando la necesidad
+        de ORM.
+      </p>
+      <ul>
+        <li>RDB: tablas, SQL, claves foráneas.</li>
+        <li>OODB: objetos, referencias directas, consultas orientadas a objetos.</li>
+        <li>Mejor rendimiento en jerarquías y relaciones complejas.</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="ventajas-oodb">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h2>Ventajas de las OODB</h2>
+      <p>
+        Las OODB se integran de forma natural con lenguajes orientados a objetos, manteniendo la coherencia entre el
+        modelo de dominio y la persistencia.
+      </p>
+      <ul>
+        <li>Soporte nativo para herencia y polimorfismo.</li>
+        <li>Persistencia de objetos complejos y anidados.</li>
+        <li>Reducción de errores al no usar ORM.</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="caracteristicas-oodb">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h2>Características de una OODB</h2>
+      <p>
+        Una base de datos orientada a objetos almacena instancias de clases respetando los principios de la POO.
+      </p>
+      <ul>
+        <li>Persistencia de objetos.</li>
+        <li>Identidad única mediante OID.</li>
+        <li>Encapsulamiento de datos.</li>
+        <li>Soporte completo para herencia.</li>
+        <li>Navegación por referencias entre objetos.</li>
+      </ul>
+    </section>
+     <!-- 1. INTRODUCCIÓN A LA HERENCIA -->
+    <section class="slide" id="comparativa-rdb-oodb">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h2>Instalación y configuración de ObjectDB</h2>
+      
+      <p>
+        ObjectDB es un gestor de bases de datos orientadas a objetos para Java. Es fácil de instalar y configurar, y se integra con JPA.
+      </p>
+      <ul>
+        <li>Descarga el JAR desde el sitio oficial: https://www.objectdb.com/download</li>
+        <li>Añade el JAR al classpath de tu proyecto Java: <ol>
+          <li>En NetBeans: clic derecho en el proyecto → Propiedades → Bibliotecas → Añadir JAR/Carpeta.</li>
+          <li>En Eclipse: clic derecho en el proyecto → Build Path → Add External Archives.</li>
+          <li>En IntelliJ: File → Project Structure → Libraries → + → Java y selecciona el JAR.</li>
+        </ol></li>
+        <li>Configura la unidad de persistencia en persistence.xml.</li>
+      </ul>
+
+    </section>
+
+
+    <section class="slide" id="modelo-objetos-persistentes">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h2>Modelo de objetos persistentes</h2>
+      <p>
+        El esquema de una OODB se define mediante clases. Cada objeto almacenado es una instancia persistente de una
+        clase del modelo.
+      </p>
+      <pre class="language-java"><code>public class Usuario {
+    private String nombre;
+    private String email;
+    private int edad;
+
+    public Usuario(String nombre, String email, int edad) {
+        this.nombre = nombre;
+        this.email = email;
+        this.edad = edad;
+    }
+}</code></pre>
+    </section>
+
+    <section class="slide" id="oodbms">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h2>Sistemas gestores OODBMS</h2>
+      <p>
+        Existen distintos gestores de bases de datos orientadas a objetos, tanto comerciales como de código abierto.
+        En el entorno formativo se utiliza principalmente ObjectDB por su integración con JPA.
+      </p>
+      <ul>
+        <li>ObjectDB (Java, compatible con JPA).</li>
+        <li>ZODB (Python).</li>
+        <li>GemStone y Versant (entornos empresariales).</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="instalacion-objectdb">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h2>Instalación y uso de ObjectDB</h2>
+      <p>
+        ObjectDB es un gestor ligero que no requiere instalación compleja. Basta con añadir su JAR al proyecto Java y
+        configurar la unidad de persistencia.
+      </p>
+      <ul>
+        <li>JDK 8 o superior.</li>
+        <li>IDE Java (NetBeans, Eclipse, IntelliJ).</li>
+        <li>Archivo objectdb.jar en el classpath.</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="conexion-java">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h2>Conexión a ObjectDB desde Java</h2>
+      <p>
+        Mediante JPA se establece la conexión y se persisten objetos usando EntityManager.
+      </p>
+      <pre class="language-java"><code>EntityManagerFactory emf =
+    Persistence.createEntityManagerFactory("usuarioPU");
+EntityManager em = emf.createEntityManager();
+
+Usuario u = new Usuario("Ana", "ana@email.com", 29);
+em.getTransaction().begin();
+em.persist(u);
+em.getTransaction().commit();
+
+em.close();
+emf.close();</code></pre>
+    </section>
+
+    <section class="slide" id="clases-persistentes">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h2>Diseño de clases persistentes</h2>
+      <p>
+        Las clases persistentes definen la estructura de almacenamiento en una OODB. Se anotan con JPA y actúan como
+        esquema de la base de datos.
+      </p>
+      <pre class="language-java"><code>@Entity
+public class Producto {
+    @Id @GeneratedValue
+    private long id;
+    private String nombre;
+    private double precio;
+
+    public Producto() {}
+}</code></pre>
+    </section>
+
+    <section class="slide" id="operaciones-crud">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h2>Operaciones CRUD</h2>
+      <p>
+        JPA permite crear, leer, actualizar y eliminar objetos persistentes de forma sencilla mediante transacciones.
+      </p>
+      <ul>
+        <li>Crear: persist()</li>
+        <li>Leer: find() y consultas JPQL</li>
+        <li>Actualizar: modificar atributos dentro de transacción</li>
+        <li>Eliminar: remove()</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="consultas-jpql">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h2>Consultas con JPQL</h2>
+      <p>
+        JPQL es un lenguaje de consultas orientado a objetos que permite recuperar información usando entidades y sus
+        relaciones.
+      </p>
+      <pre class="language-java"><code>TypedQuery&lt;Producto&gt; query =
+    em.createQuery(
+        "SELECT p FROM Producto p WHERE p.precio &gt; 500",
+        Producto.class);
+List&lt;Producto&gt; resultados = query.getResultList();</code></pre>
+    </section>
+
+    <section class="slide" id="datos-compuestos">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h2>Gestión de datos estructurados y compuestos</h2>
+      <p>
+        Las OODB permiten almacenar relaciones directas entre objetos, como listas y jerarquías de clases, respetando
+        el modelo orientado a objetos.
+      </p>
+      <ul>
+        <li>Relaciones uno a muchos con @OneToMany.</li>
+        <li>Persistencia de objetos compuestos.</li>
+        <li>Soporte para herencia y consultas polimórficas.</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="resumen-ut8">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h2>Resumen de la unidad</h2>
+      <p>
+        En esta unidad se ha aprendido a gestionar la persistencia de datos respetando el paradigma orientado a objetos,
+        utilizando OODB y JPA para diseñar, almacenar y consultar objetos de forma eficaz.
+      </p>
+      <ul>
+        <li>Persistencia de objetos completos.</li>
+        <li>Uso de ObjectDB y JPA en Java.</li>
+        <li>Operaciones CRUD y consultas JPQL.</li>
+        <li>Gestión de relaciones y jerarquías de clases.</li>
+      </ul>
+    </section>
+    <p>
+      La persistencia de datos permite que la información generada por una aplicación se conserve más allá de su
+      ejecución. En programación orientada a objetos, esto implica almacenar objetos completos, incluyendo su
+      estructura, atributos y relaciones, en sistemas externos como bases de datos.
+    </p>
+    <ul>
+      <li>Los datos sobreviven al cierre del programa.</li>
+      <li>Se almacenan objetos, no solo valores.</li>
+      <li>Se mantiene la estructura del modelo de clases.</li>
+    </ul>
+    </section>
+
+
+
+
+
+
+
+  </div>
+  <div class="footer">
+    <div class="bar">
+      <small>UT8 · Persistencia con bases de datos orientadas a objetos · LinkiaFP</small>
+      <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+    </div>
+  </div>
+</body>
+
+</html>

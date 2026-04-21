@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UT1 · Fundamentos de programación y entorno de desarrollo · LinkiaFP</title>
+    <meta name="description"
+        content="Presentación HTML con secciones tipo diapositiva para la UT1: Fundamentos de programación y entorno de desarrollo." />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link rel="stylesheet" href="../style.css" />
+    <script src="../script.js" defer></script>
+</head>
+
+<body>
+    <div class="deck">
+
+        <!-- COVER -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+                </div>
+                <div class="title">UT1 · Fundamentos de programación y entorno de desarrollo</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+            </div>
+
+        </section>
+
+       <!-- ====================== SLIDE: Comparativa diseño visual vs código ====================== --><!-- =================astrar y soltar,
+    y el <strong>diseño manual</strong> escribiendo código para definir cada componente.
+  </p>
+</section>
+
+<section class="slide" id="comparativa-2">
+  <h2>Diferencias entre ambos métodos</h2>
+  <ul>
+    <li><strong>Diseño visual:</strong> intuitivo, rápido, vista previa inmediata, ideal para prototipos.</li>
+    <li><strong>Diseño mediante código:</strong> mayor precisión, control total, personalización avanzada.</li>
+    <li>El entorno profesional combina ambos: prototipado visual + afinado por código.</li>
+  </ul>
+</section>
+
+<!-- ====================== SLIDE: Creación de interfaces básicas ====================== -->
+<section class="slide" id="interfaces-basicas-1">
+  <h2>Creación de interfaces básicas</h2>
+  <p>
+    Crear una interfaz implica seleccionar componentes, distribuirlos visualmente, configurar propiedades 
+    y definir su comportamiento mediante eventos.
+  </p>
+</section>
+
+<section class="slide" id="interfaces-basicas-2">
+  <h2>Asistentes de formularios</h2>
+  <p>
+    Los editores visuales incluyen <strong>asistentes</strong> que permiten generar formularios comunes 
+    de manera rápida: selección de plantilla, estructura inicial, componentes básicos y vista previa inmediata.
+  </p>
+</section>
+
+<!-- ====================== SLIDE: Componentes (botones, etiquetas, textos) ====================== -->
+<section class="slide" id="componentes-1">
+  <h2>Componentes de interfaz</h2>
+  <p>
+    Los componentes son los elementos esenciales de una interfaz gráfica: botones, etiquetas y cuadros de texto.
+  </p>
+</section>
+
+<section class="slide" id="componentes-2">
+  <h2>Botones</h2>
+  <ul>
+    <li>Permiten ejecutar acciones mediante la interacción del usuario.</li>
+    <li><strong>Propiedades:</strong> Text, BackColor, ForeColor, Size, Enabled, Visible.</li>
+    <li><strong>Ejemplo:</strong> Botón “Enviar” en un formulario.</li>
+  </ul>
+</section>
+
+<section class="slide" id="componentes-3">
+  <h2>Etiquetas</h2>
+  <ul>
+    <li>Muestran información o instrucciones al usuario.</li>
+    <li><strong>Propiedades:</strong> Text, Font, ForeColor, BackColor.</li>
+    <li><strong>Ejemplo:</strong> “Introduce tu correo electrónico”.</li>
+  </ul>
+</section>
+
+<section class="slide" id="componentes-4">
+  <h2>Cuadros de texto</h2>
+  <ul>
+    <li>Permiten que el usuario introduzca información.</li>
+    <li><strong>Propiedades:</strong> Text, MaxLength, PasswordChar, Size, Placeholder.</li>
+    <li><strong>Ejemplos:</strong> campos de nombre, correo o contraseña.</li>
+  </ul>
+</section>
+
+<!-- ====================== SLIDE: Gestión de propiedades ====================== -->
+<section class="slide" id="propiedades-1">
+  <h2>Gestión de propiedades</h2>
+  <p>
+    Las propiedades determinan el aspecto, comportamiento y posición de cada componente dentro de la interfaz.
+  </p>
+</section>
+
+<section class="slide" id="propiedades-2">
+  <h2>Propiedades comunes</h2>
+  <ul>
+    <li><strong>Text:</strong> contenido visible.</li>
+    <li><strong>Name:</strong> identificador interno.</li>
+    <li><strong>Size:</strong> ancho y alto.</li>
+    <li><strong>Location:</strong> posición en pantalla.</li>
+    <li><strong>Color:</strong> BackColor y ForeColor.</li>
+    <li><strong>Enabled / Visible:</strong> disponibilidad y visibilidad.</li>
+  </ul>
+</section>
+
+<section class="slide" id="propiedades-3">
+  <h2>Buenas prácticas</h2>
+  <ul>
+    <li>Usar nombres lógicos: <em>btnEnviar</em>, <em>txtCorreo</em>.</li>
+    <li>Respetar coherencia visual: colores, tipografías y márgenes.</li>
+    <li>Probar legibilidad y contraste para asegurar accesibilidad.</li>
+  </ul>
+</section>
+
+<!-- ====================== SLIDE: Panel de propiedades ====================== -->
+<section class="slide" id="panel-propiedades-1">
+  <h2>Panel de propiedades</h2>
+  <p>
+    El panel de propiedades muestra todas las configuraciones modificables de un componente, 
+    agrupadas por categorías como apariencia, diseño, comportamiento y eventos.
+  </p>
+</section>
+
+<section class="slide" id="panel-propiedades-2">
+  <h2>¿Qué permite hacer?</h2>
+  <ul>
+    <li>Modificar texto, color y tamaño.</li>
+    <li>Cambiar el nombre lógico del componente.</li>
+    <li>Ajustar límites: longitud, contraseña, etc.</li>
+    <li>Configurar visibilidad y estilo.</li>
+  </ul>
+</section>
+
+<!-- ====================== SLIDE: Propiedades en tiempo de diseño ====================== -->
+<section class="slide" id="tiempo-diseno-1">
+  <h2>Cambiar propiedades en tiempo de diseño</h2>
+  <p>
+    En tiempo de diseño se ajustan propiedades desde el editor antes de ejecutar la aplicación. 
+    Esto permite una vista previa inmediata del resultado.
+  </p>
+</section>
+
+<section class="slide" id="tiempo-diseno-2">
+  <h2>Buenas prácticas</h2>
+  <ul>
+    <li>Usar guías y reglas del editor para alinear componentes.</li>
+    <li>Mantener márgenes y tamaños consistentes.</li>
+    <li>Probar diferentes combinaciones de colores y estilos.</li>
+  </ul>
+</section>
+
+<!-- ====================== SLIDE: Relación diseño visual / código ====================== -->
+<section class="slide" id="relacion-codigo-1">
+  <h2>Relación entre diseño visual y código</h2>
+  <p>
+    Cuando colocas un componente o cambias una propiedad, el editor genera automáticamente 
+    el código necesario que representa esa interfaz.
+  </p>
+</section>
+
+<section class="slide" id="relacion-codigo-2">
+  <h2>Traducción del diseño a código</h2>
+  <ul>
+    <li><strong>Declaración:</strong> creación del componente en código.</li>
+    <li><strong>Inicialización:</strong> asignación de propiedades.</li>
+    <li><strong>Eventos:</strong> preparación de métodos asociados.</li>
+  </ul>
+</section>
+
+<!-- ====================== SLIDE: Código autogenerado ====================== -->
+<section class="slide" id="codigo-autogenerado-1">
+  <h2>Código autogenerado</h2>
+  <p>
+    Los editores generan clases, métodos y propiedades necesarias para que la interfaz funcione. 
+    Muchas partes no deben editarse directamente.
+  </p>
+</section>
+
+<section class="slide" id="codigo-autogenerado-2">
+  <h2>Qué puede modificar el estudiante</h2>
+  <ul>
+    <li>Métodos de eventos (click, keypress, etc.).</li>
+    <li>Lógica de uso de los datos del formulario.</li>
+    <li>Comportamiento dinámico de los componentes en ejecución.</li>
+  </ul>
+</section>
+
+<!-- ====================== SLIDE: Modificación desde código ====================== -->
+<section class="slide" id="modificacion-codigo-1">
+  <h2>Modificación del comportamiento desde el código</h2>
+  <p>
+    El código permite personalizar dinámicamente la interfaz: validar datos, cambiar textos, 
+    habilitar o deshabilitar componentes, o responder a acciones del usuario.
+  </p>
+</section>
+
+<section class="slide" id="modificacion-codigo-2">
+  <h2>Ejemplos comunes</h2>
+  <ul>
+    <li><code>btnEnviar.Enabled = false;</code></li>
+    <li><code>lblResultado.Text = "Procesando...";</code></li>
+    <li><code>txtEmail.Visible = true;</code></li>
+  </ul>
+</section>
+<section class="slide" id="comparativa-1">
+  <h2>Diseño visual vs Diseño mediante código</h2>
+  <p>
+    Existen dos enfoques para crear interfaces gráficas: el <strong>diseño visual</strong> mediante editores
+    y el <strong>diseño mediante código</strong>, donde se escriben directamente las instrucciones de creación de componentes. El diseño visual es más intuitivo y rápido, ideal para prototipos, mientras que el diseño mediante código ofrece mayor precisión y control, permitiendo personalizaciones avanzadas. En entornos profesionales, se suele combinar ambos métodos: se utiliza el diseño visual para prototipar rápidamente y luego se afina el resultado mediante código para lograr la funcionalidad deseada.
+  </p>
+</section>
+
+
+        
+
+        
+
+
+
+    </div>
+
+    <div class="footer">
+        <div class="bar">
+            <small>UT1 · Fundamentos de programación y entorno de desarrollo</small>
+            <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+        </div>
+    </div>
+</body>
+
+</html>

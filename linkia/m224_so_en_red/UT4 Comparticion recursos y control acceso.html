@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UT 4. Compartición de recursos y control de acceso · LinkiaFP</title>
+    <meta name="description"
+        content="Presentación HTML con secciones tipo diapositiva para la UT4: Compartición de recursos y control de acceso." />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link rel="stylesheet" href="../style.css" />
+    <script src="../script.js" defer></script>
+</head>
+
+<body>
+    <div class="deck">
+
+        <!-- COVER -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+                </div>
+                <div class="title">UT4 · Compartición de recursos y control de acceso</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+            </div>
+
+        </section>
+
+
+
+        <section class="slide" id="permisos-derechos-intro">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h2>1. Permisos y derechos de acceso</h2>
+            <p>
+                En una red profesional, los recursos compartidos (carpetas, archivos, impresoras o dispositivos)
+                <strong>no deben estar disponibles libremente</strong>. Es imprescindible definir quién puede acceder,
+                qué puede hacer y bajo qué condiciones. Esta gestión se basa en dos conceptos clave:
+                <strong>permisos</strong> y <strong>derechos de acceso</strong>.
+            </p>
+            <ul>
+                <li><strong>Permisos</strong>: regulan acciones sobre objetos concretos del sistema (archivos, carpetas,
+                    etc.).</li>
+                <li><strong>Derechos de acceso</strong>: regulan capacidades generales sobre el sistema (iniciar sesión,
+                    apagar, etc.).</li>
+                <li>Una correcta configuración contribuye a una red <strong>segura, eficiente y ajustada</strong> a las
+                    necesidades de la organización.</li>
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/linkia/secure-access-permissions.jpg" style="max-width: 30%;"
+                    alt="Permisos y derechos de acceso">
+            </div>
+
+        </section>
+
+        <section class="slide" id="permisos-vs-derechos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+            <h3>1.1. Diferencias conceptuales</h3>
+            <p>
+                Aunque a menudo se usan como sinónimos, <strong>permiso</strong> y <strong>derecho</strong> no son lo
+                mismo.
+                Distinguirlos correctamente es clave para diseñar una política de seguridad coherente.
+            </p>
+            <ul>
+                <li><strong>Permiso</strong>: atribución específica sobre un recurso (archivo, carpeta, impresora).
+                    Determina si el usuario puede leer, escribir, modificar o eliminar.</li>
+                <li><strong>Derecho de acceso</strong>: privilegio general sobre el sistema
+                    (iniciar sesión localmente, realizar copias de seguridad, cambiar la hora, etc.).</li>
+                <li>Ejemplo: un usuario puede tener derecho a iniciar sesión pero no permiso para abrir una carpeta
+                    compartida,
+                    o al revés.</li>
+            </ul>
+
+
+        </section>
+
+        <section class="slide" id="herencia-permisos-concepto">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h3>1.2. Herencia de permisos</h3>
+            <p>
+                La <strong>herencia de permisos</strong> permite que un archivo o subcarpeta reciba automáticamente
+                los permisos del contenedor donde se encuentra. Es una herramienta muy útil, pero que exige
+                planificación y control para evitar accesos no deseados.
+            </p>
+            <ul>
+                <li>Al crear un archivo dentro de una carpeta heredada, el archivo recibe esos mismos permisos.</li>
+                <li>El administrador puede <strong>romper la herencia</strong> y definir permisos explícitos para un
+                    objeto concreto.</li>
+                <li>Conviene revisar siempre si un permiso es explícito o heredado antes de modificarlo.</li>
+            </ul>
+
+            <div class="diagram">
+                <img src="../../assets/linkia/parent-child-workspace.jpg" style="max-width: 45%;"
+                    alt="Permisos y derechos de acceso">
+            </div>
+
+        </section>
+
+        <section class="slide" id="herencia-permisos-sistemas">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h3>1.2.1 Herencia en Windows</h3>
+            <p>
+                En Windows, la herencia de permisos es un mecanismo fundamental para gestionar recursos compartidos de
+                forma eficiente. Permite que los permisos asignados a una carpeta se propaguen automáticamente a sus
+                archivos y subcarpetas, facilitando la administración en entornos con gran cantidad de recursos.
+            </p>
+
+            <ul>
+                <li>Distingue entre permisos <strong>explícitos</strong> y <strong>heredados</strong>.</li>
+                <li>Permite activar/desactivar la herencia y copiar permisos heredados para editarlos.</li>
+            </ul>
+
+            <div class="diagram">
+                <img src="../../assets/linkia/sistemasyoperativos_permisosNTFS.jpg" style="max-width: 40%;"
+                    alt="Permisos y derechos de acceso">
+            </div>
+
+
+        </section>
+        <section class="slide" id="herencia-permisos-sistemas">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h3>1.2.2 Herencia en GNU/Linux</h3>
+            <p>
+                En GNU/Linux, la herencia de permisos se gestiona de forma diferente según el sistema
+                de archivos y las herramientas utilizadas. Es fundamental entender estas diferencias para configurar
+                recursos compartidos de forma segura.
+            </p>
+            <ul>
+                <li><strong>GNU/Linux</strong>:
+                    <ul>
+                        <li>Permisos tradicionales basados en <strong>owner</strong>, <strong>group</strong> y
+                            <strong>others</strong>
+                            con bits <code>r</code>, <code>w</code>, <code>x</code>.
+                        </li>
+                        <li>La herencia se emula con <strong>ACLs</strong>, <strong>umask</strong> y el bit
+                            <strong>setgid</strong> en directorios.
+                        </li>
+                    </ul>
+                </li>
+                <div class="diagram">
+                    <img src="../../assets/linkia/prored-bits-de-permisos-unix-permission-bits.png"
+                        style="max-width: 45%;" alt="Permisos en GNU/Linux">
+                </div>
+            </ul>
+
+        </section>
+        <section class="slide" id="recursos-compartidos-intro">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h2>2. Recursos compartidos en red</h2>
+            <p>
+                Compartir recursos en red permite que varios usuarios accedan a información, dispositivos y servicios
+                comunes sin duplicar datos ni moverlos físicamente. Es una práctica esencial en entornos corporativos,
+                educativos e institucionales.
+            </p>
+            <ul>
+                <li>Fomenta el <strong>trabajo colaborativo</strong> y reduce costes de infraestructura.</li>
+                <li>Debe realizarse bajo <strong>condiciones controladas</strong> y con criterios claros de acceso.</li>
+                <li>Los recursos más habituales son las <strong>carpetas/archivos</strong> y las
+                    <strong>impresoras/dispositivos</strong> de red.
+                </li>
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/linkia/recursos-compartidos.jpg" style="max-width: 40%;"
+                    alt="Recursos compartidos en red">
+            </div>
+
+        </section>
+
+        <section class="slide" id="carpetas-archivos-intro">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h3>2.1. Carpetas y archivos</h3>
+            <p>
+                Las carpetas y archivos compartidos constituyen la forma más frecuente de distribuir información en red.
+                En ellas se almacenan documentos internos, plantillas, informes o recursos de trabajo diario.
+            </p>
+            <ul>
+                <li>Se comparten desde un servidor o estación que expone determinadas rutas del sistema de archivos.
+                </li>
+                <li>Se define quién puede <strong>leer</strong>, <strong>escribir</strong>, <strong>modificar</strong> o
+                    <strong>eliminar</strong> contenido.
+                </li>
+                <li>A menudo se combinan <strong>permisos de red</strong> con permisos del
+                    <strong>sistema de archivos local</strong> (NTFS, ACLs, etc.).
+                </li>
+            </ul>
+
+            <div class="diagram">
+                <img src="../../assets/linkia/carpetas-compartidas-en-red-656x318.jpg" style="max-width: 40%;"
+                    alt="Carpetas compartidas en red">
+            </div>
+        </section>
+
+        <section class="slide" id="carpetas-archivos-windows">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h3>2.1. Compartición de carpetas en Windows Server</h3>
+            <p>
+                En <strong>Windows Server</strong>, la compartición de carpetas se configura combinando
+                <strong>permisos de compartición</strong> (nivel red) y <strong>permisos NTFS</strong>
+                (nivel sistema de archivos). Ambos deben ser coherentes para obtener el resultado esperado.
+            </p>
+            <ul>
+                <li>Ejemplo: carpeta <code>\\servidor\proyectos</code>:
+                    <ul>
+                        <li>Grupo <em>Visitantes</em>: solo lectura.</li>
+                        <li>Grupo <em>Gestión</em>: control total.</li>
+                    </ul>
+                </li>
+                <li>La ruta UNC se utiliza para acceder a la carpeta desde otros equipos.</li>
+                <li>Se pueden aplicar cuotas, auditoría de accesos o cifrado según la sensibilidad de los datos.</li>
+            </ul>
+
+        </section>
+
+        <section class="slide" id="carpetas-archivos-linux-samba-nfs">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+
+            <h3>2.1. Compartición de carpetas en GNU/Linux</h3>
+            <p>
+                En <strong>GNU/Linux</strong>, la compartición de archivos se realiza habitualmente mediante
+                servicios como <strong>Samba</strong> y <strong>NFS (Network File System)</strong>, según si el
+                entorno es mixto (Windows–Linux) o exclusivamente Unix/Linux.
+            </p>
+            <ul>
+                <li><strong>Samba</strong>:
+                    <ul>
+                        <li>Comparte carpetas con equipos Windows mediante SMB/CIFS.</li>
+                        <li>Se configura en <code>/etc/samba/smb.conf</code>, indicando ruta, permisos y acceso
+                            invitado.</li>
+                    </ul>
+                </li>
+                <li><strong>NFS</strong>:
+                    <ul>
+                        <li>Protocolo habitual en entornos Unix/Linux para sistemas distribuidos.</li>
+                        <li>Se configura en <code>/etc/exports</code>, especificando directorios y redes autorizadas.
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <pre class="language-python"><code># Fragmento típico de smb.conf (Samba)
+
+\[proyectos]
+path = /srv/proyectos
+read only = no
+guest ok = no
+create mask = 0660
+directory mask = 0770</code></pre>
+
+        </section>
+
+        <section class="slide" id="impresoras-dispositivos-intro">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+
+            <h3>2.2. Impresoras y dispositivos</h3>
+            <p>
+                Además de carpetas y archivos, también pueden compartirse en red <strong>impresoras</strong>,
+                <strong>escáneres</strong>, <strong>discos externos</strong> u otras unidades, siempre que estén
+                conectados
+                a un equipo que actúe como servidor de dichos recursos.
+            </p>
+            <ul>
+                <li>En oficinas y centros educativos es habitual una impresora para varios usuarios.</li>
+                <li>En Windows, la compartición se realiza desde “Dispositivos e impresoras”, asignando permisos y
+                    nombre de recurso.</li>
+                <li>En Linux, el sistema más extendido es <strong>CUPS</strong>, con administración web y control de
+                    colas de impresión.</li>
+                <li>Es posible establecer cuotas, prioridades y restricciones horarias para un uso responsable.</li>
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/linkia/impresora-red.png" style="max-width: 40%;"
+                    alt="Impresora compartida en red">
+            </div>
+        </section>
+
+        <section class="slide" id="configuracion-recursos-intro">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h2>3. Configuración de recursos compartidos</h2>
+            <p>
+                La configuración de recursos compartidos traduce la teoría en acciones concretas sobre el sistema
+                operativo.
+                Consiste en decidir <strong>qué se comparte</strong>, <strong>con quién</strong>, <strong>cómo</strong>
+                y
+                <strong>con qué permisos</strong>, utilizando herramientas gráficas o de línea de comandos.
+            </p>
+            <ul>
+                <li>Debe garantizar <strong>seguridad</strong>, <strong>eficiencia</strong> y <strong>claridad</strong>
+                    en la gestión.</li>
+                <li>Implica trabajar tanto con permisos de red como con permisos del sistema de archivos.</li>
+
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/linkia/recursos-compartidos-en-red.jpg" style="max-width: 40%;"
+                    alt="Configuración de recursos compartidos">
+            </div>
+
+        </section>
+
+        <section class="slide" id="configuracion-windows-gui">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+
+            <h3>3.1. Entorno gráfico en Windows Server</h3>
+            <p>
+                El <strong>entorno gráfico</strong> de Windows Server permite compartir carpetas e impresoras de forma
+                intuitiva, asignando permisos a usuarios o grupos del dominio. Es la forma más habitual en redes
+                pequeñas o cuando se prioriza la configuración visual.
+            </p>
+            <ul>
+                <li>Compartir una carpeta:
+                    <ul>
+                        <li>Clic derecho → <em>Propiedades</em> → pestaña <em>Compartir</em>.</li>
+                        <li>“Uso compartido avanzado” → “Compartir esta carpeta” → definir nombre del recurso y
+                            permisos.</li>
+                    </ul>
+                </li>
+                <li>Compartir una impresora:
+                    <ul>
+                        <li>Panel de control → Dispositivos e impresoras → Propiedades → pestaña <em>Compartir</em>.
+                        </li>
+                        <li>Opción “Compartir esta impresora” y drivers adicionales para distintas arquitecturas.</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/linkia/compartir-windows.jpg" style="max-width: 50%;"
+                    alt="Compartir carpeta en Windows Server">
+            </div>
+
+        </section>
+
+        <section class="slide" id="configuracion-linux-gui-samba">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+
+            <h3>3.1. Entorno gráfico en GNU/Linux</h3>
+            <p>
+                En distribuciones de escritorio (Ubuntu, Linux Mint, etc.), la compartición de carpetas se puede realizar desde el entorno gráfico, aunque suele ser más limitada que en
+                Windows. Para entornos profesionales, se recomienda configurar Samba o NFS desde la línea de comandos.
+            </p>
+            <p>En el directorio que se desea compartir, en la parte inferior se puede poner smb: IP del recurso.</p>
+            
+            <div class="diagram">
+                <img src="../../assets/linkia/Samba-file-share-ubuntu.png" style="max-width: 50%;"
+                    alt="Compartir carpeta en GNU/Linux con Samba">
+            </div>
+        </section>
+
+        <section class="slide" id="configuracion-linea-comandos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+           
+            <h3>3.2. Línea de comandos</h3>
+            <p>
+                La <strong>línea de comandos</strong> permite automatizar y documentar la configuración de recursos
+                compartidos, siendo especialmente útil en servidores y entornos profesionales donde se requieren
+                scripts repetibles y administración remota.
+            </p>
+            <ul>
+                <li>En Windows se utilizan herramientas como <strong>PowerShell</strong> o el comando
+                    <code>net use / net share</code> para crear y probar recursos compartidos.
+                </li>
+                <li>En GNU/Linux se editan ficheros como <code>/etc/samba/smb.conf</code> o <code>/etc/exports</code>
+                    y se gestionan servicios con <code>systemctl</code>.</li>
+                <li>La CLI facilita la integración con GPO, scripts de inicio de sesión y despliegues automatizados.
+                </li>
+            </ul>
+            <pre class="language-python"><code># Ejemplo orientativo (Windows PowerShell)
+
+New-SmbShare -Name "Proyectos" -Path "D:\Departamentos\Proyectos" -FullAccess "DOMINIO\Gestion"
+
+# Ejemplo orientativo (Linux - reiniciar Samba)
+
+sudo systemctl restart smbd</code></pre>
+
+        </section>
+
+        <section class="slide" id="seguridad-acceso-intro">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h2>4. Seguridad y acceso</h2>
+            <p>
+                Una red corporativa o educativa debe ser <strong>segura</strong>, predecible y controlable. Compartir
+                recursos sin una política de seguridad clara supone un riesgo para la integridad de los datos y el
+                funcionamiento global del sistema.
+            </p>
+            <ul>
+                <li>Definir correctamente permisos y derechos de acceso.</li>
+                <li>Auditar quién accede a qué recurso y cuándo.</li>
+                <li>Aplicar medidas complementarias como cuotas, restricciones horarias o filtrado por IP.</li>
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/linkia/seucrity-system.jpg" style="max-width: 40%;"
+                    alt="Seguridad y control de acceso">
+            </div>
+
+        </section>
+
+        <section class="slide" id="control-acceso-recursos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h3>4.1. Control de acceso a recursos</h3>
+            <p>
+                Controlar el acceso a los recursos compartidos implica aplicar <strong>niveles de seguridad adecuados</strong>
+                tanto en el sistema operativo como en la propia red.
+            </p>
+            <ul>
+                <li><strong>Principios</strong>:
+                    <ul>
+                        <li><em>Menor privilegio</em>: solo los permisos necesarios.</li>
+                        <li><em>Separación de funciones</em>: evitar mezclar roles sin motivo.</li>
+                        <li><em>Auditoría y trazabilidad</em>: registrar acciones relevantes.</li>
+                    </ul>
+                </li>
+                <li><strong>Medidas habituales</strong>:
+                    <ul>
+                        <li>ACLs detalladas y control de acceso basado en roles (RBAC).</li>
+                        <li>Revisión periódica de recursos compartidos y carpetas sensibles.</li>
+                        <li>Aplicación de cuotas de disco y limitación de acceso por IP o subred.</li>
+                    </ul>
+                </li>
+            </ul>
+
+        </section>
+
+        <section class="slide" id="pruebas-acceso-clientes">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+           <h3>4.2. Pruebas de acceso desde clientes</h3>
+            <p>
+                Una buena práctica consiste en comprobar los recursos compartidos desde la perspectiva de distintos
+                perfiles de usuario, verificando que los permisos asignados son coherentes con lo esperado.
+            </p>
+            <ul>
+                <li>Pruebas como usuario autorizado:
+                    <ul>
+                        <li>Comprobar si ve la carpeta, puede abrir archivos y modificar o borrar cuando proceda.</li>
+                    </ul>
+                </li>
+                <li>Pruebas como usuario no autorizado:
+                    <ul>
+                        <li>Verificar que no puede acceder o ni siquiera ver el recurso sensible.</li>
+                    </ul>
+                </li>
+                <li>Comprobaciones desde diferentes sistemas (Windows, Linux, móvil) y, si aplica, acceso externo
+                    mediante VPN.</li>
+                <li>Herramientas: “Acceso efectivo” en Windows, <code>smbclient</code> y <code>mount</code> en Linux,
+                    scripts de conexión, etc.</li>
+            </ul>
+
+        </section>
+
+       
+
+                <section class="slide" id="actividades-evaluacion-ut4">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h2>Actividades de evaluación</h2>
+          
+            <ul>
+                <li><strong>Bloque 1: Permisos y derechos de acceso</strong> (RA4CEa):
+                    creación de una carpeta, asignación de permisos diferenciados y comprobación.</li>
+                <li><strong>Bloque 2: Recursos compartidos en red</strong> (RA4CEb, RA4CEd):
+                    creación de carpetas “Profesores” y “Alumnos”, compartición con distintos niveles de acceso y prueba
+                    de uso.</li>
+                <li><strong>Bloque 3: Configuración de recursos compartidos</strong> (RA4CEc, RA4CEe):
+                    verificación de la estructura de carpetas y funcionamiento con usuarios de diferentes grupos.</li>
+            </ul>
+
+        </section>
+        
+        <div class=" footer">
+            <div class="bar">
+                <small>UT4 · Compartición de recursos y control de acceso · LinkiaFP</small>
+                <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

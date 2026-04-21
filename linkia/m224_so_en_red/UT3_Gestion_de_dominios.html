@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UT3 · Administración de dominios y servicios de directorio · LinkiaFP</title>
+    <meta name="description"
+        content="Presentación HTML con secciones tipo diapositiva para la UT3: Administración de dominios y servicios de directorio." />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link rel="stylesheet" href="../style.css" />
+    <script src="../script.js" defer></script>
+</head>
+
+<body>
+    <div class="deck">
+
+        <!-- COVER -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+                </div>
+                <div class="title">UT3 · Administración de dominios y servicios de directorio</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+            </div>
+
+        </section>
+
+        <!-- ============================= -->
+        <!--  SECCIÓN 1: SERVICIO DIRECTORIO -->
+        <!-- ============================= -->
+        <section class="slide" id="servicio-directorio">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h2>¿Qué es un servicio de directorio?</h2>
+
+            <div class="diagram">
+                <img src="../../assets/linkia/servicios_dircetorios_logo.webp" style="max-width: 50%;"
+                    alt="Esquema de un servicio de directorioa y gestiona">
+            </div>
+            <p>
+                Un servicio de directorio es una base de datos especializada que almacena y organiza información sobre
+                los recursos de una red, como usuarios, equipos, grupos y políticas. Permite gestionar el acceso y la
+                seguridad de manera centralizada, facilitando la administración de grandes entornos informáticos.
+                la información de usuarios, equipos y recursos dentro de una red.
+            </p>
+
+            <ul>
+                <li><strong>Autenticación:</strong> Verifica la identidad de los usuarios.</li>
+                <li><strong>Autorización:</strong> Controla los permisos y accesos.</li>
+                <li><strong>Centralización:</strong> Todo se gestiona desde un único punto.</li>
+                <li><strong>Estructura jerárquica:</strong> Organización en forma de árbol.</li>
+            </ul>
+        </section>
+
+        <!-- ============================= -->
+        <!--  SECCIÓN 2: ELEMENTOS DEL DIRECTORIO -->
+        <!-- ============================= -->
+        <section class="slide" id="elementos-directorio">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h2>Elementos del servicio de directorio</h2>
+
+            <div class="diagram">
+                <img src="../../assets/linkia/objects-ad.jpg" style="max-width: 40%;" alt="Objetos y atributos en Active Directorye atributos 
+    que describen sus propiedades.">
+            </div>
+            <p>
+                Un servicio de directorio se compone de objetos, cada uno con atributos que describen sus propiedades.
+                Estos objetos pueden ser usuarios, grupos, equipos, impresoras, etc., y se organizan en una estructura
+                jerárquica.
+            </p>
+
+            <ul>
+                <li><strong>Objetos:</strong> Usuarios, grupos, equipos, impresoras…</li>
+                <li><strong>Atributos:</strong> Nombre, correo, descripción, etc.</li>
+                <li><strong>Clases:</strong> Tipos de objetos permitidos.</li>
+                <li><strong>DN (Distinguished Name):</strong> Ruta completa del objeto en la jerarquía.</li>
+            </ul>
+        </section>
+
+        <!-- ============================= -->
+        <!--  SECCIÓN 3: ESTRUCTURA JERÁRQUICA -->
+        <!-- ============================= -->
+        <section class="slide" id="estructura-jerarquica">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="diagram">
+            <h2>Estructura jerárquica</h2>
+
+            <div class="diagram">
+                <img src="../../assets/linkia/domain_tree_forest.jpg" style="max-width: 60%;" alt="Objetos y atributos en Active Directorye atributos 
+    que describen sus propiedades.">
+            </div>
+            <p>Active Directory organiza sus recursos en forma de árbol jerárquico:</p>
+
+            <ul>
+                <li><strong>Dominio:</strong> Unidad principal de administración.</li>
+                <li><strong>Árbol:</strong> Conjunto de dominios relacionados.</li>
+                <li><strong>Bosque:</strong> Conjunto de árboles con configuración común.</li>
+                <li><strong>OU:</strong> Contenedores para organizar usuarios y equipos.</li>
+            </ul>
+        </section>
+
+        <!-- ============================= -->
+        <!--  SECCIÓN 4: EL DOMINIO Y FUNCIONES -->
+        <!-- ============================= -->
+        <section class="slide" id="dominio-funciones">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+            <h2>El dominio y sus funciones</h2>
+            <div class="diagram">
+                <img src="../../assets/linkia/domain-functions.jpg" style="max-width: 60%;" alt="Objetos y atributos en Active Directorye atributos 
+    que describen sus propiedades.">
+            </div>
+
+            <p>
+                Un dominio define límites administrativos, de seguridad y control dentro de una red basada
+                en Active Directory.
+            </p>
+
+            <ul>
+                <li><strong>Autenticación centralizada</strong> de usuarios y equipos.</li>
+                <li><strong>Aplicación de políticas de grupo (GPO)</strong>.</li>
+                <li><strong>Control de permisos</strong> y recursos compartidos.</li>
+                <li><strong>Relaciones de confianza</strong> con otros dominios.</li>
+            </ul>
+        </section>
+
+        <!-- ============================= -->
+        <!--  SECCIÓN 5: RELACIONES DE CONFIANZA -->
+        <!-- ============================= -->
+        <section class="slide" id="relaciones-confianza">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+            <h2>Relaciones de confianza entre dominios</h2>
+
+            <div class="diagram">
+                <img src="../../assets/linkia/relacion-confianza.png" style="max-width: 60%;" alt="Objetos y atributos en Active Directorye atributos 
+    que describen sus propiedades.">
+            </div>
+
+            <p>
+                Las relaciones de confianza permiten que usuarios de un dominio accedan a recursos de otro.
+            </p>
+
+            <ul>
+                <li><strong>Unidireccionales:</strong> A confía en B, pero no al revés.</li>
+                <li><strong>Bidireccionales:</strong> Confianza mutua.</li>
+                <li><strong>Explícitas:</strong> Creación manual.</li>
+                <li><strong>Implícitas:</strong> Automáticas dentro del mismo bosque.</li>
+                <li><strong>Transitivas:</strong> La confianza se propaga entre dominios.</li>
+            </ul>
+        </section>
+
+        <!-- ============================= -->
+        <!--  SECCIÓN 6: DELEGACIÓN DE AUTORIDAD -->
+        <!-- ============================= -->
+        <section class="slide" id="delegacion-autoridad">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+            <h2>Delegación de autoridad</h2>
+
+            <div class="diagram">
+                <img src="../../assets/linkia/departamentalizacao-Funcional.jpg" style="max-width: 40%;" alt="Objetos y atributos en Active Directorye atributos 
+    que describen sus propiedades.">
+            </div>
+
+            <p>
+                La delegación permite asignar a un usuario o grupo permisos administrativos dentro de una
+                parte concreta del dominio.
+            </p>
+
+            <ul>
+                <li>Delegar creación y gestión de usuarios.</li>
+                <li>Permitir reinicio de contraseñas.</li>
+                <li>Administrar equipos dentro de una OU.</li>
+                <li>Asignar tareas sin conceder control total del dominio.</li>
+            </ul>
+        </section>
+
+        <!-- ============================= -->
+        <!--  SECCIÓN 7: INSTALACIÓN DE ACTIVE DIRECTORY -->
+        <!-- ============================= -->
+        <section class="slide" id="instalacion-ad">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+            <h2>Instalación de Active Directory</h2>
+            <div class="diagram">
+                <img src="../../assets/linkia/active-directory.webp" style="max-width: 40%;" alt="Objetos y atributos en Active Directorye atributos 
+    que describen sus propiedades.">
+            </div>
+            <p>
+                Para instalar Active Directory en un servidor Windows, se deben seguir estos pasos:
+            </p>
+
+            <ol>
+                <li>Asignar IP estática y nombre al servidor.</li>
+                <li>Instalar rol <strong>AD DS</strong> desde el Administrador del servidor.</li>
+                <li>Promocionar a controlador de dominio.</li>
+                <li>Configurar DNS, NetBIOS y DSRM.</li>
+            </ol>
+        </section>
+
+        <!-- ============================= -->
+        <!--  SECCIÓN 7: INSTALACIÓN DE ACTIVE DIRECTORY -->
+        <!-- ============================= -->
+        <section class="slide" id="instalacion-ad">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+            <h3>1. Asignar IP estática</h3>
+            <p>
+                Es fundamental asignar una dirección IP estática al servidor para garantizar su accesibilidad y
+                estabilidad en la red.
+            </p>
+            <ul>
+                <li>Acceder a la configuración de red.</li>
+                <li>Seleccionar la conexión de red y abrir propiedades.</li>
+                <li>Configurar IPv4 con dirección, máscara, puerta de enlace y DNS.</li>
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/linkia/ip-estatica.jpg" style="max-width: 30%;" alt="Objetos y atributos en Active Directorye atributos 
+    que describen sus propiedades.">
+            </div>
+        </section>
+        <section class="slide" id="instalacion-ad">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+            <h3>2. Instalar rol AD DS</h3>
+            <p>
+                El rol AD DS (Active Directory Domain Services) es el componente esencial para convertir un servidor en
+                un controlador de dominio.
+            </p>
+            <ul>
+                <li>Acceder al Administrador del servidor.</li>
+                <li>Seleccionar “Agregar roles y características”.</li>
+                <li>Elegir el rol “Servicios de dominio de Active Directory”.</li>
+                <li>Completar la instalación y reiniciar si es necesario.</li>
+            </ul>
+
+            <div class="diagram">
+                <img src="../../assets/linkia/active-directory-installation.png" style="max-width: 40%;" alt="Objetos y atributos en Active Directorye atributos 
+    que describen sus propiedades.">
+            </div>
+        </section>
+
+        <section class="slide" id="instalacion-ad">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+            <h3>3. Promocionar a controlador de dominio</h3>
+            <p>
+                Promocionar el servidor a controlador de dominio implica configurar el dominio, el bosque y las opciones
+                de seguridad.
+            </p>
+            <ul>
+                <li>Seleccionar “Promocionar este servidor a controlador de dominio”.</li>
+                <li>Elegir “Agregar un nuevo bosque” e ingresar el nombre del dominio.</li>
+                <li>Configurar opciones de nivel funcional, contraseña DSRM y DNS.</li>
+                <li>Completar la promoción y reiniciar el servidor.</li>
+            </ul>
+
+            <div class="diagram">
+                <img src="../../assets/linkia/promover-dominio.gif" style="max-width: 40%;" alt="Objetos y atributos en Active Directorye atributos 
+    que describen sus propiedades.">
+            </div>
+        </section>
+        <section class="slide" id="instalacion-ad">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+            <h3>4. Configurar el dominio</h3>
+            <p>
+                Tras la promoción, es necesario configurar el dominio para asegurar su correcto funcionamiento y
+                seguridad.
+            </p>
+            <ul>
+                <li>Configurar zonas DNS para el dominio.</li>
+                <li>Crear unidades organizativas (OU) para organizar recursos.</li>
+                <li>Definir políticas de grupo (GPO) para gestionar configuraciones.</li>
+                <li>Agregar usuarios y equipos al dominio.</li>
+            </ul>
+
+
+        </section>
+        <!-- ============================= -->
+        <!--  SECCIÓN 8: VALIDACIÓN DEL DOMINIO -->
+        <!-- ============================= -->
+        <section class="slide" id="validacion-ad">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;">
+            <h2>Validación del dominio</h2>
+            <div style="    display: flex;
+    /* flex-direction: column; */
+    /* gap: 20px; */
+    align-items: center;">
+                <div class="diagram">
+                    <img src="../../assets/linkia/validar.jpg" style="max-width: 40%;"
+                        alt="Esquema de validación de un dominio Active Directory">
+                </div>
+
+                <div>
+                    <p>
+                        Tras la instalación, deben realizarse pruebas para asegurar que el dominio funciona correctamente.
+                    </p>
+    
+                    <ul>
+                        <li>Comprobar la consola “Usuarios y equipos de Active Directory”.</li>
+                        <li>Verificar la respuesta del servidor DNS.</li>
+                        <li>Unir un equipo al dominio como prueba.</li>
+                        <li>Ejecutar <code>dcdiag</code>, <code>repadmin</code>, <code>gpresult</code>.</li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </section>
+
+        <!-- ============================= -->
+        <!--  SECCIÓN 9: UNIDADES ORGANIZATIVAS -->
+        <!-- ============================= -->
+        <section class="slide" id="ou-ad">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+
+            <h2>Unidades Organizativas (OU)</h2>
+<div style="    display: flex;
+    /* flex-direction: column; */
+    /* gap: 20px; */
+    align-items: center;">
+            <div class="diagram">
+                <img src="../../assets/linkia/uo.jpg" style="max-width: 80%;"
+                    alt="Esquema de Unidades Organizativas en Active Directory">
+            </div>
+
+            <div>
+                <p>
+                Las OU permiten organizar usuarios, equipos y grupos según la estructura de la empresa o centro
+                educativo. (Ej: Departamento de Informática, Ciclo Formativo de Grado Superior, etc.)
+            </p>
+
+            <ul>
+                <li>Agrupar usuarios por departamento.</li>
+                <li>Agrupar equipos por aula o ciclo.</li>
+                <li>Delegar control por unidad específica.</li>
+                <li>Aplicar GPO específicas a una zona concreta.</li>
+            </ul>
+            </div>
+            
+</div>
+        </section>
+
+        <!-- ============================= -->
+        <!--  SECCIÓN 10: POLÍTICAS DE GRUPO -->
+        <!-- ============================= -->
+        <section class="slide" id="gpo-ad">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+            <h2>Políticas de Grupo (GPO)</h2>
+            <div style="    display: flex;
+    /* flex-direction: column; */
+    /* gap: 20px; */
+    align-items: center;">
+            <div class="diagram">
+                <img src="../../assets/linkia/gpo.jpg" style="max-width: 90%;"
+                    alt="Esquema de Unidades Organizativas en Active Directory">
+            </div>
+            <div>
+                <p>
+                    Las GPO permiten configurar automáticamente el comportamiento de usuarios y equipos dentro del dominio.
+                </p>
+    
+                <ul>
+                    <li>Restringir funciones del sistema.</li>
+                    <li>Configurar normas de contraseñas.</li>
+                    <li>Aplicar fondo, accesos o redirecciones de carpetas.</li>
+                    <li>Instalar software de forma automática.</li>
+                </ul>
+
+            </div>
+
+        </section>
+
+        <!-- ============================= -->
+        <!--  SECCIÓN 11: HERRAMIENTAS ADMINISTRATIVAS -->
+        <!-- ============================= -->
+        <section class="slide" id="herramientas-ad">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+            <h2>Herramientas administrativas</h2>
+
+           
+                <p>
+                    Existen diversas herramientas para gestionar y administrar un dominio Active Directory, cada una con
+                    funciones específicas para facilitar la administración de usuarios, equipos, políticas y servicios
+                    relacionados.
+                </p>
+
+                <ul>
+                    <li><strong>dsa.msc:</strong> Usuarios y Equipos de Active Directory.</li>
+                    <li><strong>gpmc.msc:</strong> Administración de GPO.</li>
+                    <li><strong>dssite.msc:</strong> Sitios y Servicios de AD.</li>
+                    <li><strong>DNS Manager:</strong> Administración del servicio DNS.</li>
+                    <li><strong>PowerShell:</strong> Gestión avanzada mediante scripting.</li>
+                </ul>
+        </section>
+
+        <!-- ============================= -->
+        <!--  SECCIÓN 12: DIAGNÓSTICO Y ERRORES -->
+        <!-- ============================= -->
+        <section class="slide" id="diagnostico-ad">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" "diagram">
+            <h2>Diagnóstico y resolución de errores</h2>
+            <p>
+                Para mantener un dominio saludable, es fundamental realizar diagnósticos periódicos y resolver errores
+                comunes que puedan surgir en el entorno de Active Directory.
+            </p>
+
+
+            <ul>
+                <li><strong>Visor de eventos:</strong> Errores de inicio de sesión y servicios.</li>
+                <li><strong>dcdiag:</strong> Análisis del controlador de dominio.</li>
+                <li><strong>repadmin:</strong> Estado de la replicación.</li>
+                <li><strong>gpresult:</strong> Políticas aplicadas a un usuario/equipo.</li>
+            </ul>
+        </section>
+
+
+
+
+        <div class=" footer">
+            <div class="bar">
+                <small>UT3 · Administración de dominios y servicios de directorio · LinkiaFP</small>
+                <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

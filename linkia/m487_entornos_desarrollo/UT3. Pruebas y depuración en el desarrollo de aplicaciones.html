@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UT3. Pruebas y depuración en el desarrollo de aplicaciones</title>
+  <meta name="description" content="UT3: Pruebas y depuración en el desarrollo de aplicaciones." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <link rel="stylesheet" href="../style.css" />
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../script.js" defer></script>
+</head>
+
+<body>
+  <div class="deck">
+    <!-- ======================= TEMA 3 ======================= -->
+    <!-- COVER -->
+    <section class="slide cover" id="slide-1">
+      <div style="max-width: 60%;">
+        <div>
+          <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+        </div>
+        <div class="title">UT3 · Pruebas y depuración en el desarrollo de aplicaciones</div>
+        <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+
+      </div>
+      <div class="logo-first-page">
+        <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+      </div>
+
+    </section>
+
+
+
+    <section class="slide" id="indice-general-ut3">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h2>Índice de la UT3</h2>
+      <ul>
+        <li>1. Introducción a las pruebas y la depuración.</li>
+        <li>2. Tipos de pruebas.</li>
+        <li>3. Herramientas de depuración en IDEs.</li>
+        <li>4. Automatización de pruebas: JUnit y PyTest.</li>
+        <li>5. Documentación de pruebas e incidencias.</li>
+      </ul>
+
+    </section>
+
+
+
+    <section class="slide" id="intro-pruebas-depuracion">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h2>1. Introducción a las pruebas y la depuración</h2>
+      <p>
+        Las pruebas y la depuración son actividades clave del desarrollo de software: permiten detectar, analizar y
+        corregir errores antes de que el producto llegue al usuario
+        final.
+      </p>
+
+      <div class="diagram">
+        <img src="../../assets/linkia/testing vs debuggin.jpg" style="max-width: 40%;"
+          alt="Diagrama de pruebas y depuración">
+      </div>
+      <p><strong>Ambas actividades son fundamentales para garantizar la calidad del software.</strong></p>
+
+    </section>
+
+    <section class="slide" id="definicion-objetivos-pruebas">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>1.1 Definición y objetivos de las pruebas</h3>
+      <p>
+        Las pruebas de software son el conjunto de actividades destinadas a comprobar que el programa cumple las
+        especificaciones y a descubrir defectos antes de la
+        entrega.
+      </p>
+      <ul>
+        <li>Verificar que el software funciona correctamente en los escenarios previstos.<i
+            class="fa-solid fa-check fa-beat" style="color: rgb(99, 230, 190);"></i></li>
+        <li>Comprobar que se cumplen los requisitos funcionales y no funcionales.<i class="fa-solid fa-check fa-beat"
+            style="color: rgb(99, 230, 190);"></i></li>
+        <li>Detectar defectos que afecten estabilidad, rendimiento o seguridad.<i class="fa-solid fa-check fa-beat"
+            style="color: rgb(99, 230, 190);"></i></li>
+        <li>Reducir riesgos y costes asociados a fallos en producción.<i class="fa-solid fa-check fa-beat"
+            style="color: rgb(99, 230, 190);"></i></li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="definicion-objetivos-depuracion">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>1.2 Definición y objetivos de la depuración</h3>
+      <p>
+        La depuración (debugging) es el proceso de localizar, analizar y corregir errores en el código fuente cuando el
+        programa no se comporta como se
+        esperaba.
+      </p>
+      <ul>
+        <li>Inspeccionar instrucciones, flujo de ejecución, variables y estado del sistema en tiempo de ejecución.<i
+            class="fa-solid fa-check fa-beat" style="color: rgb(99, 230, 190);"></i></li>
+        <li>Corregir los errores para que el programa sea estable y cumpla requisitos.<i
+            class="fa-solid fa-check fa-beat" style="color: rgb(99, 230, 190);"></i></li>
+        <li>Prevenir la aparición de errores derivados de una corrección mal aplicada.<i
+            class="fa-solid fa-check fa-beat" style="color: rgb(99, 230, 190);"></i></li>
+        <li>Apoyarse en herramientas del IDE (breakpoints, inspección de variables, etc.).<i
+            class="fa-solid fa-check fa-beat" style="color: rgb(99, 230, 190);"></i></li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="pasos-tipicos-depuracion">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>Pasos típicos en la depuración</h3>
+      <p>
+        Aunque cada bug es diferente, el proceso de depuración suele seguir una serie de pasos
+        sistemáticos.
+      </p>
+      <div class="column">
+
+        <div class="diagram">
+          <img src="../../assets/linkia/concepto-del-depuración-de-código-de-ordenador-94518464.webp"
+            style="max-width: 40%;" alt="Diagrama de pasos en la depuración">
+        </div>
+        <ul>
+          <li><strong>Reproducción del error:</strong> provocar el fallo de forma controlada y repetible.</li>
+          <li><strong>Análisis del código:</strong> localizar el punto exacto donde el comportamiento es incorrecto.
+          </li>
+          <li><strong>Prueba de soluciones:</strong> proponer cambios y verificar su efecto.</li>
+          <li><strong>Verificación final:</strong> ejecutar de nuevo el sistema para asegurar que el error desaparece
+            sin
+            introducir otros defectos.</li>
+        </ul>
+    </section>
+
+    <section class="slide" id="relacion-pruebas-depuracion">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>1.3 Relación entre pruebas y depuración</h3>
+      <div class="column">
+        <div class="diagram">
+          <img src="../../assets/linkia/maxresdefault.jpg" style="max-width: 100%;"
+            alt="Diagrama de pruebas y depuración">
+        </div>
+        <ul>
+          <li>Las pruebas se diseñan de forma sistemática para comprobar el comportamiento del sistema.</li>
+          <li>Cuando una prueba falla, se inicia un proceso de depuración para encontrar la causa raíz.</li>
+          <li>Tras depurar, se reejecutan las pruebas para comprobar que la corrección es válida.</li>
+          <li>Este ciclo se repite durante todo el desarrollo y mantenimiento del software.</li>
+        </ul>
+      </div>
+
+
+    </section>
+
+    <section class="slide" id="importancia-pruebas-depuracion">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>1.4 Importancia de las pruebas y la depuración</h3>
+      <p>
+        Probar y depurar correctamente un sistema tiene impacto directo en la calidad del producto, la satisfacción del
+        cliente y los costes del
+        proyecto.
+      </p>
+      <ul>
+        <li><strong>Mejora de la calidad:</strong> menos fallos en producción y mayor confianza en el software.<i
+            class="fa-solid fa-medal" style="color: rgb(255, 212, 59);"></i></li>
+        <li><strong>Reducción de costes:</strong> un error detectado en desarrollo es mucho más barato que en
+          producción.<i class="fa-solid fa-sack-dollar" style="color: rgb(255, 212, 59);"></i></li>
+        <li><strong>Satisfacción del cliente:</strong> experiencias de uso más estables y fiables.<i
+            class="fa-solid fa-face-smile" style="color: rgb(255, 212, 59);"></i></li>
+        <li><strong>Facilita el mantenimiento:</strong> un código bien probado es más sencillo de evolucionar.<i
+            class="fa-solid fa-screwdriver-wrench" style="color: rgb(255, 212, 59);"></i></li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="herramientas-tecnicas-comunes">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>1.5 Herramientas y técnicas comunes</h3>
+      <p>
+        Existen múltiples herramientas y técnicas que ayudan a automatizar pruebas y simplificar la depuración en
+        proyectos
+        reales.
+      </p>
+      <div class="column">
+        <div class="diagram">
+          <img src="../../assets/linkia/Test-Driven-Development-Tools.jpg" style="max-width: 100%;"
+            alt="Diagrama de herramientas de pruebas y depuración">
+        </div>
+        <ul>
+          <li><strong>Frameworks de pruebas:</strong> JUnit (Java), PyTest (Python), NUnit, etc.</li>
+          <li><strong>IDEs con depurador integrado:</strong> Visual Studio, Eclipse, PyCharm, VS Code.</li>
+          <li><strong>Integración continua:</strong> ejecución automática de pruebas en cada cambio de código.</li>
+          <li><strong>Herramientas de análisis estático:</strong> inspección automática de calidad de código.</li>
+        </ul>
+      </div>
+
+
+    </section>
+
+    <section class="slide" id="tipos-pruebas-introduccion">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h2>2. Tipos de pruebas</h2>
+      <p>
+        Para garantizar la calidad del software se emplean distintos tipos de pruebas, cada uno con un enfoque y un
+        nivel de granularidad
+        específico.
+      </p>
+
+      <div class="diagram">
+        <img src="../../assets/linkia/Clasificacion-de-las-Pruebas-de-Software-1.png" style="max-width: 60%;"
+          alt="Diagrama de tipos de pruebas de software">
+      </div>
+
+
+
+
+    </section>
+
+    <section class="slide" id="pruebas-unitarias">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>2.1 Pruebas unitarias</h3>
+      <p>
+        Las pruebas unitarias verifican el comportamiento de una unidad individual de código (función, método, clase) en
+        aislamiento del resto del
+        sistema.
+      </p>
+      <ul>
+        <li>Se centran en pequeñas piezas de lógica, probadas de forma independiente.</li>
+        <li>Normalmente se automatizan con frameworks como JUnit, NUnit o PyTest.</li>
+        <li>Son muy rápidas y se ejecutan con frecuencia durante el desarrollo.</li>
+        <li>Favorecen un diseño modular y reutilizable.</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="ejemplo-prueba-unitaria">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>Ejemplo de prueba unitaria</h3>
+      <p>
+        Ejemplo simplificado de prueba unitaria que comprueba una función de suma de dos
+        números.
+      </p>
+      <ul>
+        <li>Se define una función pequeña y bien delimitada.</li>
+        <li>Se crea un test que verifica el resultado esperado.</li>
+        <li>Si cambia la implementación, el test alerta de regresiones.</li>
+      </ul>
+      <pre class="language-python"><code>def sumar(a: int, b: int) -> int:
+    return a + b
+
+def test\_sumar():
+resultado = sumar(2, 3)
+assert resultado == 5  # Verifica que 2 + 3 = 5</code></pre>
+
+    </section>
+
+    <section class="slide" id="pruebas-funcionales">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>2.2 Pruebas funcionales</h3>
+      <p>
+        Las pruebas funcionales validan que el sistema, desde la perspectiva del usuario, cumple los requisitos
+        funcionales
+        definidos.
+      </p>
+      <ul>
+        <li>Se centran en el <strong>comportamiento observable</strong> del software.</li>
+        <li>Frecuentemente implican recorrido de escenarios de extremo a extremo.</li>
+        <li>Pueden implicar UI, base de datos y servicios externos.</li>
+        <li>Herramientas típicas: Selenium (web), Postman (APIs), entre otras.</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="ejemplo-prueba-funcional">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>Ejemplo de prueba funcional</h3>
+      <p>
+        En una tienda online, una prueba funcional puede verificar todo el flujo de compra desde que el usuario añade un
+        producto al carrito hasta la confirmación del
+        pedido.
+      </p>
+      <ul>
+        <li>Agregar un producto al carrito.</li>
+        <li>Iniciar el proceso de pago.</li>
+        <li>Introducir dirección y forma de pago.</li>
+        <li>Confirmar que el pedido se registra correctamente en la base de datos.</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="pruebas-integracion">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>2.3 Pruebas de integración</h3>
+      <p>
+        Las pruebas de integración comprueban que varios módulos o componentes del sistema funcionan correctamente
+        cuando se
+        combinan.
+      </p>
+      <ul>
+        <li>Validan la comunicación entre capas (por ejemplo, servicio–base de datos–interfaz).</li>
+        <li>Detectan errores que no aparecen en pruebas unitarias aisladas.</li>
+        <li>Suelen centrarse en interfaces entre componentes y contratos de datos.</li>
+        <li>Pueden apoyarse en herramientas como JUnit, contenedores ligeros o Docker para simular entornos.</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="ejemplo-prueba-integracion">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>Ejemplo de prueba de integración</h3>
+      <p>
+        Imagina una aplicación que consulta una base de datos y muestra los resultados en una interfaz web; la prueba de
+        integración valida todo el flujo de
+        datos.
+      </p>
+      <ul>
+        <li>La capa de acceso a datos debe devolver la información correcta.</li>
+        <li>La lógica de negocio debe procesar esos datos.</li>
+        <li>El frontend debe mostrar correctamente los resultados al usuario.</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="herramientas-depuracion-ides">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h2>3. Herramientas de depuración en IDEs</h2>
+      <p>
+        Los entornos de desarrollo integrados (IDE) incluyen depuradores potentes que facilitan el análisis del código
+        en tiempo de
+        ejecución.
+      </p>
+      <ul>
+        <li>Puntos de ruptura (breakpoints).</li>
+        <li>Depuración paso a paso.</li>
+        <li>Inspección de variables y pilas de llamadas.</li>
+        <li>Soporte para integración con pruebas automatizadas.</li>
+      </ul>
+      <div class="diagram">
+        <img src="../../assets/linkia/depurator_python.gif" style="max-width: 100%;"
+          alt="Diagrama de depuración en Python">
+      </div>
+
+    </section>
+
+    <section class="slide" id="puntos-ruptura">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>3.1 Puntos de ruptura</h3>
+      <p>
+        Un punto de ruptura detiene la ejecución del programa en una línea concreta para inspeccionar el estado interno
+        en ese
+        momento.
+      </p>
+      <ul>
+        <li><strong>Configuración:</strong> se colocan en el margen del editor (Eclipse, VS Code, PyCharm, etc.).</li>
+        <li><strong>Ejecución:</strong> el programa se pausa automáticamente al alcanzar el breakpoint.</li>
+        <li><strong>Inspección:</strong> se observan variables locales, globales, parámetros y estructuras de datos.
+        </li>
+        <li><strong>Continuación:</strong> se puede seguir paso a paso o continuar hasta el siguiente punto de ruptura.
+        </li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="ejemplo-puntos-ruptura">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>Ejemplo práctico: breakpoint en un bucle</h3>
+      <p>
+        En un IDE como Eclipse, colocar un punto de ruptura dentro de un bucle permite verificar cómo evoluciona una
+        variable contador en cada
+        iteración.
+      </p>
+      <ul>
+        <li>Se monitoriza el valor de la variable en cada pausa.</li>
+        <li>Permite detectar condiciones de salida incorrectas o índices fuera de rango.</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="depuracion-paso-a-paso">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>3.2 Depuración paso a paso</h3>
+      <p>
+        La depuración paso a paso permite ejecutar el programa línea a línea para estudiar el flujo de ejecución con
+        máximo
+        detalle.
+      </p>
+      <ul>
+        <li><strong>Step Over:</strong> ejecuta la línea actual y pasa a la siguiente sin entrar en llamadas internas.
+        </li>
+        <li><strong>Step Into:</strong> entra dentro de la función o método invocado.</li>
+        <li><strong>Step Return:</strong> ejecuta hasta el final de la función actual y vuelve al llamador.</li>
+        <li>Ideal para comprender la interacción entre métodos y la evolución de las variables.</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="ejemplo-depuracion-paso-a-paso">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>Ejemplo: depuración de una función de suma</h3>
+      <p>
+        En PyCharm o VS Code, es posible usar Step Into para entrar en una función y observar cómo se calculan los
+        valores paso a
+        paso.
+      </p>
+      <pre class="language-python"><code>def sumar(a, b):
+    resultado = a + b
+    return resultado
+
+# Coloca un breakpoint en la línea de suma y usa Step Into para ver cómo se calculan los valores.</code></pre>
+
+    </section>
+
+    <section class="slide" id="automizacion-pruebas-ides">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>3.3 Automatización de pruebas en el IDE</h3>
+      <p>
+        Los IDEs suelen integrarse con frameworks de pruebas (JUnit, PyTest) para ejecutar baterías de tests de forma
+        rápida y
+        visual.
+      </p>
+      <ul>
+        <li>Ejecutar todos los tests tras un cambio de código.</li>
+        <li>Ver qué casos han pasado o fallado de un vistazo.</li>
+        <li>Acceder directamente a la línea de código que ha provocado el fallo.</li>
+        <li>Integrar resultados de pruebas en pipelines de integración continua.</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="documentacion-incidencias-ides">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>3.4 Documentación de pruebas e incidencias</h3>
+      <p>
+        A partir de los resultados de pruebas y sesiones de depuración, es fundamental documentar errores e incidencias
+        de forma
+        estructurada.
+      </p>
+      <ul>
+        <li>Registrar fallos detectados durante la ejecución de pruebas automáticas y manuales.</li>
+        <li>Incluir capturas, logs y pasos para reproducir el problema.</li>
+        <li>Facilitar la comunicación entre desarrolladores, testers y otros roles.</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="automatizacion-pruebas-introduccion">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h2>4. Automatización de pruebas</h2>
+      <p>
+        La automatización de pruebas permite ejecutar conjuntos de tests de forma repetible y eficiente, reduciendo
+        esfuerzo manual y errores
+        humanos.
+      </p>
+      <ul>
+        <li>Se apoyan en frameworks como JUnit (Java) o PyTest (Python).</li>
+        <li>Son clave para proyectos ágiles e integraciones frecuentes.</li>
+        <li>Se integran fácilmente en pipelines de CI/CD.</li>
+      </ul>
+
+
+    </section>
+
+    <section class="slide" id="intro-automatizacion-pruebas">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>4.1 Concepto de automatización de pruebas</h3>
+      <p>
+        Automatizar pruebas consiste en definir casos de prueba que pueden ejecutarse automáticamente siempre que se
+        cambie el
+        código.
+      </p>
+      <ul>
+        <li>Permite detectar errores de forma temprana en el ciclo de vida.</li>
+        <li>Garantiza que nuevas funcionalidades no rompen las existentes.</li>
+        <li>Reduce tiempos de regresión respecto a pruebas manuales.</li>
+        <li>Facilita la repetición de pruebas bajo distintas configuraciones.</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="junit-framework">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>4.2.1 Framework JUnit (Java)</h3>
+      <p>
+        JUnit es uno de los frameworks más utilizados para realizar pruebas unitarias en aplicaciones Java, basado en
+        anotaciones y
+        aserciones.
+      </p>
+      <ul>
+        <li>Anotaciones típicas: <code>@Test</code>, <code>@Before</code>, <code>@After</code>,
+          <code>@BeforeClass</code>, <code>@AfterClass</code>.
+        </li>
+        <li>Permite agrupar pruebas y generar informes claros de resultados.</li>
+        <li>Se integra con Maven, Gradle y servidores de integración continua.</li>
+      </ul>
+      <pre class="language-python"><code>@Test
+
+public void testSumar() {
+int resultado = 2 + 3;
+assertEquals(5, resultado);  // Comprueba que 2 + 3 = 5
+}</code></pre>
+
+    </section>
+
+    <section class="slide" id="pytest-framework">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>4.2.2 Framework PyTest (Python)</h3>
+      <p>
+        PyTest es un framework de pruebas para Python conocido por su sintaxis sencilla, uso de fixtures y amplia
+        extensibilidad mediante
+        plugins.
+      </p>
+      <ul>
+        <li>No requiere clases, basta con funciones que empiecen por <code>test_</code>.</li>
+        <li>Usa <code>assert</code> para realizar comprobaciones de forma legible.</li>
+        <li>Permite fixtures para preparar y limpiar el entorno de prueba.</li>
+        <li>Soporta ejecución paralela y medidores de cobertura.</li>
+      </ul>
+      <pre class="language-python"><code>def test_suma():
+    resultado = 2 + 3
+    assert resultado == 5  # Verifica que la suma es correcta</code></pre>
+
+    </section>
+
+    <section class="slide" id="integracion-ci-pruebas-automatizadas">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>4.3 Integración en el ciclo de desarrollo (CI/CD)</h3>
+      <p>
+        Las pruebas automatizadas son un pilar de la Integración Continua (CI) y la Entrega Continua (CD), ejecutándose
+        en cada cambio de
+        código.
+      </p>
+      <ul>
+        <li><strong>CI:</strong> cada commit lanza la ejecución automática de todas las pruebas.</li>
+        <li><strong>CD:</strong> si las pruebas pasan, se puede desplegar la nueva versión de forma automática.</li>
+        <li>Herramientas típicas: Jenkins, GitLab CI, GitHub Actions, Travis CI, etc.</li>
+        <li>Generación de informes que muestran qué módulos están fallando.</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="beneficios-automatizacion-pruebas">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>4.4 Beneficios de la automatización de pruebas</h3>
+      <p>
+        Automatizar pruebas proporciona ventajas directas sobre la calidad del producto y la productividad del equipo de
+        desarrollo.
+      </p>
+      <ul>
+        <li>Detección temprana de errores y reducción de costes de corrección.</li>
+        <li>Menor esfuerzo manual y más tiempo para pruebas exploratorias.</li>
+        <li>Mayor calidad y estabilidad del código a lo largo del tiempo.</li>
+        <li>Facilita la refactorización segura y el mantenimiento del sistema.</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="documentacion-pruebas-incidencias-intro">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h2>5. Documentación de pruebas e incidencias</h2>
+      <p>
+        Documentar pruebas e incidencias garantiza trazabilidad, comunicación efectiva y cumplimiento de estándares de
+        calidad en el desarrollo de
+        software.
+      </p>
+      <div class="column">
+        <div class="diagram">
+          <img src="../../assets/linkia/Información-documentada.jpg" style="max-width: 100%;"
+            alt="Diagrama de documentación de pruebas e incidencias">
+        </div>
+        <ul>
+          <li>Informes de pruebas.</li>
+          <li>Registros de incidencias.</li>
+          <li>Seguimiento del estado de errores y correcciones.</li>
+        </ul>
+      </div>
+
+
+    </section>
+
+    <section class="slide" id="importancia-documentacion-pruebas">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>5.1 Importancia de la documentación de pruebas</h3>
+      <p>
+        La documentación de pruebas sirve como evidencia objetiva de la verificación del sistema y apoya el
+        mantenimiento futuro del
+        software.
+      </p>
+      <ul>
+        <li>Permite hacer seguimiento de resultados y evolución de la calidad.</li>
+        <li>Aporta transparencia a todas las partes interesadas.</li>
+        <li>Facilita el mantenimiento y las nuevas versiones del producto.</li>
+        <li>Es clave en contextos regulados (financiero, sanitario, etc.).</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="estructura-informe-pruebas">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>5.2 Estructura de un informe de pruebas</h3>
+      <p>
+        Un informe de pruebas bien diseñado describe qué se ha probado, cómo y con qué resultados, incluyendo
+        recomendaciones de
+        mejora.
+      </p>
+      <ul>
+        <li>Título y objetivo de la prueba.</li>
+        <li>Alcance y entorno de prueba (SO, versión, herramientas).</li>
+        <li>Casos de prueba ejecutados: datos de entrada, pasos, resultados esperados y obtenidos.</li>
+        <li>Incidencias encontradas y su gravedad.</li>
+        <li>Recomendaciones y conclusiones finales.</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="ejemplo-informe-pruebas-busqueda">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>Ejemplo de informe de pruebas: búsqueda</h3>
+      <p>
+        Ejemplo de informe centrado en la verificación de la funcionalidad de búsqueda de un
+        sistema.
+      </p>
+      <ul>
+        <li><strong>Objetivo:</strong> comprobar que las búsquedas por palabra clave devuelven resultados correctos.
+        </li>
+        <li><strong>Caso 1:</strong> búsqueda "Java" → resultados correctos (acierto).</li>
+        <li><strong>Caso 2:</strong> búsqueda "Python" → sin resultados (error).</li>
+        <li><strong>Acción correctiva:</strong> revisar consultas a la base de datos e indexado de términos.</li>
+        <li><strong>Conclusión:</strong> funcionalidad parcialmente operativa; requiere corrección.</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="gestion-incidencias-proceso">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>5.3 Gestión de incidencias: proceso</h3>
+      <p>
+        La gestión de incidencias abarca desde la detección de un fallo hasta su resolución y cierre, pasando por el
+        registro y la
+        priorización.
+      </p>
+      <ul>
+        <li>Identificación y descripción detallada del problema.</li>
+        <li>Registro de la incidencia en una herramienta (Jira, Bugzilla, Redmine…).</li>
+        <li>Clasificación por gravedad e impacto.</li>
+        <li>Asignación a un responsable para su corrección.</li>
+        <li>Verificación de la solución y cierre de la incidencia.</li>
+      </ul>
+      
+
+    </section>
+
+    <section class="slide" id="ejemplo-gestion-incidencia-busqueda-productos">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>Ejemplo de gestión de incidencia</h3>
+      <p>
+        Ejemplo: error en la búsqueda de productos donde el término "teclado mecánico" no devuelve resultados pese a
+        existir en
+        catálogo.
+      </p>
+      <table>
+        <tr>
+          <th>Campo</th>
+          <th>Descripción</th>
+        </tr>
+        <tr>
+          <td><strong>ID:</strong></td>
+          <td>INC-2025-001</td>
+        </tr>
+        <tr>
+          <td><strong>Título:</strong></td>
+          <td>Error en búsqueda de productos: "teclado mecánico" sin resultados.</td>
+        </tr>
+        <tr>
+          <td><strong>Fecha de reporte:</strong></td>
+          <td>15/09/2025</td>
+        </tr>
+        <tr>
+          <td><strong>Reportado por:</strong></td>
+          <td>Equipo de pruebas</td>
+        </tr>
+        <tr>
+          <td><strong>Asignado a:</strong></td>
+          <td>Desarrollador Backend</td>
+        </tr>
+        <tr>
+          <td><strong>Prioridad:</strong></td>
+          <td>Alta</td>
+        </tr>
+        <tr>
+          <td><strong>Gravedad:</strong></td>
+          <td>Crítica</td>
+        </tr>
+        <tr>
+          <td><strong>Estado:</strong></td>
+          <td>En progreso</td>
+        </tr>
+        <tr>
+          <td><strong>Descripción:</strong></td>
+          <td>La búsqueda no devuelve coincidencias para un término existente en el catálogo.</td>
+        </tr>
+        <tr>
+          <td><strong>Pasos para reproducir:</strong></td>
+          <td>1. Ingresar "teclado mecánico" en el campo de búsqueda.<br>2. Pulsar el botón "Buscar".<br>3. Observar que no se muestran resultados.</td>
+        </tr>
+        <tr>
+          <td><strong>Acción correctiva:</strong></td>
+          <td>Revisar el índice de la base de datos y el proceso de indexación de productos para asegurar que el término se incluya correctamente.</td>
+        </tr>
+        <tr>
+            <td><strong>Comentarios adicionales:</strong></td>
+            <td>El error afecta a la experiencia del usuario y puede impactar en las ventas, por lo que se requiere una solución rápida.</td>
+        </tr>
+      </table>
+      
+
+    </section>
+
+    <section class="slide" id="importancia-doc-incidencias">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="Logo Linkia">
+
+      <h3>5.4 Importancia de documentar incidencias</h3>
+      <p>
+        Documentar correctamente las incidencias permite medir la calidad del software y coordinar el trabajo del equipo
+        de forma
+        eficiente.
+      </p>
+      <ul>
+        <li>Seguimiento del estado de errores y su resolución.</li>
+        <li>Facilita la colaboración entre desarrolladores y testers.</li>
+        <li>Optimiza tiempos de desarrollo y mantenimiento.</li>
+        <li>Contribuye al cumplimiento de estándares y auditorías.</li>
+      </ul>
+
+    </section>
+
+
+
+
+
+
+
+    <div class="footer">
+      <div class="bar">
+        <small>UT3 · Pruebas y depuración en el desarrollo de aplicaciones · LinkiaFP</small>
+        <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+      </div>
+    </div>
+</body>
+
+</html>

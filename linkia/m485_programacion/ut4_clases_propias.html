@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>UT4-5 · Clases propias y JSwing · LinkiaFP</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link href="../style.css" rel="stylesheet">
+    <script defer="" src="../script.js"></script>
+    </link>
+</head>
+
+<body>
+    <div class="deck">
+        <!-- COVER -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img alt="" src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" />
+                </div>
+                <div class="title">UT4-5 · Clases propias y JSwing · LinkiaFP</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;" />
+            </div>
+        </section>
+        <!-- Contenido principal desarrollado -->
+
+        <!-- ========== UT4 · 1.1 ¿Qué es una clase? ========== -->
+        <section class="slide" id="ut4-1-1">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+            <h2>UT4 · Introducción a la definición de clases</h2>
+            <h3>¿Qué es una clase?</h3>
+            <p>
+                Tal y como se vio en el tema anterior, una <strong>clase</strong> es una plantilla que define el
+                <em>estado</em> (atributos) y el
+                <em>comportamiento</em>
+                (métodos) de los objetos que se crearán a partir de ella. Permite modelar entidades del dominio de forma
+                modular y reusable.
+            </p>
+            <div class="diagram">
+                <img src="../../assets/linkia/clase_objeto.png" style="max-width: 100%;"
+                    alt="Diagrama UML de una clase">
+            </div>
+            <pre class="language-java"><code>public class Car {
+  String brand;   // atributo (estado)
+  int speed;        // atributo (estado)
+
+  void accelerate(int increment) { // método (comportamiento)
+    speed += increment;
+  }
+}</code></pre>
+        </section>
+
+
+
+        <!-- ========== UT4 · 2.2 Convenciones de nomenclatura ========== -->
+        <section class="slide" id="ut4-2-2">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h3>Convenciones de nomenclatura</h3>
+            <p>
+                En la anterior clase vimos como crear un objeto a partir de una clase, pero no se hizo mención a las
+                convenciones de nomenclatura. </p>
+            <p>Es importante seguir estas convenciones para mejorar la legibilidad y mantenibilidad del código.</p>
+            <p>En Java, por ejemplo, se recomienda usar:</p>
+            <ul>
+                <li><strong>Clases:</strong> Nombres en mayúscula (PascalCase), como <code>CuentaBancaria</code>.</li>
+                <li><strong>Métodos y variables:</strong> Nombres en minúscula con mayúscula para separar palabras
+                    (camelCase), como <code>ingresarMonto</code>.</li>
+                <li><strong>Constantes:</strong> Nombres en mayúscula con guiones bajos, como
+                    <code>COMISION_ANUAL</code>.</li>
+            </ul>
+
+
+            <pre class="language-java"><code>public class CuentaBancaria { // PascalCase para clases
+  // Mayúsculas con guiones bajos para constantes
+private static final double COMISION_ANUAL = 12.50; 
+  // camelCase para variables
+  private String titular;     
+  private double saldo;
+    // camelCase para métodos
+  public void ingresarMonto(double cantidad) { 
+    saldo += cantidad; 
+  } 
+}</code></pre>
+        </section>
+
+
+
+        <!-- ========== UT4 · 3.1 Qué son las propiedades (atributos) ========== -->
+        <section class="slide" id="ut4-3-1">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+            <h3>Qué son las propiedades (atributos)</h3>
+            <p>
+                Las <strong>propiedades</strong> almacenan el estado del objeto. Pueden ser tipos primitivos u otros
+                objetos, y suelen declararse privadas para proteger la integridad del estado.
+            </p>
+
+            <pre class="language-java"><code>public class Libro {
+  private String titulo;
+  private String autor;
+  private int anio;
+}</code></pre>
+        </section>
+
+        <!-- ========== UT4 · 3.2 Tipos de métodos y sus usos ========== -->
+        <section class="slide" id="ut4-3-2">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+            <h3>Tipos de métodos y sus usos</h3>
+            <p>
+                Los métodos definen el comportamiento del objeto. Pueden ser:</p>
+            <ul>
+                <li><strong>Getters/Setters:</strong> para acceder y modificar propiedades privadas.</li>
+                <li><strong>Acciones:</strong> que realizan operaciones o cálculos basados en el estado.</li>
+                <li><strong>Constructores:</strong> para inicializar objetos al crearlos.</li>
+            </ul>
+
+
+            <pre class="language-java"><code>public class Persona {
+  private String nombre;
+  private int edad;
+
+  // Constructor
+  public Persona(String nombre, int edad) {
+    this.nombre = nombre;
+    this.edad = edad;
+  }
+  // Getter/Setter
+  public String getNombre() { return nombre; }
+  public void setNombre(String n) { this.nombre = n; }
+
+  // Acción
+  public boolean esMayorDeEdad() { return edad >= 18; }
+}</code></pre>
+        </section>
+
+        <!-- ========== UT4 · 3.3 Encapsulamiento: visibilidad ========== -->
+        <section class="slide" id="ut4-3-3">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+            <h3>Encapsulamiento: visibilidad de propiedades y métodos</h3>
+            <div class="diagram">
+                <img src="../../assets/linkia/getter-setter.png" style="max-width: 40%;"
+                    alt="Diagrama de encapsulamiento">
+            </div>
+            <p>
+                El <strong>encapsulamiento</strong> oculta detalles internos y expone una interfaz controlada. Reduce
+                errores, acoplamiento y facilita cambios.
+            </p>
+
+            <pre class="language-java"><code>public class Cuenta {
+  private double saldo;
+
+  public void ingresar(double cantidad) {
+    if (cantidad > 0) saldo += cantidad;
+  }
+  public boolean retirar(double cantidad) {
+    if (cantidad > 0 && cantidad <= saldo) { saldo -= cantidad; return true; }
+    return false;
+  }
+  public double getSaldo() { return saldo; }
+}</code></pre>
+        </section>
+
+        <!-- ========== UT4 · 4.1 Propósito del constructor ========== -->
+        <section class="slide" id="ut4-4-1">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+            <h3>Propósito del constructor</h3>
+            <p>
+                Un <strong>constructor</strong> inicializa el estado del objeto en el momento de su creación. No tiene
+                tipo de retorno y su nombre coincide con la clase.
+            </p>
+            <div class=" diagram">
+                <img src="../../assets/linkia/constructor-java.jpg" style="max-width: 40%;"
+                    alt="Diagrama de constructor">
+            </div>
+            <pre class="language-java"><code>public class Persona {
+// Atributos: nombre, altura, colorEmblema, colorCapa, tallaPie
+    public Persona(String nombre, double altura, String colorEmblema, String colorCapa, int tallaPie) {
+        // Inicialización de atributos
+        this.nombre = nombre;
+        this.altura = altura;
+        this.colorEmblema = colorEmblema;
+        this.colorCapa = colorCapa;
+        this.tallaPie = tallaPie;
+    }
+}</code></pre>
+        </section>
+
+        <!-- ========== UT4 · 4.2 Sobrecarga de constructores ========== -->
+        <section class="slide" id="ut4-4-2">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+            <h3>Sobrecarga de constructores</h3>
+            <p>
+                La <strong>sobrecarga</strong> permite varios constructores con diferentes parámetros para flexibilidad
+                en la inicialización.
+            </p>
+
+            <pre class="language-java"><code>public class Punto {
+    int x, y;
+    
+    public Punto() { this(0, 0); }               // por defecto
+    public Punto(int x) { this(x, 0); }          // solo x
+    public Punto(int x, int y) { this.x = x; this.y = y; } // completo
+}</code></pre>
+        </section>
+
+
+        <!-- ========== UT4 · 4.3 Invocación de constructores desde otras clases ========== -->
+        <section class="slide" id="ut4-4-3">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+            <h3>Invocación de constructores desde otras clases</h3>
+            <p>
+                Los constructores se invocan con <code>new</code>. Si hay sobrecarga, el compilador elige el adecuado según los argumentos.
+            </p>
+           
+            <pre class="language-java"><code>public class App {
+  public static void main(String[] args) {
+    Punto p1 = new Punto();       // (0,0)
+    Punto p2 = new Punto(5);      // (5,0)
+    Punto p3 = new Punto(5, 7);   // (5,7)
+  }
+}</code></pre>
+        </section>
+
+        
+
+        <!-- ========== UT4 · 8.1 Qué es un método estático ========== -->
+        <section class="slide" id="ut4-8-1">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+            
+            <h3>Qué es un método estático</h3>
+            <p>
+                Un método <strong>estático</strong> pertenece a la <em>clase</em>, no a la instancia; se invoca sin
+                crear objetos y no accede a estado de instancia.
+            </p>
+            
+            <pre class="language-java"><code>class Mat {
+  public static int cuadrado(int n) { return n * n; }
+}
+int r = Mat.cuadrado(5);</code></pre>
+        </section>
+
+        <!-- ========== UT4 · 8.2 Diferencias entre estáticos e instancia ========== -->
+        <section class="slide" id="ut4-8-2">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+            
+            <h3>Diferencias con métodos de instancia</h3>
+            <p>
+                Los métodos de <em>instancia</em> operan sobre el estado del objeto (<code>this</code>), los
+                <em>estáticos</em> no.
+            </p>
+            
+            <pre class="language-java"><code>class Circulo {
+  double radio;
+  public double area() { return Math.PI * radio * radio; }      // instancia
+  public static double cmAPulgadas(double cm) { return cm / 2.54; } // estático
+}</code></pre>
+        </section>
+
+        
+        <!-- ========== UT4 · 9.1 ¿Qué es una interfaz? ========== -->
+        <section class="slide" id="ut4-9-1">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+            <h3>¿Qué es una interfaz?</h3>
+            <p>
+                Una <strong>interfaz</strong> define un <em>contrato</em> (conjunto de métodos) que las clases se
+                comprometen a implementar. Favorece polimorfismo y desacoplamiento.
+            </p>
+           
+            <pre class="language-java"><code>//Creación de la interfaz
+interface Imprimible { 
+    void imprimir(); 
+}
+//Implementación de la interfaz en una clase
+class Factura implements Imprimible {
+  // Obligación de implementar el método definido en la interfaz
+  public void imprimir() { 
+    System.out.println("Imprimiendo factura..."); 
+  }
+}</code></pre>
+        </section>
+
+        
+    </div>
+    <div class="footer">
+        <div class="bar">
+            <small>UTX · Título UT</small>
+            <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+        </div>
+    </div>
+</body>
+
+</html>

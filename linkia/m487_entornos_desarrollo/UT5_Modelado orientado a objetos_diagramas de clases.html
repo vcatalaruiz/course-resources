@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UT5. Modelado orientado a objetos. Diagramas de clases</title>
+  <meta name="description" content="UT5: Modelado orientado a objetos. Diagramas de clases." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <link rel="stylesheet" href="../style.css" />
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../script.js" defer></script>
+</head>
+
+<body>
+  <div class="deck">
+    <!-- ======================= TEMA 3 ======================= -->
+    <!-- COVER -->
+    <section class="slide cover" id="slide-1">
+      <div style="max-width: 60%;">
+        <div>
+          <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+        </div>
+        <div class="title">UT5 · Modelado orientado a objetos. Diagramas de clases</div>
+        <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+
+      </div>
+      <div class="logo-first-page">
+        <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+      </div>
+
+    </section>
+
+    <section class="slide" id="ut5-introduccion">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h2>¿Qué es el modelado orientado a objetos?</h2>
+      <p>
+        Es un enfoque de diseño de software que utiliza objetos para representar entidades del mundo real o abstracto,
+        facilitando la comprensión, el mantenimiento y la evolución de los sistemas informáticos.
+      </p>
+      <p><strong>Se basa en conceptos como clases, objetos, herencia, polimorfismo y encapsulación, y se apoya en
+          herramientas de modelado como UML para visualizar la estructura y el comportamiento del software.</strong>
+      </p>
+      <div class="diagram">
+        <img src="../../assets/linkia/pilares del MOO.jpg" width="40%" alt="Diagrama de modelado orientado a objetos">
+      </div>
+    </section>
+
+    <section class="slide" id="fundamentos-poo">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h2>1. Fundamentos de la Programación Orientada a Objetos (POO)</h2>
+      <p>
+        La Programación Orientada a Objetos es un paradigma que organiza el software en torno a objetos
+        que representan entidades del mundo real o abstracto. Cada objeto combina datos (atributos)
+        y comportamiento (métodos), favoreciendo la modularidad, la reutilización y el mantenimiento
+        del código.
+      </p>
+      <div class="diagram">
+        <img src="../../assets/linkia/The-Four-Pillars-of-Object-Oriented-Programming-.webp" width="40%"
+          alt="Diagrama de modelado orientado a objetos">
+      </div>
+
+    </section>
+
+    <section class="slide" id="clases">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h3>1.1.1. Clases</h3>
+      <p>
+        Una clase es una plantilla que define las características comunes de un conjunto de objetos.
+        Especifica qué datos tendrá el objeto (atributos) y qué acciones podrá realizar (métodos).
+      </p>
+      <div class="diagram">
+        <img src="../../assets/objeto_plantilla.png" width="40%" alt="Diagrama de modelado orientado a objetos">
+      </div>
+      <div class="ejemplo">
+        <strong>Ejemplo en Java</strong>
+        <pre class="language-java"><code>public class Coche {
+    String marca;
+    String modelo;
+    String color;
+
+    public void arrancar() {
+        System.out.println("El coche se ha arrancado.");
+    }
+}</code></pre>
+      </div>
+    </section>
+
+    <section class="slide" id="objetos">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h3>1.1.2. Objetos</h3>
+      <p>
+        Un objeto es una <strong><code>instancia concreta</code></strong> de una clase. Cada objeto tiene identidad
+        propia y valores
+        específicos para sus atributos, aunque provenga de la misma clase que otros objetos.
+      </p>
+      <div class="ejemplo">
+        <strong>Ejemplo</strong>
+        <pre class="language-java"><code>Coche miCoche = new Coche();
+miCoche.marca = "Toyota";
+miCoche.encender();</code></pre>
+      </div>
+    </section>
+
+    <section class="slide" id="herencia">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h3>1.1.3. Herencia</h3>
+      <div class="diagram">
+        <img src="../../assets/Herencia_ejemplo-1024x501.png" width="30%"
+          alt="Diagrama de modelado orientado a objetos">
+      </div>
+      <p>
+        La herencia permite crear nuevas clases a partir de otras existentes. La subclase hereda
+        atributos y métodos de la superclase, pudiendo ampliarlos o modificarlos. Esto facilita
+        la reutilización de código y la organización jerárquica.
+      </p>
+      <div class="ejemplo">
+        <strong>Ejemplo en Java</strong>
+        <pre class="language-java"><code>public class Mascota {
+    private String nombre;
+    private int edad;
+    public void sonido() {
+        System.out.println("La mascota hace un sonido.");
+    }
+}
+
+public class Perro extends Mascota {
+  private String raza;
+    @Override
+    public void sonido() {
+        System.out.println("El perro ladra.");
+    }
+}</code></pre>
+      </div>
+    </section>
+
+    <section class="slide" id="polimorfismo">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h3>1.1.4. Polimorfismo</h3>
+      <p>
+        El polimorfismo permite que un mismo método se comporte de forma distinta según el objeto
+        que lo ejecute. Aumenta la flexibilidad y extensibilidad del sistema.
+      </p>
+      <div class="diagram">
+        <img src="../../assets/linkia/polimorfismo.jpg" width="60%" alt="Diagrama de modelado orientado a objetos">
+      </div>
+      <ul>
+        <li>Sobrecarga: métodos con el mismo nombre y distinta firma.</li>
+        <li>Redefinición: una subclase cambia la implementación heredada.</li>
+      </ul>
+      <div class="ejemplo">
+        <strong>Ejemplo de polimorfismo</strong>
+        <pre class="language-java"><code>
+//Definición de clases
+public class Vehiculo {
+    public void descripcion() {
+        System.out.println("Es un vehículo.");
+    }
+}
+
+public class Coche extends Vehiculo {
+    @Override
+    public void descripcion() {
+        System.out.println("Es un coche.");
+    }
+}
+
+public class Moto extends Vehiculo {
+    @Override
+    public void descripcion() {
+        System.out.println("Es una moto.");
+    }
+} 
+
+//Uso del polimorfismo: al ser ambos objetos de tipo Vehiculo, pueden usar el mismo método 
+//descripcion() pero con comportamientos diferentes.
+public class Main {
+    public static void main(String[] args) {
+        Vehiculo miVehiculo = new Coche();
+        miVehiculo.descripcion(); // Imprime: Es un coche.
+        miVehiculo = new Moto();
+        miVehiculo.descripcion(); // Imprime: Es una moto.
+    }
+  }
+        </code></pre>
+      </div>
+    </section>
+
+    <section class="slide" id="uml">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h2>2. Uso de Herramientas de Modelado UML</h2>
+      <p>
+        UML es un lenguaje estándar de modelado visual que permite representar la estructura y el
+        comportamiento de sistemas orientados a objetos. El diagrama de clases es uno de los más
+        utilizados en las fases de análisis y diseño.
+      </p>
+      <div class="diagram">
+        <img src="../../assets/linkia/UML_logo.svg.png" width="30%" alt="Diagrama de modelado orientado a objetos">
+      </div>
+    </section>
+
+    <section class="slide" id="diagrama-clases">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h3>2.1.1. ¿Qué es un diagrama de clases?</h3>
+      <p>
+        Un diagrama de clases representa gráficamente las clases de un sistema, sus atributos,
+        métodos y las relaciones entre ellas. Permite visualizar la estructura estática del software
+        y sirve como base para la generación de código.
+      </p>
+      <div class="diagram">
+        <img src="../../assets/linkia/uml-class-diagram.png" width="100%" alt="Diagrama de modelado orientado a objetos">
+      </div>
+    </section>
+
+    <section class="slide" id="elementos-diagrama">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h3>2.1.2. Elementos de un diagrama de clases</h3>
+      <p>
+        Cada clase se representa mediante un rectángulo dividido en tres partes:
+      </p>
+      <ul>
+        <li><strong>+ Público</strong>: Accesible desde cualquier otra clase.</li>
+        <li><strong>- Privado</strong>: Accesible solo desde la propia clase.</li>
+        <li><strong># Protegido</strong>: Accesible desde la propia clase y sus subclases.</li>
+      </ul>
+      <p>
+        Además, se utilizan símbolos para indicar la visibilidad de los atributos y métodos, y
+        diferentes tipos de líneas para representar las relaciones entre clases.
+      </p>
+      <p><strong>Ejemplo de representación de una herencia:</strong></p>
+       <div class="diagram">
+        <img src="../../assets/linkia/uml herencia.jpg" width="40%" alt="Diagrama de modelado orientado a objetos">
+      </div>
+    </section>
+
+    <section class="slide" id="relaciones">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h3>2.1.3. Relaciones entre clases</h3>
+      <p>
+        Los diagramas de clases muestran cómo se relacionan las clases entre sí, lo que permite
+        comprender la arquitectura del sistema.
+      </p>
+      <div class="diagram">
+        <img src="../../assets/linkia/elementos UML.jpg" width="60%" alt="Diagrama de modelado orientado a objetos">
+      </div>
+      <ul>
+        <li><strong>Asociación:</strong> una clase utiliza a otra. Se representa con una línea continua.</li>
+        <li><strong>Agregación:</strong> una clase contiene a otra, pero ambas pueden existir independientemente. Se representa con una línea con un rombo vacío.</li>
+        <li><strong>Composición:</strong> una clase contiene a otra, y la existencia de la parte depende del todo. Se representa con una línea con un rombo relleno.</li>
+        <li><strong>Herencia:</strong> una clase es un tipo especializado de otra. Se representa con una línea con una flecha abierta.</li>
+        <li><strong>Dependencia:</strong> una clase depende de otra para funcionar. Se representa con una línea discontinua con una flecha.</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="interpretacion">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h3>2.1.4. Interpretación de diagramas de clases</h3>
+      <p>
+        Interpretar un diagrama implica identificar las clases principales, analizar sus relaciones,
+        comprender sus responsabilidades y evaluar la cohesión y el acoplamiento del diseño.
+      </p>
+      <ul>
+        <li><strong>Identificación de clases:</strong> reconocer las entidades clave del sistema.</li>
+        <li><strong>Análisis de relaciones:</strong> entender cómo interactúan las clases entre sí.</li>
+        <li><strong>Responsabilidades:</strong> determinar qué hace cada clase y cómo contribuye al sistema.</li>
+        <li><strong>Cohesión y acoplamiento:</strong> evaluar la calidad del diseño, buscando alta cohesión y bajo acoplamiento.</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="generacion-codigo">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h2>3. Generación de Código desde Diagramas</h2>
+      <p>
+        Las herramientas de modelado UML permiten generar automáticamente código fuente a partir
+        de diagramas de clases (ingeniería directa) y también obtener diagramas desde código existente
+        (ingeniería inversa).
+      </p>
+      <p><strong>Heramientas:</strong></p>
+      <ul>
+        <li><strong>Enterprise Architect:</strong> Soporta UML 2.5 y permite generar código en múltiples lenguajes.</li>
+        <li><strong>Visual Paradigm:</strong> Ofrece una amplia gama de diagramas UML y generación de código.</li>
+        <li><strong>StarUML:</strong> Es una herramienta de modelado ligera y fácil de usar, con soporte para generación de código.</li>
+      </ul>
+
+    </section>
+
+    <section class="slide" id="enterprise-architect">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h3>3.1.2. Herramientas de modelado (StarUML)</h3>
+      <p>
+        <strong>StarUML</strong> es una herramienta de modelado UML que permite diseñar, analizar y generar código para sistemas orientados a objetos. Ofrece soporte para múltiples lenguajes de programación y facilita la colaboración entre equipos de desarrollo.
+      </p>
+      <div class="diagram">
+        <img src="../../assets/linkia/staruml.webp" width="60%" alt="Diagrama de modelado orientado a objetos">
+      </div>
+    </section>
+
+    <section class="slide" id="buenas-practicas">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h3>3.1.4. Buenas prácticas</h3>
+      <p>
+        La generación automática de código debe utilizarse como apoyo al diseño. Es fundamental
+        modelar con rigor, revisar el código generado y completar manualmente la lógica de negocio.
+      </p>
+      <ul>
+        <li><strong>Modelado riguroso:</strong> Asegurarse de que los diagramas reflejen fielmente los requisitos y el diseño del sistema.</li>
+        <li><strong>Revisión del código generado:</strong> Verificar que el código generado sea correcto, eficiente y siga las mejores prácticas de programación.</li>
+        <li><strong>Complementar con lógica de negocio:</strong> Añadir manualmente la lógica específica del negocio que no puede ser representada en los diagramas.</li>
+        <li><strong>Iteración entre diseño y código:</strong> Utilizar la generación de código como parte de un proceso iterativo, donde el diseño se ajusta en función de las necesidades del desarrollo.</li>
+        
+      </ul>
+    </section>
+
+<section class="slide" id="buenas-practicas">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+      <h3>3.1.5. Ingeniería Directa e Inversa</h3>
+      <p>
+        La ingeniería directa permite generar código a partir de diagramas, mientras que la ingeniería inversa
+        permite crear diagramas a partir de código existente. Ambas técnicas son útiles para mantener la
+        sincronización entre el diseño y la implementación.
+      </p>
+      <ul>
+        <li><strong>Ingeniería Directa:</strong> Facilita la transición del diseño al desarrollo, permitiendo generar código estructurado y consistente con el modelo.</li>
+        <li><strong>Ingeniería Inversa:</strong> Ayuda a comprender sistemas existentes, permitiendo visualizar su estructura y relaciones a través de diagramas.</li>
+        <li><strong>Sincronización:</strong> Es importante mantener la coherencia entre los diagramas y el código, actualizando ambos a medida que el sistema evoluciona.</li>
+        </ul>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="footer">
+      <div class="bar">
+        <small>UT5 · Modelado orientado a objetos. Diagramas de clases · LinkiaFP</small>
+        <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+      </div>
+    </div>
+</body>
+
+</html>

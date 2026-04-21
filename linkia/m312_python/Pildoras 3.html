@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Píldoras formativas · LinkiaFP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link rel="stylesheet" href="../style.css" />
+    <script src="../script.js" defer></script>
+</head>
+
+<body>
+    <div class="deck">
+
+        <!-- COVER -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+                </div>
+                <div class="title">Píldora 3: Funciones, estructuras y archivos.</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+            </div>
+
+        </section>
+
+
+        <!-- ========================================================= -->
+        <!-- PÍLDORA 3 · Modularidad y entrada/salida -->
+        <!-- ========================================================= -->
+
+        
+
+        <section class="slide" id="pildora3-funciones">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Funciones en Python</h2>
+            <p>
+                Una función es un bloque de código reutilizable que realiza una tarea concreta.
+            </p>
+            <div class="diagram">
+                <img src="../../assets/linkia/Funciones-en-Python.-Estructura-de-una-función.png" width="550px" alt="if-else">
+            </div>
+            <p><strong>Definición de funciones:</strong></p>
+             <pre class="language-python"><code>def nombre_funcion(parametros):
+    # Cuerpo de la función
+    return resultado</code></pre>
+    <p><strong>Uso de funciones:</strong></p>
+             <pre class="language-python"><code>resultado = nombre_funcion(argumentos)</code></pre>
+    
+        </section>
+
+        <section class="slide" id="pildora3-listas">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Listas y diccionarios</h2>
+            <p>
+                Las listas y diccionarios permiten almacenar colecciones de datos. Son estructuras 
+                de datos fundamentales en Python.
+            </p>
+            <p>Tipos de estructuras de datos:</p>
+            <ul>
+                <li><strong>Listas:</strong> ordenadas y mutables.</li>
+                <pre class="language-python"><code>mi_lista = [1, 2, 3, "cuatro"]</code></pre>
+                <li><strong>Diccionarios:</strong> pares clave–valor.</li>
+                <pre class="language-python"><code>mi_diccionario = {"clave1": "valor1", "clave2": "valor2"}</code></pre>
+
+            </ul>
+        </section>
+        <section class="slide" id="pildora3-listas">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Listas: declaración y acceso</h2>
+            <p>
+                Una lista está definida por corchetes <code>[]</code> y puede contener elementos de cualquier tipo.
+            </p>
+            <p>Ejemplo:</p>
+            <pre class="language-python"><code>mi_lista = [1, 2, 3, "cuatro"]
+print(mi_lista[0])  # Imprime el primer elemento (1)
+print(mi_lista[3])  # Imprime el cuarto elemento ("cuatro")</code></pre>
+                <p>Recorrido de listas: Se utiliza un bucle <code>for</code></p>
+                <pre class="language-python"><code>for elemento in mi_lista:
+    print(elemento)</code></pre>
+    <p>Operaciones con listas:</p>
+                <pre class="language-python"><code>mi_lista.append(5)  # Agrega un elemento al final de la lista
+mi_lista.remove(2)  # Elimina el elemento 2 de la lista
+print(mi_lista)  # Imprime la lista actualizada</code></pre>
+        </section>
+<section class="slide" id="pildora3-listas">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Diccionarios: declaración y acceso</h2>
+            <p>
+                Un diccionario está definido por llaves <code>{}</code> y contiene pares clave–valor.
+            </p>
+            <p>Ejemplo:</p>
+            <pre class="language-python"><code>mi_diccionario = {"clave1": "valor1", "clave2": "valor2"}
+print(mi_diccionario["clave1"])  # Imprime el valor asociado a "clave1"
+print(mi_diccionario["clave2"])  # Imprime el valor asociado a "clave2"</code></pre>
+                <p>Recorrido de diccionarios: Se utiliza un bucle <code>for</code></p>
+                <pre class="language-python"><code>for clave, valor in mi_diccionario.items():
+    print(clave, valor)</code></pre>
+    <p>Operaciones con diccionarios:</p>
+                <pre class="language-python"><code>mi_diccionario["clave3"] = "valor3"  # Agrega un nuevo par clave–valor
+print(mi_diccionario["clave3"])  # Imprime el valor asociado a "clave3"</code></pre>
+        </section>
+        
+        
+        <section class="slide" id="pildora3-entrada-salida">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Entrada y salida por consola</h2>
+            <p>Para probar la entrada y salida por consola, puedes ejecutar el siguiente código en tu entorno de desarrollo:</p>
+           
+            <p>
+                La función <code>input()</code> permite al usuario ingresar datos por consola, mientras que <code>print()</code> muestra información en la consola.
+            </p>
+             <div class="diagram">
+                <img src="../../assets/linkia/consola python input print.webp" width="50%" alt="if-else">
+            </div>
+        </section>
+            
+
+        
+        <section class="slide" id="pildora3-archivos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Manejo de archivos</h2>
+            <p>
+                Python permite leer y escribir archivos de texto usando <code>open()</code>
+                y la estructura <code>with</code>.
+            </p>
+            <p><strong>Ejemplo de escritura en un archivo:</strong></p>
+            
+            <pre class="language-python"><code># Escribir en un archivo
+with open("archivo.txt", "w") as archivo:
+    archivo.write("Hola, mundo!")</code></pre>
+            <p><strong>Ejemplo de lectura de un archivo:</strong></p>
+            <pre class="language-python"><code># Leer un archivo
+with open("archivo.txt", "r") as archivo:
+    contenido = archivo.read()
+print(contenido)  # Imprime el contenido del archivo</code></pre>   
+        </section>
+
+
+        <div class="footer">
+            <div class="bar">
+                <small>Píldora 3 · Funciones, estructuras y archivos</small>
+                <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+            </div>
+        </div>
+</body>
+
+</html>
