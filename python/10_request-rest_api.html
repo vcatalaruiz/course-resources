@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-EVTW1307T1');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Request REST API</title>
+    <script src="../../index.js" defer></script>
+
+    <!-- Mermaid -->
+    <script type="module">
+        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+
+    <!-- HighlightJS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+    <script src="../index.js" defer></script>
+    <script src="../menu.js" defer></script>
+    <!-- <link rel="stylesheet" href="../index.css"> -->
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+
+    <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+        <div class="vc-rail-head">
+            <span class="vc-rail-title">Índice</span>
+            <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+                <!-- X SVG -->
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+        <ul id="vc-list" class="vc-list"></ul>
+    </nav>
+
+    <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+    <!-- ===== /VC SIDEBAR ===== -->
+
+    <header>
+
+        <!-- ===== VC SIDEBAR (desde cero) ===== -->
+        <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+            aria-controls="vc-rail" aria-expanded="false">
+            <!--Hamburger icon -->
+            <i class="fa fa-bars" aria-hidden="true"></i>
+
+
+        </button>
+        <h1>Request REST API</h1>
+        <img src="" id="logo" alt="Logo" style="display: none;">
+    </header>
+
+    <main>
+
+       <section class="slide" id="rest-api-python">
+    
+
+    <h2>Request a una API REST en Python</h2>
+    <p>
+        Una API REST permite a una aplicación comunicarse con otra mediante peticiones HTTP.
+        En Python, la forma más habitual de realizar estas peticiones es utilizando la librería
+        <code>requests</code>, que simplifica el trabajo con los métodos HTTP más comunes.
+    </p>
+    <ul>
+        <li>Comunicación cliente-servidor</li>
+        <li>Uso de métodos HTTP (GET, POST, PUT, DELETE)</li>
+        <li>Intercambio de datos en formato JSON</li>
+    </ul>
+</section>
+
+<section class="slide" id="rest-api-get">
+    
+
+    <h3>Petición GET</h3>
+    <p>
+        El método <code>GET</code> se utiliza para solicitar información a un recurso de la API.
+        No modifica datos en el servidor y suele devolver la respuesta en formato JSON.
+    </p>
+    <div class="ejemplo">
+        <strong>Ejemplo</strong>
+        <pre class="language-python"><code>import requests
+
+url = "https://api.ejemplo.com/usuarios"
+respuesta = requests.get(url)
+
+if respuesta.status_code == 200:
+    datos = respuesta.json()
+    print(datos)
+else:
+    print("Error en la petición")</code></pre>
+    </div>
+</section>
+
+<section class="slide" id="rest-api-post">
+    
+
+    <h3>Petición POST</h3>
+    <p>
+        El método <code>POST</code> se emplea para enviar datos al servidor, normalmente para crear
+        nuevos recursos. Los datos se envían en el cuerpo de la petición.
+    </p>
+    <div class="ejemplo">
+        <strong>Ejemplo</strong>
+        <pre class="language-python"><code>import requests
+
+url = "https://api.ejemplo.com/usuarios"
+nuevo_usuario = {
+    "nombre": "Ana",
+    "email": "ana@ejemplo.com"
+}
+
+respuesta = requests.post(url, json=nuevo_usuario)
+
+if respuesta.status_code == 201:
+    print("Usuario creado correctamente")
+else:
+    print("Error al crear el usuario")</code></pre>
+    </div>
+</section>
+
+<section class="slide" id="rest-api-errores">
+    
+
+    <h3>Gestión de errores y respuestas</h3>
+    <p>
+        Es importante comprobar el código de estado HTTP devuelto por la API para saber
+        si la petición se ha realizado correctamente o si se ha producido un error.
+    </p>
+    <ul>
+        <li>200–299: petición correcta</li>
+        <li>400–499: error del cliente</li>
+        <li>500–599: error del servidor</li>
+    </ul>
+    <div class="ejemplo">
+        <strong>Ejemplo</strong>
+        <pre class="language-python"><code>try:
+    respuesta = requests.get(url)
+    respuesta.raise_for_status()
+    print(respuesta.json())
+except requests.exceptions.RequestException as e:
+    print("Error:", e)</code></pre>
+    </div>
+</section>
+<section class="slide" id="ejercicio-1">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>Ejercicio 1: Petición GET básica</h3>
+    <p>
+        Realiza una petición <code>GET</code> a una API pública y muestra por pantalla el contenido
+        de la respuesta en formato JSON.
+    </p>
+    
+</section>
+
+<section class="slide" id="ejercicio-2">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>Ejercicio 2: Comprobar código de estado</h3>
+    <p>
+        Modifica una petición <code>GET</code> para comprobar el código de estado HTTP y mostrar
+        un mensaje diferente según sea correcto o incorrecto.
+    </p>
+    
+</section>
+
+<section class="slide" id="ejercicio-3">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>Ejercicio 3: Enviar parámetros por URL</h3>
+    <p>
+        Realiza una petición <code>GET</code> enviando parámetros mediante la URL para filtrar
+        la información recibida.
+    </p>
+    
+</section>
+
+<section class="slide" id="ejercicio-4">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>Ejercicio 4: Petición POST</h3>
+    <p>
+        Crea una petición <code>POST</code> para enviar datos en formato JSON y crear un nuevo
+        recurso en la API.
+    </p>
+    
+</section>
+
+<section class="slide" id="ejercicio-5">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>Ejercicio 5: Cabeceras HTTP</h3>
+    <p>
+        Añade cabeceras personalizadas a una petición REST, por ejemplo para indicar que
+        se envía y recibe información en JSON.
+    </p>
+    
+</section>
+
+<section class="slide" id="ejercicio-api-completo">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>Ejercicio completo: Consumo de una API REST de prueba</h2>
+
+    <p>
+        En este ejercicio se trabajará con una API REST pública de prueba llamada
+        <strong>JSONPlaceholder</strong>. Esta API simula un backend real y permite realizar
+        operaciones <code>GET</code> y <code>POST</code> sin necesidad de autenticación.
+        El objetivo es obtener datos, crear un nuevo recurso y gestionar errores.
+    </p>
+
+    <ul>
+        <li>API de prueba: https://jsonplaceholder.typicode.com</li>
+        <li>Uso de <code>requests</code></li>
+        <li>Lectura de respuestas JSON</li>
+        <li>Control de errores</li>
+    </ul>
+</section>
+
+<section class="slide" id="ejercicio-api-get">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>Paso 1: Obtener una lista de usuarios (GET)</h3>
+
+    <p>
+        Realiza una petición <code>GET</code> para obtener la lista de usuarios y muestra por
+        pantalla el nombre y el email de cada uno.
+    </p>
+
+    
+</section>
+
+<section class="slide" id="ejercicio-api-post">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>Paso 2: Crear un nuevo post (POST)</h3>
+
+    <p>
+        A continuación, envía una petición <code>POST</code> para crear un nuevo post asociado
+        a un usuario. La API devolverá el objeto creado como respuesta.
+    </p>
+
+    
+</section>
+
+
+
+        <footer>
+            <p>Profesor: Vicente Català — ®Todos los derechos reservados.</p>
+        </footer>
+    </main>
+</body>
+
+
+
+</html>
