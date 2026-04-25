@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub y Git</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <!-- X SVG -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+  <!-- ===== /VC SIDEBAR ===== -->
+
+  <header>
+
+    <!-- ===== VC SIDEBAR (desde cero) ===== -->
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail"
+      aria-expanded="false">
+      <!--Hamburger icon -->
+      <i class="fa fa-bars" aria-hidden="true"></i>
+
+
+    </button>
+    <h1>GitHub y Git</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+<main>
+
+<!-- SECCIÓN 1: ABOUT GITHUB AND GIT -->
+<section id="acerca-github-git">
+<h2>1. Acerca de GitHub y Git</h2>
+
+<h3>1.1. ¿Qué es GitHub?</h3>
+
+<p>
+<strong>GitHub</strong> es una plataforma en la nube donde puedes almacenar, compartir y colaborar con otros para escribir código.
+</p>
+<div class="diagram">
+    <img src="../assets/github_logo.png" style="max-width:50%;" alt="GitHub Logo">
+</div>
+
+<p>
+Almacenar tu código en un <strong>"repositorio"</strong> en GitHub te permite:
+</p>
+
+<ul>
+    <li><strong>Mostrar o compartir tu trabajo:</strong> Publica tus proyectos para que otros los vean y utilicen.</li>
+    <li><strong>Rastrear y gestionar cambios:</strong> Mantén un historial completo de todas las modificaciones realizadas al código a lo largo del tiempo.</li>
+    <li><strong>Recibir retroalimentación:</strong> Permite que otros revisen tu código y sugieran mejoras.</li>
+    <li><strong>Colaborar en proyectos compartidos:</strong> Trabaja con otros sin preocuparte de que tus cambios afecten el trabajo de colaboradores antes de integrarlos.</li>
+</ul>
+
+<p>
+La colaboración, una característica fundamental de GitHub, es posible gracias al software de código abierto <strong>Git</strong>, 
+que es la base sobre la que se construye GitHub.
+</p>
+
+<h3>1.2. ¿Cómo trabajan Git y GitHub juntos?</h3>
+<div class="diagram">
+    <img src="../assets/github_git.png" style="max-width:50%;" alt="GitHub vs Git">
+</div>
+
+<p>
+Cuando subes archivos a <strong>GitHub</strong>, los almacenas en un <strong>"repositorio Git"</strong>. 
+Esto significa que cuando realizas cambios (o "commits") en tus archivos en GitHub, 
+Git automáticamente comienza a rastrear y gestionar tus cambios.
+</p>
+
+<p>
+Hay muchas acciones relacionadas con Git que puedes completar en GitHub directamente en tu navegador, 
+tales como crear un repositorio Git, crear ramas y subir y editar archivos.
+</p>
+
+<p>
+Sin embargo, la mayoría de las personas trabajan en sus archivos localmente (en su propia computadora) 
+y luego continuamente sincronizan estos cambios locales, y todos los datos relacionados con Git, 
+con el repositorio "remoto" central en GitHub. 
+Hay muchas herramientas que puedes usar para hacer esto, como GitHub Desktop.
+</p>
+
+<p>
+Una vez que comienzes a colaborar con otros y todos necesiten trabajar en el mismo repositorio al mismo tiempo, 
+continuamente:
+</p>
+
+<ul>
+    <li><strong>Extraes (Pull):</strong> Obtienes todos los últimos cambios realizados por tus colaboradores desde el repositorio remoto en GitHub.</li>
+    <li><strong>Envías (Push):</strong> Subes tus propios cambios al mismo repositorio remoto en GitHub.</li>
+</ul>
+
+<p>
+Git determina cómo fusionar de forma inteligente este flujo de cambios, y GitHub te ayuda a gestionar el flujo mediante características como <strong>"pull requests"</strong>.
+</p>
+
+</section>
+
+<!-- SECCIÓN 2: GITHUB FLOW -->
+<section id="github-flow">
+<h2>2. Flujo de GitHub (GitHub Flow)</h2>
+
+<p>
+El <strong>flujo de GitHub (GitHub Flow)</strong> es un flujo de trabajo ligero basado en ramas.
+</p>
+<div class="diagram">
+    <img src="../assets/github_flow.png" style="max-width:100%;" alt="GitHub flow">
+</div>
+
+<h3>2.1. Requisitos previos</h3>
+
+<p>
+Para seguir el flujo de GitHub, necesitarás:
+</p>
+
+<ul>
+    <li>Una <strong>cuenta de GitHub</strong></li>
+    <li>Un <strong>repositorio</strong></li>
+</ul>
+
+<p>
+Si necesitas crear una cuenta, consulta la documentación sobre crear una cuenta en GitHub. 
+Si necesitas crear un repositorio, consulta el inicio rápido de repositorios. 
+Si deseas encontrar un repositorio existente para contribuir, consulta cómo encontrar formas de contribuir al código abierto en GitHub.
+</p>
+
+<h3>2.2. Pasos del Flujo de GitHub</h3>
+
+<h4>2.2.1. Crear una rama (Create a branch)</h4>
+
+<p>
+Crea una rama en tu repositorio. 
+Un nombre de rama corto y descriptivo permite a tus colaboradores ver el trabajo en curso de un vistazo. 
+Por ejemplo: <code>increase-test-timeout</code> o <code>add-code-of-conduct</code>.
+</p>
+
+<p>
+<strong>¿Por qué crear una rama?</strong>
+</p>
+
+<ul>
+    <li>Al crear una rama, creas un espacio para trabajar sin afectar la rama principal (main/master).</li>
+    <li>Además, das a tus colaboradores la oportunidad de revisar tu trabajo.</li>
+</ul>
+
+<h4>2.2.2. Realizar cambios (Make changes)</h4>
+
+<p>
+En tu rama, realiza los cambios deseados en el repositorio. 
+Puedes crear nuevos archivos, editar archivos existentes, renombrar archivos, mover archivos a una nueva ubicación o eliminar archivos del repositorio.
+</p>
+
+<p>
+<strong>Tu rama es un lugar seguro para realizar cambios:</strong>
+</p>
+
+<ul>
+    <li>Si cometes un error, puedes revertir tus cambios o hacer cambios adicionales para corregir el error.</li>
+    <li>Tus cambios no aparecerán en la rama principal hasta que fusiones (merges) tu rama.</li>
+</ul>
+
+<p>
+<strong>Hacer commits y pushes de tus cambios:</strong>
+</p>
+
+<p>
+Realiza commits y push de tus cambios a tu rama. 
+Dale a cada commit un mensaje descriptivo para ayudarte a ti y a futuros colaboradores a entender qué cambios contiene el commit.
+Por ejemplo: <code>fix typo</code> o <code>increase rate limit</code>.
+</p>
+
+<p>
+Idealmente, cada commit contiene un cambio aislado y completo. 
+Esto facilita revertir tus cambios si decides tomar un enfoque diferente.
+</p>
+
+<p>
+Al hacer commits y push de tus cambios, respaldarás tu trabajo en almacenamiento remoto. 
+Esto significa que puedes acceder a tu trabajo desde cualquier dispositivo. 
+También significa que tus colaboradores pueden ver tu trabajo, responder preguntas y hacer sugerencias o contribuciones.
+</p>
+
+<h4>2.2.3. Crear un Pull Request</h4>
+
+<p>
+Crea un pull request para pedir a tus colaboradores retroalimentación sobre tus cambios. 
+La revisión de pull requests es tan valiosa que algunos repositorios requieren una revisión aprobada 
+antes de que se puedan fusionar los pull requests.
+</p>
+
+<p>
+<strong>Al crear un pull request, incluye:</strong>
+</p>
+
+<ul>
+    <li>Un resumen de los cambios</li>
+    <li>Qué problema resuelven</li>
+    <li>Imágenes, enlaces y tablas para ayudar a comunicar esta información</li>
+    <li>Un enlace al problema si tu pull request lo aborda (esto cerrará automáticamente el problema cuando se fusione el pull request)</li>
+</ul>
+
+<p>
+Hay un par de formas para comenzar tu Pull Request.
+</p>
+
+<p>
+<strong>Opción 1: Desde tu repositorio</strong>
+Si realizaste un push reciente en tu rama, puede aparecer un botón verde <code>"Compare & Pull Request"</code> en la pantalla de inicio de tu repositorio. 
+Haz clic en él para comenzar tu pull request.
+</p>
+<div class="diagram">
+    <img src="../assets/github_pr1.png" style="max-width:100%;" alt="GitHub pull request 1">
+</div>
+
+<p>
+<strong>Opción 2: A través de la página de Pull Requests</strong>
+En cualquier lugar de tu página de repositorio, haz clic en <code>'Pull requests'</code> en la barra de navegación del repositorio.
+</p>
+<div class="diagram">
+    <img src="../assets/github_pr2_1.png" style="max-width:100%;" alt="GitHub pull request 2">
+</div>
+<p>
+Luego, haz clic en el botón verde <code>'New pull request'</code>.
+</p>
+<div class="diagram">
+    <img src="../assets/github_pr2_2.png" style="max-width:100%;" alt="GitHub pull request 2">
+</div>
+<p>
+Asegúrate de seleccionar en la segunda caja la rama que deseas fusionar en main (tu rama debe estar en el lado derecho).
+</p>
+<div class="diagram">
+    <img src="../assets/github_pr2_3.png" style="max-width:100%;" alt="GitHub pull request 2">
+</div>
+<p>
+Haz clic en el botón verde <code>'Create pull request'</code> para comenzar tu pull request.
+</p>
+<div class="diagram">
+    <img src="../assets/github_pr2_4.png" style="max-width:100%;" alt="GitHub pull request 2">
+</div>
+
+<h4>2.2.4. Abordar los comentarios de revisión (Address review comments)</h4>
+
+<p>
+Los revisores deben dejar preguntas, comentarios y sugerencias. 
+Los revisores pueden comentar en todo el pull request o agregar comentarios a líneas o archivos específicos.
+</p>
+
+<p>
+Tú y los revisores pueden insertar imágenes o sugerencias de código para aclarar comentarios.
+</p>
+
+<p>
+Puedes continuar haciendo commits y pusheando cambios en respuesta a las revisiones. 
+Tu pull request se actualizará automáticamente.
+</p>
+
+<h4>2.2.5. Fusionar tu Pull Request (Merge your pull request)</h4>
+
+<p>
+Una vez que tu pull request sea aprobado, fusiona tu pull request. 
+Esto fusionará automáticamente tu rama para que tus cambios aparezcan en la rama principal.
+</p>
+<div class="diagram">
+    <img src="../assets/github_merge.png" style="max-width:100%;" alt="GitHub pull merge">
+</div>
+
+<p>
+GitHub retiene el historial de comentarios y commits en el pull request para ayudar a futuros colaboradores 
+a entender tus cambios.
+</p>
+
+<p>
+<strong>Situaciones especiales:</strong>
+</p>
+
+<ul>
+    <li>GitHub te dirá si tu pull request tiene conflictos que deben resolverse antes de fusionarse.</li>
+</ul>
+
+<h4>2.2.6. Eliminar tu rama (Delete your branch)</h4>
+
+<p>
+Después de fusionar tu pull request, elimina tu rama. 
+Esto indica que el trabajo en la rama ha finalizado y evita que tú u otros usen accidentalmente ramas antiguas.
+</p>
+
+<blockquote>
+    <strong>No te preocupes por perder información:</strong> Tu historial de pull request y commits no se eliminará. 
+    Siempre puedes restaurar tu rama eliminada o revertir tu pull request si es necesario.
+</blockquote>
+
+<h3>2.3. Resumen del Flujo de GitHub</h3>
+
+<p>
+El flujo completo de GitHub se puede resumir en los siguientes pasos:
+</p>
+
+<ol>
+    <li><strong>Create a branch</strong> - Crea una rama con un nombre descriptivo</li>
+    <li><strong>Make the changes</strong> - Edita archivos, haz commits y pushes</li>
+    <li><strong>Create a Pull Request</strong> - Solicita revisión de tus cambios</li>
+    <li><strong>Merge from branch to master</strong> - Merging de tu rama en main/master</li>
+    <li><strong>Delete the branch</strong> - Limpia borrando la rama completada</li>
+</ol>
+
+<blockquote>
+    <strong>Herramientas disponibles:</strong> Puedes completar todos los pasos del flujo de GitHub a través de la interfaz web de GitHub, 
+    línea de comandos, GitHub CLI o GitHub Desktop.
+</blockquote>
+
+</section>
+
+<!-- SECCIÓN 3: VENTAJAS Y MEJORES PRÁCTICAS -->
+<section id="ventajas-practicas">
+<h2>3. Ventajas y Mejores Prácticas</h2>
+
+<h3>3.1. Ventajas de usar GitHub</h3>
+
+<ul>
+    <li><strong>Control de versiones:</strong> Mantén un historial completo de todos los cambios</li>
+    <li><strong>Colaboración:</strong> Trabaja fácilmente con otros desarrolladores en el mismo proyecto</li>
+    <li><strong>Integración:</strong> Conecta con herramientas de CI/CD para automatizar pruebas y despliegues</li>
+    <li><strong>Documentación:</strong> Utiliza archivos README, wikis y páginas para documentar tu proyecto</li>
+    <li><strong>Seguridad:</strong> Controla el acceso al repositorio y revisa cambios antes de integrarlos</li>
+    <li><strong>Comunidad:</strong> Descubre proyectos, contribuye a código abierto y conecta con otros desarrolladores</li>
+</ul>
+
+<h3>3.2. Mejores Prácticas</h3>
+
+<ul>
+    <li><strong>Mensajes de commit claros:</strong> Usa mensajes descriptivos que expliquen qué cambio hace el commit y por qué</li>
+    <li><strong>Commits pequeños y atómicos:</strong> Cada commit debe contener un cambio lógico e independiente</li>
+    <li><strong>Ramas por característica:</strong> Crea una rama separada para cada nueva característica o corrección</li>
+    <li><strong>Revisión de código:</strong> Revisa siempre los cambios de otros antes de fusionar</li>
+    <li><strong>Mantén branches limpias:</strong> Elimina ramas completadas después de fusionarse</li>
+    <li><strong>Sigue un flujo consistente:</strong> El GitHub Flow es simple pero efectivo para la mayoría de los proyectos</li>
+</ul>
+
+</section>
+
+</main>
+
+</body>
+</html>
