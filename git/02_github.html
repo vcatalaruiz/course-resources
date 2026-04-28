@@ -339,6 +339,23 @@ El flujo completo de GitHub se puede resumir en los siguientes pasos:
     <li><strong>Delete the branch</strong> - Limpia borrando la rama completada</li>
 </ol>
 
+<div class="diagram">
+    <pre class="mermaid" style="zoom: 1.5;">
+graph TD
+    A["<b>1. Create a branch</b><br/>Crea una rama descriptiva"] -->
+    B["<b>2. Make the changes</b><br/>Edita, commits y pushes"] -->
+    C["<b>3. Create a Pull Request</b><br/>Solicita revisión"] -->
+    D["<b>4. Merge to master</b><br/>Fusiona en main/master"] -->
+    E["<b>5. Delete the branch</b><br/>Limpia la rama"]
+    
+    style A fill:#e1f5ff,stroke:#01579b,stroke-width:2px,color:#000
+    style B fill:#fff3e0,stroke:#e65100,stroke-width:2px,color:#000
+    style C fill:#f3e5f5,stroke:#4a148c,stroke-width:2px,color:#000
+    style D fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px,color:#000
+    style E fill:#fce4ec,stroke:#880e4f,stroke-width:2px,color:#000
+    </pre>
+</div>
+
 <blockquote>
     <strong>Herramientas disponibles:</strong> Puedes completar todos los pasos del flujo de GitHub a través de la interfaz web de GitHub, 
     línea de comandos, GitHub CLI o GitHub Desktop.
