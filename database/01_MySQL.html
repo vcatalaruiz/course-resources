@@ -839,15 +839,15 @@ taskkill /F /PID [PID_DE_MYSQL]
              <div class="diagram">
                     <img src="../assets/mysql_backup.jpg" style="max-width:100%;" alt="Run server">
                 </div>
-            <pre><code class="language-bash">
--- Opción 1: Con exclusión de ibdata1 (PowerShell)
-Copy-Item -Path "C:\xampp\mysql\backup\*" -Destination "C:\xampp\mysql\data\" -Exclude "ibdata1" -Force
+            <pre><code class="language-bash">                
+                -- Opción 1: Copiar manualmente desde explorador
+                -- 1. Abre: C:\xampp\mysql\backup
+                -- 2. Selecciona todos los archivos EXCEPTO ibdata1
+                -- 3. Cópialo
+                -- 4. Pégalo en: C:\xampp\mysql\data (sobrescribir si se pide)
 
--- Opción 2: Copiar manualmente desde explorador
--- 1. Abre: C:\xampp\mysql\backup
--- 2. Selecciona todos los archivos EXCEPTO ibdata1
--- 3. Cópialo
--- 4. Pégalo en: C:\xampp\mysql\data (sobrescribir si se pide)
+                -- Opción 2: Con exclusión de ibdata1 (PowerShell)
+                Copy-Item -Path "C:\xampp\mysql\backup\*" -Destination "C:\xampp\mysql\data\" -Exclude "ibdata1" -Force
             </code></pre>
 
             <h4>Paso 3: Reiniciar MySQL</h4>
