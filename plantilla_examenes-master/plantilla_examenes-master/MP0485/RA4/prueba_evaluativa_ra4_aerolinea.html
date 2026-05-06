@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Prueba Evaluativa – Gestión de Compañía Aérea</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Departamento de Informática" />
+    <meta name="description" content="Prueba evaluativa RA4: Programación Orientada a Objetos" />
+
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <link rel="stylesheet" href="../../style.css">
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+</head>
+
+<body style="background-color: white;">
+
+<main style="border-style: none;">
+
+<section class="panel">
+    <div class="top-block">
+        <img src="../../logo_stucom_black.svg" alt="Logo" height="70px">
+        <div style="text-align: right">
+            <p>Prueba: Evaluativa</p>
+            <p>Asignatura: MP0485</p>
+            <p>Temario: RA4</p>
+        </div>
+    </div>
+
+    <div style="display: flex;justify-content: space-between;margin-top:20px">
+        <p><strong>Nombre alumno: _____________________________________________</strong></p>
+        <p><strong>Calificación: __________</strong></p>
+    </div>
+
+    <h2>Enunciado</h2>
+    <p>
+        Una <strong>compañía aérea</strong> necesita una aplicación para gestionar
+        sus <strong>pasajeros</strong> y los <strong>vuelos</strong> disponibles.
+        El programa será utilizado por el <strong>personal de la aerolínea</strong>
+        y funcionará íntegramente por consola.
+    </p>
+
+    <p>
+        El sistema permitirá registrar pasajeros, asignarles vuelos
+        y gestionar su información mediante un menú interactivo.
+    </p>
+
+    <h3>1. Modelado de clases <span class="points">(3 puntos)</span></h3>
+    <ul class="list-check">
+        <li>Cree una clase por cada elemento identificable del sistema.</li>
+        <li>Cada clase debe disponer de un <strong>constructor</strong>.</li>
+        <li>Añada <strong>getters y setters</strong> a todas las clases.</li>
+        <li>Sobrescriba el método <strong>toString()</strong> cuando sea necesario.</li>
+    </ul>
+
+    <h3>2. Clases principales</h3>
+    <ul class="list-check">
+        <li><strong>Empleado de la Aerolínea</strong>
+            <ul>
+                <li>Nombre</li>
+                <li>Apellido</li>
+            </ul>
+        </li>
+
+        <li><strong>Pasajero</strong>
+            <ul>
+                <li>Nombre</li>
+                <li>Número de pasajero</li>
+                <li>Tipo de pasajero: preferente o estándar</li>
+                <li>Listado de vuelos (máximo 3)</li>
+            </ul>
+        </li>
+
+        <li><strong>Vuelo</strong>
+            <ul>
+                <li>Código de vuelo</li>
+                <li>Origen</li>
+                <li>Destino</li>
+                <li>
+                    Restricciones:
+                    <ul>
+                        <li>Pasajero preferente: puede acceder a cualquier vuelo</li>
+                        <li>Pasajero estándar: máximo 2 vuelos</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>3. Clase CompaniaAerea y arranque del programa <span class="points">(2 puntos)</span></h3>
+    <ul class="list-check">
+        <li>El programa debe iniciarse desde una clase <strong>CompaniaAerea</strong>.</li>
+        <li>Al comenzar:
+            <ul>
+                <li>Solicitar los datos del empleado de la aerolínea.</li>
+                <li>Crear el objeto correspondiente.</li>
+                <li>Mostrar el mensaje:
+                    <br><strong>“Bienvenido nombre apellido”</strong>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>4. Menú de gestión de la compañía <span class="points">(5 puntos)</span></h3>
+    <p>El programa mostrará un menú repetitivo con las siguientes opciones:</p>
+
+    <ul class="list-check">
+        <li>Dar de alta pasajero.</li>
+        <li>Mostrar datos de un pasajero.</li>
+        <li>Actualizar tipo de pasajero.</li>
+        <li>Eliminar pasajero.</li>
+        <li>Salir del programa.</li>
+    </ul>
+
+</section>
+
+<section class="panel">
+    <h2>Diagrama UML</h2>
+
+    <div class="mermaid">
+        classDiagram
+        direction LR
+
+        class CompaniaAerea {
+            -empleado : Empleado
+            -pasajeros : ArrayList~Pasajero~
+            +mostrarMenu() void
+            +altaPasajero() void
+            +mostrarPasajero() void
+            +actualizarTipo() void
+            +eliminarPasajero() void
+        }
+
+        class Empleado {
+            -nombre : String
+            -apellido : String
+        }
+
+        class Pasajero {
+            -nombre : String
+            -numeroPasajero : int
+            -preferente : boolean
+            -vuelos : ArrayList~Vuelo~
+        }
+
+        class Vuelo {
+            -codigo : String
+            -origen : String
+            -destino : String
+        }
+
+        CompaniaAerea "1" o-- "1" Empleado : has-a
+        CompaniaAerea "1" o-- "n" Pasajero : has-a
+        Pasajero "1" o-- "0..3" Vuelo : has-a
+    </div>
+</section>
+
+<section class="panel">
+    <h2>Ejemplo de salida por consola</h2>
+    <ul>
+        <li>Mensaje de bienvenida al empleado.</li>
+        <li>Menú numérico con opciones claras.</li>
+        <li>Visualización completa de los datos del pasajero.</li>
+        <li>Mensajes de error si el número de pasajero no existe.</li>
+    </ul>
+</section>
+
+</main>
+
+<div class="footer">
+    © Departamento de Informática
+</div>
+
+</body>
+</html>

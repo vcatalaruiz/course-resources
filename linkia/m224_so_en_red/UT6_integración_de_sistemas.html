@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UT 6. Integración de sistemas · LinkiaFP</title>
+    <meta name="description"
+        content="Presentación HTML con secciones tipo diapositiva para la UT6: Integración de sistemas." />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link rel="stylesheet" href="../style.css" />
+    <script src="../script.js" defer></script>
+</head>
+
+<body>
+    <div class="deck">
+
+        <!-- COVER -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+                </div>
+                <div class="title">UT6 · Integración de sistemas</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+            </div>
+
+        </section>
+
+
+
+
+        <section class="slide" id="ut6-introduccion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>UT6 · Integración de sistemas libres y propietarios</h2>
+            <p>
+                Esta unidad aborda la interoperabilidad entre sistemas operativos libres y propietarios en redes
+                corporativas.
+                Se estudia cómo Linux, Windows y otros sistemas pueden comunicarse, compartir recursos y funcionar de
+                forma
+                integrada, garantizando eficiencia, seguridad y continuidad del servicio.
+            </p>
+            <div class="diagram">
+                <img src="../../assets/linkia/windows-linux.jpg" alt="Diagrama de interoperabilidad entre sistemas">
+            </div>
+        </section>
+
+        <section class="slide" id="interoperabilidad">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>1. Introducción a la interoperabilidad</h2>
+            <p>
+                La interoperabilidad es la capacidad de distintos sistemas operativos para comunicarse, intercambiar
+                información
+                y utilizar recursos de forma conjunta, independientemente de su fabricante o arquitectura.
+            </p>
+            <ul>
+                <li><strong>Acceso transparente a recursos compartidos.</strong></li>
+                <li><strong>Coexistencia de software libre y propietario.</strong></li>
+                <li><strong>Optimización del rendimiento global de la red.</strong></li>
+                <li><strong>Garantía de seguridad e integridad de los datos.</strong></li>
+            </ul>
+        </section>
+
+        <section class="slide" id="ventajas-integracion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>1.1 Ventajas de la integración</h2>
+            <p>
+                La integración de sistemas libres y propietarios aporta beneficios técnicos, económicos y organizativos,
+                permitiendo aprovechar las fortalezas específicas de cada plataforma.
+            </p>
+            <ul>
+                <li>Complementariedad tecnológica (Linux en servidores, Windows en gestión y usuarios).</li>
+                <li>Reducción de costes mediante software libre.</li>
+                <li>Escalabilidad y flexibilidad de la infraestructura.</li>
+                <li>Independencia de proveedor (vendor lock-in).</li>
+                <li>Estandarización de protocolos abiertos.</li>
+                <li>Mejora de la seguridad y la resiliencia.</li>
+            </ul>
+        </section>
+
+        <section class="slide" id="escenarios-heterogeneos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>1.2 Escenarios heterogéneos</h2>
+            <p>
+                Los escenarios heterogéneos son entornos donde conviven distintos sistemas operativos, cada uno con un
+                rol
+                específico dentro de la red corporativa.
+            </p>
+            <ul>
+                <li>Compartición de archivos mediante Samba o SMB.</li>
+                <li>Impresión en red con CUPS, IPP o SMB.</li>
+                <li>Autenticación centralizada con Active Directory, Kerberos y LDAP.</li>
+                <li>Distribución de servicios entre servidores Linux y Windows.</li>
+                <li>Virtualización y nube híbrida con sistemas mixtos.</li>
+            </ul>
+        </section>
+
+        <section class="slide" id="servicios-comparticion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>2. Servicios de compartición entre sistemas</h2>
+            <p>
+                Los servicios de compartición permiten intercambiar archivos, impresoras y otros recursos entre
+                plataformas
+                diferentes de forma transparente para el usuario final.
+            </p>
+            <div class="diagram">
+                <img src="../../assets/linkia/compartir-archivos.jpg" alt="Diagrama de servicios de compartición entre sistemas">
+            </div>
+        </section>
+
+        <section class="slide" id="nfs-samba">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h3>2.1 NFS, Samba y otros servicios</h3>
+            <p>
+                NFS y Samba son los protocolos más utilizados para compartir recursos en entornos mixtos Linux–Windows,
+                complementados por otros servicios según las necesidades de seguridad y acceso remoto.
+            </p>
+            <ul>
+                <li><strong>NFS:</strong> alto rendimiento en entornos Linux/Unix.</li>
+                <li><strong>Samba (SMB/CIFS):</strong> interoperabilidad total con Windows.</li>
+                <li>FTP / SFTP para transferencia de archivos.</li>
+                <li>WebDAV para acceso vía HTTP.</li>
+                <li>rsync y SSHFS para sincronización y acceso seguro.</li>
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/linkia/servidor-samba-linux-apertura.webp" alt="Diagrama de servicios de compartición entre sistemas">
+            </div>
+        </section>
+
+        <section class="slide" id="nfs-samba">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h3>2.2.1 Configuración básica de SAMBA</h3>
+            <p>
+                La configuración de Samba en Linux para compartir recursos con Windows implica editar el archivo
+                <code>smb.conf</code> y definir los recursos a compartir, los permisos y las opciones de seguridad.
+            </p>
+            <ul>
+                <li>Instalación de Samba: <code>sudo apt install samba</code>.</li>
+                <li>Edición de <code>/etc/samba/smb.conf</code> para definir recursos compartidos.</li>
+                <li>Configuración de usuarios Samba con <code>smbpasswd</code>.</li>
+                <li>Reinicio del servicio con <code>sudo systemctl restart smbd</code>.</li>
+            </ul>
+            <div class="ejemplo">
+                <strong>Ejemplo de recurso compartido en smb.conf</strong>
+                <pre class="language-ini"><code>[compartido]
+    path = /home/compartido
+    read only = no
+    browsable = yes
+    valid users = @users</code></pre>
+            </div>
+        </section>
+
+        <section class="slide" id="nfs-samba">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h3>2.2.2 Crear usuario SAMBA</h3>
+            <p>
+                Para crear un usuario Samba en Linux, se debe crear primero el usuario del sistema y luego agregarlo a
+                Samba
+                con una contraseña específica.
+            </p>
+            <ul>
+                <li>Crear usuario del sistema: <code>sudo useradd -m nombre_usuario</code>.</li>
+                <li>Agregar usuario a Samba: <code>sudo smbpasswd -a nombre_usuario</code>.</li>
+            </ul>
+            <div class="ejemplo">
+                <strong>Ejemplo de creación de usuario Samba</strong>
+                <pre class="language-bash"><code>sudo useradd -m juan
+sudo smbpasswd -a juan</code></pre>
+            </div>
+        </section>
+
+        <section class="slide" id="nfs-samba">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h3>2.2.3 Configurar cliente Windows para acceder a recurso compartido</h3>
+            <p>
+                Para acceder a un recurso compartido de Samba desde Windows, se puede utilizar el Explorador de
+                archivos o el comando <code>net use</code> en la línea de comandos.
+            </p>
+            <ul>
+                <li>Acceso mediante Explorador de archivos: <code>\\IP_del_servidor\compartido</code>.</li>
+                <li>Acceso mediante línea de comandos: <code>net use Z: \\IP_del_servidor\compartido /user:usuario</code>.</li>
+            </ul>
+            <div class="ejemplo">
+                <strong>Ejemplo de acceso a recurso compartido desde Windows</strong>
+                <pre class="language-bash"><code>net use Z: \\IP_del_servidor\compartido /user:usuario</code></pre>
+            </div>
+        </section>
+
+        <section class="slide" id="configuracion-cruzada">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h3>2.2 Configuración cruzada de recursos</h3>
+            <p>
+                La configuración cruzada permite que Linux y Windows actúen indistintamente como servidores o clientes
+                de
+                recursos compartidos.
+            </p>
+            <ul>
+                <li>Linux comparte recursos a Windows mediante Samba.</li>
+                <li>Windows comparte carpetas accesibles desde Linux con CIFS.</li>
+                <li>Buenas prácticas: usuarios sincronizados, permisos coherentes y copias de seguridad.</li>
+            </ul>
+        </section>
+
+        <section class="slide" id="acceso-recursos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>3. Acceso a recursos entre plataformas</h2>
+            <p>
+                Un entorno interoperable debe garantizar el acceso a sistemas de archivos y dispositivos compartidos sin
+                conflictos de formato, permisos o controladores.
+            </p>
+        </section>
+
+        <section class="slide" id="sistemas-archivos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h3>3.1 Sistemas de archivos</h3>
+            <p>
+                Cada sistema operativo utiliza su propio sistema de archivos, por lo que es fundamental conocer su
+                compatibilidad y los métodos de acceso cruzado.
+            </p>
+            <ul>
+                <li>NTFS, FAT32 y exFAT en Windows.</li>
+                <li>EXT4 y XFS en Linux.</li>
+                <li>Acceso directo mediante controladores o acceso remoto mediante servicios de red.</li>
+            </ul>
+        </section>
+
+        <section class="slide" id="impresoras-compartidas">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h3>3.2 Impresoras compartidas</h3>
+            <p>
+                La compartición de impresoras en entornos mixtos se realiza mediante protocolos estándar que garantizan
+                compatibilidad entre plataformas.
+            </p>
+            <ul>
+                <li>SMB/CIFS para integración con Windows.</li>
+                <li>IPP como estándar recomendado por su soporte de seguridad.</li>
+                <li>CUPS como sistema de impresión en Linux.</li>
+            </ul>
+            <div class="diagram">
+                <img src="../../assets/linkia/impresorasimages.png" alt="Diagrama de servicios de compartición entre sistemas">
+            </div>
+        </section>
+
+        <section class="slide" id="seguridad-entornos-mixtos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h2>4. Seguridad en entornos mixtos</h2>
+            <p>
+                La seguridad en redes heterogéneas requiere integrar autenticación, control de acceso, cifrado y
+                auditoría
+                entre sistemas distintos.
+            </p>
+        </section>
+
+        <section class="slide" id="control-acceso">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h3>4.1 Control de acceso</h3>
+            <p>
+                El control de acceso define quién puede acceder a los recursos y qué acciones puede realizar,
+                manteniendo
+                coherencia entre Linux y Windows.
+            </p>
+            <ul>
+                <li>Autenticación, autorización y auditoría.</li>
+                <li>Modelos DAC y RBAC.</li>
+                <li>Unificación de identidades con Active Directory y LDAP.</li>
+                <li>Cifrado con SMB3, Kerberos, TLS y VPN.</li>
+            </ul>
+        </section>
+
+        <section class="slide" id="pruebas-funcionamiento">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <h3>4.2 Pruebas de funcionamiento</h3>
+            <p>
+                Las pruebas de funcionamiento permiten validar que los servicios interoperables están correctamente
+                configurados y son seguros.
+            </p>
+            <ul>
+                <li>Pruebas de conectividad, autenticación y acceso a recursos.</li>
+                <li>Verificación de permisos y cifrado.</li>
+                <li>Revisión de logs y documentación de resultados.</li>
+            </ul>
+        </section>
+
+        <section class="slide" id="guia-actividad1-objetivo">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+<!-- ACTIVIDAD GUIADA -->
+    <h2>Actividad 1 · Dominio Samba + Windows</h2>
+    <p>
+        En esta guía vas a <strong>crear un dominio Samba en Linux</strong> y
+        <strong>unir un equipo Windows al dominio</strong>.
+        Sigue los pasos en orden y ejecuta exactamente los comandos indicados.
+    </p>
+</section>
+
+<section class="slide" id="a1-paso1-red">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>Paso 1 · Preparar la red (Linux)</h3>
+    <p>
+        El servidor Linux debe tener IP fija, nombre correcto y resolución DNS funcional.
+    </p>
+    <ul>
+        <li>IP fija (ejemplo): <code>192.168.1.10</code></li>
+        <li>Nombre del servidor: <code>dc1</code></li>
+        <li>Dominio: <code>empresa.local</code></li>
+    </ul>
+    <div class="ejemplo">
+        <strong>Ejemplo de configuración de red en Linux</strong>
+        <div class="diagram">
+            <img src="../../assets/linkia/netplan_confing_ip.png" alt="Diagrama de configuración de red en Linux">
+        </div>
+    </div>
+    <p><strong>Editar hostname: </strong> sudo nano /etc/hostname</p>
+    <p>dc1</p>
+    <p><strong>Editar hosts: </strong> sudo nano /etc/hosts</p>
+    <div class="diagram">
+            <img src="../../assets/linkia/hosts.png" alt="Diagrama de configuración de red en Linux">
+        </div>
+    <div class="ejemplo">
+        <strong>Comprobación</strong>
+        <pre class="language-bash"><code>hostname
+ip a
+ping 8.8.8.8</code></pre>
+    </div>
+</section>
+
+<section class="slide" id="a1-paso2-instalacion">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>Paso 2 · Instalar Samba y dependencias</h3>
+    <p>
+        Instala los paquetes necesarios para que Linux funcione como
+        <strong>Controlador de Dominio Samba</strong>.
+    </p>
+    <div class="ejemplo">
+        <pre class="language-bash"><code>sudo apt update
+sudo apt upgrade -y
+sudo apt install samba winbind krb5-user smbclient dnsutils</code></pre>
+    </div>
+    <p>En la pantalla de instalación, tienes que poner:
+        <ul>
+            <li>Contraseña para el usuario Administrator</li>
+        </ul>
+    </p>
+</section>
+
+<section class="slide" id="a1-paso3-dominio">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>Paso 3 · Crear el dominio Samba</h3>
+    <p>
+        Se inicializa el dominio y se configura Samba como
+        <strong>Controlador de Dominio Active Directory</strong>.
+    </p>
+    <div class="ejemplo">
+        <pre class="language-bash"><code>sudo samba-tool domain provision \
+--use-rfc2307 \
+--realm=EMPRESA.LOCAL \
+--domain=EMPRESA \
+--server-role=dc</code></pre>
+    </div>
+    <p>
+        Durante el proceso, introduce una contraseña segura para
+        <strong>Administrator</strong>.
+    </p>
+</section>
+
+<section class="slide" id="a1-paso4-servicios">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>Paso 4 · Activar servicios Samba</h3>
+    <p>
+        Se detienen servicios antiguos y se inicia el servicio principal de Samba AD.
+    </p>
+    <div class="ejemplo">
+        <pre class="language-bash"><code>sudo systemctl stop smbd nmbd winbind
+sudo systemctl disable smbd nmbd winbind
+sudo systemctl start samba-ad-dc
+sudo systemctl enable samba-ad-dc</code></pre>
+    </div>
+</section>
+
+<section class="slide" id="a1-paso5-usuarios">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>Paso 5 · Crear usuarios del dominio</h3>
+    <p>
+        Se crean usuarios que iniciarán sesión desde Windows.
+    </p>
+    <div class="ejemplo">
+        <pre class="language-bash"><code>sudo samba-tool user create alumno1
+sudo samba-tool user create profesor1</code></pre>
+    </div>
+</section>
+
+<section class="slide" id="a1-paso6-windows">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>Paso 6 · Unir Windows al dominio</h3>
+    <p>
+        En el equipo Windows:
+    </p>
+    <ul>
+        <li>Configura como DNS la IP del servidor Linux (<code>192.168.1.10</code>)</li>
+        <li>Panel de control → Sistema → Cambiar configuración</li>
+        <li>Selecciona <strong>Dominio</strong> e introduce: <code>empresa.local</code></li>
+        <li>Usuario: <code>Administrator</code></li>
+    </ul>
+</section>
+
+<section class="slide" id="a1-paso7-pruebas">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>Paso 7 · Pruebas finales</h3>
+    <p>
+        Comprueba que todo funciona correctamente.
+    </p>
+    <ul>
+        <li>Inicia sesión en Windows con <code>EMPRESA\alumno1</code></li>
+        <li>Accede a recursos compartidos</li>
+        <li>Documenta capturas</li>
+    </ul>
+</section>
+
+<section class="slide" id="guia-actividad2-objetivo">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>Actividad 2 · Linux cliente al dominio</h2>
+    <p>
+        En esta actividad unirás un <strong>cliente Linux</strong>
+        al dominio Samba creado en la Actividad 1.
+    </p>
+</section>
+
+<section class="slide" id="a2-paso1-preparacion">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>Paso 1 · Preparar cliente Linux</h3>
+    <p>
+        El cliente debe usar el servidor Samba como DNS y tener la hora sincronizada.
+    </p>
+    <div class="ejemplo">
+        <pre class="language-bash"><code>sudo timedatectl set-ntp true
+ping dc1.empresa.local</code></pre>
+    </div>
+</section>
+
+<section class="slide" id="a2-paso2-paquetes">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>Paso 2 · Instalar paquetes</h3>
+    <p>
+        Estos paquetes permiten autenticación contra el dominio.
+    </p>
+    <div class="ejemplo">
+        <pre class="language-bash"><code>sudo apt install realmd sssd krb5-user samba-common-bin</code></pre>
+    </div>
+</section>
+
+<section class="slide" id="a2-paso3-kerberos">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>Paso 3 · Probar Kerberos</h3>
+    <p>
+        Comprueba que el cliente obtiene tickets del dominio.
+    </p>
+    <div class="ejemplo">
+        <pre class="language-bash"><code>kinit administrador
+klist</code></pre>
+    </div>
+</section>
+
+<section class="slide" id="a2-paso4-union">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>Paso 4 · Unir Linux al dominio</h3>
+    <p>
+        Se une el equipo Linux al dominio Samba.
+    </p>
+    <div class="ejemplo">
+        <pre class="language-bash"><code>sudo realm join empresa.local -U Administrator
+realm list</code></pre>
+    </div>
+</section>
+
+<section class="slide" id="a2-paso5-login">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h3>Paso 5 · Prueba de inicio de sesión</h3>
+    <p>
+        Verifica que los usuarios del dominio pueden iniciar sesión.
+    </p>
+    <div class="ejemplo">
+        <pre class="language-bash"><code>su - alumno1@empresa.local
+id alumno1@empresa.local</code></pre>
+    </div>
+</section>
+
+<section class="slide" id="cierre-guias">
+    <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+    <h2>Resultado esperado</h2>
+    <p>
+        Al finalizar, tendrás un dominio Samba funcional con
+        <strong>Windows y Linux autenticándose de forma centralizada</strong>,
+        cumpliendo todos los criterios de evaluación de la UT6.
+    </p>
+</section>
+        
+
+
+        <div class=" footer">
+            <div class="bar">
+                <small>UT6 · Integración de sistemas · LinkiaFP</small>
+                <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

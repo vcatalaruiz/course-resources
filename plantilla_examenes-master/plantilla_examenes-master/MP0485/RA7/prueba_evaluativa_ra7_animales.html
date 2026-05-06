@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Prueba Evaluativa – Gestión de Felinos (RA7)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Departamento de Informática" />
+    <meta name="description" content="Prueba evaluativa RA7: Herencia e Interfaces" />
+
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <link rel="stylesheet" href="../../style.css">
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+</head>
+
+<body style="background-color: white;">
+
+    <main style="border-style: none;">
+
+        <section class="panel">
+            <div class="top-block">
+                <img src="../../logo_stucom_black.svg" alt="Logo" height="70px">
+                <div style="text-align: right">
+                    <p>Prueba: Evaluativa</p>
+                    <p>Asignatura: MP0485</p>
+                    <p>Resultado de Aprendizaje: RA7</p>
+                </div>
+            </div>
+
+            <div style="display: flex;justify-content: space-between;margin-top:20px">
+                <p><strong>Nombre alumno: _____________________________________________</strong></p>
+                <p><strong>Calificación: __________</strong></p>
+            </div>
+
+            <h2>Enunciado</h2>
+            <p>
+                Una reserva natural necesita una aplicación para gestionar a sus <strong>felinos</strong>.
+                Cada tipo de felino tiene comportamientos y características distintas.
+            </p>
+
+            <p>
+                El programa se ejecutará por consola y deberá hacer uso de
+                <strong>herencia</strong> e <strong>interfaces</strong> para modelar correctamente
+                el comportamiento de los felinos.
+            </p>
+
+            <h3>1. Clase base Felino <span class="points">(1 punto)</span></h3>
+            <ul class="list-check">
+                <li>Atributos comunes a todos los felinos:
+                    <ul>
+                        <li>Nombre</li>
+                        <li>Edad</li>
+                        <li>Peso</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>2. Interfaz Carnivoro <span class="points">(1 punto)</span></h3>
+            <ul class="list-check">
+                <li>Defina la interfaz <strong>Carnivoro</strong> con los métodos:
+                    <ul>
+                        <li><strong>comer()</strong>: devuelve qué alimento está consumiendo.</li>
+                        <li><strong>cazar()</strong>: devuelve cómo caza su presa.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>3. Clase Reserva <span class="points">(1 punto)</span></h3>
+            <ul class="list-check">
+                <li>Atributos:
+                    <ul>
+                        <li>Nombre de la reserva</li>
+                        <li>Listado de felinos</li>
+                    </ul>
+                </li>
+                <li>Métodos:
+                    <ul>
+                        <li>Añadir felinos a la reserva.</li>
+                        <li>Hacer que todos los felinos coman y cacen, mostrando su actividad.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>4. Herencia de felinos <span class="points">(2 puntos)</span></h3>
+            <ul class="list-check">
+                <li><strong>Leon</strong>
+                    <ul>
+                        <li>Rugido impresionante</li>
+                        <li>comer(): “El león está comiendo carne fresca.”</li>
+                        <li>cazar(): “El león acecha a su presa en la sabana.”</li>
+                    </ul>
+                </li>
+
+                <li><strong>Gato</strong>
+                    <ul>
+                        <li>Pequeño y ágil</li>
+                        <li>comer(): “El gato está comiendo su comida balanceada.”</li>
+                        <li>cazar(): “El gato persigue un ratón en el jardín.”</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>5. Clase Main y ejecución del programa <span class="points">(5 puntos)</span></h3>
+            <ul class="list-check">
+                <li>Crear una reserva solicitando su nombre al usuario.</li>
+                <li>Permitir crear felinos mediante un menú:
+                    <ul>
+                        <li>Elegir tipo de felino (León o Gato).</li>
+                        <li>Introducir nombre, edad y peso.</li>
+                        <li>Crear dos felinos de cada tipo.</li>
+                        <li>Añadir automáticamente los felinos a la reserva.</li>
+                    </ul>
+                </li>
+                <li>Hacer que todos los felinos coman y cacen, mostrando sus actividades.</li>
+            </ul>
+
+        </section>
+
+        <section class="panel">
+            <h2>Diagrama UML</h2>
+
+            <div class="mermaid">
+                classDiagram
+                direction LR
+                    class Carnivoro {
+                        +comer() String
+                        +cazar() String
+                    }
+                    
+                    class Felino {
+                        #String nombre
+                        #int edad
+                        #double peso
+                        +comer() String
+                        +cazar() String
+                    }
+                    
+                    class Leon {
+                        +comer() String
+                        +cazar() String
+                    }
+                    
+                    class Gato {
+                        +comer() String
+                        +cazar() String
+                    }
+                    
+                    class Reserva {
+                        +String nombre
+                        +List~Felino~ felinos
+                        +agregarFelino(Felino f) void
+                        +comerTodos() void
+                        +cazarTodos() void
+                    }
+                    
+                    class Main {
+                        +main(String[] args) void
+                    }
+                    
+                    Carnivoro <|.. Felino: implements
+                    Felino <|-- Leon: extends
+                    Felino <|-- Gato: extends
+                    Reserva o-- Felino: aggregation
+                    Main --> Reserva
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Ejemplo de salida por consola</h2>
+            <pre class="console-output">
+Introduce el nombre de la reserva: Safari Park
+
+Creación de felinos...
+Felino 1: Tipo (1. León, 2. Gato)
+Nombre: Simba
+Edad: 5
+Peso: 190
+León creado correctamente.
+
+¡A comer y cazar!
+🦁 León Simba → El león está comiendo carne fresca.
+🦁 León Simba → El león acecha a su presa en la sabana.
+🐱 Gato 1 → El gato está comiendo su comida balanceada.
+🐱 Gato 1 → El gato persigue un ratón en el jardín.
+
+            </pre>
+        </section>
+
+    </main>
+
+    <div class="footer">
+        © Departamento de Informática
+    </div>
+
+</body>
+
+</html>

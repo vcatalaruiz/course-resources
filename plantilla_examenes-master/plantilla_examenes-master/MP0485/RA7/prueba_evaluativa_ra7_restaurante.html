@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Prueba Evaluativa – Gestión de un Restaurante (RA7)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Departamento de Informática" />
+    <meta name="description" content="Prueba evaluativa RA7: Herencia e Interfaces" />
+
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <link rel="stylesheet" href="../../style.css">
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+</head>
+
+<body style="background-color: white;">
+
+    <main style="border-style: none;">
+
+        <section class="panel">
+            <div class="top-block">
+                <img src="../../logo_stucom_black.svg" alt="Logo" height="70px">
+                <div style="text-align: right">
+                    <p>Prueba: Evaluativa</p>
+                    <p>Asignatura: MP0485</p>
+                    <p>Resultado de Aprendizaje: RA7</p>
+                </div>
+            </div>
+
+            <div style="display: flex;justify-content: space-between;margin-top:20px">
+                <p><strong>Nombre alumno: _____________________________________________</strong></p>
+                <p><strong>Calificación: __________</strong></p>
+            </div>
+
+            <h2>Enunciado</h2>
+            <p>
+                Una cadena de <strong>restaurantes</strong> necesita una aplicación para gestionar
+                los <strong>empleados</strong> que trabajan en sus locales.
+                Cada tipo de empleado tiene características y responsabilidades distintas,
+                lo que influye en el funcionamiento del restaurante.
+            </p>
+
+            <p>
+                El programa se ejecutará por consola y deberá hacer uso de
+                <strong>herencia</strong> e <strong>interfaces</strong> para modelar correctamente
+                el comportamiento de los empleados.
+            </p>
+
+            <h3>1. Clase base Empleado <span class="points">(1 punto)</span></h3>
+            <ul class="list-check">
+                <li>Atributos comunes a todos los empleados:
+                    <ul>
+                        <li>Nombre</li>
+                        <li>Sueldo base: <strong>1000€</strong></li>
+                        <li>Horas de trabajo por día: <strong>8</strong></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>2. Interfaz Contratable <span class="points">(1 punto)</span></h3>
+            <ul class="list-check">
+                <li>Defina la interfaz <strong>Contratable</strong> con los siguientes métodos:
+                    <ul>
+                        <li><strong>iniciarJornada()</strong>: devuelve una descripción de la actividad del empleado y su jornada laboral.</li>
+                        <li><strong>calcularSueldo()</strong>: devuelve el sueldo total del empleado.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>3. Clase Restaurante <span class="points">(1 punto)</span></h3>
+            <ul class="list-check">
+                <li>Atributos:
+                    <ul>
+                        <li>Nombre</li>
+                        <li>Listado de empleados</li>
+                    </ul>
+                </li>
+                <li>Métodos:
+                    <ul>
+                        <li>Añadir empleados al restaurante.</li>
+                        <li>Hacer que todos los empleados inicien jornada.</li>
+                        <li>Mostrar sueldo por cada de empleado.</li>
+                        <li>Hacer sueldo por tipo de empleado y total.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>4. Herencia de empleados <span class="points">(2 puntos)</span></h3>
+            <ul class="list-check">
+                <li><strong>Cocinero</strong>
+                    <ul>
+                        <li>Bono de experiencia: 500€</li>
+                        <li>Sueldo final: 1500€</li>
+                        <li>iniciarJornada(): “cocinero prepara platos durante 8 horas.”</li>
+                    </ul>
+                </li>
+
+                <li><strong>Camarero</strong>
+                    <ul>
+                        <li>Propinas: 200€</li>
+                        <li>Sueldo final: 1200€</li>
+                        <li>iniciarJornada(): “camarero atiende a los clientes durante 8 horas.”</li>
+                    </ul>
+                </li>
+
+                <li><strong>Gerente</strong>
+                    <ul>
+                        <li>Bonus de gestión: 1000€</li>
+                        <li>Horas de trabajo: 6</li>
+                        <li>Sueldo final: 2000€</li>
+                        <li>iniciarJornada(): “gerente supervisa durante 6 horas.”</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>5. Clase Main y ejecución del programa <span class="points">(5 puntos)</span></h3>
+            <ul class="list-check">
+                <li>Crear un restaurante solicitando su nombre al usuario.</li>
+                <li>Mediante menu
+                    <ul>1) Crear empleado
+                        <ul>
+                            <li>Elegir tipo de empleado (cocinero, camarero o gerente).</li>
+                            <li>Introducir el nombre del empleado, no puede ser repetido.</li>
+                            <li>Añadir empleado al restaurante.</li>
+                        </ul>
+                    </ul>
+                    <ul>2) Hacer que todos los empleados inicien jornada.</ul>
+                    <ul>3) Mostrar el sueldo individual de cada empleado.</ul>
+                    <ul>4) Mostrar un resumen final de sueldos por tipo y el total.</ul>
+                </li>
+            </ul>
+
+        </section>
+
+        <section class="panel">
+            <h2>Diagrama UML</h2>
+
+            <div class="mermaid">
+                classDiagram
+                direction LR
+                    class Contratable {
+                        +iniciarJornada() String
+                        +calcularSueldo() double
+                    }
+                    
+                    class Empleado {
+                        #String nombre
+                        #double sueldoBase = 1000
+                        #int horasTrabajo = 8
+                        +iniciarJornada() String
+                        +calcularSueldo() double
+                    }
+                    
+                    class Cocinero {
+                        -double bonoExperiencia = 500
+                        +iniciarJornada() String
+                        +calcularSueldo() double
+                    }
+                    
+                    class Camarero {
+                        -double propinas = 200
+                        +iniciarJornada() String
+                        +calcularSueldo() double
+                    }
+                    
+                    class Gerente {
+                        -double bonusGestion = 1000
+                        -int horasTrabajo = 6
+                        +iniciarJornada() String
+                        +calcularSueldo() double
+                    }
+                    
+                    class Restaurante {
+                        +String nombre
+                        +List~Empleado~ empleados
+                        +agregarEmpleado(Empleado emp) void
+                        +iniciarJornada() void
+                        +mostrarSueldoEmpleado() void
+                        +mostrarTotalSueldos() void
+                    }
+                    
+                    class Main {
+                        +main(String[] args) void
+                    }
+                    
+                    Contratable <|.. Empleado: implements
+                    Empleado <|-- Cocinero: extends
+                    Empleado <|-- Camarero: extends
+                    Empleado <|-- Gerente: extends
+                    Restaurante o-- Empleado: aggregation
+                    Main --> Restaurante
+
+            </div>
+        </section>
+
+        <div class="salto-pagina"></div>
+
+        <section class="panel">
+            <h2>Ejemplo de salida por consola</h2>
+            <pre class="console-output">
+Introduce el nombre del restaurante: Restaurante Familia Martínez
+
+1) Creación de empleados...
+Empleado 1: Tipo (1. Cocinero, 2. Camarero, 3. Gerente)
+Nombre: Paquito
+Cocinero creado correctamente.
+
+2) ¡Iniciar jornada!
+👨‍🍳 Paquito → prepara platos durante 8 horas.
+👨‍🍳 Pedro → prepara platos durante 8 horas.
+🍽️ Juan → camarero atiende a los clientes durante 8 horas.
+🧑‍💼 Antonio → gerente supervisa durante 6 horas.
+
+3) Sueldo por empleado
+👨‍🍳 Paquito → cobra 1500 €.
+👨‍🍳 Pedro → cobra 1500 €.
+🍽️ Juan → cobra 1200 €.
+🧑‍💼 Antonio → cobra 2000 €.
+
+4) 💰 Resumen de sueldos:
+Cocineros: 3000 €
+Camareros: 1200 €
+Gerentes: 2000 €
+Total de sueldos: 6200 €
+            </pre>
+        </section>
+
+    </main>
+
+    <div class="footer">
+        © Departamento de Informática
+    </div>
+
+</body>
+
+</html>

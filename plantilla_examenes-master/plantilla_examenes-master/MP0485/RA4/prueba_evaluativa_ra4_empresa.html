@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Prueba Evaluativa – Gestión de Programadores</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Departamento de Informática" />
+    <meta name="description" content="Prueba evaluativa RA4: Programación Orientada a Objetos" />
+
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <link rel="stylesheet" href="../../style.css">
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+</head>
+
+<body style="background-color: white;">
+
+    <main style="border-style: none;">
+
+        <section class="panel">
+            <div class="top-block">
+                <img src="../../logo_stucom_black.svg" alt="Logo" height="70px">
+                <div style="text-align: right">
+                    <p>Prueba: Evaluativa</p>
+                    <p>Asignatura: MP0485</p>
+                    <p>Temario: RA4</p>
+                </div>
+            </div>
+
+            <div style="display: flex;justify-content: space-between;margin-top:20px">
+                <p><strong>Nombre alumno: _____________________________________________</strong></p>
+                <p><strong>Calificación: __________</strong></p>
+            </div>
+
+            <h2>Enunciado</h2>
+            <p>
+                Una empresa de desarrollo de software necesita una aplicación para gestionar a sus
+                <strong>programadores</strong>.
+                El programa será utilizado por empleados del <strong>departamento de recursos humanos</strong>
+                y funcionará íntegramente por consola.
+            </p>
+
+            <p>
+                El sistema debe permitir introducir y gestionar información de programadores,
+                sus perfiles profesionales y realizar distintas consultas a través de un menú interactivo.
+            </p>
+
+            <h3>1. Modelado de clases <span class="points">(3 puntos)</span></h3>
+            <ul class="list-check">
+                <li>Cree una clase por cada elemento identificable del sistema.</li>
+                <li>Cada clase debe disponer de un <strong>constructor</strong> que permita inicializar sus atributos.</li>
+                <li>Añada <strong>getters y setters</strong> a todas las clases.</li>
+                <li>Sobrescriba el método <strong>toString()</strong> cuando sea necesario.</li>
+            </ul>
+
+            <h3>2. Clases principales</h3>
+            <ul class="list-check">
+                <li><strong>Empleado de Recursos Humanos</strong>
+                    <ul>
+                        <li>Nombre</li>
+                        <li>Apellido</li>
+                    </ul>
+                </li>
+                <li><strong>Programador</strong>
+                    <ul>
+                        <li>Nombre</li>
+                        <li>DNI</li>
+                        <li>Listado de perfiles (máximo 3)</li>
+                    </ul>
+                </li>
+                <li><strong>Perfil</strong>
+                    <ul>
+                        <li>Nombre del perfil: backend, frontend o fullstack</li>
+                        <li>Nivel de experiencia: junior, mid o senior</li>
+                        <li>Indicar si dispone de certificación o no</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>3. Clase Empresa y arranque del programa <span class="points">(2 puntos)</span></h3>
+            <ul class="list-check">
+                <li>El programa debe iniciarse desde una clase <strong>Empresa</strong>.</li>
+                <li>Al comenzar:
+                    <ul>
+                        <li>Solicitar los datos del empleado de recursos humanos.</li>
+                        <li>Crear el objeto correspondiente y asignarlo a la Empresa.</li>
+                        <li>Mostrar el mensaje:
+                            <br><strong>“Bienvenido/a Nombre Apellido”</strong>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>4. Menú de gestión de la empresa <span class="points">(5 puntos)</span></h3>
+            <p>El programa mostrará un menú repetitivo con las siguientes opciones:</p>
+
+            <ul class="list-check">
+                <li>Introducir programador:
+                    <ul>
+                        <li>Pedir los datos por consola.</li>
+                        <li>Añadir el programador a un listado gestionado por la empresa.</li>
+                    </ul>
+                </li>
+
+                <li>Añadir perfil a un programador:
+                    <ul>
+                        <li>Solicitar el DNI del programador.</li>
+                        <li>Si existe, añadirle un nuevo perfil.</li>
+                    </ul>
+                </li>
+
+                <li>Mostrar los datos de un programador:
+                    <ul>
+                        <li>Solicitar el DNI.</li>
+                        <li>Mostrar toda su información y perfiles.</li>
+                    </ul>
+                </li>
+
+                <li>Mostrar número de programadores por perfil:
+                    <ul>
+                        <li>Solicitar el nombre del perfil.</li>
+                        <li>Mostrar cuántos programadores lo tienen.</li>
+                    </ul>
+                </li>
+
+                <li>Mostrar programadores por nivel de experiencia certificados:
+                    <ul>
+                        <li>Solicitar el nivel: junior, mid o senior.</li>
+                        <li>Listar los programadores correspondientes que tengan certificación.</li>
+                    </ul>
+                </li>
+
+                <li>Salir del programa.</li>
+            </ul>
+
+        </section>
+        
+        <section class="panel">
+            <h2>Diagrama UML</h2>
+
+            <div class="mermaid">
+                classDiagram
+                direction LR
+
+                class Empresa {
+                -empleado : EmpleadoRRHH
+                -programadores : Arraylist~Programador~
+                +mostrarMenu() void
+                +insertarProgramador() void
+                +insertarPerfil() void
+                +mostrarProgramador() void
+                +contarProgramadores() int
+                +mostrarProgramadoresCertificados() void
+                }
+
+                class EmpleadoRRHH {
+                -nombre : String
+                -apellido : String
+                }
+
+                class Programador {
+                -nombre : String
+                -dni : String
+                -perfiles : Arraylist~Perfil~
+                }
+
+                class Perfil {
+                -nombrePerfil : String
+                -nivel : String
+                -certificacion : boolean
+                }
+
+                Empresa "1" o-- "1" EmpleadoRRHH : has-a
+                Empresa "1" o-- "n" Programador : has-a
+                Programador "1" o-- "0..3" Perfil : has-a
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Ejemplo de salida por consola</h2>
+            <ul>
+                <li>Mensaje de bienvenida tras iniciar el programa.</li>
+                <li>Menú numérico con opciones.</li>
+                <li>Listados claros y legibles de programadores y perfiles.</li>
+                <li>Mensajes de error si el DNI no existe o se superan los perfiles permitidos.</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <div class="footer">
+        © Departamento de Informática
+    </div>
+
+</body>
+
+</html>

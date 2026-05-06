@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Prueba Evaluativa – PLN y Deep Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Departamento de Informática" />
+  <meta name="description" content="Prueba evaluativa RA4: Procesamiento de Lenguaje Natural e IA" />
+
+  <link rel="stylesheet" href="../../style.css" />
+  <script src="https://kit.fontawesome.comed.js" crossorigin="anonymous"></script>
+</head>
+
+<body style="background-color: white;">
+<main style="border-style: none;">
+
+<section class="panel">
+  <div class="top-block">
+    <img src="../../logo_stucom_black.svg" alt="Logo" height="70px">
+    <div style="text-align: right">
+      <p>Prueba: Evaluativa</p>
+      <p>Asignatura: MP0485</p>
+      <p>Temario: RA4</p>
+    </div>
+  </div>
+
+  <div style="display: flex; justify-content: space-between; margin-top:20px">
+    <p><strong>Nombre alumno: ____________________________________________</strong></p>
+    <p><strong>Calificación: ______</strong></p>
+  </div>
+
+  <h2>Enunciado</h2>
+  <p>
+    Esta prueba evalúa los conocimientos sobre <strong>Procesamiento de Lenguaje Natural (PLN)</strong>,
+    <strong>representaciones semánticas mediante embeddings</strong>, <strong>similitud semántica</strong>,
+    <strong>tokenización</strong>, <strong>redes neuronales</strong> y el uso básico de
+    <strong>modelos de lenguaje (LLM)</strong>.
+  </p>
+  <p>
+    La prueba es de tipo <strong>test</strong>. Cada pregunta tiene una única respuesta correcta.
+    <strong>Las respuestas incorrectas penalizan</strong>.
+  </p>
+
+  <h3>Criterios de calificación</h3>
+  <ul class="list-check">
+    <li>Respuesta correcta: +1 punto</li>
+    <li>Respuesta incorrecta: −0,25 puntos</li>
+    <li>Respuesta en blanco: 0 puntos</li>
+    <li>Puntuación máxima: 20 puntos</li>
+  </ul>
+</section>
+
+<section class="panel">
+  <h2>Preguntas tipo test</h2>
+
+  <ol>
+    <li>¿Qué es un <em>embedding</em> en PLN?<br>
+      A) Una lista de palabras<br>
+      B) Una representación numérica del significado de un texto<br>
+      C) Un algoritmo de clasificación<br>
+      D) Una técnica de tokenización
+    </li><br>
+
+    <li>¿Qué ventaja principal tienen los embeddings frente a BoW o TF‑IDF?<br>
+      A) Reducen el texto original<br>
+      B) Capturan el significado semántico<br>
+      C) No requieren modelos neuronales<br>
+      D) Funcionan solo con textos cortos
+    </li><br>
+
+    <li>¿Cuál es la principal limitación de los embeddings de palabras clásicos?<br>
+      A) No se pueden comparar<br>
+      B) No capturan el contexto<br>
+      C) Tienen pocas dimensiones<br>
+      D) No sirven para PLN
+    </li><br>
+
+    <li>¿Qué ventaja ofrecen los embeddings de frases?<br>
+      A) Menor coste computacional<br>
+      B) Independencia del contexto<br>
+      C) Capturan el significado global de la frase<br>
+      D) No necesitan entrenamiento
+    </li><br>
+
+    <li>¿Qué modelo genera embeddings de frases?<br>
+      A) Word2Vec<br>
+      B) FastText<br>
+      C) Sentence‑BERT<br>
+      D) TF‑IDF
+    </li><br>
+
+    <li>¿Qué mide la similitud de coseno?<br>
+      A) La distancia absoluta<br>
+      B) El número de palabras comunes<br>
+      C) El ángulo entre vectores<br>
+      D) El tamaño del embedding
+    </li><br>
+
+    <li>Un valor de similitud cercano a 1 indica:<br>
+      A) Textos no relacionados<br>
+      B) Significados opuestos<br>
+      C) Alta similitud semántica<br>
+      D) Error de cálculo
+    </li><br>
+
+    <li>Una similitud de 0.2 indica que los textos son:<br>
+      A) Muy similares<br>
+      B) Moderadamente similares<br>
+      C) Poco relacionados<br>
+      D) Idénticos
+    </li><br>
+
+    <li>¿Qué ocurre si el umbral de similitud es demasiado alto?<br>
+      A) Se obtienen más resultados<br>
+      B) No se devuelve ningún resultado relevante<br>
+      C) Mejora siempre la precisión<br>
+      D) Se ignoran los embeddings
+    </li><br>
+
+    <li>¿Qué función se usa para obtener el documento más similar?<br>
+      A) np.min()<br>
+      B) np.mean()<br>
+      C) np.argmax()<br>
+      D) np.sort()
+    </li><br>
+
+    <li>¿Qué es la tokenización?<br>
+      A) Entrenar un modelo<br>
+      B) Convertir texto en tokens<br>
+      C) Calcular similitud<br>
+      D) Generar embeddings
+    </li><br>
+
+    <li>Problema principal de la tokenización por palabras:<br>
+      A) Secuencias largas<br>
+      B) Alto consumo de CPU<br>
+      C) Palabras fuera del vocabulario (OOV)<br>
+      D) Falta de contexto
+    </li><br>
+
+    <li>Ventaja de la tokenización por caracteres:<br>
+      A) Secuencias cortas<br>
+      B) Manejo excelente de palabras nuevas<br>
+      C) Mejor semántica<br>
+      D) Menor coste
+    </li><br>
+
+    <li>¿Por qué BPE es el método más usado en LLM?<br>
+      A) Elimina la tokenización<br>
+      B) Usa solo caracteres<br>
+      C) Equilibra vocabulario y flexibilidad<br>
+      D) No requiere entrenamiento
+    </li><br>
+
+    <li>Arquitectura base de los LLM modernos:<br>
+      A) CNN<br>
+      B) RNN<br>
+      C) LSTM<br>
+      D) Transformer
+    </li><br>
+
+    <li>¿Qué algoritmo ajusta los pesos de una red neuronal?<br>
+      A) Tokenización<br>
+      B) Backpropagation<br>
+      C) Clustering<br>
+      D) Normalización
+    </li><br>
+
+    <li>Parámetro que controla la creatividad en un chatbot:<br>
+      A) max_length<br>
+      B) temperature<br>
+      C) batch_size<br>
+      D) vocab_size
+    </li><br>
+
+    <li>Una temperature baja produce respuestas:<br>
+      A) Más largas<br>
+      B) Más creativas<br>
+      C) Más precisas y conservadoras<br>
+      D) Aleatorias
+    </li><br>
+
+    <li>Mejorar un chatbot sin reentrenar implica:<br>
+      A) Cambiar la arquitectura<br>
+      B) Añadir más datos<br>
+      C) Ajustar prompts y parámetros<br>
+      D) Reentrenar embeddings
+    </li><br>
+
+    <li>Añadir ejemplos correctos al prompt se llama:<br>
+      A) Fine‑tuning<br>
+      B) Transfer learning<br>
+      C) Few‑shot learning<br>
+      D) Regularización
+    </li>
+  </ol>
+</section>
+
+</main>
+
+<div class="footer">
+  © Departamento de Informática
+</div>
+
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Prueba Evaluativa – Gestión de Alquiler Vacacional (RA5)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Departamento de Informática" />
+    <meta name="description"
+        content="Prueba evaluativa RA5: MVC, Swing y Persistencia de datos con dos ficheros" />
+
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <link rel="stylesheet" href="../../style.css">
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+</head>
+
+<body style="background-color: white;">
+
+    <main style="border-style: none;">
+
+        <section class="panel">
+            <div class="top-block">
+                <img src="../../logo_stucom_black.svg" alt="Logo" height="70px">
+                <div style="text-align: right">
+                    <p>Prueba: Evaluativa</p>
+                    <p>Asignatura: MP0485</p>
+                    <p>Resultado de Aprendizaje: RA5</p>
+                </div>
+            </div>
+
+            <div style="display: flex;justify-content: space-between;margin-top:20px">
+                <p><strong>Nombre alumno: _____________________________________________</strong></p>
+                <p><strong>Calificación: __________</strong></p>
+            </div>
+
+            <h2>Enunciado</h2>
+            <p>
+                Desarrolla una aplicación Java que simule la gestión interna de una
+                <strong>empresa de alquiler vacacional</strong> (similar a Airbnb o Booking).
+                El sistema permitirá gestionar las viviendas disponibles y las reservas de clientes,
+                utilizando una arquitectura <strong>MVC</strong> y un entorno gráfico basado en
+                <strong>Swing</strong>.
+            </p>
+            <p>
+                La información se almacenará en <strong>dos ficheros de texto</strong>, simulando
+                una base de datos interna del sistema.
+            </p>
+
+            <h3>1. Estructura del proyecto <span class="points">(1 punto)</span></h3>
+
+            <pre>
+gestor_alquiler_vacacional/
+│
+├── src/
+│   ├── modelo/
+│   │   ├── Vivienda.java
+│   │   ├── Cliente.java
+│   │   └── Reserva.java
+│   │
+│   ├── controlador/
+│   │   └── ReservasControlador.java
+│   │
+│   ├── vista/
+│   │   ├── VentanaPrincipal.java
+│   │   ├── VentanaViviendasDisponibles.java
+│   │   ├── VentanaReservasActuales.java
+│   │   ├── VentanaCrearReserva.java
+│   │   └── VentanaBorrarReserva.java
+│   │
+│   ├── persistencia/
+│   │   ├── FicheroViviendas.java
+│   │   └── FicheroReservas.java
+│
+├── data/
+│   ├── Viviendas.txt
+│   └── Reservas.txt
+            </pre>
+
+            <h3>2. Arquitectura MVC <span class="points">(1 punto)</span></h3>
+
+            <div class="mermaid">
+                flowchart LR
+
+                subgraph Modelo
+                Vivienda
+                Cliente
+                Reserva
+                end
+
+                subgraph Controlador
+                ReservasControlador
+                end
+
+                subgraph Vista
+                VentanaPrincipal
+                VentanaViviendasDisponibles
+                VentanaReservasActuales
+                VentanaCrearReserva
+                VentanaBorrarReserva
+                end
+
+                subgraph Persistencia
+                FicheroViviendas
+                FicheroReservas
+                end
+
+                Vista --> Controlador
+                Controlador --> Modelo
+                Controlador --> Persistencia
+                Persistencia --> Modelo
+                Controlador --> Vista
+            </div>
+
+            <hr style="page-break-before:always;">
+
+            <h3>3. Funcionalidades de la Aplicación (Swing) <span class="points">(5 puntos) (las pantallas tienen que funcionar, no se puntúa si solo se ha hecho el diseño)</span></h3>
+            <ul class="list-check">
+                <li><strong>Diseño gráfico:</strong> Ventanas creadas con <code>JFrame</code> y cuadros
+                    de diálogo <code>JOptionPane</code>.</li>
+                <li><strong>Ver viviendas disponibles:</strong> Mostrar únicamente las viviendas que
+                    no estén asociadas a ninguna reserva. <strong>[1 punto]</strong></li>
+                <li><strong>Listar alojamientos actuales:</strong> Mostrar los clientes alojados y
+                    la vivienda ocupada por cada uno. <strong>[1 punto]</strong></li>
+                <li><strong>Crear reserva:</strong> Introducir los datos del cliente, mostrar las
+                    viviendas disponibles y asignar una vivienda al cliente.
+                    <strong>[2 puntos]</strong>
+                </li>
+                <li><strong>Borrar reserva:</strong> Eliminar una reserva existente a partir del DNI
+                    del cliente. <strong>[1 punto]</strong></li>
+            </ul>
+
+            <h3>4. Persistencia de Datos <span class="points">(2 puntos)</span></h3>
+            <ul class="list-check">
+                <li><strong>Fichero de viviendas:</strong> Se carga al iniciar la aplicación y contiene
+                    todas las viviendas disponibles.</li>
+                <li><strong>Fichero de reservas:</strong> Guarda las reservas activas (clientes y
+                    viviendas asignadas).</li>
+            </ul>
+
+            <h3>5. Validaciones y Restricciones <span class="points">(1 punto)</span></h3>
+            <ul class="list-check">
+                <li><strong>Una vivienda solo puede estar asignada a un cliente.</strong></li>
+                <li><strong>Un cliente no puede tener más de una reserva.</strong></li>
+                <li><strong>Tratamiento de errores:</strong> Mostrar un diálogo asociado a una excepción personalizada
+                    en caso de intentar crear una reserva con un cliente que ya tiene una reserva o asignar una
+                    vivienda que ya está ocupada.</li>
+            </ul>
+            <h3><strong><em>Si no compila o se presenta con errores de código, la nota será 0.</em></strong></h3>
+
+        </section>
+
+        <div style="page-break-before: always;"></div>
+        <section class="panel">
+            <h2>Diagrama UML</h2>
+            <div class="mermaid">
+                classDiagram
+                direction LR
+
+                class Vivienda {
+                    -String codigo
+                    -String direccion
+                    -String localidad
+                    -int capacidad
+                    -double precioNoche
+                    -boolean disponible
+                }
+
+                class Cliente {
+                    -String dni
+                    -String nombre
+                    -String telefono
+                }
+
+                class Reserva {
+                    -Cliente cliente
+                    -Vivienda vivienda
+                }
+
+                class ReservasControlador {
+                    +verViviendasDisponibles()
+                    +listarReservas()
+                    +crearReserva()
+                    +borrarReserva()
+                    +guardarReservas()
+                    +cargarDatos()
+                }
+
+                class FicheroViviendas {
+                    +cargar() ArrayList~Vivienda~
+                }
+
+                class FicheroReservas {
+                    +guardar(ArrayList~Reserva~) void
+                    +cargar() ArrayList~Reserva~
+                }
+
+                ReservasControlador --> Reserva
+                Reserva --> Cliente
+                Reserva --> Vivienda
+                ReservasControlador --> FicheroViviendas
+                ReservasControlador --> FicheroReservas
+            </div>
+        </section>
+
+    </main>
+
+    <div class="footer">
+        © Stucom · Departamento de Informática
+    </div>
+
+</body>
+
+</html>

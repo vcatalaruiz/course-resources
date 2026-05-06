@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Prueba Evaluativa – Gestión de una Farmacia (RA5)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Departamento de Informática" />
+    <meta name="description" content="Prueba evaluativa RA5: Herencia, Interfaces, Swing y Persistencia de datos" />
+
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <link rel="stylesheet" href="../../style.css">
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+</head>
+
+<body style="background-color: white;">
+
+    <main style="border-style: none;">
+
+        <section class="panel">
+            <div class="top-block">
+                <img src="../../logo_stucom_black.svg" alt="Logo" height="70px">
+                <div style="text-align: right">
+                    <p>Prueba: Evaluativa</p>
+                    <p>Asignatura: MP0485</p>
+                    <p>Resultado de Aprendizaje: RA5</p>
+                </div>
+            </div>
+
+            <div style="display: flex;justify-content: space-between;margin-top:20px">
+                <p><strong>Nombre alumno: _____________________________________________</strong></p>
+                <p><strong>Calificación: __________</strong></p>
+            </div>
+
+            <h2>Enunciado</h2>
+            <p>
+                Crea un programa para simular la gestión de una <strong>farmacia</strong>.
+                La información se almacenará en un fichero de texto, simulando una base de datos interna.
+                El entorno gráfico debe implementarse con <strong>Swing</strong>, utilizando botones, etiquetas y cajas
+                de texto para mostrar la información e interactuar con el usuario.
+            </p>
+
+            <h3>1. Estructura del proyecto <span class="points">(1 punto)</span></h3>
+
+            <pre>
+farmacia/
+│
+├── src/
+│   ├── modelo/
+│   │   ├── Medicamento.java
+│   │   ├── MedicamentoConReceta.java
+│   │   └── MedicamentoSinReceta.java
+│   │
+│   ├── controlador/
+│   │   └── Farmacia.java
+│   │
+│   ├── vista/
+│   │   ├── VentanaPrincipal.java
+│   │   ├── VentanaRegistrar.java
+│   │   ├── VentanaBuscar.java
+│   │   ├── VentanaRetirar.java
+│   │   ├── VentanaListarConReceta.java
+│   │   └── VentanaListarSinReceta.java
+│   │
+│   ├── persistencia/
+│   │   └── FicheroMedicamentos.java
+│   │
+├── data/
+│   └── medicamentos.txt
+            </pre>
+
+            <h3>2. Arquitectura MVC <span class="points">(1 punto)</span></h3>
+
+            <div class="mermaid">
+                flowchart LR
+
+                subgraph Modelo
+                Medicamento
+                ConReceta
+                SinReceta
+                end
+
+                subgraph Controlador
+                Farmacia
+                end
+
+                subgraph Vista
+                VentanaPrincipal
+                Dialogos
+                end
+
+                subgraph Persistencia
+                FicheroMedicamentos
+                end
+
+                Vista --> Controlador
+                Controlador --> Modelo
+                Controlador --> Persistencia
+                Persistencia --> Modelo
+                Controlador --> Vista
+            </div>
+
+            <hr style="page-break-before:always;">
+
+            <h3>3. Interfaz Gráfica (Swing) <span class="points">(5 puntos)</span></h3>
+            <ul class="list-check">
+                <li>Implementar una ventana principal con JFrame, submenus con JDialog y paneles de información
+                    JOptionPane.</li>
+                <li><strong>Registrar medicamento:</strong> Añadir un medicamento con receta o sin receta. [1 punto]</li>
+                <li><strong>Buscar medicamento:</strong> Pedir el código para localizarlo y mostrar sus detalles. [1
+                    punto]</li>
+                <li><strong>Retirar medicamento:</strong> Eliminar un medicamento del inventario por su código. [1 punto]</li>
+                <li><strong>Listar con receta:</strong> Mostrar solo medicamentos que requieren receta. [1 punto]
+                </li>
+                <li><strong>Listar sin receta:</strong> Mostrar solo medicamentos de venta libre. [1 punto]</li>
+            </ul>
+
+            <h3>4. Persistencia de Datos <span class="points">(2 puntos)</span></h3>
+            <ul class="list-check">
+                <li>Guardar los datos al cerrar el programa</li>
+                <li>Cargar los datos al iniciar</li>
+            </ul>
+
+            <h3>5. Validaciones y Restricciones <span class="points">(1 punto)</span></h3>
+            <ul class="list-check">
+                <li><strong>Código único:</strong> No puede haber dos medicamentos con el mismo código. </li>
+                <li><strong>Tratamiento de errores:</strong> Mostrar un diálogo asociado a una excepción personalizada.
+                </li>
+            </ul>
+
+        </section>
+
+        <section class="panel">
+            <h2>Diagrama UML</h2>
+            <div class="mermaid">
+                classDiagram
+                 direction LR
+
+                class Medicamento {
+                    -String codigoFarmacos
+                    -String nombre
+                    -String laboratorio
+                    -double precio
+                }
+
+                class MedicamentoConReceta {
+                    -String principioActivo
+                }
+
+                class MedicamentoSinReceta {
+                    -String tipo
+                }
+
+                class Farmacia {
+                    -ArrayList~Medicamento~ medicamentos
+                    +guardar() void
+                    +cargar() void
+                    +registrarMedicamento(Medicamento m) void
+                    +buscarPorCodigo(String codigo) Medicamento
+                    +retirarMedicamento(String codigo) void
+                    +listarConReceta() ArrayList~MedicamentoConReceta~
+                    +listarSinReceta() ArrayList~MedicamentoSinReceta~
+                }
+
+                class FicheroMedicamentos {
+                    -String rutaArchivo
+                    +guardar(ArrayList~Medicamento~ medicamentos) void
+                    +cargar() ArrayList~Medicamento~
+                }
+
+                Medicamento <|-- MedicamentoConReceta
+                Medicamento <|-- MedicamentoSinReceta
+                Farmacia --> Medicamento
+                Farmacia --> FicheroMedicamentos
+            </div>
+        </section>
+    </main>
+
+    <div class="footer">
+        © Stucom · Departamento de Informática
+    </div>
+
+</body>
+
+</html>
