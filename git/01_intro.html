@@ -218,6 +218,19 @@ y trabajar de forma colaborativa.
 git clone https://github.com/usuario/proyecto.git
 </code></pre>
 
+<h3>6.2. Renombrar mensaje de commit (amend)</h3>
+
+<p>
+Si necesitas corregir el mensaje del último commit, puedes usar <code>--amend</code>.
+Esto <strong>reescribe el historial</strong>, por lo que se requiere un <code>push --force</code>
+si el commit ya fue enviado al repositorio remoto.
+</p>
+
+<pre><code class="language-bash">
+git commit --amend -m "#556 new message to be updated"
+git push --force
+</code></pre>
+
 </section>
 
 <!-- SECCIÓN 7 -->
