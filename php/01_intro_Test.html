@@ -18,6 +18,9 @@
   <script src="../menu.js" defer></script>
   <link rel="stylesheet" href="../style.css" />
   <link rel="stylesheet" href="../menu.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-php.min.js"></script>
 </head>
 
 <body>
@@ -203,158 +206,102 @@
         explanation: "true es un valor booleano."
       },
       {
-        text: "¿Qué función convierte texto a mayúsculas?",
-        options: [
-          "uppercase()",
-          "toUpper()",
-          "strtoupper()",
-          "upper()"
-        ],
-        answer: 2,
-        explanation: "strtoupper() convierte a mayúsculas."
-      },
-      {
-        text: "¿Qué función busca una subcadena?",
-        options: [
-          "find()",
-          "search()",
-          "strpos()",
-          "locate()"
-        ],
-        answer: 2,
-        explanation: "strpos() busca la posición de una subcadena."
-      },
-      {
-        text: "¿Qué función divide un string en array?",
-        options: [
-          "split()",
-          "divide()",
-          "explode()",
-          "separate()"
-        ],
-        answer: 2,
-        explanation: "explode() divide un string en array."
-      },
-      {
-        text: "¿Qué función une un array en string?",
-        options: [
-          "join()",
-          "merge()",
-          "implode()",
-          "concatenate()"
-        ],
-        answer: 2,
-        explanation: "implode() une un array en string."
-      },
-      {
-        text: "¿Cuál es la diferencia entre echo y print?",
-        options: [
-          "No hay diferencia",
-          "echo es más rápido y acepta múltiples parámetros",
-          "print es más rápido",
-          "print no devuelve valor"
-        ],
+        text: "¿Cuál es el resultado?",
+        codeBlock: "$a = 10;\n$b = 3;\necho $a % $b;",
+        options: ["0", "1", "3", "Error"],
         answer: 1,
-        explanation: "echo es más rápido y acepta múltiples parámetros."
+        explanation: "El operador % devuelve el resto de la división: 10 % 3 = 1."
       },
       {
-        text: "¿Qué función reemplaza texto en un string?",
-        options: [
-          "replace()",
-          "strreplace()",
-          "str_replace()",
-          "substitute()"
-        ],
+        text: "¿Cuál es el resultado?",
+        codeBlock: "$x = 5;\n$x += 3;\necho $x;",
+        options: ["5", "3", "8", "Error"],
         answer: 2,
-        explanation: "str_replace() reemplaza texto."
+        explanation: "$x += 3 equivale a $x = $x + 3 = 8."
       },
       {
-        text: "¿Qué función extrae parte de un string?",
-        options: [
-          "extract()",
-          "substring()",
-          "substr()",
-          "cut()"
-        ],
+        text: "¿Cuál es el resultado?",
+        codeBlock: "$a = 10;\n$b = '10';\necho $a === $b ? 'igual' : 'distinto';",
+        options: ["igual", "distinto", "Error", "1"],
+        answer: 1,
+        explanation: "=== compara tipo y valor; $a es int y $b es string, por tanto distinto."
+      },
+      {
+        text: "¿Cuál es el resultado?",
+        codeBlock: "$n = 7;\nif ($n > 10) {\n  echo 'mayor';\n} elseif ($n > 5) {\n  echo 'medio';\n} else {\n  echo 'menor';\n}",
+        options: ["mayor", "menor", "medio", "Error"],
         answer: 2,
-        explanation: "substr() extrae parte de un string."
+        explanation: "7 no es mayor que 10, pero sí mayor que 5, se imprime 'medio'."
       },
       {
-        text: "¿Qué función invierte un string?",
-        options: [
-          "reverse()",
-          "strrev()",
-          "backwards()",
-          "flip()"
-        ],
-        answer: 1,
-        explanation: "strrev() invierte un string."
-      },
-      {
-        text: "¿Cuál es el tipo de dato 3.14?",
-        options: [
-          "Integer",
-          "Float",
-          "Double",
-          "Decimal"
-        ],
-        answer: 1,
-        explanation: "3.14 es un float."
-      },
-      {
-        text: "¿Cuál es el tipo de dato null?",
-        options: [
-          "Un valor falso",
-          "Una cadena vacía",
-          "Un valor sin asignar",
-          "Un tipo especial que indica ausencia de valor"
-        ],
+        text: "¿Cuál es el resultado?",
+        codeBlock: "$x = 4;\nif ($x % 2 == 0) {\n  echo 'par';\n} else {\n  echo 'impar';\n}",
+        options: ["impar", "Error", "0", "par"],
         answer: 3,
-        explanation: "null es un tipo especial que indica ausencia de valor."
+        explanation: "4 % 2 == 0 es verdadero, se imprime 'par'."
       },
       {
-        text: "¿Qué hace var_dump()?",
-        options: [
-          "Imprime el valor",
-          "Muestra el tipo y valor",
-          "Elimina la variable",
-          "Verifica el tipo"
-        ],
-        answer: 1,
-        explanation: "var_dump() muestra tipo, longitud y valor."
-      },
-      {
-        text: "¿Qué función crea dinámicamente una variable?",
-        options: [
-          "dynamic_var()",
-          "$${var}",
-          "$$var",
-          "new_var()"
-        ],
+        text: "¿Cuál es el resultado?",
+        codeBlock: "$color = 'rojo';\nswitch ($color) {\n  case 'azul': echo 'Azul'; break;\n  case 'rojo': echo 'Rojo'; break;\n  default: echo 'Otro';\n}",
+        options: ["Azul", "Otro", "Rojo", "Error"],
         answer: 2,
-        explanation: "$$var crea variables dinámicas."
+        explanation: "El switch coincide con 'rojo' e imprime 'Rojo'."
       },
       {
-        text: "Interpretación: $x = 'nombre'; $$x = 'Juan'; echo $nombre;",
-        options: [
-          "Imprime: nombre",
-          "Imprime: Juan",
-          "Imprime: $nombre",
-          "Error"
-        ],
+        text: "¿Cuál es el resultado?",
+        codeBlock: "$x = 2;\nswitch ($x) {\n  case 1:\n  case 2: echo 'uno o dos'; break;\n  case 3: echo 'tres'; break;\n}",
+        options: ["tres", "uno o dos", "Error", "2"],
         answer: 1,
-        explanation: "$$x crea $nombre = 'Juan'."
+        explanation: "El caso 1 cae en el caso 2 sin break, ambos ejecutan 'uno o dos'."
       },
       {
-        text: "¿Qué resultado da strlen('Hola')?",
-        options: [
-          "3",
-          "4",
-          "5",
-          "0"
-        ],
+        text: "¿Cuál es el resultado?",
+        codeBlock: "for ($i = 0; $i < 3; $i++) {\n  echo $i;\n}",
+        options: ["123", "012", "0123", "Error"],
         answer: 1,
-        explanation: "strlen('Hola') devuelve 4."
+        explanation: "El bucle for va de 0 a 2 (menor que 3), imprime 012."
+      },
+      {
+        text: "¿Cuál es el resultado?",
+        codeBlock: "$i = 1;\n$sum = 0;\nwhile ($i <= 4) {\n  $sum += $i;\n  $i++;\n}\necho $sum;",
+        options: ["4", "10", "8", "Error"],
+        answer: 1,
+        explanation: "1+2+3+4 = 10."
+      },
+      {
+        text: "¿Cuál es el resultado?",
+        codeBlock: "$i = 0;\ndo {\n  echo $i;\n  $i++;\n} while ($i < 3);",
+        options: ["123", "Error", "012", "0"],
+        answer: 2,
+        explanation: "do-while ejecuta el bloque primero, luego comprueba; imprime 0, 1, 2."
+      },
+      {
+        text: "¿Cuál es el resultado?",
+        codeBlock: "for ($i = 0; $i < 5; $i++) {\n  if ($i == 3) break;\n  echo $i;\n}",
+        options: ["01234", "0123", "012", "Error"],
+        answer: 2,
+        explanation: "break detiene el bucle cuando $i == 3, imprime 0, 1, 2."
+      },
+      {
+        text: "¿Cuál es el resultado?",
+        codeBlock: "for ($i = 0; $i < 5; $i++) {\n  if ($i == 2) continue;\n  echo $i;\n}",
+        options: ["01234", "0134", "01234", "Error"],
+        answer: 1,
+        explanation: "continue salta la iteración cuando $i == 2, imprime 0, 1, 3, 4."
+      },
+      {
+        text: "¿Cuál es el resultado?",
+        codeBlock: "$total = 0;\nfor ($i = 1; $i <= 5; $i++) {\n  if ($i % 2 == 0) $total += $i;\n}\necho $total;",
+        options: ["6", "9", "15", "Error"],
+        answer: 0,
+        explanation: "Suma los pares: 2 + 4 = 6."
+      },
+      {
+        text: "¿Cuál es el resultado?",
+        codeBlock: "$x = 0;\nif ($x || !$x) {\n  echo 'ok';\n} else {\n  echo 'no';\n}",
+        options: ["no", "Error", "ok", "0"],
+        answer: 2,
+        explanation: "!$x es true (ya que $x es 0), por tanto la condición es true, imprime 'ok'."
       }
     ];
 
@@ -373,6 +320,19 @@
         const title = document.createElement('div');
         title.className = 'question-title';
         title.textContent = `${index + 1}. ${q.text}`;
+        card.appendChild(title);
+
+        if (q.codeBlock) {
+          const codeDiv = document.createElement('div');
+          codeDiv.className = 'question-text-code';
+          const pre = document.createElement('pre');
+          const code = document.createElement('code');
+          code.className = 'language-php';
+          code.textContent = q.codeBlock;
+          pre.appendChild(code);
+          codeDiv.appendChild(pre);
+          card.appendChild(codeDiv);
+        }
 
         const options = document.createElement('div');
         options.className = 'options';
@@ -399,11 +359,11 @@
         explanation.className = 'explanation';
         explanation.hidden = true;
 
-        card.appendChild(title);
         card.appendChild(options);
         card.appendChild(explanation);
         quizForm.appendChild(card);
       });
+      Prism.highlightAllUnder(quizForm);
     }
 
     function checkAnswers() {
