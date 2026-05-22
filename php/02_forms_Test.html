@@ -18,6 +18,9 @@
   <script src="../menu.js" defer></script>
   <link rel="stylesheet" href="../style.css" />
   <link rel="stylesheet" href="../menu.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-php.min.js"></script>
 </head>
 
 <body>
@@ -203,158 +206,102 @@
         explanation: "El atributo id se usa para identificar elementos en CSS/JavaScript."
       },
       {
-        text: "¿Cuál es el tipo de entrada para selectores radio?",
-        options: [
-          "type='select'",
-          "type='radio'",
-          "type='option'",
-          "type='choice'"
-        ],
-        answer: 1,
-        explanation: "type='radio' crea un botón de opción única."
-      },
-      {
-        text: "¿Cuál es el tipo de entrada para casillas de verificación?",
-        options: [
-          "type='select'",
-          "type='check'",
-          "type='checkbox'",
-          "type='option'"
-        ],
+        text: "¿Cuál es el resultado?",
+        codeBlock: "<?php\n$_GET['nombre'] = 'Ana';\necho isset($_GET['nombre']) ? $_GET['nombre'] : 'vacío';\n?>",
+        options: ["vacío", "Error", "Ana", "nombre"],
         answer: 2,
-        explanation: "type='checkbox' crea una casilla de verificación."
+        explanation: "isset() devuelve true porque 'nombre' está definido, imprime 'Ana'."
       },
       {
-        text: "¿Qué elemento HTML crea una lista desplegable?",
-        options: [
-          "<input>",
-          "<dropdown>",
-          "<select>",
-          "<list>"
-        ],
+        text: "¿Cuál es el resultado?",
+        codeBlock: "<?php\n$_POST['edad'] = '25';\n$edad = (int) $_POST['edad'];\necho $edad + 5;\n?>",
+        options: ["255", "30", "Error", "25"],
+        answer: 1,
+        explanation: "Convertimos '25' a entero y sumamos 5: resultado 30."
+      },
+      {
+        text: "¿Cuál es el resultado?",
+        codeBlock: "<?php\n$nombre = '<scr' + 'ipt>alert(1)<\/scr' + 'ipt>';\necho htmlspecialchars($nombre);\n?>",
+        options: ["Ejecuta el alert", "Error", "[vacío]", "&lt;script&gt;alert(1)&lt;/script&gt;"],
+        answer: 3,
+        explanation: "htmlspecialchars() convierte < y > en entidades HTML, evitando XSS."
+      },
+      {
+        text: "¿Cuál es el resultado?",
+        codeBlock: "<?php\n$input = '  Hola mundo  ';\necho trim($input);\n?>",
+        options: ["  Hola mundo  ", "Holamundo", "Hola mundo", "Error"],
         answer: 2,
-        explanation: "El elemento <select> crea una lista desplegable."
+        explanation: "trim() elimina los espacios al inicio y al final del string."
       },
       {
-        text: "¿Qué método es más seguro para datos sensibles como contraseñas?",
-        options: [
-          "GET",
-          "POST",
-          "Ambos igual",
-          "Ninguno"
-        ],
-        answer: 1,
-        explanation: "POST es más seguro porque los datos no aparecen en la URL."
-      },
-      {
-        text: "¿Para qué se usa htmlspecialchars()?",
-        options: [
-          "Validar datos",
-          "Convertir caracteres especiales en entidades HTML",
-          "Encriptar datos",
-          "Comprimir datos"
-        ],
-        answer: 1,
-        explanation: "htmlspecialchars() protege contra XSS."
-      },
-      {
-        text: "¿Cuál es el tipo de entrada para subir archivos?",
-        options: [
-          "type='upload'",
-          "type='file'",
-          "type='document'",
-          "type='attachment'"
-        ],
-        answer: 1,
-        explanation: "type='file' permite subir archivos."
-      },
-      {
-        text: "¿Qué hace el super array $_REQUEST?",
-        options: [
-          "Solo GET",
-          "Solo POST",
-          "GET y POST combinados",
-          "Todas las variables"
-        ],
+        text: "¿Cuál es el resultado?",
+        codeBlock: "<?php\n$_POST['email'] = 'test@example.com';\nif (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {\n  echo 'válido';\n} else {\n  echo 'inválido';\n}\n?>",
+        options: ["inválido", "Error", "válido", "test@example.com"],
         answer: 2,
-        explanation: "$_REQUEST contiene datos de GET y POST."
+        explanation: "filter_var() con FILTER_VALIDATE_EMAIL valida que el email tiene formato correcto."
       },
       {
-        text: "¿Qué atributo HTML proporciona un texto de ayuda en el campo?",
-        options: [
-          "help",
-          "title",
-          "placeholder",
-          "hint"
-        ],
+        text: "¿Cuál es el resultado?",
+        codeBlock: "<?php\n$_POST['usuario'] = '';\nif (empty($_POST['usuario'])) {\n  echo 'Campo vacío';\n} else {\n  echo $_POST['usuario'];\n}\n?>",
+        options: ["Error", "[nada]", "usuario", "Campo vacío"],
+        answer: 3,
+        explanation: "empty() devuelve true para strings vacíos, imprime 'Campo vacío'."
+      },
+      {
+        text: "¿Cuál es el resultado?",
+        codeBlock: "<?php\n$datos = '<b>Texto</b> con <i>etiquetas</i>';\necho strip_tags($datos);\n?>",
+        options: ["<b>Texto</b> con <i>etiquetas</i>", "Error", "Texto con etiquetas", "[vacío]"],
         answer: 2,
-        explanation: "El atributo placeholder muestra un texto de ayuda."
+        explanation: "strip_tags() elimina todas las etiquetas HTML, dejando solo el texto."
       },
       {
-        text: "¿Cuál es el tipo de entrada para direcciones de correo?",
-        options: [
-          "type='mail'",
-          "type='email'",
-          "type='e-mail'",
-          "type='address'"
-        ],
+        text: "¿Cuál es el resultado?",
+        codeBlock: "<?php\n$_GET['pagina'] = '3';\n$pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;\necho $pagina;\n?>",
+        options: ["1", "Error", "'3'", "3"],
+        answer: 3,
+        explanation: "$_GET['pagina'] existe, se convierte a entero: resultado 3."
+      },
+      {
+        text: "¿Cuál es el resultado?",
+        codeBlock: "<?php\n$_POST['precio'] = '19.99abc';\n$precio = filter_var($_POST['precio'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);\necho $precio;\n?>",
+        options: ["Error", "19.99", "19.99abc", "0"],
         answer: 1,
-        explanation: "type='email' valida direcciones de correo."
+        explanation: "FILTER_SANITIZE_NUMBER_FLOAT elimina caracteres no numéricos, dejando 19.99."
       },
       {
-        text: "Interpretación: <input type='text' name='usuario'> con método GET",
-        options: [
-          "El dato aparece en: procesar.php?usuario=valor",
-          "El dato aparece en el cuerpo",
-          "No se envía el dato",
-          "El dato se encripta"
-        ],
-        answer: 0,
-        explanation: "Con GET, los datos aparecen en la URL."
+        text: "¿Cuál es el resultado?",
+        codeBlock: "<?php\n$metodo = $_SERVER['REQUEST_METHOD'];\nif ($metodo === 'POST') {\n  echo 'Formulario enviado';\n} else {\n  echo 'Solo GET';\n}\n?>",
+        options: ["Formulario enviado", "Error", "POST", "Solo GET"],
+        answer: 3,
+        explanation: "$_SERVER['REQUEST_METHOD'] en una carga normal es GET, imprime 'Solo GET'."
       },
       {
-        text: "¿Qué función valida un email?",
-        options: [
-          "is_email()",
-          "filter_var(\$email, FILTER_VALIDATE_EMAIL)",
-          "validate_email()",
-          "check_email()"
-        ],
-        answer: 1,
-        explanation: "filter_var() con FILTER_VALIDATE_EMAIL valida emails."
-      },
-      {
-        text: "¿Cuál es el tipo de entrada para números?",
-        options: [
-          "type='digit'",
-          "type='numeric'",
-          "type='number'",
-          "type='integer'"
-        ],
+        text: "¿Cuál es el resultado?",
+        codeBlock: "<?php\n$_POST['nombre'] = 'Juan';\n$nombre = htmlspecialchars(trim($_POST['nombre']));\necho strlen($nombre);\n?>",
+        options: ["Error", "5", "4", "0"],
         answer: 2,
-        explanation: "type='number' es para campos numéricos."
+        explanation: "trim() no elimina nada, htmlspecialchars() tampoco cambia 'Juan', strlen('Juan') = 4."
       },
       {
-        text: "¿Qué atributo limita el rango de un número?",
-        options: [
-          "range",
-          "min y max",
-          "limit",
-          "bounds"
-        ],
-        answer: 1,
-        explanation: "Los atributos min y max limitan el rango."
+        text: "¿Cuál es el resultado?",
+        codeBlock: "<?php\n$_POST['acepta'] = 'on';\nif (isset($_POST['acepta'])) {\n  echo 'Acepta condiciones';\n} else {\n  echo 'No acepta';\n}\n?>",
+        options: ["on", "No acepta", "Error", "Acepta condiciones"],
+        answer: 3,
+        explanation: "Los checkboxes envían 'on' cuando están marcados; isset() devuelve true."
       },
       {
-        text: "¿Qué hace el método strip_tags()?",
-        options: [
-          "Elimina caracteres especiales",
-          "Elimina etiquetas HTML",
-          "Valida el formulario",
-          "Encripta los datos"
-        ],
-        answer: 1,
-        explanation: "strip_tags() elimina etiquetas HTML."
+        text: "¿Cuál es el resultado?",
+        codeBlock: "<?php\n$_GET['q'] = 'php forms';\n$busqueda = htmlspecialchars($_GET['q']);\necho 'Buscando: ' . $busqueda;\n?>",
+        options: ["Buscando: ", "Error", "Buscando: php forms", "php forms"],
+        answer: 2,
+        explanation: "Concatenamos el string con el valor saneado, imprime 'Buscando: php forms'."
+      },
+      {
+        text: "¿Cuál es el resultado?",
+        codeBlock: "<?php\n$_POST['num'] = '-5';\n$num = (int) $_POST['num'];\nif ($num < 0) {\n  echo 'negativo';\n} else {\n  echo 'positivo';\n}\n?>",
+        options: ["positivo", "Error", "-5", "negativo"],
+        answer: 3,
+        explanation: "Convertimos '-5' a entero, -5 < 0 es true, imprime 'negativo'."
       }
     ];
 
@@ -373,6 +320,19 @@
         const title = document.createElement('div');
         title.className = 'question-title';
         title.textContent = `${index + 1}. ${q.text}`;
+        card.appendChild(title);
+
+        if (q.codeBlock) {
+          const codeDiv = document.createElement('div');
+          codeDiv.className = 'question-text-code';
+          const pre = document.createElement('pre');
+          const code = document.createElement('code');
+          code.className = 'language-php';
+          code.textContent = q.codeBlock;
+          pre.appendChild(code);
+          codeDiv.appendChild(pre);
+          card.appendChild(codeDiv);
+        }
 
         const options = document.createElement('div');
         options.className = 'options';
@@ -399,11 +359,11 @@
         explanation.className = 'explanation';
         explanation.hidden = true;
 
-        card.appendChild(title);
         card.appendChild(options);
         card.appendChild(explanation);
         quizForm.appendChild(card);
       });
+      Prism.highlightAllUnder(quizForm);
     }
 
     function checkAnswers() {
