@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Clase de Repaso · Examen 0487 Entornos de Desarrollo</title>
+  <meta name="description" content="Clase previa de repaso para el examen de Entornos de Desarrollo. Repaso de UT1 a UT6 sin revelar preguntas." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <link rel="stylesheet" href="../style.css" />
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../script.js" defer></script>
+</head>
+<body>
+  <div class="deck">
+    <section class="slide cover" id="slide-1">
+      <div style="max-width: 60%;">
+        <div><img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt=""></div>
+        <div class="title">Repaso previo al examen · 0487 Entornos de Desarrollo</div>
+        <div class="subtitle">DAM-DAW · UT1 a UT6 · Vicente Català Ruiz</div>
+      </div>
+      <div class="logo-first-page"><img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;"></div>
+    </section>
+
+    <section class="slide" id="objetivo">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h2>Objetivo de la sesión</h2>
+      <p>Repasar los conceptos importantes del módulo para llegar al examen con una visión clara, conectada y práctica.</p>
+      <ul>
+        <li>No vamos a “adivinar preguntas”.</li>
+        <li>Sí vamos a identificar ideas clave, relaciones entre unidades y errores típicos.</li>
+        <li>La prioridad es saber <strong>razonar</strong> las respuestas, no memorizar frases aisladas.</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="mapa">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h2>Mapa general del examen</h2>
+      <p>El temario trabaja una progresión lógica:</p>
+      <ol>
+        <li>Cómo funciona un sistema informático y el software.</li>
+        <li>Cómo se prepara un entorno de desarrollo.</li>
+        <li>Cómo se prueba y depura una aplicación.</li>
+        <li>Cómo se mejora, mantiene y documenta el código.</li>
+        <li>Cómo se modela la estructura con UML.</li>
+        <li>Cómo se modela el comportamiento del sistema.</li>
+      </ol>
+    </section>
+
+    <section class="slide" id="tecnica-test">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h2>Estrategia para un test técnico</h2>
+      <ul>
+        <li>Lee primero el enunciado completo: suele dar el contexto de la respuesta.</li>
+        <li>Descarta opciones imposibles: muchas mezclan conceptos incompatibles.</li>
+        <li>Busca palabras clave: <em>compilación</em>, <em>depuración</em>, <em>herencia</em>, <em>ciclo de vida</em>, <em>actor</em>, <em>estado</em>.</li>
+        <li>Si dudas entre dos, piensa: “¿qué problema está intentando resolver este concepto?”</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="ut1-title">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h2>UT1 · Fundamentos del desarrollo de software</h2>
+      <p>Ideas que deben quedar claras: sistema informático, tipos de software, ciclo de vida, código fuente/objeto/ejecutable, máquinas virtuales y lenguajes.</p>
+    </section>
+
+    <section class="slide" id="sistema-informatico">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h3>1. Sistema informático: hardware + software</h3>
+      <ul>
+        <li><strong>CPU:</strong> interpreta y ejecuta instrucciones.</li>
+        <li><strong>Memoria:</strong> almacena datos e instrucciones; RAM para ejecución, almacenamiento para persistencia.</li>
+        <li><strong>Periféricos:</strong> entrada, salida y almacenamiento.</li>
+        <li><strong>Sistema operativo:</strong> coordina recursos y hace de intermediario entre aplicaciones y hardware.</li>
+      </ul>
+      <p><strong>Pregunta guía:</strong> cuando abro un archivo, ¿quién coordina la petición, la lectura del disco y la aplicación que lo muestra?</p>
+    </section>
+
+    <section class="slide" id="tipos-software">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h3>2. Clasificación funcional del software</h3>
+      <ul>
+        <li><strong>Software de sistema:</strong> sistema operativo, controladores.</li>
+        <li><strong>Software de aplicación:</strong> programas orientados a tareas del usuario.</li>
+        <li><strong>Software de programación:</strong> lenguajes, compiladores, IDEs.</li>
+        <li><strong>Software de utilidades:</strong> antivirus, copias de seguridad, optimizadores.</li>
+      </ul>
+      <p><strong>Error típico:</strong> confundir una aplicación de usuario con software de sistema.</p>
+    </section>
+
+    <section class="slide" id="ciclo-vida">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h3>3. Ciclo de vida del software</h3>
+      <ol>
+        <li><strong>Requisitos y análisis:</strong> qué necesita el cliente y qué restricciones existen.</li>
+        <li><strong>Diseño:</strong> arquitectura, módulos, datos, modelos.</li>
+        <li><strong>Codificación:</strong> implementación siguiendo buenas prácticas.</li>
+        <li><strong>Pruebas:</strong> comprobación de funcionamiento.</li>
+        <li><strong>Despliegue:</strong> puesta en producción.</li>
+        <li><strong>Mantenimiento:</strong> correcciones, adaptaciones y mejoras.</li>
+      </ol>
+    </section>
+
+    <section class="slide" id="modelos-ciclo">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h3>4. Modelos del ciclo de vida</h3>
+      <ul>
+        <li><strong>Cascada:</strong> secuencial, claro, pero poco flexible ante cambios.</li>
+        <li><strong>Ágil:</strong> iterativo, por sprints, permite adaptación continua.</li>
+        <li><strong>Prototipos:</strong> útil cuando los requisitos no están completamente definidos.</li>
+      </ul>
+      <p><strong>Clave:</strong> relacionar cada modelo con el tipo de proyecto y el nivel de incertidumbre.</p>
+    </section>
+
+    <section class="slide" id="codigo-fuente-objeto-ejecutable">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h3>5. Del código fuente al ejecutable</h3>
+      <ul>
+        <li><strong>Código fuente:</strong> escrito por el programador; legible por humanos.</li>
+        <li><strong>Código objeto:</strong> resultado intermedio de la compilación; aún no es el producto final.</li>
+        <li><strong>Ejecutable:</strong> archivo final que puede ejecutar el sistema operativo tras compilación/enlazado.</li>
+      </ul>
+      <p><strong>Secuencia mental:</strong> escribir → compilar → enlazar/generar → ejecutar.</p>
+    </section>
+
+    <section class="slide" id="vm-codigo-intermedio">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h3>6. Máquinas virtuales y código intermedio</h3>
+      <p>Algunos lenguajes generan un código intermedio que se ejecuta sobre una máquina virtual.</p>
+      <ul>
+        <li><strong>Java:</strong> código fuente → bytecode → JVM.</li>
+        <li><strong>.NET:</strong> código fuente → IL → CLR.</li>
+        <li><strong>Python:</strong> código fuente → bytecode → PVM/intérprete.</li>
+      </ul>
+      <p><strong>Idea clave:</strong> portabilidad: el mismo programa puede funcionar en distintas plataformas si existe la máquina virtual adecuada.</p>
+    </section>
+
+    <section class="slide" id="lenguajes">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h3>7. Clasificación de lenguajes</h3>
+      <ul>
+        <li><strong>Por nivel:</strong> bajo nivel, medio nivel, alto nivel.</li>
+        <li><strong>Por paradigma:</strong> imperativo, orientado a objetos, funcional, lógico.</li>
+        <li><strong>Por ejecución:</strong> compilados, interpretados o con código intermedio.</li>
+      </ul>
+      <p><strong>Ejemplo:</strong> C suele asociarse a compilación y control cercano al hardware; Python a alto nivel e interpretación; Java a POO y bytecode.</p>
+    </section>
+
+    <section class="slide" id="ut2-title">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h2>UT2 · Instalación y configuración de entornos</h2>
+      <p>El foco está en saber para qué sirve un IDE, cómo se configura, cómo se amplía y cómo se integra con herramientas como Git.</p>
+    </section>
+
+    <section class="slide" id="ides">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h3>1. IDE: concepto y ejemplos</h3>
+      <ul>
+        <li>Integra editor, compilador/intérprete, depurador, gestión de proyectos y control de versiones.</li>
+        <li><strong>Eclipse:</strong> libre, extensible, muy usado en Java.</li>
+        <li><strong>Visual Studio:</strong> propietario, con versión Community gratuita, muy usado en .NET.</li>
+        <li><strong>PyCharm Community:</strong> gratuito para Python; versión Professional con funciones avanzadas.</li>
+        <li><strong>IntelliJ IDEA:</strong> muy usado en Java/Kotlin, con Community y Ultimate.</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="productividad-ide">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h3>2. Productividad en el IDE</h3>
+      <ul>
+        <li>Personalizar temas, fuentes y paneles no cambia el código, pero mejora el flujo de trabajo.</li>
+        <li>Los atajos reducen tiempo y errores repetitivos.</li>
+        <li>Los plugins añaden capacidades: Git, bases de datos, frameworks, Docker, análisis de código.</li>
+      </ul>
+      <p><strong>Idea clave:</strong> configurar bien el entorno también forma parte del trabajo profesional.</p>
+    </section>
+
+    <section class="slide" id="automatizacion-git">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h3>3. Automatización y Git</h3>
+      <ul>
+        <li>Los scripts automatizan tareas repetitivas: crear proyectos, instalar dependencias, compilar.</li>
+        <li>Git permite controlar versiones, colaborar y recuperar cambios.</li>
+        <li>Operaciones esenciales: <strong>clone, status, add, commit, push, pull, branch, merge</strong>.</li>
+      </ul>
+      <p><strong>Clave de examen:</strong> commit guarda una instantánea local; push la envía al remoto; pull trae cambios.</p>
+    </section>
+
+    <section class="slide" id="ut3-title">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h2>UT3 · Pruebas y depuración</h2>
+      <p>Las pruebas detectan fallos; la depuración ayuda a analizarlos y corregirlos.</p>
+    </section>
+
+    <section class="slide" id="tipos-pruebas">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h3>1. Tipos de pruebas</h3>
+      <ul>
+        <li><strong>Unitarias:</strong> prueban funciones o métodos aislados.</li>
+        <li><strong>Funcionales:</strong> validan funcionalidades desde el punto de vista del usuario/requisitos.</li>
+        <li><strong>Integración:</strong> comprueban que varios módulos funcionan correctamente juntos.</li>
+        <li><strong>Regresión:</strong> verifican que cambios nuevos no rompen lo que ya funcionaba.</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="depuracion">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h3>2. Depuración en el IDE</h3>
+      <ul>
+        <li><strong>Breakpoint:</strong> detiene la ejecución en una línea concreta.</li>
+        <li><strong>Inspección de variables:</strong> permite ver valores y estado de objetos.</li>
+        <li><strong>Step over:</strong> avanza sin entrar en métodos.</li>
+        <li><strong>Step into:</strong> entra en el método llamado.</li>
+        <li><strong>Step return:</strong> sale del método actual.</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="junit-pytest">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h3>3. Automatización de pruebas</h3>
+      <p>JUnit y PyTest permiten ejecutar verificaciones de forma sistemática y repetible.</p>
+      <pre><code class="language-java">@Test
+public void testSumar() {
+    int resultado = sumar(2, 3);
+    assertEquals(5, resultado);
+}</code></pre>
+      <p><strong>Idea clave:</strong> una prueba automatizada comprueba un resultado esperado sin intervención manual.</p>
+    </section>
+
+    <section class="slide" id="incidencias">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h3>4. Documentación de incidencias</h3>
+      <p>Una incidencia bien registrada debe permitir reproducir y priorizar el fallo.</p>
+      <ul>
+        <li>Descripción clara del error.</li>
+        <li>Pasos para reproducirlo.</li>
+        <li>Entorno de prueba.</li>
+        <li>Resultado esperado y obtenido.</li>
+        <li>Gravedad, prioridad y estado.</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="ut4-title">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h2>UT4 · Optimización y mantenimiento del código</h2>
+      <p>Mejorar código no siempre significa añadir funciones: muchas veces significa hacerlo más claro, simple y mantenible.</p>
+    </section>
+
+    <section class="slide" id="refactorizacion">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h3>1. Refactorización</h3>
+      <p>Modificar la estructura interna del código sin cambiar su comportamiento externo.</p>
+      <ul>
+        <li>Renombrar variables y métodos.</li>
+        <li>Extraer métodos.</li>
+        <li>Eliminar código duplicado.</li>
+        <li>Simplificar condicionales.</li>
+        <li>Modularizar con clases y métodos claros.</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="dry-kiss-yagni">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h3>2. Principios de mejora</h3>
+      <ul>
+        <li><strong>DRY:</strong> no repetir lógica; extraer lo común.</li>
+        <li><strong>KISS:</strong> mantener soluciones simples y comprensibles.</li>
+        <li><strong>YAGNI:</strong> no implementar funcionalidad que aún no se necesita.</li>
+      </ul>
+      <p><strong>Atajo mental:</strong> menos duplicación, menos complejidad, menos código innecesario.</p>
+    </section>
+
+    <section class="slide" id="analisis-estatico">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h3>3. Análisis estático y documentación</h3>
+      <ul>
+        <li><strong>SonarQube:</strong> análisis de calidad en múltiples lenguajes, duplicación, complejidad, vulnerabilidades.</li>
+        <li><strong>ESLint:</strong> análisis centrado en JavaScript y derivados.</li>
+        <li><strong>Javadoc:</strong> documentación para Java.</li>
+        <li><strong>Sphinx:</strong> documentación habitual en Python.</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="ut5-title">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h2>UT5 · Modelado orientado a objetos</h2>
+      <p>UML ayuda a representar la estructura del sistema antes o durante la implementación.</p>
+    </section>
+
+    <section class="slide" id="clase-objeto">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h3>1. Clase, objeto y POO</h3>
+      <ul>
+        <li><strong>Clase:</strong> plantilla que define atributos y métodos.</li>
+        <li><strong>Objeto:</strong> instancia concreta de una clase, con valores propios.</li>
+        <li><strong>Herencia:</strong> una clase reutiliza y especializa otra.</li>
+        <li><strong>Polimorfismo:</strong> una misma operación puede comportarse de formas distintas.</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="visibilidad">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h3>2. Visibilidad UML</h3>
+      <ul>
+        <li><strong>+</strong> público: accesible desde cualquier clase.</li>
+        <li><strong>-</strong> privado: accesible solo desde la propia clase.</li>
+        <li><strong>#</strong> protegido: accesible desde la clase y sus subclases.</li>
+        <li><strong>~</strong> paquete: accesible dentro del mismo paquete.</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="relaciones-clases">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h3>3. Relaciones en diagramas de clases</h3>
+      <ul>
+        <li><strong>Asociación:</strong> relación general entre clases.</li>
+        <li><strong>Agregación:</strong> “tiene un”, parte independiente; rombo blanco.</li>
+        <li><strong>Composición:</strong> parte con ciclo de vida dependiente; rombo negro.</li>
+        <li><strong>Herencia:</strong> generalización/especialización; flecha con triángulo blanco.</li>
+        <li><strong>Dependencia:</strong> uso puntual; línea discontinua.</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="ingenieria">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h3>4. Ingeniería directa e inversa</h3>
+      <ul>
+        <li><strong>Ingeniería directa:</strong> generar código a partir de un modelo UML.</li>
+        <li><strong>Ingeniería inversa:</strong> generar diagramas a partir de código existente.</li>
+      </ul>
+      <p><strong>Importante:</strong> la herramienta genera estructura; la lógica de negocio debe desarrollarse y revisarse.</p>
+    </section>
+
+    <section class="slide" id="ut6-title">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h2>UT6 · Modelado dinámico</h2>
+      <p>Los diagramas de comportamiento muestran qué hace el sistema y cómo evoluciona o interactúa en el tiempo.</p>
+    </section>
+
+    <section class="slide" id="casos-uso-repaso">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h3>1. Casos de uso</h3>
+      <ul>
+        <li>Representan funcionalidades desde la perspectiva de actores externos.</li>
+        <li>Elementos: actor, caso de uso, asociación, include, extend, generalización.</li>
+        <li>Responden a: <em>¿qué ofrece el sistema al usuario?</em></li>
+      </ul>
+    </section>
+
+    <section class="slide" id="interaccion-repaso">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h3>2. Interacción: secuencia y comunicación</h3>
+      <ul>
+        <li><strong>Secuencia:</strong> enfatiza el orden temporal de los mensajes.</li>
+        <li><strong>Comunicación:</strong> enfatiza relaciones entre participantes y mensajes.</li>
+      </ul>
+      <p><strong>Pregunta guía:</strong> si lo importante es “qué mensaje ocurre primero y cuál después”, piensa en secuencia.</p>
+    </section>
+
+    <section class="slide" id="actividades-estados-repaso">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h3>3. Actividades y estados</h3>
+      <ul>
+        <li><strong>Actividad:</strong> flujo de trabajo, acciones, decisiones, rutas alternativas y paralelismo.</li>
+        <li><strong>Estados:</strong> ciclo de vida de un objeto, eventos y transiciones.</li>
+      </ul>
+      <p><strong>Ejemplo mental:</strong> un pedido puede pasar por creado, pagado, enviado, entregado o cancelado.</p>
+    </section>
+
+    <section class="slide" id="herramientas-uml">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h3>4. Herramientas UML</h3>
+      <ul>
+        <li>Visual Paradigm, StarUML, Enterprise Architect, Modelio, ArgoUML.</li>
+        <li>Permiten modelar diagramas, documentar, exportar y en algunos casos generar o sincronizar código.</li>
+      </ul>
+      <p><strong>Clave:</strong> una herramienta ayuda, pero no sustituye a un modelo correcto.</p>
+    </section>
+
+    <section class="slide" id="errores-tipicos">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h2>Errores típicos que conviene evitar</h2>
+      <ul>
+        <li>Confundir prueba con depuración.</li>
+        <li>Confundir código objeto con ejecutable final.</li>
+        <li>Confundir agregación y composición.</li>
+        <li>Creer que refactorizar es añadir funcionalidad.</li>
+        <li>Usar “diagrama de clases” para representar procesos o flujos.</li>
+        <li>Olvidar que Git commit es local y push es remoto.</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="actividad-rapida-1">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h2>Actividad rápida 1 · Clasifica</h2>
+      <p>En parejas, clasificad estos elementos y justificadlo:</p>
+      <ul>
+        <li>Sistema operativo</li>
+        <li>Antivirus</li>
+        <li>PyCharm</li>
+        <li>Aplicación de facturación</li>
+        <li>Git</li>
+        <li>JUnit</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="actividad-rapida-2">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h2>Actividad rápida 2 · Elige el diagrama</h2>
+      <ul>
+        <li>Quiero mostrar funcionalidades disponibles para un usuario externo.</li>
+        <li>Quiero mostrar el orden de mensajes entre objetos.</li>
+        <li>Quiero representar decisiones y rutas alternativas de un proceso.</li>
+        <li>Quiero representar el ciclo de vida de un pedido.</li>
+        <li>Quiero representar clases, atributos, métodos y relaciones estructurales.</li>
+      </ul>
+    </section>
+
+    <section class="slide" id="cierre">
+      <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+      <h2>Cierre: cómo estudiar las últimas horas</h2>
+      <ul>
+        <li>Repasa definiciones con ejemplos, no solo de memoria.</li>
+        <li>Haz comparativas: compilado vs interpretado, prueba vs depuración, clase vs objeto.</li>
+        <li>Dibuja mentalmente los símbolos UML básicos.</li>
+        <li>Practica descartar opciones falsas por contradicción técnica.</li>
+        <li>Si no sabes una respuesta, no improvises: razona desde el concepto.</li>
+      </ul>
+    </section>
+
+    <div class="footer">
+      <div class="bar">
+        <small>Repaso examen · 0487 Entornos de Desarrollo · LinkiaFP</small>
+        <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase Repaso – Entornos de Desarrollo 0487</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0e17;
+    --surface: #1a1928;
+    --surface2: #232238;
+    --accent: #e8c547;
+    --accent2: #7b6ef6;
+    --accent3: #4ecdc4;
+    --danger: #ff6b6b;
+    --text: #fffffe;
+    --text2: #a7a3c2;
+    --border: rgba(255,255,255,0.08);
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Sora', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(15,14,23,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; gap: 0;
+    overflow-x: auto;
+  }
+  .nav-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px; color: var(--accent);
+    padding: 1rem 1.5rem 1rem 0;
+    border-right: 1px solid var(--border);
+    white-space: nowrap; margin-right: 1rem;
+    flex-shrink: 0;
+  }
+  .nav-btn {
+    background: none; border: none; cursor: pointer;
+    font-family: 'Sora', sans-serif;
+    font-size: 13px; color: var(--text2);
+    padding: 1rem 1rem;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all .2s;
+    flex-shrink: 0;
+  }
+  .nav-btn:hover { color: var(--text); }
+  .nav-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* SECTIONS */
+  .section { display: none; padding: 2.5rem 2rem; max-width: 900px; margin: 0 auto; }
+  .section.active { display: block; }
+
+  /* HERO SECTION */
+  .hero-header {
+    text-align: center; padding: 3rem 0 2rem;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--accent); background: rgba(232,197,71,.12);
+    padding: 4px 14px; border-radius: 999px;
+    margin-bottom: 1.2rem;
+  }
+  .hero-header h1 {
+    font-size: 2.4rem; font-weight: 700; line-height: 1.15;
+    margin-bottom: .8rem;
+  }
+  .hero-header p { color: var(--text2); font-size: 1rem; font-weight: 300; }
+
+  /* CARDS GRID */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem; margin-top: 2rem;
+  }
+  .unit-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.4rem;
+    cursor: pointer;
+    transition: all .2s;
+    position: relative; overflow: hidden;
+  }
+  .unit-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .unit-card.ut1::before { background: var(--accent); }
+  .unit-card.ut2::before { background: var(--accent2); }
+  .unit-card.ut3::before { background: var(--accent3); }
+  .unit-card.ut4::before { background: var(--danger); }
+  .unit-card.ut5::before { background: #f9a03f; }
+  .unit-card.ut6::before { background: #c084fc; }
+  .unit-card:hover { background: var(--surface2); transform: translateY(-2px); }
+  .unit-card .ut-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--text2); margin-bottom: .5rem;
+  }
+  .unit-card h3 { font-size: .95rem; font-weight: 600; margin-bottom: .5rem; }
+  .unit-card p { font-size: .8rem; color: var(--text2); line-height: 1.5; }
+  .unit-card .q-count {
+    margin-top: .8rem;
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; color: var(--accent);
+    background: rgba(232,197,71,.1); padding: 3px 10px; border-radius: 99px;
+  }
+
+  /* SECTION HEADER */
+  .sec-header {
+    display: flex; align-items: flex-start; gap: 1rem;
+    margin-bottom: 2rem; padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .sec-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; padding: 6px 14px;
+    border-radius: 8px; white-space: nowrap;
+    font-weight: 700; flex-shrink: 0;
+  }
+  .sec-badge.ut1 { background: rgba(232,197,71,.15); color: var(--accent); }
+  .sec-badge.ut2 { background: rgba(123,110,246,.15); color: var(--accent2); }
+  .sec-badge.ut3 { background: rgba(78,205,196,.15); color: var(--accent3); }
+  .sec-badge.ut4 { background: rgba(255,107,107,.15); color: var(--danger); }
+  .sec-badge.ut5 { background: rgba(249,160,63,.15); color: #f9a03f; }
+  .sec-badge.ut6 { background: rgba(192,132,252,.15); color: #c084fc; }
+  .sec-header-text h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: .3rem; }
+  .sec-header-text p { color: var(--text2); font-size: .85rem; }
+
+  /* CONCEPT BLOCK */
+  .concept {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.4rem;
+    margin-bottom: 1rem;
+  }
+  .concept h4 {
+    font-size: .9rem; font-weight: 600; margin-bottom: .7rem;
+    display: flex; align-items: center; gap: .5rem;
+  }
+  .concept h4 .pill {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px; text-transform: uppercase; letter-spacing: .08em;
+    background: rgba(232,197,71,.15); color: var(--accent);
+    padding: 2px 8px; border-radius: 99px;
+  }
+  .concept p, .concept li {
+    font-size: .85rem; color: var(--text2); line-height: 1.65;
+  }
+  .concept ul { padding-left: 1.2rem; }
+  .concept li { margin-bottom: .3rem; }
+  .concept .highlight {
+    background: rgba(232,197,71,.08); border-left: 3px solid var(--accent);
+    padding: .7rem 1rem; border-radius: 0 8px 8px 0;
+    margin-top: .8rem; font-size: .83rem; color: var(--text); line-height: 1.55;
+  }
+  .concept .highlight strong { color: var(--accent); }
+
+  /* COMPARISON TABLE */
+  .comp-table {
+    width: 100%; border-collapse: collapse; margin-top: .8rem;
+    font-size: .82rem;
+  }
+  .comp-table th {
+    text-align: left; padding: .5rem .7rem;
+    color: var(--text2); font-weight: 600; font-size: .75rem;
+    text-transform: uppercase; letter-spacing: .06em;
+    border-bottom: 1px solid var(--border);
+  }
+  .comp-table td {
+    padding: .55rem .7rem; color: var(--text2); line-height: 1.4;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: top;
+  }
+  .comp-table td:first-child { color: var(--text); font-weight: 500; }
+  .comp-table tr:last-child td { border-bottom: none; }
+
+  /* EXAM QUESTIONS */
+  .exam-q {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.2rem 1.4rem;
+    margin-bottom: .8rem;
+  }
+  .exam-q .q-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px; color: var(--text2); margin-bottom: .5rem;
+  }
+  .exam-q .q-text { font-size: .9rem; font-weight: 600; margin-bottom: .9rem; line-height: 1.5; }
+  .options { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; }
+  .opt {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; padding: .55rem .8rem;
+    font-size: .8rem; color: var(--text2); cursor: pointer;
+    transition: all .2s; display: flex; align-items: flex-start; gap: .5rem;
+  }
+  .opt:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+  .opt.correct { background: rgba(78,205,196,.12); border-color: var(--accent3); color: var(--accent3); }
+  .opt.wrong { background: rgba(255,107,107,.1); border-color: var(--danger); color: var(--danger); }
+  .opt .opt-letter {
+    font-family: 'Space Mono', monospace; font-size: 10px;
+    background: var(--border); padding: 2px 6px; border-radius: 4px;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .opt.correct .opt-letter { background: rgba(78,205,196,.2); }
+  .opt.wrong .opt-letter { background: rgba(255,107,107,.2); }
+  .explanation {
+    margin-top: .8rem; padding: .7rem .9rem;
+    background: rgba(78,205,196,.06); border-left: 2px solid var(--accent3);
+    border-radius: 0 6px 6px 0; font-size: .8rem; color: var(--text2);
+    display: none; line-height: 1.55;
+  }
+  .explanation strong { color: var(--accent3); }
+
+  /* UML DIAGRAM */
+  .diagram-box {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.5rem; margin: 1rem 0;
+    overflow-x: auto;
+  }
+  .uml-class {
+    display: inline-block; min-width: 160px;
+    border: 1.5px solid rgba(249,160,63,.5); border-radius: 8px; overflow: hidden;
+    font-family: 'Space Mono', monospace; font-size: 12px;
+    vertical-align: top; margin: .5rem;
+  }
+  .uml-class .class-name {
+    background: rgba(249,160,63,.15); color: #f9a03f;
+    padding: .5rem .8rem; font-weight: 700; font-size: 12px;
+    border-bottom: 1px solid rgba(249,160,63,.3);
+    text-align: center;
+  }
+  .uml-class .class-attrs, .uml-class .class-methods {
+    padding: .5rem .8rem; border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .uml-class .class-methods { border-bottom: none; }
+  .uml-class .attr, .uml-class .method { display: block; font-size: 11px; color: var(--text2); padding: 1px 0; }
+  .uml-class .attr { color: #c084fc; }
+  .uml-class .method { color: var(--accent3); }
+
+  /* VISIBILITY TABLE */
+  .vis-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; margin-top: .8rem;
+  }
+  .vis-card {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; padding: .8rem; text-align: center;
+  }
+  .vis-symbol {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.6rem; font-weight: 700; display: block; margin-bottom: .3rem;
+  }
+  .vis-card .v-name { font-size: .75rem; font-weight: 600; margin-bottom: .3rem; }
+  .vis-card .v-desc { font-size: .7rem; color: var(--text2); line-height: 1.4; }
+
+  /* RELATIONS */
+  .rel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; margin-top: .8rem; }
+  .rel-card {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; padding: .9rem 1rem;
+  }
+  .rel-card .rel-name { font-weight: 700; font-size: .85rem; margin-bottom: .3rem; }
+  .rel-card .rel-symbol {
+    font-family: 'Space Mono', monospace; font-size: .75rem;
+    color: var(--accent); margin-bottom: .4rem; display: block;
+  }
+  .rel-card .rel-desc { font-size: .78rem; color: var(--text2); line-height: 1.45; }
+  .rel-card.highlight-rel { border-color: rgba(78,205,196,.4); }
+  .rel-card.highlight-rel .rel-name { color: var(--accent3); }
+
+  /* EXAM ALERT */
+  .exam-alert {
+    background: rgba(232,197,71,.08); border: 1px solid rgba(232,197,71,.25);
+    border-radius: var(--radius); padding: 1rem 1.2rem; margin-bottom: 1.2rem;
+    display: flex; gap: .7rem; align-items: flex-start;
+  }
+  .exam-alert .icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+  .exam-alert p { font-size: .83rem; color: var(--text2); line-height: 1.5; }
+  .exam-alert strong { color: var(--accent); }
+
+  /* SCORE */
+  .score-bar {
+    display: flex; align-items: center; gap: 1rem;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1rem 1.4rem; margin-bottom: 1.5rem;
+  }
+  .score-num {
+    font-family: 'Space Mono', monospace; font-size: 1.6rem;
+    color: var(--accent); font-weight: 700; min-width: 60px;
+  }
+  .score-label { font-size: .8rem; color: var(--text2); }
+
+  /* BACK BTN */
+  .back-btn {
+    background: none; border: 1px solid var(--border);
+    color: var(--text2); font-family: 'Sora', sans-serif;
+    font-size: .8rem; padding: .5rem 1rem; border-radius: 8px;
+    cursor: pointer; margin-bottom: 1.5rem; transition: all .2s;
+  }
+  .back-btn:hover { border-color: rgba(255,255,255,.2); color: var(--text); }
+
+  /* PROGRESS */
+  .progress-row {
+    display: flex; align-items: center; gap: .8rem; margin-bottom: 1.5rem;
+  }
+  .progress-track {
+    flex: 1; height: 4px; background: var(--surface2); border-radius: 99px; overflow: hidden;
+  }
+  .progress-fill { height: 100%; background: var(--accent); border-radius: 99px; transition: width .3s; }
+  .progress-label { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--text2); }
+
+  @media (max-width: 600px) {
+    .options { grid-template-columns: 1fr; }
+    .vis-grid { grid-template-columns: repeat(2, 1fr); }
+    .rel-grid { grid-template-columns: 1fr; }
+    .hero-header h1 { font-size: 1.7rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">ED · 0487</div>
+  <button class="nav-btn active" onclick="showSection('home')">Inicio</button>
+  <button class="nav-btn" onclick="showSection('ut1')">UT1 · Fundamentos</button>
+  <button class="nav-btn" onclick="showSection('ut2')">UT2 · IDEs</button>
+  <button class="nav-btn" onclick="showSection('ut3')">UT3 · Pruebas</button>
+  <button class="nav-btn" onclick="showSection('ut4')">UT4 · Optimización</button>
+  <button class="nav-btn" onclick="showSection('ut5')">UT5 · Clases UML</button>
+  <button class="nav-btn" onclick="showSection('ut6')">UT6 · Comportamiento</button>
+  <button class="nav-btn" onclick="showSection('test')">🎯 Test examen</button>
+</nav>
+
+<!-- HOME -->
+<div id="home" class="section active">
+  <div class="hero-header">
+    <div class="hero-tag">Repaso pre-examen · 23 mayo 2026</div>
+    <h1>Entornos de Desarrollo<br>Módulo 0487</h1>
+    <p>Clase resumen centrada en los contenidos del examen ordinario</p>
+  </div>
+
+  <div class="exam-alert">
+    <span class="icon">⚡</span>
+    <p><strong>Formato del examen:</strong> 30 preguntas tipo test · 4 opciones · Una respuesta correcta · Cada correcta +0,33 pts · Cada 3 incorrectas −0,33 pts · En blanco 0 pts. <strong>Penaliza errar a lo loco.</strong></p>
+  </div>
+
+  <p style="font-size:.85rem; color:var(--text2); margin-bottom:1rem;">Haz clic en una unidad para repasar sus conceptos clave y las preguntas exactas del examen.</p>
+
+  <div class="cards-grid">
+    <div class="unit-card ut1" onclick="showSection('ut1')">
+      <div class="ut-label">UT1 · 5 preguntas</div>
+      <h3>Fundamentos del Desarrollo de Software</h3>
+      <p>Sistema operativo, tipos de software, código fuente/objeto/ejecutable, máquinas virtuales, paradigmas y lenguajes.</p>
+      <span class="q-count">Preguntas 1–5</span>
+    </div>
+    <div class="unit-card ut2" onclick="showSection('ut2')">
+      <div class="ut-label">UT2 · 5 preguntas</div>
+      <h3>Instalación y configuración de entornos</h3>
+      <p>IDEs libres vs propietarios, integración de Git, personalización, scripts de automatización, PyCharm en Linux.</p>
+      <span class="q-count" style="color:var(--accent2);background:rgba(123,110,246,.1)">Preguntas 6–10</span>
+    </div>
+    <div class="unit-card ut3" onclick="showSection('ut3')">
+      <div class="ut-label">UT3 · 5 preguntas</div>
+      <h3>Pruebas y depuración</h3>
+      <p>Diferencia pruebas/depuración, pruebas unitarias con frameworks, breakpoints, documentación de fallos, JUnit y PyTest.</p>
+      <span class="q-count" style="color:var(--accent3);background:rgba(78,205,196,.1)">Preguntas 11–15</span>
+    </div>
+    <div class="unit-card ut4" onclick="showSection('ut4')">
+      <div class="ut-label">UT4 · 5 preguntas</div>
+      <h3>Optimización y mantenimiento</h3>
+      <p>Refactorización, principio DRY, SonarQube vs ESLint, Git commit, Javadoc y Sphinx.</p>
+      <span class="q-count" style="color:var(--danger);background:rgba(255,107,107,.1)">Preguntas 16–20</span>
+    </div>
+    <div class="unit-card ut5" onclick="showSection('ut5')">
+      <div class="ut-label">UT5 · 5 preguntas</div>
+      <h3>Modelado OO: Diagramas de Clases</h3>
+      <p>Clase vs objeto, visibilidades (+−#~), composición vs agregación, ingeniería directa, StarUML, flecha herencia.</p>
+      <span class="q-count" style="color:#f9a03f;background:rgba(249,160,63,.1)">Preguntas 21–25</span>
+    </div>
+    <div class="unit-card ut6" onclick="showSection('ut6')">
+      <div class="ut-label">UT6 · 5 preguntas</div>
+      <h3>Modelado Dinámico: Comportamiento</h3>
+      <p>Diagramas de casos de uso, secuencia vs comunicación, actividades para flujos con decisiones, StarUML.</p>
+      <span class="q-count" style="color:#c084fc;background:rgba(192,132,252,.1)">Preguntas 26–30</span>
+    </div>
+  </div>
+</div>
+
+<!-- UT1 -->
+<div id="ut1" class="section">
+  <button class="back-btn" onclick="showSection('home')">← Volver</button>
+  <div class="sec-header">
+    <span class="sec-badge ut1">UT1 · Preguntas 1–5</span>
+    <div class="sec-header-text">
+      <h2>Fundamentos del Desarrollo de Software</h2>
+      <p>5 preguntas del examen provienen de esta unidad</p>
+    </div>
+  </div>
+
+  <div class="exam-alert">
+    <span class="icon">🎯</span>
+    <p>Los temas más preguntados: <strong>rol del SO como intermediario</strong>, <strong>diferencia código objeto/ejecutable</strong>, <strong>máquinas virtuales para portabilidad</strong>, <strong>clasificación del software</strong> y <strong>lenguajes compilados + paradigma OO</strong>.</p>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 1 · El sistema operativo como intermediario <span class="pill">⭐ examen</span></h4>
+    <p>Cuando haces doble clic en un archivo, el SO:</p>
+    <ul style="margin-top:.5rem">
+      <li>Gestiona la solicitud del usuario</li>
+      <li>Recupera el archivo del almacenamiento (disco)</li>
+      <li>Lo envía a la aplicación adecuada (p.ej. un visor de imágenes)</li>
+    </ul>
+    <div class="highlight"><strong>Clave:</strong> El SO no compila ni transforma la CPU; actúa como gestor de recursos entre hardware y software.</div>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 2 · Código fuente → objeto → ejecutable <span class="pill">⭐ examen</span></h4>
+    <table class="comp-table">
+      <tr><th>Tipo</th><th>Qué es</th><th>Se puede ejecutar directamente</th></tr>
+      <tr><td>Código fuente</td><td>El que escribe el programador (legible)</td><td>No</td></tr>
+      <tr><td>Código objeto</td><td>Resultado de la <strong style="color:var(--text)">compilación</strong></td><td>No (falta enlazado)</td></tr>
+      <tr><td>Código ejecutable</td><td>Resultado del <strong style="color:var(--text)">enlazado</strong></td><td>Sí ✓</td></tr>
+    </table>
+    <div class="highlight"><strong>Clave:</strong> código objeto = compilación · ejecutable = compilación + enlazado.</div>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 3 · Máquinas virtuales y portabilidad <span class="pill">⭐ examen</span></h4>
+    <p>Para ejecutar una app en distintas plataformas <em>sin recompilar</em> para cada una:</p>
+    <div class="highlight"><strong>Solución:</strong> Generar <strong>código intermedio</strong> (bytecode) que luego ejecuta una <strong>máquina virtual</strong> (JVM en Java, CLR en .NET). Esto abstrae el SO específico.</div>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 4 · Clasificación del software <span class="pill">⭐ examen</span></h4>
+    <table class="comp-table">
+      <tr><th>Software</th><th>Tipo</th><th>Ejemplos</th></tr>
+      <tr><td>Sistema operativo</td><td>Sistema</td><td>Windows, Linux, macOS</td></tr>
+      <tr><td>App de facturación</td><td>Aplicación</td><td>Sage, SAP</td></tr>
+      <tr><td>Antivirus</td><td>Utilidades</td><td>Avast, Kaspersky</td></tr>
+      <tr><td>IDE / compilador</td><td>Programación</td><td>Eclipse, GCC</td></tr>
+    </table>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 5 · Lenguajes compilados + paradigma OO <span class="pill">⭐ examen</span></h4>
+    <ul>
+      <li><strong style="color:var(--text)">Lenguajes compilados:</strong> traducen todo el código <em>antes</em> de ejecutarlo (≠ interpretados, que lo hacen línea a línea).</li>
+      <li><strong style="color:var(--text)">Paradigma orientado a objetos:</strong> modela el software mediante objetos con atributos y métodos.</li>
+    </ul>
+    <div class="highlight"><strong>Recuerda:</strong> Los compilados NO se traducen línea a línea (eso es el intérprete). El paradigma OO NO evita las instrucciones secuenciales.</div>
+  </div>
+</div>
+
+<!-- UT2 -->
+<div id="ut2" class="section">
+  <button class="back-btn" onclick="showSection('home')">← Volver</button>
+  <div class="sec-header">
+    <span class="sec-badge ut2">UT2 · Preguntas 6–10</span>
+    <div class="sec-header-text">
+      <h2>Instalación y configuración de entornos de desarrollo</h2>
+      <p>5 preguntas del examen</p>
+    </div>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 6 · IDEs libres vs propietarios <span class="pill">⭐ examen</span></h4>
+    <table class="comp-table">
+      <tr><th>IDE</th><th>Tipo</th><th>Coste</th></tr>
+      <tr><td>Eclipse</td><td>Libre / open source</td><td>Gratuito</td></tr>
+      <tr><td>NetBeans</td><td>Libre</td><td>Gratuito</td></tr>
+      <tr><td>PyCharm Community</td><td>Libre / open source</td><td>Gratuito</td></tr>
+      <tr><td>IntelliJ IDEA Community</td><td>Tiene edición gratuita</td><td>Gratuita (Community) / pago (Ultimate)</td></tr>
+      <tr><td style="color:var(--accent)">Visual Studio</td><td style="color:var(--accent)">Propietario</td><td style="color:var(--accent)">Versión Community gratuita ✓</td></tr>
+    </table>
+    <div class="highlight"><strong>Clave examen:</strong> Visual Studio = IDE propietario con versión Community <strong>gratuita</strong>. PyCharm Community Edition = libre, no propietario de pago.</div>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 7 · IDEs e integración de Git <span class="pill">⭐ examen</span></h4>
+    <div class="highlight"><strong>Sí,</strong> los IDEs están diseñados para integrar Git. <strong>No</strong> requieren licencia de GitHub ni es solo Eclipse. Cada IDE tiene sus propias características de integración.</div>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 8 · Mejorar productividad sin tocar el código <span class="pill">⭐ examen</span></h4>
+    <p>Sin modificar el código fuente se puede mejorar el entorno:</p>
+    <div class="highlight"><strong>Clave:</strong> Personalizar atajos de teclado y reorganizar paneles según prioridad de uso. No implica cambiar lenguaje ni desinstalar plugins.</div>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 9 · Automatización de proyectos + control de versiones <span class="pill">⭐ examen</span></h4>
+    <div class="highlight"><strong>Solución correcta:</strong> Usar <strong>scripts</strong> para la configuración automática de proyectos e <strong>integrar Git en el IDE</strong>. No se cambia de SO ni se desactivan plugins.</div>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 10 · Python en Linux <span class="pill">⭐ examen</span></h4>
+    <div class="highlight"><strong>Actuación más coherente:</strong> Instalar <strong>PyCharm Community con snap</strong> y configurar el entorno de Python. Visual Studio for Mac no aplica en Linux.</div>
+  </div>
+</div>
+
+<!-- UT3 -->
+<div id="ut3" class="section">
+  <button class="back-btn" onclick="showSection('home')">← Volver</button>
+  <div class="sec-header">
+    <span class="sec-badge ut3">UT3 · Preguntas 11–15</span>
+    <div class="sec-header-text">
+      <h2>Pruebas y depuración en el desarrollo de aplicaciones</h2>
+      <p>5 preguntas del examen</p>
+    </div>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 11 · Pruebas vs depuración <span class="pill">⭐ examen</span></h4>
+    <table class="comp-table">
+      <tr><th>Actividad</th><th>Objetivo</th></tr>
+      <tr><td>Pruebas</td><td>Detectar fallos de forma sistemática</td></tr>
+      <tr><td>Depuración</td><td>Analizar y corregir los errores encontrados</td></tr>
+    </table>
+    <div class="highlight"><strong>Son complementarias, no excluyentes.</strong> Las pruebas detectan → la depuración corrige. La depuración NO sustituye a las pruebas.</div>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 12 · Prueba unitaria <span class="pill">⭐ examen</span></h4>
+    <p>Comprobar una función <code style="color:var(--accent);font-family:Space Mono,monospace;font-size:.85em">sumar(a, b)</code> de forma <strong style="color:var(--text)">aislada</strong> mediante un framework = <strong style="color:var(--accent3)">prueba unitaria</strong>.</p>
+    <div class="highlight">Unitaria = unidad individual (función/método) · Funcional = funcionalidad completa · Aceptación = validación del cliente.</div>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 13 · Breakpoint (punto de ruptura) <span class="pill">⭐ examen</span></h4>
+    <div class="highlight">Para detener la ejecución en una línea concreta e inspeccionar variables y objetos → <strong>punto de ruptura (breakpoint)</strong>. No es un commit, merge ni hook de Git.</div>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 14 · Documentar un fallo correctamente <span class="pill">⭐ examen</span></h4>
+    <p>El conjunto mínimo para registrar un fallo y poder reproducirlo y priorizarlo:</p>
+    <ul style="margin-top:.5rem">
+      <li>Descripción del error</li>
+      <li>Pasos para reproducirlo</li>
+      <li>Entorno de prueba</li>
+      <li>Gravedad</li>
+      <li>Estado</li>
+    </ul>
+    <div class="highlight">No basta con el nombre del archivo ni con la solución propuesta ni con el historial de commits.</div>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 15 · JUnit y PyTest <span class="pill">⭐ examen</span></h4>
+    <div class="highlight"><strong>Ventaja compartida:</strong> Permiten <strong>automatizar pruebas</strong> y ejecutar verificaciones de forma sistemática. No sustituyen al IDE, no son para pruebas manuales ni están limitados a JavaScript.</div>
+    <p style="margin-top:.5rem;font-size:.82rem;color:var(--text2)">JUnit → Java · PyTest → Python</p>
+  </div>
+</div>
+
+<!-- UT4 -->
+<div id="ut4" class="section">
+  <button class="back-btn" onclick="showSection('home')">← Volver</button>
+  <div class="sec-header">
+    <span class="sec-badge ut4">UT4 · Preguntas 16–20</span>
+    <div class="sec-header-text">
+      <h2>Optimización y Mantenimiento del Código</h2>
+      <p>5 preguntas del examen</p>
+    </div>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 16 · Refactorización <span class="pill">⭐ examen</span></h4>
+    <div class="highlight"><strong>Definición exacta:</strong> Mejorar la <strong>estructura interna</strong> del código <strong>sin alterar su comportamiento externo</strong>. No añade funcionalidades nuevas. No convierte lenguajes.</div>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 17 · Principio DRY <span class="pill">⭐ examen</span></h4>
+    <p><strong style="color:var(--text)">DRY = Don't Repeat Yourself</strong>. Si dos métodos hacen exactamente lo mismo:</p>
+    <div class="highlight"><strong>Solución:</strong> Extraer la lógica común a un <strong>método compartido</strong>. Duplicar más código es exactamente lo contrario de DRY.</div>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 18 · SonarQube vs ESLint <span class="pill">⭐ examen</span></h4>
+    <table class="comp-table">
+      <tr><th>Herramienta</th><th>Lenguajes</th><th>Función principal</th></tr>
+      <tr><td style="color:var(--accent)">SonarQube</td><td>Múltiples lenguajes</td><td>Análisis de calidad de código, detecta bugs, vulnerabilidades y code smells</td></tr>
+      <tr><td style="color:var(--accent3)">ESLint</td><td>JavaScript y derivados (TS, JSX…)</td><td>Linter: detecta errores de estilo y sintaxis en JS</td></tr>
+    </table>
+    <div class="highlight"><strong>Clave:</strong> SonarQube = múltiples lenguajes · ESLint = JavaScript/derivados. SonarQube SÍ puede integrarse con IDEs.</div>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 19 · Operaciones de Git <span class="pill">⭐ examen</span></h4>
+    <table class="comp-table">
+      <tr><th>Acción</th><th>Qué hace</th></tr>
+      <tr><td style="color:var(--accent)">commit</td><td>Guarda una instantánea de los cambios en el historial <strong style="color:var(--text)">local</strong></td></tr>
+      <tr><td>pull</td><td>Descarga cambios del repositorio remoto</td></tr>
+      <tr><td>push</td><td>Sube commits locales al repositorio remoto</td></tr>
+      <tr><td>merge</td><td>Une dos ramas</td></tr>
+      <tr><td>clone</td><td>Copia un repositorio remoto en local</td></tr>
+    </table>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 20 · Javadoc y Sphinx <span class="pill">⭐ examen</span></h4>
+    <div class="highlight"><strong>Combinación correcta:</strong> <strong>Javadoc</strong> para Java · <strong>Sphinx</strong> para Python. No al revés.</div>
+  </div>
+</div>
+
+<!-- UT5 -->
+<div id="ut5" class="section">
+  <button class="back-btn" onclick="showSection('home')">← Volver</button>
+  <div class="sec-header">
+    <span class="sec-badge ut5">UT5 · Preguntas 21–25</span>
+    <div class="sec-header-text">
+      <h2>Modelado Orientado a Objetos: Diagramas de Clases</h2>
+      <p>5 preguntas del examen</p>
+    </div>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 21 · Clase vs Objeto <span class="pill">⭐ examen</span></h4>
+    <div class="highlight"><strong>Clase = plantilla/molde</strong> que define estructura y comportamiento.<br><strong>Objeto = instancia concreta</strong> con valores propios de una clase.<br>Ejemplo: <em>Coche</em> es la clase · <em>miToyota</em> es el objeto.</div>
+
+    <div class="diagram-box" style="margin-top:1rem">
+      <div class="uml-class">
+        <div class="class-name">Coche</div>
+        <div class="class-attrs">
+          <span class="attr">- marca: String</span>
+          <span class="attr">- modelo: String</span>
+        </div>
+        <div class="class-methods">
+          <span class="method">+ encender(): void</span>
+          <span class="method">+ frenar(): void</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept">
+    <h4>Preguntas 22 y 25 · Visibilidades en UML <span class="pill">⭐ examen</span></h4>
+    <div class="vis-grid">
+      <div class="vis-card">
+        <span class="vis-symbol" style="color:var(--accent3)">+</span>
+        <div class="v-name">Público</div>
+        <div class="v-desc">Acceso desde cualquier clase del proyecto</div>
+      </div>
+      <div class="vis-card">
+        <span class="vis-symbol" style="color:var(--danger)">−</span>
+        <div class="v-name">Privado</div>
+        <div class="v-desc">Solo desde la propia clase</div>
+      </div>
+      <div class="vis-card">
+        <span class="vis-symbol" style="color:#f9a03f">#</span>
+        <div class="v-name">Protegido</div>
+        <div class="v-desc">Desde la clase y sus subclases (herencia)</div>
+      </div>
+      <div class="vis-card">
+        <span class="vis-symbol" style="color:var(--accent2)">~</span>
+        <div class="v-name">Paquete</div>
+        <div class="v-desc">Desde clases del mismo paquete</div>
+      </div>
+    </div>
+    <div class="highlight" style="margin-top:.8rem"><strong>P22:</strong> acceso desde propia clase y subclases → <strong># protegido</strong> · <strong>P25:</strong> acceso desde cualquier clase → <strong>+ público</strong></div>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 23 · Relaciones entre clases <span class="pill">⭐ examen</span></h4>
+    <div class="rel-grid">
+      <div class="rel-card">
+        <div class="rel-name">Asociación</div>
+        <div class="rel-symbol">———</div>
+        <div class="rel-desc">Relación genérica. Las clases se conocen pero no hay dependencia de ciclo de vida.</div>
+      </div>
+      <div class="rel-card highlight-rel">
+        <div class="rel-name">Composición ⭐</div>
+        <div class="rel-symbol">◆——— (rombo negro)</div>
+        <div class="rel-desc">Propiedad fuerte. Las partes no existen sin el todo. Comparten ciclo de vida. Ej: Coche compone Motor.</div>
+      </div>
+      <div class="rel-card">
+        <div class="rel-name">Agregación</div>
+        <div class="rel-symbol">◇——— (rombo blanco)</div>
+        <div class="rel-desc">Relación "tiene un" débil. Las partes pueden existir sin el todo.</div>
+      </div>
+      <div class="rel-card">
+        <div class="rel-name">Dependencia</div>
+        <div class="rel-symbol">- - - -→</div>
+        <div class="rel-desc">Uso temporal de una clase por otra. Línea discontinua con flecha.</div>
+      </div>
+    </div>
+    <div class="highlight" style="margin-top:.8rem"><strong>Coche compone Motor + ciclo de vida compartido = Composición (rombo negro).</strong></div>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 24 · Ingeniería directa <span class="pill">⭐ examen</span></h4>
+    <div class="highlight"><strong>Ingeniería directa (forward engineering):</strong> obtener código fuente a partir de un diagrama UML.<br><strong>Ingeniería inversa:</strong> obtener el diagrama a partir del código existente.</div>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 30 · Flecha con punta blanca (triángulo hueco) <span class="pill">⭐ examen</span></h4>
+    <div class="highlight"><strong>Flecha con punta blanca (triángulo hueco) = Herencia / Generalización.</strong> Va desde la subclase hacia la superclase.</div>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 29 · Software para diagramas UML <span class="pill">⭐ examen</span></h4>
+    <div class="highlight"><strong>StarUML</strong> es una herramienta real para diagramas UML (multiplataforma, open source). MagicUML, UMLPlus y UMLGenerator son inventados.</div>
+  </div>
+</div>
+
+<!-- UT6 -->
+<div id="ut6" class="section">
+  <button class="back-btn" onclick="showSection('home')">← Volver</button>
+  <div class="sec-header">
+    <span class="sec-badge ut6">UT6 · Preguntas 26–30</span>
+    <div class="sec-header-text">
+      <h2>Modelado Dinámico: Diagramas de Comportamiento</h2>
+      <p>5 preguntas del examen</p>
+    </div>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 26 · Diagramas de casos de uso <span class="pill">⭐ examen</span></h4>
+    <div class="highlight"><strong>Representan las funcionalidades del sistema desde la perspectiva del actor externo</strong> (usuario). Describen <em>qué hace</em> el sistema, no cómo.</div>
+    <p style="margin-top:.6rem;font-size:.82rem;color:var(--text2)">No representan código objeto, ni historial de commits, ni estructura de clases.</p>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 27 · Secuencia vs Comunicación <span class="pill">⭐ examen</span></h4>
+    <table class="comp-table">
+      <tr><th>Diagrama</th><th>Énfasis</th><th>Ejes / Estructura</th></tr>
+      <tr><td style="color:var(--accent)">Secuencia</td><td>Orden temporal de los mensajes</td><td>Eje vertical = tiempo · Eje horizontal = participantes</td></tr>
+      <tr><td style="color:#c084fc">Comunicación</td><td>Relaciones estructurales entre participantes</td><td>Sin eje temporal, muestra los enlaces entre objetos</td></tr>
+    </table>
+    <div class="highlight"><strong>Clave:</strong> Secuencia = tiempo · Comunicación = estructura de relaciones. El diagrama de comunicación no muestra solo estados (eso son los diagramas de estados).</div>
+  </div>
+
+  <div class="concept">
+    <h4>Pregunta 28 · Flujo con decisiones binarias y rutas alternativas <span class="pill">⭐ examen</span></h4>
+    <div class="highlight"><strong>Para modelar acciones, decisiones binarias y rutas alternativas → Diagrama de actividades.</strong><br>No es un diagrama de clases (estructura), ni de componentes, ni de despliegue.</div>
+  </div>
+
+  <div class="concept">
+    <h4>Resumen tipos de diagramas UML</h4>
+    <table class="comp-table">
+      <tr><th>Diagrama</th><th>Para qué sirve</th></tr>
+      <tr><td>Clases</td><td>Estructura estática: clases, atributos, relaciones</td></tr>
+      <tr><td>Casos de uso</td><td>Funcionalidades desde perspectiva del actor</td></tr>
+      <tr><td>Secuencia</td><td>Orden temporal de mensajes entre objetos</td></tr>
+      <tr><td>Comunicación</td><td>Relaciones estructurales en una interacción</td></tr>
+      <tr><td style="color:var(--accent3)">Actividades</td><td style="color:var(--accent3)">Flujos con acciones, decisiones y rutas alternativas ⭐</td></tr>
+      <tr><td>Estados</td><td>Ciclo de vida de un objeto (estados y transiciones)</td></tr>
+      <tr><td>Componentes</td><td>Estructura de componentes software y sus dependencias</td></tr>
+      <tr><td>Despliegue</td><td>Distribución física del sistema en nodos hardware</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- TEST EXAMEN -->
+<div id="test" class="section">
+  <button class="back-btn" onclick="showSection('home')">← Volver</button>
+  <div class="sec-header">
+    <span class="sec-badge" style="background:rgba(232,197,71,.15);color:var(--accent)">🎯 Test</span>
+    <div class="sec-header-text">
+      <h2>Simulacro de examen</h2>
+      <p>Las 30 preguntas reales del examen. Haz clic en una opción para ver si es correcta.</p>
+    </div>
+  </div>
+
+  <div class="score-bar">
+    <div class="score-num" id="score-display">0/0</div>
+    <div>
+      <div class="score-label">Respuestas correctas</div>
+      <div class="progress-track" style="width:200px;margin-top:6px">
+        <div class="progress-fill" id="score-progress" style="width:0%"></div>
+      </div>
+    </div>
+    <button class="back-btn" style="margin:0;margin-left:auto" onclick="resetTest()">Reiniciar</button>
+  </div>
+
+  <div id="questions-container"></div>
+</div>
+
+<script>
+const questions = [
+  { n:1, ut:'UT1', text:'Cuando se hace doble clic sobre un archivo y se visualiza en pantalla, ¿qué función está realizando el sistema operativo en la interacción entre hardware y software?', opts:['A) Gestionar la solicitud, recuperar el archivo del almacenamiento y enviarlo a la aplicación adecuada.','B) Compilar el archivo para convertirlo en código fuente.','C) Sustituir la memoria RAM por periféricos de salida.','D) Transformar la CPU en un dispositivo de almacenamiento.'], correct:0, exp:'El SO actúa como intermediario: gestiona la solicitud, accede al almacenamiento y dirige el archivo a la aplicación correcta. No compila ni transforma hardware.' },
+  { n:2, ut:'UT1', text:'¿Qué afirmación distingue correctamente el código objeto del código ejecutable?', opts:['A) El código objeto puede ejecutarse directamente y el ejecutable no.','B) Ambos son siempre código fuente escrito por el programador.','C) El código objeto es el resultado de la compilación y el ejecutable es el archivo final generado tras el enlazado.','D) El ejecutable es una versión previa al código fuente.'], correct:2, exp:'Código objeto = resultado de compilar el código fuente. Ejecutable = resultado de enlazar los módulos objeto. Solo el ejecutable puede correr directamente.' },
+  { n:3, ut:'UT1', text:'Un equipo de desarrollo necesita que una misma aplicación pueda ejecutarse en distintas plataformas sin recompilar el código para cada una. ¿Qué solución se ajusta mejor?', opts:['A) Traducir siempre el código fuente a código máquina específico de cada sistema operativo.','B) Guardar únicamente el ejecutable final en una memoria USB.','C) Reescribir la aplicación completa en lenguaje ensamblador.','D) Generar código intermedio para su ejecución mediante una máquina virtual.'], correct:3, exp:'El código intermedio (bytecode) + máquina virtual (JVM, CLR) permiten ejecutar la misma app en distintos SO sin recompilar para cada uno.' },
+  { n:4, ut:'UT1', text:'En un puesto de trabajo conviven una aplicación de facturación, un antivirus y el sistema operativo. ¿Qué clasificación es correcta?', opts:['A) La aplicación de facturación es software de sistema y el antivirus es software de programación.','B) El sistema operativo es software de sistema, la aplicación de facturación es software de aplicación y el antivirus es software de utilidades.','C) La aplicación de facturación es software de utilidades y el sistema operativo es software de aplicación.','D) El antivirus y el sistema operativo son software de programación.'], correct:1, exp:'SO = sistema · App facturación = aplicación (uso productivo específico) · Antivirus = utilidades (mantenimiento del sistema).' },
+  { n:5, ut:'UT1', text:'¿Qué opción combina correctamente un criterio de clasificación por forma de ejecución y un paradigma de programación?', opts:['A) Los lenguajes compilados traducen el código antes de ejecutarlo y el paradigma orientado a objetos modela el software mediante objetos.','B) Los lenguajes compilados se traducen línea por línea y el paradigma lógico se basa en clases con herencia.','C) Los lenguajes interpretados siempre requieren una máquina virtual y el paradigma imperativo evita las secuencias de instrucciones.','D) Los lenguajes de bajo nivel son siempre funcionales.'], correct:0, exp:'Compilados = traducción completa antes de ejecutar. POO = modela mediante objetos. Traducir línea a línea es característica del intérprete.' },
+  { n:6, ut:'UT2', text:'¿Qué afirmación se ajusta a la clasificación de IDE?', opts:['A) Eclipse es un IDE propietario.','B) IntelliJ IDEA no dispone de edición gratuita.','C) PyCharm Community Edition es un IDE propietario de pago.','D) Visual Studio es un IDE propietario que dispone de una versión gratuita Community.'], correct:3, exp:'Visual Studio es de Microsoft (propietario) pero su edición Community es gratuita. Eclipse y NetBeans son libres. PyCharm Community es gratuita y open source. IntelliJ sí tiene edición Community gratuita.' },
+  { n:7, ut:'UT2', text:'Los IDE están diseñados para integrar GIT en el proyecto:', opts:['A) No, solo se puede manipular GIT mediante la consola del equipo.','B) Sí, aunque cada IDE tiene sus propias características.','C) Sí, mediante una licencia de Github.','D) No, solo Eclipse.'], correct:1, exp:'Todos los IDEs modernos integran Git directamente. No requieren licencia de GitHub ni es exclusivo de Eclipse. Cada IDE implementa la integración de forma distinta.' },
+  { n:8, ut:'UT2', text:'¿Qué acción mejora la productividad del entorno sin modificar el código fuente del proyecto?', opts:['A) Sustituir un lenguaje compilado por uno interpretado.','B) Eliminar de forma permanente el explorador de proyectos.','C) Personalizar atajos de teclado y reorganizar paneles según la prioridad de uso.','D) Desinstalar los complementos de productividad para simplificar el IDE.'], correct:2, exp:'Personalizar atajos y reorganizar paneles mejora la eficiencia del flujo de trabajo sin tocar nada del código.' },
+  { n:9, ut:'UT2', text:'Un equipo docente desea crear varios proyectos con la misma estructura y dejar preparado el control de versiones desde el inicio. ¿Qué medida se ajusta mejor?', opts:['A) Utilizar scripts para la configuración automática de proyectos e integrar Git en el IDE.','B) Copiar manualmente los archivos entre carpetas sin repositorio.','C) Cambiar de sistema operativo al crear cada proyecto.','D) Desactivar la gestión de plugins para reducir pasos.'], correct:0, exp:'Scripts de automatización + integración de Git desde el inicio es la solución más eficiente y profesional.' },
+  { n:10, ut:'UT2', text:'En un sistema Linux orientado al desarrollo en Python, se desea instalar un IDE y dejar preparado el entorno Python para trabajar. ¿Qué actuación es la más coherente?', opts:['A) Instalar Visual Studio for Mac.','B) Generar primero un ejecutable .exe antes de crear el proyecto.','C) Trabajar solo con un editor de texto tipo nano sin complementos.','D) Instalar PyCharm Community con snap y configurar el entorno de Python.'], correct:3, exp:'PyCharm Community es el IDE de referencia para Python, se instala fácilmente con snap en Linux y permite configurar el entorno Python directamente.' },
+  { n:11, ut:'UT3', text:'¿Qué relación entre pruebas y depuración refleja mejor su definición?', opts:['A) La depuración sustituye por completo a las pruebas.','B) Las pruebas corrigen errores y la depuración solo documenta incidencias.','C) Las pruebas detectan fallos y la depuración permite analizarlos y corregirlos.','D) Son procesos independientes y no complementarios.'], correct:2, exp:'Son actividades complementarias: las pruebas detectan fallos de forma sistemática; la depuración permite analizar y corregir esos fallos.' },
+  { n:12, ut:'UT3', text:'Si se comprueba una función sumar(a, b) de forma aislada mediante un framework, ¿qué tipo de prueba se está realizando?', opts:['A) Prueba unitaria.','B) Prueba funcional.','C) Prueba de aceptación.','D) Prueba de despliegue.'], correct:0, exp:'Verificar una función o método de forma aislada = prueba unitaria. Las pruebas funcionales evalúan funcionalidades completas.' },
+  { n:13, ut:'UT3', text:'Un/a desarrollador/a desea detener la ejecución en una línea concreta para inspeccionar el valor de una variable y el estado de los objetos. ¿Qué recurso debe utilizar en el IDE?', opts:['A) Un commit.','B) Un punto de ruptura.','C) Un merge.','D) Un hook de Git.'], correct:1, exp:'El breakpoint (punto de ruptura) detiene la ejecución en una línea específica y permite inspeccionar el estado del programa en ese momento.' },
+  { n:14, ut:'UT3', text:'Tras detectar un fallo durante las pruebas, el equipo debe registrar información suficiente para reproducirlo y priorizarlo. ¿Qué conjunto de datos es el más adecuado?', opts:['A) Solo el nombre del archivo afectado.','B) Solo la solución propuesta por el programador.','C) Únicamente el historial completo de commits.','D) Descripción del error, pasos para reproducirlo, entorno de prueba, gravedad y estado.'], correct:3, exp:'La documentación completa de un bug incluye descripción, pasos de reproducción, entorno, gravedad y estado. Ninguno de los otros elementos por sí solo es suficiente.' },
+  { n:15, ut:'UT3', text:'¿Qué ventaja comparten JUnit y PyTest?', opts:['A) Sustituyen al IDE en todas las tareas de desarrollo.','B) Se utilizan exclusivamente para pruebas manuales.','C) Permiten automatizar pruebas y ejecutar verificaciones de forma sistemática.','D) Están limitados al análisis de código JavaScript.'], correct:2, exp:'JUnit (Java) y PyTest (Python) son frameworks de pruebas que permiten automatizar la ejecución de tests y verificaciones de forma sistemática y repetible.' },
+  { n:16, ut:'UT4', text:'¿Qué define mejor la refactorización?', opts:['A) Añadir funcionalidades nuevas, aunque cambie el comportamiento externo.','B) Mejorar la estructura interna del código sin alterar su comportamiento externo.','C) Convertir automáticamente código Java en Python.','D) Sustituir las pruebas por comentarios dentro del código.'], correct:1, exp:'Refactorizar = mejorar estructura interna (legibilidad, mantenibilidad) SIN cambiar lo que hace el programa externamente.' },
+  { n:17, ut:'UT4', text:'Dos métodos realizan exactamente la misma secuencia de verificación, cálculo y pago. ¿Qué actuación se alinea con DRY y con la eliminación de código duplicado?', opts:['A) Extraer la lógica común a un método compartido.','B) Duplicar también el método en una tercera clase.','C) Añadir más condicionales para diferenciar ambos métodos.','D) Mantener los dos métodos sin cambios para evitar riesgos.'], correct:0, exp:'DRY = Don\'t Repeat Yourself. La solución es extraer la lógica repetida a un único método reutilizable.' },
+  { n:18, ut:'UT4', text:'¿Qué afirmación distingue correctamente SonarQube de ESLint según el material?', opts:['A) SonarQube solo analiza JavaScript y ESLint múltiples lenguajes.','B) ESLint genera documentación HTML automáticamente.','C) SonarQube no puede integrarse con IDEs.','D) SonarQube analiza la calidad en múltiples lenguajes, mientras que ESLint se centra en JavaScript y derivados.'], correct:3, exp:'SonarQube es una plataforma multi-lenguaje para análisis de calidad. ESLint es un linter específico para JavaScript/TypeScript/JSX.' },
+  { n:19, ut:'UT4', text:'En un IDE integrado con Git, después de modificar archivos y revisar el estado del repositorio, ¿qué acción guarda una instantánea de los cambios en el historial local?', opts:['A) Pull.','B) Merge.','C) Commit.','D) Clone.'], correct:2, exp:'Commit = guardar una instantánea de los cambios en el historial local. Pull descarga, merge une ramas, clone copia el repositorio.' },
+  { n:20, ut:'UT4', text:'Un equipo necesita mantener documentadas clases y funciones en proyectos Java y Python de forma estructurada y reutilizable. ¿Qué combinación se ajusta mejor?', opts:['A) Javadoc para Python y Sphinx para Java.','B) Javadoc para Java y Sphinx para Python.','C) SonarQube para generar manuales funcionales y ESLint para exportar PDF.','D) Git Hooks como única herramienta de documentación.'], correct:1, exp:'Javadoc es la herramienta estándar de documentación para Java. Sphinx es la estándar para Python (genera documentación desde docstrings y archivos .rst).' },
+  { n:21, ut:'UT5', text:'¿Qué enunciado describe correctamente una clase frente a un objeto?', opts:['A) La clase es una plantilla y el objeto es una instancia concreta con valores propios.','B) La clase es un método y el objeto es un atributo.','C) La clase solo existe en tiempo de ejecución y el objeto solo en fase de diseño.','D) Clase y objeto son equivalentes en UML.'], correct:0, exp:'Clase = plantilla/molde que define estructura y comportamiento. Objeto = instancia concreta de esa clase con valores propios en sus atributos.' },
+  { n:22, ut:'UT5', text:'En un diagrama de clases, ¿qué visibilidad permite acceso desde la propia clase y desde sus subclases?', opts:['A) + público.','B) - privado.','C) ~ paquete.','D) # protegido.'], correct:3, exp:'# protegido (protected): accesible desde la propia clase y desde sus subclases (clases derivadas). + público es accesible desde cualquier clase.' },
+  { n:23, ut:'UT5', text:'Si un diagrama representa que un Coche compone un Motor y que ambas partes comparten ciclo de vida, ¿qué relación debe interpretarse?', opts:['A) Asociación.','B) Composición.','C) Agregación.','D) Dependencia.'], correct:1, exp:'Composición = relación "tiene un" fuerte con ciclo de vida compartido. El Motor no puede existir sin el Coche. Se representa con rombo negro (◆).' },
+  { n:24, ut:'UT5', text:'Un equipo dispone de un diagrama UML completo y desea obtener una base inicial de código fuente estructurado. ¿Qué proceso corresponde a esta necesidad?', opts:['A) Refactorización.','B) Depuración paso a paso.','C) Ingeniería directa.','D) Integración continua.'], correct:2, exp:'Ingeniería directa (forward engineering) = generar código a partir de diagramas UML. La inversa sería obtener diagramas a partir del código.' },
+  { n:25, ut:'UT5', text:'En un diagrama de clases, ¿qué visibilidad permite acceso desde cualquier clase del proyecto?', opts:['A) # protegido.','B) - privado.','C) ~ paquete.','D) + público.'], correct:3, exp:'+ público = accesible desde cualquier clase del proyecto, sin restricciones.' },
+  { n:26, ut:'UT6', text:'¿Qué representan principalmente los diagramas de casos de uso?', opts:['A) Las funcionalidades del sistema desde la perspectiva del actor externo.','B) La estructura de clases con atributos y métodos.','C) El código objeto tras la compilación.','D) El historial de commits del proyecto.'], correct:0, exp:'Los casos de uso describen QUÉ hace el sistema desde el punto de vista del usuario/actor externo. No entran en cómo se implementa.' },
+  { n:27, ut:'UT6', text:'¿Qué característica diferencia al diagrama de secuencia del diagrama de comunicación?', opts:['A) El diagrama de comunicación muestra únicamente estados.','B) El diagrama de secuencia elimina los mensajes asincrónicos.','C) El diagrama de secuencia enfatiza el orden temporal de los mensajes y el de comunicación las relaciones estructurales entre participantes.','D) No existe diferencia funcional entre ambos.'], correct:2, exp:'Secuencia: énfasis en el TIEMPO (eje vertical). Comunicación: énfasis en las RELACIONES ESTRUCTURALES entre objetos participantes.' },
+  { n:28, ut:'UT6', text:'Se desea modelar el proceso "Validar pedido" mostrando acciones, decisiones binarias y rutas alternativas. ¿Qué diagrama resulta más adecuado?', opts:['A) Diagrama de clases.','B) Diagrama de actividades.','C) Diagrama de componentes.','D) Diagrama de despliegue.'], correct:1, exp:'El diagrama de actividades modela flujos de trabajo con acciones, decisiones (rombos), rutas alternativas y concurrencia. Es el equivalente UML a un diagrama de flujo.' },
+  { n:29, ut:'UT6', text:'¿Qué software podemos utilizar para hacer un diagrama UML?', opts:['A) MagicUML','B) UMLPlus','C) UMLGenerator','D) StarUML'], correct:3, exp:'StarUML es una herramienta real y reconocida para crear diagramas UML. Es multiplataforma y open source. Las otras opciones son inventadas.' },
+  { n:30, ut:'UT6', text:'En un diagrama UML, el símbolo de la flecha con la punta blanca (triángulo hueco), ¿qué representa?', opts:['A) Una herencia','B) Una composición','C) Un atributo','D) No existe dicho símbolo'], correct:0, exp:'La flecha con triángulo hueco (punta blanca) representa generalización/herencia en UML. Va desde la subclase hacia la superclase. Es uno de los símbolos más importantes del diagrama de clases.' },
+];
+
+let answered = 0, correct_count = 0;
+
+function buildTest() {
+  const container = document.getElementById('questions-container');
+  container.innerHTML = '';
+  questions.forEach(q => {
+    const div = document.createElement('div');
+    div.className = 'exam-q';
+    div.id = 'q' + q.n;
+    const letters = ['A','B','C','D'];
+    div.innerHTML = `
+      <div class="q-num">${q.ut} · Pregunta ${q.n}</div>
+      <div class="q-text">${q.text}</div>
+      <div class="options">
+        ${q.opts.map((o,i) => `<button class="opt" onclick="answer(${q.n},${i},${q.correct})" id="q${q.n}o${i}">
+          <span class="opt-letter">${letters[i]}</span>${o.substring(3)}
+        </button>`).join('')}
+      </div>
+      <div class="explanation" id="exp${q.n}"><strong>✓ Correcto:</strong> ${q.exp}</div>
+    `;
+    container.appendChild(div);
+  });
+  updateScore();
+}
+
+function answer(qn, chosen, correct) {
+  const opts = document.querySelectorAll(`#q${qn} .opt`);
+  if (opts[0].disabled) return;
+  opts.forEach((o,i) => {
+    o.disabled = true;
+    if (i === correct) o.classList.add('correct');
+    else if (i === chosen && chosen !== correct) o.classList.add('wrong');
+  });
+  document.getElementById('exp'+qn).style.display = 'block';
+  answered++;
+  if (chosen === correct) correct_count++;
+  updateScore();
+}
+
+function updateScore() {
+  document.getElementById('score-display').textContent = correct_count + '/' + answered;
+  const pct = answered > 0 ? Math.round(correct_count/answered*100) : 0;
+  document.getElementById('score-progress').style.width = pct + '%';
+}
+
+function resetTest() {
+  answered = 0; correct_count = 0;
+  buildTest();
+}
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const idx = ['home','ut1','ut2','ut3','ut4','ut5','ut6','test'].indexOf(id);
+  document.querySelectorAll('.nav-btn')[idx]?.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+buildTest();
+</script>
+</body>
+</html>
