@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Prueba Evaluativa – Extraordinaria</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Departamento de Informática" />
+    <meta name="description" content="Prueba evaluativa RA7: Herencia e Interfaces" />
+
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        pre,
+        pre code,
+        code[class*="language-"],
+        code[class*="hljs"],
+        .shell,
+        .hljs {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+            border: 1px solid #ddd !important;
+        }
+
+        pre {
+            padding: 1rem;
+        }
+
+        @media print {
+
+            body,
+            html,
+            main,
+            section,
+            .panel,
+            .top-block,
+            table,
+            th,
+            td,
+            pre,
+            code,
+            .hljs {
+                background: #ffffff !important;
+                color: #000000 !important;
+                box-shadow: none !important;
+            }
+
+            body,
+            html {
+                background: #ffffff !important;
+            }
+
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            a,
+            strong,
+            h1,
+            h2,
+            h3,
+            p,
+            li {
+                color: #000000 !important;
+            }
+
+            .list-check li::marker {
+                color: #000000 !important;
+            }
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+</head>
+
+<body style="background-color: white;">
+
+    <main style="border-style: none;">
+
+        <section class="panel">
+            <div class="top-block">
+                <img src="../logo_stucom_black.svg" alt="Logo Linkia" height="70px">
+                <div style="text-align: right">
+                    <p>Prueba: Evaluativa</p>
+                    <p>Asignatura: MP0485</p>
+                    <p>Temario: Examen extraordinaria MP0485</p>
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; margin-top: 20px; gap: 1rem; flex-wrap: wrap;">
+                <p><strong>Nombre alumno: _____________________________________________</strong></p>
+                <p><strong>Fecha: ______________________</strong></p>
+                <p><strong>Calificación: __________</strong></p>
+            </div>
+
+            <h2>Instrucciones generales</h2>
+            <p>Marca con una X en la tabla las RA que tengas pendientes y realiza únicamente los ejercicios
+                correspondientes a esas RA.</p>
+            <ul class="list-check">
+                <li>Cada RA se evalúa mediante un ejercicio independiente.</li>
+                <li>Si una RA ya está aprobada, no debes realizar ese bloque.</li>
+
+            </ul>
+
+            <h2>Tabla inicial para marcar RA pendientes</h2>
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: center;">
+                <thead>
+                    <tr>
+                        <th style="border: 1px solid #ddd; padding: 10px;">RA1</th>
+                        <th style="border: 1px solid #ddd; padding: 10px;">RA2</th>
+                        <th style="border: 1px solid #ddd; padding: 10px;">RA3</th>
+                        <th style="border: 1px solid #ddd; padding: 10px;">RA4</th>
+                        <th style="border: 1px solid #ddd; padding: 10px;">RA5</th>
+                        <th style="border: 1px solid #ddd; padding: 10px;">RA6</th>
+                        <th style="border: 1px solid #ddd; padding: 10px;">RA7</th>
+                        <th style="border: 1px solid #ddd; padding: 10px;">RA8</th>
+                        <th style="border: 1px solid #ddd; padding: 10px;">RA9</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="border: 1px solid #ddd; padding: 18px;">&nbsp;</td>
+                        <td style="border: 1px solid #ddd; padding: 18px;">&nbsp;</td>
+                        <td style="border: 1px solid #ddd; padding: 18px;">&nbsp;</td>
+                        <td style="border: 1px solid #ddd; padding: 18px;">&nbsp;</td>
+                        <td style="border: 1px solid #ddd; padding: 18px;">&nbsp;</td>
+                        <td style="border: 1px solid #ddd; padding: 18px;">&nbsp;</td>
+                        <td style="border: 1px solid #ddd; padding: 18px;">&nbsp;</td>
+                        <td style="border: 1px solid #ddd; padding: 18px;">&nbsp;</td>
+                        <td style="border: 1px solid #ddd; padding: 18px;">&nbsp;</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>Orden de los bloques del examen:</strong> RA1, RA3, RA2, RA4, RA7, RA5, RA6, RA8 y RA9.</p>
+            <h3>ANTES DE EMPEZAR REVISA LOS EJERCICIOS PORQUE ALGUNOS CONVALIDAN RAS</h3>
+        </section>
+ <div class="salto-pagina"></div>
+        <section class="panel">
+            <h2>RA1 – Introducción a Java</h2>
+            <p><strong>Objetivo:</strong> usar variables, entrada/salida y condicionales en consola.</p>
+            <h3>Ejercicio</h3>
+            <p>Realiza un programa <code>RA1.java</code> que pida por consola el nombre, la edad y la nota (0-10). El
+                programa debe:</p>
+            <ul class="list-check">
+                <li>Almacenar los datos introducidos en variables.</li>
+                <li>Muestra el siguiente mensaje: <em>“Hola [nombre], tienes [edad] años y tu nota es [nota].”</em></li>
+                <li>Realiza una comparación con la nota y el 5 para ver si está aprobado.</li>
+            </ul>
+            <pre><code class="shell">Ejemplo de salida: “Hola Juan, tienes 20 años y tu nota es 7.”</code></pre>
+            <pre><code class="shell">Aprobado: true</code></pre>
+
+        </section>
+
+        <section class="panel">
+            <h2>RA3 – Bucles y arrays estáticos (Convalida RA1)</h2>
+            <p><strong>Objetivo:</strong> trabajar con arrays estáticos y bucles.</p>
+            <h3>Ejercicio</h3>
+            <p>Desarrolla un programa <code>RA3.java</code> que lea 5 números enteros en un array estático (pueden ser
+                fijos) y muestre por consola:</p>
+            <ul class="list-check">
+                <li>La suma de los números.</li>
+                <li>El número máximo y el número mínimo.</li>
+                <li>La cantidad de números pares e impares.</li>
+            </ul>
+            <p><strong>No se puede hacer con ArrayList</strong></p>
+            <p><strong>Se tiene que utilizar un bucle para recorrer el array</strong></p>
+        </section>
+
+        <section class="panel">
+            <h2>RA2 – ArrayList y métodos (Convalida RA1)</h2>
+            <p><strong>Objetivo:</strong> gestionar una lista dinámica con métodos propios.</p>
+            <h3>Ejercicio</h3>
+            <p>Crea un programa <code>RA2.java</code> que utilice un <code>ArrayList</code> para almacenar y gestionar
+                una lista de colores.</p>
+            <ul class="list-check">
+                <li>El programa debe tener los siguientes métodos: <em>Añadir color</em>, <em>Eliminar color</em> y
+                    <em>Mostrar colores</em>.
+                </li>
+                <li>Cada opción debe ser gestionada por un método independiente.</li>
+                <li>El método añadir color tiene un parámetro para recibir el color a añadir.</li>
+                <li>El método eliminar color pregunta al usuario que color desea eliminar.</li>
+                <li>El método mostrar colores no tiene parámetros, pero devuelve la lista de colores.</li>
+            </ul>
+        </section>
+
+        <section class="panel">
+            <h2>RA4 – Clases y objetos (Convalida RA1, RA2 y RA3)</h2>
+            <p><strong>Objetivo:</strong> modelar una clase y utilizar objetos.</p>
+            <h3>Ejercicio</h3>
+            <p>Diseña una clase <code>Alumno</code> en <code>RA4.java</code> con:</p>
+            <ul class="list-check">
+                <li><code>String nombre</code></li>
+                <li><code>int edad</code></li>
+                <li><code>String curso</code></li>
+                <li><code>ArrayList<String> calificaciones</code></li>
+                <li>Constructor que inicialice los atributos.</li>
+                <li>Método <code>mostrarMedia()</code> que imprima la media de las calificaciones.</li>
+                <li>Método <code>mostrarNotaMaxima()</code> que imprima la nota máxima.</li>
+                <li>En el <code>main</code>, crea al menos dos objetos <code>Alumno</code> y muestra su información.
+                </li>
+            </ul>
+
+        </section>
+
+        <section class="panel">
+            <h2>RA7 – Herencia, interfaces y sobrescritura (Convalida RA1, RA2, RA3 y RA4)</h2>
+            <p><strong>Objetivo:</strong> implementar herencia e interfaces en Java.</p>
+            <h3>Ejercicio</h3>
+            <p>A partir del ejercicio de la RA4 (si no lo has hecho hazlo), crea una clase
+                <code>AlumnoInternacional</code> que herede de <code>Alumno</code> y haga lo siguiente:
+            </p>
+            <ul class="list-check">
+                <li>Añade un nuevo atributo <code>paisOrigen</code>.</li>
+                <li>Sobrescribe el método <code>mostrarMedia()</code> para que también muestre el país de origen.</li>
+                <li>Implementa una interfaz <code>InteresadoEnDeportes</code> con un método
+                    <code>mostrarDeporteFavorito()</code>, y haz que <code>AlumnoInternacional</code> la implemente.
+                </li>
+                <li>En el <code>main</code>, crea un objeto de tipo <code>AlumnoInternacional</code> y muestra su
+                    información, incluyendo la media, el país de origen y su deporte favorito.</li>
+            </ul>
+
+        </section>
+
+        <section class="panel">
+            <h2>RA5 – Lógica Swing (Convalida RA1, RA2, RA3 y RA4)</h2>
+            <p><strong>Objetivo:</strong> programar el comportamiento de un formulario Swing.</p>
+            <h3>Ejercicio</h3>
+            <p>Mediante JSwing, haz el ejercico de la RA4 pero con una interfaz gráfica.
+                Para ello, crea un proyecto Java que cumpla con la estructura MVC</p>
+            <ul class="list-check">
+                <li>El modelo es la clase <code>Alumno</code> con sus atributos y métodos.</li>
+                <li>La vista está formada por la pantalla Home y tres pantallas adicionales (accesibles desde Home):
+                    <em>Registro</em>, <em>Listado</em> y <em>Detalle</em>.</li>
+                <li>El controlador gestiona la lógica de la aplicación, como el registro de alumnos, la navegación entre
+                    pantallas y la actualización de la vista.</li>
+            </ul>
+
+        </section>
+ <div class="salto-pagina"></div>
+        <section class="panel">
+            <h2>RA6 – HashMap (Convalida RA1, RA2 y RA3)</h2>
+            <p><strong>Objetivo:</strong> almacenar y buscar datos con <code>HashMap</code>.</p>
+            <h3>Ejercicio</h3>
+            <p>Crea un programa <code>RA6.java</code> que implemente un HashMap< String, String> para almacenar los
+                    vehículos de un concesionario:</p>
+            <ul class="list-check">
+                <li>El programa empieza pidiendo al usuario la matrícula y la marca de 5 vehículos mediante un bucle.
+                </li>
+                <li>Almacena cada par matrícula-marca en el HashMap, utilizando la matrícula como clave.</li>
+                <li>Una vez introducidos los datos, se llama al método <code>mostrarVehiculo(String matrícula)</code>
+                    para que devuelva la marca del vehículo o un mensaje de error si no se encuentra.</li>
+                <li>Muestra el resultado de la búsqueda por consola.</li>
+            </ul>
+        </section>
+
+        <section class="panel">
+            <h2>RA8 y RA9 – Bases de datos (Convalida RA1, RA2, RA3, RA4)</h2>
+            <p><strong>Objetivo:</strong> diseñar la tabla y consultas SQL para una base de datos relacional de alumnos.</p>
+            <h3>Ejercicio</h3>
+            <p>Haz el ejercicio de la RA4 implementando una BBDD relacional.</p>
+            <ul class="list-check">
+                <li>Diseña la tabla SQL para almacenar la información de los alumnos, incluyendo su nombre, edad, curso
+                    y calificaciones.</li>
+                <li>Escribe un método con una consulta SQL para insertar un nuevo alumno en la tabla.</li>
+                <li>Escribe un método con una consulta SQL para actualizar la edad de un alumno específico.</li>
+                <li>Escribe un método con una consulta SQL para eliminar un alumno de la tabla.</li>
+                <li>Escribe un método con una consulta SQL para recuperar todos los alumnos que están en un curso
+                    específico.</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <div class="footer">
+        © Departamento de Informática
+    </div>
+
+</body>
+
+</html>
