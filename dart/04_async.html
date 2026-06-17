@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-EVTW1307T1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programación Asíncrona en Dart</title>
+    <script src="/course-resources/index.js" defer></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/dart.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+    <script src="../index.js" defer></script>
+    <script src="../menu.js" defer></script>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../menu.css">
+</head>
+
+<body>
+
+    <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+        <div class="vc-rail-head">
+            <span class="vc-rail-title">Índice</span>
+            <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+        <ul id="vc-list" class="vc-list">
+            <li><a href="#introduccion-asincronia">1. Introducción a la Asincronía</a></li>
+            <li><a href="#clase-future">2. La Clase Future y sus Estados</a></li>
+            <li><a href="#async-await">3. Palabras Clave: async y await</a></li>
+            <li><a href="#gestion-errores">4. Tratamiento de Errores Asíncronos</a></li>
+            <li><a href="#peticiones-http">5. Peticiones HTTP Externas</a></li>
+            <li><a href="#resumen">Resumen</a></li>
+        </ul>
+    </nav>
+
+    <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+    <header>
+        <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+            aria-controls="vc-rail" aria-expanded="false">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+        <h1>Programación Asíncrona en Dart</h1>
+        <img src="" id="logo" alt="Logo" style="display: none;">
+    </header>
+
+    <main>
+
+        <section id="introduccion-asincronia">
+            <h2>1. Introducción a la Asincronía</h2>
+            <p>
+                Por defecto, las aplicaciones y programas utilizan un <strong>único hilo de ejecución</strong> (single-threaded). Cuando se ejecuta un software bajo este modelo secuencial, cualquier operación que requiera un procesamiento denso o una espera externa (como un cálculo complejo o aguardar la respuesta de un servidor) provocará que el programa entero quede completamente bloqueado hasta que dicha acción finalice.
+            </p>
+            <p>
+                Para solucionar este inconveniente, se recurre a los <strong>procesos asíncronos</strong>, los cuales impiden la congelación de la interfaz o del flujo de control delegando la tarea en segundo plano. Cabe destacar que no se debe confundir el concepto de multihilo con el de procesos asíncronos.
+            </p>
+        </section>
+
+        <section id="clase-future">
+            <h2>2. La Clase Future y sus Estados</h2>
+            <p>
+                En Dart, la herramienta fundamental para gestionar operaciones síncronas que postergan su resolución en el tiempo es la clase <code>Future</code>. Mediante un <code>Future</code>, podemos "esperar" de forma segura la obtención de resultados futuros sin bloquear el hilo principal.
+            </p>
+            <p>Un objeto de tipo <code>Future</code> transiciona obligatoriamente a través de los siguientes estados:</p>
+            <ul>
+                <li><strong>Uncompleted (Incompleto):</strong> Es el estado inicial que se mantiene de manera persistente mientras la operación asíncrona se encuentra ejecutándose activamente en segundo plano, a la espera de una respuesta.</li>
+                <li><strong>Completed (Completado):</strong> Cuando la operación finaliza de manera definitiva, el estado muta a completado. Esta resolución puede concluir de dos formas diferenciadas:
+                    <ul>
+                        <li><strong>Success (Éxito):</strong> El proceso ha concluido correctamente y retorna el valor esperado.</li>
+                        <li><strong>Error:</strong> El proceso ha fallado, devolviendo una excepción o fallo controlado.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>2.1. Consumo mediante Callbacks (.then)</h3>
+            <p>El mecanismo clásico para capturar e interactuar con el valor exitoso de un <code>Future</code> una vez es completado consiste en usar el método callback <code>then</code>:</p>
+            <pre><code class="language-dart">
+void main(List&lt;String&gt; arguments) {
+  print('Inicio del programa.');
+
+  futuro().then((valor) {
+    print(valor);
+  });
+
+  print('El programa continua...');
+}
+
+Future&lt;String&gt; futuro() {
+  return Future.delayed(Duration(seconds: 2), () =&gt; "¡Esto es el futuro!");
+}
+</code></pre>
+        </section>
+
+        <section id="async-await">
+            <h2>3. Palabras Clave: async y await</h2>
+            <p>
+                A fin de simplificar la sintaxis y evitar los anidamientos de callbacks de <code>.then()</code>, Dart introduce el paradigma estructurado de <code>async</code> y <code>await</code>. Esto permite escribir código asíncrono con una apariencia y legibilidad idénticas a las del código síncrono secuencial:
+            </p>
+            <ul>
+                <li><strong><code>async</code>:</strong> Palabra clave obligatoria que se añade inmediatamente antes del cuerpo de cualquier función que requiera ejecutar tareas asíncronas internamente.</li>
+                <li><strong><code>await</code>:</strong> Instrucción que suspende la ejecución lineal de la función actual de manera temporal hasta que el <code>Future</code> correspondiente resuelva su valor, sin congelar el resto del software.</li>
+            </ul>
+
+            <pre><code class="language-dart">
+void main(List&lt;String&gt; arguments) async {
+  print('Inicio del programa.');
+
+  // El flujo espera aquí la resolución antes de pasar a la siguiente línea
+  String respuesta = await futuro();
+  print(respuesta);
+
+  print('El programa continua...');
+}
+
+Future&lt;String&gt; futuro() {
+  return Future.delayed(Duration(seconds: 2), () =&gt; "¡Esto es el futuro!");
+}
+</code></pre>
+        </section>
+
+        <section id="gestion-errores">
+            <h2>4. Tratamiento de Errores Asíncronas</h2>
+            <p>
+                Dado que los procesos asíncronos interactúan con factores impredecibles del entorno (caídas de red, fallos de infraestructura, parsing incorrecto), estos pueden derivar con frecuencia en errores o excepciones. Controlar estas anomalías es vital para evitar el cierre inesperado de la aplicación.
+            </p>
+
+            <h3>4.1. Captura con .catchError</h3>
+            <p>Si se utiliza la sintaxis tradicional basada en métodos encadenados, se acopla la función <code>catchError</code> al final de la estructura:</p>
+            <pre><code class="language-dart">
+void main(List&lt;String&gt; arguments) {
+  futuro()
+      .then((value) =&gt; print('res: $value'))
+      .catchError((error) =&gt; print('error: $error'));
+
+  print('El programa continua...');
+}
+
+Future futuro() async {
+  var resultado;
+  await Future.delayed(Duration(seconds: 2), () {
+    resultado = getServerInfo("https://server.ip/get_info");
+  });
+  return resultado;
+}
+</code></pre>
+        </section>
+
+        <section id="peticiones-http">
+            <h2>5. Peticiones HTTP Externas (Consumo de JSON)</h2>
+            <p>
+                Una de las necesidades más recurrentes en el desarrollo de software actual es la consulta de APIs web externas que proveen datos estructurados en formato JSON. Al depender estrictamente de internet, estas operaciones son forzosamente asíncronas y deben ser orquestadas mediante <code>Future</code> y bloques estructurados de control de excepciones <code>try-catch-finally</code>:
+            </p>
+
+            <pre><code class="language-dart">
+import 'package:http/http.dart' as http;
+import 'package:http/retry.dart';
+
+Future&lt;void> main(List&lt;String&gt; arguments) async {
+  final client = RetryClient(http.Client());
+  
+  try {
+    // Realiza la lectura asíncrona de la API REST externa
+    print(await client.read(Uri.parse('https://jsonplaceholder.typicode.com/comments')));
+  } catch (error) {
+    print('Se ha producido un error en la comunicación: $error');
+  } finally {
+    // Garantiza de manera estricta el cierre de las conexiones del cliente HTTP
+    client.close();
+  }
+}
+</code></pre>
+        </section>
+
+        <section id="resumen">
+            <div class="info-box">
+                <h3>Resumen de Programación Asíncrona</h3>
+                <ul>
+                    <li>Las tareas asíncronas previenen la congelación y el bloqueo del único hilo principal ante cálculos masivos o peticiones de red.</li>
+                    <li>La clase <code>Future</code> encapsula un valor diferido, pasando de un estado <code>uncompleted</code> a un fin <code>completed</code> (éxito o error).</li>
+                    <li>La dupla de modificadores <code>async</code> y <code>await</code> dota al entorno asíncrono de una lectura lineal y una semántica limpia de mantener.</li>
+                    <li>Es obligatorio controlar los fallos potenciales del flujo asíncrono aplicando cláusulas como <code>catchError</code> o bloques <code>try-catch</code>.</li>
+                    <li>El consumo de endpoints e interconexiones HTTP externas requiere siempre el uso de estructuras asíncronas combinadas con un cierre seguro de clientes en bloques <code>finally</code>.</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+    </footer>
+</body>
+
+</html>

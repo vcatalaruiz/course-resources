@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-EVTW1307T1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clases, Métodos y Estructuras en Dart</title>
+    <script src="/course-resources/index.js" defer></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/dart.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+    <script src="../index.js" defer></script>
+    <script src="../menu.js" defer></script>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../menu.css">
+</head>
+
+<body>
+
+    <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+        <div class="vc-rail-head">
+            <span class="vc-rail-title">Índice</span>
+            <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+        <ul id="vc-list" class="vc-list">
+            <li><a href="#variables-globales">1. Variables Globales</a></li>
+            <li><a href="#estructuras-map">2. Estructuras de Datos: Map</a></li>
+            <li><a href="#funciones-metodos">3. Funciones y Métodos en Dart</a></li>
+            <li><a href="#clases-poo">4. Clases y Programación Orientada a Objetos</a></li>
+            <li><a href="#resumen">Resumen</a></li>
+        </ul>
+    </nav>
+
+    <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+    <header>
+        <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+            aria-controls="vc-rail" aria-expanded="false">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+        <h1>Clases, Métodos y Estructuras en Dart</h1>
+        <img src="" id="logo" alt="Logo" style="display: none;">
+    </header>
+
+    <main>
+
+        <section id="variables-globales">
+            <h2>1. Variables Globales</h2>
+            <p>
+                Una variable global es aquella que es declarada fuera del alcance de cualquier función o clase, permitiendo que sea accesible desde cualquier punto del proyecto[cite: 156]. 
+            </p>
+            <p>
+                Como convención y buena práctica en el desarrollo con Dart, se recomienda centralizar la definición de estas variables dentro de un archivo independiente, habitualmente denominado <code>globals.dart</code>[cite: 157]. Para utilizarlas en otros componentes de la aplicación, únicamente se debe importar el archivo correspondiente[cite: 158].
+            </p>
+
+            <pre><code class="language-dart">
+// globals.dart
+const String apiKey = "abcdefg12345";
+
+// main.dart
+import 'globals.dart';
+
+void main(List&lt;String&gt; arguments) {
+  print(apiKey);
+}
+</code></pre>
+        </section>
+
+        <section id="estructuras-map">
+            <h2>2. Estructuras de Datos: Map</h2>
+            <p>
+                En Dart, las estructuras de tipo diccionario o tablas asociativas se definen mediante la clase <code>Map</code>[cite: 169]. Un Map representa una colección estructurada de pares formados por una <strong>clave</strong> y un <strong>valor</strong>[cite: 170]. Permite manejar tipos de datos heterogéneos según la restricción que usemos al declararlo[cite: 171].
+            </p>
+
+            <pre><code class="language-dart">
+// Estructura conceptual general
+var identifier = { key1:value1, key2:value2 };
+
+// Declaración clásica instanciando el objeto
+Map infoAlumno = Map();
+infoAlumno['nombre'] = 'root';
+infoAlumno['apellido'] = 'ABCD1234';
+infoAlumno['edad'] = 25;
+
+// Declaración literal (Forma recomendada)
+Map infoAlumnoLiteral = {
+  'nombre': 'root',
+  'apellido': 'ABCD1234',
+  'edad': 25,
+};
+</code></pre>
+
+            <h3>2.1. Métodos nativos de uso frecuente en Map</h3>
+            <p>La API de Dart proporciona un robusto abanico de utilidades para el tratamiento directo de mapas asociativos[cite: 190]:</p>
+            <ul>
+                <li><strong><code>addAll(Map&lt;K, V&gt; other)</code></strong>: Incorpora de manera masiva todos los pares clave/valor del mapa proporcionado al mapa actual[cite: 191, 192].</li>
+                <li><strong><code>clear()</code></strong>: Purga y remueve la totalidad de elementos del mapa dejándolo vacío[cite: 196, 197].</li>
+                <li><strong><code>containsKey(Object? key)</code></strong>: Evalúa mediante un booleano si la clave especificada existe dentro de la colección[cite: 198, 199].</li>
+                <li><strong><code>containsValue(Object? value)</code></strong>: Evalúa mediante un booleano si el valor especificado está presente en el mapa[cite: 200, 201].</li>
+                <li><strong><code>remove(Object? key)</code></strong>: Elimina de la colección la clave solicitada junto con su valor vinculado[cite: 204, 205].</li>
+                <li><strong><code>removeWhere(bool test(K key, V value))</code></strong>: Realiza un borrado condicional selectivo eliminando las entradas que cumplan la condición lógica evaluada[cite: 206, 207].</li>
+            </ul>
+        </section>
+
+        <section id="funciones-metodos">
+            <h2>3. Funciones y Métodos en Dart</h2>
+            <p>
+                Los métodos y funciones en Dart proveen mecanismos avanzados para estructurar código modular, admitiendo el paso de parámetros obligatorios y opcionales[cite: 215].
+            </p>
+
+            <h3>3.1. Parámetros Obligatorios Posicionales</h3>
+            <p>Es el modelo estándar donde el orden en el que se envían las variables determina la recepción de los argumentos:</p>
+            <pre><code class="language-dart">
+void main(List&lt;String&gt; arguments) {
+  muestraNombreCompleto("Vicente", "Català");
+}
+
+void muestraNombreCompleto(String nombre, String apellidos) {
+  print('$nombre $apellidos');
+}
+</code></pre>
+
+            <h3>3.2. Parámetros Opcionales Posicionales</h3>
+            <p>
+                Para indicar que determinados parámetros no son obligatorios en la invocación del método, se encapsulan mediante corchetes <code>[]</code>[cite: 219, 220]. Al poder recibir ausencias de valores, las variables deben tiparse explícitamente como nullables (<code>?</code>) o en su defecto asignarles un valor predeterminado de respaldo[cite: 222]:
+            </p>
+            <pre><code class="language-dart">
+// Ejemplo con parámetros nullables
+void muestraNombreCompleto(String nombre, [String? apellidos]) {
+  print('$nombre $apellidos');
+}
+
+// Ejemplo implementando un valor por defecto
+void muestraDatos(String nombre, [String? apellidos, int edad = 15]) {
+  print('$nombre $apellidos ($edad)');
+}
+</code></pre>
+
+            <h3>3.3. Parámetros Nombrados</h3>
+            <p>
+                Los parámetros nombrados ofrecen una gran legibilidad al invocar funciones ya que obligan a especificar la etiqueta de la variable[cite: 242]. Se declaran usando llaves <code>{}</code> y podemos exigir la presencia ineludible de un parámetro anteponiendo la palabra clave <code>required</code>[cite: 231, 235]. No es imperativo respetar el orden de declaración al realizar la llamada al método[cite: 242].
+            </p>
+            <pre><code class="language-dart">
+void main(List&lt;String&gt; arguments) {
+  // Invocación explícita mediante los nombres de los atributos
+  muestraNombreCompleto(nombre: "Vicente", edad: 25, apellidos: "Català");
+}
+
+void muestraNombreCompleto({
+  required String nombre,
+  required String apellidos,
+  required int edad,
+}) {
+  print('$nombre $apellidos ($edad)');
+}
+</code></pre>
+
+            <h3>3.4. Tipado de Retorno</h3>
+            <p>
+                Para retornar valores computados hacia el flujo principal que llamó a la función, se debe especificar el tipo de dato que devuelve el método en lugar de marcarlo como <code>void</code>, utilizando la palabra clave <code>return</code>[cite: 246]:
+            </p>
+            <pre><code class="language-dart">
+String obtieneNombreCompleto({
+  required String nombre,
+  required String apellidos,
+  required int edad,
+}) {
+  return '$nombre $apellidos ($edad)';
+}
+</code></pre>
+        </section>
+
+        <section id="clases-poo">
+            <h2>4. Clases y Programación Orientada a Objetos</h2>
+            <p>
+                Para definir el modelo o plantilla de un objeto se utiliza la palabra reservada <code>class</code>[cite: 260]. Por convenciones estrictas de estilo, los nombres de las clases se estructuran usando la nomenclatura UpperCamelCase (empezando en mayúscula) y no pueden dar comienzo mediante dígitos o caracteres especiales[cite: 261, 262].
+            </p>
+
+            <pre><code class="language-dart">
+class Alumno {
+  String? nombre;
+  String? apellidos;
+  int? edad;
+  bool? repetidor;
+}
+</code></pre>
+
+            <h3>4.1. Constructores Básicos y Avanzados</h3>
+            <p>
+                El constructor es la función especial encargada de inicializar y crear una instancia en memoria de una clase[cite: 265]. El constructor básico estándar por defecto comparte obligatoriamente el mismo nombre exacto que la clase[cite: 266].
+            </p>
+            <pre><code class="language-dart">
+// Constructor básico clásico simplificado de Dart
+class Alumno {
+  String nombre;
+  String apellidos;
+  int edad;
+
+  Alumno(this.nombre, this.apellidos, this.edad);
+}
+</code></pre>
+
+            <p>
+                Adicionalmente, se pueden configurar constructores más sofisticados implementando argumentos nombrados y valores por defecto para flexibilizar la inicialización del objeto[cite: 271]:
+            </p>
+            <pre><code class="language-dart">
+class Docente {
+  String nombre;
+  String apellidos;
+  int edad;
+  double salario;
+
+  Docente({
+    required this.nombre,
+    required this.apellidos,
+    this.edad = 25,
+    required this.salario,
+  });
+}
+</code></pre>
+
+            <h3>4.2. Múltiples Constructores (Named Constructors)</h3>
+            <p>
+                A diferencia de lenguajes como Java o C#, Dart no soporta la sobrecarga tradicional de constructores con el mismo nombre y firmas diferentes[cite: 272]. Para habilitar múltiples estrategias de construcción, Dart utiliza los **Constructores Nombrados**, asignando un alias explícito mediante un punto descriptivo[cite: 273]:
+            </p>
+            <pre><code class="language-dart">
+class Docente {
+  String nombre;
+  String apellidos;
+  int edad;
+  double salario;
+
+  // Constructor nombrado enfocado a personal en prácticas
+  Docente.practicas({
+    required this.nombre,
+    required this.apellidos,
+    required this.edad,
+  }) : salario = 0.0;
+
+  // Constructor nombrado para interinos
+  Docente.interino({
+    required this.nombre,
+    required this.apellidos,
+    required this.edad,
+    required this.salario,
+  });
+}
+</code></pre>
+
+            <h3>4.3. Herencia y Sobrescritura (@override)</h3>
+            <p>
+                Como lenguaje fuertemente orientado a objetos, todas las clases en Dart heredan de forma implícita de una superclase base común denominada <code>Object</code>[cite: 138]. La herencia explícita permite extender las propiedades y la lógica funcional de una clase padre hacia una clase hija mediante la palabra clave <code>extends</code>[cite: 143].
+            </p>
+            <p>
+                Cuando una clase hija necesita redefinir o personalizar un comportamiento heredado del padre, se hace uso de la directiva o anotación <code>@override</code>[cite: 139, 144, 145]. Cabe destacar que el constructor del hijo está obligado a inicializar y traspasar los parámetros requeridos por la clase base invocando al elemento <code>super</code>[cite: 146]:
+            </p>
+            <pre><code class="language-dart">
+class Persona {
+  String nombre;
+  int edad;
+  
+  Persona(this.nombre, this.edad);
+
+  void presentarse() {
+    print("Hola, soy $nombre.");
+  }
+}
+
+class Estudiante extends Persona {
+  String curso;
+
+  // Inicialización de variables propias e invocación rigurosa a super
+  Estudiante(String nombre, int edad, this.curso) : super(nombre, edad);
+
+  @override
+  void presentarse() {
+    print("Hola, soy el estudiante $nombre del curso $curso.");
+  }
+}
+</code></pre>
+
+            <h3>4.4. Interfaces y Mixins</h3>
+            <ul>
+                <li><strong>Interfaces:</strong> Dart no dispone de una palabra reservada exclusiva para interfaces (como <code>interface</code>). En su lugar, **cualquier clase puede actuar y operar como interfaz** implementando sus firmas obligatoriamente a través de la instrucción clave <code>implements</code>[cite: 148, 149].</li>
+                <li><strong>Mixins:</strong> Debido a que en Dart no existe soporte para la herencia múltiple directa, se emplean los **Mixins** para inyectar y reutilizar bloques de código de múltiples clases dentro de otras de manera modular y segura[cite: 150, 151].</li>
+            </ul>
+        </section>
+
+        <section id="resumen">
+            <div class="info-box">
+                <h3>Resumen de POO y Métodos</h3>
+                <ul>
+                    <li>Las variables globales deben mantenerse idealmente aisladas en módulos como <code>globals.dart</code> para preservar la arquitectura limpia[cite: 157].</li>
+                    <li>Los <code>Map</code> operan con esquemas eficientes de clave/valor proporcionando utilidades nativas complejas de filtrado como <code>removeWhere</code>[cite: 170, 206].</li>
+                    <li>Dart provee un control minucioso de parámetros permitiendo combinaciones posicionales opcionales <code>[]</code> y estructuradas nombradas obligatorias <code>{required}</code>[cite: 220, 231].</li>
+                    <li>La sobrecarga de constructores tradicional no existe; en su lugar, se recurre a constructores dotados de alias mediante la sintaxis de constructores nombrados[cite: 272, 273].</li>
+                    <li>La herencia es lineal y simple usando <code>extends</code>, exigiendo coordinar los constructores con <code>super</code> y usando <code>@override</code> para polimorfismo estructurado[cite: 143, 144, 146].</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+    </footer>
+</body>
+
+</html>
