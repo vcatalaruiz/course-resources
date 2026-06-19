@@ -58,35 +58,41 @@
         <section id="intro">
             <h2>1. ¿Qué es Dart?</h2>
 
-             <div class="diagram">
+            <div class="diagram">
                 <img src="../assets/dart_logo.png" style="max-width:30%;" alt="Dart Logo">
             </div>
 
             <p>
-                <strong>Dart</strong> es un lenguaje de programación creado por Google, de código abierto, basado en clases y enfocado a la creación de aplicaciones web, tanto en el cliente como en el servidor.
+                <strong>Dart</strong> es un lenguaje de programación creado por Google, de código abierto, basado en
+                clases y enfocado a la creación de aplicaciones web, tanto en el cliente como en el servidor.
             </p>
 
             <h3>1.1. Objetivos de diseño de Dart</h3>
             <ul>
                 <li>Crear un lenguaje estructurado pero flexible para la programación web.</li>
-                <li>Ofrecer un alto rendimiento en todos los navegadores web y entornos modernos, desde pequeños dispositivos de mano hasta la ejecución del lado del servidor.</li>
+                <li>Ofrecer un alto rendimiento en todos los navegadores web y entornos modernos, desde pequeños
+                    dispositivos de mano hasta la ejecución del lado del servidor.</li>
             </ul>
 
             <h3>1.2. Funciones y herramientas principales</h3>
             <ul>
                 <li><strong>Tipos opcionales</strong>: No es necesario declarar los tipos de las variables.</li>
                 <li><strong>Fácil acceso al DOM</strong>: Usando selectores de CSS de manera similar a jQuery.</li>
-                <li><strong>Herramientas de IDE de Dart</strong>: Existen complementos de Dart para muchos IDE de uso común, por ejemplo, VSCode.</li>
-                <li><strong>Dartium</strong>: Una compilación del navegador web Chromium con una máquina virtual Dart incorporada.</li>
+                <li><strong>Herramientas de IDE de Dart</strong>: Existen complementos de Dart para muchos IDE de uso
+                    común, por ejemplo, VSCode.</li>
+                <li><strong>Dartium</strong>: Una compilación del navegador web Chromium con una máquina virtual Dart
+                    incorporada.</li>
             </ul>
         </section>
 
         <section id="instalacion">
             <h2>2. Instalación de Dart</h2>
-            <p>Puedes obtener el SDK oficial desde <a href="https://dart.dev/get-dart" target="_blank">dart.dev/get-dart</a>.</p>
+            <p>Puedes obtener el SDK oficial desde <a href="https://dart.dev/get-dart"
+                    target="_blank">dart.dev/get-dart</a>.</p>
 
             <h3>2.1. Instalación en Windows</h3>
-            <p>Puedes utilizar <strong>Chocolatey</strong> para realizar la instalación del SDK y después utilizar los siguientes comandos:</p>
+            <p>Puedes utilizar <strong>Chocolatey</strong> para realizar la instalación del SDK y después utilizar los
+                siguientes comandos:</p>
             <pre><code class="language-bash">
 # Para instalar el Dart SDK
 C:\> choco install dart-sdk
@@ -96,7 +102,8 @@ C:\> choco upgrade dart-sdk
 </code></pre>
 
             <h3>2.2. Instalación en Mac</h3>
-            <p>Puedes utilizar <strong>Homebrew</strong> para realizar la instalación del SDK. Una vez instalado Homebrew, ejecuta en la terminal:</p>
+            <p>Puedes utilizar <strong>Homebrew</strong> para realizar la instalación del SDK. Una vez instalado
+                Homebrew, ejecuta en la terminal:</p>
             <pre><code class="language-bash">
 $ brew tap dart-lang/dart
 $ brew install dart
@@ -117,23 +124,25 @@ $ sudo apt-get install dart
 
             <h3>2.4. Extensión en VSCode</h3>
             <ul>
-                <li>Instalar la extensión <strong>Dart</strong> (Dart language support and debugger) dentro de Visual Studio Code para habilitar el soporte de lenguaje y depuración.</li>
+                <li>Instalar la extensión <strong>Dart</strong> (Dart language support and debugger) dentro de Visual
+                    Studio Code para habilitar el soporte de lenguaje y depuración.</li>
             </ul>
-             <div class="diagram">
+            <div class="diagram">
                 <img src="../assets/dart_plugin.png" style="max-width:100%;" alt="Dart plugin">
             </div>
         </section>
 
         <section id="hello-world">
             <h2>3. Primer Programa: Hello World</h2>
-            <p>Para crear el primer programa en Dart, abrimos VSCode y creamos un archivo <code>main.dart</code> en el directorio de trabajo.</p>
+            <p>Para crear el primer programa en Dart, abrimos VSCode y creamos un archivo <code>main.dart</code> en el
+                directorio de trabajo.</p>
 
             <pre><code class="language-dart">
 void main() {
   print("Hello World!");
 }
 </code></pre>
- <div class="diagram">
+            <div class="diagram">
                 <img src="../assets/dart_hello.png" style="max-width:100%;" alt="Dart hello">
             </div>
 
@@ -141,7 +150,7 @@ void main() {
             <pre><code class="language-bash">
 dart main.dart
 </code></pre>
- <div class="diagram">
+            <div class="diagram">
                 <img src="../assets/dart_execute.png" style="max-width:100%;" alt="Dart execute">
             </div>
         </section>
@@ -210,7 +219,9 @@ dart main.dart
             </table>
 
             <h3>4.2. Tipo var</h3>
-            <p>Si declaramos una variable como <code>var</code>, Dart asignará el tipo que crea conveniente dependiendo del valor asignado. <strong>Una vez se asigna un valor a la variable ya no se podrá modificar su tipo</strong>.</p>
+            <p>Si declaramos una variable como <code>var</code>, Dart asignará el tipo que crea conveniente dependiendo
+                del valor asignado. <strong>Una vez se asigna un valor a la variable ya no se podrá modificar su
+                    tipo</strong>.</p>
             <pre><code class="language-dart">
 var name = 'Paco'; // name será de tipo String de manera implícita
 name = 98.5; // Error: A value of type 'double' can't be assigned to a variable of type 'String'
@@ -223,31 +234,63 @@ String name = 'Paco';
 double height = 177.45;
 int age = 25;
 </code></pre>
+
+
+            <h3>4.3. Variables Globales</h3>
+            <p>
+                Una variable global es aquella que es declarada fuera del alcance de cualquier función o clase,
+                permitiendo que sea accesible desde cualquier punto del proyecto.
+            </p>
+            <p>
+                Como convención y buena práctica en el desarrollo con Dart, se recomienda centralizar la definición de
+                estas variables dentro de un archivo independiente, habitualmente denominado
+                <code>globals.dart</code>. Para utilizarlas en otros componentes de la aplicación, únicamente
+                se debe importar el archivo correspondiente.
+            </p>
+
+            <pre><code class="language-dart">
+// globals.dart
+const String apiKey = "abcdefg12345";
+
+// main.dart
+import 'globals.dart';
+
+void main(List&lt;String&gt; arguments) {
+    print(apiKey);
+}
+</code></pre>
         </section>
+
 
         <section id="null-safety-features">
             <h2>5. Características de Variables (Null Safety, Late, Const y Final)</h2>
 
             <h3>5.1. NULL safety</h3>
-            <p>En Dart no se pueden utilizar variables sin asignar previamente un valor. Esta acción provocará un error de compilación. Para evitar este error y permitir que una variable pueda ser nula, se utiliza el símbolo de interrogación <code>?</code> después del tipo.</p>
+            <p>En Dart no se pueden utilizar variables sin asignar previamente un valor. Esta acción provocará un error
+                de compilación. Para evitar este error y permitir que una variable pueda ser nula, se utiliza el símbolo
+                de interrogación <code>?</code> después del tipo.</p>
             <pre><code class="language-dart">
 // Provoca error si se intenta usar sin asignar:
 // String name; 
 
 String? name; // Con null safety se evita el error de asignación obligatoria
 </code></pre>
-<div class="diagram">
+            <div class="diagram">
                 <img src="../assets/dart_null.png" style="max-width:100%;" alt="Dart null">
             </div>
             <div class="info-box">
-                <p><strong>Importante:</strong> Con null safety se evita el error inicial, pero las variables que pueden ser NULL se tienen que tratar en el código, de lo contrario pueden aparecer errores de ejecución.</p>
+                <p><strong>Importante:</strong> Con null safety se evita el error inicial, pero las variables que pueden
+                    ser NULL se tienen que tratar en el código, de lo contrario pueden aparecer errores de ejecución.
+                </p>
             </div>
             <div class="diagram">
                 <img src="../assets/dart_null2.png" style="max-width:100%;" alt="Dart null2">
             </div>
 
             <h3>5.2. Late</h3>
-            <p>Se puede utilizar la palabra clave <code>late</code> si hay una certeza de que a la variable se le asignará un valor definitivo antes de ser usada. Igual que con null safety, se tendrá que comprobar o asegurar que la variable tiene un valor antes de ser utilizada para evitar un error de ejecución.</p>
+            <p>Se puede utilizar la palabra clave <code>late</code> si hay una certeza de que a la variable se le
+                asignará un valor definitivo antes de ser usada. Igual que con null safety, se tendrá que comprobar o
+                asegurar que la variable tiene un valor antes de ser utilizada para evitar un error de ejecución.</p>
             <pre><code class="language-dart">
 late String description;
 // ... en algún momento posterior antes de su uso:
@@ -255,21 +298,108 @@ description = "Introducción a Dart";
 </code></pre>
 
             <h3>5.3. Const y Final</h3>
-            <p>Si el valor de la variable no se tiene que modificar en el futuro, se podrá declarar como <code>const</code> o <code>final</code>:</p>
+            <p>Si el valor de la variable no se tiene que modificar en el futuro, se podrá declarar como
+                <code>const</code> o <code>final</code>:
+            </p>
             <ul>
-                <li><strong>Const:</strong> La variable tiene que ser asignada antes de la ejecución, es decir, en el momento de la compilación.</li>
-                <li><strong>Final:</strong> La variable se puede calcular o definir dinámicamente después de la compilación.</li>
+                <li><strong>Const:</strong> La variable tiene que ser asignada antes de la ejecución, es decir, en el
+                    momento de la compilación.</li>
+                <li><strong>Final:</strong> La variable se puede calcular o definir dinámicamente después de la
+                    compilación.</li>
             </ul>
             <div class="diagram">
                 <img src="../assets/dart_const_final.png" style="max-width:100%;" alt="Dart const final">
             </div>
         </section>
 
-        <section id="estructuras-control">
-            <h2>6. Estructuras de control</h2>
+        <section id="concatenacion">
+            <h2>6. Concatenación e Interpolación de texto</h2>
 
-            <h3>6.1. Bucle For</h3>
-            <p>El bucle <code>for</code> nos sirve para recorrer secuencias de valores. Podemos hacerlo usando un índice clásico o con la sintaxis <code>for..in</code></p>
+            <p>
+                Para unir o concatenar cadenas de texto en Dart disponemos de varios métodos dependiendo de la
+                naturaleza de los datos:
+            </p>
+
+            <h3>6.1. Concatenación tradicional</h3>
+            <p>Si las variables implicadas ya son de tipo de dato <code>String</code>, se puede utilizar el operador de
+                suma estándar:</p>
+            <pre><code class="language-dart">
+String textoA = "Hola ";
+String textoB = "Mundo";
+String resultado = textoA + textoB; // "Hola Mundo"
+</code></pre>
+
+            <p>Si alguna de las variables no pertenece al tipo String, se debe invocar obligatoriamente a su método de
+                conversión antes de la suma:</p>
+            <pre><code class="language-dart">
+VARIABLE.toString() + " texto"
+</code></pre>
+
+            <h3>6.2. Interpolación con símbolos</h3>
+            <p>La alternativa más eficiente y recomendada en Dart es usar el símbolo <code>$</code> incrustado
+                directamente dentro de las comillas:</p>
+            <pre><code class="language-dart">
+// Para variables simples
+print('TextoA $VARIABLE TextoB');
+
+// Si se requiere evaluar expresiones o invocar métodos, se encapsula entre llaves ${}
+print('Hello world: ${mi_primer_proyecto.calculate()}!');
+</code></pre>
+        </section>
+
+        <section id="condicionales">
+            <h2>7. Condicionales</h2>
+            <p>
+                Las estructuras condicionales nos permiten bifurcar el flujo de ejecución de un programa basándonos en
+                si una condición lógica se evalúa como verdadera o falsa.
+            </p>
+
+            <h3>7.1. Estructura If / If-Else</h3>
+            <p>
+                La estructura básica evalúa una condición booleana. Si es verdadera, ejecuta el bloque correspondiente.
+                Opcionalmente, se puede añadir un bloque <code>else</code> o múltiples cláusulas <code>else if</code>.
+            </p>
+            <pre><code class="language-dart">
+int edad = 18;
+
+if (edad >= 18) {
+  print('Eres mayor de edad.');
+} else if (edad > 12) {
+  print('Eres un adolescente.');
+} else {
+  print('Eres un niño.');
+}
+</code></pre>
+
+            <h3>7.2. Estructura Switch</h3>
+            <p>
+                La estructura <code>switch</code> evalúa una expresión y la compara con múltiples valores posibles
+                especificados mediante cláusulas <code>case</code>. A partir de Dart 3, incluye potentes características
+                de correspondencia de patrones (<em>pattern matching</em>).
+            </p>
+            <pre><code class="language-dart">
+String estadoClima = 'SOLEADO';
+
+switch (estadoClima) {
+  case 'SOLEADO':
+    print('Lleva gafas de sol.');
+    break;
+  case 'LLUVIOSO':
+    print('Lleva un paraguas.');
+    break;
+  default:
+    print('Disfruta de tu día.');
+}
+</code></pre>
+        </section>
+
+
+        <section id="estructuras-control">
+            <h2>8. Estructuras de control</h2>
+
+            <h3>8.1. Bucle For</h3>
+            <p>El bucle <code>for</code> nos sirve para recorrer secuencias de valores. Podemos hacerlo usando un índice
+                clásico o con la sintaxis <code>for..in</code></p>
             <pre><code class="language-dart">
 // Opción 1: Recorrido con índice
 const List<String> colores = ['Red', 'Blue'];
@@ -283,8 +413,10 @@ for (String color in colores) {
 }
 </code></pre>
 
-            <h3>6.2. Bucles While y Do...While</h3>
-            <p>El bucle <code>while</code> nos sirve para recorrer secuencias a partir de una condición, evaluándola al inicio. Por otro lado, la estructura <code>do...while</code> ejecuta el bloque de código al menos una vez antes de evaluar la condición.</p>
+            <h3>8.2. Bucles While y Do...While</h3>
+            <p>El bucle <code>while</code> nos sirve para recorrer secuencias a partir de una condición, evaluándola al
+                inicio. Por otro lado, la estructura <code>do...while</code> ejecuta el bloque de código al menos una
+                vez antes de evaluar la condición.</p>
             <pre><code class="language-dart">
 // Estructura While
 while (condicion) {
@@ -302,12 +434,21 @@ do {
             <div class="info-box">
                 <h3>Resumen de Dart básico</h3>
                 <ul>
-                    <li><strong>Dart</strong> es un lenguaje estructurado, de código abierto y desarrollado por Google para web y servidores.</li>
+                    <li><strong>Dart</strong> es un lenguaje estructurado, de código abierto y desarrollado por Google
+                        para web y servidores.</li>
                     <li>Permite tipado explícito e implícito mediante la palabra clave <code>var</code>.</li>
-                    <li>Incorpora <strong>Null Safety</strong> nativo mediante el operador <code>?</code> para evitar errores de ejecución.</li>
+                    <li>Las variables globales deben mantenerse idealmente aisladas en módulos como
+                        <code>globals.dart</code> para preservar la arquitectura limpia.
+                    </li>
+                    <li>Incorpora <strong>Null Safety</strong> nativo mediante el operador <code>?</code> para evitar
+                        errores de ejecución.</li>
                     <li>Ofrece <code>late</code> para inicializaciones tardías garantizadas.</li>
-                    <li>Distingue entre valores inmutables en tiempo de compilación (<code>const</code>) y de ejecución (<code>final</code>).</li>
-                    <li>Soporta bucles de control estándar como <code>for</code>, <code>for..in</code>, <code>while</code> y <code>do..while</code>.</li>
+                    <li>Distingue entre valores inmutables en tiempo de compilación (<code>const</code>) y de ejecución
+                        (<code>final</code>).</li>
+                    <li>Controla el flujo de lógica mediante <code>if</code>, <code>if else</code> y estructuras multi-caso <code>switch</code>.</li>
+                    <li>Soporta bucles de control estándar como <code>for</code>, <code>for..in</code>,
+                        <code>while</code> y <code>do..while</code>.
+                    </li>
                 </ul>
             </div>
         </section>

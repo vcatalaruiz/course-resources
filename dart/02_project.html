@@ -42,8 +42,8 @@
         <ul id="vc-list" class="vc-list">
             <li><a href="#creacion-proyecto">1. Creación de un proyecto en Dart</a></li>
             <li><a href="#configuracion-proyecto">2. Archivos de Configuración</a></li>
-            <li><a href="#concatenacion">3. Concatenación e Interpolación</a></li>
-            <li><a href="#listas-colecciones">4. Gestión de Listas (List)</a></li>
+            <li><a href="#listas-colecciones">3. Gestión de Listas (List)</a></li>
+            <li><a href="#estructuras-map">4. Gestión de Listas con clave-valor (Map)</a></li>
             <li><a href="#resumen">Resumen</a></li>
         </ul>
     </nav>
@@ -64,30 +64,37 @@
             <h2>1. Creación de un proyecto en Dart</h2>
 
             <p>
-                Un proyecto Dart tiene una estructura organizada donde se distribuyen los diferentes archivos que lo componen[cite: 5]. Cada una de estas partes cumple una función específica sobre el proyecto, tales como el control de versionado, la gestión de librerías y las configuraciones del entorno[cite: 6].
+                Un proyecto Dart tiene una estructura organizada donde se distribuyen los diferentes archivos que lo componen. Cada una de estas partes cumple una función específica sobre el proyecto, tales como el control de versionado, la gestión de librerías y las configuraciones del entorno.
             </p>
+            <div class="diagram">
+                <img src="../assets/dart_project.png" style="max-width:100%;" alt="Dart project">
+            </div>
 
             <h3>1.1. Comandos de creación</h3>
-            <p>Para crear un nuevo proyecto estructurado desde la terminal, ejecutamos el siguiente comando[cite: 7]:</p>
+            <p>Para crear un nuevo proyecto estructurado desde la terminal, ejecutamos el siguiente comando:</p>
             <pre><code class="language-dart">
 dart create "NOMBRE_PROYECTO"
-</code></pre>
-
-            <p>Si prefieres realizarlo a través de la interfaz visual de <strong>Visual Studio Code</strong>, puedes seguir estos pasos[cite: 8]:</p>
-            <ul>
-                <li>Presiona la combinación de teclas <kbd>Ctrl + Shift + P</kbd> (o <kbd>Cmd + Shift + P</kbd> en macOS)[cite: 8].</li>
-                <li>Escribe <code>dart</code> en la barra de comandos[cite: 8].</li>
-                <li>Selecciona la opción <strong>New Project</strong> y posteriormente elige <strong>Console application</strong>[cite: 10].</li>
-            </ul>
+</code></pre>            
 
             <h3>1.2. Paquetes y Directorios Principales</h3>
             <p>Una vez generado el proyecto, se creará un árbol de directorios con la siguiente distribución[cite: 5]:</p>
-            <ul>
-                <li><strong><code>bin/</code></strong>: Directorio esencial que contiene el código fuente principal de nuestra aplicación ejecutable[cite: 29].</li>
-                <li><strong><code>lib/</code></strong>: Carpeta habitualmente reservada para almacenar los métodos, clases y la lógica reutilizable del software[cite: 29].</li>
-                <li><strong><code>test/</code></strong>: Espacio dedicado para la implementación y ejecución de las pruebas unitarias de código[cite: 30].</li>
-                <li><strong><code>package_config.json</code></strong>: Archivo interno que almacena la configuración de todos los paquetes locales que tenemos instalados[cite: 31].</li>
-            </ul>
+            <pre><code class="language-dart">
+my_dart_project/
+├── .dart_tool/          # Almacenamiento interno de herramientas (gestionado por Dart; no editar)
+├── bin/                 # Scripts ejecutables de la línea de comandos
+│   └── main.dart        # Punto de entrada principal para la ejecución (Entry point)
+├── lib/                 # Código público principal compartido con otros proyectos
+│   ├── src/             # Detalles de implementación privada e interna
+│   │   └── internal.dart
+│   └── my_library.dart  # API pública principal exportada para los usuarios externos
+├── test/                # Pruebas de código unitarias y de integración
+│   └── main_test.dart
+├── CHANGELOG.md         # Historial detallado de cambios de versión del proyecto
+├── LICENSE              # Texto de licencia de código abierto o propietaria
+├── README.md            # Descripción general del proyecto y guía de uso
+├── pubspec.lock         # Registro con las versiones exactas instaladas de cada dependencia (Bloqueo automático)
+└── pubspec.yaml         # Dependencias solicitadas, recursos estáticos y metadatos del proyecto
+</code></pre>            
         </section>
 
         <section id="configuracion-proyecto">
@@ -95,7 +102,7 @@ dart create "NOMBRE_PROYECTO"
 
             <h3>2.1. El archivo pubspec.yaml</h3>
             <p>
-                El archivo <code>pubspec.yaml</code> es la pieza central de metadatos del proyecto[cite: 32]. Define la identidad de la aplicación e indica las restricciones del SDK y sus dependencias externas[cite: 32, 52]:
+                El archivo <code>pubspec.yaml</code> es la pieza central de metadatos del proyecto. Define la identidad de la aplicación e indica las restricciones del SDK y sus dependencias externas:
             </p>
 
             <pre><code class="language-dart">
@@ -116,7 +123,7 @@ dev_dependencies:
 
             <h3>2.2. El archivo CHANGELOG.md</h3>
             <p>
-                El archivo <code>CHANGELOG.md</code> se utiliza como un diario del proyecto para reflejar y documentar detalladamente los cambios que se van aplicando en cada una de las versiones publicadas[cite: 56]. Una estructura inicial básica luce de la siguiente manera[cite: 58, 61]:
+                El archivo <code>CHANGELOG.md</code> se utiliza como un diario del proyecto para reflejar y documentar detalladamente los cambios que se van aplicando en cada una de las versiones publicadas. Una estructura inicial básica luce de la siguiente manera:
             </p>
             <pre><code class="language-dart">
 ## 1.0.0
@@ -125,42 +132,12 @@ dev_dependencies:
 </code></pre>
         </section>
 
-        <section id="concatenacion">
-            <h2>3. Concatenación e Interpolación de texto</h2>
-
-            <p>
-                Para unir o concatenar cadenas de texto en Dart disponemos de varios métodos dependiendo de la naturaleza de los datos[cite: 65]:
-            </p>
-
-            <h3>3.1. Concatenación tradicional</h3>
-            <p>Si las variables implicadas ya son de tipo de dato <code>String</code>, se puede utilizar el operador de suma estándar[cite: 66]:</p>
-            <pre><code class="language-dart">
-String textoA = "Hola ";
-String textoB = "Mundo";
-String resultado = textoA + textoB; // "Hola Mundo"
-</code></pre>
-
-            <p>Si alguna de las variables no pertenece al tipo String, se debe invocar obligatoriamente a su método de conversión antes de la suma[cite: 67]:</p>
-            <pre><code class="language-dart">
-VARIABLE.toString() + " texto"
-</code></pre>
-
-            <h3>3.2. Interpolación con símbolos</h3>
-            <p>La alternativa más eficiente y recomendada en Dart es usar el símbolo <code>$</code> incrustado directamente dentro de las comillas[cite: 68]:</p>
-            <pre><code class="language-dart">
-// Para variables simples
-print('TextoA $VARIABLE TextoB');
-
-// Si se requiere evaluar expresiones o invocar métodos, se encapsula entre llaves ${}
-print('Hello world: ${mi_primer_proyecto.calculate()}!');
-</code></pre>
-        </section>
-
+        
         <section id="listas-colecciones">
-            <h2>4. Gestión de Listas (List)</h2>
+            <h2>4. Estructura de datos (List)</h2>
 
             <p>
-                Las listas en Dart permiten agrupar colecciones indexadas de datos[cite: 74]. Dart nos provee de múltiples métodos nativos para su manipulación directa[cite: 75, 77, 79, 81]:
+                Las listas en Dart permiten agrupar colecciones indexadas de datos. Dart nos provee de múltiples métodos nativos para su manipulación directa:
             </p>
 
             <pre><code class="language-dart">
@@ -202,15 +179,53 @@ milista.removeWhere((element) => element % 2 == 0);
 </code></pre>
         </section>
 
+        <section id="estructuras-map">
+            <h2>5. Estructuras de Datos: Map</h2>
+            <p>
+                En Dart, las estructuras de tipo diccionario o tablas asociativas se definen mediante la clase <code>Map</code>[cite: 169]. Un Map representa una colección estructurada de pares formados por una <strong>clave</strong> y un <strong>valor</strong>[cite: 170]. Permite manejar tipos de datos heterogéneos según la restricción que usemos al declararlo[cite: 171].
+            </p>
+
+            <pre><code class="language-dart">
+// Estructura conceptual general
+var identifier = { key1:value1, key2:value2 };
+
+// Declaración clásica instanciando el objeto
+Map infoAlumno = Map();
+infoAlumno['nombre'] = 'root';
+infoAlumno['apellido'] = 'ABCD1234';
+infoAlumno['edad'] = 25;
+
+// Declaración literal (Forma recomendada)
+Map infoAlumnoLiteral = {
+  'nombre': 'root',
+  'apellido': 'ABCD1234',
+  'edad': 25,
+};
+</code></pre>
+
+            <h3>5.1. Métodos nativos de uso frecuente en Map</h3>
+            <p>La API de Dart proporciona un robusto abanico de utilidades para el tratamiento directo de mapas asociativos[cite: 190]:</p>
+            <ul>
+                <li><strong><code>addAll(Map&lt;K, V&gt; other)</code></strong>: Incorpora de manera masiva todos los pares clave/valor del mapa proporcionado al mapa actual[cite: 191, 192].</li>
+                <li><strong><code>clear()</code></strong>: Purga y remueve la totalidad de elementos del mapa dejándolo vacío[cite: 196, 197].</li>
+                <li><strong><code>containsKey(Object? key)</code></strong>: Evalúa mediante un booleano si la clave especificada existe dentro de la colección[cite: 198, 199].</li>
+                <li><strong><code>containsValue(Object? value)</code></strong>: Evalúa mediante un booleano si el valor especificado está presente en el mapa[cite: 200, 201].</li>
+                <li><strong><code>remove(Object? key)</code></strong>: Elimina de la colección la clave solicitada junto con su valor vinculado[cite: 204, 205].</li>
+                <li><strong><code>removeWhere(bool test(K key, V value))</code></strong>: Realiza un borrado condicional selectivo eliminando las entradas que cumplan la condición lógica evaluada[cite: 206, 207].</li>
+            </ul>
+        </section>
+
+
         <section id="resumen">
             <div class="info-box">
                 <h3>Resumen de Estructura y Colecciones</h3>
                 <ul>
-                    <li>Los proyectos Dart se estructuran con directorios fijos: <code>bin/</code> para ejecución y <code>lib/</code> para métodos genéricos[cite: 29].</li>
-                    <li>El archivo <code>pubspec.yaml</code> centraliza el control de versiones del SDK y las dependencias del ecosistema[cite: 32].</li>
-                    <li>La interpolación mediante el uso de <code>$</code> y <code>${}</code> es la manera óptima de formatear texto combinando variables o expresiones en Dart[cite: 68, 70, 71].</li>
-                    <li>Para manejar e iterar colecciones como <code>List</code> de manera correcta, prioriza el uso de bucles <code>for..in</code> frente a <code>forEach</code>[cite: 82, 89].</li>
-                    <li>Funciones de orden superior como <code>removeWhere</code> agilizan la mutación segura de los datos bajo filtros específicos[cite: 94, 95].</li>
+                    <li>Los proyectos Dart se estructuran con directorios fijos: <code>bin/</code> para ejecución y <code>lib/</code> para métodos genéricos.</li>
+                    <li>El archivo <code>pubspec.yaml</code> centraliza el control de versiones del SDK y las dependencias del ecosistema.</li>
+                    <li>La interpolación mediante el uso de <code>$</code> y <code>${}</code> es la manera óptima de formatear texto combinando variables o expresiones en Dart.</li>
+                    <li>Para manejar e iterar colecciones como <code>List</code> de manera correcta, prioriza el uso de bucles <code>for..in</code> frente a <code>forEach</code>.</li>
+                    <li>Funciones de orden superior como <code>removeWhere</code> agilizan la mutación segura de los datos bajo filtros específicos.</li>
+                    <li>Los <code>Map</code> operan con esquemas eficientes de clave/valor proporcionando utilidades nativas complejas de filtrado como <code>removeWhere</code>.</li>
                 </ul>
             </div>
         </section>
@@ -218,7 +233,7 @@ milista.removeWhere((element) => element % 2 == 0);
     </main>
 
     <footer>
-        <p>&copy; Stucom 2025-26. Todos los derechos reservados. [cite: 2]</p>
+        <p>&copy; Stucom 2025-26. Todos los derechos reservados. </p>
     </footer>
 </body>
 
