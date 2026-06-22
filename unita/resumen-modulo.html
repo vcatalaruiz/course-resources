@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UNITA: Resumen del módulo</title>
+  <script src="../../course-resources/index.js" defer></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      color: #1f2937;
+    }
+
+    header {
+      background: #1d4ed8;
+      color: #fff;
+      padding: 2rem;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    main {
+      padding: 1.5rem;
+      max-width: 980px;
+      margin: auto;
+    }
+
+    code,
+    pre {
+      background: #f4f6f8;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+    }
+
+    pre {
+      padding: 1rem;
+      overflow-x: auto;
+    }
+
+    .callout {
+      background: #fef3c7;
+      border: 1px solid #fcd34d;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+    }
+
+    .mermaid {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      padding: 1rem;
+      border-radius: 6px;
+    }
+
+    footer {
+      border-top: 1px solid #e5e7eb;
+      margin-top: 2rem;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+  </style>
+  <script type='module'>
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <!-- X SVG -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+  <!-- ===== /VC SIDEBAR ===== -->
+
+  <header>
+
+    <!-- ===== VC SIDEBAR (desde cero) ===== -->
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+      aria-controls="vc-rail" aria-expanded="false">
+      <!--Hamburger icon -->
+      <i class="fa fa-bars" aria-hidden="true"></i>
+
+
+    </button>
+    <h1>UNITA: Resumen del módulo</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+
+  </header>
+
+  <main>
+
+
+
+    <section>
+      <h2>Diseño de Asignatura: Arquitectura e Ingeniería del Ciclo de Datos</h2>
+      <p>
+        Asignatura de enfoque teórico-práctico orientada a recorrer el ciclo de vida del dato de extremo a extremo.
+        Se plantea para 1 semestre, con una dedicación estimada de 60 a 80 horas lectivas y una carga de 66 horas en el
+        módulo OPT2.
+        Se recomienda un proyecto integral de fin de curso para aplicar progresivamente cada fase trabajada.
+      </p>
+      <ul>
+        <li>Duración: 1 semestre.</li>
+        <li>Carga estimada: 60-80 horas lectivas.</li>
+        <li>Módulo OPT2: 66 horas.</li>
+        <li>Enfoque: teórico-práctico.</li>
+        <li>Metodología recomendada: proyecto integral de fin de curso.</li>
+      </ul>
+    </section>
+
+
+    <section>
+      <h2>Módulo 1: Fundamentos y el Ciclo de Vida del Dato</h2>
+      <p>
+        Este módulo introduce el recorrido completo del dato, desde su generación hasta su archivado, y permite
+        distinguir
+        entre datos estructurados, semiestructurados y no estructurados. También sitúa el papel de los metadatos como
+        base para el catálogo, el linaje y la gobernanza.
+      </p>
+
+      <h3>Contenidos clave</h3>
+      <ul>
+        <li>Del dato crudo al valor de negocio.</li>
+        <li>Fases del ciclo de vida del dato: generación, ingesta, almacenamiento, procesamiento, análisis y archivado.
+        </li>
+        <li>Tipos de datos: relacionales, JSON/XML, imágenes, audio y texto libre.</li>
+        <li>Procesamiento batch frente a tiempo real.</li>
+        <li>Metadatos, catálogo y trazabilidad.</li>
+      </ul>
+
+      <h3>Ejemplo aplicado</h3>
+      <p>
+        En una empresa de e-commerce, los pedidos se registran en una base de datos relacional, las reseñas de clientes
+        llegan como texto libre y los clics de navegación se recogen como eventos en streaming. Los metadatos permiten
+        saber de dónde procede cada dato, quién lo usa y cómo se transforma.
+      </p>
+
+      <h3>Actividades propuestas</h3>
+      <ul>
+        <li>Clasificar un conjunto de fuentes según el tipo de dato que generan.</li>
+        <li>Diseñar un esquema del ciclo de vida del dato para un caso de negocio sencillo.</li>
+        <li>Identificar metadatos mínimos necesarios: origen, fecha, formato, propietario y frecuencia.</li>
+        <li>Comparar un flujo batch y un flujo streaming en términos de latencia y uso.</li>
+      </ul>
+
+    </section>
+
+    <section>
+      <h2>Módulo 2: Modelado de Orígenes y Arquitectura de Almacenamiento</h2>
+      <p>
+        Este módulo se centra en descubrir, evaluar y catalogar fuentes de datos, así como en diseñar el almacenamiento
+        objetivo para
+        soportar analítica y escalabilidad. Se comparan arquitecturas tradicionales y cloud.
+      </p>
+      <ul>
+        <li>Modelado de origen: descubrimiento, evaluación y categorización de fuentes.</li>
+        <li>Evolución del almacenamiento: on-premise frente a cloud.</li>
+        <li>OLTP vs. OLAP: diferencia entre sistemas transaccionales y analíticos.</li>
+        <li>Data Warehouse, Data Lake y Lakehouse: características y casos de uso.</li>
+        <li>Práctica: diseño del Target Model para un Data Lake analítico.</li>
+      </ul>
+    </section>
+
+
+    <section>
+      <h2>Módulo 3: Ingesta de Datos y Procesamiento (ETL / ELT)</h2>
+      <p>
+        Aborda la construcción de flujos de datos de extremo a extremo, la selección de herramientas de integración y la
+        aplicación de
+        controles de calidad del dato para asegurar consistencia y fiabilidad.
+      </p>
+      <ul>
+        <li>ETL tradicional frente a ELT moderna.</li>
+        <li>Herramientas del mercado: Azure Data Factory/Fabric, Denodo, Python, Pandas y PySpark.</li>
+        <li>Calidad del dato: nulos, duplicados, validación de tipos y formatos.</li>
+        <li>Diseño de pipelines reproducibles y mantenibles.</li>
+        <li>Práctica: construcción de un flujo de ingesta con Python/Pandas o herramienta cloud.</li>
+      </ul>
+      <div class="diagram">
+        ../../assets/linkia/depurator_python.gif
+      </div>
+
+    </section>
+
+    <section>
+      <h2>Módulo 4: Seguridad, Privacidad y Gobernanza</h2>
+      <p>
+        Integra la seguridad y la privacidad en todas las fases del ciclo de datos. El alumno entiende cómo proteger la
+        información,
+        controlar accesos y cumplir con marcos regulatorios como el RGPD.
+      </p>
+      <ul>
+        <li>Seguridad en tránsito y en reposo mediante cifrado.</li>
+        <li>Control de accesos e identidades: IAM, permisos y seguridad a nivel de base de datos.</li>
+        <li>Enmascaramiento y protección de datos sensibles.</li>
+        <li>Privacidad y cumplimiento: RGPD y anonimización.</li>
+        <li>Gobernanza como marco para calidad, trazabilidad y responsabilidad.</li>
+      </ul>
+
+    </section>
+
+    <section>
+      <h2>Módulo 5: Modelado Analítico y Business Intelligence (BI)</h2>
+      <p>
+        Se orienta a preparar los datos para consumo de negocio, diseñando modelos analíticos eficientes y dashboards
+        claros que faciliten
+        la toma de decisiones basada en KPIs e indicadores visuales.
+      </p>
+      <ul>
+        <li>Modelado dimensional: esquemas en estrella y copo de nieve.</li>
+        <li>Hechos, dimensiones y diseño orientado a análisis.</li>
+        <li>Principios de visualización: gráfico adecuado, color y storytelling.</li>
+        <li>Herramientas BI: Power BI y Tableau.</li>
+        <li>Práctica: creación de un dashboard interactivo sobre datos curados.</li>
+      </ul>
+
+    </section>
+
+    <section>
+      <h2>Módulo 6: Introducción a la Ciencia de Datos y Analítica Avanzada</h2>
+      <p>
+        Presenta el salto desde la analítica descriptiva del BI hacia técnicas predictivas y prescriptivas. El alumnado
+        conoce librerías,
+        plataformas y casos básicos de aprendizaje automático aplicados a negocio.
+      </p>
+      <ul>
+        <li>BI vs. Data Science: descriptivo, predictivo y prescriptivo.</li>
+        <li>Introducción a Scikit-Learn y plataformas Low-Code como KNIME.</li>
+        <li>Uso de datasets reales para problemas frecuentes de analítica.</li>
+        <li>Casos de estudio: predicción de abandono o segmentación.</li>
+        <li>Enfoque práctico para entender el valor de los modelos.</li>
+      </ul>
+
+    </section>
+
+    <section>
+      <h2>Módulo 7: Proyecto Fin de Asignatura y Presentación</h2>
+      <p>
+        El proyecto final integra los aprendizajes de toda la asignatura en una solución completa: desde la ingesta
+        hasta el dashboard final,
+        incorporando modelado, seguridad y comunicación efectiva del valor generado.
+      </p>
+      <ul>
+        <li>Integración final del flujo end-to-end.</li>
+        <li>Conexión entre ingesta, almacenamiento, seguridad, modelo analítico y visualización.</li>
+        <li>Presentación de resultados a una audiencia técnica o de negocio.</li>
+        <li>Traducción de métricas técnicas en impacto y valor.</li>
+        <li>Defensa del proyecto ante el profesorado o tribunal.</li>
+      </ul>
+
+    </section>
+
+    <section>
+      <h2>Metodología y Enfoque Global</h2>
+      <p>
+        La asignatura está planteada para que el alumno recorra de forma progresiva todas las capas de una arquitectura
+        de datos moderna,
+        combinando conceptos técnicos, herramientas del mercado y un caso práctico integrador durante todo el semestre.
+      </p>
+      <ul>
+        <li>Aprendizaje basado en proyecto.</li>
+        <li>Secuencia lógica: origen, almacenamiento, ingesta, seguridad, analítica y presentación.</li>
+        <li>Equilibrio entre fundamentos, herramientas y práctica aplicada.</li>
+        <li>Orientación a empleabilidad en entornos de datos y BI.</li>
+        <li>Visión end-to-end de la arquitectura e ingeniería del ciclo de datos.</li>
+      </ul>
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+    <footer>
+      <p>Profesores: Alex Castel y Vicente Català — ®Todos los derechos reservados.</p>
+    </footer>
+  </main>
+</body>
+
+</html>

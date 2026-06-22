@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="es">
+ <head><script src="/_sdk/telemetry_sdk.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Itinerario Córcega</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&amp;family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --ink:#173a38;
+      --teal:#0f5d5d;
+      --sea:#7bd8d0;
+      --cream:#fff8eb;
+      --paper:#fffdf6;
+      --coral:#f47d5f;
+      --sun:#ffd86b;
+      --lime:#c9e66b;
+      --muted:#5e7772;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--paper)}
+    .app-shell{
+      width:100%;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 8% 2%, rgba(123,216,208,.18), transparent 18%),
+        radial-gradient(circle at 96% 6%, rgba(255,216,107,.22), transparent 18%),
+        linear-gradient(180deg,#fffdf6 0%,#fffaf0 100%);
+    }
+    .comic{font-family:'Bangers', cursive; letter-spacing:.03em}
+    .hero-shadow{text-shadow:4px 4px 0 rgba(23,58,56,.9)}
+    .hard-shadow{box-shadow:8px 8px 0 var(--ink)}
+    .soft-hard-shadow{box-shadow:6px 6px 0 rgba(23,58,56,.92)}
+    .ink-border{border:3px solid var(--ink)}
+    .hero-overlay{background:linear-gradient(90deg,rgba(10,47,47,.86) 0%,rgba(10,47,47,.55) 46%,rgba(10,47,47,.14) 100%)}
+    .halftone{background-image:radial-gradient(rgba(23,58,56,.12) 1px,transparent 1px);background-size:10px 10px}
+    .bubble{position:relative;border:3px solid var(--ink);border-radius:20px;background:#fff}
+    .bubble:after{content:"";position:absolute;left:28px;bottom:-15px;width:22px;height:22px;background:#fff;border-right:3px solid var(--ink);border-bottom:3px solid var(--ink);transform:rotate(45deg)}
+    .activity-card,.tip-card,.food-card{transition:transform .25s ease, box-shadow .25s ease}
+    .activity-card:hover,.tip-card:hover,.food-card:hover{transform:translate(-2px,-3px);box-shadow:5px 5px 0 var(--ink)}
+    .stage-card{animation:rise .7s ease both}
+    @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .map-frame{position:relative;overflow:hidden}
+    .map-frame:after{
+      content:"";
+      position:absolute; inset:0;
+      box-shadow:inset 0 0 0 2px rgba(255,255,255,.45), inset 0 0 35px rgba(23,58,56,.12);
+      pointer-events:none;
+    }
+    @media print{
+      .print-hide{display:none!important}
+      .hero-section{height:430px!important}
+      .stage-card{break-inside:avoid}
+    }
+  </style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/resizing_sdk.js" type="text/javascript"></script>
+ </head>
+ <body data-template-id="__page-root">
+  <div class="app-shell w-full">
+   <header class="w-full px-5 md:px-8 lg:px-12 py-5">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+     <div class="flex items-center gap-3">
+      <div class="w-11 h-11 rounded-full bg-[#ffd86b] ink-border flex items-center justify-center soft-hard-shadow">
+       <i data-lucide="sun" style="width:22px;height:22px;"></i>
+      </div>
+      <div>
+       <p data-template-id="brand-eyebrow" class="canva-text uppercase text-[10px] tracking-[.18em] font-bold text-[#6b857f]"></p>
+       <p data-template-id="brand-name" class="canva-text comic text-[#0f5d5d]"></p>
+      </div>
+     </div><button id="printBtn" data-template-id="print-button" class="canva-button print-hide inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white ink-border soft-hard-shadow hover:translate-y-[-2px] transition"> <i data-lucide="printer" style="width:16px;height:16px;"></i> </button>
+    </div>
+   </header>
+   <main>
+    <section class="hero-section relative h-[580px] md:h-[650px] overflow-hidden">
+     <img data-template-id="hero-image" loading="lazy" class="canva-image absolute inset-0 w-full h-full object-cover">
+     <div class="hero-overlay absolute inset-0"></div>
+     <div class="absolute top-8 right-8 hidden md:block w-36 h-36 rounded-full bg-[#ffd86b] opacity-90 ink-border halftone"></div>
+     <div class="relative z-10 max-w-7xl mx-auto h-full px-5 md:px-8 lg:px-12 flex items-center">
+      <div class="max-w-3xl text-white">
+       <p data-template-id="hero-kicker" class="canva-text inline-block bg-[#f47d5f] text-white px-4 py-2 rounded-full ink-border uppercase font-bold tracking-[.16em] mb-5"></p>
+       <h1 data-template-id="hero-title" class="canva-text comic hero-shadow leading-[.95] mb-5"></h1>
+       <p data-template-id="hero-subtitle" class="canva-text max-w-xl text-white/95 leading-7 mb-7"></p>
+       <div class="flex flex-wrap gap-3">
+        <span data-template-id="hero-pill-1" class="canva-tag bg-[#ffd86b] text-[#173a38] px-4 py-2 rounded-full ink-border font-bold"></span> <span data-template-id="hero-pill-2" class="canva-tag bg-[#7bd8d0] text-[#173a38] px-4 py-2 rounded-full ink-border font-bold"></span>
+       </div>
+      </div>
+     </div>
+    </section>
+    <section class="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 -mt-12 relative z-20">
+     <div data-template-id="summary-panel" class="canva-panel bg-white ink-border hard-shadow rounded-[22px] p-5 md:p-7 grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+      <div class="bg-[#fff8eb] rounded-2xl p-3">
+       <p data-template-id="summary-label-1" class="canva-text uppercase text-[10px] tracking-[.16em] font-bold text-[#6b857f] mb-1"></p>
+       <p data-template-id="summary-value-1" class="canva-text comic text-[#0f5d5d]"></p>
+      </div>
+      <div class="bg-[#eafaf7] rounded-2xl p-3">
+       <p data-template-id="summary-label-2" class="canva-text uppercase text-[10px] tracking-[.16em] font-bold text-[#6b857f] mb-1"></p>
+       <p data-template-id="summary-value-2" class="canva-text comic text-[#0f5d5d]"></p>
+      </div>
+      <div class="bg-[#fff3ef] rounded-2xl p-3">
+       <p data-template-id="summary-label-3" class="canva-text uppercase text-[10px] tracking-[.16em] font-bold text-[#6b857f] mb-1"></p>
+       <p data-template-id="summary-value-3" class="canva-text comic text-[#0f5d5d]"></p>
+      </div>
+      <div class="bg-[#f5f9e8] rounded-2xl p-3">
+       <p data-template-id="summary-label-4" class="canva-text uppercase text-[10px] tracking-[.16em] font-bold text-[#6b857f] mb-1"></p>
+       <p data-template-id="summary-value-4" class="canva-text comic text-[#0f5d5d]"></p>
+      </div>
+     </div>
+    </section>
+    <section class="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 pt-24 pb-12">
+     <div class="grid lg:grid-cols-[1.1fr_.9fr] gap-8 items-center">
+      <div>
+       <p data-template-id="intro-kicker" class="canva-text inline-block bg-[#ffd86b] px-3 py-1 rounded-full ink-border uppercase text-[10px] tracking-[.18em] font-bold mb-4"></p>
+       <h2 data-template-id="intro-title" class="canva-text comic text-[#0f5d5d] leading-none mb-4"></h2>
+       <p data-template-id="intro-copy" class="canva-text text-[#5e7772] leading-7 max-w-2xl"></p>
+      </div>
+      <div class="bubble p-5 soft-hard-shadow">
+       <p data-template-id="intro-note" class="canva-text comic text-[#173a38] leading-tight"></p>
+      </div>
+     </div>
+    </section>
+    <section class="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 py-12">
+     <div class="mb-8">
+      <p data-template-id="journey-map-kicker" class="canva-text inline-block bg-[#7bd8d0] px-3 py-1 rounded-full ink-border uppercase text-[10px] tracking-[.18em] font-bold mb-4"></p>
+      <h2 data-template-id="journey-map-title" class="canva-text comic text-[#0f5d5d] leading-none mb-3"></h2>
+      <p data-template-id="journey-map-copy" class="canva-text text-[#5e7772] max-w-3xl leading-7"></p>
+     </div>
+     <div data-template-id="journey-map-container" class="canva-card bg-white ink-border rounded-[24px] p-5 md:p-7 hard-shadow flex justify-center">
+      <svg class="w-full max-w-2xl" viewbox="0 0 280 420" preserveaspectratio="xMidYMid meet"><!-- Mar de fondo azul claro --> <rect width="280" height="420" fill="#cce8e8" /> <!-- Silueta de Córcega --> <path d="M 80 20 Q 95 15 110 20 Q 120 25 125 40 Q 130 65 128 95 Q 130 120 128 150 Q 135 180 132 210 Q 130 240 125 265 Q 120 285 110 295 Q 100 305 85 300 Q 75 295 70 275 Q 65 240 68 210 Q 62 180 65 150 Q 63 120 65 95 Q 60 65 70 40 Q 75 25 80 20 Z" fill="#d4f1ef" stroke="#0f5d5d" stroke-width="2.5" /> <!-- Etapa 1: L'Île-Rousse (norte) --> <circle cx="95" cy="35" r="9" fill="#ffd86b" stroke="#173a38" stroke-width="2" /> <text x="95" y="62" text-anchor="middle" fill="#0f5d5d" font-size="13" font-weight="bold" font-family="Bangers">
+        1
+       </text> <text x="95" y="78" text-anchor="middle" fill="#0f5d5d" font-size="11" font-family="DM Sans" font-weight="500">
+        L'Île-Rousse
+       </text> <!-- Etapa 2: Calvi --> <circle cx="108" cy="75" r="9" fill="#7bd8d0" stroke="#173a38" stroke-width="2" /> <text x="108" y="102" text-anchor="middle" fill="#0f5d5d" font-size="13" font-weight="bold" font-family="Bangers">
+        2
+       </text> <text x="108" y="118" text-anchor="middle" fill="#0f5d5d" font-size="11" font-family="DM Sans" font-weight="500">
+        Calvi
+       </text> <!-- Etapa 3: Porto-Vecchio --> <circle cx="125" cy="210" r="9" fill="#f47d5f" stroke="#173a38" stroke-width="2" /> <text x="125" y="237" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="bold" font-family="Bangers">
+        3
+       </text> <text x="125" y="253" text-anchor="middle" fill="#0f5d5d" font-size="11" font-family="DM Sans" font-weight="500">
+        Porto-Vecchio
+       </text> <!-- Etapa 4: Bonifacio (sur) --> <circle cx="98" cy="305" r="9" fill="#c9e66b" stroke="#173a38" stroke-width="2" /> <text x="98" y="332" text-anchor="middle" fill="#173a38" font-size="13" font-weight="bold" font-family="Bangers">
+        4
+       </text> <text x="98" y="348" text-anchor="middle" fill="#0f5d5d" font-size="11" font-family="DM Sans" font-weight="500">
+        Bonifacio
+       </text> <!-- Línea de ruta punteada conectando los puntos --> <path d="M 95 44 Q 100 55 108 66 Q 115 140 125 200 Q 110 250 98 296" fill="none" stroke="#f47d5f" stroke-width="2.5" stroke-dasharray="6,4" opacity="0.8" /> <!-- Leyenda --> <text x="140" y="395" fill="#5e7772" font-size="11" font-family="DM Sans" font-weight="500">
+        El viaje completo: norte tranquilo → costa central → playas → acantilados del sur
+       </text>
+      </svg>
+     </div>
+    </section>
+    <section class="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 py-10">
+     <div class="mb-7">
+      <p data-template-id="overview-kicker" class="canva-text inline-block bg-[#7bd8d0] px-3 py-1 rounded-full ink-border uppercase text-[10px] tracking-[.18em] font-bold mb-4"></p>
+      <h2 data-template-id="overview-title" class="canva-text comic text-[#0f5d5d] leading-none mb-3"></h2>
+      <p data-template-id="overview-copy" class="canva-text text-[#5e7772] max-w-3xl leading-7"></p>
+     </div>
+     <div data-template-id="overview-panel" class="canva-card bg-[#eafaf7] ink-border rounded-[24px] p-6 md:p-8 hard-shadow">
+      <div class="grid lg:grid-cols-2 gap-8 items-center">
+       <div class="flex justify-center">
+        <svg class="w-full max-w-sm" viewbox="0 0 280 420" preserveaspectratio="xMidYMid meet"><!-- Mar de fondo azul claro --> <rect width="280" height="420" fill="#cce8e8" /> <!-- Silueta de Córcega --> <path d="M 80 20 Q 95 15 110 20 Q 120 25 125 40 Q 130 65 128 95 Q 130 120 128 150 Q 135 180 132 210 Q 130 240 125 265 Q 120 285 110 295 Q 100 305 85 300 Q 75 295 70 275 Q 65 240 68 210 Q 62 180 65 150 Q 63 120 65 95 Q 60 65 70 40 Q 75 25 80 20 Z" fill="#d4f1ef" stroke="#0f5d5d" stroke-width="2.5" /> <!-- Etapa 1: L'Île-Rousse (norte) --> <circle cx="95" cy="35" r="9" fill="#ffd86b" stroke="#173a38" stroke-width="2" /> <text x="95" y="60" text-anchor="middle" fill="#0f5d5d" font-size="12" font-weight="bold" font-family="Bangers">
+          1
+         </text> <!-- Etapa 2: Calvi --> <circle cx="108" cy="75" r="9" fill="#7bd8d0" stroke="#173a38" stroke-width="2" /> <text x="108" y="100" text-anchor="middle" fill="#0f5d5d" font-size="12" font-weight="bold" font-family="Bangers">
+          2
+         </text> <!-- Etapa 3: Porto-Vecchio --> <circle cx="125" cy="210" r="9" fill="#f47d5f" stroke="#173a38" stroke-width="2" /> <text x="125" y="235" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="bold" font-family="Bangers">
+          3
+         </text> <!-- Etapa 4: Bonifacio (sur) --> <circle cx="98" cy="305" r="9" fill="#c9e66b" stroke="#173a38" stroke-width="2" /> <text x="98" y="330" text-anchor="middle" fill="#173a38" font-size="12" font-weight="bold" font-family="Bangers">
+          4
+         </text> <!-- Línea de ruta punteada --> <path d="M 95 44 Q 100 55 108 66 Q 115 140 125 200 Q 110 250 98 296" fill="none" stroke="#f47d5f" stroke-width="2.5" stroke-dasharray="6,4" opacity="0.8" />
+        </svg>
+       </div>
+       <div class="space-y-4">
+        <p data-template-id="overview-list-label" class="canva-text uppercase tracking-[.16em] text-[10px] font-bold text-[#f47d5f]"></p>
+        <div class="space-y-3">
+         <div class="flex gap-3 items-start">
+          <div class="w-8 h-8 rounded-full bg-[#ffd86b] ink-border flex items-center justify-center comic shrink-0">
+           1
+          </div>
+          <div>
+           <h3 data-template-id="overview-stop-1-title" class="canva-text comic text-[#0f5d5d] leading-none"></h3>
+           <p data-template-id="overview-stop-1-copy" class="canva-text text-sm text-[#5e7772] leading-5"></p>
+          </div>
+         </div>
+         <div class="flex gap-3 items-start">
+          <div class="w-8 h-8 rounded-full bg-[#7bd8d0] ink-border flex items-center justify-center comic shrink-0">
+           2
+          </div>
+          <div>
+           <h3 data-template-id="overview-stop-2-title" class="canva-text comic text-[#0f5d5d] leading-none"></h3>
+           <p data-template-id="overview-stop-2-copy" class="canva-text text-sm text-[#5e7772] leading-5"></p>
+          </div>
+         </div>
+         <div class="flex gap-3 items-start">
+          <div class="w-8 h-8 rounded-full bg-[#f47d5f] text-white ink-border flex items-center justify-center comic shrink-0">
+           3
+          </div>
+          <div>
+           <h3 data-template-id="overview-stop-3-title" class="canva-text comic text-[#0f5d5d] leading-none"></h3>
+           <p data-template-id="overview-stop-3-copy" class="canva-text text-sm text-[#5e7772] leading-5"></p>
+          </div>
+         </div>
+         <div class="flex gap-3 items-start">
+          <div class="w-8 h-8 rounded-full bg-[#c9e66b] ink-border flex items-center justify-center comic shrink-0">
+           4
+          </div>
+          <div>
+           <h3 data-template-id="overview-stop-4-title" class="canva-text comic text-[#0f5d5d] leading-none"></h3>
+           <p data-template-id="overview-stop-4-copy" class="canva-text text-sm text-[#5e7772] leading-5"></p>
+          </div>
+         </div>
+        </div>
+        <div class="mt-5 pt-4 border-t-2 border-dashed border-[#d9e9e5]">
+         <p data-template-id="overview-note" class="canva-text text-[#355f59] italic leading-6"></p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+    <section class="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 py-12">
+     <div class="mb-8">
+      <p data-template-id="itinerary-kicker" class="canva-text inline-block bg-[#7bd8d0] px-3 py-1 rounded-full ink-border uppercase text-[10px] tracking-[.18em] font-bold mb-4"></p>
+      <h2 data-template-id="itinerary-title" class="canva-text comic text-[#0f5d5d] leading-none"></h2>
+     </div>
+     <div class="space-y-14">
+      <article class="stage-card">
+       <div class="flex items-center gap-4 mb-5">
+        <div data-template-id="stage-1-number" class="canva-text comic w-16 h-16 rounded-full bg-[#ffd86b] ink-border flex items-center justify-center soft-hard-shadow"></div>
+        <div>
+         <p data-template-id="stage-1-kicker" class="canva-text uppercase tracking-[.18em] text-[10px] font-bold text-[#f47d5f]"></p>
+         <h3 data-template-id="stage-1-title" class="canva-text comic text-[#173a38] leading-none"></h3>
+        </div>
+       </div>
+       <div data-template-id="stage-1-panel" class="canva-card bg-[#fff8eb] ink-border rounded-[24px] p-5 md:p-7 hard-shadow">
+        <div class="grid lg:grid-cols-[.8fr_1.2fr] gap-7">
+         <div class="space-y-5">
+          <div class="map-frame rounded-2xl ink-border bg-white relative overflow-hidden h-[160px]">
+           <svg class="w-full h-full" viewbox="0 0 200 180" preserveaspectratio="xMidYMid meet" style="z-index:1;">
+            <path d="M 60 10 Q 75 8 85 15 Q 100 25 105 45 Q 108 70 102 95 Q 98 120 85 145 Q 70 160 55 155 Q 45 150 42 130 Q 38 100 50 60 Q 55 30 60 10 Z" fill="#e8f7f5" stroke="#0f5d5d" stroke-width="1.5" opacity="0.95" /> <circle cx="70" cy="25" r="5" fill="#ffd86b" stroke="#173a38" stroke-width="1.5" /> <circle cx="80" cy="140" r="5" fill="#c9e66b" stroke="#173a38" stroke-width="1.5" /> <line x1="70" y1="30" x2="80" y2="135" stroke="#f47d5f" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7" />
+           </svg>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+           <div class="bg-white rounded-2xl p-3 ink-border">
+            <p data-template-id="stage-1-distance-label" class="canva-text uppercase text-[9px] tracking-[.16em] font-bold text-[#6b857f]"></p>
+            <p data-template-id="stage-1-distance" class="canva-text comic text-[#0f5d5d]"></p>
+           </div>
+           <div class="bg-white rounded-2xl p-3 ink-border">
+            <p data-template-id="stage-1-time-label" class="canva-text uppercase text-[9px] tracking-[.16em] font-bold text-[#6b857f]"></p>
+            <p data-template-id="stage-1-time" class="canva-text comic text-[#0f5d5d]"></p>
+           </div>
+          </div>
+          <div>
+           <p data-template-id="stage-1-route-label" class="canva-text uppercase tracking-[.16em] text-[10px] font-bold text-[#f47d5f] mb-2"></p>
+           <p data-template-id="stage-1-route-copy" class="canva-text text-[#5e7772] leading-7"></p>
+          </div>
+         </div>
+         <div>
+          <div class="grid md:grid-cols-[.95fr_1.05fr] gap-5">
+           <div class="relative overflow-hidden rounded-[20px] ink-border">
+            <img data-template-id="stage-1-image" loading="lazy" class="canva-image w-full h-full min-h-[300px] object-cover"> <span data-template-id="stage-1-photo-tag" class="canva-tag absolute left-3 top-3 bg-[#ffd86b] px-3 py-1 rounded-full ink-border font-bold text-xs"></span>
+           </div>
+           <div>
+            <p data-template-id="stage-1-village-label" class="canva-text uppercase tracking-[.16em] text-[10px] font-bold text-[#f47d5f] mb-1"></p>
+            <h4 data-template-id="stage-1-village-title" class="canva-text comic text-[#0f5d5d] leading-none mb-2"></h4>
+            <p data-template-id="stage-1-village-copy" class="canva-text text-[#5e7772] leading-6 mb-4"></p>
+            <p data-template-id="stage-1-why-label" class="canva-text uppercase tracking-[.16em] text-[10px] font-bold text-[#f47d5f] mb-2"></p>
+            <p data-template-id="stage-1-why-copy" class="canva-text text-[#355f59] text-sm leading-6 mb-4"></p>
+            <p data-template-id="stage-1-do-label" class="canva-text uppercase tracking-[.16em] text-[10px] font-bold text-[#f47d5f] mb-2"></p>
+            <div class="space-y-2">
+             <div class="activity-card bg-white ink-border rounded-xl px-3 py-2 flex gap-2 items-start"><i data-lucide="map-pin" style="width:17px;height:17px;margin-top:3px;"></i>
+              <p data-template-id="stage-1-do-1" class="canva-text text-sm text-[#355f59]"></p>
+             </div>
+             <div class="activity-card bg-white ink-border rounded-xl px-3 py-2 flex gap-2 items-start"><i data-lucide="sun-medium" style="width:17px;height:17px;margin-top:3px;"></i>
+              <p data-template-id="stage-1-do-2" class="canva-text text-sm text-[#355f59]"></p>
+             </div>
+             <div class="activity-card bg-white ink-border rounded-xl px-3 py-2 flex gap-2 items-start"><i data-lucide="utensils" style="width:17px;height:17px;margin-top:3px;"></i>
+              <p data-template-id="stage-1-do-3" class="canva-text text-sm text-[#355f59]"></p>
+             </div>
+            </div>
+            <div class="mt-4 bg-[#fff2bf] rounded-xl px-3 py-2 ink-border">
+             <p data-template-id="stage-1-tip" class="canva-text text-sm text-[#355f59]"></p>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </article>
+      <article class="stage-card">
+       <div class="flex items-center gap-4 mb-5">
+        <div data-template-id="stage-2-number" class="canva-text comic w-16 h-16 rounded-full bg-[#7bd8d0] ink-border flex items-center justify-center soft-hard-shadow"></div>
+        <div>
+         <p data-template-id="stage-2-kicker" class="canva-text uppercase tracking-[.18em] text-[10px] font-bold text-[#f47d5f]"></p>
+         <h3 data-template-id="stage-2-title" class="canva-text comic text-[#173a38] leading-none"></h3>
+        </div>
+       </div>
+       <div data-template-id="stage-2-panel" class="canva-card bg-[#eafaf7] ink-border rounded-[24px] p-5 md:p-7 hard-shadow">
+        <div class="grid lg:grid-cols-[1.2fr_.8fr] gap-7">
+         <div class="grid md:grid-cols-[1.05fr_.95fr] gap-5 order-2 lg:order-1">
+          <div>
+           <p data-template-id="stage-2-village-label" class="canva-text uppercase tracking-[.16em] text-[10px] font-bold text-[#f47d5f] mb-1"></p>
+           <h4 data-template-id="stage-2-village-title" class="canva-text comic text-[#0f5d5d] leading-none mb-2"></h4>
+           <p data-template-id="stage-2-village-copy" class="canva-text text-[#5e7772] leading-6 mb-4"></p>
+           <p data-template-id="stage-2-why-label" class="canva-text uppercase tracking-[.16em] text-[10px] font-bold text-[#f47d5f] mb-2"></p>
+           <p data-template-id="stage-2-why-copy" class="canva-text text-[#355f59] text-sm leading-6 mb-4"></p>
+           <p data-template-id="stage-2-do-label" class="canva-text uppercase tracking-[.16em] text-[10px] font-bold text-[#f47d5f] mb-2"></p>
+           <div class="space-y-2">
+            <div class="activity-card bg-white ink-border rounded-xl px-3 py-2 flex gap-2 items-start"><i data-lucide="ship" style="width:17px;height:17px;margin-top:3px;"></i>
+             <p data-template-id="stage-2-do-1" class="canva-text text-sm text-[#355f59]"></p>
+            </div>
+            <div class="activity-card bg-white ink-border rounded-xl px-3 py-2 flex gap-2 items-start"><i data-lucide="coffee" style="width:17px;height:17px;margin-top:3px;"></i>
+             <p data-template-id="stage-2-do-2" class="canva-text text-sm text-[#355f59]"></p>
+            </div>
+            <div class="activity-card bg-white ink-border rounded-xl px-3 py-2 flex gap-2 items-start"><i data-lucide="camera" style="width:17px;height:17px;margin-top:3px;"></i>
+             <p data-template-id="stage-2-do-3" class="canva-text text-sm text-[#355f59]"></p>
+            </div>
+           </div>
+           <div class="mt-4 bg-[#dff7f2] rounded-xl px-3 py-2 ink-border">
+            <p data-template-id="stage-2-tip" class="canva-text text-sm text-[#355f59]"></p>
+           </div>
+          </div>
+          <div class="relative overflow-hidden rounded-[20px] ink-border">
+           <img data-template-id="stage-2-image" loading="lazy" class="canva-image w-full h-full min-h-[300px] object-cover"> <span data-template-id="stage-2-photo-tag" class="canva-tag absolute left-3 top-3 bg-[#ffd86b] px-3 py-1 rounded-full ink-border font-bold text-xs"></span>
+          </div>
+         </div>
+         <div class="space-y-5 order-1 lg:order-2">
+          <div class="map-frame rounded-2xl ink-border bg-white relative overflow-hidden h-[160px]">
+           <svg class="w-full h-full" viewbox="0 0 200 180" preserveaspectratio="xMidYMid meet" style="z-index:1;">
+            <path d="M 60 10 Q 75 8 85 15 Q 100 25 105 45 Q 108 70 102 95 Q 98 120 85 145 Q 70 160 55 155 Q 45 150 42 130 Q 38 100 50 60 Q 55 30 60 10 Z" fill="#e8f7f5" stroke="#0f5d5d" stroke-width="1.5" opacity="0.95" /> <circle cx="65" cy="30" r="5" fill="#ffd86b" stroke="#173a38" stroke-width="1.5" /> <circle cx="75" cy="50" r="5" fill="#7bd8d0" stroke="#173a38" stroke-width="1.5" /> <line x1="65" y1="35" x2="75" y2="45" stroke="#f47d5f" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7" />
+           </svg>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+           <div class="bg-white rounded-2xl p-3 ink-border">
+            <p data-template-id="stage-2-distance-label" class="canva-text uppercase text-[9px] tracking-[.16em] font-bold text-[#6b857f]"></p>
+            <p data-template-id="stage-2-distance" class="canva-text comic text-[#0f5d5d]"></p>
+           </div>
+           <div class="bg-white rounded-2xl p-3 ink-border">
+            <p data-template-id="stage-2-time-label" class="canva-text uppercase text-[9px] tracking-[.16em] font-bold text-[#6b857f]"></p>
+            <p data-template-id="stage-2-time" class="canva-text comic text-[#0f5d5d]"></p>
+           </div>
+          </div>
+          <div>
+           <p data-template-id="stage-2-route-label" class="canva-text uppercase tracking-[.16em] text-[10px] font-bold text-[#f47d5f] mb-2"></p>
+           <p data-template-id="stage-2-route-copy" class="canva-text text-[#5e7772] leading-7"></p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </article>
+      <article class="stage-card">
+       <div class="flex items-center gap-4 mb-5">
+        <div data-template-id="stage-3-number" class="canva-text comic w-16 h-16 rounded-full bg-[#f47d5f] text-white ink-border flex items-center justify-center soft-hard-shadow"></div>
+        <div>
+         <p data-template-id="stage-3-kicker" class="canva-text uppercase tracking-[.18em] text-[10px] font-bold text-[#f47d5f]"></p>
+         <h3 data-template-id="stage-3-title" class="canva-text comic text-[#173a38] leading-none"></h3>
+        </div>
+       </div>
+       <div data-template-id="stage-3-panel" class="canva-card bg-[#fff3ef] ink-border rounded-[24px] p-5 md:p-7 hard-shadow">
+        <div class="grid lg:grid-cols-[.8fr_1.2fr] gap-7">
+         <div class="space-y-5">
+          <div class="map-frame rounded-2xl ink-border bg-white relative overflow-hidden h-[160px]">
+           <svg class="w-full h-full" viewbox="0 0 200 180" preserveaspectratio="xMidYMid meet" style="z-index:1;">
+            <path d="M 60 10 Q 75 8 85 15 Q 100 25 105 45 Q 108 70 102 95 Q 98 120 85 145 Q 70 160 55 155 Q 45 150 42 130 Q 38 100 50 60 Q 55 30 60 10 Z" fill="#e8f7f5" stroke="#0f5d5d" stroke-width="1.5" opacity="0.95" /> <circle cx="75" cy="50" r="5" fill="#7bd8d0" stroke="#173a38" stroke-width="1.5" /> <circle cx="95" cy="95" r="5" fill="#f47d5f" stroke="#173a38" stroke-width="1.5" /> <line x1="75" y1="55" x2="95" y2="90" stroke="#f47d5f" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7" />
+           </svg>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+           <div class="bg-white rounded-2xl p-3 ink-border">
+            <p data-template-id="stage-3-distance-label" class="canva-text uppercase text-[9px] tracking-[.16em] font-bold text-[#6b857f]"></p>
+            <p data-template-id="stage-3-distance" class="canva-text comic text-[#0f5d5d]"></p>
+           </div>
+           <div class="bg-white rounded-2xl p-3 ink-border">
+            <p data-template-id="stage-3-time-label" class="canva-text uppercase text-[9px] tracking-[.16em] font-bold text-[#6b857f]"></p>
+            <p data-template-id="stage-3-time" class="canva-text comic text-[#0f5d5d]"></p>
+           </div>
+          </div>
+          <div>
+           <p data-template-id="stage-3-route-label" class="canva-text uppercase tracking-[.16em] text-[10px] font-bold text-[#f47d5f] mb-2"></p>
+           <p data-template-id="stage-3-route-copy" class="canva-text text-[#5e7772] leading-7"></p>
+          </div>
+         </div>
+         <div>
+          <div class="grid md:grid-cols-[.95fr_1.05fr] gap-5">
+           <div class="relative overflow-hidden rounded-[20px] ink-border">
+            <img data-template-id="stage-3-image" loading="lazy" class="canva-image w-full h-full min-h-[300px] object-cover"> <span data-template-id="stage-3-photo-tag" class="canva-tag absolute left-3 top-3 bg-[#ffd86b] px-3 py-1 rounded-full ink-border font-bold text-xs"></span>
+           </div>
+           <div>
+            <p data-template-id="stage-3-village-label" class="canva-text uppercase tracking-[.16em] text-[10px] font-bold text-[#f47d5f] mb-1"></p>
+            <h4 data-template-id="stage-3-village-title" class="canva-text comic text-[#0f5d5d] leading-none mb-2"></h4>
+            <p data-template-id="stage-3-village-copy" class="canva-text text-[#5e7772] leading-6 mb-4"></p>
+            <p data-template-id="stage-3-why-label" class="canva-text uppercase tracking-[.16em] text-[10px] font-bold text-[#f47d5f] mb-2"></p>
+            <p data-template-id="stage-3-why-copy" class="canva-text text-[#355f59] text-sm leading-6 mb-4"></p>
+            <p data-template-id="stage-3-do-label" class="canva-text uppercase tracking-[.16em] text-[10px] font-bold text-[#f47d5f] mb-2"></p>
+            <div class="space-y-2">
+             <div class="activity-card bg-white ink-border rounded-xl px-3 py-2 flex gap-2 items-start"><i data-lucide="waves" style="width:17px;height:17px;margin-top:3px;"></i>
+              <p data-template-id="stage-3-do-1" class="canva-text text-sm text-[#355f59]"></p>
+             </div>
+             <div class="activity-card bg-white ink-border rounded-xl px-3 py-2 flex gap-2 items-start"><i data-lucide="palmtree" style="width:17px;height:17px;margin-top:3px;"></i>
+              <p data-template-id="stage-3-do-2" class="canva-text text-sm text-[#355f59]"></p>
+             </div>
+             <div class="activity-card bg-white ink-border rounded-xl px-3 py-2 flex gap-2 items-start"><i data-lucide="moon" style="width:17px;height:17px;margin-top:3px;"></i>
+              <p data-template-id="stage-3-do-3" class="canva-text text-sm text-[#355f59]"></p>
+             </div>
+            </div>
+            <div class="mt-4 bg-[#ffe5dc] rounded-xl px-3 py-2 ink-border">
+             <p data-template-id="stage-3-tip" class="canva-text text-sm text-[#355f59]"></p>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </article>
+      <article class="stage-card">
+       <div class="flex items-center gap-4 mb-5">
+        <div data-template-id="stage-4-number" class="canva-text comic w-16 h-16 rounded-full bg-[#c9e66b] ink-border flex items-center justify-center soft-hard-shadow"></div>
+        <div>
+         <p data-template-id="stage-4-kicker" class="canva-text uppercase tracking-[.18em] text-[10px] font-bold text-[#f47d5f]"></p>
+         <h3 data-template-id="stage-4-title" class="canva-text comic text-[#173a38] leading-none"></h3>
+        </div>
+       </div>
+       <div data-template-id="stage-4-panel" class="canva-card bg-[#f5f9e8] ink-border rounded-[24px] p-5 md:p-7 hard-shadow">
+        <div class="grid lg:grid-cols-[1.2fr_.8fr] gap-7">
+         <div class="grid md:grid-cols-[1.05fr_.95fr] gap-5 order-2 lg:order-1">
+          <div>
+           <p data-template-id="stage-4-village-label" class="canva-text uppercase tracking-[.16em] text-[10px] font-bold text-[#f47d5f] mb-1"></p>
+           <h4 data-template-id="stage-4-village-title" class="canva-text comic text-[#0f5d5d] leading-none mb-2"></h4>
+           <p data-template-id="stage-4-village-copy" class="canva-text text-[#5e7772] leading-6 mb-4"></p>
+           <p data-template-id="stage-4-why-label" class="canva-text uppercase tracking-[.16em] text-[10px] font-bold text-[#f47d5f] mb-2"></p>
+           <p data-template-id="stage-4-why-copy" class="canva-text text-[#355f59] text-sm leading-6 mb-4"></p>
+           <p data-template-id="stage-4-do-label" class="canva-text uppercase tracking-[.16em] text-[10px] font-bold text-[#f47d5f] mb-2"></p>
+           <div class="space-y-2">
+            <div class="activity-card bg-white ink-border rounded-xl px-3 py-2 flex gap-2 items-start"><i data-lucide="binoculars" style="width:17px;height:17px;margin-top:3px;"></i>
+             <p data-template-id="stage-4-do-1" class="canva-text text-sm text-[#355f59]"></p>
+            </div>
+            <div class="activity-card bg-white ink-border rounded-xl px-3 py-2 flex gap-2 items-start"><i data-lucide="footprints" style="width:17px;height:17px;margin-top:3px;"></i>
+             <p data-template-id="stage-4-do-2" class="canva-text text-sm text-[#355f59]"></p>
+            </div>
+            <div class="activity-card bg-white ink-border rounded-xl px-3 py-2 flex gap-2 items-start"><i data-lucide="wine" style="width:17px;height:17px;margin-top:3px;"></i>
+             <p data-template-id="stage-4-do-3" class="canva-text text-sm text-[#355f59]"></p>
+            </div>
+           </div>
+           <div class="mt-4 bg-[#eff8c9] rounded-xl px-3 py-2 ink-border">
+            <p data-template-id="stage-4-tip" class="canva-text text-sm text-[#355f59]"></p>
+           </div>
+          </div>
+          <div class="relative overflow-hidden rounded-[20px] ink-border">
+           <img data-template-id="stage-4-image" loading="lazy" class="canva-image w-full h-full min-h-[300px] object-cover"> <span data-template-id="stage-4-photo-tag" class="canva-tag absolute left-3 top-3 bg-[#ffd86b] px-3 py-1 rounded-full ink-border font-bold text-xs"></span>
+          </div>
+         </div>
+         <div class="space-y-5 order-1 lg:order-2">
+          <div class="map-frame rounded-2xl ink-border bg-white relative overflow-hidden h-[160px]">
+           <svg class="w-full h-full" viewbox="0 0 200 180" preserveaspectratio="xMidYMid meet" style="z-index:1;">
+            <path d="M 60 10 Q 75 8 85 15 Q 100 25 105 45 Q 108 70 102 95 Q 98 120 85 145 Q 70 160 55 155 Q 45 150 42 130 Q 38 100 50 60 Q 55 30 60 10 Z" fill="#e8f7f5" stroke="#0f5d5d" stroke-width="1.5" opacity="0.95" /> <circle cx="95" cy="95" r="5" fill="#f47d5f" stroke="#173a38" stroke-width="1.5" /> <circle cx="85" cy="140" r="5" fill="#c9e66b" stroke="#173a38" stroke-width="1.5" /> <line x1="95" y1="100" x2="85" y2="135" stroke="#f47d5f" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7" />
+           </svg>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+           <div class="bg-white rounded-2xl p-3 ink-border">
+            <p data-template-id="stage-4-distance-label" class="canva-text uppercase text-[9px] tracking-[.16em] font-bold text-[#6b857f]"></p>
+            <p data-template-id="stage-4-distance" class="canva-text comic text-[#0f5d5d]"></p>
+           </div>
+           <div class="bg-white rounded-2xl p-3 ink-border">
+            <p data-template-id="stage-4-time-label" class="canva-text uppercase text-[9px] tracking-[.16em] font-bold text-[#6b857f]"></p>
+            <p data-template-id="stage-4-time" class="canva-text comic text-[#0f5d5d]"></p>
+           </div>
+          </div>
+          <div>
+           <p data-template-id="stage-4-route-label" class="canva-text uppercase tracking-[.16em] text-[10px] font-bold text-[#f47d5f] mb-2"></p>
+           <p data-template-id="stage-4-route-copy" class="canva-text text-[#5e7772] leading-7"></p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </article>
+     </div>
+    </section>
+    <section class="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 py-16">
+     <div class="mb-8">
+      <p data-template-id="tips-kicker" class="canva-text inline-block bg-[#ffd86b] px-3 py-1 rounded-full ink-border uppercase text-[10px] tracking-[.18em] font-bold mb-4"></p>
+      <h2 data-template-id="tips-title" class="canva-text comic text-[#0f5d5d] leading-none mb-3"></h2>
+      <p data-template-id="tips-copy" class="canva-text text-[#5e7772] max-w-3xl leading-7"></p>
+     </div>
+     <div class="grid md:grid-cols-3 gap-4 mb-10">
+      <div class="tip-card bg-white ink-border rounded-2xl p-4">
+       <div class="w-10 h-10 rounded-full bg-[#ffd86b] ink-border flex items-center justify-center mb-3"><i data-lucide="car" style="width:19px;height:19px;"></i>
+       </div>
+       <h3 data-template-id="tip-1-title" class="canva-text comic text-[#0f5d5d] leading-none mb-2"></h3>
+       <p data-template-id="tip-1-copy" class="canva-text text-sm text-[#5e7772] leading-6"></p>
+      </div>
+      <div class="tip-card bg-white ink-border rounded-2xl p-4">
+       <div class="w-10 h-10 rounded-full bg-[#7bd8d0] ink-border flex items-center justify-center mb-3"><i data-lucide="clock-3" style="width:19px;height:19px;"></i>
+       </div>
+       <h3 data-template-id="tip-2-title" class="canva-text comic text-[#0f5d5d] leading-none mb-2"></h3>
+       <p data-template-id="tip-2-copy" class="canva-text text-sm text-[#5e7772] leading-6"></p>
+      </div>
+      <div class="tip-card bg-white ink-border rounded-2xl p-4">
+       <div class="w-10 h-10 rounded-full bg-[#f47d5f] text-white ink-border flex items-center justify-center mb-3"><i data-lucide="waves" style="width:19px;height:19px;"></i>
+       </div>
+       <h3 data-template-id="tip-3-title" class="canva-text comic text-[#0f5d5d] leading-none mb-2"></h3>
+       <p data-template-id="tip-3-copy" class="canva-text text-sm text-[#5e7772] leading-6"></p>
+      </div>
+     </div>
+     <div data-template-id="food-panel" class="canva-card bg-[#fff8eb] ink-border rounded-[24px] p-5 md:p-7 hard-shadow">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-5">
+       <div>
+        <p data-template-id="food-kicker" class="canva-text uppercase tracking-[.16em] text-[10px] font-bold text-[#f47d5f] mb-1"></p>
+        <h3 data-template-id="food-title" class="canva-text comic text-[#0f5d5d] leading-none"></h3>
+       </div>
+       <p data-template-id="food-copy" class="canva-text text-[#5e7772] max-w-xl text-sm leading-6"></p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4">
+       <div class="food-card bg-white ink-border rounded-2xl overflow-hidden">
+        <img data-template-id="food-1-image" loading="lazy" class="canva-image w-full h-40 object-cover">
+        <div class="p-4">
+         <h4 data-template-id="food-1-title" class="canva-text comic text-[#0f5d5d] leading-none mb-1"></h4>
+         <p data-template-id="food-1-copy" class="canva-text text-sm text-[#5e7772] leading-5"></p>
+        </div>
+       </div>
+       <div class="food-card bg-white ink-border rounded-2xl overflow-hidden">
+        <img data-template-id="food-2-image" loading="lazy" class="canva-image w-full h-40 object-cover">
+        <div class="p-4">
+         <h4 data-template-id="food-2-title" class="canva-text comic text-[#0f5d5d] leading-none mb-1"></h4>
+         <p data-template-id="food-2-copy" class="canva-text text-sm text-[#5e7772] leading-5"></p>
+        </div>
+       </div>
+       <div class="food-card bg-white ink-border rounded-2xl overflow-hidden">
+        <img data-template-id="food-3-image" loading="lazy" class="canva-image w-full h-40 object-cover">
+        <div class="p-4">
+         <h4 data-template-id="food-3-title" class="canva-text comic text-[#0f5d5d] leading-none mb-1"></h4>
+         <p data-template-id="food-3-copy" class="canva-text text-sm text-[#5e7772] leading-5"></p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+    <section class="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 py-6 pb-16">
+     <div data-template-id="closing-card" class="canva-card bg-[#0f5d5d] text-white ink-border rounded-[24px] p-6 md:p-8 hard-shadow flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+      <div>
+       <p data-template-id="closing-kicker" class="canva-text uppercase tracking-[.18em] text-[10px] font-bold text-[#b9e9e3] mb-2"></p>
+       <h2 data-template-id="closing-title" class="canva-text comic leading-none mb-2"></h2>
+       <p data-template-id="closing-copy" class="canva-text text-white/85 max-w-2xl leading-7"></p>
+      </div>
+      <div class="w-16 h-16 rounded-full bg-[#ffd86b] text-[#173a38] ink-border flex items-center justify-center shrink-0">
+       <i data-lucide="map" style="width:28px;height:28px;"></i>
+      </div>
+     </div>
+    </section>
+   </main>
+   <footer class="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 pb-8">
+    <div class="border-t-2 border-[#d7e5e1] pt-5 flex flex-col md:flex-row gap-2 md:justify-between">
+     <p data-template-id="footer-left" class="canva-text text-[#6f8580] text-sm"></p>
+     <p data-template-id="footer-right" class="canva-text text-[#6f8580] text-sm"></p>
+    </div>
+   </footer>
+  </div>
+  <script src="/_sdk/editing_sdk.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      document.getElementById('printBtn').addEventListener('click', () => window.print());
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0ea7d0a2394301c',t:'MTc4MTk1NTUxOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

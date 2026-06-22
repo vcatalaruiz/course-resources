@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TÍTULO DE EJEMPLO</title>
+  <script src="../../course-resources/index.js" defer></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      color: #1f2937;
+    }
+
+    header {
+      background: #1d4ed8;
+      color: #fff;
+      padding: 2rem;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    main {
+      padding: 1.5rem;
+      max-width: 980px;
+      margin: auto;
+    }
+
+    code,
+    pre {
+      background: #f4f6f8;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+    }
+
+    pre {
+      padding: 1rem;
+      overflow-x: auto;
+    }
+
+    .callout {
+      background: #fef3c7;
+      border: 1px solid #fcd34d;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+    }
+
+    .mermaid {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      padding: 1rem;
+      border-radius: 6px;
+    }
+
+    footer {
+      border-top: 1px solid #e5e7eb;
+      margin-top: 2rem;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+  </style>
+  <script type='module'>
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <!-- X SVG -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+  <!-- ===== /VC SIDEBAR ===== -->
+
+  <header>
+
+    <!-- ===== VC SIDEBAR (desde cero) ===== -->
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+      aria-controls="vc-rail" aria-expanded="false">
+      <!--Hamburger icon -->
+      <i class="fa fa-bars" aria-hidden="true"></i>
+
+
+    </button>
+    <h1>TÍTULO DE EJEMPLO</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+
+  </header>
+
+  <main>
+
+    <!-- Contenido principal. CADA SECTION ES UNA SLIDE DE LA PRESENTACIÓN -->
+
+    <section>
+      <h2>TÍTULO DE EJEMPLO DE LA SECCIÓN 1</h2>
+      <p>
+        DESCRIPCIÓN DE EJEMPLO DE LA SECCIÓN 1
+      </p>
+      <!-- SI PROCEDE: EJEMPLO DE LISTA -->
+      <ul>
+        <li>ITEM 1</li>
+        <li>ITEM 2</li>
+        <li>ITEM 3</li>
+        <li>...</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>TÍTULO DE EJEMPLO DE LA SECCIÓN 2</h2>
+      <p>
+        DESCRIPCIÓN DE EJEMPLO DE LA SECCIÓN 2
+      </p>
+      <!-- SI PROCEDE: EJEMPLO DE IMAGEN O ELEMENTO VISUAL -->
+      <div class="diagram">
+        <img src="../assets/linkia/depurator_python.gif" alt="Diagrama de ejemplo">
+      </div>
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+    <footer>
+      <p>Departamento de informática — ®Todos los derechos reservados.</p>
+    </footer>
+  </main>
+</body>
+
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 1: The Data Lifecycle</title>
+  <script src="../../course-resources/index.js" defer></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      color: #1f2937;
+    }
+
+    header {
+      background: #1d4ed8;
+      color: #fff;
+      padding: 2rem;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    main {
+      padding: 1.5rem;
+      max-width: 980px;
+      margin: auto;
+    }
+
+    code,
+    pre {
+      background: #f4f6f8;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+    }
+
+    pre {
+      padding: 1rem;
+      overflow-x: auto;
+    }
+
+    .callout {
+      background: #fef3c7;
+      border: 1px solid #fcd34d;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+    }
+
+    .mermaid {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      padding: 1rem;
+      border-radius: 6px;
+    }
+
+    footer {
+      border-top: 1px solid #e5e7eb;
+      margin-top: 2rem;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+  </style>
+  <script type='module'>
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <!-- X SVG -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+  <!-- ===== /VC SIDEBAR ===== -->
+
+  <header>
+
+    <!-- ===== VC SIDEBAR (desde cero) ===== -->
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+      aria-controls="vc-rail" aria-expanded="false">
+      <!--Hamburger icon -->
+      <i class="fa fa-bars" aria-hidden="true"></i>
+
+
+    </button>
+    <h1>Module 1: The Data Lifecycle</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+
+  </header>
+
+  <main>
+
+
+<section class="slide" id="cover">
+  
+  <h2>Data Architecture and Engineering: The Data Lifecycle</h2>
+  <h3>Module 1: Fundamentals, Data Types and Governance</h3>
+  <div class="diagram">
+    <img src="../assets/unita/the_data_lifecycle.webp" alt="Data Cycle Diagram" style="max-width: 55%; height: auto;">
+  </div>
+  <p>This module introduces the foundational concepts of data within modern organizations. It explores how raw data evolves into valuable insights and decisions, and how data flows through different stages from its creation to long-term storage.</p>
+  <p>Understanding this lifecycle is essential to designing robust, scalable, and efficient data systems that support business objectives.</p>
+</section>
+
+<section class="slide" id="dikw">
+  
+  <h2>Why Do Data Matter?</h2>
+  <h3>DIKW Model: From Raw Data to Business Value</h3>
+  <p>Data, on its own, has little meaning. Its value emerges through transformation, context, and interpretation. The DIKW model explains how data is progressively refined into actionable insights that drive business decisions.</p>
+  <ul>
+    <li><strong>Data:</strong> Raw, unprocessed facts without context (e.g., "39.5")</li>
+    <li><strong>Information:</strong> Data placed in context (e.g., "The patient's temperature is 39.5°C")</li>
+    <li><strong>Knowledge:</strong> Interpretation of information (e.g., "The patient has a high fever")</li>
+    <li><strong>Action/Value:</strong> Decisions and actions based on knowledge (e.g., prescribing treatment)</li>
+  </ul>
+  <p>This progression illustrates how organizations extract value from data by structuring processes that convert raw inputs into informed decisions.</p>
+  <div class="diagram">
+    <img src="../assets/unita/DIKW-Pyramid-1.png" style="max-width: 65%;" alt="DIKW Pyramid">
+  </div>
+</section>
+
+<section class="slide" id="lifecycle">
+  
+  <h2>The Data Lifecycle</h2>
+  <h3>Six Core Phases</h3>
+  <p>The data lifecycle describes the journey of data from its origin to its final storage or deletion. Each phase represents a critical step in ensuring data quality, availability, and usefulness.</p>
+  <ul>
+    <li><strong>Generation:</strong> Data is created by systems, devices, or users</li>
+    <li><strong>Ingestion:</strong> Data is collected and transported into storage systems</li>
+    <li><strong>Storage:</strong> Data is stored in databases, data lakes, or warehouses</li>
+    <li><strong>Processing:</strong> Data is cleaned, transformed, and structured</li>
+    <li><strong>Analysis:</strong> Data is explored and used for reporting or modeling</li>
+    <li><strong>Archiving:</strong> Data is stored long-term or retired according to policies</li>
+  </ul>
+  <p>These phases form a continuous loop, enabling organizations to derive ongoing value from their data assets.</p>
+  <div class="diagram">
+    <img src="../assets/unita/datacatalyst-data-lifecycle-4.gif" style="max-width: 95%;" alt="Data Lifecycle Diagram">
+  </div>
+</section>
+
+<section class="slide" id="data-types">
+  
+  <h2>Data Types</h2>
+  <h3>Structured, Semi-structured and Unstructured Data</h3>
+  <p>Different types of data require different storage systems, processing techniques, and tools. Identifying the type of data early is essential for designing an efficient data architecture.</p>
+  <ul>
+    <li><strong>Structured Data:</strong> Highly organized with a fixed schema, typically stored in relational databases (e.g., tables with rows and columns)</li>
+    <li><strong>Semi-structured Data:</strong> Does not follow a rigid schema but contains tags or markers (e.g., JSON, XML)</li>
+    <li><strong>Unstructured Data:</strong> Lacks a predefined format (e.g., images, audio, videos, text documents)</li>
+  </ul>
+  <p>Choosing how to handle each type of data directly affects performance, scalability, and system complexity.</p>
+  <div class="diagram">
+    <img src="../assets/unita/Data Types comparison.png" style="max-width: 65%;" alt="Data Types Comparison">
+  </div>
+</section>
+
+<section class="slide" id="velocity">
+  
+  <h2>Data Velocity</h2>
+  <h3>Batch vs Real-Time Processing</h3>
+  <p>Data processing strategies depend on how quickly results are needed. Two main approaches are used depending on business requirements.</p>
+  <ul>
+    <li><strong>Batch Processing:</strong> Data is accumulated over time and processed periodically (e.g., daily reports)</li>
+    <li><strong>Streaming Processing:</strong> Data is processed continuously as it is generated (e.g., real-time event handling)</li>
+  </ul>
+  <p>Batch processing is simpler and more cost-effective, while streaming enables immediate insights but increases system complexity and cost.</p>
+  <div class="diagram">
+    <img src="../assets/unita/Batch vs Real-Time Processing.gif" style="max-width: 75%;" alt="Batch vs Streaming">
+  </div>
+</section>
+
+<section class="slide" id="metadata">
+  
+  <h2>Metadata: The DNA of Data</h2>
+  <h3>Catalogs and Data Lineage</h3>
+  <p>Metadata provides essential context about data, enabling understanding, governance, and trust. Without metadata, managing data at scale becomes inefficient and error-prone.</p>
+  <ul>
+    <li><strong>Metadata:</strong> Describes data characteristics such as source, format, and meaning</li>
+    <li><strong>Data Catalog:</strong> Centralized system for discovering and managing data assets</li>
+    <li><strong>Data Lineage:</strong> Tracks the flow and transformations of data across systems</li>
+  </ul>
+  <p>Data lineage ensures transparency by showing how data moves from source systems to final reports, supporting auditing and validation processes.</p>
+  <div class="diagram">
+    <img src="../assets/unita/Data-linage.gif" style="max-width: 100%;" alt="Data Lineage">
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+    <footer>
+      <p>Departamento de informática — ®Todos los derechos reservados.</p>
+    </footer>
+  </main>
+</body>
+
+</html>
