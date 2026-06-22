@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 2: Modeling and Storage</title>
+  <script src="../../course-resources/index.js" defer></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      color: #1f2937;
+    }
+
+    header {
+      background: #1d4ed8;
+      color: #fff;
+      padding: 2rem;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    main {
+      padding: 1.5rem;
+      max-width: 980px;
+      margin: auto;
+    }
+
+    code,
+    pre {
+      background: #f4f6f8;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+    }
+
+    pre {
+      padding: 1rem;
+      overflow-x: auto;
+    }
+
+    .callout {
+      background: #fef3c7;
+      border: 1px solid #fcd34d;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+    }
+
+    .mermaid {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      padding: 1rem;
+      border-radius: 6px;
+    }
+
+    footer {
+      border-top: 1px solid #e5e7eb;
+      margin-top: 2rem;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+  </style>
+  <script type='module'>
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <!-- <link rel="stylesheet" href="../index.css"> -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+
+<body>
+
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <!-- X SVG -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+  <!-- ===== /VC SIDEBAR ===== -->
+
+  <header>
+
+    <!-- ===== VC SIDEBAR (desde cero) ===== -->
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+      aria-controls="vc-rail" aria-expanded="false">
+      <!--Hamburger icon -->
+      <i class="fa fa-bars" aria-hidden="true"></i>
+
+
+    </button>
+    <h1>Module 2: Modeling and Storage</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+
+  </header>
+
+  <main>
+
+
+<section class="slide" id="cover">
+  
+  <h2>Data Architecture: Modeling and Storage</h2>
+  <h3>Module 2: From Data Sources to Data Destination</h3>
+  <p>This module explores how data is discovered, evaluated, structured, and ultimately stored. It focuses on understanding the origin of data and designing architectures that enable efficient analysis and decision-making.</p>
+  <div class="diagram">
+    <img src="../assets/unita/data_modeling.gif" style="max-width: 85%;" alt="data pipeline">
+  </div>
+</section>
+
+<section class="slide" id="problem">
+  
+  <h2>The Real Data Problem</h2>
+  <p>In real-world scenarios, data does not arrive in a clean, structured format. Instead, it is fragmented across multiple systems, formats, and levels of quality.</p>
+  <ul>
+    <li>Data distributed across multiple sources</li>
+    <li>Different formats (Excel, APIs, databases, logs)</li>
+    <li>Disconnected systems</li>
+    <li>Lack of control and governance</li>
+  </ul>
+  
+  <div class="diagram">
+    <img src="../assets/unita/clean_data.png" style="max-width: 55%;" alt="data pipeline">
+  </div>
+  <p style="text-align: center;"><em>Before building any architecture, the first challenge is to organize and understand this complexity.</em></p>
+</section>
+
+<section class="slide" id="source-modeling">
+  
+  <h2>Source Modeling</h2>
+  <p>Understanding data sources is a critical first step in any data project. This involves identifying, classifying, and analyzing how data is generated and delivered.</p>
+
+  <h3>Data Sources</h3>
+  <ul>
+    <li>Internal systems: ERP, CRM, databases</li>
+    <li>External systems: APIs, third-party providers</li>
+    <li>Unconventional sources: logs, IoT sensors, spreadsheets</li>
+  </ul>
+
+  <h3>Key Dimensions</h3>
+  <ul>
+    <li>Structure: Structured, semi-structured, unstructured</li>
+    <li>Frequency: Batch vs real-time</li>
+    <li>Format: CSV, JSON, SQL, streaming data</li>
+  </ul>
+
+  <h3>Common Challenges</h3>
+  <ul>
+    <li>Incomplete or inconsistent data</li>
+    <li>Schema changes over time</li>
+    <li>Duplicate records</li>
+    <li>Unstable external APIs</li>
+  </ul>
+
+
+  <div class="diagram">
+    <img src="../assets/unita/Flowchart-of-the-Proposed-Approach-for-Data-Cleaning.webp" style="max-width: 65%;" alt="sources diagram">
+  </div>
+  <p style="text-align: center;"><em>Data engineers must analyze these aspects to ensure proper integration and reliability.</em></p>
+
+</section>
+
+<section class="slide" id="evaluation">
+  
+  <h2>Data Source Evaluation</h2>
+  <p>Not all data sources are equally reliable or useful. Evaluating data quality and characteristics is essential before integrating them into a system.</p>
+
+  <ul>
+    <li><strong>Data Quality:</strong> completeness, consistency, validity, uniqueness</li>
+    <li><strong>Volume:</strong> determines scalability and technology choices</li>
+    <li><strong>Velocity:</strong> batch vs real-time requirements</li>
+    <li><strong>Cost:</strong> storage, queries, and data transfer</li>
+    <li><strong>Reliability:</strong> uptime and dependency on external systems</li>
+    <li><strong>Schema Stability:</strong> frequency of structural changes</li>
+  </ul>
+<div class="diagram">
+    <img src="../assets/unita/data-source-evaluation.png" style="max-width: 65%;" alt="sources diagram">
+  </div>
+  <p style="text-align: center;"><em>Poor-quality data leads to unreliable insights, reinforcing the principle: "Garbage In, Garbage Out".</em></p>
+</section>
+
+<section class="slide" id="catalog">
+  
+  <h2>Data Cataloging</h2>
+  <p>Data cataloging provides visibility and control over data assets, enabling organizations to understand, manage, and govern their data effectively.</p>
+
+  <h3>Core Components</h3>
+  <ul>
+    <li><strong>Data Dictionary:</strong> defines fields, types, and descriptions</li>
+    <li><strong>Source Catalog:</strong> inventory of available data sources</li>
+    <li><strong>Metadata:</strong> information about origin, ownership, and updates</li>
+  </ul>
+
+  <h3>Data Classification</h3>
+  <ul>
+    <li>Sensitive data (PII)</li>
+    <li>Critical business data</li>
+    <li>Historical data</li>
+    <li>Public data</li>
+  </ul>
+
+  <p>A data catalog ensures discoverability, reduces duplication, and supports governance and compliance.</p>
+  <p><strong>Example source data and metadata:</strong></p>
+ <div class="diagram">
+    <img src="../assets/unita/Outlining-a-rough-architecture-for-a-data-catalog.webp" style="max-width: 75%;" alt="data catalog">
+  </div>
+</section>
+
+<section class="slide" id="storage-evolution">
+  
+  <h2>Demystifying On-Premise vs. Cloud Computing</h2>
+
+  <p>In the digital era, IT infrastructure is at a crossroads: choosing the tradition of <strong>OnPremise</strong> or embracing the agility of <strong>CloudComputing</strong></a>. Both options have their merits, but understanding their differences is key to making strategic decisions.</p>
+
+  <h3><strong>OnPremise</strong></a>: Systems and Data Control</h3>
+  <p>On-Premise refers to local infrastructure that companies manage internally. It is the preferred option for organizations that require:</p>
+  <ul>
+    <li>Control over their data and systems.</li>
+    <li>Deep customization and specific regulatory compliance.</li>
+    <li>However, it involves challenges such as high upfront costs, complex maintenance, and scalability limits.</li>
+  </ul>
+
+  <h3><strong>CloudComputing</strong>: The Freedom to Innovate</h3>
+  <p>Cloud Computing, on the other hand, allows companies to rent access to infrastructure and services hosted on the internet, offering:</p>
+  <ul>
+    <li>Flexibility and scalability.</li>
+    <li>Cost efficiency with pay-as-you-go models.</li>
+    <li>Improved resilience and disaster recovery.</li>
+    <li>Dependency on third parties raises questions about security and data control.</li>
+  </ul>
+
+  <h3>How to Choose?</h3>
+  <p>The choice between <strong>OnPremise</strong></a> and <strong>CloudComputing</strong></a> is not binary. Many companies benefit from a hybrid approach, leveraging the best of both worlds. Consider the following when making your decision:</p>
+  <ul>
+    <li>Long-term cost analysis.</li>
+    <li>Security and compliance requirements.</li>
+    <li>Scalability and flexibility needs.</li>
+  </ul>
+
+  <div class="diagram">
+    <img src="../assets/unita/on-premise-vs-cloud.gif" style="max-width: 75%;" alt="OLTP vs OLAP">
+  </div>
+</section>
+
+
+<section class="slide" id="oltp-olap">
+  
+  <h2>OLTP vs OLAP Systems</h2>
+  <p>Modern architectures separate operational systems from analytical systems to avoid performance conflicts.</p>
+
+  <h3>OLTP (Transactional Systems)</h3>
+  <ul>
+    <li>Handles daily operations</li>
+    <li>Fast inserts and updates</li>
+    <li>High concurrency</li>
+  </ul>
+
+  <h3>OLAP (Analytical Systems)</h3>
+  <ul>
+    <li>Supports complex queries</li>
+    <li>Processes large volumes of historical data</li>
+    <li>Used for reporting and business intelligence</li>
+  </ul>
+
+  <pre><code>SELECT country, SUM(sales)
+FROM orders
+GROUP BY country;</code></pre>
+
+  <p>Separating OLTP and OLAP ensures scalability and prevents performance degradation in production systems.</p>
+    
+</section>
+<section class="slide" id="warehouse">
+  
+  <h2>Data Warehouse</h2>
+  <p>A Data Warehouse is a structured storage system optimized for analytical queries and business intelligence.</p>
+  <ul>
+    <li>Data is cleaned, transformed, and loaded into a consistent schema before use.</li>
+    <li>Uses schema-on-write to enforce structure and quality at ingestion time.</li>
+    <li>Optimized for fast analytical queries and complex aggregations.</li>
+  </ul>
+  <h3>Example Use Cases</h3>
+  <ul>
+    <li>Sales analytics: monthly revenue, product performance, and customer segments.</li>
+    <li>Financial reporting: consolidated ledgers, budget comparisons, and trend analysis.</li>
+    <li>Operational metrics: inventory levels, supply chain KPIs, and service performance.</li>
+  </ul>
+  <p>Typical warehouse architectures separate staging, integration, and presentation layers to ensure reliable and repeatable analytics.</p>
+  <div class="diagram">
+    <img src="../assets/unita/data_warehouse.bin" style="max-width: 55%;" alt="Data Warehouse architecture">
+    </div>
+  <p>Common use cases include dashboards, reporting, KPI tracking, and historical analysis for strategic decision-making.</p>
+</section>
+
+<section class="slide" id="lake">
+  
+  <h2>Data Lake</h2>
+  <p>A Data Lake stores raw data in its original format without requiring prior structuring, making it ideal for flexible exploration and advanced analytics.</p>
+  <ul>
+    <li>Supports all formats: structured, semi-structured, and unstructured data.</li>
+    <li>Uses schema-on-read, allowing structure to be applied when the data is consumed.</li>
+    <li>Highly scalable and cost-effective for large volumes of data.</li>
+  </ul>
+  <h3>Example Use Cases</h3>
+  <ul>
+    <li>Streaming sensor data and log ingestion for real-time monitoring.</li>
+    <li>Machine learning experiments with large raw datasets.</li>
+    <li>Data archival and historical storage before transformation.</li>
+  </ul>
+  <p>Without governance and metadata management, a data lake can become an unmanageable data swamp, making discovery and quality control difficult.</p>
+  <div class="diagram">
+    <img src="../assets/unita/data-lake.gif" style="max-width: 75%;" alt="Data Lake architecture placeholder">
+    </div>
+</section>
+<section class="slide" id="lakehouse">
+  
+  <h2>Lakehouse Architecture</h2>
+  <p>The Lakehouse combines the flexibility of data lakes with the performance and structure of data warehouses.</p>
+  <ul>
+    <li>Supports both raw and processed data</li>
+    <li>Enables efficient querying</li>
+    <li>Reduces data duplication</li>
+  </ul>
+  <p>This hybrid model represents the modern approach to data architecture.</p>
+</section>
+<section class="slide" id="warehouse-vs-lake">
+  
+  <h2>Data Warehouse vs Data Lake</h2>
+  <p>While both systems store data, they serve different purposes and users within an organization.</p>
+  <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
+    <thead>
+      <tr>
+        <th style="border: 1px solid #e5e7eb; padding: 0.75rem; text-align: left;">Feature</th>
+        <th style="border: 1px solid #e5e7eb; padding: 0.75rem; text-align: left;">Data Warehouse</th>
+        <th style="border: 1px solid #e5e7eb; padding: 0.75rem; text-align: left;">Data Lake</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #e5e7eb; padding: 0.75rem;">Data format</td>
+        <td style="border: 1px solid #e5e7eb; padding: 0.75rem;">Structured, cleaned, and transformed</td>
+        <td style="border: 1px solid #e5e7eb; padding: 0.75rem;">Raw, unstructured, and semi-structured</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #e5e7eb; padding: 0.75rem;">Schema strategy</td>
+        <td style="border: 1px solid #e5e7eb; padding: 0.75rem;">Schema-on-write</td>
+        <td style="border: 1px solid #e5e7eb; padding: 0.75rem;">Schema-on-read</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #e5e7eb; padding: 0.75rem;">Primary users</td>
+        <td style="border: 1px solid #e5e7eb; padding: 0.75rem;">Business analysts, executives</td>
+        <td style="border: 1px solid #e5e7eb; padding: 0.75rem;">Data scientists, engineers</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #e5e7eb; padding: 0.75rem;">Best for</td>
+        <td style="border: 1px solid #e5e7eb; padding: 0.75rem;">Reporting, BI, historical analysis</td>
+        <td style="border: 1px solid #e5e7eb; padding: 0.75rem;">Exploration, ML, raw data storage</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #e5e7eb; padding: 0.75rem;">Governance needs</td>
+        <td style="border: 1px solid #e5e7eb; padding: 0.75rem;">High, with strict data quality</td>
+        <td style="border: 1px solid #e5e7eb; padding: 0.75rem;">Essential to avoid a data swamp</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="diagram">
+    <img src="../assets/unita/datawarehouse-vs-datalake.gif" style="max-width: 75%;" alt="Data Warehouse vs Data Lake">
+  </div>
+  <p>This comparison helps clarify when to use a warehouse, a lake, or a hybrid approach such as a lakehouse.</p>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <footer>
+      <p>Departamento de informática — ®Todos los derechos reservados.</p>
+    </footer>
+  </main>
+</body>
+
+</html>
