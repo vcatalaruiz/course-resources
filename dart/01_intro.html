@@ -91,15 +91,34 @@
                     target="_blank">dart.dev/get-dart</a>.</p>
 
             <h3>2.1. Instalación en Windows</h3>
-            <p>Puedes utilizar <strong>Chocolatey</strong> para realizar la instalación del SDK y después utilizar los
-                siguientes comandos:</p>
-            <pre><code class="language-bash">
-# Para instalar el Dart SDK
-C:\> choco install dart-sdk
+            <p>Descarga el archivo .zip desde la versión estable en: <a href="https://dart.dev/get-dart"
+                    target="_blank">https://dart.dev/get-dart/archive</a>.</p>
+            <p>Descoprime el zip y mueve el contenido a C:\tools\dart-sdk</p>
+            <div class="diagram">
+                <img src="../assets/dart_sdk.png" style="max-width:100%;" alt="Dart SDK">
+            </div>
+            <ol>
+                <li>Busca <strong>env</strong> en Windows.</li>
+                <li>Haz clic en <strong>Editar las variables de entorno del sistema</strong>.</li>
+                <li>Selecciona <strong>Variables de entorno</strong>.</li>
+                <li>En variables de usuario, edita <code>Path</code>.</li>
+                <li>Añade la ruta al directorio <code>C:\tools\dart-sdk\bin</code>.</li>
+                <li>Aplica los cambios.</li>
+            </ol>
+             <div class="diagram">
+                <img src="../assets/dart_path.png" style="max-width:100%;" alt="Dart Path">
+            </div>
+            <ol>
+                <li>Verificar instalación.</li>
+            </ol>
 
-# Para actualizar el Dart SDK
-C:\> choco upgrade dart-sdk
+            <pre><code class="language-bash">
+# Para verificar el Dart SDK
+C:\> dart --version
 </code></pre>
+ <div class="diagram">
+                <img src="../assets/dart_version.png" style="max-width:100%;" alt="Dart Version">
+            </div>
 
             <h3>2.2. Instalación en Mac</h3>
             <p>Puedes utilizar <strong>Homebrew</strong> para realizar la instalación del SDK. Una vez instalado
@@ -445,7 +464,8 @@ do {
                     <li>Ofrece <code>late</code> para inicializaciones tardías garantizadas.</li>
                     <li>Distingue entre valores inmutables en tiempo de compilación (<code>const</code>) y de ejecución
                         (<code>final</code>).</li>
-                    <li>Controla el flujo de lógica mediante <code>if</code>, <code>if else</code> y estructuras multi-caso <code>switch</code>.</li>
+                    <li>Controla el flujo de lógica mediante <code>if</code>, <code>if else</code> y estructuras
+                        multi-caso <code>switch</code>.</li>
                     <li>Soporta bucles de control estándar como <code>for</code>, <code>for..in</code>,
                         <code>while</code> y <code>do..while</code>.
                     </li>

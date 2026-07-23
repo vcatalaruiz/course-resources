@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-EVTW1307T1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso a datos con Ficheros</title>
+    <script src="/course-resources/index.js" defer></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+    <script src="../index.js" defer></script>
+    <script src="../menu.js" defer></script>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../menu.css">
+</head>
+
+<body>
+
+    <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+        <div class="vc-rail-head">
+            <span class="vc-rail-title">Índice</span>
+            <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+                <!-- X SVG -->
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+        <ul id="vc-list" class="vc-list"></ul>
+    </nav>
+
+    <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+    <header>
+        <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+            aria-controls="vc-rail" aria-expanded="false">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+        <h1>Acceso a datos con Ficheros</h1>
+        <img src="" id="logo" alt="Logo" style="display: none;">
+    </header>
+
+    <main>
+        <!-- SECCIÓN 1: INTRODUCCIÓN A FICHEROS -->
+        <section id="introduccion">
+            <h2>1. Introducción a la Persistencia en Ficheros</h2>
+            <p>
+                En toda aplicación, la necesidad de <strong>almacenar la información de manera permanente</strong> es
+                fundamental.
+                Los ficheros permiten guardar datos más allá de la ejecución del programa.
+            </p>
+            <p>
+                Java proporciona diferentes formas de trabajar con ficheros:
+            </p>
+            <ul>
+                <li><strong>Flujo de bytes</strong>: Usando <code>InputStream</code> y <code>OutputStream</code></li>
+                <li><strong>Flujo de caracteres</strong>: Usando <code>Reader</code> y <code>Writer</code> (recomendado)
+                </li>
+            </ul>
+            <div class="diagram">
+                <img src="../assets/java_file_byte.png" style="max-width:60%;" alt="File intro">
+            </div>
+            <div class="diagram">
+                <img src="../assets/java_file_intro.png" style="max-width:60%;" alt="File intro">
+            </div>
+
+            <p>
+                Todas estas clases provienen del paquete <code>java.io</code>. Nosotros nos centraremos en el
+                <strong>flujo de caracteres</strong>,
+                que es más adecuado para trabajar con texto.
+            </p>
+
+            <h3>1.1. Operaciones con ficheros</h3>
+            <p>Podemos realizar las siguientes operaciones con ficheros:</p>
+            <ul>
+                <li><strong>Leer</strong> contenido de un fichero existente</li>
+                <li><strong>Escribir</strong> contenido en un fichero nuevo o existente</li>
+                <li><strong>Modificar</strong> o añadir contenido a un fichero</li>
+                <li><strong>Manipular</strong> ficheros (crear, eliminar, renombrar)</li>
+            </ul>
+        </section>
+
+        <!-- SECCIÓN 2: CREACIÓN DE FICHEROS -->
+        <section id="creacion">
+            <h2>2. Creación y Manipulación de Ficheros</h2>
+            <p>
+                Para trabajar con ficheros, utilizamos la clase <code>File</code> del paquete <code>java.io</code>.
+            </p>
+
+            <h3>2.1. Constructores de la clase File</h3>
+            <pre><code class="language-java">
+// Constructor básico
+File fichero = new File(path);
+            </code></pre>
+            <p>
+                El parámetro <code>path</code> almacena la <strong>ruta del fichero</strong> (relativa o absoluta
+                partiendo de la raíz).
+            </p>
+
+            <h3>2.2. File.separator</h3>
+            <p>
+                <code>File.separator</code> es una constante que devuelve el carácter que utiliza el Sistema Operativo
+                para separar las carpetas en las rutas:
+            </p>
+            <ul>
+                <li><strong>Windows:</strong> <code>\</code> (barra invertida)</li>
+                <li><strong>Linux/Mac:</strong> <code>/</code> (barra normal)</li>
+            </ul>
+            <p>
+                <strong>Importante:</strong> Para escapar un carácter especial (interpretarlo literalmente) en una
+                cadena de texto,
+                se utiliza una barra invertida adicional <code>\\</code>.
+            </p>
+
+            <h3>2.3. Ejemplo práctico</h3>
+            <pre><code class="language-java">
+String rutaActual = System.getProperty("user.dir");
+String separador = File.separator;
+String rutaFichero = rutaActual + separador + "datos.txt";
+File f = new File(rutaFichero);
+
+if (f.exists()) {
+    System.out.println("El fichero existe.");
+    System.out.println("Nombre del fichero: " + f.getName());
+} else {
+    System.out.println("El fichero no existe.");
+}
+            </code></pre>
+
+            <h3>2.4. Métodos principales de la clase File</h3>
+            <table class="methods-table">
+                <tr>
+                    <th>Método</th>
+                    <th>Descripción</th>
+                </tr>
+                <tr>
+                    <td><code>exists()</code></td>
+                    <td>Devuelve true si el fichero o directorio existe</td>
+                </tr>
+                <tr>
+                    <td><code>isFile()</code></td>
+                    <td>Devuelve true si la ruta apunta a un fichero</td>
+                </tr>
+                <tr>
+                    <td><code>isDirectory()</code></td>
+                    <td>Devuelve true si la ruta apunta a un directorio</td>
+                </tr>
+                <tr>
+                    <td><code>canRead()</code></td>
+                    <td>Devuelve true si el fichero es legible</td>
+                </tr>
+                <tr>
+                    <td><code>canWrite()</code></td>
+                    <td>Devuelve true si el fichero es editable</td>
+                </tr>
+                <tr>
+                    <td><code>canExecute()</code></td>
+                    <td>Devuelve true si el fichero es ejecutable</td>
+                </tr>
+                <tr>
+                    <td><code>length()</code></td>
+                    <td>Devuelve el tamaño del fichero en bytes</td>
+                </tr>
+                <tr>
+                    <td><code>list()</code></td>
+                    <td>Devuelve un array con los ficheros del directorio</td>
+                </tr>
+                <tr>
+                    <td><code>mkdir()</code></td>
+                    <td>Crea un directorio (devuelve true si tiene éxito)</td>
+                </tr>
+                <tr>
+                    <td><code>delete()</code></td>
+                    <td>Elimina el fichero o directorio vacío</td>
+                </tr>
+                <tr>
+                    <td><code>renameTo(File)</code></td>
+                    <td>Renombra el fichero</td>
+                </tr>
+                <tr>
+                    <td><code>getName()</code></td>
+                    <td>Devuelve el nombre del fichero sin la ruta</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- SECCIÓN 3: LECTURA DE FICHEROS -->
+        <section id="lectura">
+            <h2>3. Lectura de Ficheros</h2>
+            <p>
+                Para leer ficheros de texto, utilizamos la clase <code>FileReader</code> que implementa la interfaz
+                <code>Reader</code>.
+                Esta clase permite leer caracteres de un fichero.
+            </p>
+
+            <h3>3.1. Constructores de FileReader</h3>
+            <pre><code class="language-java">
+// Constructor 1: Con ruta como String
+FileReader fr = new FileReader("ruta/del/fichero.txt");
+
+// Constructor 2: Con objeto File
+File archivo = new File("ruta/del/fichero.txt");
+FileReader fr = new FileReader(archivo);
+            </code></pre>
+
+            <h3>3.2. Método read()</h3>
+            <p>
+                El método más popular de <code>FileReader</code> es <code>read()</code>, que puede:
+            </p>
+            <ul>
+                <li>Leer un <strong>carácter por carácter</strong> (devuelve un entero)</li>
+                <li>Aceptar un <strong>array de caracteres</strong> (llamado buffer)</li>
+            </ul>
+
+            <h3>3.3. Lectura línea por línea con BufferedReader</h3>
+            <p>
+                Si queremos leer <strong>líneas enteras</strong>, utilizaremos <code>BufferedReader</code>
+                que envuelve un <code>FileReader</code>:
+            </p>
+             <div class="diagram">
+                <img src="../assets/java_file_buffer_read.png" style="max-width:100%;" alt="File buffer read">
+            </div>
+            <pre><code class="language-java">
+File archivo = new File("archivo.txt");
+FileReader fr = new FileReader(archivo);
+
+// Creación de BufferedReader para poder hacer una lectura cómoda (disponemos del método readLine()).
+BufferedReader br = new BufferedReader(fr);
+
+// Lectura del fichero
+String linea;
+while ((linea = br.readLine()) != null) {
+    System.out.println(linea);
+}
+            </code></pre>
+
+            <h3>3.4. Manejo de excepciones</h3>
+            <p>
+                La apertura del fichero y su lectura pueden lanzar <strong>excepciones</strong> que debemos capturar.
+                La excepción más importante es <code>IOException</code>.
+            </p>
+            <p>
+                <strong>Importante:</strong> El fichero debe cerrarse cuando se termina de utilizar mediante el método
+                <code>close()</code>.
+                Se recomienda usar <code>try-catch-finally</code> para garantizar el cierre.
+            </p>
+
+            <h3>3.5. Ejemplo completo de lectura</h3>
+            <pre><code class="language-java">
+public static void main(String[] args) {
+    File archivo = new File("archivo.txt");
+    FileReader fr = null;
+
+    try {
+        // Apertura del fichero y creación de BufferedReader para poder
+        // hacer una lectura cómoda (disponemos del método readLine()).
+        fr = new FileReader(archivo);
+        BufferedReader br = new BufferedReader(fr);
+
+        // Lectura del fichero
+        String linea;
+        while ((linea = br.readLine()) != null) {
+            System.out.println(linea);
+        }
+    } catch (IOException ex) {
+        System.out.println("ERROR al abrir o leer el archivo: " + ex.getMessage());
+    } finally {
+        // En el finally nos aseguramos que se cierre tanto si todo va bien
+        // como si salta una excepción.
+        try {
+            if (fr != null) {
+                fr.close();
+            }
+        } catch (IOException ex) {
+            System.out.println("ERROR al cerrar el archivo: " + ex.getMessage());
+        }
+    }
+}
+            </code></pre>
+        </section>
+
+        <!-- SECCIÓN 4: ESCRITURA DE FICHEROS -->
+        <section id="escritura">
+            <h2>4. Escritura de Ficheros</h2>
+            <p>
+                Para escribir contenido en ficheros, utilizamos la clase <code>FileWriter</code>
+                que implementa la interfaz <code>Writer</code>.
+            </p>
+
+            <h3>4.1. Constructores de FileWriter</h3>
+            <pre><code class="language-java">
+// Constructor 1: Con ruta y opción de añadir contenido
+FileWriter fw = new FileWriter("ruta/del/fichero.txt", true);
+
+// Constructor 2: Con objeto File
+File fichero = new File("ruta/del/fichero.txt");
+FileWriter fw = new FileWriter(fichero);
+            </code></pre>
+
+            <h3>4.2. Parámetro anadir</h3>
+            <p>
+                En el primer constructor, el parámetro <code>anadir</code> (boolean) determina el comportamiento:
+            </p>
+            <ul>
+                <li><strong>true:</strong> El contenido se añade a continuación (append)</li>
+                <li><strong>false:</strong> Se sobrescribe el fichero completo (defecto)</li>
+            </ul>
+
+            <h3>4.3. Método write()</h3>
+            <p>
+                El método más popular es <code>write()</code>, que puede:
+            </p>
+            <ul>
+                <li>Escribir un <strong>String</strong></li>
+                <li>Aceptar un <strong>array de caracteres</strong> (buffer)</li>
+            </ul>
+
+            <h3>4.4. Escritura eficiente con BufferedWriter</h3>
+            <p>
+                Si queremos escribir contenido de manera más eficiente, utilizaremos <code>BufferedWriter</code>
+                que envuelve un <code>FileWriter</code>:
+            </p>
+             <div class="diagram">
+                <img src="../assets/java_file_buffer_write.png" style="max-width:100%;" alt="File buffer write">
+            </div>
+            <pre><code class="language-java">
+File documento = new File("ruta_al_documento.txt");
+FileWriter fw = new FileWriter(documento); // Stream conectado al fichero a escribir.
+
+// BufferedWriter: Buffer que almacena datos hacia el stream
+BufferedWriter bw = new BufferedWriter(fw);
+
+// Escribir contenido en el buffer
+bw.write("Nuevo texto");
+bw.write("\n");
+
+// flush(): envía los datos que queden en el buffer al fichero
+bw.flush();
+
+// close(): se liberan los recursos asignados al outputStream
+bw.close();
+            </code></pre>
+
+            <h3>4.5. Ejemplo completo de escritura</h3>
+            <pre><code class="language-java">
+public static void main(String[] args) {
+    File archivo = new File("salida.txt");
+    FileWriter fw = null;
+    BufferedWriter bw = null;
+
+    try {
+        // Creamos un FileWriter para escribir en el fichero
+        // El parámetro true significa que añadiremos contenido si existe
+        fw = new FileWriter(archivo, true);
+        
+        // Creación de BufferedWriter para poder hacer una escritura cómoda y eficiente
+        bw = new BufferedWriter(fw);
+
+        // Escribimos contenido en el buffer
+        bw.write("Este es un ejemplo de escritura en ficheros.\n");
+        bw.write("Se puede escribir múltiples líneas.\n");
+        bw.write("Cada write() añade contenido al buffer.\n");
+        
+        // flush(): envía los datos al fichero
+        bw.flush();
+
+        System.out.println("Archivo escrito correctamente.");
+
+    } catch (IOException ex) {
+        System.out.println("ERROR al escribir en el archivo: " + ex.getMessage());
+    } finally {
+        // En el finally nos aseguramos que se cierren tanto si todo va bien
+        // como si salta una excepción.
+        try {
+            if (bw != null) {
+                bw.close(); // Importante cerrar el fichero
+            }
+        } catch (IOException ex) {
+            System.out.println("ERROR al cerrar el archivo: " + ex.getMessage());
+        }
+    }
+}
+            </code></pre>
+
+            <h3>4.6. Métodos útiles de FileWriter</h3>
+            <pre><code class="language-java">
+FileWriter fw = new FileWriter("archivo.txt", false);
+
+// Escribir un String
+fw.write("Hola, mundo!");
+
+// Escribir un salto de línea
+fw.write("\n");
+
+// Escribir desde un array de caracteres
+char[] buffer = {'H', 'o', 'l', 'a'};
+fw.write(buffer);
+
+// Usar flush() para asegurar que se escriben los datos en buffer
+fw.flush();
+
+// Cerrar el fichero
+fw.close();
+            </code></pre>
+        </section>
+
+        <!-- SECCIÓN 5: COMPARATIVA Y BUENAS PRÁCTICAS -->
+        <section id="comparativa">
+            <h2>5. Comparativa FileReader vs FileWriter</h2>
+
+            <table class="comparison-table">
+                <tr>
+                    <th>Característica</th>
+                    <th>FileReader</th>
+                    <th>FileWriter</th>
+                </tr>
+                <tr>
+                    <td><strong>Función</strong></td>
+                    <td>Leer ficheros de texto</td>
+                    <td>Escribir en ficheros de texto</td>
+                </tr>
+                <tr>
+                    <td><strong>Tipo de dato</strong></td>
+                    <td>Entrada (input)</td>
+                    <td>Salida (output)</td>
+                </tr>
+                <tr>
+                    <td><strong>Método principal</strong></td>
+                    <td>read()</td>
+                    <td>write()</td>
+                </tr>
+                <tr>
+                    <td><strong>Lectura línea a línea</strong></td>
+                    <td>Con BufferedReader</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td><strong>Parámetro especial</strong></td>
+                    <td>N/A</td>
+                    <td>anadir (true/false)</td>
+                </tr>
+            </table>
+
+            <h3>5.1. Buenas prácticas</h3>
+            <div class="info-box">
+                <ul>
+                    <li><strong>Siempre utiliza try-catch-finally:</strong> Garantiza que se capten excepciones y se
+                        cierren los recursos.</li>
+                    <li><strong>Usa File.separator:</strong> Hace tu código portable entre diferentes sistemas
+                        operativos.</li>
+                    <li><strong>Cierra los ficheros:</strong> Evita fugas de recursos llamando a close() en el bloque
+                        finally.</li>
+                    <li><strong>Valida la existencia:</strong> Comprueba si un fichero existe antes de leerlo con
+                        exists().</li>
+                    <li><strong>Usa BufferedReader para lectura:</strong> Es más eficiente que leer carácter por
+                        carácter. Permite leer líneas completas con readLine().</li>
+                    <li><strong>Usa BufferedWriter para escritura:</strong> Es más eficiente que escribir directamente
+                        con FileWriter. Almacena datos en buffer y mejora el rendimiento.</li>
+                    <li><strong>Usa flush():</strong> Cuando uses BufferedWriter, asegúrate de llamar a flush() para
+                        enviar los datos pendientes al fichero antes de cerrar.</li>
+                    <li><strong>Maneja excepciones específicas:</strong> IOException es la más importante en operaciones
+                        con ficheros.</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <style>
+        .methods-table,
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .methods-table th,
+        .comparison-table th,
+        .methods-table td,
+        .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .methods-table th,
+        .comparison-table th {
+            background-color: #0066cc;
+            color: white;
+            font-weight: bold;
+        }
+
+        .methods-table tr:nth-child(even),
+        .comparison-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .methods-table tr:hover,
+        .comparison-table tr:hover {
+            background-color: #f0f0f0;
+        }
+
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #0066cc;
+            padding: 15px;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .info-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .info-box li {
+            margin: 0.5rem 0;
+        }
+    </style>
+
+</body>
+
+</html>
