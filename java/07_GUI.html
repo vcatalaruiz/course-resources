@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-EVTW1307T1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diseño de la Interfaz Gráfica - JSwing</title>
+    <script src="/course-resources/index.js" defer></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+    <script src="../index.js" defer></script>
+    <script src="../menu.js" defer></script>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../menu.css">
+</head>
+
+<body>
+
+    <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+        <div class="vc-rail-head">
+            <span class="vc-rail-title">Índice</span>
+            <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+                <!-- X SVG -->
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+        <ul id="vc-list" class="vc-list"></ul>
+    </nav>
+
+    <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+    <header>
+        <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+            aria-controls="vc-rail" aria-expanded="false">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+        <h1>Diseño de la Interfaz Gráfica - JSwing</h1>
+        <img src="" id="logo" alt="Logo" style="display: none;">
+    </header>
+
+    <main>
+        <!-- SECCIÓN 1: INTRODUCCIÓN A GUI -->
+        <section id="introduccion">
+            <h2>1. Introducción a las Interfaces Gráficas</h2>
+            
+            <h3>1.1. Definición de GUI</h3>
+            <p>
+                Llamamos <strong>Interfaz Gráfica (GUI - Graphical User Interface)</strong> al conjunto de 
+                componentes gráficos que posibilitan la interacción entre el usuario y la aplicación.
+            </p>
+            <p>
+                Las interfaces gráficas se caracterizan por una serie de componentes como:
+            </p>
+            <ul>
+                <li>Botones</li>
+                <li>Cajas de texto</li>
+                <li>Etiquetas</li>
+                <li>Paneles</li>
+                <li>Barras de desplazamiento</li>
+                <li>Menús</li>
+            </ul>
+             <div class="diagram">
+                <img src="../assets/java_swing_parts.png" style="max-width:100%;" alt="Java swing parts">
+            </div>
+
+            <h3>1.2. Librerías de Java para GUI</h3>
+            <p>
+                Java tiene principalmente dos librerías (APIs) para trabajar con interfaz gráfica:
+            </p>
+            <ul>
+                <li><strong>AWT (Abstract Window Toolkit):</strong> La primera librería de Java para crear interfaces gráficas.</li>
+                <li><strong>Swing:</strong> Librería moderna y recomendada, más flexible y con más componentes.</li>
+            </ul>
+        </section>
+
+        <!-- SECCIÓN 2: AWT -->
+        <section id="awt">
+            <h2>2. Abstract Window Toolkit (AWT)</h2>
+            <p>
+                <strong>AWT</strong> es un kit de herramientas de gráficos, interfaz de usuario y sistema de ventanas 
+                independiente de la plataforma original de Java.
+            </p>
+            <p>
+                AWT es ahora parte de las <code>Java Foundation Classes (JFC)</code>, la API estándar 
+                para suministrar una interfaz gráfica de usuario (GUI) para un programa Java.
+            </p>
+            
+            <h3>2.1. Características principales</h3>
+            <ul>
+                <li>Alto grado de fidelidad al kit de herramientas nativo subyacente</li>
+                <li>Mejor integración con las aplicaciones nativas</li>
+                <li>Dependencia del sistema operativo</li>
+            </ul>
+        </section>
+
+        <!-- SECCIÓN 3: SWING -->
+        <section id="swing">
+            <h2>3. Swing</h2>
+            <p>
+                <strong>Swing</strong> es una biblioteca gráfica para Java. Incluye <code>widgets</code> para interfaz gráfica de 
+                usuario tales como cajas de texto, botones, desplegables y tablas.
+            </p>
+            
+            <h3>3.1. Principales Características de Swing</h3>
+            <ul>
+                <li><strong>Sigue un modelo de programación por hilos:</strong> Facilita el desarrollo de aplicaciones multihilo.</li>
+                <li><strong>Independencia de plataforma:</strong> Las aplicaciones Swing funcionan igual en Windows, Linux y macOS.</li>
+                <li><strong>Extensibilidad:</strong> Es una arquitectura altamente particionada que permite crear componentes personalizados.</li>
+                <li><strong>Personalizable:</strong> El control permite representar diferentes estilos de apariencia "look and feel" 
+                (desde apariencia MacOS hasta apariencia Windows).</li>
+            </ul>
+
+            <h3>3.2. Ventajas de Swing sobre AWT</h3>
+            <ul>
+                <li>Más componentes disponibles</li>
+                <li>Mayor flexibilidad en el diseño</li>
+                <li>Mejor capacidad de personalización</li>
+                <li>Componentes más ligeros (lightweight components)</li>
+            </ul>
+        </section>
+
+        <!-- SECCIÓN 4: JERARQUÍA DE COMPONENTES -->
+        <section id="jerarquia">
+            <h2>4. Jerarquía de la Librería Swing</h2>
+            <p>
+                Todos los componentes de Swing heredan del paquete <code>javax.swing</code>.
+            </p>
+            <p>
+                Para construir aplicaciones utilizando Java Swing se debe tener al menos un <strong>contenedor</strong> 
+                que será la base para la aplicación.
+            </p>
+            <p>
+                Se puede utilizar, normalmente, un <code>JFrame</code> o <code>JDialog</code> como base para la 
+                ventana y en ellos pintar los paneles, botones, cajas de texto, entre otros.
+            </p>
+            
+            <div class="diagram">
+                <img src="../assets/java_swing_hierarchy.png" style="max-width:100%;" alt="Jerarquía Swing">
+            </div>
+        </section>
+
+        <!-- SECCIÓN 5: JFRAME -->
+        <section id="jframe">
+            <h2>5. JFrame</h2>
+            <p>
+                <code>JFrame</code> es una clase utilizada en Swing para generar ventanas sobre las cuales añadir 
+                distintos objetos con los que podrá interactuar o no el usuario.
+            </p>
+             <div class="diagram">
+                <img src="../assets/java_swing_jframe.png" style="max-width:100%;" alt="JFrame Swing">
+            </div>
+            <p>
+                La utilizaremos normalmente como <strong>pantalla principal</strong> de nuestra aplicación.
+            </p>
+            <p>
+                La clase JFrame proporciona operaciones para manipular ventanas.
+            </p>
+
+            <h3>5.1. Constructores de JFrame</h3>
+            <pre><code class="language-java">
+// Constructor sin parámetros
+JFrame f = new JFrame();
+
+// Constructor con título
+JFrame f = new JFrame("Título ventana");
+            </code></pre>
+
+            <h3>5.2. Propiedades esenciales de JFrame</h3>
+            <p>Una vez creado el objeto de ventana, hay que:</p>
+            <ul>
+                <li>Establecer su tamaño mediante <code>setSize(int ancho, int alto)</code></li>
+                <li>Establecer la acción de cierre mediante <code>setDefaultCloseOperation()</code></li>
+                <li>Hacerla visible mediante <code>setVisible(true)</code></li>
+            </ul>
+
+            <h3>5.3. Acciones de cierre (setDefaultCloseOperation)</h3>
+            <pre><code class="language-java">
+JFrame.EXIT_ON_CLOSE          // Abandona la aplicación
+JFrame.DISPOSE_ON_CLOSE       // Libera los recursos asociados a la ventana
+JFrame.DO_NOTHING_ON_CLOSE    // No hace nada
+JFrame.HIDE_ON_CLOSE          // Cierra la ventana, sin liberar sus recursos
+            </code></pre>
+
+            <h3>5.4. Ejemplo básico de JFrame</h3>
+            <pre><code class="language-java">
+import javax.swing.*;
+
+public class VentanaTest {
+    public static void main(String[] args) { 
+        JFrame f = new JFrame("Título ventana"); 
+        f.setSize(400, 300);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setVisible(true);
+    }
+}
+            </code></pre>
+
+            <h3>5.5. Extender JFrame (práctica recomendada)</h3>
+            <p>
+                Es usual extender la clase JFrame, y realizar las operaciones de inicialización en su constructor:
+            </p>
+            <pre><code class="language-java">
+public class MiVentana extends JFrame { 
+    public MiVentana() {
+        super("Título de ventana");
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+}
+
+public class VentanaTest {
+    public static void main(String[] args) { 
+        MiVentana v = new MiVentana(); 
+        v.setVisible(true);
+    }
+}
+            </code></pre>           
+        </section>
+
+        <!-- SECCIÓN 6: JDIALOG -->
+        <section id="jdialog">
+            <h2>6. JDialog</h2>
+            <p>
+                <code>JDialog</code> es una clase utilizada en Swing para generar ventanas sobre las cuales añadir 
+                distintos objetos con los que podrá interactuar o no el usuario.
+            </p>
+             <div class="diagram">
+                <img src="../assets/java_swing_jdialog.png" style="max-width:100%;" alt="JDialog Swing">
+            </div>
+            <p>
+                Generalmente los utilizaremos para el <strong>resto de ventanas</strong> de nuestra aplicación, 
+                que no son la ventana principal.
+            </p>
+
+            <h3>6.1. Comparativa JFrame vs JDialog</h3>
+            <table class="comparison-table">
+                <tr>
+                    <th>Característica</th>
+                    <th>JFrame</th>
+                    <th>JDialog</th>
+                </tr>
+                <tr>
+                    <td><strong>Uso</strong></td>
+                    <td>Ventana principal de la aplicación</td>
+                    <td>Ventanas secundarias o de diálogo</td>
+                </tr>
+                <tr>
+                    <td><strong>Icono en taskbar</strong></td>
+                    <td>Sí, aparece en la barra de tareas</td>
+                    <td>No, no aparece en la barra de tareas</td>
+                </tr>
+                <tr>
+                    <td><strong>Método setIconImage()</strong></td>
+                    <td>Sí, permite cambiar el icono</td>
+                    <td>No disponible</td>
+                </tr>
+                <tr>
+                    <td><strong>Ventana padre</strong></td>
+                    <td>No admite padres</td>
+                    <td>Admite JFrame o JDialog como padre</td>
+                </tr>
+                <tr>
+                    <td><strong>Modal</strong></td>
+                    <td>No puede ser modal</td>
+                    <td>Puede ser modal (bloquea interacción con padre)</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- SECCIÓN 7: COMPONENTES ESTÁNDAR -->
+        <section id="componentes">
+            <h2>7. Componentes Estándar de Swing</h2>
+            <p>
+                Los frames (como JFrame) son contenedores, por lo que incluyen un <strong>panel de contenido</strong> 
+                (content pane) al cual se le pueden añadir componentes gráficos y otros contenedores.
+            </p>
+            <p>
+                Las interfaces gráficas de usuario se construyen con componentes, cada uno de los cuales está 
+                preparado para responder a distintos tipos de eventos.
+            </p>
+
+            <h3>7.1. Componentes principales</h3>
+            <ul>
+                <li><code>JLabel</code> - Etiqueta para mostrar texto</li>
+                <li><code>JTextField</code> - Caja de texto de una línea</li>
+                <li><code>JTextArea</code> - Área de texto multilínea</li>
+                <li><code>JButton</code> - Botón clickeable</li>
+                <li><code>JCheckBox</code> - Caja de comprobación para elegir opciones</li>
+                <li><code>JRadioButton</code> - Botón de radio para elegir opciones mutuamente excluyentes</li>
+                <li><code>JList</code> - Lista de opciones</li>
+                <li><code>JComboBox</code> - Lista desplegable de opciones</li>
+                <li><code>JScrollBar</code> - Barra de scroll</li>
+                <li><code>JPanel</code> - Panel contenedor</li>
+                <li><code>JTree</code> - Árbol de componentes</li>
+                <li><code>JTable</code> - Tabla de datos</li>
+            </ul>
+             <div class="diagram">
+                <img src="../assets/java_swing_components.png" style="max-width:100%;" alt="Components Swing">
+            </div>
+
+            <h3>7.2. Componentes de menú y diálogo</h3>
+            <ul>
+                <li><code>JMenuBar</code> - Barra de menú</li>
+                <li><code>JMenu</code> - Menú desplegable</li>
+                <li><code>JMenuItem</code> - Opción de menú</li>
+                <li><code>JOptionPane</code> - Ventanas de diálogo predefinidas</li>
+                <li><code>JFileChooser</code> - Selector de archivos</li>
+                <li><code>JColorChooser</code> - Selector de colores</li>
+            </ul>
+        </section>
+
+        <!-- SECCIÓN 8: LAYOUT MANAGERS -->
+        <section id="layout">
+            <h2>8. Gestores de Diseño (Layout Managers)</h2>
+            
+            <h3>8.1. BorderLayout</h3>
+            <p>
+                <code>BorderLayout</code> es el gestor de diseño por defecto para un <code>JFrame</code>.
+            </p>
+            <p>
+                Permite dividir el espacio disponible en cinco áreas:
+            </p>
+            <ul>
+                <li><strong>NORTH:</strong> Parte superior</li>
+                <li><strong>SOUTH:</strong> Parte inferior</li>
+                <li><strong>EAST:</strong> Parte derecha</li>
+                <li><strong>WEST:</strong> Parte izquierda</li>
+                <li><strong>CENTER:</strong> Parte central (ocupa el espacio restante)</li>
+            </ul>
+             <div class="diagram">
+                <img src="../assets/java_swing_borderlayout.png" style="max-width:100%;" alt="BorderLayout Swing">
+            </div>
+
+            <h3>8.2. Ejemplo de uso de BorderLayout</h3>
+            <pre><code class="language-java">
+JButton b = new JButton("Botón");
+getContentPane().add(b, BorderLayout.EAST);
+
+JButton b2 = new JButton("Centro");
+getContentPane().add(b2, BorderLayout.CENTER);
+            </code></pre>
+        </section>
+
+        <!-- SECCIÓN 9: EVENTOS -->
+        <section id="eventos">
+            <h2>9. Sistema de Eventos</h2>
+            
+            <h3>9.1. ¿Qué es un evento?</h3>
+            <p>
+                Un <strong>evento</strong> es un suceso que ocurre como consecuencia de la interacción 
+                del usuario con la interfaz gráfica.
+            </p>
+
+            <h3>9.2. Ejemplos de eventos</h3>
+            <ul>
+                <li>Pulsación de un botón</li>
+                <li>Cambio del contenido de un cuadro de texto</li>
+                <li>Deslizamiento de una barra de desplazamiento</li>
+                <li>Activación de un JCheckBox</li>
+                <li>Movimiento de la ventana</li>
+                <li>Pulsación de una tecla</li>
+                <li>Movimiento del ratón</li>
+            </ul>
+
+            <h3>9.3. Listeners (Manejadores de eventos)</h3>
+            <p>
+                Existe una serie de <strong>manejadores / controladores de eventos</strong> llamados <code>listener</code>.
+            </p>
+            <p>
+                Estos manejadores deben ser <strong>asociados al componente</strong> para que este 
+                ejecute la respuesta necesaria.
+            </p>
+            <p>
+                Estos listener son <strong>diferentes</strong> dependiendo de los eventos a los que van a dar respuesta.
+            </p>
+             <div class="diagram">
+                <img src="../assets/java_swing_event.png" style="max-width:100%;" alt="Event Swing">
+            </div>
+        </section>
+
+        <!-- SECCIÓN 10: TIPOS DE LISTENERS -->
+        <section id="listeners">
+            <h2>10. Tipos de Listeners</h2>
+            
+            <table class="listeners-table">
+                <tr>
+                    <th>Listener</th>
+                    <th>Componentes</th>
+                    <th>Acción a la que responden</th>
+                </tr>
+                <tr>
+                    <td><code>ActionListener</code></td>
+                    <td>JButton, JTextField, JComboBox...</td>
+                    <td>Presionar el botón, pulsar intro, elegir una opción</td>
+                </tr>
+                <tr>
+                    <td><code>AdjustementListener</code></td>
+                    <td>JScrollBar</td>
+                    <td>Mover la barra de desplazamiento</td>
+                </tr>
+                <tr>
+                    <td><code>FocusListener</code></td>
+                    <td>JButton, JTextField, JComboBox...</td>
+                    <td>Obtener y perder el foco del componente</td>
+                </tr>
+                <tr>
+                    <td><code>ItemListener</code></td>
+                    <td>JCheckBox, JRadioButton</td>
+                    <td>Seleccionar y deseleccionar opciones</td>
+                </tr>
+                <tr>
+                    <td><code>KeyListener</code></td>
+                    <td>JTextField, JTextArea</td>
+                    <td>Pulsar una tecla cuando el componente tiene el foco</td>
+                </tr>
+                <tr>
+                    <td><code>MouseListener</code></td>
+                    <td>Múltiples componentes</td>
+                    <td>Acciones con el ratón (click, press, release, enter, exit)</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- SECCIÓN 11: EJEMPLO ACTIONLISTENER -->
+        <section id="ejemplo-action">
+            <h2>11. Ejemplo: Escuchar Pulsación de un Botón</h2>
+            
+            <h3>11.1. Implementar ActionListener</h3>
+            <p>
+                La clase <code>JButton</code> tiene un método:
+            </p>
+            <pre><code class="language-java">
+void addActionListener(ActionListener l)
+            </code></pre>
+            <p>
+                Este método especifica el objeto (manejador de evento) que se encargará de tratar 
+                el evento de pulsación del botón.
+            </p>
+
+            <h3>11.2. Interfaz ActionListener</h3>
+            <p>
+                El objeto debe implementar la interfaz <code>ActionListener</code> del paquete <code>java.awt.event</code>:
+            </p>
+            <pre><code class="language-java">
+public interface ActionListener {
+    void actionPerformed(ActionEvent e);
+}
+            </code></pre>
+            <p>
+                Cuando el usuario pulse el botón, se llamará automáticamente al método <code>actionPerformed()</code>.
+            </p>
+
+            <h3>11.3. Clase manejadora de eventos</h3>
+            <pre><code class="language-java">
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.*;
+
+public class ManejadorBotones implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+        System.out.println("¡Se ha pulsado el botón!");
+    }
+}
+
+public class Ventana extends JFrame {
+    public Ventana() {
+        super("Mi Ventana");
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        JButton boton = new JButton("Haz click");
+        ManejadorBotones manejador = new ManejadorBotones();
+        boton.addActionListener(manejador);
+        
+        getContentPane().add(boton);
+    }
+}
+            </code></pre>
+        </section>
+
+        <!-- SECCIÓN 12: CUADROS DE DIÁLOGO -->
+        <section id="dialogos">
+            <h2>12. Cuadros de Diálogo Predefinidos</h2>
+            <p>
+                La clase <code>JOptionPane</code> proporciona métodos de utilidad para mostrar ventanas 
+                de aviso, error, confirmación y entrada de datos de manera estándar.
+            </p>
+
+            <h3>12.1. Mensaje de información/error/aviso</h3>
+            <pre><code class="language-java">
+void showMessageDialog(Component padre, Object mensaje, 
+                       String tituloVentana, int tipoMensaje)
+
+// Tipos de mensaje:
+JOptionPane.INFORMATION_MESSAGE    // Mensaje informativo (ícono azul)
+JOptionPane.WARNING_MESSAGE        // Mensaje de aviso (ícono amarillo)
+JOptionPane.ERROR_MESSAGE          // Mensaje de error (ícono rojo)
+JOptionPane.PLAIN_MESSAGE          // Mensaje simple (sin ícono)
+            </code></pre>
+            <div class="diagram">
+                <img src="../assets/java_swing_joptionpane1.png" style="max-width:100%;" alt="JOptionPane1 Swing">
+            </div>
+
+            <h3>12.2. Solicitar entrada de datos</h3>
+            <pre><code class="language-java">
+String showInputDialog(Component padre, Object mensaje, 
+                       Object valorDefecto)
+
+// Ejemplo:
+String nombre = JOptionPane.showInputDialog(this, 
+    "Introduce tu nombre:", "Juan");
+            </code></pre>
+             <div class="diagram">
+                <img src="../assets/java_swing_joptionpane2.png" style="max-width:100%;" alt="JOptionPane2 Swing">
+            </div>
+
+            <h3>12.3. Pedir confirmación</h3>
+            <pre><code class="language-java">
+int showConfirmDialog(Component padre, Object mensaje, 
+                      String titulo, int tipoOpciones, 
+                      int tipoMensaje)
+
+// Tipos de opciones:
+JOptionPane.YES_NO_OPTION             // Botones Sí / No
+JOptionPane.YES_NO_CANCEL_OPTION      // Botones Sí / No / Cancelar
+JOptionPane.OK_CANCEL_OPTION          // Botones OK / Cancelar
+
+// Valores de retorno:
+JOptionPane.YES_OPTION     // El usuario pulsó Sí (0)
+JOptionPane.NO_OPTION      // El usuario pulsó No (1)
+JOptionPane.CANCEL_OPTION  // El usuario pulsó Cancelar (2)
+JOptionPane.OK_OPTION      // El usuario pulsó OK (0)
+            </code></pre>
+             <div class="diagram">
+                <img src="../assets/java_swing_joptionpane3.png" style="max-width:50%;" alt="JOptionPane3 Swing">
+            </div>
+
+            <h3>12.4. Ejemplo de uso de JOptionPane</h3>
+            <pre><code class="language-java">
+// Mostrar mensaje de información
+JOptionPane.showMessageDialog(this, 
+    "Proceso completado", 
+    "Información", 
+    JOptionPane.INFORMATION_MESSAGE);
+
+// Solicitar confirmación
+int resultado = JOptionPane.showConfirmDialog(this,
+    "¿Deseas continuar?",
+    "Confirmación",
+    JOptionPane.YES_NO_OPTION,
+    JOptionPane.QUESTION_MESSAGE);
+
+if (resultado == JOptionPane.YES_OPTION) {
+    // El usuario pulsó Sí
+}
+            </code></pre>
+        </section>
+
+        <!-- SECCIÓN 13: BUENAS PRÁCTICAS -->
+        <section id="buenas-practicas">
+            <h2>13. Buenas Prácticas en Desarrollo de GUI</h2>
+            <div class="info-box">
+                <ul>
+                    <li><strong>Extiende JFrame para la ventana principal:</strong> Es más limpio y organizado.</li>
+                    <li><strong>Utiliza JDialog para ventanas secundarias:</strong> Permite establecer una ventana padre y hacer ventanas modales.</li>
+                    <li><strong>Organiza los componentes con Layout Managers:</strong> No posiciones elementos manualmente, usa gestores de diseño.</li>
+                    <li><strong>Implementa listeners específicos:</strong> Usa el listener correcto para cada tipo de evento.</li>
+                    <li><strong>Separa la lógica de la GUI:</strong> Crea clases separadas para los listeners y la lógica de negocio.</li>
+                    <li><strong>Usa JOptionPane para diálogos estándar:</strong> Es más rápido que crear diálogos personalizados.</li>
+                    <li><strong>Proporciona retroalimentación al usuario:</strong> Usa mensajes claros y directos.</li>
+                    <li><strong>Prueba en diferentes plataformas:</strong> Las aplicaciones Swing pueden verse diferentes en Windows, Linux y macOS.</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <style>
+        .listeners-table,
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .listeners-table th,
+        .comparison-table th,
+        .listeners-table td,
+        .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .listeners-table th,
+        .comparison-table th {
+            background-color: #0066cc;
+            color: white;
+            font-weight: bold;
+        }
+
+        .listeners-table tr:nth-child(even),
+        .comparison-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .listeners-table tr:hover,
+        .comparison-table tr:hover {
+            background-color: #f0f0f0;
+        }
+
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #0066cc;
+            padding: 15px;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .info-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .info-box li {
+            margin: 0.5rem 0;
+        }
+
+        .diagram {
+            text-align: center;
+            margin: 1rem 0;
+        }
+    </style>
+
+</body>
+
+</html>
