@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación Orientada a Objetos I: Métodos</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+<body>
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+  <header>
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail"
+      aria-expanded="false">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1>Programación Orientada a Objetos I: Métodos</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+    <!-- 1. MÉTODOS - ¿QUÉ ES UN MÉTODO? -->
+    <section id="metodos-que-es">
+      <h2>1. Métodos - ¿Qué es un método?</h2>  
+      <h3>1.1. ¿Qué es un método y por qué usarlos?</h3>
+      
+      <p>
+        Un <strong>método</strong> es un bloque de código reutilizable que realiza una tarea específica. Los métodos son fundamentales en la programación porque permiten:
+      </p>
+      
+      <h4>Descomposición de problemas (Decomposition)</h4>
+      <p>
+        Los métodos permiten dividir un problema complejo en problemas más pequeños y manejables. En lugar de escribir
+        todo el código en un único <strong>main</strong>, podemos crear métodos especializados que resuelven partes específicas del problema.
+      </p>
+       <div class="diagram">
+                <img src="../assets/java_decomposition.png" style="max-width: 75%;" width="auto" alt="Java decomposition" />
+            </div>
+      <ul>
+        <li>Un programa grande se divide en tareas más pequeñas y controlables.</li>
+        <li>Cada método tiene una responsabilidad clara y definida.</li>
+        <li>El código es más fácil de entender y seguir.</li>
+      </ul>
+
+      <h4>Reutilización de código (Reusability)</h4>
+      <p>
+        Una vez que escribimos un método, podemos usarlo múltiples veces sin tener que reescribir el código. Esto ahorra
+        tiempo y reduce errores.
+      </p>
+      <ul>
+        <li>El mismo método puede ser llamado desde diferentes partes del programa.</li>
+        <li>No repetimos código innecesariamente (principio DRY: Don't Repeat Yourself).</li>
+        <li>Si hay un error en el método, lo arreglamos en un solo lugar.</li>
+      </ul>
+
+      <h4>Legibilidad y mantenimiento</h4>
+      <p>
+        Un código bien estructurado con métodos descriptivos es mucho más fácil de leer y mantener.
+      </p>
+      <ul>
+        <li>El nombre del método indica qué hace (auto-documentación).</li>
+        <li>Otros programadores (o tú mismo después de un tiempo) entienden el código más rápidamente.</li>
+        <li>Es más fácil hacer cambios y mejoras sin romper el programa.</li>
+      </ul>
+
+      <h4>Ejemplo: Con y sin métodos</h4>
+      <p>
+        <strong>Sin métodos (problemático):</strong>
+      </p>
+      <pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        // Validar edad usuario 1
+        Scanner sc = new Scanner(System.in);
+        int edad1 = 0;
+        do {
+            try {
+                System.out.println("Introduce la edad del usuario 1: ");
+                edad1 = sc.nextInt();
+                if (edad1 >= 0 && edad1 <= 150) break;
+            } catch (Exception e) {
+                System.out.println("Error");
+                sc.nextLine();
+            }
+        } while (true);
+        
+        // Validar edad usuario 2 (repetimos el mismo código)
+        int edad2 = 0;
+        do {
+            try {
+                System.out.println("Introduce la edad del usuario 2: ");
+                edad2 = sc.nextInt();
+                if (edad2 >= 0 && edad2 <= 150) break;
+            } catch (Exception e) {
+                System.out.println("Error");
+                sc.nextLine();
+            }
+        } while (true);
+    }
+}</code></pre>
+
+      <p>
+        <strong>Con métodos (óptimo):</strong>
+      </p>
+      <pre><code class="language-java">public class Main {
+    // Método reutilizable
+    public static int validarEdad(String mensaje) {
+        Scanner sc = new Scanner(System.in);
+        int edad = 0;
+        do {
+            try {
+                System.out.println(mensaje);
+                edad = sc.nextInt();
+                if (edad >= 0 && edad <= 150) return edad;
+            } catch (Exception e) {
+                System.out.println("Error");
+                sc.nextLine();
+            }
+        } while (true);
+    }
+    
+    public static void main(String[] args) {
+        int edad1 = validarEdad("Introduce la edad del usuario 1: ");
+        int edad2 = validarEdad("Introduce la edad del usuario 2: ");
+    }
+}</code></pre>
+
+      <h3>1.2. Conceptos fundamentales</h3>
+      <ul>
+        <li>Un <strong>método de Java</strong> bien escrito realiza sólo <strong>una tarea</strong>.</li>
+        <li>La <strong>declaración completa</strong> de un método se llama <strong>"firma del método"</strong>.</li>
+        <li>La instrucción <strong>return</strong> se usa para que el método pueda retornar cualquier tipo de dato (objeto o primitivo). También se puede aplicar en métodos que no devuelven un valor para salir de la ejecución del mismo en algún punto.</li>
+        <li><strong>Parámetro de entrada:</strong> este campo es obligatorio pero puede estar vacío. Si se necesitan múltiples parámetros han de ir separados por comas. Se pueden usar <strong>"parámetros varargs"</strong> (argumentos de longitud variable) que siempre han de ir al final. Solo puede ir un <strong>"varargs"</strong> por método.</li>
+        <li>Nosotros trabajaremos de momento con <strong>métodos estáticos (STATIC)</strong>. Más adelante explicaremos qué implica esta palabra clave.</li>
+      </ul>
+
+      <h3>1.3. Firma del método</h3>
+      <div class="diagram">
+                <img src="../assets/java_signature.png" style="max-width: 75%;" width="auto" alt="Java signature" />
+            </div>
+      <p>
+        La estructura completa de un método es la siguiente:
+      </p>
+      <pre><code class="language-java">public final void nap(int minutes) throws InterruptedException {
+    // código del método
+}</code></pre>
+
+      <p>
+        Los componentes de una firma del método son:
+      </p>
+      <table>
+        <tr>
+          <th>Elemento</th>
+          <th>Valor</th>
+          <th>Obligatorio</th>
+        </tr>
+        <tr>
+          <td>Modificador Acceso</td>
+          <td>public</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>Especificador opcional</td>
+          <td>final</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>Tipo de valor de retorno</td>
+          <td>void</td>
+          <td>Sí</td>
+        </tr>
+        <tr>
+          <td>Nombre del método</td>
+          <td>nap</td>
+          <td>Sí</td>
+        </tr>
+        <tr>
+          <td>Parámetros de entrada</td>
+          <td>(int minutes)</td>
+          <td>Sí, pero puede ir vacío</td>
+        </tr>
+        <tr>
+          <td>Excepción (opcional)</td>
+          <td>throws InterruptedException</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>Código</td>
+          <td>//code</td>
+          <td>Sí, pero puede ir vacío</td>
+        </tr>
+      </table>
+
+      <h3>1.4. Ejemplo práctico</h3>
+      <p>
+        Un ejemplo clásico es un método que pide un número entero al usuario dentro de un rango específico:
+      </p>
+      <pre><code class="language-java">public class Fecha {
+
+    public static int pedirEntero(int min, int max, String texto) {
+        Scanner sc = new Scanner(System.in);
+        do {
+            int n;
+            try {
+                System.out.println(texto);
+                n = sc.nextInt();
+                if (min <= n && n <= max)
+                    return n;
+            } catch (Exception e) {
+                System.out.println("Valor incorrecto");
+                sc.nextLine();
+            }
+        } while (true);
+    }
+
+    public static void main(String[] args) {
+        int day = pedirEntero(1, 31, "Introduce un numero entre 1 y 31: ");
+        int month = pedirEntero(1, 12, "Introduce un numero entre 1 y 12: ");
+        int year = pedirEntero(0, 2025, "Introduce un numero entre 0 y 2025: ");
+        System.out.println("Fecha: " + day + "/" + month + "/" + year);
+    }
+}</code></pre>
+    </section>
+
+    <!-- 1.5. PASO DE ARGUMENTOS POR VALOR -->
+    <section id="paso-argumentos">
+      <h2>1.5. Paso de argumentos por valor</h2>
+      
+      <p>
+        <strong>Java es un lenguaje "pass-by-value"</strong>, es decir, el método trabaja con una copia de la variable que se le pasa
+        como parámetro. Si es un primitivo pasaremos una copia del valor y si es una referencia una copia de la
+        dirección del objeto al que apunta.
+      </p>
+
+      <h3>Comportamiento con primitivos</h3>
+      <p>
+        En el caso de un primitivo, la copia de la variable y la variable son dos entidades diferentes. Cualquier
+        modificación sufrida dentro del código del método no afecta a la variable externa.
+      </p>
+      <pre><code class="language-java">public class Vector {
+
+    public static int modificarValor(int n) {
+        int y = ++n;
+        return y;
+    }
+
+    public static void main(String[] args) {
+        int numero = 1;
+        System.out.println(numero);
+        int y = modificarValor(numero);
+        System.out.println(numero);
+        System.out.println(y);
+    }
+}</code></pre>
+
+      <h3>Comportamiento con objetos</h3>
+      <p>
+        En el caso de un objeto, la copia de la referencia y la referencia son dos entidades diferentes, pero apuntan a
+        la misma estructura de datos. Cualquier modificación sufrida dentro del código del método afecta al objeto.
+      </p>
+      <pre><code class="language-java">import java.util.Arrays;
+
+public class Vector {
+
+    public static int[] modificarVector(int[] n) {
+        for (int i = 0; i < n.length; i++)
+            n[i] = 5;
+        return n;
+    }
+
+    public static void main(String[] args) {
+        int[] numeros = {1, 2, 3, 4, 5};
+        System.out.println(Arrays.toString(numeros));
+        modificarVector(numeros);
+        System.out.println(Arrays.toString(numeros));
+    }
+}</code></pre>
+    </section>
+
+    <!-- 1.6. SOBRECARGA -->
+    <section id="sobrecarga">
+      <h2>1.6. Sobrecarga de métodos</h2>
+      
+      <p>
+        La <strong>sobrecarga de métodos</strong> ocurre cuando en una misma clase hay varios métodos con el <strong>mismo nombre</strong>
+        pero con <strong>argumentos de entrada diferentes en cuanto a tipo, orden o número</strong>.
+      </p>
+
+      <h3>Ejemplo de sobrecarga</h3>
+      <pre><code class="language-java">public class Vector {
+
+    public static int[] modificarVector(int ... n) {
+        for (int i = 0; i < n.length; i++)
+            n[i] = 5;
+        return n;
+    }
+
+    public static int[] modificarVector(int valor, int[] n) {
+        for (int i = 0; i < n.length; i++)
+            n[i] = valor;
+        return n;
+    }
+
+    public static void main(String[] args) {
+        int[] n1 = {1, 2, 3, 4, 5};
+        modificarVector(n1);
+        System.out.println(Arrays.toString(n1));
+        int[] n2 = {1, 2, 3, 4, 5};
+        modificarVector(6, n2);
+        System.out.println(Arrays.toString(n2));
+    }
+}</code></pre>
+    </section>
+
+    <!-- 1.7. RECURSIVIDAD -->
+    <section id="recursividad">
+      <h2>1.7. Recursividad</h2>
+      
+      <p>
+        En Java, un método se puede <strong>invocar a sí mismo</strong> y se denomina <strong>método recursivo</strong>.
+      </p>
+
+      <h3>Puntos importantes sobre recursividad</h3>
+      <ul>
+        <li>Cuando un método se llama a sí mismo, se asigna almacenamiento en la memoria <strong>STACK</strong> a nuevas variables locales y parámetros.</li>
+        <li>Una invocación recursiva no crea una nueva copia del método.</li>
+        <li>Un exceso de invocaciones recursivas a un método puede provocar el <strong>desbordamiento de pila</strong>.</li>
+        <li>Las versiones recursivas de muchas rutinas pueden ejecutarse más lentamente que sus equivalentes iterativas debido a la sobrecarga añadida de las invocaciones métodos adicionales.</li>
+      </ul>
+
+      <h3>Ejemplo: Factorial recursivo vs iterativo</h3>
+      <pre><code class="language-java">public class Factorial {
+
+    // Función recursiva
+    public static int factR(int n) {
+        int result;
+        if (n == 1) return 1;
+        result = factR(n - 1) * n;
+        return result;
+    }
+
+    // Un equivalente iterativo
+    public static int factI(int n) {
+        int result = 1;
+        for (int t = 1; t <= n; t++) result *= t;
+        return result;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(factR(5));
+        System.out.println(factI(5));
+    }
+}</code></pre>
+    </section>
+
+    <!-- 2. CLASE STRING -->
+    <section id="clase-string">
+      <h2>2. Clase String</h2>
+
+      <h3>2.1. La clase String</h3>
+      <ul>
+        <li>Se usa para <strong>manipular texto</strong> y se halla en el paquete <strong>java.lang</strong>.</li>
+        <li>Maneras de crear un objeto String:
+          <ul>
+            <li><code>String name = "Manolo";</code></li>
+            <li><code>String name = new String("Manolo");</code></li>
+          </ul>
+        </li>
+        <li>Cuando se crea sin el método <strong>"new"</strong>, el String es <strong>compartido</strong> y se almacena en un espacio de memoria denominado <strong>"String Pool"</strong> dentro del HEAP. Si se hace con el método <strong>"new"</strong>, se crea un nuevo objeto y almacena fuera del <strong>"String Pool"</strong> y puede ser eliminado por el Garbage Collector.</li>
+        <li><strong>Inmutabilidad:</strong> una vez se ha creado un objeto String, no se puede modificar. No se puede cambiar ningún carácter.</li>
+        <li><strong>Concatenación (+, +=):</strong> Cada vez que se concatenan Strings se crean objetos diferentes.</li>
+      </ul>
+
+      <h3>2.2. Ejemplo de concatenación</h3>
+      <pre><code class="language-java">public class Concatenacion {
+    public static void main(String[] args) {
+        String a = "Pedro";
+        String b = new String("Juan");
+        int c = 100;
+        double d = 1.2;
+        System.out.println(a + b + c + d);
+        System.out.println(d + c + b + a);
+        System.out.println(a + c + b + d);
+        System.out.println(c + a + b + d);
+    }
+}</code></pre>
+
+      <h3>2.3. Métodos importantes de la clase String</h3>
+      <ul>
+        <li><strong>int length():</strong> devuelve el tamaño del String</li>
+        <li><strong>char charAt(int index):</strong> devuelve el carácter que ocupa la posición index. Si se accede a una posición no existente Java lanza una excepción <code>StringIndexOutBoundsException</code></li>
+        <li><strong>int indexOf(...):</strong> devuelve la posición donde se localiza la primera coincidencia. Devuelve -1 si no encuentra coincidencias.</li>
+        <li><strong>String substring(int begin, int end):</strong> devuelve un substring comprendido entre las posiciones (sin incluir end).</li>
+        <li><strong>String toLowerCase(), String toUpperCase():</strong> convierte a minúsculas o mayúsculas.</li>
+        <li><strong>boolean equals(String str):</strong> determina si dos objetos tienen el mismo contenido (case-sensitive).</li>
+        <li><strong>boolean equalsIgnoreCase(String str):</strong> determina si dos objetos tienen el mismo contenido (case-insensitive).</li>
+        <li><strong>boolean startsWith(String prefix):</strong> determina si un String empieza con un prefijo.</li>
+        <li><strong>boolean endsWith(String sufix):</strong> determina si un String acaba con sufijo.</li>
+        <li><strong>boolean contains(String str):</strong> determina si el String contiene el string str.</li>
+        <li><strong>String replace(char oldChar, char newChar):</strong> sustituye caracteres.</li>
+        <li><strong>String trim():</strong> elimina espacios en blanco al principio y final.</li>
+        <li><strong>String concat(String str):</strong> concatena dos strings (permite encadenamiento de métodos).</li>
+      </ul>
+
+      <h3>2.4. Ejemplo práctico con String</h3>
+      <pre><code class="language-java">public class MetodosString {
+    public static void main(String[] args) {
+        String a = " La casa de papel ";
+        // Recorrer String
+        for (int i = 0; i < a.length(); i++)
+            System.out.print(a.charAt(i));
+        // Recortar String
+        System.out.println(a.substring(2, 5));
+        // Transformar a mayúsculas
+        System.out.println(a.toUpperCase());
+        // Eliminar espacios al principio y al final
+        System.out.println(a.trim());
+    }
+}</code></pre>
+    </section>
+
+    <!-- 3. CLASE STRINGBUILDER -->
+    <section id="clase-stringbuilder">
+      <h2>3. Clase StringBuilder</h2>
+
+      <h3>3.1. ¿Por qué StringBuilder?</h3>
+      <ul>
+        <li>Es similar a la clase <strong>String</strong> excepto que es <strong>mutable</strong>.</li>
+        <li>Reutiliza el mismo StringBuilder sin crear más en memoria, modificando su tamaño.</li>
+        <li><strong>En ningún caso se almacenan en el "StringPool"</strong>.</li>
+      </ul>
+
+      <h3>3.2. Creación de objetos StringBuilder</h3>
+      <pre><code class="language-java">StringBuilder str = new StringBuilder();              // StringBuilder vacío, size=0
+StringBuilder str = new StringBuilder("Hola");        // Con contenido inicial
+StringBuilder str = new StringBuilder(10);            // Reservamos una capacidad</code></pre>
+
+      <h3>3.3. Métodos importantes</h3>
+      <ul>
+        <li><strong>Compartidos con String:</strong> length(), charAt(), substring(), indexOf()</li>
+        <li><strong>StringBuilder append(String str):</strong> para concatenar String (igual que concat() de String).</li>
+        <li><strong>StringBuilder insert(int offset, String str):</strong> añade un String en la posición indicada.</li>
+        <li><strong>StringBuilder delete(int start, int end):</strong> borra los caracteres entre posiciones.</li>
+        <li><strong>StringBuilder deleteCharAt(int index):</strong> borra el carácter en la posición indicada.</li>
+        <li><strong>String toString():</strong> convierte un StringBuilder en un String.</li>
+      </ul>
+
+      <h3>3.4. Nota importante sobre comparación</h3>
+      <p>
+        Tanto el operador <strong>==</strong> como el método <strong>equals()</strong> verifican que las referencias apuntan al mismo objeto, no el contenido.
+      </p>
+
+      <h3>3.5. Ejemplo práctico: String vs StringBuilder</h3>
+      <pre><code class="language-java">public class StrBuild {
+    public static void main(String args[]) {
+        String alpha = "";
+        String abc = "abcdefghijklmnopqrstuvwxyz";
+        for (char c = 'a'; c <= 'z'; c++)
+            alpha += c;
+        System.out.println(alpha);
+
+        StringBuilder alpha2 = new StringBuilder();
+        for (char c = 'a'; c <= 'z'; c++)
+            alpha2.append(c);
+        System.out.println(alpha2);
+
+        StringBuilder test = new StringBuilder(alpha);
+        System.out.println(test.append("yzwvut"));
+        System.out.println(test.reverse());
+        System.out.println(test.length());
+    }
+}</code></pre>
+    </section>
+
+    <!-- 4. CLASE ARRAY -->
+    <section id="clase-array">
+      <h2>4. Clase Array</h2>
+
+      <h3>4.1. Conceptos básicos</h3>
+      <ul>
+        <li>Un <strong>array</strong> es un objeto que representa una colección de <strong>variables u objetos del mismo tipo</strong>.</li>
+        <li>Pueden ser <strong>unidimensionales o multidimensionales</strong>.</li>
+        <li>Un array es <strong>inmutable</strong>, es decir, su tamaño no puede variar. Su contenido sí.</li>
+        <li>La clase Array se encuentra en el paquete <strong>java.util</strong>.</li>
+      </ul>
+
+      <h3>4.2. Declaración de arrays</h3>
+      <pre><code class="language-java">public class UF4 {
+    public static void main(String[] args) {
+        int[] numbers = new int[3];
+        char characters[] = new char[10];
+        byte bytes[] = new byte[]{1, 2, 3};
+        String[] strings = {"Hola", "Adiós"};
+        StringBuilder stringBuilders[] = new StringBuilder[5];
+        
+        for (int a : numbers)
+            System.out.println(a);
+    }
+}</code></pre>
+
+      <h3>4.3. Excepción: ArrayIndexOutOfBoundsException</h3>
+      <p>
+        Se produce cuando se intenta acceder a una posición de un array que no existe.
+      </p>
+
+      <h3>4.4. Métodos importantes de la clase Arrays</h3>
+      <ul>
+        <li><strong>toString():</strong> devuelve el contenido de un array</li>
+        <li><strong>sort():</strong> ordena un array (números antes que letras y letras UpperCase antes que LowerCase)</li>
+        <li><strong>equals() y ==:</strong> NO comparan el contenido, sino la referencia</li>
+      </ul>
+
+      <h3>4.5. Ejemplo: toString() y sort()</h3>
+      <pre><code class="language-java">import java.util.Arrays;
+
+public class UF4 {
+    public static void main(String[] args) {
+        String[] ejemplos = {"1", "Hola", "4", "Adiós", "1000"};
+        System.out.println(Arrays.toString(ejemplos));
+        Arrays.sort(ejemplos);
+        System.out.println(Arrays.toString(ejemplos));
+        for (int i = 0; i < ejemplos.length; i++)
+            System.out.print(ejemplos[i] + ", ");
+    }
+}</code></pre>
+
+      <h3>4.6. Arrays multidimensionales (Matrices)</h3>
+      <p>
+        Los arrays pueden tener múltiples dimensiones para representar matrices y estructuras más complejas.
+      </p>
+      <pre><code class="language-java">public class multiArray {
+    public static void main(String[] args) {
+        int[][] numbers = {{1, 2, 3}, {4, 5}, {6, 7, 8, 9}};
+        System.out.println(numbers.length);
+        for (int h = 0; h < numbers.length; h++)
+            System.out.println(numbers[h].length + " ");
+
+        // Recorrer el array con for clásico
+        for (int i = 0; i < numbers.length; i++) {
+            for (int j = 0; j < numbers[i].length; j++)
+                System.out.print(numbers[i][j] + " ");
+            System.out.println();
+        }
+
+        // Recorrer el array con for mejorado
+        for (int[] col : numbers) {
+            for (int fil : col)
+                System.out.print(fil + " ");
+            System.out.println();
+        }
+    }
+}</code></pre>
+    </section>
+
+    <!-- 5. CLASE ARRAYLIST -->
+    <section id="clase-arraylist">
+      <h2>5. Clase ArrayList</h2>
+
+      <h3>5.1. Características</h3>
+      <ul>
+        <li>Un <strong>ArrayList</strong> puede <strong>cambiar su tamaño en tiempo de ejecución</strong>.</li>
+        <li><strong>No puede contener datos primitivos, sólo objetos</strong>.</li>
+        <li>La clase ArrayList se encuentra en el paquete <strong>java.util</strong>.</li>
+      </ul>
+
+      <h3>5.2. Métodos importantes</h3>
+      <ul>
+        <li><strong>boolean add(E element), void add(int index, E element):</strong> insertar un nuevo valor</li>
+        <li><strong>boolean remove(Object object), E remove(int index):</strong> borra el primer match en el array o el elemento en la posición especificada</li>
+        <li><strong>E set(int index, E newElement):</strong> cambia uno de los elementos del ArrayList sin cambiar el tamaño</li>
+        <li><strong>boolean isEmpty(), int size():</strong> ambos métodos miran cuántos slots del ArrayList están en uso</li>
+        <li><strong>void clear():</strong> vacía todos los slots de un ArrayList</li>
+        <li><strong>boolean contains(Object object):</strong> comprueba si un valor está en el ArrayList</li>
+        <li><strong>boolean equals(Object object):</strong> compara dos listas para ver si contienen los mismos elementos y en el mismo orden</li>
+        <li><strong>Object toArray():</strong> convierte un ArrayList en un Array</li>
+      </ul>
+
+      <h3>5.3. Ejemplo práctico</h3>
+      <pre><code class="language-java">import java.util.ArrayList;
+
+public class UF4 {
+    public static void main(String[] args) {
+        ArrayList<String> a = new ArrayList<>();
+        ArrayList<String> b = new ArrayList<String>(4);
+        System.out.println(a.size());
+        System.out.println(b.size());
+        for (int i = 0; i < 5; i++) a.add("casa" + i);
+        for (int i = 0; i < 5; i++) b.add("casa" + i);
+        System.out.println(a.equals(b));
+        System.out.println(a == b);
+
+        b = a;
+        System.out.println(a.equals(b));
+        System.out.println(a == b);
+
+        ArrayList<String> c = new ArrayList<>(b);
+        System.out.println(c);
+
+        for (int i = 0; i < 20; i++) list1.add("casa" + i);
+        for (int i = 0; i < 20; i++) list2.add("casa" + i);
+        System.out.println(list1.equals(list2));
+        list2.clear();
+        for (int i = 0; i < 20; i--) list2.add("casa" + i);
+        System.out.println(list1);
+        System.out.println(list2);
+        System.out.println(list1.equals(list2));
+    }
+}</code></pre>
+    </section>
+
+    <!-- 6. WRAPPERS -->
+    <section id="wrappers">
+      <h2>6. Wrappers (Clases Envoltorio)</h2>
+
+      <h3>6.1. ¿Qué son los Wrappers?</h3>
+      <ul>
+        <li>En ocasiones es muy conveniente poder <strong>tratar los datos primitivos (int, boolean, etc.) como objetos</strong>.</li>
+        <li>Pero los datos primitivos no son objetos, con lo que quedan en principio excluidos de estas posibilidades.</li>
+        <li>Para resolver esta situación el API de Java incorpora las <strong>clases envoltorio (wrapper class)</strong>, que no son más que dotar a los datos primitivos con un envoltorio que permita tratarlos como objetos.</li>
+      </ul>
+
+      <h3>6.2. Consideraciones importantes</h3>
+      <ul>
+        <li>Las operaciones aritméticas habituales (suma, resta, multiplicación...) están definidas solo para los datos primitivos, por lo que las clases envoltura no sirven para este fin.</li>
+        <li>Las variables primitivas tienen mecanismos de reserva y liberación de memoria más eficaces y rápidos que los objetos, por lo que deben usarse datos primitivos en lugar de sus correspondientes envolturas siempre que se pueda.</li>
+      </ul>
+
+      <h3>6.3. Correspondencia primitivos-Wrappers</h3>
+      <table>
+        <tr>
+          <th>Tipo primitivo</th>
+          <th>Clase Wrapper</th>
+          <th>Ejemplo de construcción</th>
+        </tr>
+        <tr>
+          <td>boolean</td>
+          <td>Boolean</td>
+          <td><code>new Boolean(true)</code></td>
+        </tr>
+        <tr>
+          <td>byte</td>
+          <td>Byte</td>
+          <td><code>new Byte((byte)1)</code></td>
+        </tr>
+        <tr>
+          <td>short</td>
+          <td>Short</td>
+          <td><code>new Short((short)1)</code></td>
+        </tr>
+        <tr>
+          <td>int</td>
+          <td>Integer</td>
+          <td><code>new Integer(1)</code></td>
+        </tr>
+        <tr>
+          <td>long</td>
+          <td>Long</td>
+          <td><code>new Long(1)</code></td>
+        </tr>
+        <tr>
+          <td>float</td>
+          <td>Float</td>
+          <td><code>new Float(1.0)</code></td>
+        </tr>
+        <tr>
+          <td>double</td>
+          <td>Double</td>
+          <td><code>new Double(1.0)</code></td>
+        </tr>
+        <tr>
+          <td>char</td>
+          <td>Character</td>
+          <td><code>new Character('c')</code></td>
+        </tr>
+      </table>
+
+      <h3>6.4. Convertir String a primitivo o Wrapper</h3>
+      <table>
+        <tr>
+          <th>Clase Wrapper</th>
+          <th>Convertir de String a primitivo</th>
+          <th>Convertir de String a Wrapper</th>
+        </tr>
+        <tr>
+          <td>Boolean</td>
+          <td><code>Boolean.parseBoolean("true")</code></td>
+          <td><code>Boolean.valueOf("true")</code></td>
+        </tr>
+        <tr>
+          <td>Byte</td>
+          <td><code>Byte.parseByte("1")</code></td>
+          <td><code>Byte.valueOf("2")</code></td>
+        </tr>
+        <tr>
+          <td>Short</td>
+          <td><code>Short.parseShort("1")</code></td>
+          <td><code>Short.valueOf("2")</code></td>
+        </tr>
+        <tr>
+          <td>Integer</td>
+          <td><code>Integer.parseInt("1")</code></td>
+          <td><code>Integer.valueOf("2")</code></td>
+        </tr>
+        <tr>
+          <td>Long</td>
+          <td><code>Long.parseLong("1")</code></td>
+          <td><code>Long.valueOf("2")</code></td>
+        </tr>
+        <tr>
+          <td>Float</td>
+          <td><code>Float.parseFloat("1.0")</code></td>
+          <td><code>Float.valueOf("2.0")</code></td>
+        </tr>
+        <tr>
+          <td>Double</td>
+          <td><code>Double.parseDouble("1.0")</code></td>
+          <td><code>Double.valueOf("2.0")</code></td>
+        </tr>
+        <tr>
+          <td>Character</td>
+          <td colspan="2">Usar <code>charAt(int index)</code> de String</td>
+        </tr>
+      </table>
+
+      <h3>6.5. Conversión de String a primitivo/Wrapper</h3>
+      <pre><code class="language-java">// String a primitivo
+int primitive = Integer.parseInt("123");
+
+// String a wrapper
+Integer wrapper = Integer.valueOf("123");
+
+// Ejemplos incorrectos (generan NumberFormatException)
+// int bad1 = Integer.parseInt("a");
+// Integer bad2 = Integer.valueOf("123.23");
+
+// Para Character: usar charAt()
+// String->primitivo: 
+String string = "a"; 
+char c = string.charAt(0);
+
+// String->wrapper: 
+String string = "a"; 
+Character c = new Character(string.charAt(0));</code></pre>
+
+      <h3>6.6. Autoboxing y Unboxing</h3>
+      
+      <h4>Autoboxing</h4>
+      <p>Java convierte automáticamente un primitivo a su wrapper cuando es necesario:</p>
+      <pre><code class="language-java">import java.util.*;
+
+public class Autoboxing {
+    public static void main(String[] args) {
+        ArrayList<Integer> entero = new ArrayList<Integer>();
+        // NO hace falta convertir de int a Integer
+        entero.add(1);  // Java lo hace automáticamente
+        // Java lo hace automáticamente
+        entero.add(2);
+        System.out.println("Integer: " + entero.get(0) + "; int: " + entero.get(1));
+    }
+}</code></pre>
+
+      <h4>Unboxing</h4>
+      <p>Java convierte automáticamente un objeto wrapper a su primitivo:</p>
+      <pre><code class="language-java">public class Unboxing {
+    public static void main(String[] args) {
+        // Autoboxing por el JDK
+        Integer a = 10;
+        // Misma operación sin autoboxing
+        Integer b = new Integer(10);
+        // Unboxing por el JDK
+        int c = a;
+        // Misma operación sin Unboxing
+        int d = a.intValue();
+    }
+}</code></pre>
+
+      <h3>6.7. Cuidado con ArrayList.remove()</h3>
+      <p>
+        La clase ArrayList tiene dos métodos <code>remove()</code>:
+      </p>
+      <ul>
+        <li><strong>remove(int index):</strong> Removes the element at the specified position</li>
+        <li><strong>remove(Object o):</strong> Removes the first occurrence of the specified element</li>
+      </ul>
+      <pre><code class="language-java">public class Autoboxing {
+    public static void main(String[] args) {
+        ArrayList<Integer> entero = new ArrayList<Integer>();
+        entero.add(new Integer(1));
+        entero.add(2);
+        System.out.println(entero.remove(1));           // Elimina por índice
+        System.out.println(entero.remove(new Integer(1)));  // Elimina por valor
+        System.out.println(entero.size());
+    }
+}</code></pre>
+    </section>
+
+  </main>
+
+</body>
+</html>
