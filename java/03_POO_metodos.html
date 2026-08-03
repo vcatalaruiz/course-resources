@@ -608,35 +608,50 @@ public class UF4 {
         <li><strong>Object toArray():</strong> convierte un ArrayList en un Array</li>
       </ul>
 
-      <h3>5.3. Ejemplo práctico</h3>
+      <h3>5.3. Ejemplo práctico - Operaciones CRUD</h3>
+      <p>Las operaciones CRUD (Create, Read, Update, Delete) son las operaciones más básicas con ArrayList:</p>
       <pre><code class="language-java">import java.util.ArrayList;
 
 public class UF4 {
     public static void main(String[] args) {
-        ArrayList<String> a = new ArrayList<>();
-        ArrayList<String> b = new ArrayList<String>(4);
-        System.out.println(a.size());
-        System.out.println(b.size());
-        for (int i = 0; i < 5; i++) a.add("casa" + i);
-        for (int i = 0; i < 5; i++) b.add("casa" + i);
-        System.out.println(a.equals(b));
-        System.out.println(a == b);
-
-        b = a;
-        System.out.println(a.equals(b));
-        System.out.println(a == b);
-
-        ArrayList<String> c = new ArrayList<>(b);
-        System.out.println(c);
-
-        for (int i = 0; i < 20; i++) list1.add("casa" + i);
-        for (int i = 0; i < 20; i++) list2.add("casa" + i);
-        System.out.println(list1.equals(list2));
-        list2.clear();
-        for (int i = 0; i < 20; i--) list2.add("casa" + i);
-        System.out.println(list1);
-        System.out.println(list2);
-        System.out.println(list1.equals(list2));
+        ArrayList<String> frutas = new ArrayList<>();
+        
+        // CREATE (Crear/Agregar elementos)
+        frutas.add("Manzana");
+        frutas.add("Plátano");
+        frutas.add("Naranja");
+        System.out.println("Después de agregar: " + frutas);
+        System.out.println("Tamaño: " + frutas.size());
+        
+        // READ (Leer elementos)
+        System.out.println("\n--- Lectura de elementos ---");
+        System.out.println("Primer elemento: " + frutas.get(0));
+        System.out.println("Elemento en índice 2: " + frutas.get(2));
+        System.out.println("¿Contiene 'Plátano'?: " + frutas.contains("Plátano"));
+        
+        // Iterar sobre todos los elementos
+        System.out.println("Todas las frutas:");
+        for (String fruta : frutas) {
+            System.out.println("  - " + fruta);
+        }
+        
+        // UPDATE (Actualizar elementos)
+        System.out.println("\n--- Actualización de elementos ---");
+        frutas.set(1, "Sandía");  // Cambia "Plátano" por "Sandía" en índice 1
+        System.out.println("Después de actualizar: " + frutas);
+        
+        // DELETE (Eliminar elementos)
+        System.out.println("\n--- Eliminación de elementos ---");
+        frutas.remove("Naranja");  // Elimina por valor
+        System.out.println("Después de eliminar 'Naranja': " + frutas);
+        
+        frutas.remove(0);  // Elimina por índice
+        System.out.println("Después de eliminar índice 0: " + frutas);
+        
+        // Limpiar todo el ArrayList
+        frutas.clear();
+        System.out.println("Después de clear(): " + frutas);
+        System.out.println("¿Está vacío?: " + frutas.isEmpty());
     }
 }</code></pre>
     </section>

@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-EVTW1307T1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RA1: Estructura de un Programa Informático</title>
+    <script src="/course-resources/index.js" defer></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/java.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+    <script src="../index.js" defer></script>
+    <script src="../menu.js" defer></script>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../menu.css">
+</head>
+
+<body>
+
+    <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+        <div class="vc-rail-head">
+            <span class="vc-rail-title">Índice</span>
+            <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+        <ul id="vc-list" class="vc-list"></ul>
+    </nav>
+
+    <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+    <header>
+        <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+            aria-controls="vc-rail" aria-expanded="false">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+        <h1>RA1: Estructura de un Programa Informático</h1>
+        <img src="" id="logo" alt="Logo" style="display: none;">
+    </header>
+
+    <main>
+
+        <!-- SECCIÓN 0: INTRODUCCIÓN -->
+        <section id="introduccion">
+            <h2>Conceptos Fundamentales</h2>
+
+            <h3>¿Qué significa programar?</h3>
+            <p><strong>Programar</strong> es el proceso de crear un conjunto de instrucciones que una computadora puede entender y ejecutar para realizar una tarea específica.</p>
+
+            <p>Programar significa crear una secuencia ordenada de instrucciones que un ordenador puede interpretar y ejecutar. <strong>Estas instrucciones no dejan lugar a ambigüedades: el sistema ejecuta exactamente lo que se le indica.</strong></p>
+
+            <ul>
+                <li>Es la base de la informática</li>
+                <li>Permite desarrollar software, aplicaciones y sistemas que utilizamos a diario</li>
+                <li>Cada instrucción forma parte de un flujo que transforma datos de entrada en resultados de salida</li>
+            </ul>
+             <div class="diagram">
+                <img src="../assets/java_programar.png" style="max-width:60%;" alt="Java programar">
+            </div>
+
+            <h3>¿Qué es un Programa Informático?</h3>
+            <p>Un <strong>programa informático</strong> es el resultado final del proceso de programación. Está formado por instrucciones escritas en un lenguaje de programación que permiten automatizar una tarea.</p>
+
+            <ul>
+                <li><strong>Los programas pueden ser muy simples o extremadamente complejos, pero todos siguen la misma idea básica: instrucciones + datos + ejecución.</strong></li>
+                <li>Un programa se organiza en bloques claramente definidos: clases, métodos, variables e instrucciones</li>
+                <li>Cada bloque cumple una función concreta dentro del conjunto</li>
+            </ul>
+              <div class="diagram">
+                <img src="../assets/java_input_output.png" style="max-width:100%;" alt="Java i-o">
+            </div>
+
+            <h3>Lenguajes de Programación</h3>
+            <p>Los lenguajes de programación permiten escribir instrucciones de forma comprensible para las personas y transformarlas en un formato que la máquina pueda ejecutar.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Descripción</th>
+                        <th>Ejemplos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Compilados</strong></td>
+                        <td>Se traducen completamente antes de ejecutarse</td>
+                        <td>C++, Go, Rust</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Interpretados</strong></td>
+                        <td>Se ejecutan línea a línea</td>
+                        <td>Python, Swift, PHP</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mixtos</strong></td>
+                        <td>Combinan ambos enfoques</td>
+                        <td>Java, C#, JavaScript</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Código Fuente</h3>
+            <p>El código fuente es el lenguaje de alto nivel que entienden los humanos. Algunos lenguajes de alto nivel
+                incluyen: Fortran, C, Pascal, C++, C#, Java.</p>
+
+            <ul>
+                <li>No tiene en cuenta el hardware específico</li>
+                <li>Contiene números, operadores, sentencias, etc.</li>
+                <li>La ejecución del código es secuencial</li>
+            </ul>
+
+            <h3>Compilación</h3>
+            <p><strong>Compilar</strong> es traducir el código fuente a lenguaje máquina (instrucciones binarias). Durante
+                la compilación, se detectan errores en la sintaxis:</p>
+
+            <ul>
+                <li>Comandos mal escritos</li>
+                <li>Variables de tipos diferentes</li>
+                <li>Omisión de elementos necesarios</li>
+            </ul>
+             <div class="diagram">
+                <img src="../assets/java_compiler.png" style="max-width:100%;" alt="Java compiler">
+            </div>
+
+            <h3>Código Máquina o Ensamblador</h3>
+            <p>El código máquina es el lenguaje de bajo nivel que entienden las computadoras.</p>
+
+            <ul>
+                <li>Adaptado a cada tipo de ordenador</li>
+                <li>Un programa hecho para PC no funcionará en MAC o Unix/Linux sin recompilar</li>
+                <li>Es un archivo ejecutable sin errores de compilación</li>
+            </ul>
+
+           <div class="diagram">
+                <img src="../assets/java_compilacion.png" style="max-width:100%;" alt="Java compilacion">
+            </div>
+
+            <h3>Tiempo de Ejecución</h3>
+            <p>Pueden producirse errores (excepciones) en tiempo de ejecución que causan que un programa se bloquee o
+                deje de ejecutarse:</p>
+
+            <ul>
+                <li>División por 0</li>
+                <li>Acceso a una posición de memoria inexistente (array fuera de límites)</li>
+                <li>Acceso a un recurso no disponible: fichero, red, BBDD, etc.</li>
+            </ul>
+        </section>
+
+        <!-- SECCIÓN 2: QUÉ ES JAVA -->
+        <section id="java">
+            <h2>01 INTRODUCCIÓN - ¿Qué es Java?</h2>
+
+            <p>En este curso utilizaremos Java, un lenguaje de programación muy popular y versátil. Java es un lenguaje de propósito general que se utiliza en una amplia variedad de aplicaciones, desde aplicaciones móviles hasta sistemas empresariales.</p>
+            
+            <div class="diagram">
+                <img src="../assets/java_intro.png" style="max-width:100%;" alt="Java intro">
+            </div>
+
+            <h3>BYTECODE y JVM (Java Virtual Machine)</h3>
+
+            <p>El resultado de un compilador de Java <strong>no es código ejecutable</strong>, sino <strong>código de
+                    bytes (BYTECODE)</strong>, un lenguaje de bajo nivel optimizado para ejecutarse en tiempo de ejecución
+                en la <strong>JVM (Java Virtual Machine)</strong>.</p>
+
+            <ul>
+                <li>La ejecución del código queda confinada a la JVM</li>
+                <li>De esta manera, queda restringido el acceso a memoria de los programas Java</li>
+                <li>La máquina virtual de Java puede estar implementada en software, hardware, una herramienta de
+                    desarrollo o un navegador web</li>
+                <li>La JVM lee y ejecuta código precompilado bytecode que es <strong>independiente de la
+                        plataforma</strong> (multiplataforma)</li>
+            </ul>
+              <div class="diagram">
+                <img src="../assets/java_how_works.gif" style="max-width:100%;" alt="Java how works">
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: ENTORNO DE PROGRAMACIÓN -->
+        <section id="entorno">
+            <h2>02 ENTORNO DE PROGRAMACIÓN - JDK y JRE</h2>
+
+            <h3>Java Development Kit (JDK)</h3>
+
+            <p>El <strong>JDK (Java Development Kit)</strong> es un software que proporciona herramientas de desarrollo
+                para la creación de programas en Java.</p>
+
+            <ul>
+                <li>Se ejecuta en la línea de comandos</li>
+                <li>Ofrece dos programas principales:
+                    <ul>
+                        <li><code>javac</code> - para compilar</li>
+                        <li><code>java</code> - para ejecutar</li>
+                    </ul>
+                </li>
+                <li>Es un paquete completo de herramientas de Java</li>
+            </ul>
+
+            <h3>Java Runtime Environment (JRE)</h3>
+
+            <p><strong>JRE (Java Runtime Environment)</strong> incluye la JVM y las APIs de Java (incluidas en el JDK)
+                para la ejecución de un programa. Se puede descargar gratuitamente desde Oracle.</p>
+
+            <h3>Instalación</h3>
+
+            <ul>
+                <li>Ambas herramientas se instalan creando sus propios directorios</li>
+                <li>Es aconsejable referenciarlas en las variables de entorno del sistema operativo para facilitar su
+                    uso desde la línea de comandos</li>
+                <li>Pueden descargarse gratuitamente desde la web oficial de Oracle</li>
+            </ul>
+             <div class="diagram">
+                <img src="../assets/java_jdk_jre.png" style="max-width:100%;" alt="Java jdk jre">
+            </div>
+
+            <h3>Entornos Integrados de Desarrollo (IDE)</h3>
+
+            <p>Un <strong>IDE (Integrated Development Environment)</strong> es una aplicación informática que proporciona servicios integrales para facilitar al desarrollador el desarrollo de software.</p>
+
+            <h4>Características principales de un IDE:</h4>
+            <ul>
+                <li>Editor de código fuente con resaltado de sintaxis</li>
+                <li>Herramientas de construcción automáticas</li>
+                <li>Un depurador (debugger) para analizar la ejecución</li>
+                <li>Permite trabajar con la versión de JDK que deseemos</li>
+                <li>Autocompletado de código e inspección de errores</li>
+            </ul>
+
+            <h4>IDEs populares para Java:</h4>
+            <ul>
+                <li><strong>NetBeans</strong> - IDE de desarrollo gratuito y de código abierto, ideal para principiantes</li>
+                <li><strong>Eclipse</strong> - IDE muy popular, gratuito y con gran comunidad de desarrolladores</li>
+                <li><strong>IntelliJ IDEA</strong> - IDE profesional de JetBrains con versión community gratuita</li>
+            </ul>
+             <div class="diagram">
+                <img src="../assets/java_ide.png" style="max-width:100%;" alt="Java ide">
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: MI PRIMER PROGRAMA -->
+        <section id="primer-programa">
+            <h2>03 MI PRIMER PROGRAMA</h2>
+
+            <h3>Estructura Básica</h3>
+
+            <p>Trabajaremos con una única clase y definiendo código dentro del método <code>main()</code>:</p>
+
+            <ul>
+                <li>Definiremos variables locales y sentencias dentro del método <code>main()</code></li>
+                <li>El nombre de la clase debe coincidir con el nombre del archivo</li>
+                <li>Hasta la UF5 haremos programas con interacción con el usuario no gráfica (solo texto o aplicaciones
+                    de consola)</li>
+            </ul>
+
+            <h3>Método main()</h3>
+
+            <p>Es el punto de entrada para cualquier programa Java.</p>
+
+             <div class="diagram">
+                <img src="../assets/java_main.png" style="max-width:100%;" alt="Java main">
+            </div>
+
+            <h3>Ejemplo Básico</h3>
+
+            <pre><code class="language-java">
+package UFI;
+
+public class Ej1 {
+    public static void main(String [] args){
+        //Imprimimos por pantalla
+        System.out.println("Hello world");
+    }
+}
+            </code></pre>
+
+            <h3>Comentarios en Java</h3>
+
+            <p>Los comentarios hacen que el código sea más comprensible. Se pueden poner en cualquier parte del código y
+                no son ejecutables. Hay tres tipos diferentes:</p>
+
+            <ul>
+                <li><strong>Comentario de línea //</strong>: Desde el símbolo hasta el final de línea es un comentario
+                </li>
+                <li><strong>Comentario de línea múltiple /* ... */</strong>: Todo lo comprendido entre estos símbolos es
+                    un comentario</li>
+                <li><strong>Comentario Javadoc /** ... */</strong>: Igual que el comentario de línea múltiple pero además
+                    la herramienta "Javadoc" integrada en el JDK genera documentación en formato .html</li>
+            </ul>
+
+            <pre><code class="language-java">
+// Esto es un comentario de línea
+
+/* Esto es un comentario
+   de múltiples líneas */
+
+/** 
+ * Esto es un comentario Javadoc
+ * Se usará para generar documentación
+ */
+            </code></pre>
+        </section>
+
+        <!-- SECCIÓN 4: TIPOS DE DATOS PRIMITIVOS -->
+        <section id="primitivos">
+            <h2>04 TIPOS DE DATOS PRIMITIVOS</h2>
+
+            <h3>Clasificación de Tipos</h3>
+
+            <p>Los tipos de datos que manipula Java se clasifican en dos grandes grupos:</p>
+
+            <ul>
+                <li><strong>Primitivos</strong>: Es un tipo de dato que almacena un único valor (número, carácter,
+                    booleano)</li>
+                <li><strong>Objetos</strong>: Son datos más complejos que pueden estar constituidos por uno o varios datos
+                    primitivos, así como también por otros objetos. Suelen tener predefinidos métodos que permiten
+                    manipular dichos datos. Para crear este tipo de datos es necesario usar el método
+                    <code>new</code></li>
+            </ul>
+
+            <h3>Tabla de Tipos Primitivos</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Keyword</th>
+                        <th>Tamaño</th>
+                        <th>Ejemplo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="4"><strong>BOOLEANO</strong></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><code>boolean</code></td>
+                        <td>1 byte</td>
+                        <td><code>true</code> o <code>false</code></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><strong>ENTERO</strong></td>
+                    </tr>
+                    <tr>
+                        <td>byte</td>
+                        <td><code>byte</code></td>
+                        <td>1 byte</td>
+                        <td>[-128, 127]</td>
+                    </tr>
+                    <tr>
+                        <td>short</td>
+                        <td><code>short</code></td>
+                        <td>2 bytes</td>
+                        <td>[-32768, 32767]</td>
+                    </tr>
+                    <tr>
+                        <td>int</td>
+                        <td><code>int</code></td>
+                        <td>4 bytes</td>
+                        <td>[-2147483648, 2147483647]</td>
+                    </tr>
+                    <tr>
+                        <td>long</td>
+                        <td><code>long</code></td>
+                        <td>8 bytes</td>
+                        <td>Valores muy grandes (agregar L al final)</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><strong>DECIMAL (Flotante)</strong></td>
+                    </tr>
+                    <tr>
+                        <td>float</td>
+                        <td><code>float</code></td>
+                        <td>4 bytes</td>
+                        <td><code>1256.89f</code> (agregar f al final)</td>
+                    </tr>
+                    <tr>
+                        <td>double</td>
+                        <td><code>double</code></td>
+                        <td>8 bytes</td>
+                        <td><code>1256.89</code></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><strong>CARÁCTER</strong></td>
+                    </tr>
+                    <tr>
+                        <td>char</td>
+                        <td><code>char</code></td>
+                        <td>2 bytes (UNICODE)</td>
+                        <td><code>'b'</code> o <code>'\u0062'</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Literales</h3>
+
+            <p>Se denomina literal a un número presente en el código.</p>
+
+            <h4>Tipos de Literales</h4>
+
+            <ul>
+                <li><strong>Enteros</strong>:
+                    <ul>
+                        <li>Java los trata como <code>int</code> por defecto</li>
+                        <li>Para <code>long</code>, agregue una <code>L</code> al final (ej: <code>3000000000L</code>)
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>Decimales</strong>:
+                    <ul>
+                        <li>Se trata como <code>double</code> por defecto</li>
+                        <li>Para <code>float</code>, agregue una <code>f</code> al final (ej: <code>1256.89f</code>)</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>Sistemas de Numeración para Literales</h4>
+
+            <ul>
+                <li><strong>Decimal</strong>: <code>123</code></li>
+                <li><strong>Binario</strong>: <code>0b11010001</code> o <code>0B11010001</code></li>
+                <li><strong>Octal</strong>: <code>017</code></li>
+                <li><strong>Hexadecimal</strong>: <code>0xFFE1</code> o <code>0XFFE1</code></li>
+            </ul>
+
+            <p>Los literales pueden contener el símbolo <code>_</code> para agilizar su lectura (no se permite al
+                principio, final o antes/después del punto).</p>
+
+            <h3>Cadenas de Texto</h3>
+
+            <p>Una cadena es un conjunto de caracteres incluidos entre comillas dobles. Se pueden incluir secuencias de
+                escape:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Secuencia</th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>\'</code></td>
+                        <td>Comilla simple</td>
+                    </tr>
+                    <tr>
+                        <td><code>\"</code></td>
+                        <td>Comilla doble</td>
+                    </tr>
+                    <tr>
+                        <td><code>\\</code></td>
+                        <td>Barra invertida</td>
+                    </tr>
+                    <tr>
+                        <td><code>\n</code></td>
+                        <td>Salto de línea</td>
+                    </tr>
+                    <tr>
+                        <td><code>\t</code></td>
+                        <td>Tabulación horizontal</td>
+                    </tr>
+                    <tr>
+                        <td><code>\r</code></td>
+                        <td>Retorno de carro</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <pre><code class="language-java">
+String cadena1 = "Ejemplo de cadenas";
+String cadena2 = "Ejemplo de \ncadenas";
+String cadena3 = "Ejemplo\tde\tcadenas";
+            </code></pre>
+        </section>
+
+        <!-- SECCIÓN 5: VARIABLES LOCALES -->
+        <section id="variables">
+            <h2>05 VARIABLES LOCALES</h2>
+
+            <h3>¿Qué es una Variable Local?</h3>
+
+            <p>En Java hay tres tipos de variables según su ubicación en el código. En esta unidad trabajaremos con
+                <strong>variables locales</strong>, que son variables definidas en el bloque de código de un método (en
+                nuestro caso, el método <code>main()</code>).</p>
+
+            <h3>Ámbito de una Variable</h3>
+
+            <p>El <strong>ámbito</strong> define en qué partes del programa puede utilizarse una variable. Normalmente está limitado al bloque donde se declara.</p>
+
+            <ul>
+                <li>Una variable local solo es accesible dentro del método donde se declara</li>
+                <li>El ámbito comienza cuando se declara la variable y termina al cerrar el bloque con <code>}</code></li>
+                <li>Las variables declaradas dentro de bloques anidados (como bucles) solo existen dentro de esos bloques</li>
+            </ul>
+
+            <pre><code class="language-java">
+public class Ambito {
+    public static void main(String[] args) {
+        int a = 5;  // Variable local del método main
+        
+        if (a > 0) {
+            int b = 10;  // Variable local del if
+            System.out.println(b);  // Funciona
+        }
+        
+        // System.out.println(b);  // ERROR - b está fuera del ámbito if
+    }
+}
+            </code></pre>
+
+            <h3>Declaración de Variables</h3>
+
+            <p>Una variable consta del tipo de primitivo u objeto que almacena y del identificador:</p>
+
+            <pre><code class="language-java">
+tipo nombre-var = valor;
+
+// Ejemplos
+char a = 'e';
+int j = 3;
+String h = "Hello world";
+            </code></pre>
+
+            <h3>Ejemplos de Declaraciones</h3>
+
+            <h4>Correctas:</h4>
+            <ul>
+                <li><code>long zooAnimals; int numAnimals; zooAnimals=100L; numAnimals=100;</code></li>
+                <li><code>long zooAnimals=100L; int numAnimals=100;</code></li>
+                <li><code>short s1, s2; short s3=20, s4=23;</code></li>
+            </ul>
+
+            <h4>Incorrectas:</h4>
+            <ul>
+                <li><code>int num, char value;</code> (de diferente tipo en la misma línea no es válido)</li>
+                <li><code>byte f, byte a;</code> (forma correcta: <code>byte f, a;</code>)</li>
+            </ul>
+
+            <h3>Reglas para Nombres de Variables, Clases y Métodos</h3>
+
+            <ul>
+                <li>Pueden empezar por letra, <code>$</code> ó <code>_</code>. Las letras posteriores pueden ser números
+                </li>
+                <li>Solo están permitidos letras, números, <code>$</code> y <code>_</code></li>
+                <li>No pueden nombrarse igual que las "reserved words" de Java</li>
+                <li>Java es case-sensitive (diferencia entre mayúsculas y minúsculas)</li>
+            </ul>
+
+            <h3>Convención CamelCase</h3>
+
+            <p>(Opcional pero MUY RECOMENDABLE)</p>
+
+            <ul>
+                <li><strong>Métodos y variables</strong>: <code>int myNumber;</code></li>
+                <li><strong>Clases</strong>: <code>public class MyClass {};</code></li>
+            </ul>
+
+            <h3>Inicialización de Variables</h3>
+
+            <p>Las variables locales <strong>no se inicializan por defecto</strong>, deben estarlo antes de ser usadas.
+                En caso contrario se produce un error en <strong>TIEMPO DE COMPILACIÓN</strong>.</p>
+
+            <pre><code class="language-java">
+public class Variables {
+    public static void main(String [] args){
+        int a=3;  // Inicializada
+        int b;    // No inicializada - ERROR si se usa
+        System.out.println(a);
+        System.out.println(b);  // Error: variable b might not have been initialized
+    }
+}
+            </code></pre>
+        </section>
+
+        <!-- SECCIÓN 6: OPERADORES -->
+        <section id="operadores">
+            <h2>06 OPERADORES DE JAVA</h2>
+
+            <h3>¿Qué es un Operador?</h3>
+
+            <p>Un operador es un símbolo especial que puede ser aplicado a un conjunto de variables o literales y que
+                devuelve un resultado.</p>
+
+            <ul>
+                <li>Java cuenta con cuatro tipos de operadores: aritméticos, lógicos, relacionales y de asignación</li>
+                <li>Tres tipos de operadores existen según el número de operandos: unary, binary, ternary</li>
+            </ul>
+
+            <h3>Orden de Ejecución (Precedencia)</h3>
+
+            <ul>
+                <li>Si no hay paréntesis, se ejecutan los operadores por orden de PRIORIDAD</li>
+                <li>Si dos operadores tienen el mismo orden de preferencia se ejecutan de izquierda a derecha</li>
+            </ul>
+
+            <h3>Operadores Aritméticos</h3>
+
+            <p>Operadores binarios por orden de precedencia: multiplicación (*), división (/), módulo (%), suma (+),
+                resta (-)</p>
+
+            <ul>
+                <li>Se pueden aplicar a cualquier primitivo, excepto a los booleanos</li>
+                <li>Solo los operadores + y += se pueden aplicar a String para concatenaciones</li>
+                <li>El operador % funciona con enteros negativos y decimales</li>
+            </ul>
+
+            <h4>Operadores Unitarios</h4>
+
+            <ul>
+                <li><code>+ / -</code>: Indica si un número es positivo/negativo</li>
+                <li><code>++ / --</code>: Incrementa/decrementa un valor en 1</li>
+                <li><code>!</code>: Invierte el resultado de un valor booleano</li>
+            </ul>
+
+            <h3>Asignación Simple (=)</h3>
+
+            <p>La variable ubicada en el lado izquierdo coge el valor a la derecha del símbolo:</p>
+
+            <pre><code class="language-java">
+int x = 3;
+            </code></pre>
+
+            <h4>Casting (Conversión de Tipos)</h4>
+
+            <ul>
+                <li>Java <strong>NO</strong> convierte automáticamente números grandes en números pequeños (cast)</li>
+                <li>Sí lo hace al revés (promoción)</li>
+                <li>Al hacer "cast" se puede perder precisión por "overflow" (demasiado grande) o "underflow"
+                    (demasiado pequeño)</li>
+            </ul>
+
+            <pre><code class="language-java">
+int x = (int) 1.0;        // Casting explícito
+byte a = (byte)129;       // Overflow
+short y = (short) 1_000_000; // Pérdida de datos
+            </code></pre>
+
+            <h3>Asignación Compuesta (+=, -=, *=, /=, %=)</h3>
+
+            <p>Se implementan con mayor eficacia y hacen casting automáticamente:</p>
+
+            <pre><code class="language-java">
+y = y + 3;  // Equivalente a:
+y += 3;
+            </code></pre>
+
+            <h3>Operadores Relacionales (&lt;, &lt;=, &gt;, &gt;=)</h3>
+
+            <ul>
+                <li>Comparan dos expresiones y devuelven un booleano</li>
+                <li>Solo se pueden aplicar a números primitivos</li>
+                <li>Si alguno es más grande, se promociona automáticamente</li>
+            </ul>
+
+            <h3>Operadores Lógicos (&amp;, |, ^)</h3>
+
+            <p><strong>Trucos:</strong></p>
+            <ul>
+                <li>AND es solo "true" si ambos operandos son "true"</li>
+                <li>OR es solo "false" si ambos operandos son "false"</li>
+                <li>XOR es solo "true" si ambos operandos son diferentes</li>
+            </ul>
+
+            <ul>
+                <li>Cuando se aplican a booleanos se les conoce como "operadores lógicos"</li>
+                <li>Cuando se aplican a números se les conoce como "operadores bitwise"</li>
+                <li><strong>Operadores short-cut AND (&&), OR(||)</strong>: No ejecutan el operando de la derecha si no
+                    es necesario</li>
+            </ul>
+
+            <h3>Operadores de Igualdad (==, !=)</h3>
+
+            <ul>
+                <li>Si dos números son de tipo diferente, automáticamente se promociona</li>
+                <li>Compara dos primitivos o dos referencias a objetos (@), incluyendo "null"</li>
+                <li>Dos referencias son iguales solo si apuntan al mismo objeto o ambas son nulas</li>
+            </ul>
+        </section>
+    </main>
+
+</body>
+
+</html>
