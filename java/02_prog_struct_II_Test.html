@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Java Estructuras de Control y Arrays — Test</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+</head>
+
+<body>
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+  <header>
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1>Java Estructuras de Control y Arrays — Test</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+
+    <section id="intro">
+      <h2>1. Instrucciones</h2>
+      <div class="quiz-intro">
+        <p>Responde las 25 preguntas tipo test sobre <strong>Java - Estructuras de Control</strong> (condicionales, bucles), <strong>Arrays</strong> y <strong>Operaciones CRUD en Arrays</strong>. Al final podrás ver tu puntuación y la explicación de cada respuesta.</p>
+        <div class="quiz-meta">
+          <span class="badge">25 preguntas</span>
+          <span>Modo: selección única</span>
+          <span>Corrección inmediata al enviar</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="test">
+      <h2>2. Test de conocimientos</h2>
+
+      <div id="result" class="result-box"></div>
+
+      <form id="quiz-form" class="quiz-container" aria-describedby="result">
+        <!-- Preguntas generadas por JS -->
+      </form>
+
+      <div class="quiz-actions">
+        <button type="button" class="primary" id="check-btn">Corregir</button>
+        <button type="button" class="danger" id="reset-btn">Reiniciar</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const QUESTIONS = [
+      {
+        text: "¿Qué palabra reservada se utiliza en Java junto a un switch para definir la acción por defecto?",
+        options: ["else", "default", "case", "fallthrough"],
+        answer: 1,
+        explanation: "default es la palabra reservada para la acción por defecto en un switch."
+      },
+      {
+        text: "¿Qué imprimirá por consola el siguiente código con if anidado?",
+        codeBlock: "int nota = 7;\nif (nota >= 5) {\n    if (nota >= 9) {\n        System.out.println(\"Sobresaliente\");\n    } else {\n        System.out.println(\"Aprobado\");\n    }\n} else {\n    System.out.println(\"Suspenso\");\n}",
+        options: ["Sobresaliente", "Aprobado", "Suspenso", "Error"],
+        answer: 1,
+        explanation: "7 >= 5 es true, pero 7 >= 9 es false, por tanto imprime 'Aprobado'."
+      },
+      {
+        text: "¿Qué palabra reservada dentro de un switch impide la ejecución secuencial de casos?",
+        options: ["stop", "exit", "break", "continue"],
+        answer: 2,
+        explanation: "break impide que se ejecuten los siguientes casos del switch."
+      },
+      {
+        text: "¿Qué imprimirá por consola el operador ternario en este código?",
+        codeBlock: "int edad = 16;\nboolean puedeEntrar = (edad >= 18) ? true : false;\nSystem.out.println(puedeEntrar);",
+        options: ["true", "false", "16", "Error"],
+        answer: 1,
+        explanation: "16 >= 18 es false, por tanto puedeEntrar = false."
+      },
+      {
+        text: "¿Qué sucede al compilar este código con asignación en lugar de comparación?",
+        codeBlock: "int x = 5;\nif (x = 10) {\n    System.out.println(\"Es diez\");\n}",
+        options: ["Imprime 'Es diez'", "Imprime 10", "ERROR de compilación", "No imprime nada"],
+        answer: 2,
+        explanation: "ERROR: En Java, if requiere un boolean, no puede usarse una asignación (=) en lugar de comparación (==)."
+      },
+      {
+        text: "¿Cuántas veces se imprimirá 'Hola' en este bucle for?",
+        codeBlock: "for (int i = 0; i < 5; i++) {\n    System.out.println(\"Hola\");\n}",
+        options: ["4 veces", "5 veces", "6 veces", "0 veces"],
+        answer: 1,
+        explanation: "El bucle se ejecuta mientras i < 5, es decir: 0, 1, 2, 3, 4 = 5 veces."
+      },
+      {
+        text: "¿Qué valor imprimirá este código después de sumar en un bucle?",
+        codeBlock: "int suma = 0;\nfor (int i = 1; i <= 3; i++) {\n    suma += i;\n}\nSystem.out.println(suma);",
+        options: ["3", "6", "4", "Error"],
+        answer: 1,
+        explanation: "suma = 0 + 1 + 2 + 3 = 6."
+      },
+      {
+        text: "¿Qué imprimirá este bucle while que nunca entra en el bloque?",
+        codeBlock: "int contador = 10;\nwhile (contador > 10) {\n    contador--;\n}\nSystem.out.println(contador);",
+        options: ["9", "11", "10", "Error"],
+        answer: 2,
+        explanation: "contador = 10, la condición 10 > 10 es false, nunca entra. Imprime 10."
+      },
+      {
+        text: "¿Qué diferencia hay entre while y do-while? ¿Qué imprimirá este do-while?",
+        codeBlock: "int c = 10;\ndo {\n    c--;\n} while (c > 10);\nSystem.out.println(c);",
+        options: ["10", "11", "9", "Error"],
+        answer: 2,
+        explanation: "do-while ejecuta el bloque al menos una vez. Decrementa a 9, luego comprueba 9 > 10 (false)."
+      },
+      {
+        text: "¿Cuántas veces se ejecuta el cuerpo de este bucle while con multiplicación?",
+        codeBlock: "int n = 1;\nwhile (n < 10) {\n    n *= 2;\n}",
+        options: ["1 vez", "2 veces", "3 veces", "4 veces"],
+        answer: 3,
+        explanation: "n=1 → n=2 → n=4 → n=8 (8<10, entra) → n=16 (16<10 es false). Se ejecuta 4 veces."
+      },
+      {
+        text: "¿Qué valor imprimirá este bucle con continue?",
+        codeBlock: "int x = 0;\nfor (int i = 0; i < 5; i++) {\n    if (i == 2) {\n        continue;\n    }\n    x++;\n}\nSystem.out.println(x);",
+        options: ["2", "3", "4", "5"],
+        answer: 2,
+        explanation: "continue salta cuando i == 2, así que x se incrementa 4 veces (en i=0,1,3,4)."
+      },
+      {
+        text: "¿Qué valor imprimirá este bucle con break?",
+        codeBlock: "int x = 0;\nfor (int i = 0; i < 5; i++) {\n    if (i == 3) {\n        break;\n    }\n    x++;\n}\nSystem.out.println(x);",
+        options: ["2", "3", "4", "5"],
+        answer: 1,
+        explanation: "break sale del bucle cuando i == 3, así que x se incrementa 3 veces (en i=0,1,2)."
+      },
+      {
+        text: "¿Qué tipo de dato debe ser la variable i en un bucle for estándar?",
+        options: ["double", "String", "int", "boolean"],
+        answer: 2,
+        explanation: "La variable controladora de un bucle for debe ser de tipo int (o compatible con números)."
+      },
+      {
+        text: "¿Qué valor imprimirá este bucle anidado?",
+        codeBlock: "int total = 0;\nfor (int i = 0; i < 2; i++) {\n    for (int j = 0; j < 3; j++) {\n        total++;\n    }\n}\nSystem.out.println(total);",
+        options: ["2", "3", "5", "6"],
+        answer: 3,
+        explanation: "El bucle externo se ejecuta 2 veces, el interno 3 veces: 2 × 3 = 6."
+      },
+      {
+        text: "¿Qué sucede con este bucle while sin actualización de variable?",
+        codeBlock: "int k = 1;\nwhile (k <= 5) {\n    System.out.print(k);\n}",
+        options: ["Imprime 1", "Imprime 12345", "BUCLE INFINITO", "ERROR"],
+        answer: 2,
+        explanation: "BUCLE INFINITO: k nunca cambia, siempre será <= 5."
+      },
+      {
+        text: "¿Qué tamaño devuelve la propiedad length de este array?",
+        codeBlock: "int[] misNumeros = new int[8];",
+        options: ["7", "8", "9", "0"],
+        answer: 1,
+        explanation: "misNumeros.length devuelve 8, el tamaño total del array."
+      },
+      {
+        text: "¿Cuál es el índice del primer elemento de cualquier array en Java?",
+        options: ["1", "0", "-1", "Depende del tamaño"],
+        answer: 1,
+        explanation: "Los arrays en Java usan índices de base 0, el primer elemento está en el índice 0."
+      },
+      {
+        text: "¿Qué valor numérico devuelve valores[2] en este array?",
+        codeBlock: "int[] valores = {10, 20, 30, 40};",
+        options: ["10", "20", "30", "40"],
+        answer: 2,
+        explanation: "El índice 2 corresponde al tercer elemento: valores[0]=10, valores[1]=20, valores[2]=30."
+      },
+      {
+        text: "¿Qué imprimirá este código que modifica y accede a un array?",
+        codeBlock: "int[] numeros = {1, 2, 3, 4};\nnumeros[1] = 9;\nSystem.out.println(numeros[0] + numeros[1]);",
+        options: ["3", "10", "11", "Error"],
+        answer: 1,
+        explanation: "numeros[0]=1, numeros[1]=9 (modificado), entonces 1 + 9 = 10."
+      },
+      {
+        text: "¿Qué valor imprimirá este foreach que suma un array?",
+        codeBlock: "int total = 0;\nint[] miLista = {2, 4, 6};\nfor (int num : miLista) {\n    total += num;\n}\nSystem.out.println(total);",
+        options: ["2", "6", "12", "Error"],
+        answer: 2,
+        explanation: "El foreach suma todos los elementos: 2 + 4 + 6 = 12."
+      },
+      {
+        text: "¿Cuál es la forma correcta de CREAR (CREATE) un array de 5 elementos de tipo String?",
+        codeBlock: "String[] nombres = new String[5];",
+        options: ["String nombres[5];", "String[] nombres = new String[5];", "String nombres = new String[];", "new String[] nombres[5];"],
+        answer: 1,
+        explanation: "La sintaxis correcta es: tipo[] nombreArray = new tipo[tamaño];"
+      },
+      {
+        text: "¿Qué valor imprimirá este código al LEER (READ) un elemento del array inicializado con valores por defecto?",
+        codeBlock: "double[] precios = new double[3];\nSystem.out.println(precios[0]);",
+        options: ["null", "0.0", "undefined", "Error"],
+        answer: 1,
+        explanation: "Los arrays de tipo double se inicializan con 0.0 por defecto en cada posición."
+      },
+      {
+        text: "¿Qué imprimirá este código tras ACTUALIZAR (UPDATE) múltiples elementos?",
+        codeBlock: "int[] datos = {10, 20, 30};\ndatos[0] = 50;\ndatos[2] = 40;\nSystem.out.println(datos[0] + datos[1] + datos[2]);",
+        options: ["60", "100", "110", "120"],
+        answer: 2,
+        explanation: "Después de actualizar: datos[0]=50, datos[1]=20, datos[2]=40. Suma: 50 + 20 + 40 = 110."
+      },
+      {
+        text: "¿Qué sucede al intentar 'BORRAR' un elemento asignándole null en un array de primitivos?",
+        codeBlock: "int[] numeros = {1, 2, 3};\nnumeros[1] = null;",
+        options: ["Se borra el elemento", "ERROR de compilación", "Se pone a 0", "Se pone a -1"],
+        answer: 1,
+        explanation: "ERROR: No se puede asignar null a un array de tipo primitivo (int). Los primitivos no pueden ser null."
+      },
+      {
+        text: "¿Qué valor imprimirá este código con operaciones CRUD complejas?",
+        codeBlock: "String[] frutas = new String[4];\nfrutas[0] = \"Manzana\";\nfrutas[2] = \"Naranja\";\nfrutas[0] = \"Plátano\";\nint contador = 0;\nfor (String fruta : frutas) {\n    if (fruta != null) contador++;\n}\nSystem.out.println(contador);",
+        options: ["1", "2", "3", "4"],
+        answer: 1,
+        explanation: "Se crean 4 espacios, se asignan 2 valores (índice 0 y 2), se actualiza índice 0, solo hay 2 elementos no-null."
+      }
+    ];
+
+    const quizForm = document.getElementById('quiz-form');
+    const resultBox = document.getElementById('result');
+    const checkBtn = document.getElementById('check-btn');
+    const resetBtn = document.getElementById('reset-btn');
+
+    function renderQuiz() {
+      quizForm.innerHTML = '';
+      QUESTIONS.forEach((q, index) => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.dataset.index = index;
+
+        const title = document.createElement('div');
+        title.className = 'question-title';
+        title.textContent = `${index + 1}. ${q.text}`;
+        card.appendChild(title);
+
+        if (q.codeBlock) {
+          const codeDiv = document.createElement('div');
+          codeDiv.className = 'question-text-code';
+          const pre = document.createElement('pre');
+          const code = document.createElement('code');
+          code.className = 'language-java';
+          code.textContent = q.codeBlock;
+          pre.appendChild(code);
+          codeDiv.appendChild(pre);
+          card.appendChild(codeDiv);
+        }
+
+        const options = document.createElement('div');
+        options.className = 'options';
+
+        q.options.forEach((opt, optIndex) => {
+          const label = document.createElement('label');
+          label.className = 'option';
+
+          const input = document.createElement('input');
+          input.type = 'radio';
+          input.name = `q${index}`;
+          input.value = optIndex;
+          input.setAttribute('aria-label', opt);
+
+          const span = document.createElement('span');
+          span.textContent = opt;
+
+          label.appendChild(input);
+          label.appendChild(span);
+          options.appendChild(label);
+        });
+
+        const explanation = document.createElement('div');
+        explanation.className = 'explanation';
+        explanation.hidden = true;
+
+        card.appendChild(options);
+        card.appendChild(explanation);
+        quizForm.appendChild(card);
+      });
+      Prism.highlightAllUnder(quizForm);
+    }
+
+    function checkAnswers() {
+      let correct = 0;
+
+      const cards = quizForm.querySelectorAll('.question-card');
+      cards.forEach((card) => {
+        const index = Number(card.dataset.index);
+        const question = QUESTIONS[index];
+        const selected = card.querySelector('input[type="radio"]:checked');
+        const options = card.querySelectorAll('.option');
+        const explanation = card.querySelector('.explanation');
+
+        options.forEach((opt) => opt.classList.remove('correct', 'incorrect'));
+
+        if (selected) {
+          const selectedIndex = Number(selected.value);
+          if (selectedIndex === question.answer) {
+            correct += 1;
+            options[selectedIndex].classList.add('correct');
+          } else {
+            options[selectedIndex].classList.add('incorrect');
+            options[question.answer].classList.add('correct');
+          }
+        } else {
+          options[question.answer].classList.add('correct');
+        }
+
+        explanation.textContent = `Explicación: ${question.explanation}`;
+        explanation.hidden = false;
+      });
+
+      const total = QUESTIONS.length;
+      const percent = Math.round((correct / total) * 100);
+
+      resultBox.style.display = 'block';
+      resultBox.innerHTML = `
+        <h3>Resultado</h3>
+        <p>Has acertado <strong>${correct}</strong> de <strong>${total}</strong> preguntas (${percent}%).</p>
+        <p>Revisa las explicaciones debajo de cada pregunta.</p>
+      `;
+
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetQuiz() {
+      renderQuiz();
+      resultBox.style.display = 'none';
+      resultBox.innerHTML = '';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    checkBtn.addEventListener('click', checkAnswers);
+    resetBtn.addEventListener('click', resetQuiz);
+
+    renderQuiz();
+  </script>
+</body>
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Java Métodos y ArrayList — Test</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+</head>
+
+<body>
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+  <header>
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1>Java Métodos y ArrayList — Test</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+
+    <section id="intro">
+      <h2>1. Instrucciones</h2>
+      <div class="quiz-intro">
+        <p>Responde las 25 preguntas tipo test sobre <strong>Java Métodos</strong> (parámetros, retorno, invocación) y <strong>ArrayList</strong> (operaciones, métodos, tipos). Al final podrás ver tu puntuación y la explicación de cada respuesta.</p>
+        <div class="quiz-meta">
+          <span class="badge">25 preguntas</span>
+          <span>Modo: selección única</span>
+          <span>Corrección inmediata al enviar</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="test">
+      <h2>2. Test de conocimientos</h2>
+
+      <div id="result" class="result-box"></div>
+
+      <form id="quiz-form" class="quiz-container" aria-describedby="result">
+        <!-- Preguntas generadas por JS -->
+      </form>
+
+      <div class="quiz-actions">
+        <button type="button" class="primary" id="check-btn">Corregir</button>
+        <button type="button" class="danger" id="reset-btn">Reiniciar</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const QUESTIONS = [
+      {
+        text: "¿Cuántos parámetros recibe este método en su declaración?",
+        codeBlock: "public static double calculaArea(double base, double altura) {\n    return (base * altura) / 2;\n}",
+        options: ["1", "2", "3", "ninguno"],
+        answer: 1,
+        explanation: "El método recibe 2 parámetros: base y altura."
+      },
+      {
+        text: "¿Qué tipo de dato exacto devuelve este método?",
+        codeBlock: "public static double calculaArea(double base, double altura) {\n    return (base * altura) / 2;\n}",
+        options: ["int", "double", "float", "void"],
+        answer: 1,
+        explanation: "El método devuelve un double, indicado en su firma."
+      },
+      {
+        text: "¿Qué valor numérico exacto devolverá calculaArea(4.0, 5.0)?",
+        codeBlock: "public static double calculaArea(double base, double altura) {\n    return (base * altura) / 2;\n}",
+        options: ["20.0", "10.0", "9.0", "Error"],
+        answer: 1,
+        explanation: "(4.0 * 5.0) / 2 = 20.0 / 2 = 10.0"
+      },
+      {
+        text: "¿Qué valor numérico exacto devolverá aplicaDescuento(100.0, 15)?",
+        codeBlock: "public static double aplicaDescuento(double precio, int porcentaje) {\n    return precio - (precio * porcentaje / 100.0);\n}",
+        options: ["85.0", "15.0", "100.0", "Error"],
+        answer: 0,
+        explanation: "100.0 - (100.0 * 15 / 100.0) = 100.0 - 15.0 = 85.0"
+      },
+      {
+        text: "¿Cuál es la salida exacta al invocar muestraPrecio(19.99)?",
+        codeBlock: "public static void muestraPrecio(double precio) {\n    System.out.println(\"El precio es: $\" + precio);\n}",
+        options: ["El precio es: $19.99", "19.99", "El precio es: 19.99", "null"],
+        answer: 0,
+        explanation: "Imprime exactamente: El precio es: $19.99"
+      },
+      {
+        text: "¿Qué palabra reservada indica que un método no devuelve ningún valor?",
+        codeBlock: "public static void muestraPrecio(double precio) {\n    System.out.println(\"El precio es: $\" + precio);\n}",
+        options: ["return", "null", "void", "empty"],
+        answer: 2,
+        explanation: "void es la palabra reservada que indica ausencia de valor de retorno."
+      },
+      {
+        text: "¿Qué valor booleano devolverá esMayorDeEdad(18)?",
+        codeBlock: "public static boolean esMayorDeEdad(int edad) {\n    return edad >= 18;\n}",
+        options: ["true", "false", "null", "Error"],
+        answer: 0,
+        explanation: "18 >= 18 es true, por tanto devuelve true."
+      },
+      {
+        text: "¿Qué tipo de dato se debe pasar como primer argumento?",
+        codeBlock: "public static void saludarUsuario(String nombre, int visitas) {\n    System.out.println(\"Hola \" + nombre + \", esta es tu visita #\" + visitas);\n}",
+        options: ["int", "double", "String", "boolean"],
+        answer: 2,
+        explanation: "El primer parámetro es de tipo String, según la declaración del método."
+      },
+      {
+        text: "¿Qué valor devuelve obtenerMayor(12, 45)?",
+        codeBlock: "public static int obtenerMayor(int a, int b) {\n    if (a > b) {\n        return a;\n    }\n    return b;\n}",
+        options: ["12", "45", "Error", "null"],
+        answer: 1,
+        explanation: "45 > 12, por tanto la función devuelve 45."
+      },
+      {
+        text: "¿Qué sucede al intentar asignar el retorno de muestraPrecio a una variable?",
+        codeBlock: "double resultado = muestraPrecio(10.5);\n// public static void muestraPrecio(double p) { System.out.println(p); }",
+        options: ["Se asigna 10.5", "Se asigna null", "ERROR de compilación", "Se asigna 0"],
+        answer: 2,
+        explanation: "ERROR: muestraPrecio es void, no devuelve nada. No se puede asignar su retorno."
+      },
+      {
+        text: "¿Qué valor devolverá duplicarSueldo(duplicarSueldo(1000))?",
+        codeBlock: "public static int duplicarSueldo(int sueldo) {\n    return sueldo * 2;\n}",
+        options: ["1000", "2000", "4000", "Error"],
+        answer: 2,
+        explanation: "duplicarSueldo(1000) = 2000, luego duplicarSueldo(2000) = 4000."
+      },
+      {
+        text: "¿Cuál es el tipo de dato del valor de retorno de generarCodigo?",
+        codeBlock: "public static String generarCodigo(String producto, int id) {\n    return producto + \"_\" + id;\n}",
+        options: ["int", "String", "boolean", "void"],
+        answer: 1,
+        explanation: "El método devuelve String, como se indica en su firma."
+      },
+      {
+        text: "¿Qué valor exacto (String) devolverá generarCodigo(\"Mesa\", 7)?",
+        codeBlock: "public static String generarCodigo(String producto, int id) {\n    return producto + \"_\" + id;\n}",
+        options: ["Mesa_7", "(Mesa, 7)", "Mesa,7", "Error"],
+        answer: 0,
+        explanation: "Concatena el producto, un guión y el id: Mesa_7"
+      },
+      {
+        text: "¿Qué palabra reservada es obligatoria en métodos no-void para finalizar y devolver el resultado?",
+        options: ["exit", "throw", "return", "break"],
+        answer: 2,
+        explanation: "return es la palabra reservada que finaliza el método y devuelve el valor."
+      },
+      {
+        text: "¿Qué valor devuelve calcularIva(50.0)?",
+        codeBlock: "public static double calcularIva(double importe) {\n    double factor = 0.21;\n    return importe * factor;\n}",
+        options: ["10.5", "50.0", "0.21", "Error"],
+        answer: 0,
+        explanation: "50.0 * 0.21 = 10.5"
+      },
+      {
+        text: "¿Qué método de ArrayList se utiliza para añadir un nuevo elemento al final?",
+        options: ["insert()", "push()", "add()", "append()"],
+        answer: 2,
+        explanation: "add() es el método para añadir elementos al final de un ArrayList."
+      },
+      {
+        text: "¿Qué método se utiliza para obtener el número total de elementos en un ArrayList?",
+        options: ["length()", "count()", "size()", "total()"],
+        answer: 2,
+        explanation: "size() devuelve el número total de elementos en el ArrayList."
+      },
+      {
+        text: "¿Qué método se emplea para recuperar un elemento en una posición específica?",
+        options: ["find()", "search()", "get()", "retrieve()"],
+        answer: 2,
+        explanation: "get(índice) recupera el elemento en la posición especificada."
+      },
+      {
+        text: "¿Qué método elimina todos los elementos del ArrayList, dejándolo vacío?",
+        options: ["remove()", "delete()", "clear()", "empty()"],
+        answer: 2,
+        explanation: "clear() elimina todos los elementos del ArrayList."
+      },
+      {
+        text: "¿Qué clase envolvente (Wrapper) se especifica para un ArrayList de enteros?",
+        options: ["int", "Int", "Integer", "NUMBER"],
+        answer: 2,
+        explanation: "ArrayList<Integer> utiliza la clase envolvente Integer para tipos int."
+      },
+      {
+        text: "¿Qué método se utiliza para modificar el elemento en un índice específico?",
+        options: ["replace()", "update()", "set()", "modify()"],
+        answer: 2,
+        explanation: "set(índice, valor) reemplaza el elemento en la posición especificada."
+      },
+      {
+        text: "¿Qué devuelve lista.isEmpty() después de estos pasos?",
+        codeBlock: "ArrayList<String> lista = new ArrayList<>();\nlista.add(\"Java\");\nlista.remove(0);",
+        options: ["false", "true", "null", "Error"],
+        answer: 1,
+        explanation: "Se añade un elemento y se elimina, dejando la lista vacía. isEmpty() devuelve true."
+      },
+      {
+        text: "¿Qué valor imprimirá nums.get(1) en este código?",
+        codeBlock: "ArrayList<Integer> nums = new ArrayList<>();\nnums.add(10);\nnums.add(20);\nnums.add(30);\nSystem.out.println(nums.get(1));",
+        options: ["10", "20", "30", "Error"],
+        answer: 1,
+        explanation: "nums.get(1) accede al segundo elemento (índice 1), que es 20."
+      },
+      {
+        text: "¿Qué método verifica si un elemento específico existe en el ArrayList?",
+        options: ["exists()", "has()", "contains()", "find()"],
+        answer: 2,
+        explanation: "contains(elemento) devuelve true si el elemento existe en el ArrayList."
+      },
+      {
+        text: "¿Qué palabra reservada falta en esta inicialización de ArrayList?",
+        codeBlock: "ArrayList<Double> precios = ______ ArrayList<>();",
+        options: ["create", "init", "new", "make"],
+        answer: 2,
+        explanation: "new es la palabra reservada para instanciar un nuevo objeto ArrayList."
+      }
+    ];
+
+    const quizForm = document.getElementById('quiz-form');
+    const resultBox = document.getElementById('result');
+    const checkBtn = document.getElementById('check-btn');
+    const resetBtn = document.getElementById('reset-btn');
+
+    function renderQuiz() {
+      quizForm.innerHTML = '';
+      QUESTIONS.forEach((q, index) => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.dataset.index = index;
+
+        const title = document.createElement('div');
+        title.className = 'question-title';
+        title.textContent = `${index + 1}. ${q.text}`;
+        card.appendChild(title);
+
+        if (q.codeBlock) {
+          const codeDiv = document.createElement('div');
+          codeDiv.className = 'question-text-code';
+          const pre = document.createElement('pre');
+          const code = document.createElement('code');
+          code.className = 'language-java';
+          code.textContent = q.codeBlock;
+          pre.appendChild(code);
+          codeDiv.appendChild(pre);
+          card.appendChild(codeDiv);
+        }
+
+        const options = document.createElement('div');
+        options.className = 'options';
+
+        q.options.forEach((opt, optIndex) => {
+          const label = document.createElement('label');
+          label.className = 'option';
+
+          const input = document.createElement('input');
+          input.type = 'radio';
+          input.name = `q${index}`;
+          input.value = optIndex;
+          input.setAttribute('aria-label', opt);
+
+          const span = document.createElement('span');
+          span.textContent = opt;
+
+          label.appendChild(input);
+          label.appendChild(span);
+          options.appendChild(label);
+        });
+
+        const explanation = document.createElement('div');
+        explanation.className = 'explanation';
+        explanation.hidden = true;
+
+        card.appendChild(options);
+        card.appendChild(explanation);
+        quizForm.appendChild(card);
+      });
+      Prism.highlightAllUnder(quizForm);
+    }
+
+    function checkAnswers() {
+      let correct = 0;
+
+      const cards = quizForm.querySelectorAll('.question-card');
+      cards.forEach((card) => {
+        const index = Number(card.dataset.index);
+        const question = QUESTIONS[index];
+        const selected = card.querySelector('input[type="radio"]:checked');
+        const options = card.querySelectorAll('.option');
+        const explanation = card.querySelector('.explanation');
+
+        options.forEach((opt) => opt.classList.remove('correct', 'incorrect'));
+
+        if (selected) {
+          const selectedIndex = Number(selected.value);
+          if (selectedIndex === question.answer) {
+            correct += 1;
+            options[selectedIndex].classList.add('correct');
+          } else {
+            options[selectedIndex].classList.add('incorrect');
+            options[question.answer].classList.add('correct');
+          }
+        } else {
+          options[question.answer].classList.add('correct');
+        }
+
+        explanation.textContent = `Explicación: ${question.explanation}`;
+        explanation.hidden = false;
+      });
+
+      const total = QUESTIONS.length;
+      const percent = Math.round((correct / total) * 100);
+
+      resultBox.style.display = 'block';
+      resultBox.innerHTML = `
+        <h3>Resultado</h3>
+        <p>Has acertado <strong>${correct}</strong> de <strong>${total}</strong> preguntas (${percent}%).</p>
+        <p>Revisa las explicaciones debajo de cada pregunta.</p>
+      `;
+
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetQuiz() {
+      renderQuiz();
+      resultBox.style.display = 'none';
+      resultBox.innerHTML = '';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    checkBtn.addEventListener('click', checkAnswers);
+    resetBtn.addEventListener('click', resetQuiz);
+
+    renderQuiz();
+  </script>
+</body>
+</html>
