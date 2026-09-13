@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JDBC</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+<body>
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+  <header>
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1>Acceso a datos con JDBC</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+<main>
+
+<!-- SECCIÓN 1: INTRODUCCIÓN -->
+<section id="introduccion">
+<h2>1. Introducción a JDBC</h2>
+
+<p>
+<strong>JDBC (Java Database Connectivity)</strong> es una API de Java que permite la conexión y la interacción con bases de datos relacionales.
+A través de un driver JDBC, se puede establecer conexión con el servidor de BBDD para realizar operaciones SQL como insertar, eliminar, actualizar y consultar datos.
+</p>
+
+<p>
+JDBC actúa como intermediario entre la aplicación Java y el Sistema Gestor de Base de Datos (SGBD), permitiendo ejecutar comandos SQL de forma segura y controlada.
+</p>
+
+<h3>1.1. Características principales</h3>
+<ul>
+    <li>Conexión con bases de datos relacionales (MySQL, PostgreSQL, Oracle, SQL Server, etc.)</li>
+    <li>Ejecución de consultas SQL (SELECT, INSERT, UPDATE, DELETE)</li>
+    <li>Manejo de transacciones y control de errores</li>
+    <li>Consultas parametrizadas para evitar inyecciones SQL</li>
+    <li>Recuperación de resultados mediante ResultSet</li>
+</ul>
+
+<h3>1.2. Flujo de interacción JDBC-SGBD</h3>
+
+<div class="diagram">
+  <svg width="100%" height="400" xmlns="http://www.w3.org/2000/svg">
+    <rect x="50" y="20" width="200" height="60" fill="#4A90E2" stroke="#2E5C8A" stroke-width="2" rx="5"/>
+    <text x="150" y="55" text-anchor="middle" fill="white" font-weight="bold">Aplicación Java</text>
+    
+    <rect x="50" y="120" width="200" height="60" fill="#F5A623" stroke="#B8860B" stroke-width="2" rx="5"/>
+    <text x="150" y="155" text-anchor="middle" fill="white" font-weight="bold">JDBC Driver</text>
+    
+    <rect x="50" y="220" width="200" height="60" fill="#7ED321" stroke="#5BA600" stroke-width="2" rx="5"/>
+    <text x="150" y="255" text-anchor="middle" fill="white" font-weight="bold">Base de Datos</text>
+    
+    <line x1="150" y1="80" x2="150" y2="120" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <line x1="150" y1="180" x2="150" y2="220" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+    
+    <defs>
+      <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+        <polygon points="0 0, 10 5, 0 10" fill="#333"/>
+      </marker>
+    </defs>
+  </svg>
+</div>
+
+</section>
+
+<!-- SECCIÓN 2: CLASES Y OBJETOS PRINCIPALES -->
+<section id="clases">
+<h2>2. Objetos JDBC principales</h2>
+
+<p>
+La gestión de la conexión JDBC implica el uso de varios objetos de diferentes clases para poder gestionar la conexión SQL de forma efectiva.
+</p>
+
+<h3>2.1. Connection</h3>
+<p>
+Es el objeto que establece y mantiene la conexión con la Base de Datos. 
+Se obtiene a través de <code>DriverManager.getConnection()</code> especificando la URL de conexión, usuario y contraseña.
+</p>
+
+<pre><code class="language-java">
+Connection con = DriverManager.getConnection(
+    "jdbc:mysql://localhost:3306/dam2tp2?serverTimezone=UTC",
+    "root",
+    "root"
+);
+</code></pre>
+
+<h3>2.2. Statement</h3>
+<p>
+Objeto encargado de ejecutar consultas SQL no parametrizadas directamente.
+Es más vulnerable a inyecciones SQL y debe evitarse en consultas con parámetros.
+</p>
+
+<pre><code class="language-java">
+Statement stmt = conn.createStatement();
+ResultSet rs = stmt.executeQuery("SELECT * FROM Empleados");
+</code></pre>
+
+<h3>2.3. PreparedStatement</h3>
+<p>
+Objeto encargado de ejecutar consultas SQL parametrizadas. 
+Los caracteres <code>?</code> se sustituyen por valores reales, proporcionando mayor seguridad contra inyecciones SQL.
+</p>
+
+<pre><code class="language-java">
+String sql = "SELECT * FROM Empleados WHERE id = ? AND edad > ?";
+PreparedStatement pstmt = conn.prepareStatement(sql);
+pstmt.setInt(1, 5);
+pstmt.setInt(2, 25);
+ResultSet rs = pstmt.executeQuery();
+</code></pre>
+
+<h3>2.4. ResultSet</h3>
+<p>
+Objeto que contiene los resultados de una consulta SELECT. 
+Se recorre usando un bucle <code>while</code> con el método <code>next()</code> que devuelve <code>true</code> mientras haya registros.
+</p>
+
+<pre><code class="language-java">
+while (rs.next()) {
+    int id = rs.getInt("id");
+    String nombre = rs.getString("nombre");
+    int edad = rs.getInt("edad");
+    System.out.println("ID: " + id + ", Nombre: " + nombre + ", Edad: " + edad);
+}
+</code></pre>
+
+<h3>2.5. Tabla resumen de objetos</h3>
+
+<table style="width: 100%; border-collapse: collapse;">
+    <thead>
+        <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Objeto</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Descripción</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Uso</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>Connection</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Conexión con la BD</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Establecer y mantener conexión</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>Statement</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Ejecuta SQL no parametrizado</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Consultas simples sin parámetros</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>PreparedStatement</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Ejecuta SQL parametrizado</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Consultas con parámetros (más seguro)</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>ResultSet</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Contiene resultados de consulta</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Recorrer y acceder a datos</td>
+        </tr>
+    </tbody>
+</table>
+
+</section>
+
+<!-- SECCIÓN 3: CONFIGURACIÓN E INSTALACIÓN -->
+<section id="instalacion">
+<h2>3. Instalación y configuración del driver JDBC</h2>
+
+<h3>3.1. Descarga del driver MySQL</h3>
+<p>
+El driver JDBC de MySQL se descarga desde:
+<a href="https://www.mysql.com/downloads" target="_blank">https://www.mysql.com/downloads</a>
+</p>
+
+<ul>
+    <li>Seleccionar <strong>MySQL Community (GPL) Downloads</strong></li>
+    <li>Opción 1: <strong>MySQL Installer for Windows</strong> (incluye servidor y drivers)</li>
+    <li>Opción 2: <strong>MySQL Connector/J</strong> (solo el driver JDBC)</li>
+</ul>
+
+<h3>3.2. Uso con Maven</h3>
+<p>
+Si utilizas Maven, añade la dependencia en el archivo <code>pom.xml</code>:
+</p>
+
+<pre><code class="language-xml">
+&lt;dependency&gt;
+    &lt;groupId&gt;mysql&lt;/groupId&gt;
+    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+    &lt;version&gt;8.0.33&lt;/version&gt;
+    &lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<h3>3.3. Parámetros de conexión</h3>
+<p>
+La URL de conexión tiene la siguiente estructura:
+</p>
+
+<pre><code class="language-java">
+jdbc:mysql://[host]:[puerto]/[schema]?[parámetros]
+</code></pre>
+
+<table style="width: 100%; border-collapse: collapse;">
+    <thead>
+        <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Parámetro</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Descripción</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Ejemplo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>host</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Servidor de BD</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">localhost</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>puerto</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Puerto de conexión</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">3306</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>schema</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Nombre de la BD</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">dam2tp2</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>serverTimezone</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Zona horaria del servidor</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">UTC (o Europe/Madrid)</td>
+        </tr>
+    </tbody>
+</table>
+
+<p style="margin-top: 15px;">
+<strong>Nota importante:</strong> El parámetro <code>serverTimezone</code> es determinante para establecer la conexión. 
+Sin él, a veces la conexión puede fallar. Por ejemplo, Madrid es UTC+1.
+</p>
+
+</section>
+
+<!-- SECCIÓN 4: USUARIO Y CONTRASEÑA -->
+<section id="autenticacion">
+<h2>4. Autenticación: Usuario y Contraseña</h2>
+
+<p>
+Debemos especificar las credenciales del usuario que tiene acceso a la base de datos.
+Estas credenciales están asociadas al servidor MySQL y determinan qué bases de datos y tablas puede acceder el usuario.
+</p>
+
+<table style="width: 100%; border-collapse: collapse;">
+    <thead>
+        <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Parámetro</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Descripción</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Valor por defecto</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>Usuario</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Nombre de usuario en MySQL</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">root</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>Contraseña</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Contraseña del usuario</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">root</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+Con las credenciales correctas, podremos interactuar con todas las tablas y bases de datos que el usuario tenga permisos para acceder.
+</p>
+
+</section>
+
+<!-- SECCIÓN 5: CRUD CON JDBC -->
+<section id="crud">
+<h2>5. CRUD con JDBC</h2>
+
+<p>
+Las operaciones CRUD (Create, Read, Update, Delete) son las cuatro operaciones básicas en cualquier base de datos.
+A continuación se presentan ejemplos prácticos de cada operación utilizando <strong>PreparedStatement</strong> para mayor seguridad.
+</p>
+
+<h3>5.1. Ejemplo: Insertar registros (CREATE)</h3>
+<p>
+La operación CREATE añade nuevos registros a la tabla. Utilizamos <code>executeUpdate()</code> que devuelve el número de filas afectadas.
+</p>
+
+<pre><code class="language-java">
+import java.sql.*;
+
+public class CRUDCreate {
+    static final String DB_URL = "jdbc:mysql://localhost/Studra?serverTimezone=UTC";
+    static final String USER = "root";
+    static final String PASS = "123";
+
+    public static void insertarEmpleado(String nombre, String apellido, int edad, double salario) {
+        String sql = "INSERT INTO Empleados (nombre, apellido, edad, salario) VALUES (?, ?, ?, ?)";
+        
+        try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // Reemplaza los parámetros ? con valores reales
+            pstmt.setString(1, nombre);
+            pstmt.setString(2, apellido);
+            pstmt.setInt(3, edad);
+            pstmt.setDouble(4, salario);
+            
+            int filasInsertadas = pstmt.executeUpdate();
+            System.out.println("Se insertaron " + filasInsertadas + " registros.");
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        insertarEmpleado("Juan", "García", 30, 2500.0);
+        insertarEmpleado("María", "López", 28, 2400.0);
+        insertarEmpleado("Carlos", "Martínez", 35, 2800.0);
+    }
+}
+</code></pre>
+
+<h3>5.2. Ejemplo: Consultar registros (READ)</h3>
+<p>
+La operación READ recupera datos de la tabla. Utilizamos <code>executeQuery()</code> que devuelve un ResultSet con los resultados.
+</p>
+
+<pre><code class="language-java">
+import java.sql.*;
+
+public class CRUDRead {
+    static final String DB_URL = "jdbc:mysql://localhost/Studra?serverTimezone=UTC";
+    static final String USER = "root";
+    static final String PASS = "123";
+
+    // Leer todos los registros
+    public static void leerTodos() {
+        String sql = "SELECT id, nombre, apellido, edad, salario FROM Empleados";
+        
+        try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                System.out.println("ID: " + rs.getInt("id") + 
+                                 ", Nombre: " + rs.getString("nombre") + 
+                                 ", Apellido: " + rs.getString("apellido") +
+                                 ", Edad: " + rs.getInt("edad") +
+                                 ", Salario: " + rs.getDouble("salario"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Leer por criterio (edad mayor que un valor)
+    public static void leerPorEdad(int edadMinima) {
+        String sql = "SELECT id, nombre, apellido, edad, salario FROM Empleados WHERE edad > ?";
+        
+        try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, edadMinima);
+            
+            try(ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    System.out.println("ID: " + rs.getInt("id") + 
+                                     ", Nombre: " + rs.getString("nombre") + 
+                                     ", Edad: " + rs.getInt("edad"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println("=== Todos los empleados ===");
+        leerTodos();
+        
+        System.out.println("\n=== Empleados con edad > 30 ===");
+        leerPorEdad(30);
+    }
+}
+</code></pre>
+
+<h3>5.3. Ejemplo: Actualizar registros (UPDATE)</h3>
+<p>
+La operación UPDATE modifica registros existentes. Utilizamos <code>executeUpdate()</code> que devuelve el número de filas modificadas.
+</p>
+
+<pre><code class="language-java">
+import java.sql.*;
+
+public class CRUDUpdate {
+    static final String DB_URL = "jdbc:mysql://localhost/Studra?serverTimezone=UTC";
+    static final String USER = "root";
+    static final String PASS = "123";
+
+    // Actualizar salario por ID
+    public static void actualizarSalario(int id, double nuevoSalario) {
+        String sql = "UPDATE Empleados SET salario = ? WHERE id = ?";
+        
+        try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setDouble(1, nuevoSalario);
+            pstmt.setInt(2, id);
+            
+            int filasActualizadas = pstmt.executeUpdate();
+            System.out.println("Se actualizaron " + filasActualizadas + " registros.");
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Actualizar múltiples campos
+    public static void actualizarEmpleado(int id, String nombre, String apellido, int edad) {
+        String sql = "UPDATE Empleados SET nombre = ?, apellido = ?, edad = ? WHERE id = ?";
+        
+        try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, nombre);
+            pstmt.setString(2, apellido);
+            pstmt.setInt(3, edad);
+            pstmt.setInt(4, id);
+            
+            int filasActualizadas = pstmt.executeUpdate();
+            if (filasActualizadas > 0) {
+                System.out.println("Empleado ID " + id + " actualizado correctamente.");
+            } else {
+                System.out.println("No se encontró empleado con ID " + id);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        actualizarSalario(1, 3000.0);
+        actualizarEmpleado(2, "María", "López García", 29);
+    }
+}
+</code></pre>
+
+<h3>5.4. Ejemplo: Eliminar registros (DELETE)</h3>
+<p>
+La operación DELETE elimina registros de la tabla. Utilizamos <code>executeUpdate()</code> que devuelve el número de filas eliminadas.
+</p>
+
+<pre><code class="language-java">
+import java.sql.*;
+
+public class CRUDDelete {
+    static final String DB_URL = "jdbc:mysql://localhost/Studra?serverTimezone=UTC";
+    static final String USER = "root";
+    static final String PASS = "123";
+
+    // Eliminar por ID
+    public static void eliminarEmpleado(int id) {
+        String sql = "DELETE FROM Empleados WHERE id = ?";
+        
+        try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, id);
+            
+            int filasEliminadas = pstmt.executeUpdate();
+            if (filasEliminadas > 0) {
+                System.out.println("Se eliminó 1 empleado.");
+            } else {
+                System.out.println("No se encontró empleado con ID " + id);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Eliminar por criterio (empleados con salario menor a un valor)
+    public static void eliminarPorSalario(double salarioMaximo) {
+        String sql = "DELETE FROM Empleados WHERE salario < ?";
+        
+        try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setDouble(1, salarioMaximo);
+            
+            int filasEliminadas = pstmt.executeUpdate();
+            System.out.println("Se eliminaron " + filasEliminadas + " empleados con salario < " + salarioMaximo);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        eliminarEmpleado(3);
+        eliminarPorSalario(2300.0);
+    }
+}
+</code></pre>
+
+<h3>5.5. Tabla comparativa de métodos</h3>
+
+<table style="width: 100%; border-collapse: collapse;">
+    <thead>
+        <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Operación</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Comando SQL</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Método</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Retorna</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><strong>CREATE</strong></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">INSERT</td>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>executeUpdate()</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">int (filas insertadas)</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><strong>READ</strong></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">SELECT</td>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>executeQuery()</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">ResultSet</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><strong>UPDATE</strong></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">UPDATE</td>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>executeUpdate()</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">int (filas modificadas)</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><strong>DELETE</strong></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">DELETE</td>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>executeUpdate()</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">int (filas eliminadas)</td>
+        </tr>
+    </tbody>
+</table>
+
+</section>
+</main>
+
+<footer>
+    <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JUnit - Testing Framework</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+</head>
+
+<body>
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+  <header>
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1>Testing con JUnit</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+<main>
+
+<!-- SECCIÓN 1: INTRODUCCIÓN -->
+<section id="introduccion">
+<h2>1. Introducción a JUnit</h2>
+
+<p>
+<strong>JUnit</strong> es un framework de testing o pruebas unitarias para Java. 
+Permite escribir y ejecutar pruebas automatizadas de forma sencilla y estructurada.
+Es el framework más popular en el mundo Java y forma parte esencial del desarrollo ágil y de la metodología Test-Driven Development (TDD).
+</p>
+
+<h3>1.1. ¿Qué es una prueba unitaria?</h3>
+<p>
+Una <strong>prueba unitaria</strong> es una prueba automatizada que verifica que una pequeña parte del código (una unidad, típicamente un método) funciona correctamente de forma aislada.
+</p>
+
+<ul>
+    <li>Verifica el comportamiento esperado de un método o clase</li>
+    <li>Se ejecuta de forma automática</li>
+    <li>Proporciona retroalimentación inmediata sobre errores</li>
+    <li>Facilita la refactorización segura del código</li>
+    <li>Documenta el comportamiento esperado del código</li>
+</ul>
+
+<h3>1.2. Propósitos de JUnit</h3>
+
+<table style="width: 100%; border-collapse: collapse;">
+    <thead>
+        <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Propósito</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Descripción</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><strong>Validación</strong></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Verificar que el código produce los resultados esperados</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><strong>Regresión</strong></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Detectar cambios indeseados tras modificaciones</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><strong>Documentación</strong></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Mostrar cómo se usa correctamente el código</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><strong>Diseño</strong></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Mejorar la estructura y modularidad del código</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><strong>Confianza</strong></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Aumentar la seguridad al realizar cambios</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>1.3. Ciclo de vida de un test</h3>
+
+<div class="diagram">
+  <svg width="100%" height="300" xmlns="http://www.w3.org/2000/svg">
+    <rect x="20" y="20" width="120" height="50" fill="#4A90E2" stroke="#2E5C8A" stroke-width="2" rx="5"/>
+    <text x="80" y="50" text-anchor="middle" fill="white" font-weight="bold">Setup</text>
+    
+    <rect x="170" y="20" width="120" height="50" fill="#F5A623" stroke="#B8860B" stroke-width="2" rx="5"/>
+    <text x="230" y="50" text-anchor="middle" fill="white" font-weight="bold">Test</text>
+    
+    <rect x="320" y="20" width="120" height="50" fill="#7ED321" stroke="#5BA600" stroke-width="2" rx="5"/>
+    <text x="380" y="50" text-anchor="middle" fill="white" font-weight="bold">Verificación</text>
+    
+    <rect x="170" y="120" width="120" height="50" fill="#BD10E0" stroke="#7A0D73" stroke-width="2" rx="5"/>
+    <text x="230" y="150" text-anchor="middle" fill="white" font-weight="bold">Teardown</text>
+    
+    <line x1="140" y1="45" x2="170" y2="45" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <line x1="290" y1="45" x2="320" y2="45" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <line x1="380" y1="70" x2="230" y2="120" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+    
+    <defs>
+      <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+        <polygon points="0 0, 10 5, 0 10" fill="#333"/>
+      </marker>
+    </defs>
+  </svg>
+</div>
+
+</section>
+
+<!-- SECCIÓN 2: INSTALACIÓN Y CONFIGURACIÓN -->
+<section id="instalacion">
+<h2>2. Instalación y configuración de JUnit</h2>
+
+<h3>2.1. Versiones de JUnit</h3>
+<p>
+Existen dos versiones principales de JUnit:
+</p>
+
+<table style="width: 100%; border-collapse: collapse;">
+    <thead>
+        <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Versión</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Características</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><strong>JUnit 4</strong></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Anotaciones, simple de usar, ampliamente utilizado</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Estable (mantenimiento)</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><strong>JUnit 5</strong></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Arquitectura modular, más potente, extensible</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Actual (recomendado)</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>2.2. Dependencia Maven</h3>
+<p>
+Añade la siguiente dependencia en tu archivo <code>pom.xml</code>:
+</p>
+
+<pre><code class="language-xml">
+&lt;!-- JUnit 4 --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;junit&lt;/groupId&gt;
+    &lt;artifactId&gt;junit&lt;/artifactId&gt;
+    &lt;version&gt;4.13.2&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+
+&lt;!-- JUnit 5 (Jupiter) --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
+    &lt;artifactId&gt;junit-jupiter&lt;/artifactId&gt;
+    &lt;version&gt;5.9.2&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<h3>2.3. Estructura de carpetas</h3>
+<p>
+Por convención, los tests deben colocarse en una estructura específica:
+</p>
+
+<pre><code>
+mi-proyecto/
+├── src/
+│   └── main/
+│       └── java/
+│           └── com/miempresa/
+│               └── Calculadora.java
+└── src/
+    └── test/
+        └── java/
+            └── com/miempresa/
+                └── CalculadoraTest.java
+</code></pre>
+
+</section>
+
+<!-- SECCIÓN 3: ANOTACIONES PRINCIPALES -->
+<section id="anotaciones">
+<h2>3. Anotaciones principales de JUnit 4</h2>
+
+<h3>3.1. @Test</h3>
+<p>
+Marca un método como un caso de prueba. JUnit ejecutará todos los métodos anotados con @Test.
+</p>
+
+<pre><code class="language-java">
+import org.junit.Test;
+
+public class CalculadoraTest {
+    
+    @Test
+    public void testSuma() {
+        // Código de prueba
+        System.out.println("Test de suma ejecutándose...");
+    }
+}
+</code></pre>
+
+<h3>3.2. @Before y @After</h3>
+<p>
+<code>@Before</code> se ejecuta antes de cada test. <code>@After</code> se ejecuta después de cada test.
+Útil para setup y cleanup de recursos.
+</p>
+
+<pre><code class="language-java">
+import org.junit.Before;
+import org.junit.After;
+import org.junit.Test;
+
+public class CalculadoraTest {
+    private Calculadora calc;
+    
+    @Before
+    public void setUp() {
+        calc = new Calculadora();
+        System.out.println("Setup: Inicializando calculadora");
+    }
+    
+    @Test
+    public void testSuma() {
+        int resultado = calc.sumar(5, 3);
+        System.out.println("Resultado: " + resultado);
+    }
+    
+    @After
+    public void tearDown() {
+        calc = null;
+        System.out.println("Teardown: Liberando recursos");
+    }
+}
+</code></pre>
+
+<h3>3.3. @BeforeClass y @AfterClass</h3>
+<p>
+Se ejecutan una única vez para toda la clase de test (antes de todos los tests y después de todos).
+Deben ser métodos static.
+</p>
+
+<pre><code class="language-java">
+import org.junit.BeforeClass;
+import org.junit.AfterClass;
+import org.junit.Test;
+
+public class CalculadoraTest {
+    
+    @BeforeClass
+    public static void setUpClass() {
+        System.out.println("Inicializando clase de test (una sola vez)");
+    }
+    
+    @Test
+    public void testSuma() {
+        System.out.println("Ejecutando test 1");
+    }
+    
+    @Test
+    public void testResta() {
+        System.out.println("Ejecutando test 2");
+    }
+    
+    @AfterClass
+    public static void tearDownClass() {
+        System.out.println("Finalizando clase de test (una sola vez)");
+    }
+}
+</code></pre>
+
+<h3>3.4. @Ignore</h3>
+<p>
+Omite la ejecución de un test. Útil cuando el test no está listo o está roto.
+</p>
+
+<pre><code class="language-java">
+import org.junit.Ignore;
+import org.junit.Test;
+
+public class CalculadoraTest {
+    
+    @Test
+    @Ignore("No implementado aún")
+    public void testDivision() {
+        // Este test no se ejecutará
+    }
+}
+</code></pre>
+
+<h3>3.5. Tabla resumen de anotaciones</h3>
+
+<table style="width: 100%; border-collapse: collapse;">
+    <thead>
+        <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Anotación</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Descripción</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Frecuencia</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>@Test</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Marca método como caso de prueba</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Por cada test</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>@Before</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Ejecuta antes de cada test</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Antes de cada @Test</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>@After</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Ejecuta después de cada test</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Después de cada @Test</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>@BeforeClass</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Ejecuta una sola vez al principio (static)</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Una sola vez al inicio</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>@AfterClass</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Ejecuta una sola vez al final (static)</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Una sola vez al final</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>@Ignore</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Omite la ejecución del test</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Nunca</td>
+        </tr>
+    </tbody>
+</table>
+
+</section>
+
+<!-- SECCIÓN 4: ASSERTIONS -->
+<section id="assertions">
+<h2>4. Assertions - Verificaciones</h2>
+
+<p>
+Los <strong>assertions</strong> son sentencias que verifican si el resultado obtenido coincide con el esperado.
+Si el assertion falla, el test se considera fallido.
+</p>
+
+<h3>4.1. Principales métodos de Assert</h3>
+
+<table style="width: 100%; border-collapse: collapse;">
+    <thead>
+        <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Método</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Descripción</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Ejemplo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>assertEquals()</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Verifica que dos valores sean iguales</td>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>assertEquals(4, 2+2);</code></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>assertTrue()</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Verifica que una condición sea true</td>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>assertTrue(5 > 3);</code></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>assertFalse()</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Verifica que una condición sea false</td>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>assertFalse(5 < 3);</code></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>assertNull()</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Verifica que un objeto sea null</td>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>assertNull(obj);</code></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>assertNotNull()</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Verifica que un objeto no sea null</td>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>assertNotNull(obj);</code></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>assertSame()</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Verifica que dos referencias apunten al mismo objeto</td>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>assertSame(obj1, obj2);</code></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>fail()</code></td>
+            <td style="border: 1px solid #ddd; padding: 8px;">Fuerza el fallo del test</td>
+            <td style="border: 1px solid #ddd; padding: 8px;"><code>fail("No debería llegar aquí");</code></td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>4.2. Ejemplos de Assertions</h3>
+
+<pre><code class="language-java">
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class AssertionsTest {
+    
+    @Test
+    public void testAssertEquals() {
+        // Verifica que el resultado sea exactamente 4
+        assertEquals(4, 2 + 2);
+        assertEquals("Esperado", "Esperado");
+    }
+    
+    @Test
+    public void testAssertTrue() {
+        // Verifica que la condición sea verdadera
+        assertTrue(5 > 3);
+        assertTrue("El número es positivo".length() > 0);
+    }
+    
+    @Test
+    public void testAssertFalse() {
+        // Verifica que la condición sea falsa
+        assertFalse(5 < 3);
+        assertFalse("".isEmpty() == false);
+    }
+    
+    @Test
+    public void testAssertNull() {
+        String texto = null;
+        assertNull(texto);
+    }
+    
+    @Test
+    public void testAssertNotNull() {
+        String texto = "Hola";
+        assertNotNull(texto);
+    }
+    
+    @Test
+    public void testAssertWithMessage() {
+        // Assertions con mensaje personalizado
+        assertEquals("El resultado debe ser 4", 4, 2 + 2);
+        assertTrue("5 debe ser mayor que 3", 5 > 3);
+    }
+}
+</code></pre>
+
+</section>
+
+<!-- SECCIÓN 5: PRIMER TEST COMPLETO -->
+<section id="primertest">
+<h2>5. Ejemplo completo: Primer Test</h2>
+
+<h3>5.1. Clase a probar: Calculadora</h3>
+
+<pre><code class="language-java">
+// Calculadora.java
+public class Calculadora {
+    
+    public int sumar(int a, int b) {
+        return a + b;
+    }
+    
+    public int restar(int a, int b) {
+        return a - b;
+    }
+    
+    public int multiplicar(int a, int b) {
+        return a * b;
+    }
+    
+    public int dividir(int a, int b) {
+        if (b == 0) {
+            throw new IllegalArgumentException("No se puede dividir por cero");
+        }
+        return a / b;
+    }
+}
+</code></pre>
+
+<h3>5.2. Clase de test: CalculadoraTest</h3>
+
+<pre><code class="language-java">
+// CalculadoraTest.java
+import org.junit.Before;
+import org.junit.After;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class CalculadoraTest {
+    
+    private Calculadora calc;
+    
+    @Before
+    public void setUp() {
+        // Se ejecuta antes de cada test
+        calc = new Calculadora();
+        System.out.println("Inicializando calculadora para test...");
+    }
+    
+    @Test
+    public void testSuma() {
+        int resultado = calc.sumar(5, 3);
+        assertEquals("5 + 3 debe ser 8", 8, resultado);
+    }
+    
+    @Test
+    public void testResta() {
+        int resultado = calc.restar(10, 3);
+        assertEquals("10 - 3 debe ser 7", 7, resultado);
+    }
+    
+    @Test
+    public void testMultiplicar() {
+        int resultado = calc.multiplicar(4, 5);
+        assertEquals("4 * 5 debe ser 20", 20, resultado);
+    }
+    
+    @Test
+    public void testDividir() {
+        int resultado = calc.dividir(20, 4);
+        assertEquals("20 / 4 debe ser 5", 5, resultado);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testDividirPorCero() {
+        // Este test espera que se lance una excepción
+        calc.dividir(10, 0);
+    }
+    
+    @After
+    public void tearDown() {
+        // Se ejecuta después de cada test
+        calc = null;
+        System.out.println("Limpiando después del test...");
+    }
+}
+</code></pre>
+
+<h3>5.3. Ejecución del test</h3>
+<p>
+Para ejecutar los tests en una IDE como Eclipse o IntelliJ:
+</p>
+
+<ol>
+    <li>Click derecho en la clase de test → Run As → JUnit Test</li>
+    <li>O usar Maven: <code>mvn test</code></li>
+    <li>O usar Gradle: <code>gradle test</code></li>
+</ol>
+
+</section>
+
+<!-- SECCIÓN 6: PRUEBAS DE EXCEPCIONES -->
+<section id="excepciones">
+<h2>6. Testing de excepciones</h2>
+
+<h3>6.1. Método 1: @Test(expected=...)</h3>
+<p>
+Espera que un método lance una excepción específica.
+</p>
+
+<pre><code class="language-java">
+import org.junit.Test;
+
+public class ExceptionTest {
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testExceptionEsperada() {
+        String[] array = new String[5];
+        String valor = array[10]; // Lanzará ArrayIndexOutOfBoundsException
+    }
+    
+    @Test(expected = NullPointerException.class)
+    public void testNullPointerException() {
+        String texto = null;
+        texto.length(); // Lanzará NullPointerException
+    }
+}
+</code></pre>
+
+<h3>6.2. Método 2: try-catch</h3>
+<p>
+Captura la excepción y verifica su tipo y mensaje.
+</p>
+
+<pre><code class="language-java">
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class ExceptionTest {
+    
+    @Test
+    public void testExceptionConMensaje() {
+        try {
+            int resultado = 10 / 0;
+            fail("Debería haber lanzado ArithmeticException");
+        } catch (ArithmeticException e) {
+            assertEquals("/ by zero", e.getMessage());
+            assertTrue(e.getMessage().contains("zero"));
+        }
+    }
+}
+</code></pre>
+
+</section>
+
+<!-- SECCIÓN 7: BUENAS PRÁCTICAS -->
+<section id="practicas">
+<h2>7. Buenas prácticas en Testing</h2>
+
+<h3>7.1. Principio AAA (Arrange-Act-Assert)</h3>
+<p>
+Todo test debe seguir esta estructura para mayor claridad:
+</p>
+
+<pre><code class="language-java">
+@Test
+public void testCalculoCompleto() {
+    // Arrange (Preparar): Configurar datos
+    Calculadora calc = new Calculadora();
+    int numeroA = 10;
+    int numeroB = 5;
+    
+    // Act (Actuar): Ejecutar la acción
+    int resultado = calc.sumar(numeroA, numeroB);
+    
+    // Assert (Verificar): Comprobar el resultado
+    assertEquals(15, resultado);
+}
+</code></pre>
+
+<h3>7.2. Nombres de tests descriptivos</h3>
+<p>
+Los nombres deben explicar qué se está probando:
+</p>
+
+<pre><code class="language-java">
+// ❌ Mal
+@Test
+public void test1() { }
+
+@Test
+public void testOK() { }
+
+// ✅ Bien
+@Test
+public void testSumarDosNumerosPositivosRetornaResultadoCorreto() { }
+
+@Test
+public void testDividirPorCeroLanzaExcepcion() { }
+</code></pre>
+
+<h3>7.3. Un assert por test (cuando sea posible)</h3>
+<p>
+Cada test debe verificar un único comportamiento:
+</p>
+
+<pre><code class="language-java">
+// ❌ Evitar: Múltiples verificaciones
+@Test
+public void testCalculadora() {
+    assertEquals(4, calc.sumar(2, 2));
+    assertEquals(0, calc.restar(2, 2));
+    assertEquals(4, calc.multiplicar(2, 2));
+}
+
+// ✅ Preferir: Tests separados
+@Test
+public void testSuma() {
+    assertEquals(4, calc.sumar(2, 2));
+}
+
+@Test
+public void testResta() {
+    assertEquals(0, calc.restar(2, 2));
+}
+
+@Test
+public void testMultiplicar() {
+    assertEquals(4, calc.multiplicar(2, 2));
+}
+</code></pre>
+
+<h3>7.4. Tests independientes</h3>
+<p>
+Los tests no deben depender unos de otros:
+</p>
+
+<pre><code class="language-java">
+// ❌ Evitar: Dependencias entre tests
+@Test
+public void testPrimero() {
+    // configura algo global
+}
+
+@Test
+public void testSegundo() {
+    // depende del resultado de testPrimero
+}
+
+// ✅ Preferir: Tests autónomos
+@Test
+public void testPrimero() {
+    Calculadora calc = new Calculadora();
+    // test completamente independiente
+}
+
+@Test
+public void testSegundo() {
+    Calculadora calc = new Calculadora();
+    // test completamente independiente
+}
+</code></pre>
+
+<h3>7.5. Considerar casos límite</h3>
+<p>
+Probar no solo casos normales sino también casos extremos:
+</p>
+
+<pre><code class="language-java">
+@Test
+public void testSumaConNumerosPositivos() {
+    assertEquals(5, calc.sumar(2, 3));
+}
+
+@Test
+public void testSumaConNumerosNegativos() {
+    assertEquals(-5, calc.sumar(-2, -3));
+}
+
+@Test
+public void testSumaConCero() {
+    assertEquals(5, calc.sumar(5, 0));
+}
+
+@Test
+public void testSumaConGrandesNumeros() {
+    assertEquals(2000000000L, calc.sumar(1000000000, 1000000000));
+}
+</code></pre>
+
+</section>
+
+<!-- SECCIÓN 8: EJECUCIÓN Y REPORTE -->
+<section id="ejecucion">
+<h2>8. Ejecución de tests</h2>
+
+<h3>8.1. Con Maven</h3>
+<p>
+Ejecuta todos los tests del proyecto:
+</p>
+
+<pre><code class="language-bash">
+# Ejecutar todos los tests
+mvn test
+
+# Ejecutar una clase de test específica
+mvn test -Dtest=CalculadoraTest
+
+# Ejecutar un método específico
+mvn test -Dtest=CalculadoraTest#testSuma
+
+# Ejecutar sin parar en fallos
+mvn test -DskipTests=false
+</code></pre>
+
+<h3>8.2. Con Gradle</h3>
+
+<pre><code class="language-bash">
+# Ejecutar todos los tests
+gradle test
+
+# Ejecutar tests con salida detallada
+gradle test --info
+
+# Ejecutar una clase de test
+gradle test --tests CalculadoraTest
+</code></pre>
+
+<h3>8.3. En la IDE (Eclipse/IntelliJ)</h3>
+<ul>
+    <li>Click derecho en la clase de test → Run As → JUnit Test</li>
+    <li>O click en el triángulo verde junto al nombre de la clase o método</li>
+    <li>Se abre la ventana "JUnit" mostrando resultados en verde (✓ ok) o rojo (✗ fallido)</li>
+</ul>
+
+<h3>8.4. Reporte de tests</h3>
+<p>
+Maven genera reportes en <code>target/surefire-reports/</code> con información detallada sobre los tests ejecutados, incluyendo tiempos de ejecución y resultados.
+</p>
+
+</section>
+
+</main>
+
+<footer>
+    <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+</footer>
+
+</body>
+</html>
