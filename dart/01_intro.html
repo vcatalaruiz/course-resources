@@ -442,6 +442,89 @@ do {
 </code></pre>
         </section>
 
+        <section id="listas-colecciones">
+            <h2>9. Estructura de datos (List)</h2>
+
+            <p>
+                Las listas en Dart permiten agrupar colecciones indexadas de datos. Dart nos provee de múltiples métodos nativos para su manipulación directa:
+            </p>
+
+            <pre><code class="language-dart">
+// Declaración e inicialización de una lista de enteros
+List&lt;int&gt; milista = [1, 2, 3, 4, 5, 6, 7];
+
+// Añade un elemento al final de la lista
+milista.add(8);
+
+// Elimina la primera coincidencia exacta encontrada
+milista.remove(8);
+
+// Obtiene la cantidad total de elementos (tamaño)
+int tamano = milista.length;
+
+// Devuelve el primer elemento de la colección
+int primero = milista.first;
+</code></pre>
+
+            <h3>9.1. Recorrido correcto de colecciones</h3>
+            <p>
+                Aunque existe el método genérico <code>forEach</code>, su uso para operaciones condicionales complejas se considera una mala praxis en Dart debido a la legibilidad y rendimiento[cite: 82, 83]. La estructura óptima recomendada es el bucle <code>for..in</code>[cite: 89, 90]:
+            </p>
+
+            <pre><code class="language-dart">
+// Recorrido correcto mediante for..in
+for (int element in milista) {
+  if (element % 2 == 0) {
+    print(element);
+  }
+}
+</code></pre>
+
+            <h3>9.2. Eliminación condicionada</h3>
+            <p>Si deseas borrar elementos que cumplan una condición específica sin necesidad de recorrer manualmente e iterar la lista, puedes emplear de forma compacta <code>removeWhere</code>[cite: 94, 95]:</p>
+            <pre><code class="language-dart">
+// Borrado directo de todos los números pares de la lista
+milista.removeWhere((element) => element % 2 == 0);
+</code></pre>
+        </section>
+
+        <section id="estructuras-map">
+            <h2>10. Estructuras de Datos: Map</h2>
+            <p>
+                En Dart, las estructuras de tipo diccionario o tablas asociativas se definen mediante la clase <code>Map</code>[cite: 169]. Un Map representa una colección estructurada de pares formados por una <strong>clave</strong> y un <strong>valor</strong>[cite: 170]. Permite manejar tipos de datos heterogéneos según la restricción que usemos al declararlo[cite: 171].
+            </p>
+
+            <pre><code class="language-dart">
+// Estructura conceptual general
+var identifier = { key1:value1, key2:value2 };
+
+// Declaración clásica instanciando el objeto
+Map infoAlumno = Map();
+infoAlumno['nombre'] = 'root';
+infoAlumno['apellido'] = 'ABCD1234';
+infoAlumno['edad'] = 25;
+
+// Declaración literal (Forma recomendada)
+Map infoAlumnoLiteral = {
+  'nombre': 'root',
+  'apellido': 'ABCD1234',
+  'edad': 25,
+};
+</code></pre>
+
+            <h3>10.1. Métodos nativos de uso frecuente en Map</h3>
+            <p>La API de Dart proporciona un robusto abanico de utilidades para el tratamiento directo de mapas asociativos[cite: 190]:</p>
+            <ul>
+                <li><strong><code>addAll(Map&lt;K, V&gt; other)</code></strong>: Incorpora de manera masiva todos los pares clave/valor del mapa proporcionado al mapa actual[cite: 191, 192].</li>
+                <li><strong><code>clear()</code></strong>: Purga y remueve la totalidad de elementos del mapa dejándolo vacío[cite: 196, 197].</li>
+                <li><strong><code>containsKey(Object? key)</code></strong>: Evalúa mediante un booleano si la clave especificada existe dentro de la colección[cite: 198, 199].</li>
+                <li><strong><code>containsValue(Object? value)</code></strong>: Evalúa mediante un booleano si el valor especificado está presente en el mapa[cite: 200, 201].</li>
+                <li><strong><code>remove(Object? key)</code></strong>: Elimina de la colección la clave solicitada junto con su valor vinculado[cite: 204, 205].</li>
+                <li><strong><code>removeWhere(bool test(K key, V value))</code></strong>: Realiza un borrado condicional selectivo eliminando las entradas que cumplan la condición lógica evaluada[cite: 206, 207].</li>
+            </ul>
+        </section>
+
+
         <section id="resumen">
             <div class="info-box">
                 <h3>Resumen de Dart básico</h3>
@@ -461,6 +544,10 @@ do {
                         multi-caso <code>switch</code>.</li>
                     <li>Soporta bucles de control estándar como <code>for</code>, <code>for..in</code>,
                         <code>while</code> y <code>do..while</code>.
+                    </li>
+                    <li>Una lista es una colección ordenada de elementos donde cada valor tiene una posición numérica llamada índice, que empieza desde el 0.
+                    </li>
+                    <li>Un mapa es una colección que almacena datos en parejas de clave y valor. La clave funciona como un identificador único para encontrar el valor de forma rápida.
                     </li>
                 </ul>
             </div>
