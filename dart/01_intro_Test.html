@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dart Introducción — Test</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-dart.min.js"></script>
+</head>
+
+<body>
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+  <header>
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1>Dart Introducción — Test</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+
+    <section id="intro">
+      <h2>1. Instrucciones</h2>
+      <div class="quiz-intro">
+        <p>Responde las 25 preguntas tipo test sobre <strong>Dart básico</strong>, tipos de datos, operaciones, lógica, salidas por consola y casting. Al final podrás ver tu puntuación y la explicación de cada respuesta.</p>
+        <div class="quiz-meta">
+          <span class="badge">25 preguntas</span>
+          <span>Modo: selección única</span>
+          <span>Corrección inmediata al enviar</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="test">
+      <h2>2. Test de conocimientos</h2>
+
+      <div id="result" class="result-box"></div>
+
+      <form id="quiz-form" class="quiz-container" aria-describedby="result">
+        <!-- Preguntas generadas por JS -->
+      </form>
+
+      <div class="quiz-actions">
+        <button type="button" class="primary" id="check-btn">Corregir</button>
+        <button type="button" class="danger" id="reset-btn">Reiniciar</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const QUESTIONS = [
+      {
+        text: "¿Qué tipo de dato en Dart se utiliza para almacenar un único carácter, como 'F'?",
+        options: ["int", "String", "char", "character"],
+        answer: 1,
+        explanation: "En Dart no existe 'char'. Se utiliza String para almacenar caracteres individuales."
+      },
+      {
+        text: "¿Qué tipo de dato en Dart es más adecuado para almacenar una cadena de texto, como el nombre de una aplicación?",
+        options: ["dynamic", "String", "List<String>", "var"],
+        answer: 1,
+        explanation: "String es el tipo de dato para almacenar cadenas de texto en Dart."
+      },
+      {
+        text: "¿Qué tipo de dato en Dart sirve para almacenar los valores lógicos true o false?",
+        options: ["int", "bool", "dynamic", "num"],
+        answer: 1,
+        explanation: "bool es el tipo de dato para almacenar valores lógicos en Dart."
+      },
+      {
+        text: "¿Qué tipo de dato en Dart se utiliza para declarar una variable de números enteros sin decimales, como iteraciones = 10?",
+        options: ["float", "double", "int", "num"],
+        answer: 2,
+        explanation: "int es el tipo de dato para números enteros sin decimales en Dart."
+      },
+      {
+        text: "¿Qué tipo de dato en Dart se utiliza para declarar números con decimales con alta precisión, como temperatura = 36.5?",
+        options: ["float", "double", "int", "decimal"],
+        answer: 1,
+        explanation: "double es el tipo de dato para números con decimales de alta precisión en Dart."
+      },
+      {
+        text: "¿Qué palabra reservada en Dart se utiliza para declarar una constante inmutable en tiempo de compilación?",
+        options: ["const", "final", "static", "immutable"],
+        answer: 0,
+        explanation: "const es la palabra reservada en Dart para declarar constantes en tiempo de compilación."
+      },
+      {
+        text: "Si int x = 5; int y = 12; double z = 3.0;. ¿Qué valor numérico exacto devuelve la operación x + y / z?",
+        codeBlock: "int x = 5;\nint y = 12;\ndouble z = 3.0;\nprint(x + y / z);",
+        options: ["5.6", "9.0", "17.0", "9.5"],
+        answer: 1,
+        explanation: "y / z = 12 / 3.0 = 4.0, entonces x + 4.0 = 5 + 4.0 = 9.0."
+      },
+      {
+        text: "Si int numero = 16;. ¿Qué valor booleano devuelve la expresión numero % 2 == 0?",
+        codeBlock: "int numero = 16;\nprint(numero % 2 == 0);",
+        options: ["false", "true", "null", "Error"],
+        answer: 1,
+        explanation: "16 % 2 = 0, y 0 == 0 es true."
+      },
+      {
+        text: "Si int a = 7; int b = 15;. ¿Qué valor booleano devuelve a < b && b < 20?",
+        codeBlock: "int a = 7;\nint b = 15;\nprint(a < b && b < 20);",
+        options: ["false", "true", "null", "Error"],
+        answer: 1,
+        explanation: "a < b es true (7 < 15) y b < 20 es true (15 < 20), por tanto true && true = true."
+      },
+      {
+        text: "Si int a = 7; int b = 15; double c = 3.5;. ¿Qué valor booleano devuelve a > b || b > c?",
+        codeBlock: "int a = 7;\nint b = 15;\ndouble c = 3.5;\nprint(a > b || b > c);",
+        options: ["false", "true", "null", "Error"],
+        answer: 1,
+        explanation: "a > b es false, pero b > c es true (15 > 3.5), por tanto false || true = true."
+      },
+      {
+        text: "Si bool activo = false; bool premium = true;. ¿Qué valor booleano devuelve !(activo || premium)?",
+        codeBlock: "bool activo = false;\nbool premium = true;\nprint(!(activo || premium));",
+        options: ["true", "false", "null", "Error"],
+        answer: 1,
+        explanation: "activo || premium = false || true = true, entonces !true = false."
+      },
+      {
+        text: "¿Qué sucede al ejecutar el siguiente código?",
+        codeBlock: "int valor = 10;\nbool esPar = true;\nprint(valor && esPar);",
+        options: ["true", "false", "10", "ERROR"],
+        answer: 3,
+        explanation: "ERROR: no se puede utilizar && con int. El operador && requiere valores bool en ambos lados."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código?",
+        codeBlock: "int x = 20;\nint y = 5;\nprint(x == (y * 4));",
+        options: ["true", "false", "20", "Error"],
+        answer: 0,
+        explanation: "y * 4 = 5 * 4 = 20, y 20 == 20 es true."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código?",
+        codeBlock: "int resultado = 18;\nprint((resultado > 10) && (resultado < 25));",
+        options: ["true", "false", "18", "Error"],
+        answer: 0,
+        explanation: "resultado > 10 es true (18 > 10) y resultado < 25 es true (18 < 25), por tanto true && true = true."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código con condicional if?",
+        codeBlock: "int edad = 20;\nif (edad >= 18) {\n  print('Mayor de edad');\n} else {\n  print('Menor de edad');\n}",
+        options: ["Mayor de edad", "Menor de edad", "20", "Error"],
+        answer: 0,
+        explanation: "Como edad (20) es >= 18, se ejecuta el bloque if, imprimiendo 'Mayor de edad'."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código con if anidado?",
+        codeBlock: "int calificacion = 75;\nif (calificacion >= 60) {\n  if (calificacion >= 90) {\n    print('Excelente');\n  } else {\n    print('Aprobado');\n  }\n}",
+        options: ["Excelente", "Aprobado", "60", "No se imprime nada"],
+        answer: 1,
+        explanation: "calificacion (75) >= 60, pero 75 no es >= 90, así que imprime 'Aprobado'."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código con switch?",
+        codeBlock: "int dia = 3;\nswitch (dia) {\n  case 1:\n    print('Lunes');\n    break;\n  case 3:\n    print('Miércoles');\n    break;\n  default:\n    print('Otro día');\n}",
+        options: ["Lunes", "Miércoles", "Otro día", "Error"],
+        answer: 1,
+        explanation: "El case 3 coincide con dia, así que imprime 'Miércoles' y el break detiene la ejecución."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código con bucle for?",
+        codeBlock: "for (int i = 1; i <= 3; i++) {\n  print(i);\n}",
+        options: ["1 2 3", "0 1 2", "1\\n2\\n3", "4"],
+        answer: 2,
+        explanation: "El bucle for imprime 1, 2, 3 en líneas separadas (cada print genera una nueva línea)."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código con bucle while?",
+        codeBlock: "int contador = 0;\nwhile (contador < 3) {\n  print(contador);\n  contador++;\n}",
+        options: ["0 1 2", "0\\n1\\n2", "1 2 3", "3"],
+        answer: 1,
+        explanation: "El bucle while imprime 0, 1, 2 (cada iteración incrementa contador hasta que sea >= 3)."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código de creación de lista?",
+        codeBlock: "List<int> numeros = [10, 20, 30, 40];\nprint(numeros);",
+        options: ["[10, 20, 30, 40]", "[10, 20, 30]", "[40, 30, 20, 10]", "Error"],
+        answer: 0,
+        explanation: "La lista se imprime tal como fue inicializada: [10, 20, 30, 40]."
+      },
+      {
+        text: "¿Qué valor imprimirá el siguiente código al acceder a un elemento de la lista?",
+        codeBlock: "List<String> frutas = ['manzana', 'plátano', 'naranja'];\nprint(frutas[1]);",
+        options: ["manzana", "plátano", "naranja", "Error"],
+        answer: 1,
+        explanation: "El índice 1 corresponde al segundo elemento: 'plátano' (los índices empiezan en 0)."
+      },
+      {
+        text: "¿Cuál es la salida exacta al agregar elementos a una lista?",
+        codeBlock: "List<int> lista = [1, 2, 3];\nlista.add(4);\nlista.add(5);\nprint(lista);",
+        options: ["[1, 2, 3]", "[1, 2, 3, 4]", "[1, 2, 3, 4, 5]", "[4, 5]"],
+        answer: 2,
+        explanation: "El método add() agrega elementos al final de la lista. Después de dos add(), la lista es [1, 2, 3, 4, 5]."
+      },
+      {
+        text: "¿Cuál es la salida exacta al actualizar un elemento de la lista?",
+        codeBlock: "List<String> colores = ['rojo', 'azul', 'verde'];\ncolores[1] = 'amarillo';\nprint(colores);",
+        options: ["[rojo, azul, verde]", "[rojo, amarillo, verde]", "[amarillo, azul, verde]", "Error"],
+        answer: 1,
+        explanation: "Al asignar un nuevo valor al índice 1, se reemplaza 'azul' por 'amarillo': [rojo, amarillo, verde]."
+      },
+      {
+        text: "¿Cuál es la salida exacta al eliminar un elemento de la lista?",
+        codeBlock: "List<int> numeros = [10, 20, 30, 40];\nnumeros.remove(20);\nprint(numeros);",
+        options: ["[10, 30, 40]", "[20, 30, 40]", "[10, 20, 30]", "[10, 20, 30, 40]"],
+        answer: 0,
+        explanation: "El método remove() elimina la primera ocurrencia del valor 20, resultando en [10, 30, 40]."
+      },
+      {
+        text: "¿Qué imprimirá el siguiente código usando la propiedad length de una lista?",
+        codeBlock: "List<String> tareas = ['estudiar', 'programar', 'ejercitarse', 'descansar'];\nprint(tareas.length);",
+        options: ["3", "4", "5", "Error"],
+        answer: 1,
+        explanation: "La propiedad length devuelve el número total de elementos en la lista: 4."
+      }
+    ];
+
+    const quizForm = document.getElementById('quiz-form');
+    const resultBox = document.getElementById('result');
+    const checkBtn = document.getElementById('check-btn');
+    const resetBtn = document.getElementById('reset-btn');
+
+    function renderQuiz() {
+      quizForm.innerHTML = '';
+      QUESTIONS.forEach((q, index) => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.dataset.index = index;
+
+        const title = document.createElement('div');
+        title.className = 'question-title';
+        title.textContent = `${index + 1}. ${q.text}`;
+        card.appendChild(title);
+
+        if (q.codeBlock) {
+          const codeDiv = document.createElement('div');
+          codeDiv.className = 'question-text-code';
+          const pre = document.createElement('pre');
+          const code = document.createElement('code');
+          code.className = 'language-dart';
+          code.textContent = q.codeBlock;
+          pre.appendChild(code);
+          codeDiv.appendChild(pre);
+          card.appendChild(codeDiv);
+        }
+
+        const options = document.createElement('div');
+        options.className = 'options';
+
+        q.options.forEach((opt, optIndex) => {
+          const label = document.createElement('label');
+          label.className = 'option';
+
+          const input = document.createElement('input');
+          input.type = 'radio';
+          input.name = `q${index}`;
+          input.value = optIndex;
+          input.setAttribute('aria-label', opt);
+
+          const span = document.createElement('span');
+          span.textContent = opt;
+
+          label.appendChild(input);
+          label.appendChild(span);
+          options.appendChild(label);
+        });
+
+        const explanation = document.createElement('div');
+        explanation.className = 'explanation';
+        explanation.hidden = true;
+
+        card.appendChild(options);
+        card.appendChild(explanation);
+        quizForm.appendChild(card);
+      });
+      Prism.highlightAllUnder(quizForm);
+    }
+
+    function checkAnswers() {
+      let correct = 0;
+
+      const cards = quizForm.querySelectorAll('.question-card');
+      cards.forEach((card) => {
+        const index = Number(card.dataset.index);
+        const question = QUESTIONS[index];
+        const selected = card.querySelector('input[type="radio"]:checked');
+        const options = card.querySelectorAll('.option');
+        const explanation = card.querySelector('.explanation');
+
+        options.forEach((opt) => opt.classList.remove('correct', 'incorrect'));
+
+        if (selected) {
+          const selectedIndex = Number(selected.value);
+          if (selectedIndex === question.answer) {
+            correct += 1;
+            options[selectedIndex].classList.add('correct');
+          } else {
+            options[selectedIndex].classList.add('incorrect');
+            options[question.answer].classList.add('correct');
+          }
+        } else {
+          options[question.answer].classList.add('correct');
+        }
+
+        explanation.textContent = `Explicación: ${question.explanation}`;
+        explanation.hidden = false;
+      });
+
+      const total = QUESTIONS.length;
+      const percent = Math.round((correct / total) * 100);
+
+      resultBox.style.display = 'block';
+      resultBox.innerHTML = `
+        <h3>Resultado</h3>
+        <p>Has acertado <strong>${correct}</strong> de <strong>${total}</strong> preguntas (${percent}%).</p>
+        <p>Revisa las explicaciones debajo de cada pregunta.</p>
+      `;
+
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetQuiz() {
+      renderQuiz();
+      resultBox.style.display = 'none';
+      resultBox.innerHTML = '';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    checkBtn.addEventListener('click', checkAnswers);
+    resetBtn.addEventListener('click', resetQuiz);
+
+    renderQuiz();
+  </script>
+</body>
+</html>

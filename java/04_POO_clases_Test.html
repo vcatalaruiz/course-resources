@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Java Introducción — Test</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+</head>
+
+<body>
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+  <header>
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1>POO: Clases — Test</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+
+    <section id="intro">
+      <h2>1. Instrucciones</h2>
+      <div class="quiz-intro">
+        <p>Responde las 25 preguntas tipo test sobre <strong>Programación Orientada a Objetos (POO) en Java</strong>, enfocándose en clases, constructores, encapsulamiento, getters y setters, modificadores de acceso y atributos estáticos. Al final podrás ver tu puntuación y la explicación de cada respuesta.</p>
+        <div class="quiz-meta">
+          <span class="badge">25 preguntas</span>
+          <span>Modo: selección única</span>
+          <span>Corrección inmediata al enviar</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="test">
+      <h2>2. Test de conocimientos</h2>
+
+      <div id="result" class="result-box"></div>
+
+      <form id="quiz-form" class="quiz-container" aria-describedby="result">
+        <!-- Preguntas generadas por JS -->
+      </form>
+
+      <div class="quiz-actions">
+        <button type="button" class="primary" id="check-btn">Corregir</button>
+        <button type="button" class="danger" id="reset-btn">Reiniciar</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const QUESTIONS = [
+      {
+        text: "¿Cuál es la principal diferencia entre una clase y un objeto?",
+        options: ["Una clase es una instancia y un objeto es un molde", "Una clase es un molde que define cómo serán los objetos", "Un objeto define la clase", "No hay diferencia"],
+        answer: 1,
+        explanation: "Una clase es el molde o plantilla que define cómo serán los objetos. Un objeto es una instancia concreta de esa clase."
+      },
+      {
+        text: "¿Qué es un constructor en una clase?",
+        options: ["Un método que devuelve un valor", "Un método especial que se ejecuta automáticamente al crear un objeto", "Un método que destruye objetos", "Un método privado"],
+        answer: 1,
+        explanation: "Un constructor es un método especial que se ejecuta automáticamente al crear un objeto y sirve para inicializar sus atributos."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código?",
+        codeBlock: "public class Persona {\n    String nombre;\n    Persona() {\n        nombre = \"Sin nombre\";\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Persona p = new Persona();\n        System.out.println(p.nombre);\n    }\n}",
+        options: ["null", "Sin nombre", "Error", "Una línea vacía"],
+        answer: 1,
+        explanation: "El constructor por defecto inicializa el atributo nombre con 'Sin nombre'."
+      },
+      {
+        text: "¿Qué significa el modificador private en Java?",
+        options: ["El atributo es accesible desde cualquier clase", "El atributo solo es accesible dentro de la clase", "El atributo es accesible desde subclases", "El atributo es estático"],
+        answer: 1,
+        explanation: "private significa que el atributo o método solo es accesible dentro de la clase donde se define."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código con constructor sobrecargado?",
+        codeBlock: "public class Hotel {\n    String nombre;\n    Hotel() {\n        nombre = \"Default\";\n    }\n    Hotel(String n) {\n        nombre = n;\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Hotel h1 = new Hotel();\n        Hotel h2 = new Hotel(\"Gran Hotel\");\n        System.out.println(h1.nombre + \", \" + h2.nombre);\n    }\n}",
+        options: ["Default, Default", "Gran Hotel, Gran Hotel", "Default, Gran Hotel", "Error"],
+        answer: 2,
+        explanation: "h1 usa el constructor sin parámetros (Default) y h2 usa el constructor con parámetro (Gran Hotel)."
+      },
+      {
+        text: "¿Qué es un getter en Java?",
+        options: ["Un método para asignar valores a un atributo privado", "Un método para obtener el valor de un atributo privado", "Un constructor", "Un método estático"],
+        answer: 1,
+        explanation: "Un getter es un método público que devuelve el valor de un atributo privado."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código con getter?",
+        codeBlock: "public class CuentaBancaria {\n    private double saldo;\n    CuentaBancaria(double s) {\n        saldo = s;\n    }\n    public double getSaldo() {\n        return saldo;\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        CuentaBancaria c = new CuentaBancaria(100.0);\n        System.out.println(c.getSaldo());\n    }\n}",
+        options: ["100", "100.0", "null", "Error"],
+        answer: 1,
+        explanation: "El getter getSaldo() devuelve el valor privado de saldo inicializado en 100.0."
+      },
+      {
+        text: "¿Qué es un setter en Java?",
+        options: ["Un método que obtiene valores", "Un método que asigna un nuevo valor a un atributo privado", "Un constructor", "Un método estático"],
+        answer: 1,
+        explanation: "Un setter es un método público que permite cambiar el valor de un atributo privado de forma controlada."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código con setter?",
+        codeBlock: "public class Persona {\n    private int edad;\n    Persona(int e) {\n        edad = e;\n    }\n    public void setEdad(int e) {\n        edad = e;\n    }\n    public int getEdad() {\n        return edad;\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Persona p = new Persona(25);\n        p.setEdad(26);\n        System.out.println(p.getEdad());\n    }\n}",
+        options: ["25", "26", "null", "Error"],
+        answer: 1,
+        explanation: "Se crea la Persona con edad 25, pero setEdad() cambia el valor a 26."
+      },
+      {
+        text: "¿Qué significa el modificador static?",
+        options: ["El atributo pertenece a cada instancia", "El atributo pertenece a la clase y es compartido por todas las instancias", "El atributo es privado", "El atributo es final"],
+        answer: 1,
+        explanation: "static indica que un atributo o método pertenece a la clase y es compartido por todos los objetos."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código con atributo static?",
+        codeBlock: "public class Contador {\n    public static int total = 0;\n    Contador() {\n        total++;\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        new Contador();\n        new Contador();\n        new Contador();\n        System.out.println(Contador.total);\n    }\n}",
+        options: ["0", "1", "3", "Error"],
+        answer: 2,
+        explanation: "Se crean 3 instancias y cada constructor incrementa el atributo static total, resultando en 3."
+      },
+      {
+        text: "¿Se puede llamar a un método static sin crear un objeto?",
+        options: ["No, siempre se necesita una instancia", "Sí, usando el nombre de la clase", "Solo desde el main", "Solo desde otro método static"],
+        answer: 1,
+        explanation: "Los métodos static se pueden llamar sin crear un objeto, usando la sintaxis NombreClase.metodoStatic()."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código?",
+        codeBlock: "public class Hotel {\n    public static String getCategoria() {\n        return \"5 Estrellas\";\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Hotel.getCategoria());\n    }\n}",
+        options: ["Error", "null", "5 Estrellas", "Hotel"],
+        answer: 2,
+        explanation: "Se llama al método static getCategoria() usando el nombre de la clase, devolviendo '5 Estrellas'."
+      },
+      {
+        text: "¿Puede un método static acceder a atributos no estáticos?",
+        options: ["Sí, siempre", "No, solo puede acceder a atributos static", "Solo si son públicos", "Solo si son privados"],
+        answer: 1,
+        explanation: "Un método static no puede acceder directamente a atributos no estáticos porque estos pertenecen a instancias específicas."
+      },
+      {
+        text: "¿Cuál es la principal razón del encapsulamiento?",
+        options: ["Hacer el código más rápido", "Ocultar información innecesaria y controlar cómo se modifican los datos", "Permitir acceso público a todo", "Facilitar la herencia"],
+        answer: 1,
+        explanation: "El encapsulamiento protege la lógica interna de una clase y garantiza que los cambios se hagan de forma controlada."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código con encapsulamiento?",
+        codeBlock: "public class CuentaBancaria {\n    private double saldo;\n    CuentaBancaria(double s) {\n        saldo = s;\n    }\n    public void ingresar(double cantidad) {\n        if (cantidad > 0) saldo += cantidad;\n    }\n    public double getSaldo() {\n        return saldo;\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        CuentaBancaria c = new CuentaBancaria(100);\n        c.ingresar(50);\n        System.out.println(c.getSaldo());\n    }\n}",
+        options: ["50", "100", "150", "Error"],
+        answer: 2,
+        explanation: "Se inicia con saldo 100 y se ingresa 50, resultando en 150."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código con validación en setter?",
+        codeBlock: "public class Persona {\n    private int edad;\n    public void setEdad(int e) {\n        if (e > 0 && e < 150) edad = e;\n    }\n    public int getEdad() {\n        return edad;\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Persona p = new Persona();\n        p.setEdad(-5);\n        System.out.println(p.getEdad());\n    }\n}",
+        options: ["-5", "0", "null", "Error"],
+        answer: 1,
+        explanation: "El setter rechaza valores inválidos (-5), así que edad permanece en su valor inicial (0)."
+      },
+      {
+        text: "¿Qué sucede si se intenta acceder a un atributo privado desde fuera de la clase?",
+        options: ["El programa se ejecuta normalmente", "Genera un error de compilación", "El atributo se vuelve público", "Se crea automáticamente un getter"],
+        answer: 1,
+        explanation: "Acceder a un atributo privado desde fuera de la clase genera un error de compilación."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código?",
+        codeBlock: "public class Vehiculo {\n    String marca;\n    int anyo;\n    Vehiculo(String m, int a) {\n        marca = m;\n        anyo = a;\n    }\n    public void mostrarInfo() {\n        System.out.println(marca + \" \" + anyo);\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Vehiculo v = new Vehiculo(\"Toyota\", 2020);\n        v.mostrarInfo();\n    }\n}",
+        options: ["Toyota 2020", "2020 Toyota", "Error", "null"],
+        answer: 0,
+        explanation: "El constructor inicializa marca='Toyota' y anyo=2020, mostrarInfo() los imprime en ese orden."
+      },
+      {
+        text: "¿Cuál es la diferencia entre un atributo public y un atributo private?",
+        options: ["No hay diferencia", "public es accesible desde cualquier clase, private solo desde la clase", "private es más rápido", "public solo funciona en métodos estáticos"],
+        answer: 1,
+        explanation: "public permite acceso desde cualquier clase, private restringe el acceso solo a la clase donde se define."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código con múltiples instancias?",
+        codeBlock: "public class Contador {\n    public static int total = 0;\n    private int valor;\n    Contador(int v) {\n        valor = v;\n        total += v;\n    }\n    public int getValor() {\n        return valor;\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Contador c1 = new Contador(5);\n        Contador c2 = new Contador(3);\n        System.out.println(Contador.total);\n    }\n}",
+        options: ["5", "3", "8", "Error"],
+        answer: 2,
+        explanation: "total es static y se incrementa en cada constructor: 5 + 3 = 8."
+      },
+      {
+        text: "¿Puede haber dos constructores con el mismo nombre en la misma clase?",
+        options: ["No, solo un constructor por clase", "Sí, si tienen diferentes parámetros (sobrecarga)", "Solo si son privados", "Solo si son estáticos"],
+        answer: 1,
+        explanation: "Sí, es posible la sobrecarga de constructores siempre que tengan diferentes parámetros."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código?",
+        codeBlock: "public class Persona {\n    private String nombre;\n    Persona() {\n        nombre = \"Anónimo\";\n    }\n    Persona(String n) {\n        nombre = n;\n    }\n    public String getNombre() {\n        return nombre;\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Persona p1 = new Persona();\n        Persona p2 = new Persona(\"Carlos\");\n        System.out.println(p1.getNombre() + \", \" + p2.getNombre());\n    }\n}",
+        options: ["Anónimo, Anónimo", "Carlos, Carlos", "Anónimo, Carlos", "Error"],
+        answer: 2,
+        explanation: "p1 usa constructor sin parámetros (Anónimo), p2 usa constructor con parámetro (Carlos)."
+      },
+      {
+        text: "¿Qué es lo importante del modificador private para la seguridad de datos?",
+        options: ["Hace el código más lento", "Evita cambios accidentales o malintencionados de datos sensibles", "Hace los objetos más grandes", "No tiene propósito de seguridad"],
+        answer: 1,
+        explanation: "private protege los datos contra acceso no autorizado y cambios no controlados, asegurando la integridad del objeto."
+      }
+    ];
+
+    const quizForm = document.getElementById('quiz-form');
+    const resultBox = document.getElementById('result');
+    const checkBtn = document.getElementById('check-btn');
+    const resetBtn = document.getElementById('reset-btn');
+
+    function renderQuiz() {
+      quizForm.innerHTML = '';
+      QUESTIONS.forEach((q, index) => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.dataset.index = index;
+
+        const title = document.createElement('div');
+        title.className = 'question-title';
+        title.textContent = `${index + 1}. ${q.text}`;
+        card.appendChild(title);
+
+        if (q.codeBlock) {
+          const codeDiv = document.createElement('div');
+          codeDiv.className = 'question-text-code';
+          const pre = document.createElement('pre');
+          const code = document.createElement('code');
+          code.className = 'language-java';
+          code.textContent = q.codeBlock;
+          pre.appendChild(code);
+          codeDiv.appendChild(pre);
+          card.appendChild(codeDiv);
+        }
+
+        const options = document.createElement('div');
+        options.className = 'options';
+
+        q.options.forEach((opt, optIndex) => {
+          const label = document.createElement('label');
+          label.className = 'option';
+
+          const input = document.createElement('input');
+          input.type = 'radio';
+          input.name = `q${index}`;
+          input.value = optIndex;
+          input.setAttribute('aria-label', opt);
+
+          const span = document.createElement('span');
+          span.textContent = opt;
+
+          label.appendChild(input);
+          label.appendChild(span);
+          options.appendChild(label);
+        });
+
+        const explanation = document.createElement('div');
+        explanation.className = 'explanation';
+        explanation.hidden = true;
+
+        card.appendChild(options);
+        card.appendChild(explanation);
+        quizForm.appendChild(card);
+      });
+      Prism.highlightAllUnder(quizForm);
+    }
+
+    function checkAnswers() {
+      let correct = 0;
+
+      const cards = quizForm.querySelectorAll('.question-card');
+      cards.forEach((card) => {
+        const index = Number(card.dataset.index);
+        const question = QUESTIONS[index];
+        const selected = card.querySelector('input[type="radio"]:checked');
+        const options = card.querySelectorAll('.option');
+        const explanation = card.querySelector('.explanation');
+
+        options.forEach((opt) => opt.classList.remove('correct', 'incorrect'));
+
+        if (selected) {
+          const selectedIndex = Number(selected.value);
+          if (selectedIndex === question.answer) {
+            correct += 1;
+            options[selectedIndex].classList.add('correct');
+          } else {
+            options[selectedIndex].classList.add('incorrect');
+            options[question.answer].classList.add('correct');
+          }
+        } else {
+          options[question.answer].classList.add('correct');
+        }
+
+        explanation.textContent = `Explicación: ${question.explanation}`;
+        explanation.hidden = false;
+      });
+
+      const total = QUESTIONS.length;
+      const percent = Math.round((correct / total) * 100);
+
+      resultBox.style.display = 'block';
+      resultBox.innerHTML = `
+        <h3>Resultado</h3>
+        <p>Has acertado <strong>${correct}</strong> de <strong>${total}</strong> preguntas (${percent}%).</p>
+        <p>Revisa las explicaciones debajo de cada pregunta.</p>
+      `;
+
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetQuiz() {
+      renderQuiz();
+      resultBox.style.display = 'none';
+      resultBox.innerHTML = '';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    checkBtn.addEventListener('click', checkAnswers);
+    resetBtn.addEventListener('click', resetQuiz);
+
+    renderQuiz();
+  </script>
+</body>
+</html>

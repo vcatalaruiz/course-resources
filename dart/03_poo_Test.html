@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-EVTW1307T1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POO: Clases — Test</title>
+  <script src="/course-resources/index.js" defer></script>
+  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+  <script src="../index.js" defer></script>
+  <script src="../menu.js" defer></script>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../menu.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-dart.min.js"></script>
+</head>
+
+<body>
+
+  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+    <div class="vc-rail-head">
+      <span class="vc-rail-title">Índice</span>
+      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <ul id="vc-list" class="vc-list"></ul>
+  </nav>
+
+  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+  <header>
+    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h1>POO: Clases — Test</h1>
+    <img src="" id="logo" alt="Logo" style="display: none;">
+  </header>
+
+  <main>
+
+    <section id="intro">
+      <h2>1. Instrucciones</h2>
+      <div class="quiz-intro">
+        <p>Responde las 25 preguntas tipo test sobre <strong>Programación Orientada a Objetos (POO) en Dart</strong>, enfocándose en clases, constructores, encapsulamiento, getters y setters, modificadores de acceso y atributos estáticos. Al final podrás ver tu puntuación y la explicación de cada respuesta.</p>
+        <div class="quiz-meta">
+          <span class="badge">25 preguntas</span>
+          <span>Modo: selección única</span>
+          <span>Corrección inmediata al enviar</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="test">
+      <h2>2. Test de conocimientos</h2>
+
+      <div id="result" class="result-box"></div>
+
+      <form id="quiz-form" class="quiz-container" aria-describedby="result">
+        <!-- Preguntas generadas por JS -->
+      </form>
+
+      <div class="quiz-actions">
+        <button type="button" class="primary" id="check-btn">Corregir</button>
+        <button type="button" class="danger" id="reset-btn">Reiniciar</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; Stucom 2025-26. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const QUESTIONS = [
+      {
+        text: "¿Cuál es la principal diferencia entre una clase y un objeto?",
+        options: ["Una clase es una instancia y un objeto es un molde", "Una clase es un molde que define cómo serán los objetos", "Un objeto define la clase", "No hay diferencia"],
+        answer: 1,
+        explanation: "Una clase es el molde o plantilla que define cómo serán los objetos. Un objeto es una instancia concreta de esa clase."
+      },
+      {
+        text: "¿Qué es un constructor en una clase?",
+        options: ["Un método que devuelve un valor", "Un método especial que se ejecuta automáticamente al crear un objeto", "Un método que destruye objetos", "Un método privado"],
+        answer: 1,
+        explanation: "Un constructor es un método especial que se ejecuta automáticamente al crear un objeto y sirve para inicializar sus atributos."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código?",
+        codeBlock: "class Alumno {\n  String nombre;\n  Alumno() {\n    nombre = 'Sin nombre';\n  }\n}\nvoid main() {\n  Alumno a = Alumno();\n  print(a.nombre);\n}",
+        options: ["null", "Sin nombre", "Error", "Una línea vacía"],
+        answer: 1,
+        explanation: "El constructor por defecto inicializa el atributo nombre con 'Sin nombre'."
+      },
+      {
+        text: "¿Qué significa el modificador _ (guion bajo) en Dart?",
+        options: ["El atributo es accesible desde cualquier clase", "El atributo solo es accesible dentro de la clase", "El atributo es accesible desde subclases", "El atributo es estático"],
+        answer: 1,
+        explanation: "El prefijo _ en Dart indica que un atributo o método es privado y solo es accesible dentro de la clase."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código con constructor sobrecargado?",
+        codeBlock: "class Residencia {\n  String nombre;\n  Residencia() {\n    nombre = 'Estándar';\n  }\n  Residencia.premium() {\n    nombre = 'Residencia Premium';\n  }\n}\nvoid main() {\n  Residencia r1 = Residencia();\n  Residencia r2 = Residencia.premium();\n  print('\${r1.nombre}, \${r2.nombre}');\n}",
+        options: ["Estándar, Estándar", "Residencia Premium, Residencia Premium", "Estándar, Residencia Premium", "Error"],
+        answer: 2,
+        explanation: "r1 usa el constructor por defecto y r2 usa el constructor nombrado .premium()."
+      },
+      {
+        text: "¿Qué es un getter en Dart?",
+        options: ["Un método para asignar valores a un atributo privado", "Un método para obtener el valor de un atributo privado", "Un constructor", "Un método estático"],
+        answer: 1,
+        explanation: "Un getter es un método que devuelve el valor de un atributo privado con sintaxis de propiedad."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código con getter?",
+        codeBlock: "class Cartera {\n  double _saldo;\n  Cartera(this._saldo);\n  double get saldo => _saldo;\n}\nvoid main() {\n  Cartera c = Cartera(250.0);\n  print(c.saldo);\n}",
+        options: ["250", "250.0", "null", "Error"],
+        answer: 1,
+        explanation: "El getter saldo devuelve el valor privado de _saldo inicializado en 250.0."
+      },
+      {
+        text: "¿Qué es un setter en Dart?",
+        options: ["Un método que obtiene valores", "Un método que asigna un nuevo valor a un atributo privado", "Un constructor", "Un método estático"],
+        answer: 1,
+        explanation: "Un setter es un método que asigna un nuevo valor a un atributo privado con sintaxis de propiedad."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código con setter?",
+        codeBlock: "class Estudiante {\n  int _edad;\n  Estudiante(this._edad);\n  set edad(int e) => _edad = e;\n  int get edad => _edad;\n}\nvoid main() {\n  Estudiante e = Estudiante(20);\n  e.edad = 21;\n  print(e.edad);\n}",
+        options: ["20", "21", "null", "Error"],
+        answer: 1,
+        explanation: "Se crea el Estudiante con edad 20, pero el setter cambia el valor a 21."
+      },
+      {
+        text: "¿Qué significa el modificador static?",
+        options: ["El atributo pertenece a cada instancia", "El atributo pertenece a la clase y es compartido por todas las instancias", "El atributo es privado", "El atributo es final"],
+        answer: 1,
+        explanation: "static indica que un atributo o método pertenece a la clase y es compartido por todos los objetos."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código con atributo static?",
+        codeBlock: "class Acumulador {\n  static int total = 0;\n  Acumulador() {\n    total++;\n  }\n}\nvoid main() {\n  Acumulador(1);\n  Acumulador(2);\n  Acumulador(3);\n  print(Acumulador.total);\n}",
+        options: ["0", "1", "3", "Error"],
+        answer: 2,
+        explanation: "Se crean 3 instancias y cada constructor incrementa el atributo static total, resultando en 3."
+      },
+      {
+        text: "¿Se puede llamar a un método static sin crear un objeto?",
+        options: ["No, siempre se necesita una instancia", "Sí, usando el nombre de la clase", "Solo desde main", "Solo desde otro método static"],
+        answer: 1,
+        explanation: "Los métodos static se pueden llamar sin crear un objeto, usando la sintaxis NombreClase.metodoStatic()."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código?",
+        codeBlock: "class Hotel {\n  static String getEstrella() => '5 Estrellas';\n}\nvoid main() {\n  print(Hotel.getEstrella());\n}",
+        options: ["Error", "null", "5 Estrellas", "Hotel"],
+        answer: 2,
+        explanation: "Se llama al método static getEstrella() usando el nombre de la clase, devolviendo '5 Estrellas'."
+      },
+      {
+        text: "¿Puede un método static acceder a atributos no estáticos?",
+        options: ["Sí, siempre", "No, solo puede acceder a atributos static", "Solo si son públicos", "Solo si son privados"],
+        answer: 1,
+        explanation: "Un método static no puede acceder directamente a atributos no estáticos porque estos pertenecen a instancias específicas."
+      },
+      {
+        text: "¿Cuál es la principal razón del encapsulamiento?",
+        options: ["Hacer el código más rápido", "Ocultar información innecesaria y controlar cómo se modifican los datos", "Permitir acceso público a todo", "Facilitar la herencia"],
+        answer: 1,
+        explanation: "El encapsulamiento protege la lógica interna de una clase y garantiza que los cambios se hagan de forma controlada."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código con encapsulamiento?",
+        codeBlock: "class Deposito {\n  double _monto;\n  Deposito(this._monto);\n  void depositar(double cantidad) {\n    if (cantidad > 0) _monto += cantidad;\n  }\n  double get monto => _monto;\n}\nvoid main() {\n  Deposito d = Deposito(200);\n  d.depositar(75);\n  print(d.monto);\n}",
+        options: ["75", "200", "275", "Error"],
+        answer: 2,
+        explanation: "Se inicia con monto 200 y se deposita 75, resultando en 275."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código con validación en setter?",
+        codeBlock: "class Persona {\n  int _edad = 0;\n  set edad(int e) {\n    if (e > 0 && e < 120) _edad = e;\n  }\n  int get edad => _edad;\n}\nvoid main() {\n  Persona p = Persona();\n  p.edad = -10;\n  print(p.edad);\n}",
+        options: ["-10", "0", "null", "Error"],
+        answer: 1,
+        explanation: "El setter rechaza valores inválidos (-10), así que edad permanece en su valor inicial (0)."
+      },
+      {
+        text: "¿Qué sucede si se intenta acceder a un atributo privado desde fuera de la clase?",
+        options: ["El programa se ejecuta normalmente", "Genera un error de compilación", "El atributo se vuelve público", "Se crea automáticamente un getter"],
+        answer: 1,
+        explanation: "Acceder a un atributo privado desde fuera de la clase genera un error de compilación."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código?",
+        codeBlock: "class Automovil {\n  String marca;\n  int anio;\n  Automovil(this.marca, this.anio);\n  void mostrarInfo() {\n    print('\$marca \$anio');\n  }\n}\nvoid main() {\n  Automovil a = Automovil('Honda', 2022);\n  a.mostrarInfo();\n}",
+        options: ["Honda 2022", "2022 Honda", "Error", "null"],
+        answer: 0,
+        explanation: "El constructor inicializa marca='Honda' y anio=2022, mostrarInfo() los imprime en ese orden."
+      },
+      {
+        text: "¿Cuál es la diferencia entre un atributo público y uno privado?",
+        options: ["No hay diferencia", "Público es accesible desde cualquier clase, privado solo desde la clase", "Privado es más rápido", "Público solo funciona en métodos estáticos"],
+        answer: 1,
+        explanation: "Un atributo público es accesible desde cualquier clase, uno privado restringe el acceso solo a la clase donde se define."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código con múltiples instancias?",
+        codeBlock: "class Sumador {\n  static int total = 0;\n  int _valor;\n  Sumador(this._valor) {\n    total += _valor;\n  }\n  int get valor => _valor;\n}\nvoid main() {\n  Sumador s1 = Sumador(7);\n  Sumador s2 = Sumador(4);\n  print(Sumador.total);\n}",
+        options: ["7", "4", "11", "Error"],
+        answer: 2,
+        explanation: "total es static y se incrementa en cada constructor: 7 + 4 = 11."
+      },
+      {
+        text: "¿Puede haber dos constructores con el mismo nombre en la misma clase?",
+        options: ["No, solo un constructor por clase", "Sí, usando constructores nombrados", "Solo si son privados", "Solo si son estáticos"],
+        answer: 1,
+        explanation: "Sí, es posible usar múltiples constructores usando constructores nombrados con la sintaxis Clase.nombre()."
+      },
+      {
+        text: "¿Cuál es la salida exacta del siguiente código?",
+        codeBlock: "class Usuario {\n  String _nombre;\n  Usuario(this._nombre);\n  Usuario.anonimo() : _nombre = 'Anónimo';\n  String get nombre => _nombre;\n}\nvoid main() {\n  Usuario u1 = Usuario.anonimo();\n  Usuario u2 = Usuario('Ana');\n  print('\${u1.nombre}, \${u2.nombre}');\n}",
+        options: ["Anónimo, Anónimo", "Ana, Ana", "Anónimo, Ana", "Error"],
+        answer: 2,
+        explanation: "u1 usa constructor nombrado .anonimo(), u2 usa constructor regular."
+      },
+      {
+        text: "¿Qué es lo importante del prefijo _ para la seguridad de datos?",
+        options: ["Hace el código más lento", "Evita cambios accidentales o malintencionados de datos sensibles", "Hace los objetos más grandes", "No tiene propósito de seguridad"],
+        answer: 1,
+        explanation: "El prefijo _ protege los datos contra acceso no autorizado y cambios no controlados, asegurando la integridad del objeto."
+      }
+    ];
+
+    const quizForm = document.getElementById('quiz-form');
+    const resultBox = document.getElementById('result');
+    const checkBtn = document.getElementById('check-btn');
+    const resetBtn = document.getElementById('reset-btn');
+
+    function renderQuiz() {
+      quizForm.innerHTML = '';
+      QUESTIONS.forEach((q, index) => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.dataset.index = index;
+
+        const title = document.createElement('div');
+        title.className = 'question-title';
+        title.textContent = `${index + 1}. ${q.text}`;
+        card.appendChild(title);
+
+        if (q.codeBlock) {
+          const codeDiv = document.createElement('div');
+          codeDiv.className = 'question-text-code';
+          const pre = document.createElement('pre');
+          const code = document.createElement('code');
+          code.className = 'language-dart';
+          code.textContent = q.codeBlock;
+          pre.appendChild(code);
+          codeDiv.appendChild(pre);
+          card.appendChild(codeDiv);
+        }
+
+        const options = document.createElement('div');
+        options.className = 'options';
+
+        q.options.forEach((opt, optIndex) => {
+          const label = document.createElement('label');
+          label.className = 'option';
+
+          const input = document.createElement('input');
+          input.type = 'radio';
+          input.name = `q${index}`;
+          input.value = optIndex;
+          input.setAttribute('aria-label', opt);
+
+          const span = document.createElement('span');
+          span.textContent = opt;
+
+          label.appendChild(input);
+          label.appendChild(span);
+          options.appendChild(label);
+        });
+
+        const explanation = document.createElement('div');
+        explanation.className = 'explanation';
+        explanation.hidden = true;
+
+        card.appendChild(options);
+        card.appendChild(explanation);
+        quizForm.appendChild(card);
+      });
+      Prism.highlightAllUnder(quizForm);
+    }
+
+    function checkAnswers() {
+      let correct = 0;
+
+      const cards = quizForm.querySelectorAll('.question-card');
+      cards.forEach((card) => {
+        const index = Number(card.dataset.index);
+        const question = QUESTIONS[index];
+        const selected = card.querySelector('input[type="radio"]:checked');
+        const options = card.querySelectorAll('.option');
+        const explanation = card.querySelector('.explanation');
+
+        options.forEach((opt) => opt.classList.remove('correct', 'incorrect'));
+
+        if (selected) {
+          const selectedIndex = Number(selected.value);
+          if (selectedIndex === question.answer) {
+            correct += 1;
+            options[selectedIndex].classList.add('correct');
+          } else {
+            options[selectedIndex].classList.add('incorrect');
+            options[question.answer].classList.add('correct');
+          }
+        } else {
+          options[question.answer].classList.add('correct');
+        }
+
+        explanation.textContent = `Explicación: ${question.explanation}`;
+        explanation.hidden = false;
+      });
+
+      const total = QUESTIONS.length;
+      const percent = Math.round((correct / total) * 100);
+
+      resultBox.style.display = 'block';
+      resultBox.innerHTML = `
+        <h3>Resultado</h3>
+        <p>Has acertado <strong>${correct}</strong> de <strong>${total}</strong> preguntas (${percent}%).</p>
+        <p>Revisa las explicaciones debajo de cada pregunta.</p>
+      `;
+
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetQuiz() {
+      renderQuiz();
+      resultBox.style.display = 'none';
+      resultBox.innerHTML = '';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    checkBtn.addEventListener('click', checkAnswers);
+    resetBtn.addEventListener('click', resetQuiz);
+
+    renderQuiz();
+  </script>
+</body>
+</html>
