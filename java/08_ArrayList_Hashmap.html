@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-EVTW1307T1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RA6 - Estructuras Avanzadas de Datos (ArrayList y HashMap)</title>
+    <script src="/course-resources/index.js" defer></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+    <script src="../index.js" defer></script>
+    <script src="../menu.js" defer></script>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../menu.css">
+</head>
+
+<body>
+
+    <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+        <div class="vc-rail-head">
+            <span class="vc-rail-title">Índice</span>
+            <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+                <!-- X SVG -->
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+        <ul id="vc-list" class="vc-list"></ul>
+    </nav>
+
+    <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+
+    <header>
+        <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+            aria-controls="vc-rail" aria-expanded="false">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+        <h1>RA6 - Estructuras Avanzadas de Datos</h1>
+        <img src="" id="logo" alt="Logo" style="display: none;">
+    </header>
+
+    <main>
+        <!-- Introducción -->
+        <section id="introduccion">
+            <h2>¿Qué aprenderás?</h2>
+                <ul>
+                    <li><strong>Estructuras ArrayList y HashMap</strong> - Uso de los métodos típicos para trabajar con estas estructuras</li>
+                    <li><strong>Métodos hashCode y equals</strong> - Modificar estos métodos de la clase Map</li>
+                </ul>
+                
+            <p><strong>Nota:</strong> Tanto ArrayList como HashMap se incluyeron en la especificación 1.2 de Java y son fundamentales en programación moderna.</p>
+                
+                <h3>Características importantes:</h3>
+                <ul>
+                    <li>Estas estructuras no pueden trabajar con tipos de datos simples. Debemos usar sus Wrappers (objetos), en un proceso conocido como <strong>Boxing</strong></li>
+                    <li>Normalmente los métodos <code>hashCode()</code> y <code>equals()</code> se sobrescriben compartiendo criterios para comparar objetos</li>
+                </ul>
+            </section>
+            
+        <!-- Colecciones -->
+        <section id="colecciones">
+            <h2>Colecciones</h2>
+                <p>Una colección almacena un conjunto de objetos, es decir, sería como un Array de objetos, pero dinámico. Al ser dinámico, no tienen un tamaño fijo y permiten añadir, eliminar y modificar los elementos durante la ejecución.</p>
+                
+                <p>Java, mediante <code>java.util</code>, nos brinda un amplio conjunto de clases para la creación y tratamiento de colecciones.</p>
+                
+                <h3>Operaciones básicas sobre una colección:</h3>
+                <ul>
+                    <li>Añadir objetos a la colección</li>
+                    <li>Eliminar objetos de la colección</li>
+                    <li>Obtener un objeto de la colección</li>
+                    <li>Localizar un objeto en la colección</li>
+                    <li>Iterar a través de una colección</li>
+                </ul>
+            </section>
+            
+        <!-- ArrayList -->
+        <section id="arraylist">
+            <h2>ArrayList</h2>
+                <p>Un <code>ArrayList</code> representa una colección basada en índices, al igual que un Array, cada elemento ocupa una posición única. Para acceder a cada elemento tenemos que utilizar un índice.</p>
+                
+                <div class="diagram">
+                    Juan (0) | 31 (1) | d (2) | 5.5 (3)
+                </div>
+                
+                <h3>Declaración</h3>
+            <pre><code class="language-java">// Creación de un listado vacío. Al no indicarle el tipo de objetos a incluir,
+// este listado puede contener cualquier tipo de objetos.
+ArrayList contactos = new ArrayList();
+miLista.add("Juan");
+miLista.add(31);
+miLista.add('d');
+miLista.add(5.5);</code></pre>
+            
+            <p><strong>Método add():</strong> Añade un elemento al final de la lista.</p>
+                
+                <h3>ArrayList Tipado</h3>
+                <p>Un listado compuesto por elementos de diferentes tipos puede provocar errores y es tedioso de manejar. La opción más recomendable es utilizar un tipado para los <code>ArrayList&lt;Object&gt;</code>, de esta forma tendremos un listado de objetos.</p>
+                
+            <pre><code class="language-java">// Creación de un listado de String.
+ArrayList&lt;String&gt; contactos = new ArrayList&lt;String&gt;();
+miLista.add("Juan");
+miLista.add("Rosa");
+miLista.add("Pedro");
+miLista.add("Ana");</code></pre>
+                
+                <div class="diagram">
+                    Juan (0) | Rosa (1) | Pedro (2) | Ana (3)
+                </div>
+                
+                <h3>Recorrer un ArrayList</h3>
+                <p>Existen diferentes formas de recorrer un ArrayList:</p>
+                
+            <h4>Método 1: Usando Iterator</h4>
+            <pre><code class="language-java">ArrayList&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();
+Iterator it = list.iterator();
+while (it.hasNext()) {
+    System.out.println(it.next().toString());
+}</code></pre>
+            
+            <h4>Método 2: Usando for-each</h4>
+            <pre><code class="language-java">for (Integer item : list) {
+    System.out.println(item);
+}</code></pre>
+            
+            <h4>Método 3: Usando for tradicional</h4>
+            <pre><code class="language-java">for (int i = 0; i < list.size(); i++) {
+    System.out.println(list.get(i));
+}</code></pre>
+            </section>
+            
+        <!-- HashMap -->
+        <section id="hashmap">
+            <h2>HashMap</h2>
+                <ul>
+                    <li><code>HashMap</code> es una implementación de la interfaz <code>Map</code> de Java. Es una colección de objetos</li>
+                    <li>Permite almacenar pares <strong>clave/valor</strong>, de tal manera que una clave sólo puede tener un valor (las claves no se repiten)</li>
+                    <li>No se admiten valores nulos</li>
+                    <li>Se utiliza un algoritmo que, a partir de la clave, genera otra clave "hash", que determina el orden en que se almacenarán en memoria</li>
+                    <li>Librería utilizada: <code>java.util.HashMap</code></li>
+                </ul>
+                
+                <div class="diagram">
+                    Clave 1 | Clave 2 | Clave 3 | Clave 4<br>
+                    Valor 1 | Valor 2 | Valor 3 | Valor 4
+                </div>
+                
+                <h3>Declaración</h3>
+            <pre><code class="language-java">// Declaración de un HashMap en que las claves serán de tipo String
+// y los valores de tipo Integer.
+HashMap&lt;String, Integer&gt; map = new HashMap&lt;String, Integer&gt;();
+
+// Añadir elementos en el HashMap
+map.put("Pedro", 12345);
+map.put("Luis", 54321);</code></pre>
+            
+            <p><strong>Importante:</strong> Como pasa con los ArrayList, en los HashMap no se pueden usar tipos primitivos (int), se debe utilizar su clase contenedora (Integer).</p>
+                
+                <h3>Recorrer un HashMap</h3>
+                <p>Para recorrer un HashMap utilizaremos la interfaz <code>iterator()</code>:</p>
+                
+            <pre><code class="language-java">Iterator it = map.keySet().iterator();
+while(it.hasNext()){
+    String key = (String) it.next();
+    System.out.println("Clave: " + key + " -> Valor: " + map.get(key));
+}</code></pre>
+                
+                <h4>Métodos para iterar:</h4>
+                <ul>
+                    <li><code>keySet()</code> - Devuelve los elementos del HashMap</li>
+                    <li><code>Iterator()</code> - Itera sobre cada elemento</li>
+                    <li><code>hasNext()</code> - Retorna false si no hay más elementos, true si existe un elemento en la siguiente posición</li>
+                    <li><code>next()</code> - Devuelve el siguiente elemento</li>
+                    <li><code>get(key)</code> - Obtiene el valor a partir de la clave dada</li>
+                </ul>
+                
+            <h3>Métodos de HashMap</h3>
+            <table class="comparison-table">
+                <tr>
+                    <th>Método</th>
+                    <th>Descripción</th>
+                </tr>
+                <tr>
+                    <td><code>clear()</code></td>
+                    <td>Vacía el HashMap</td>
+                </tr>
+                <tr>
+                    <td><code>containsKey(key)</code></td>
+                    <td>Indica si el HashMap contiene un elemento con la clave key</td>
+                </tr>
+                <tr>
+                    <td><code>containsValue(value)</code></td>
+                    <td>Indica si el HashMap contiene un elemento con el valor value</td>
+                </tr>
+                <tr>
+                    <td><code>entrySet()</code></td>
+                    <td>Devuelve una copia del HashMap en forma de colección</td>
+                </tr>
+                <tr>
+                    <td><code>get(key)</code></td>
+                    <td>Devuelve el valor asociado a la clave key, o nulo si no existe la clave</td>
+                </tr>
+                <tr>
+                    <td><code>isEmpty()</code></td>
+                    <td>Indica si el HashMap está vacío</td>
+                </tr>
+                <tr>
+                    <td><code>keySet()</code></td>
+                    <td>Devuelve una colección con las claves del HashMap</td>
+                </tr>
+                <tr>
+                    <td><code>put(key, value)</code></td>
+                    <td>Añade un elemento al HashMap. Si existe una clave key, sustituye su valor</td>
+                </tr>
+                <tr>
+                    <td><code>putAll(map)</code></td>
+                    <td>Copia todos los elementos de map en el HashMap que invoca el método</td>
+                </tr>
+                <tr>
+                    <td><code>remove(key)</code></td>
+                    <td>Elimina el elemento con clave key del HashMap si existe</td>
+                </tr>
+                <tr>
+                    <td><code>size()</code></td>
+                    <td>Devuelve un número entero que es el número de elementos que tiene el HashMap</td>
+                </tr>
+                <tr>
+                    <td><code>values()</code></td>
+                    <td>Devuelve una colección con los valores que contiene el HashMap</td>
+                </tr>
+            </table>
+            </section>
+            
+        <!-- Comparación -->
+        <section id="comparacion">
+            <h2>HashMap - Comparación de Objetos</h2>
+            <p>Para comparar objetos podemos utilizar los métodos <code>equals()</code> y <code>hashCode()</code>, ambos de la interfaz Map:</p>
+            
+            <ul>
+                <li><code>Object1.equals(Object2)</code> - Devuelve cierto si dos objetos son iguales</li>
+                <li><code>Object1.hashCode() == Object2.hashCode()</code> - Devuelve cierto si ambos objetos tienen el mismo código hash</li>
+            </ul>
+            
+            <p><strong>Nota importante:</strong> Ambos métodos pueden ser utilizados para comparar objetos, pero mediante <code>hashCode()</code> el resultado es más rápido, ya que compara dos números enteros y si es igual querrá decir que estamos frente al mismo objeto.</p>
+        </section>
+            
+        <!-- Conceptos clave -->
+        <section id="conceptos">
+            <h2>Conceptos Clave</h2>
+            
+            <h3>ArrayList</h3>
+            <p>Estructura que permite almacenar varios datos del mismo tipo. El tamaño de esta estructura es variable en función del número de elementos que contenga en cada momento.</p>
+            
+            <h3>HashMap</h3>
+            <p>Colección de objetos que almacena pares clave/valor. Podemos acceder a los elementos del HashMap mediante la clave, ya que éstas tienen un valor único.</p>
+            
+            <h3>hashCode</h3>
+            <p>Es un valor numérico entero que sirve para identificar un objeto. En las colecciones de tipo hash tiene especial importancia para identificar objetos iguales de forma rápida.</p>
+            
+            <h3>Método equals</h3>
+            <p>Método que compara dos objetos y devuelve un booleano indicando si son iguales o no.</p>
+        </section>
+        
+    </main>
+
+</body>
+
+</html>
