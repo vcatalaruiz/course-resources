@@ -1,73 +1,79 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} 
-    gtag('js', new Date());
-    gtag('config', 'G-EVTW1307T1');
-  </script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-EVTW1307T1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Introducción a Spring Boot</title>
-  <script src="/course-resources/index.js" defer></script>
-  <script type="module">
-    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-    mermaid.initialize({ startOnLoad: true });
-  </script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
-  <script src="../index.js" defer></script>
-  <script src="../menu.js" defer></script>
-  <!-- <link rel="stylesheet" href="../index.css"> -->
-  <link rel="stylesheet" href="../style.css" />
-  <link rel="stylesheet" href="../menu.css">
+    <script src="/course-resources/index.js" defer></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+    <script src="../index.js" defer></script>
+    <script src="../menu.js" defer></script>
+    <!-- <link rel="stylesheet" href="../index.css"> -->
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../menu.css">
 </head>
 
 
 <body>
 
-  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
-    <div class="vc-rail-head">
-      <span class="vc-rail-title">Índice</span>
-      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-        </svg>
-      </button>
-    </div>
-    <ul id="vc-list" class="vc-list"></ul>
-  </nav>
+    <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+        <div class="vc-rail-head">
+            <span class="vc-rail-title">Índice</span>
+            <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+        <ul id="vc-list" class="vc-list"></ul>
+    </nav>
 
-  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+    <div id="vc-backdrop" class="vc-backdrop" hidden></div>
 
-  <header>
-    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
-      <i class="fa fa-bars" aria-hidden="true"></i>
-    </button>
-    <h1>Introducción a Spring Boot</h1>
-    <img src="" id="logo" alt="Logo" style="display: none;">
-  </header>
+    <header>
+        <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+            aria-controls="vc-rail" aria-expanded="false">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+        <h1>Introducción a Spring Boot</h1>
+        <img src="" id="logo" alt="Logo" style="display: none;">
+    </header>
 
-  <main>
-      
-      <!-- SECCIÓN 1: INTRODUCCIÓN BÁSICA -->
-      <section id="introduccion-basica">
-          <h2>1. Introducción básica a Spring Boot</h2>
-          
-          <h3>1.1. ¿Qué es Spring Boot?</h3>
-          <div class="diagram">
+    <main>
+
+        <!-- SECCIÓN 1: INTRODUCCIÓN BÁSICA -->
+        <section id="introduccion-basica">
+            <h2>1. Introducción básica a Spring Boot</h2>
+
+            <h3>1.1. ¿Qué es Spring Boot?</h3>
+            <div class="diagram">
                 <img src="../assets/spring_logo.png" style="max-width:60%;" alt="Spring Logo">
             </div>
-          <p>Spring Boot es un framework de Java del ecosistema Spring que simplifica la creación de aplicaciones empresariales modernas, standalone y de producción gracias a su <strong>convención sobre configuración</strong>, la <strong>auto-configuración</strong> y el uso de servidor embebido, reduciendo al mínimo la configuración XML compleja.</p>
+            <p>Spring Boot es un framework de Java del ecosistema Spring que simplifica la creación de aplicaciones
+                empresariales modernas, standalone y de producción gracias a su <strong>convención sobre
+                    configuración</strong>, la <strong>auto-configuración</strong> y el uso de servidor embebido,
+                reduciendo al mínimo la configuración XML compleja.</p>
 
             <h3>1.2. Características principales</h3>
             <ul>
-                <li><strong>Auto-configuración:</strong> configura automáticamente beans según dependencias del classpath</li>
+                <li><strong>Auto-configuración:</strong> configura automáticamente beans según dependencias del
+                    classpath</li>
                 <li><strong>Servidor embebido:</strong> Tomcat, Jetty o Undertow incluidos (no necesita WAR)</li>
                 <li><strong>Spring Initializr:</strong> generador de proyectos en start.spring.io</li>
                 <li><strong>Spring Data JPA:</strong> simplifica acceso a bases de datos relacionales</li>
@@ -133,31 +139,50 @@ java -jar target/mi-proyecto-0.0.1-SNAPSHOT.jar
 
             <h3>1.5. Patrón MVC en Spring Boot</h3>
             <div class="mermaid">
-graph LR
-        A[Usuario/Cliente] -->|HTTP Request| B[DispatcherServlet]
-        B -->|Mapea URL| C[Controller]
-        C -->|Lógica de negocio| D[Service]
-        D -->|CRUD| E[Repository]
-        E -->|JPA/Hibernate| F[(Database)]
-        C -->|Retorna datos| G[View<br/>Thymeleaf]
-        G -->|HTTP Response| A
-    
-        style B fill:#e1f5ff
-        style C fill:#fff4e1
-        style D fill:#ffe1f5
-        style E fill:#ffe1e1
-        style G fill:#e1ffe1
+                graph LR
+                A[Usuario/Cliente] -->|HTTP Request| B[DispatcherServlet]
+                B -->|Mapea URL| C[Controller]
+                C -->|Lógica de negocio| D[Service]
+                D -->|CRUD| E[Repository]
+                E -->|JPA/Hibernate| F[(Database)]
+                C -->|Retorna datos| G[View<br />Thymeleaf]
+                G -->|HTTP Response| A
+
+                style B fill:#e1f5ff
+                style C fill:#fff4e1
+                style D fill:#ffe1f5
+                style E fill:#ffe1e1
+                style G fill:#e1ffe1
+            </div>
+            <div class="mermaid">
+                sequenceDiagram
+                autonumber
+                actor U as Cliente
+                participant R as Router<br />
+                participant C as Controller<br />
+                participant S as Entity<br />
+                participant Repo as Repository<br />(Hibernate)
+                participant DB as Database
+
+                U->>R: HTTP Request (JSON)
+                R->>C: Llama al método del controlador
+                C->>Repo: Lee/Escribe datos
+                Repo->>DB: Consulta SQL (Hibernate ORM)
+                DB-->>Repo: Resultados
+                Repo-->>S: Java object
+                S-->>C: Java object
+                C-->>U: JsonResponse (HTTP Response)
             </div>
         </section>
 
-    <!-- SECCIÓN 2: RUTAS -->
-    <section id="web-php">
-      <h2>2. Rutas en Spring Boot</h2>
+        <!-- SECCIÓN 2: RUTAS -->
+        <section id="web-php">
+            <h2>2. Rutas en Spring Boot</h2>
 
-      <h3>2.1. Mapeo de rutas con anotaciones</h3>
-      <p>En Spring Boot las rutas se definen mediante anotaciones directamente en los métodos del controlador.</p>
+            <h3>2.1. Mapeo de rutas con anotaciones</h3>
+            <p>En Spring Boot las rutas se definen mediante anotaciones directamente en los métodos del controlador.</p>
 
-      <pre><code class="language-java">
+            <pre><code class="language-java">
 // src/main/java/com/example/demo/controller/HomeController.java
 
 package com.example.demo.controller;
@@ -194,8 +219,8 @@ public class HomeController {
 }
 </code></pre>
 
-      <h3>2.2. Verbos HTTP</h3>
-      <pre><code class="language-java">
+            <h3>2.2. Verbos HTTP</h3>
+            <pre><code class="language-java">
 package com.example.demo.controller;
 
 import org.springframework.web.bind.annotation.*;
@@ -227,8 +252,8 @@ public class ArticuloController {
 }
 </code></pre>
 
-      <h3>2.3. Rutas nombradas y redirecciones</h3>
-      <pre><code class="language-java">
+            <h3>2.3. Rutas nombradas y redirecciones</h3>
+            <pre><code class="language-java">
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
@@ -259,8 +284,8 @@ public class DashboardController {
 // <a th:href="@{/perfil/{id}(id=${userId})}">Ver perfil</a>
 </code></pre>
 
-      <h3>2.4. Agrupación de rutas con @RequestMapping</h3>
-      <pre><code class="language-java">
+            <h3>2.4. Agrupación de rutas con @RequestMapping</h3>
+            <pre><code class="language-java">
 package com.example.demo.controller;
 
 import org.springframework.stereotype.Controller;
@@ -288,8 +313,8 @@ public class AdminController {
 }
 </code></pre>
 
-      <h3>2.5. Parámetros de consulta</h3>
-      <pre><code class="language-java">
+            <h3>2.5. Parámetros de consulta</h3>
+            <pre><code class="language-java">
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -307,16 +332,16 @@ public class BusquedaController {
     }
 }
 </code></pre>
-    </section>
+        </section>
 
-    <!-- SECCIÓN 3: CONTROLADORES -->
-    <section id="controllers">
-      <h2>3. Controladores (Controllers)</h2>
+        <!-- SECCIÓN 3: CONTROLADORES -->
+        <section id="controllers">
+            <h2>3. Controladores (Controllers)</h2>
 
-      <h3>3.1. Crear un controlador</h3>
-      <p>No hay generador automático como en Symfony, pero es simple crear controladores manualmente:</p>
+            <h3>3.1. Crear un controlador</h3>
+            <p>No hay generador automático como en Symfony, pero es simple crear controladores manualmente:</p>
 
-      <pre><code class="language-java">
+            <pre><code class="language-java">
 // src/main/java/com/example/demo/controller/ProductoController.java
 
 package com.example.demo.controller;
@@ -367,8 +392,8 @@ public class ProductoController {
 }
 </code></pre>
 
-      <h3>3.2. Estructura de un controlador REST</h3>
-      <pre><code class="language-java">
+            <h3>3.2. Estructura de un controlador REST</h3>
+            <pre><code class="language-java">
 package com.example.demo.controller;
 
 import com.example.demo.model.Producto;
@@ -423,8 +448,8 @@ public class ProductoApiController {
 }
 </code></pre>
 
-      <h3>3.3. Controlador simple con vistas</h3>
-      <pre><code class="language-java">
+            <h3>3.3. Controlador simple con vistas</h3>
+            <pre><code class="language-java">
 package com.example.demo.controller;
 
 import org.springframework.stereotype.Controller;
@@ -464,8 +489,8 @@ public class HomeController {
 }
 </code></pre>
 
-      <h3>3.4. Tipos de respuestas</h3>
-      <pre><code class="language-java">
+            <h3>3.4. Tipos de respuestas</h3>
+            <pre><code class="language-java">
 package com.example.demo.controller;
 
 import org.springframework.core.io.Resource;
@@ -529,14 +554,14 @@ public class RespuestaController {
     }
 }
 </code></pre>
-    </section>
+        </section>
 
-    <!-- SECCIÓN 4: THYMELEAF (Motor de plantillas) -->
-    <section id="twig">
-      <h2>4. Thymeleaf (Motor de plantillas)</h2>
+        <!-- SECCIÓN 4: THYMELEAF (Motor de plantillas) -->
+        <section id="twig">
+            <h2>4. Thymeleaf (Motor de plantillas)</h2>
 
-      <h3>4.1. Sintaxis básica</h3>
-      <pre><code class="language-html">
+            <h3>4.1. Sintaxis básica</h3>
+            <pre><code class="language-html">
 &lt;!-- src/main/resources/templates/ejemplo.html --&gt;
 
 &lt;!-- Imprimir variables (escapa HTML automáticamente) --&gt;
@@ -553,8 +578,8 @@ public class RespuestaController {
 &lt;p th:text="${variable} ?: 'Valor por defecto'"&gt;&lt;/p&gt;
 </code></pre>
 
-      <h3>4.2. Estructuras de control</h3>
-      <pre><code class="language-html">
+            <h3>4.2. Estructuras de control</h3>
+            <pre><code class="language-html">
 &lt;!-- IF / UNLESS --&gt;
 &lt;div th:if="${edad >= 18}"&gt;
     &lt;p&gt;Eres mayor de edad&lt;/p&gt;
@@ -588,8 +613,8 @@ public class RespuestaController {
 &lt;/div&gt;
 </code></pre>
 
-      <h3>4.3. Bucles</h3>
-      <pre><code class="language-html">
+            <h3>4.3. Bucles</h3>
+            <pre><code class="language-html">
 &lt;!-- FOR con rango --&gt;
 &lt;div th:each="i : ${#numbers.sequence(0, 9)}"&gt;
     &lt;p th:text="'Número: ' + ${i}"&gt;&lt;/p&gt;
@@ -617,8 +642,8 @@ public class RespuestaController {
 &lt;/div&gt;
 </code></pre>
 
-      <h3>4.4. Layouts y herencia con fragments</h3>
-      <pre><code class="language-html">
+            <h3>4.4. Layouts y herencia con fragments</h3>
+            <pre><code class="language-html">
 &lt;!-- src/main/resources/templates/layout/base.html --&gt;
 &lt;!DOCTYPE html&gt;
 &lt;html xmlns:th="http://www.thymeleaf.org" th:fragment="layout(title, content)"&gt;
@@ -667,8 +692,8 @@ public class RespuestaController {
 &lt;/html&gt;
 </code></pre>
 
-      <h3>4.5. Fragmentos reutilizables</h3>
-      <pre><code class="language-html">
+            <h3>4.5. Fragmentos reutilizables</h3>
+            <pre><code class="language-html">
 &lt;!-- templates/fragments/alerta.html --&gt;
 &lt;div th:fragment="alerta(tipo, titulo, mensaje)" th:class="'alert alert-' + ${tipo}"&gt;
     &lt;strong th:text="${titulo}"&gt;&lt;/strong&gt;
@@ -681,8 +706,8 @@ public class RespuestaController {
 &lt;div th:replace="~{fragments/alerta :: alerta('danger', 'Error', 'No se pudo completar la operación')}"&gt;&lt;/div&gt;
 </code></pre>
 
-      <h3>4.6. Incluir otras vistas</h3>
-      <pre><code class="language-html">
+            <h3>4.6. Incluir otras vistas</h3>
+            <pre><code class="language-html">
 &lt;!-- Incluir fragmento --&gt;
 &lt;div th:replace="~{fragments/header}"&gt;&lt;/div&gt;
 
@@ -695,33 +720,34 @@ public class RespuestaController {
 &lt;!-- Con Spring Security --&gt;
 &lt;div sec:authorize="hasRole('ADMIN')" th:replace="~{fragments/admin-menu}"&gt;&lt;/div&gt;
 </code></pre>
-    </section>
+        </section>
 
-    <!-- SECCIÓN 5: INTERCEPTORES Y FILTROS -->
-    <section id="middleware">
-      <h2>5. Interceptores y filtros (equivalente a middleware)</h2>
+        <!-- SECCIÓN 5: INTERCEPTORES Y FILTROS -->
+        <section id="middleware">
+            <h2>5. Interceptores y filtros (equivalente a middleware)</h2>
 
-      <h3>5.1. ¿Qué es un interceptor/filtro?</h3>
-    <p>Spring Boot usa <strong>HandlerInterceptor</strong> para interceptar peticiones web y <strong>Filters</strong> para filtrar peticiones HTTP a nivel de servlet.</p>
+            <h3>5.1. ¿Qué es un interceptor/filtro?</h3>
+            <p>Spring Boot usa <strong>HandlerInterceptor</strong> para interceptar peticiones web y
+                <strong>Filters</strong> para filtrar peticiones HTTP a nivel de servlet.</p>
 
-      <div class="mermaid">
-graph LR
-    A[Request] --> B[Filter]
-    B --> C[DispatcherServlet]
-    C --> D[HandlerInterceptor preHandle]
-    D --> E[Controller]
-    E --> F[HandlerInterceptor postHandle]
-    F --> G[Response]
-    G --> H[Client]
-    
-    style B fill:#e1f5ff
-    style D fill:#ffe1f5
-    style E fill:#ffe1e1
-    style F fill:#ffe1f5
-      </div>
+            <div class="mermaid">
+                graph LR
+                A[Request] --> B[Filter]
+                B --> C[DispatcherServlet]
+                C --> D[HandlerInterceptor preHandle]
+                D --> E[Controller]
+                E --> F[HandlerInterceptor postHandle]
+                F --> G[Response]
+                G --> H[Client]
 
-      <h3>5.2. Crear un interceptor</h3>
-      <pre><code class="language-java">
+                style B fill:#e1f5ff
+                style D fill:#ffe1f5
+                style E fill:#ffe1e1
+                style F fill:#ffe1f5
+            </div>
+
+            <h3>5.2. Crear un interceptor</h3>
+            <pre><code class="language-java">
 // src/main/java/com/example/demo/interceptor/EdadInterceptor.java
 
 package com.example.demo.interceptor;
@@ -751,8 +777,8 @@ public class EdadInterceptor implements HandlerInterceptor {
 }
 </code></pre>
 
-      <h3>5.3. Registrar interceptor</h3>
-      <pre><code class="language-java">
+            <h3>5.3. Registrar interceptor</h3>
+            <pre><code class="language-java">
 // src/main/java/com/example/demo/config/WebConfig.java
 
 package com.example.demo.config;
@@ -778,8 +804,8 @@ public class WebConfig implements WebMvcConfigurer {
 }
 </code></pre>
 
-      <h3>5.4. Restringir acceso con Spring Security</h3>
-      <pre><code class="language-java">
+            <h3>5.4. Restringir acceso con Spring Security</h3>
+            <pre><code class="language-java">
 // src/main/java/com/example/demo/config/SecurityConfig.java
 
 package com.example.demo.config;
@@ -812,8 +838,8 @@ public class SecurityConfig {
 }
 </code></pre>
 
-      <h3>5.5. Anotaciones de seguridad en controladores</h3>
-      <pre><code class="language-java">
+            <h3>5.5. Anotaciones de seguridad en controladores</h3>
+            <pre><code class="language-java">
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -838,8 +864,8 @@ public class SecureController {
 // @EnableMethodSecurity
 </code></pre>
 
-      <h3>5.6. Filtro personalizado</h3>
-      <pre><code class="language-java">
+            <h3>5.6. Filtro personalizado</h3>
+            <pre><code class="language-java">
 package com.example.demo.filter;
 
 import jakarta.servlet.*;
@@ -866,14 +892,16 @@ public class LoggingFilter implements Filter {
     }
 }
 </code></pre>
-    </section>
+        </section>
 
         <!-- SECCIÓN 6: APLICACIÓN PRINCIPAL Y CONFIGURACIÓN -->
         <section id="kernel">
             <h2>6. Aplicación principal y configuración</h2>
 
             <h3>6.1. ¿Qué es la clase principal?</h3>
-            <p>La clase principal anotada con <code>@SpringBootApplication</code> es el punto de entrada de la aplicación. Combina <code>@Configuration</code>, <code>@EnableAutoConfiguration</code> y <code>@ComponentScan</code>.</p>
+            <p>La clase principal anotada con <code>@SpringBootApplication</code> es el punto de entrada de la
+                aplicación. Combina <code>@Configuration</code>, <code>@EnableAutoConfiguration</code> y
+                <code>@ComponentScan</code>.</p>
 
             <h3>6.2. Estructura de la aplicación principal</h3>
             <pre><code class="language-java">
@@ -990,17 +1018,19 @@ java -jar app.jar --spring.profiles.active=prod
 </code></pre>
         </section>
 
-    <!-- RESUMEN -->
+        <!-- RESUMEN -->
         <section id="resumen">
             <div class="info-box">
                 <h3>Resumen de Spring Boot</h3>
                 <ul>
-                    <li><strong>Spring Boot:</strong> framework Java para aplicaciones standalone con mínima configuración</li>
+                    <li><strong>Spring Boot:</strong> framework Java para aplicaciones standalone con mínima
+                        configuración</li>
                     <li><strong>@RequestMapping, @GetMapping:</strong> mapeo de rutas HTTP en controladores</li>
                     <li><strong>@Controller / @RestController:</strong> gestionan peticiones web y API REST</li>
                     <li><strong>Thymeleaf:</strong> motor de plantillas con sintaxis th:text="${}", th:if, th:each</li>
                     <li><strong>Fragments:</strong> reutilización de vistas con th:fragment y th:replace</li>
-                    <li><strong>HandlerInterceptor / Filter:</strong> interceptan peticiones antes/después del controlador</li>
+                    <li><strong>HandlerInterceptor / Filter:</strong> interceptan peticiones antes/después del
+                        controlador</li>
                     <li><strong>@SpringBootApplication:</strong> punto de entrada que habilita auto-configuración</li>
                     <li><strong>application.properties:</strong> configuración de DB, puerto, logging, etc.</li>
                     <li><strong>Spring Data JPA:</strong> acceso a base de datos con entidades @Entity</li>
@@ -1009,7 +1039,7 @@ java -jar app.jar --spring.profiles.active=prod
             </div>
         </section>
 
-  </main>
+    </main>
 
 </body>
 

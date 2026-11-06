@@ -129,6 +129,25 @@ graph LR
     style D fill:#ffe1e1
     style F fill:#e1ffe1
       </div>
+      <div class="mermaid">
+sequenceDiagram
+    autonumber
+    actor U as Usuario/Cliente
+    participant R as Routes<br/>(web.php)
+    participant C as Controller
+    participant M as Model<br/>(Eloquent)
+    participant DB as Database
+    participant V as View<br/>(Blade)
+
+    U->>R: HTTP Request
+    R->>C: Llama al método del controlador
+    C->>M: Lee/Escribe datos
+    M->>DB: Consulta SQL (Eloquent ORM)
+    DB-->>M: Resultados
+    M-->>C: Colección / Modelo
+    C->>V: Retorna vista con datos
+    V-->>U: HTTP Response (HTML)
+</div>
     </section>
 
     <!-- SECCIÓN 2: RUTAS (web.php) -->

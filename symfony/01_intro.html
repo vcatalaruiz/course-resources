@@ -1,69 +1,74 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} 
-    gtag('js', new Date());
-    gtag('config', 'G-EVTW1307T1');
-  </script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVTW1307T1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-EVTW1307T1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Introducción a Symfony</title>
-  <script src="/course-resources/index.js" defer></script>
-  <script type="module">
-    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-    mermaid.initialize({ startOnLoad: true });
-  </script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-  <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
-  <script src="../index.js" defer></script>
-  <script src="../menu.js" defer></script>
-  <!-- <link rel="stylesheet" href="../index.css"> -->
-  <link rel="stylesheet" href="../style.css" />
-  <link rel="stylesheet" href="../menu.css">
+    <script src="/course-resources/index.js" defer></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="https://kit.fontawesome.com/a7cd9537ed.js" crossorigin="anonymous"></script>
+    <script src="../index.js" defer></script>
+    <script src="../menu.js" defer></script>
+    <!-- <link rel="stylesheet" href="../index.css"> -->
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../menu.css">
 </head>
 
 
 <body>
 
-  <nav id="vc-rail" class="vc-rail" aria-hidden="true">
-    <div class="vc-rail-head">
-      <span class="vc-rail-title">Índice</span>
-      <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-        </svg>
-      </button>
-    </div>
-    <ul id="vc-list" class="vc-list"></ul>
-  </nav>
+    <nav id="vc-rail" class="vc-rail" aria-hidden="true">
+        <div class="vc-rail-head">
+            <span class="vc-rail-title">Índice</span>
+            <button id="vc-close" class="vc-btn" aria-label="Cerrar menú">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+        <ul id="vc-list" class="vc-list"></ul>
+    </nav>
 
-  <div id="vc-backdrop" class="vc-backdrop" hidden></div>
+    <div id="vc-backdrop" class="vc-backdrop" hidden></div>
 
-  <header>
-    <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú" aria-controls="vc-rail" aria-expanded="false">
-      <i class="fa fa-bars" aria-hidden="true"></i>
-    </button>
-    <h1>Introducción a Symfony</h1>
-    <img src="" id="logo" alt="Logo" style="display: none;">
-  </header>
+    <header>
+        <button style="margin-top: 0!important;" id="vc-toggle" class="vc-toggle" aria-label="Mostrar/ocultar menú"
+            aria-controls="vc-rail" aria-expanded="false">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+        <h1>Introducción a Symfony</h1>
+        <img src="" id="logo" alt="Logo" style="display: none;">
+    </header>
 
-  <main>
-      
-      <!-- SECCIÓN 1: INTRODUCCIÓN BÁSICA -->
-      <section id="introduccion-basica">
-          <h2>1. Introducción básica a Symfony</h2>
-          
-          <h3>1.1. ¿Qué es Symfony?</h3>
-          <div class="diagram">
+    <main>
+
+        <!-- SECCIÓN 1: INTRODUCCIÓN BÁSICA -->
+        <section id="introduccion-basica">
+            <h2>1. Introducción básica a Symfony</h2>
+
+            <h3>1.1. ¿Qué es Symfony?</h3>
+            <div class="diagram">
                 <img src="../assets/symfony_logo.png" style="max-width:30%;" alt="Symfony Logo">
             </div>
-            <p>Symfony es un framework PHP open-source, creado por SensioLabs (Fabien Potencier) en 2005, robusto y modular, que sigue el patrón <strong>MVC (Model-View-Controller)</strong> y facilita el desarrollo de aplicaciones web modernas y escalables mediante componentes reutilizables, servicios y una configuración flexible.</p>
+            <p>Symfony es un framework PHP open-source, creado por SensioLabs (Fabien Potencier) en 2005, robusto y
+                modular, que sigue el patrón <strong>MVC (Model-View-Controller)</strong> y facilita el desarrollo de
+                aplicaciones web modernas y escalables mediante componentes reutilizables, servicios y una configuración
+                flexible.</p>
 
             <h3>1.2. Características principales</h3>
             <ul>
@@ -115,29 +120,48 @@ symfony serve -d
 
             <h3>1.5. Patrón MVC en Symfony</h3>
             <div class="mermaid">
-graph LR
-        A[Usuario/Cliente] -->|HTTP Request| B[Routing]
-        B -->|Llama| C[Controller]
-        C -->|Lee/Escribe| D[Model/Entity]
-        D -->|Doctrine ORM| E[(Database)]
-        C -->|Retorna| F[View<br/>Twig]
-        F -->|HTTP Response| A
-    
-        style B fill:#e1f5ff
-        style C fill:#fff4e1
-        style D fill:#ffe1e1
-        style F fill:#e1ffe1
+                graph LR
+                A[Usuario/Cliente] -->|HTTP Request| B[Routing]
+                B -->|Llama| C[Controller]
+                C -->|Lee/Escribe| D[Model/Entity]
+                D -->|Doctrine ORM| E[(Database)]
+                C -->|Retorna| F[View<br />Twig]
+                F -->|HTTP Response| A
+
+                style B fill:#e1f5ff
+                style C fill:#fff4e1
+                style D fill:#ffe1e1
+                style F fill:#e1ffe1
             </div>
+            <div class="mermaid">
+                sequenceDiagram
+                autonumber
+                actor U as Cliente
+                participant R as Router<br />
+                participant C as Controller<br />
+                participant S as Entity<br />
+                participant Repo as Repository<br />(Doctrine)
+                participant DB as Database
+
+                U->>R: HTTP Request (JSON)
+                R->>C: Llama al método del controlador
+                C->>Repo: Lee/Escribe datos
+                Repo->>DB: Consulta SQL (Doctrine ORM)
+                DB-->>Repo: Resultados
+                Repo-->>S: PHP object
+                S-->>C: PHP object
+                C-->>U: JsonResponse (HTTP Response)</div>
         </section>
 
-    <!-- SECCIÓN 2: RUTAS -->
-    <section id="web-php">
-      <h2>2. Rutas en Symfony</h2>
+        <!-- SECCIÓN 2: RUTAS -->
+        <section id="web-php">
+            <h2>2. Rutas en Symfony</h2>
 
-      <h3>2.1. Archivos de rutas</h3>
-      <p>En Symfony las rutas se pueden definir en <code>config/routes.yaml</code> o mediante atributos en los controladores.</p>
+            <h3>2.1. Archivos de rutas</h3>
+            <p>En Symfony las rutas se pueden definir en <code>config/routes.yaml</code> o mediante atributos en los
+                controladores.</p>
 
-      <pre><code class="language-yaml">
+            <pre><code class="language-yaml">
 # config/routes.yaml
 home:
   path: /
@@ -149,7 +173,7 @@ contacto:
   methods: [GET, POST]
 </code></pre>
 
-      <pre><code class="language-php">
+            <pre><code class="language-php">
 &lt;?php
 // src/Controller/HomeController.php
 
@@ -182,8 +206,8 @@ class HomeController extends AbstractController
 ?&gt;
 </code></pre>
 
-      <h3>2.2. Verbos HTTP</h3>
-      <pre><code class="language-php">
+            <h3>2.2. Verbos HTTP</h3>
+            <pre><code class="language-php">
 &lt;?php
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -214,8 +238,8 @@ public function eliminar(int $id): Response
 ?&gt;
 </code></pre>
 
-      <h3>2.3. Rutas nombradas</h3>
-      <pre><code class="language-php">
+            <h3>2.3. Rutas nombradas</h3>
+            <pre><code class="language-php">
 &lt;?php
 #[Route('/dashboard', name: 'dashboard')]
 public function dashboard(): Response
@@ -239,8 +263,8 @@ return $this->redirectToRoute('dashboard');
 ?&gt;
 </code></pre>
 
-      <h3>2.4. Grupos de rutas</h3>
-      <pre><code class="language-php">
+            <h3>2.4. Grupos de rutas</h3>
+            <pre><code class="language-php">
 &lt;?php
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -266,8 +290,8 @@ class AdminController extends AbstractController
 ?&gt;
 </code></pre>
 
-      <h3>2.5. Rutas a controladores</h3>
-      <pre><code class="language-php">
+            <h3>2.5. Rutas a controladores</h3>
+            <pre><code class="language-php">
 &lt;?php
 use App\Controller\ProductoController;
 
@@ -278,14 +302,14 @@ use App\Controller\ProductoController;
 // php bin/console make:crud Producto
 ?&gt;
 </code></pre>
-    </section>
+        </section>
 
-    <!-- SECCIÓN 3: CONTROLADORES -->
-    <section id="controllers">
-      <h2>3. Controladores (Controllers)</h2>
+        <!-- SECCIÓN 3: CONTROLADORES -->
+        <section id="controllers">
+            <h2>3. Controladores (Controllers)</h2>
 
-      <h3>3.1. Crear un controlador</h3>
-      <pre><code class="language-bash">
+            <h3>3.1. Crear un controlador</h3>
+            <pre><code class="language-bash">
 # Crear controlador básico
 php bin/console make:controller ProductoController
 
@@ -296,8 +320,8 @@ php bin/console make:entity Producto
 php bin/console make:crud Producto
 </code></pre>
 
-      <h3>3.2. Estructura de un controlador</h3>
-      <pre><code class="language-php">
+            <h3>3.2. Estructura de un controlador</h3>
+            <pre><code class="language-php">
 &lt;?php
 // src/Controller/ProductoController.php
 
@@ -351,8 +375,8 @@ class ProductoController extends AbstractController
 ?&gt;
 </code></pre>
 
-      <h3>3.3. Controlador simple</h3>
-      <pre><code class="language-php">
+            <h3>3.3. Controlador simple</h3>
+            <pre><code class="language-php">
 &lt;?php
 // src/Controller/HomeController.php
 
@@ -396,8 +420,8 @@ class HomeController extends AbstractController
 ?&gt;
 </code></pre>
 
-      <h3>3.4. Tipos de respuestas</h3>
-      <pre><code class="language-php">
+            <h3>3.4. Tipos de respuestas</h3>
+            <pre><code class="language-php">
 &lt;?php
 namespace App\Controller;
 
@@ -445,14 +469,14 @@ class RespuestaController extends AbstractController
 }
 ?&gt;
 </code></pre>
-    </section>
+        </section>
 
-    <!-- SECCIÓN 4: TWIG (Motor de plantillas) -->
-    <section id="twig">
-      <h2>4. Twig (Motor de plantillas)</h2>
+        <!-- SECCIÓN 4: TWIG (Motor de plantillas) -->
+        <section id="twig">
+            <h2>4. Twig (Motor de plantillas)</h2>
 
-      <h3>4.1. Sintaxis básica</h3>
-      <pre><code class="language-html">
+            <h3>4.1. Sintaxis básica</h3>
+            <pre><code class="language-html">
 {# templates/ejemplo.html.twig #}
 
 {# Imprimir variables (escapa HTML automáticamente) #}
@@ -469,8 +493,8 @@ class RespuestaController extends AbstractController
 &lt;p&gt;{{ variable|default('Valor por defecto') }}&lt;/p&gt;
 </code></pre>
 
-      <h3>4.2. Estructuras de control</h3>
-      <pre><code class="language-html">
+            <h3>4.2. Estructuras de control</h3>
+            <pre><code class="language-html">
 {# IF / ELSEIF / ELSE #}
 {% if edad >= 18 %}
     &lt;p&gt;Eres mayor de edad&lt;/p&gt;
@@ -497,8 +521,8 @@ class RespuestaController extends AbstractController
 {% endif %}
 </code></pre>
 
-      <h3>4.3. Bucles</h3>
-      <pre><code class="language-html">
+            <h3>4.3. Bucles</h3>
+            <pre><code class="language-html">
 {# FOR #}
 {% for i in 0..9 %}
     &lt;p&gt;Número: {{ i }}&lt;/p&gt;
@@ -533,8 +557,8 @@ class RespuestaController extends AbstractController
 {% endfor %}
 </code></pre>
 
-      <h3>4.4. Layouts y herencia</h3>
-      <pre><code class="language-html">
+            <h3>4.4. Layouts y herencia</h3>
+            <pre><code class="language-html">
 {# templates/base.html.twig #}
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
@@ -589,8 +613,8 @@ class RespuestaController extends AbstractController
 {% endblock %}
 </code></pre>
 
-      <h3>4.5. Componentes</h3>
-      <pre><code class="language-html">
+            <h3>4.5. Componentes</h3>
+            <pre><code class="language-html">
 {# templates/components/alerta.html.twig #}
 &lt;div class="alert alert-{{ tipo }}"&gt;
     &lt;strong&gt;{{ titulo }}&lt;/strong&gt;
@@ -611,8 +635,8 @@ class RespuestaController extends AbstractController
 }) }}
 </code></pre>
 
-      <h3>4.6. Incluir otras vistas</h3>
-      <pre><code class="language-html">
+            <h3>4.6. Incluir otras vistas</h3>
+            <pre><code class="language-html">
 {# Incluir parcial #}
 {{ include('partials/header.html.twig') }}
 
@@ -627,35 +651,36 @@ class RespuestaController extends AbstractController
     {{ include('partials/admin-menu.html.twig') }}
 {% endif %}
 </code></pre>
-    </section>
+        </section>
 
-    <!-- SECCIÓN 5: EVENTOS Y SEGURIDAD -->
-    <section id="middleware">
-      <h2>5. Eventos y filtros (equivalente a middleware)</h2>
+        <!-- SECCIÓN 5: EVENTOS Y SEGURIDAD -->
+        <section id="middleware">
+            <h2>5. Eventos y filtros (equivalente a middleware)</h2>
 
-      <h3>5.1. ¿Qué es un listener/subscriber?</h3>
-    <p>Symfony no usa middleware clásico. En su lugar, utiliza el sistema de <strong>eventos del Kernel</strong> y el componente de <strong>Security</strong> para interceptar y filtrar peticiones.</p>
+            <h3>5.1. ¿Qué es un listener/subscriber?</h3>
+            <p>Symfony no usa middleware clásico. En su lugar, utiliza el sistema de <strong>eventos del Kernel</strong>
+                y el componente de <strong>Security</strong> para interceptar y filtrar peticiones.</p>
 
-      <div class="mermaid">
-graph LR
-    A[Request] --> B[KernelEvents::REQUEST]
-    B --> C[Controller]
-    C --> D[KernelEvents::RESPONSE]
-    D --> E[Response]
-    E --> F[Client]
-    
-    style B fill:#e1f5ff
-    style C fill:#ffe1e1
-    style D fill:#e1f5ff
-      </div>
+            <div class="mermaid">
+                graph LR
+                A[Request] --> B[KernelEvents::REQUEST]
+                B --> C[Controller]
+                C --> D[KernelEvents::RESPONSE]
+                D --> E[Response]
+                E --> F[Client]
 
-      <h3>5.2. Crear un subscriber</h3>
-      <pre><code class="language-bash">
+                style B fill:#e1f5ff
+                style C fill:#ffe1e1
+                style D fill:#e1f5ff
+            </div>
+
+            <h3>5.2. Crear un subscriber</h3>
+            <pre><code class="language-bash">
 # Crear subscriber de eventos
 php bin/console make:subscriber VerificarEdadSubscriber
 </code></pre>
 
-      <pre><code class="language-php">
+            <pre><code class="language-php">
 &lt;?php
 // src/EventSubscriber/VerificarEdadSubscriber.php
 
@@ -696,8 +721,8 @@ class VerificarEdadSubscriber implements EventSubscriberInterface
 ?&gt;
 </code></pre>
 
-      <h3>5.3. Registrar subscriber</h3>
-      <pre><code class="language-yaml">
+            <h3>5.3. Registrar subscriber</h3>
+            <pre><code class="language-yaml">
 # config/services.yaml
 services:
   App\EventSubscriber\:
@@ -705,8 +730,8 @@ services:
     tags: ['kernel.event_subscriber']
 </code></pre>
 
-      <h3>5.4. Restringir acceso a rutas</h3>
-      <pre><code class="language-php">
+            <h3>5.4. Restringir acceso a rutas</h3>
+            <pre><code class="language-php">
 &lt;?php
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
@@ -726,8 +751,8 @@ public function admin(): Response
 ?&gt;
 </code></pre>
 
-      <h3>5.5. Acceso por configuración</h3>
-      <pre><code class="language-yaml">
+            <h3>5.5. Acceso por configuración</h3>
+            <pre><code class="language-yaml">
 # config/packages/security.yaml
 security:
   access_control:
@@ -735,8 +760,8 @@ security:
     - { path: ^/dashboard, roles: ROLE_USER }
 </code></pre>
 
-      <h3>5.6. Prioridad de eventos</h3>
-      <pre><code class="language-php">
+            <h3>5.6. Prioridad de eventos</h3>
+            <pre><code class="language-php">
 &lt;?php
 public static function getSubscribedEvents(): array
 {
@@ -747,14 +772,15 @@ public static function getSubscribedEvents(): array
 }
 ?&gt;
 </code></pre>
-    </section>
+        </section>
 
         <!-- SECCIÓN 6: KERNEL -->
         <section id="kernel">
             <h2>6. Kernel en Symfony</h2>
 
             <h3>6.1. ¿Qué es el Kernel?</h3>
-            <p>El Kernel (<code>src/Kernel.php</code>) es el núcleo de Symfony. Registra los bundles, carga la configuración y orquesta el ciclo de vida de cada petición.</p>
+            <p>El Kernel (<code>src/Kernel.php</code>) es el núcleo de Symfony. Registra los bundles, carga la
+                configuración y orquesta el ciclo de vida de cada petición.</p>
 
             <h3>6.2. Estructura del Kernel</h3>
             <pre><code class="language-php">
@@ -845,7 +871,7 @@ var/cache/prod
 </code></pre>
         </section>
 
-    <!-- RESUMEN -->
+        <!-- RESUMEN -->
         <section id="resumen">
             <div class="info-box">
                 <h3>Resumen de Symfony</h3>
@@ -864,7 +890,7 @@ var/cache/prod
             </div>
         </section>
 
-  </main>
+    </main>
 
 </body>
 
