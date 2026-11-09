@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UT5 · Manipulación y transacciones en bases de datos · LinkiaFP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', () => hljs.highlightAll());</script>
+    <script src="../script.js" defer></script>
+    <style>
+        .didactic-image {
+            max-width: 860px;
+            margin: 10px auto 18px;
+            padding: 8px 14px;
+            border: 1px solid #e0e5ef;
+            border-radius: 12px;
+            background: #f8faff;
+        }
+
+        .didactic-image svg {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .didactic-image figcaption {
+            margin-top: 4px;
+            color: #444;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        .slide table {
+            text-align: left;
+        }
+
+        .slide table th,
+        .slide table td {
+            padding: 8px;
+            border: 1px solid #d8dee8;
+        }
+
+        .slide table th {
+            background: #e7f3ff;
+        }
+
+        .slide pre {
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="deck">
+        <section class="slide cover" id="portada">
+            <div style="max-width: 70%;">
+                <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="LinkiaFP">
+                <div class="title">UT5 · Manipulación y transacciones</div>
+                <div class="subtitle">Bases de datos · SQL</div>
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;" alt="LinkiaFP">
+            </div>
+        </section>
+
+        <section class="slide" id="objetivos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Objetivos de la unidad</h2>
+            <div class="info-box">
+                <p><strong>Antes de empezar:</strong> descarga el esquema de la base de datos
+                    <a href="https://ucoc-my.sharepoint.com/personal/docenciayrecursos_linkiafp_es/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fdocenciayrecursos%5Flinkiafp%5Fes%2FDocuments%2F02%5FAutorias%20y%20aulas%2F01%5FProducci%C3%B3n%20autor%C3%ADas%2F2025%2D2026%2F01%2E%20Autor%C3%ADas%2FASIX%2DCIBER%2F0372%5FGesti%C3%B3n%20base%20de%20datos%2FUT5%2Fbd%5Fempresa%20%282%29%2Esql&amp;parent=%2Fpersonal%2Fdocenciayrecursos%5Flinkiafp%5Fes%2FDocuments%2F02%5FAutorias%20y%20aulas%2F01%5FProducci%C3%B3n%20autor%C3%ADas%2F2025%2D2026%2F01%2E%20Autor%C3%ADas%2FASIX%2DCIBER%2F0372%5FGesti%C3%B3n%20base%20de%20datos%2FUT5&amp;ga=1"
+                        target="_blank" rel="noopener noreferrer">bd_empresa (2).sql</a>.
+                </p>
+            </div>
+            <ul>
+                <li>Insertar, actualizar y eliminar registros con sentencias DML.</li>
+                <li>Proteger la integridad referencial al cambiar datos relacionados.</li>
+                <li>Controlar operaciones con <code>BEGIN</code>, <code>COMMIT</code> y <code>ROLLBACK</code>.</li>
+                <li>Explicar las propiedades ACID y los niveles de aislamiento.</li>
+                <li>Reconocer conflictos de concurrencia y entender cómo actúan los bloqueos.</li>
+            </ul>
+        </section>
+
+        <section class="slide" id="dml">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Manipular datos: DML</h2>
+            <p>El Lenguaje de Manipulación de Datos permite añadir registros, cambiar valores y eliminar filas.
+                Las sentencias principales de esta unidad son <code>INSERT</code>, <code>UPDATE</code> y
+                <code>DELETE</code>.
+            </p>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="background: #db2680;">Sentencia</th>
+                        <th style="background: #db2680;">Acción</th>
+                        <th style="background: #db2680;">Precaución</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>INSERT</code></td>
+                        <td>Añade filas nuevas.</td>
+                        <td>Valores y columnas deben corresponderse.</td>
+                    </tr>
+                    <tr>
+                        <td><code>UPDATE</code></td>
+                        <td>Modifica filas existentes.</td>
+                        <td>Usa <code>WHERE</code> para limitar las filas.</td>
+                    </tr>
+                    <tr>
+                        <td><code>DELETE</code></td>
+                        <td>Elimina filas.</td>
+                        <td>Usa <code>WHERE</code> para evitar un borrado masivo.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>La estructura de la tabla permanece después de un <code>DELETE</code>. En cambio,
+                <code>TRUNCATE</code> es una operación distinta y su comportamiento transaccional depende del
+                gestor.
+            </p>
+        </section>
+
+        <section class="slide" id="insert">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Insertar registros con INSERT</h2>
+            <p>Indica explícitamente las columnas para que la relación entre cada columna y su valor resulte clara.
+                Respeta los tipos de dato, las claves y las restricciones de la tabla.</p>
+            <pre><code class="language-sql">-- Añade un empleado indicando los campos que se van a rellenar.
+INSERT INTO empleados (id, nombre, puesto, salario, id_departamento)
+VALUES (101, 'Laura Sánchez', 'Administrativa', 1900, 2);
+
+-- Añade varios productos en una sola sentencia.
+INSERT INTO productos (id, nombre, precio)
+VALUES
+    (1, 'Ratón óptico', 12.50),
+    (2, 'Teclado mecánico', 45.00);
+
+-- Copia a una tabla de historial los clientes que ya han causado baja.
+INSERT INTO historial_clientes (id, nombre)
+SELECT id, nombre
+FROM clientes
+WHERE baja = 1;</code></pre>
+            <div class="info-box">
+                <p>El ejemplo usa nombres ilustrativos. Comprueba el esquema real y los campos obligatorios antes
+                    de adaptar una inserción a <code>bd_empresa</code>.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="update-delete">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Actualizar y eliminar con condiciones</h2>
+            <p><code>UPDATE</code> modifica los campos indicados en las filas seleccionadas. <code>DELETE</code>
+                elimina las filas que cumplen la condición.</p>
+            <pre><code class="language-sql">-- Aumenta un 5 % el salario de quienes trabajan en Barcelona.
+UPDATE empleados
+SET salario = salario * 1.05
+WHERE ciudad_trabajo = 'Barcelona';
+
+-- Elimina clientes que tienen registrada una fecha de baja.
+DELETE FROM clientes
+WHERE fecha_baja IS NOT NULL;</code></pre>
+            <figure class="didactic-image" role="img"
+                aria-label="La condición WHERE delimita las filas que se van a modificar o eliminar.">
+                <svg viewBox="0 0 930 130" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <title>WHERE limita el alcance de las sentencias DML</title>
+                    <rect x="25" y="21" width="220" height="86" rx="10" fill="#e7f3ff" stroke="#2980b9"
+                        stroke-width="2" />
+                    <text x="135" y="52" text-anchor="middle" font-family="Arial,sans-serif" font-size="15"
+                        font-weight="700" fill="#245c88">TABLA</text>
+                    <text x="135" y="78" text-anchor="middle" font-family="Arial,sans-serif" font-size="12"
+                        fill="#26334a">muchas filas</text>
+                    <path d="M250 64 H330" stroke="#5a4a86" stroke-width="3" />
+                    <path d="M350 22 H560 L520 108 H390 Z" fill="#fff3d6" stroke="#c68500" stroke-width="3" />
+                    <text x="455" y="55" text-anchor="middle" font-family="Arial,sans-serif" font-size="15"
+                        font-weight="700" fill="#996500">WHERE</text>
+                    <text x="455" y="81" text-anchor="middle" font-family="Arial,sans-serif" font-size="11"
+                        fill="#26334a">condición precisa</text>
+                    <path d="M565 64 H645" stroke="#5a4a86" stroke-width="3" />
+                    <rect x="660" y="21" width="245" height="86" rx="10" fill="#e8f5eb" stroke="#3c8c58"
+                        stroke-width="2" />
+                    <text x="782" y="52" text-anchor="middle" font-family="Arial,sans-serif" font-size="14"
+                        font-weight="700" fill="#28633c">FILAS AFECTADAS</text>
+                    <text x="782" y="78" text-anchor="middle" font-family="Arial,sans-serif" font-size="12"
+                        fill="#26334a">solo coincidencias</text>
+                </svg>
+                <figcaption>La condición selecciona las filas que recibirá la operación.</figcaption>
+            </figure>
+            <div class="warning-box">
+                <p>Sin <code>WHERE</code>, <code>UPDATE</code> puede cambiar todas las filas y <code>DELETE</code>
+                    puede borrarlas todas. Antes de ejecutar una operación importante, prueba la misma condición
+                    con un <code>SELECT</code> y revisa las filas devueltas.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="integridad">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Integridad de los datos relacionados</h2>
+            <p>La integridad referencial mantiene coherentes las relaciones entre tablas. Una clave foránea
+                referencia una clave primaria y solo acepta los valores permitidos por la relación.</p>
+            <ul>
+                <li><strong>Integridad de entidad:</strong> cada fila se identifica de manera única y la clave
+                    primaria no es nula.</li>
+                <li><strong>Integridad de dominio:</strong> los datos cumplen el tipo y las restricciones del
+                    campo.</li>
+                <li><strong>Integridad referencial:</strong> una clave foránea apunta a una fila existente o admite
+                    <code>NULL</code> cuando el diseño lo permite.
+                </li>
+            </ul>
+            <pre><code class="language-sql">-- Relaciona cada empleado con un departamento existente.
+CREATE TABLE empleados (
+    id INT PRIMARY KEY,
+    nombre VARCHAR(50),
+    id_departamento INT,
+    FOREIGN KEY (id_departamento) REFERENCES departamentos(id)
+);
+
+-- Evita que el salario tenga valores negativos.
+ALTER TABLE empleados
+ADD CONSTRAINT chk_salario_no_negativo CHECK (salario >= 0);</code></pre>
+            <div class="info-box">
+                <p>Si <code>id_departamento</code> no admite <code>NULL</code>, cada empleado debe referirse a un
+                    departamento válido. Confirma las restricciones reales antes de insertar o modificar datos.
+                    En MySQL, las restricciones <code>CHECK</code> se aplican a partir de la versión 8.0.16.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="acciones-foraneas">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Qué ocurre al cambiar una fila relacionada</h2>
+            <p>Las reglas <code>ON DELETE</code> y <code>ON UPDATE</code> definen cómo se comporta la relación
+                cuando cambia la fila referenciada.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Regla</th>
+                        <th>Efecto</th>
+                        <th>Condición o precaución</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>CASCADE</code></td>
+                        <td>Propaga el cambio a las filas relacionadas.</td>
+                        <td>Un borrado en cascada puede eliminar muchas filas dependientes.</td>
+                    </tr>
+                    <tr>
+                        <td><code>SET NULL</code></td>
+                        <td>Establece la clave foránea en <code>NULL</code>.</td>
+                        <td>La columna debe permitir <code>NULL</code>.</td>
+                    </tr>
+                    <tr>
+                        <td><code>RESTRICT</code> / <code>NO ACTION</code></td>
+                        <td>Impide el cambio si hay filas dependientes.</td>
+                        <td>El detalle temporal depende del gestor.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <figure class="didactic-image" role="img"
+                aria-label="La política de clave foránea determina si el cambio se propaga, se pone a NULL o se bloquea.">
+                <svg viewBox="0 0 930 136" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <title>Tres efectos de una clave foránea</title>
+                    <rect x="25" y="24" width="180" height="86" rx="10" fill="#f7f9fc" stroke="#8795aa"
+                        stroke-width="2" />
+                    <text x="115" y="55" text-anchor="middle" font-family="Arial,sans-serif" font-size="13"
+                        font-weight="700" fill="#35445d">FILA PADRE</text>
+                    <text x="115" y="80" text-anchor="middle" font-family="Arial,sans-serif" font-size="11"
+                        fill="#53627a">se elimina</text>
+                    <path d="M208 67 H275 M275 67 V31 H330 M275 67 H330 M275 67 V103 H330" fill="none" stroke="#8795aa"
+                        stroke-width="2" />
+                    <rect x="340" y="12" width="255" height="37" rx="8" fill="#e7f3ff" stroke="#2980b9"
+                        stroke-width="2" />
+                    <text x="467" y="36" text-anchor="middle" font-family="Arial,sans-serif" font-size="12"
+                        font-weight="700" fill="#245c88">CASCADE · elimina dependientes</text>
+                    <rect x="340" y="49" width="255" height="37" rx="8" fill="#f7eafa" stroke="#8e5aa7"
+                        stroke-width="2" />
+                    <text x="467" y="73" text-anchor="middle" font-family="Arial,sans-serif" font-size="12"
+                        font-weight="700" fill="#704280">SET NULL · conserva la fila hija</text>
+                    <rect x="340" y="86" width="255" height="37" rx="8" fill="#fff3d6" stroke="#c68500"
+                        stroke-width="2" />
+                    <text x="467" y="110" text-anchor="middle" font-family="Arial,sans-serif" font-size="12"
+                        font-weight="700" fill="#996500">RESTRICT · bloquea el borrado</text>
+                    <path d="M600 30 H660 M600 67 H660 M600 104 H660" stroke="#8795aa" stroke-width="2" />
+                    <rect x="672" y="24" width="235" height="86" rx="10" fill="#e8f5eb" stroke="#3c8c58"
+                        stroke-width="2" />
+                    <text x="789" y="55" text-anchor="middle" font-family="Arial,sans-serif" font-size="13"
+                        font-weight="700" fill="#28633c">FILAS HIJAS</text>
+                    <text x="789" y="80" text-anchor="middle" font-family="Arial,sans-serif" font-size="11"
+                        fill="#26334a">propagar · desvincular · proteger</text>
+                </svg>
+                <figcaption>Elige una regla que refleje cómo deben conservarse los datos relacionados.</figcaption>
+            </figure>
+            <div class="warning-box">
+                <p>Comprueba primero cuántas filas dependen del registro padre. <code>ON DELETE CASCADE</code>
+                    puede eliminar todos esos registros; úsalo solo cuando ese sea el comportamiento deseado.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="transaccion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Transacciones: una unidad de trabajo</h2>
+            <p>Una transacción agrupa varias operaciones que deben completarse como conjunto. Sirve, por ejemplo,
+                para que una transferencia no reste dinero de una cuenta sin añadirlo a la otra.</p>
+            <pre><code class="language-sql">-- Transfiere 100 € entre dos cuentas como una sola operación lógica.
+START TRANSACTION;
+
+UPDATE cuentas
+SET saldo = saldo - 100
+WHERE id = 'A';
+
+UPDATE cuentas
+SET saldo = saldo + 100
+WHERE id = 'B';
+
+COMMIT;</code></pre>
+            <figure class="didactic-image" role="img"
+                aria-label="Una transacción confirma todos sus cambios o los deshace antes de confirmarlos.">
+                <svg viewBox="0 0 930 132" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <title>Flujo de una transacción</title>
+                    <rect x="24" y="31" width="192" height="70" rx="10" fill="#e7f3ff" stroke="#2980b9"
+                        stroke-width="2" />
+                    <text x="120" y="59" text-anchor="middle" font-family="Arial,sans-serif" font-size="14"
+                        font-weight="700" fill="#245c88">BEGIN</text>
+                    <text x="120" y="80" text-anchor="middle" font-family="Arial,sans-serif" font-size="10"
+                        fill="#53627a">iniciar</text>
+                    <path d="M220 66 H292" stroke="#5a4a86" stroke-width="3" />
+                    <rect x="305" y="31" width="260" height="70" rx="10" fill="#f7eafa" stroke="#8e5aa7"
+                        stroke-width="2" />
+                    <text x="435" y="59" text-anchor="middle" font-family="Arial,sans-serif" font-size="14"
+                        font-weight="700" fill="#704280">OPERACIONES</text>
+                    <text x="435" y="80" text-anchor="middle" font-family="Arial,sans-serif" font-size="10"
+                        fill="#53627a">validar los resultados</text>
+                    <path d="M570 66 H642" stroke="#5a4a86" stroke-width="3" />
+                    <rect x="655" y="18" width="240" height="43" rx="9" fill="#e8f5eb" stroke="#3c8c58"
+                        stroke-width="2" />
+                    <text x="775" y="45" text-anchor="middle" font-family="Arial,sans-serif" font-size="13"
+                        font-weight="700" fill="#28633c">COMMIT · confirmar</text>
+                    <rect x="655" y="72" width="240" height="43" rx="9" fill="#fff3d6" stroke="#c68500"
+                        stroke-width="2" />
+                    <text x="775" y="99" text-anchor="middle" font-family="Arial,sans-serif" font-size="13"
+                        font-weight="700" fill="#996500">ROLLBACK · deshacer</text>
+                </svg>
+                <figcaption>Al validar los cambios, se confirma la transacción o se deshace.</figcaption>
+            </figure>
+            <div class="info-box">
+                <p>Las transacciones requieren tablas con un motor transaccional, como InnoDB. Si la validación
+                    falla, decide el <code>ROLLBACK</code> antes de confirmar. No dejes transacciones abiertas.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="control-transacciones">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Confirmar, deshacer y crear puntos de control</h2>
+            <ul>
+                <li><code>START TRANSACTION</code> o <code>BEGIN</code> inicia el bloque.</li>
+                <li><code>COMMIT</code> hace definitivos sus cambios.</li>
+                <li><code>ROLLBACK</code> revierte los cambios aún no confirmados.</li>
+                <li><code>SAVEPOINT</code> crea un punto intermedio al que se puede volver.</li>
+            </ul>
+            <pre><code class="language-sql">-- Cambia una ciudad y revierte el cambio durante la demostración.
+START TRANSACTION;
+
+UPDATE empleados
+SET ciudad_trabajo = 'Zaragoza'
+WHERE id = 101;
+
+SELECT id, ciudad_trabajo
+FROM empleados
+WHERE id = 101;
+
+ROLLBACK;
+
+-- En otra ejecución controlada, confirma una operación válida.
+START TRANSACTION;
+
+UPDATE empleados
+SET ciudad_trabajo = 'Zaragoza'
+WHERE id = 101;
+
+COMMIT;</code></pre>
+            <div class="warning-box">
+                <p>En modo <em>autocommit</em>, el gestor puede confirmar cada sentencia automáticamente.
+                    Confirma el modo de trabajo y el motor de almacenamiento antes de probar
+                    <code>ROLLBACK</code>.
+                </p>
+            </div>
+        </section>
+
+        <section class="slide" id="savepoint">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Savepoints: deshacer solo una parte</h2>
+            <p>Un punto de control permite revertir parte de una transacción sin deshacer necesariamente las
+                operaciones anteriores. La transacción sigue pendiente hasta <code>COMMIT</code> o
+                <code>ROLLBACK</code>.
+            </p>
+            <pre><code class="language-sql">-- Conserva el primer cambio y revierte solo el segundo.
+START TRANSACTION;
+
+UPDATE empleados
+SET salario = salario + 100
+WHERE id = 101;
+
+SAVEPOINT despues_del_aumento;
+
+UPDATE empleados
+SET ciudad_trabajo = 'Zaragoza'
+WHERE id = 101;
+
+ROLLBACK TO SAVEPOINT despues_del_aumento;
+
+COMMIT;</code></pre>
+            <div class="info-box">
+                <p>Los savepoints y su sintaxis pueden variar según el gestor. No se debe asumir que una sentencia
+                    de definición de estructura, como <code>ALTER TABLE</code>, pueda deshacerse como una
+                    operación DML.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="acid">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Las cuatro propiedades ACID</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Propiedad</th>
+                        <th>Qué garantiza</th>
+                        <th>Ejemplo intuitivo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Atomicidad</strong></td>
+                        <td>Todo el bloque se aplica o nada se aplica.</td>
+                        <td>La transferencia no queda a medias.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Consistencia</strong></td>
+                        <td>Se respetan las reglas y restricciones.</td>
+                        <td>No se guarda una FK inexistente.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Aislamiento</strong></td>
+                        <td>Las operaciones concurrentes no producen resultados incompatibles.</td>
+                        <td>Una lectura no ve cambios sin confirmar.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Durabilidad</strong></td>
+                        <td>Los cambios confirmados persisten ante fallos.</td>
+                        <td>Un <code>COMMIT</code> sobrevive al reinicio.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <figure class="didactic-image" role="img"
+                aria-label="Atomicidad, consistencia, aislamiento y durabilidad protegen distintas etapas de una transacción.">
+                <svg viewBox="0 0 930 132" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <title>Las propiedades ACID se complementan</title>
+                    <rect x="24" y="23" width="206" height="84" rx="12" fill="#e7f3ff" stroke="#2980b9"
+                        stroke-width="2" />
+                    <text x="127" y="56" text-anchor="middle" font-family="Arial,sans-serif" font-size="16"
+                        font-weight="700" fill="#245c88">A</text>
+                    <text x="127" y="82" text-anchor="middle" font-family="Arial,sans-serif" font-size="12"
+                        fill="#26334a">todo o nada</text>
+                    <rect x="253" y="23" width="206" height="84" rx="12" fill="#f7eafa" stroke="#8e5aa7"
+                        stroke-width="2" />
+                    <text x="356" y="56" text-anchor="middle" font-family="Arial,sans-serif" font-size="16"
+                        font-weight="700" fill="#704280">C</text>
+                    <text x="356" y="82" text-anchor="middle" font-family="Arial,sans-serif" font-size="12"
+                        fill="#26334a">estado válido</text>
+                    <rect x="482" y="23" width="206" height="84" rx="12" fill="#fff3d6" stroke="#c68500"
+                        stroke-width="2" />
+                    <text x="585" y="56" text-anchor="middle" font-family="Arial,sans-serif" font-size="16"
+                        font-weight="700" fill="#996500">I</text>
+                    <text x="585" y="82" text-anchor="middle" font-family="Arial,sans-serif" font-size="12"
+                        fill="#26334a">sin interferencias</text>
+                    <rect x="711" y="23" width="195" height="84" rx="12" fill="#e8f5eb" stroke="#3c8c58"
+                        stroke-width="2" />
+                    <text x="808" y="56" text-anchor="middle" font-family="Arial,sans-serif" font-size="16"
+                        font-weight="700" fill="#28633c">D</text>
+                    <text x="808" y="82" text-anchor="middle" font-family="Arial,sans-serif" font-size="12"
+                        fill="#26334a">cambios persistentes</text>
+                </svg>
+                <figcaption>ACID describe garantías distintas que trabajan conjuntamente.</figcaption>
+            </figure>
+            <div class="info-box">
+                <p>La base de datos y el motor de almacenamiento deben ofrecer soporte transaccional para que estas
+                    garantías se apliquen a las operaciones realizadas.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="atomicidad-consistencia">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Atomicidad y consistencia</h2>
+            <div class="two-col">
+                <div>
+                    <h3>Atomicidad</h3>
+                    <p>Si falla una operación de una transacción, se pueden revertir también las operaciones
+                        anteriores del mismo bloque.</p>
+                    <h3>Consistencia</h3>
+                    <p>Una transacción debe respetar claves, tipos y demás restricciones que mantienen válidos los
+                        datos.</p>
+                </div>
+                <div>
+                    <pre><code class="language-sql">-- La clave foránea impide asociar la fila a un departamento inexistente.
+INSERT INTO empleados (id, nombre, id_departamento)
+VALUES (100, 'Jorge', 999);</code></pre>
+                </div>
+            </div>
+            <div class="info-box">
+                <p>Si la fila padre no existe, la restricción debe impedir la inserción. La respuesta concreta
+                    (error o gestión de la transacción) depende del gestor y de la sentencia ejecutada.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="durabilidad">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Aislamiento y durabilidad</h2>
+            <ul>
+                <li><strong>Aislamiento:</strong> determina qué cambios de otras transacciones son visibles mientras
+                    una transacción está en curso.</li>
+                <li><strong>Durabilidad:</strong> los cambios confirmados quedan registrados para mantenerse tras
+                    un fallo del sistema.</li>
+            </ul>
+            <pre><code class="language-sql">-- Confirma el cambio; después, comprueba que sigue registrado.
+START TRANSACTION;
+
+UPDATE empleados
+SET activo = 0
+WHERE fecha_baja IS NOT NULL;
+
+COMMIT;
+
+SELECT id, activo
+FROM empleados
+WHERE fecha_baja IS NOT NULL;</code></pre>
+            <div class="info-box">
+                <p>La durabilidad describe el compromiso del gestor una vez emitido <code>COMMIT</code>. Para
+                    comparar resultados, asegúrate de que las sesiones trabajan con los mismos datos y que una
+                    transacción anterior no está pendiente.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="concurrencia">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Concurrencia: varias sesiones a la vez</h2>
+            <p>En un sistema multiusuario, varias transacciones pueden leer o cambiar datos simultáneamente.
+                El motor coordina esas operaciones para reducir inconsistencias y conflictos.</p>
+            <ul>
+                <li>Dos actualizaciones sobre un mismo valor pueden sobrescribirse.</li>
+                <li>Una lectura podría observar un cambio que después se deshace.</li>
+                <li>Una consulta repetida puede devolver valores o filas diferentes.</li>
+                <li>Un bloqueo puede hacer que una sesión espere a que otra termine.</li>
+            </ul>
+            <p>El aislamiento y los bloqueos regulan qué interacciones se permiten; una transacción breve y un
+                orden de acceso consistente ayudan a limitar contenciones.</p>
+        </section>
+
+        <section class="slide" id="problemas-concurrencia">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Problemas que puede producir la concurrencia</h2>
+            <ul>
+                <li><strong>Lectura sucia:</strong> se lee un cambio no confirmado que luego se revierte.</li>
+                <li><strong>Lectura no repetible:</strong> una fila vuelve a leerse con un valor distinto tras una
+                    modificación de otra transacción.</li>
+                <li><strong>Lectura fantasma:</strong> al repetir una consulta por condición, aparecen o
+                    desaparecen filas por cambios concurrentes.</li>
+                <li><strong>Actualización perdida:</strong> una escritura posterior sobrescribe el cambio de otra
+                    sesión.</li>
+            </ul>
+            <pre><code class="language-sql">-- Dos sesiones leen el mismo saldo; la segunda escritura puede sobrescribir la primera.
+SELECT saldo FROM cuentas WHERE id = 'X';
+
+-- Sesión A escribe el saldo calculado desde 1000.
+UPDATE cuentas SET saldo = 900 WHERE id = 'X';
+
+-- Sesión B escribe su propio saldo calculado desde el mismo valor inicial.
+UPDATE cuentas SET saldo = 950 WHERE id = 'X';</code></pre>
+            <figure class="didactic-image" role="img"
+                aria-label="Dos sesiones que calculan desde el mismo valor inicial pueden sobrescribirse entre sí.">
+                <svg viewBox="0 0 930 136" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <title>Ejemplo de actualización perdida</title>
+                    <rect x="24" y="22" width="245" height="91" rx="10" fill="#e7f3ff" stroke="#2980b9"
+                        stroke-width="2" />
+                    <text x="146" y="47" text-anchor="middle" font-family="Arial,sans-serif" font-size="13"
+                        font-weight="700" fill="#245c88">SALDO INICIAL</text>
+                    <text x="146" y="79" text-anchor="middle" font-family="Arial,sans-serif" font-size="18"
+                        font-weight="700" fill="#26334a">1000</text>
+                    <path d="M271 68 H340 M340 68 V34 H392 M340 68 V102 H392" fill="none" stroke="#5a4a86"
+                        stroke-width="2" />
+                    <rect x="404" y="15" width="190" height="42" rx="8" fill="#f7eafa" stroke="#8e5aa7"
+                        stroke-width="2" />
+                    <text x="499" y="41" text-anchor="middle" font-family="Arial,sans-serif" font-size="12"
+                        font-weight="700" fill="#704280">SESIÓN A → 900</text>
+                    <rect x="404" y="79" width="190" height="42" rx="8" fill="#fff3d6" stroke="#c68500"
+                        stroke-width="2" />
+                    <text x="499" y="105" text-anchor="middle" font-family="Arial,sans-serif" font-size="12"
+                        font-weight="700" fill="#996500">SESIÓN B → 950</text>
+                    <path d="M599 36 H660 M599 100 H660" stroke="#8795aa" stroke-width="2" />
+                    <rect x="672" y="28" width="233" height="77" rx="10" fill="#fce9e7" stroke="#cc665b"
+                        stroke-width="2" />
+                    <text x="788" y="58" text-anchor="middle" font-family="Arial,sans-serif" font-size="13"
+                        font-weight="700" fill="#9d4239">VALOR FINAL: 950</text>
+                    <text x="788" y="82" text-anchor="middle" font-family="Arial,sans-serif" font-size="10"
+                        fill="#26334a">el cambio de A se pierde</text>
+                </svg>
+                <figcaption>La última escritura puede ocultar una actualización calculada antes.</figcaption>
+            </figure>
+            <div class="warning-box">
+                <p>Este ejemplo describe dos sesiones que calculan un valor y luego lo escriben. El orden real de
+                    las operaciones, los bloqueos y el aislamiento determinan si el conflicto puede ocurrir.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="aislamiento">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Niveles de aislamiento</h2>
+            <p>El estándar SQL define niveles que equilibran protección frente a anomalías y concurrencia. El
+                comportamiento exacto puede variar entre motores.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nivel</th>
+                        <th>Lectura sucia</th>
+                        <th>No repetible</th>
+                        <th>Fantasma</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>READ UNCOMMITTED</code></td>
+                        <td>Puede ocurrir</td>
+                        <td>Puede ocurrir</td>
+                        <td>Puede ocurrir</td>
+                    </tr>
+                    <tr>
+                        <td><code>READ COMMITTED</code></td>
+                        <td>Evita</td>
+                        <td>Puede ocurrir</td>
+                        <td>Puede ocurrir</td>
+                    </tr>
+                    <tr>
+                        <td><code>REPEATABLE READ</code></td>
+                        <td>Evita</td>
+                        <td>Evita</td>
+                        <td>Depende del motor</td>
+                    </tr>
+                    <tr>
+                        <td><code>SERIALIZABLE</code></td>
+                        <td>Evita</td>
+                        <td>Evita</td>
+                        <td>Evita</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="info-box">
+                <p>La tabla resume el modelo ANSI; no predice por sí sola todos los comportamientos de MySQL,
+                    PostgreSQL u otros gestores. Comprueba la documentación del motor y el nivel configurado.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="bloqueos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Bloqueos compartidos y exclusivos</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Bloqueo</th>
+                        <th>Permite</th>
+                        <th>Limita</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Compartido</strong></td>
+                        <td>Varias lecturas compatibles.</td>
+                        <td>Escrituras incompatibles mientras se mantenga el bloqueo.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Exclusivo</strong></td>
+                        <td>Una operación que modifica los datos.</td>
+                        <td>Lecturas o escrituras conflictivas de otras sesiones.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>De fila</strong></td>
+                        <td>Bloquea los registros afectados.</td>
+                        <td>Solo impide operaciones en conflicto sobre esos registros.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>De tabla</strong></td>
+                        <td>Restringe el acceso a la tabla completa.</td>
+                        <td>Puede bloquear operaciones no relacionadas con la fila modificada.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="slide" id="bloqueos-de-fila">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Bloquear una fila para modificarla</h2>
+            <p>Un bloqueo exclusivo protege la fila seleccionada mientras la transacción decide si confirma o
+                revierte el cambio.</p>
+            <pre><code class="language-sql">-- Bloquea una fila y libera el bloqueo al confirmar.
+START TRANSACTION;
+
+SELECT id, salario
+FROM empleados
+WHERE id = 101
+FOR UPDATE;
+
+COMMIT;</code></pre>
+            <figure class="didactic-image" role="img"
+                aria-label="Los bloqueos compartidos permiten lecturas compatibles y los exclusivos protegen una modificación.">
+                <svg viewBox="0 0 930 130" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <title>Comparación de bloqueos compartidos y exclusivos</title>
+                    <rect x="25" y="20" width="420" height="91" rx="11" fill="#e7f3ff" stroke="#2980b9"
+                        stroke-width="2" />
+                    <text x="235" y="46" text-anchor="middle" font-family="Arial,sans-serif" font-size="14"
+                        font-weight="700" fill="#245c88">COMPARTIDO · LECTURA</text>
+                    <circle cx="145" cy="77" r="17" fill="#fff" stroke="#2980b9" stroke-width="2" />
+                    <circle cx="235" cy="77" r="17" fill="#fff" stroke="#2980b9" stroke-width="2" />
+                    <circle cx="325" cy="77" r="17" fill="#fff" stroke="#2980b9" stroke-width="2" />
+                    <text x="145" y="82" text-anchor="middle" font-family="Arial,sans-serif" font-size="11"
+                        font-weight="700" fill="#245c88">R</text>
+                    <text x="235" y="82" text-anchor="middle" font-family="Arial,sans-serif" font-size="11"
+                        font-weight="700" fill="#245c88">R</text>
+                    <text x="325" y="82" text-anchor="middle" font-family="Arial,sans-serif" font-size="11"
+                        font-weight="700" fill="#245c88">R</text>
+                    <rect x="485" y="20" width="420" height="91" rx="11" fill="#f7eafa" stroke="#8e5aa7"
+                        stroke-width="2" />
+                    <text x="695" y="46" text-anchor="middle" font-family="Arial,sans-serif" font-size="14"
+                        font-weight="700" fill="#704280">EXCLUSIVO · ESCRITURA</text>
+                    <rect x="665" y="59" width="60" height="36" rx="7" fill="#fff" stroke="#8e5aa7"
+                        stroke-width="2" />
+                    <text x="695" y="82" text-anchor="middle" font-family="Arial,sans-serif" font-size="11"
+                        font-weight="700" fill="#704280">W</text>
+                    <path d="M637 65 L753 91 M753 65 L637 91" stroke="#cc665b" stroke-width="3" />
+                </svg>
+                <figcaption>Las operaciones incompatibles esperan hasta que se libere el bloqueo.</figcaption>
+            </figure>
+            <div class="warning-box">
+                <p><code>FOR UPDATE</code> se usa dentro de una transacción y su soporte depende del gestor.
+                    <code>LOCK TABLES</code> tiene particularidades; en MySQL puede implicar una confirmación
+                    implícita. No mezcles ambos mecanismos sin revisar la documentación del motor.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="deadlocks">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Interbloqueos y buenas prácticas</h2>
+            <p>Un <em>deadlock</em> ocurre cuando dos transacciones esperan recursos retenidos entre sí. El motor
+                puede detectar el ciclo y cancelar una de las operaciones para que la otra continúe.</p>
+            <h3>Cómo reducir el riesgo</h3>
+            <ul>
+                <li>Mantén las transacciones breves y confirma o revierte cuanto antes.</li>
+                <li>Accede a las tablas y filas en el mismo orden desde procesos distintos.</li>
+                <li>Elige un nivel de aislamiento adecuado al trabajo.</li>
+                <li>Usa condiciones e índices apropiados para evitar lecturas innecesariamente amplias.</li>
+                <li>Prepara la aplicación para volver a intentar una transacción cancelada de forma segura.</li>
+            </ul>
+        </section>
+
+        <section class="slide" id="resumen">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>¿Qué has aprendido?</h2>
+            <ul>
+                <li><code>INSERT</code>, <code>UPDATE</code> y <code>DELETE</code> manipulan los registros.</li>
+                <li>Una clave foránea y sus acciones mantienen coherentes las tablas relacionadas.</li>
+                <li><code>BEGIN</code>, <code>COMMIT</code> y <code>ROLLBACK</code> controlan una transacción.</li>
+                <li>ACID resume las garantías de atomicidad, consistencia, aislamiento y durabilidad.</li>
+                <li>El aislamiento y los bloqueos ayudan a controlar la concurrencia y sus anomalías.</li>
+            </ul>
+        </section>
+
+        <section class="slide" id="glosario">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Glosario esencial</h2>
+            <ul>
+                <li><strong>DML:</strong> instrucciones para insertar, modificar y eliminar datos.</li>
+                <li><strong>Clave foránea:</strong> campo que relaciona una tabla con otra.</li>
+                <li><strong>Transacción:</strong> conjunto de operaciones que se confirma o se deshace.</li>
+                <li><strong>ACID:</strong> propiedades de atomicidad, consistencia, aislamiento y durabilidad.</li>
+                <li><strong>Lectura sucia:</strong> lectura de un cambio todavía no confirmado.</li>
+                <li><strong>Lectura fantasma:</strong> nuevas filas aparecen en una consulta repetida.</li>
+                <li><strong>Deadlock:</strong> ciclo de espera entre transacciones que retienen recursos.</li>
+            </ul>
+        </section>
+
+        <section class="slide" id="actividad1-tutorial">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Actividad 1: manipulación de datos</h2>
+            
+            <h3>Ejemplo guiado: Insertar empleados y aumentar el salario en un 5% a los empleados de Barcelona</h3>
+            <pre><code class="language-sql">-- Inserta varios empleados con distintos departamentos y ciudades.
+INSERT INTO empleados (id, nombre, salario, ciudad_trabajo, id_departamento)
+VALUES
+(101, 'Ana', 3000, 'Barcelona', 1),
+(102, 'Luis', 3200, 'Madrid', 2),
+(103, 'Marta', 3100, 'Barcelona', 1),
+(104, 'Jorge', 2900, 'Valencia', 3);
+
+-- Comprueba primero qué empleados de Barcelona cumplen la condición.
+SELECT id, nombre, salario
+FROM empleados
+WHERE ciudad_trabajo = 'Barcelona';
+
+-- Aplica el aumento del 5 % a esas filas.
+UPDATE empleados
+SET salario = salario * 1.05
+WHERE ciudad_trabajo = 'Barcelona';
+
+-- Vuelve a consultar para validar el resultado.
+SELECT id, nombre, salario
+FROM empleados
+WHERE ciudad_trabajo = 'Barcelona';</code></pre>
+            <ol>
+                <li>Comprueba los nombres de campos con la estructura real de la base.</li>
+                <li>Antes de cada <code>UPDATE</code> o <code>DELETE</code>, valida el filtro con un
+                    <code>SELECT</code>.
+                </li>
+                <li>Resuelve los otros ejercicios sin copiar este caso como respuesta.</li>
+                <li>Guarda las consultas y las capturas del resultado en los dos archivos solicitados.</li>
+            </ol>
+        </section>
+
+        <section class="slide" id="actividad2-tutorial">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Actividad 2: integridad referencial</h2>
+            
+            <h3>Ejemplo guiado: comportamiento de SET NULL</h3>
+            <pre><code class="language-sql">-- Define una relación que desvincula a los empleados si se elimina su departamento.
+ALTER TABLE empleados
+DROP FOREIGN KEY fk_empleado_departamento;
+
+ALTER TABLE empleados
+ADD CONSTRAINT fk_empleado_departamento
+FOREIGN KEY (id_departamento)
+REFERENCES departamentos(id)
+ON DELETE SET NULL;
+
+-- Comprueba qué empleados dependen del departamento antes de probar el borrado.
+SELECT id, nombre, id_departamento
+FROM empleados
+WHERE id_departamento = 2;</code></pre>
+            <div class="warning-box">
+                <p>La columna <code>id_departamento</code> debe permitir <code>NULL</code> para usar
+                    <code>SET NULL</code>. Antes de modificar la restricción existente, averigua su nombre real y
+                    revisa el esquema de la base.
+                </p>
+            </div>
+        </section>
+
+        <section class="slide" id="actividad3-tutorial">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Actividad 3: transacciones y control de errores</h2>
+            
+            <h3>Ejemplo guiado: comprobar y decidir</h3>
+            <pre><code class="language-sql">-- Cambia temporalmente el salario y comprueba el valor antes de decidir.
+START TRANSACTION;
+
+UPDATE empleados
+SET salario = salario - 100
+WHERE id = 101;
+
+SELECT id, salario
+FROM empleados
+WHERE id = 101;
+
+-- Ejecuta COMMIT si el resultado es correcto; en caso contrario, ejecuta ROLLBACK.
+ROLLBACK;</code></pre>
+            <div class="warning-box">
+                <p>La decisión entre <code>COMMIT</code> y <code>ROLLBACK</code> se toma después de revisar el
+                    resultado. No ejecutes ambos como parte de la misma prueba ni uses bloques
+                    <code>IF</code> de rutinas almacenadas como si fueran SQL interactivo.
+                </p>
+            </div>
+        </section>
+
+        <section class="slide" id="actividad4-tutorial">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Actividad 4: concurrencia, bloqueos y ACID</h2>
+            <div class="info-box">
+                <p><strong>Enunciado:</strong> simula dos sesiones que actualizan el mismo salario, aplica los
+                    niveles <code>READ COMMITTED</code> y <code>SERIALIZABLE</code>, usa
+                    <code>LOCK TABLE empleados WRITE</code> y analiza su impacto, describe un caso real que
+                    incumpla una propiedad ACID y demuestra una lectura fantasma.
+                </p>
+                <p><strong>Entrega:</strong> archivo SQL y PDF con pasos de cada sesión, capturas y justificación.</p>
+            </div>
+            <h3>Guía de simulación</h3>
+            <ol>
+                <li>Abre dos sesiones independientes conectadas a una base de pruebas.</li>
+                <li>Usa una fila identificable y anota el valor inicial antes de iniciar los cambios.</li>
+                <li>Repite el mismo caso con ambos niveles de aislamiento y registra cuándo puede leer o escribir
+                    cada sesión.</li>
+                <li>Para la lectura fantasma, repite una consulta por rango mientras la segunda sesión inserta una
+                    fila que cumpla ese rango.</li>
+                <li>Documenta esperas, errores y resultados; libera cualquier bloqueo al terminar.</li>
+            </ol>
+            <h3>Sesión A: leer la fila con READ COMMITTED</h3>
+            <pre><code class="language-sql">-- Abre una transacción y lee el salario antes de que lo cambie la otra sesión.
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+START TRANSACTION;
+
+SELECT id, salario
+FROM empleados
+WHERE id = 101;</code></pre>
+            <h3>Sesión B: modificar el mismo registro</h3>
+            <pre><code class="language-sql">-- Cambia el salario mientras la transacción de la sesión A sigue abierta.
+UPDATE empleados
+SET salario = salario + 100
+WHERE id = 101;</code></pre>
+            <h3>Sesión A: repetir la lectura y terminar</h3>
+            <pre><code class="language-sql">-- Observa el valor y confirma para liberar los recursos retenidos.
+SELECT id, salario
+FROM empleados
+WHERE id = 101;
+
+COMMIT;</code></pre>
+            <h3>Repetir con SERIALIZABLE</h3>
+            <pre><code class="language-sql">-- En una nueva prueba, cambia el aislamiento antes de abrir la transacción.
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+START TRANSACTION;
+
+SELECT id, salario
+FROM empleados
+WHERE id = 101;
+
+-- Coordina manualmente la consulta y el cambio desde la segunda sesión.
+COMMIT;</code></pre>
+            <h3>Probar el bloqueo de tabla solicitado</h3>
+            <pre><code class="language-sql">-- En una sesión de pruebas, bloquea la tabla para escritura y luego libera el bloqueo.
+LOCK TABLES empleados WRITE;
+UNLOCK TABLES;</code></pre>
+            <div class="warning-box">
+                <p>Haz estas pruebas solo en una base de datos de prácticas y con dos sesiones propias. En MySQL,
+                    <code>LOCK TABLES</code> puede provocar una confirmación implícita y el comportamiento
+                    depende del motor y del cliente; revisa cómo liberar el bloqueo antes de ejecutarlo.
+                </p>
+            </div>
+        </section>
+
+    </div>
+
+    <div class="footer">
+        <div class="bar">
+            <small>UT5 · Manipulación y transacciones · LinkiaFP</small>
+            <small>© Vicente Català Ruiz · 2026</small>
+        </div>
+    </div>
+</body>
+
+</html>

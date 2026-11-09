@@ -1,0 +1,845 @@
+<!doctype html>
+<html lang="es"><head><script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20261019-04-fd46897","C":{"Abril Fatface":"YACgEZbkUVE,0","Albert Sans":"YAHO2HRfeh4,0","Alfa Slab One":"YACgEYS9sJU,0","Anton":"YACgEcYqQ-A,0","Archivo Black":"YACgEZulLoA,0","Archivo":"YAHO2-t-jNE,0","Arial":"YAGyDvJ_4Ts,0","Baloo 2":"YAHO2IcQUcM,0","Barlow Condensed":"YAFdJljEuFc,0","Barlow":"YAFdJsyuOPM,1","Bebas Neue":"YACgESME5ew,0","Bricolage Grotesque":"YAFyMcdwzpc,0","Cairo":"YAFdtXpDzlQ,0","Canva Sans":"YAFdJjTk5UU,1","Caveat":"YALBs2ploWQ,0","Cinzel":"YACgEeV8bIQ,0","Cormorant Garamond":"YAFdJhX-538,0","Courier New":"YAGzXiGs0_8,0","Courier Prime":"YAD1aFjegN8,0","DM Sans":"YAD1aU3sLnI,0","DM Serif Display":"YAD1aYG82rc,0","Figtree":"YAHO2b-mV7A,0","Forum":"YACgEcnnqB4,0","Fraunces":"YAFdJpU7Kkk,0","Fredoka":"YACgEZml080,0","Georgia":"YAGzXkO0pEM,0","Hanken Grotesk":"YAHO2VB9G0I,0","Helvetica":"YAFcf7zkXN0,0","IBM Plex Mono":"YAFdJkmvhGI,0","IBM Plex Sans":"YAFdJgT0SHI,0","Impact":"YAFcfnjI7Vk,0","Instrument Sans":"YAHO2bKyaSQ,0","Instrument Serif":"YAHFeOnZNEk,0","Inter":"YAFdJvSyp_k,3","Italiana":"YAHO2Toik_w,0","Jacques Francois":"YAHO2a5g66Q,0","JetBrains Mono":"YAFdJksXcAk,0","Josefin Sans":"YAFdJjvw9Ps,0","Karla":"YAHO2V2NSXM,0","Lato":"YAFdJuFCnaw,0","Libre Baskerville":"YACgEUFdPdA,0","Libre Caslon Display":"YAHO2XhLmt0,0","Lobster":"YAD8SnSjSFI,0","Lora":"YACgEXvxf8Q,0","Manrope":"YAHO2b2feC4,0","Merriweather":"YACgEXvHxxs,0","Montserrat":"YAFdtQi73Xs,0","Noto Sans JP":"YAFdJiHXlcI,0","Noto Sans KR":"YAGsojZj-RQ,0","Nunito Sans":"YAFdtQJYB9w,1","Nunito":"YAFdJoNRMmU,1","Oleo Script":"YACgEQQ14jI,0","Open Sans":"YAFdJt8dAY0,1","Oswald":"YACgEQY10lw,0","Outfit":"YAHO2nVlg14,0","Pacifico":"YADLjORQ1u4,0","Playfair Display":"YAFdJhem5V8,1","Plus Jakarta Sans":"YAHO2gdhi18,0","Poppins":"YAFdJjbTu24,1","Press Start 2P":"YAFyGr-8pmQ,0","Public Sans":"YAFdJj8NdaU,1","Quicksand":"YAFdJpYtCxE,1","Raleway":"YAFdJhmxbVQ,1","Roboto Slab":"YAFdJswIKAg,0","Rockwell":"YAFcfyVZnN0,0","Rye":"YACgEdQP21k,0","STIX Two Text":"YAHO2joycuk,0","Sarabun":"YAFdJssSnME,0","Schibsted Grotesk":"YAHO2sWydRk,0","Segoe UI":"YAHNdRD1Klw,0","Source Sans 3":"YAG4lO1Mj10,0","Space Grotesk":"YAHO2sjPCSM,0","Space Mono":"YADW1-vpsoc,0","Spectral":"YAHO2rVUHIM,0","Times New Roman":"YAGzXW3gftg,0","Trebuchet MS":"YAFcfrglpVA,0","Ubuntu":"YACgERDU--Q,0","Verdana":"YAGzXTctYtQ,0","Work Sans":"YAGXhLOKv44,0","Yellowtail":"YACgEYG4kG4,0"}}');</script><script src="/_sdk/05db820ba1544614.telemetry_sdk.js" integrity="sha512-a7JzkQDDcioSXpM61nxTfeRW7PcxWQy5+BrhyeTFmQFsXJ+Gncm0y50u7fTA7qOPegFnRgqCfa0mGUOK1yjDWQ=="></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UT2 · Seguridad física y lógica de sistemas</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root{--pink:#ce1677;--navy:#192132;--ink:#39475d;--paper:#f5f6f9;--line:#dce2e9;--green:#147d62;--amber:#93600b}
+    *{box-sizing:border-box}
+    html{scroll-behavior:auto}
+    body{margin:0;width:100%;font-family:"DM Sans",sans-serif;color:var(--navy)}
+    .document{width:100%;max-width:1200px;margin:0 auto;padding:32px clamp(16px,4vw,52px) 70px}
+     .sheet{position:relative;background:white;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 12px 36px #1921320a;margin-bottom:22px}
+     .sheet::before{content:"";position:absolute;z-index:2;top:16px;left:clamp(18px,3vw,32px);width:112px;height:36px;background:url("../../assets/linkia/logo_linkia_black.png") left center/contain no-repeat}
+     .inner{padding:clamp(22px,4vw,48px);padding-top:70px}
+    .chapter{border-top:7px solid var(--pink)}
+     .chapter-heading{padding:70px clamp(22px,4vw,48px) 28px;background:linear-gradient(110deg,#fff 55%,#fff1f8);border-bottom:1px solid #f0d6e4}
+    .chapter-heading h2{margin:6px 0 0;color:var(--pink);font-weight:800;letter-spacing:-.035em;line-height:1.16}
+     .chapter-head{padding:70px clamp(22px,4vw,48px) 28px;background:linear-gradient(110deg,#fff 55%,#fff1f8);border-bottom:1px solid #f0d6e4}
+    .chapter-head h2{margin:6px 0 0;color:var(--pink);font-weight:800;letter-spacing:-.035em;line-height:1.16}
+    .chapter-body{padding:clamp(22px,4vw,48px)}
+    .section-description{margin:8px 0 0;color:var(--ink);font-size:0.96rem;line-height:1.6}
+    .chapter-heading .section-description{margin-top:10px;color:#5e697d}
+    .statement,.explanation{border:1px solid var(--line);border-radius:16px;padding:22px 20px;background:#fbfcfe}
+    .statement{background:#f7f8fb;border-left:5px solid var(--pink)}
+    .explanation{background:#ffffff;border-left:5px solid var(--green)}
+    .statement h3,.explanation h3{margin-bottom:12px}
+    .examples{margin-top:16px;padding-top:14px;border-top:1px dashed #d7dfe9}
+    .example-label{display:block;margin:12px 0 8px;color:var(--pink);font:700 12px "Space Mono",monospace;letter-spacing:.08em;text-transform:uppercase}
+    .command{display:block;margin:8px 0 6px;padding:10px 12px;border-radius:10px;background:var(--navy);color:white;font:12px/1.5 "Space Mono",monospace;overflow-wrap:anywhere;box-shadow:0 4px 10px rgba(25,33,50,.12)}
+    .command-note{margin:0 0 10px;color:var(--ink);font-size:14px}
+    .flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:14px 12px;margin:14px 0;border:1px solid #e2ccda;border-radius:12px;background:#fff7fb;color:var(--navy);font-weight:700}
+    .flow b{color:var(--pink)}
+    h1{font-weight:800;line-height:1.07;letter-spacing:-.045em;margin:12px 0}
+    h3{font-size:1.18rem;line-height:1.25;font-weight:800;margin:0 0 11px}
+    h4{font-size:1rem;font-weight:800;margin:0 0 8px}
+    p,li{line-height:1.55}
+    p{margin:0 0 12px}
+    ul,ol{padding-left:21px;margin:0}
+    li+li{margin-top:6px}
+    .eyebrow{font:700 11px "Space Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:#a01261}
+    .muted{color:#526074}
+    .grid-2,.grid-3{display:grid;gap:15px}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .card{background:#f7f8fb;border:1px solid var(--line);border-radius:14px;padding:20px;min-width:0}
+    .card p,.card li{font-size:14px;color:var(--ink)}
+    .card p:last-child{margin-bottom:0}
+    .accent{border-left:4px solid var(--pink)}
+    .success{border-left:4px solid var(--green);background:#effaf5}
+    .warning{border-left:4px solid #d69122;background:#fff8e9;color:#684710}
+    .dark{background:var(--navy);color:white;border-color:var(--navy)}
+    .dark p,.dark li{color:#e1e8f3}
+    .topic{margin-top:27px}
+    .topic:first-child{margin-top:0}
+    .topic>h3{color:var(--navy);padding-bottom:9px;border-bottom:2px solid #f1d0e1}
+    .photo{width:100%;height:270px;object-fit:cover;border-radius:12px}
+    .cover-photo{width:100%;height:100%;min-height:340px;object-fit:cover}
+    figure{margin:0}
+    figcaption{font-size:12px;color:#526074;margin-top:8px}
+    .cover{display:grid;grid-template-columns:1.05fr .95fr}
+    .cover-copy{padding:clamp(28px,5vw,62px);align-self:center}
+    .cover-copy h1{color:var(--pink);font-size:clamp(34px,4vw,56px)}
+    .cover-question{margin-top:28px;padding:18px;border-left:4px solid var(--pink);background:#fff0f7;font-weight:700}
+    .diagram{border:1px solid #d9c5d1;border-radius:15px;background:#fbf7fa;padding:20px;margin:18px 0}
+    .diagram-title{font-weight:800;color:#8e1455;margin-bottom:14px}
+    .flow{display:flex;align-items:stretch;gap:7px;flex-wrap:wrap}
+    .node{flex:1 1 115px;background:white;border:1px solid #e9c1d5;border-radius:10px;padding:11px;text-align:center;font-size:13px;font-weight:700;min-width:0}
+    .arrow{align-self:center;color:var(--pink);font-size:20px;font-weight:800}
+    .stack{display:grid;gap:7px;max-width:670px;margin:auto}
+    .stack-item{display:flex;align-items:center;justify-content:center;gap:10px;border:1px solid #b8c7d8;background:#edf2f8;border-radius:9px;padding:10px;font-weight:700;text-align:left}
+    .stack-item img{width:42px;height:42px;object-fit:cover;border-radius:8px;border:1px solid #d5dfe9;flex-shrink:0}
+    .stack-item small{display:block;font-size:11px;line-height:1.4;color:#526074;font-weight:500;margin-top:3px}
+    .stack-item:nth-child(2){margin:0 5%}.stack-item:nth-child(3){margin:0 11%}.stack-item:nth-child(4){margin:0 17%;background:#e5f5ef;border-color:#9bcab7}
+    .visual-label{display:inline-block;font:700 11px "Space Mono",monospace;color:#8e1455;background:#fff0f7;padding:6px 10px;border-radius:30px;margin-bottom:12px}
+    .concept{font-size:32px;line-height:1.3;text-align:center;color:var(--navy);padding:20px 8px;word-break:break-word}
+    .concept small{display:block;font-size:13px;color:#526074;margin-top:8px}
+    pre{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--navy);color:#eef3ff;border-radius:10px;padding:15px;font:12px/1.65 "Space Mono",monospace;margin:12px 0 0}
+    .exercise{padding:25px;border:1px solid var(--line);border-left:5px solid var(--pink);border-radius:15px;background:#fbfcfe;margin-top:18px}
+    .exercise h3{color:var(--navy);margin:7px 0 16px}
+    .exercise dt{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#991255;margin-top:14px}
+    .exercise dd{margin:5px 0 0;font-size:14px;line-height:1.55;color:var(--ink)}
+    .exercise .expected{color:var(--green);font-weight:700}
+    .exercise pre{margin-top:13px}
+    .sources li,.glossary li{overflow-wrap:anywhere}
+    .glossary{columns:2;column-gap:32px}
+    .glossary li{break-inside:avoid;margin-bottom:9px}
+    .footer{text-align:center;color:#526074;font-size:12px;padding:15px}
+     @media(max-width:760px){.sheet::before{width:96px;height:31px;top:12px;left:18px}.inner{padding-top:60px}.chapter-heading,.chapter-head{padding-top:60px}.cover,.grid-2,.grid-3{grid-template-columns:1fr}.cover-photo{height:250px;min-height:0}.glossary{columns:1}.document{padding:12px 12px 34px}.arrow{display:none}.flow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:420px){.flow{grid-template-columns:1fr}.photo{height:210px}}
+    @media print{body{background:white!important}.document{padding:0}.sheet{box-shadow:none;break-inside:avoid}.exercise{break-inside:avoid}}
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  <script src="/_sdk/570d53629f0b998d.data_sdk.js" type="text/javascript" integrity="sha512-JEN39+V+Nvv9ZZOVS8vNk1iA9ErZJHTdgOw9KzPuMiK7m0I+KPEr/wmTnCFIQVsDjCZgJWfGnFi1IQh2Io2qyA=="></script>
+  <script src="/_sdk/27a73d0f6d576f4d.editing_sdk.js" type="text/javascript" integrity="sha512-0x+G+gK8ndpjUSDbA089Mrgu5PHq4v9Csb0QtQHziS+rPUPoxPkx7w9quugJtYtMDiv2wfqmcYtCInS0i6eOvg=="></script>
+  <script src="/_sdk/03eb2403dcb2c820.resizing_sdk.js" type="text/javascript" integrity="sha512-3rStQpeHJ9SpUz/tPWj3qoOTc5Wdb4M77IFGFVtMTQ/GLbCg6/OVP+yWZaTo/YDzpJdLk+FvEXzvR4ZNQQ4/HQ=="></script>
+ </head>
+ <body data-template-id="__page-root" class="w-full" style="background: rgb(245, 246, 249);">
+  <main class="document">
+   <section class="sheet cover" aria-labelledby="page-title">
+    <div class="cover-copy"><span class="eyebrow">ASIX · ASIX-CIBER </span>
+     <h1 id="page-title" data-template-id="page-title" class="canva-text" style="color: rgb(206, 22, 119); font-weight: 800; font-style: normal; font-size: 48px;">UT 2. Seguridad física y lógica de sistemas</h1>
+     <p data-template-id="page-subtitle" class="canva-text muted" style="color: rgb(82, 96, 116); font-weight: 400; font-style: normal; font-size: 16px;">Seguridad en Sistemas, Redes y Servicios</p>
+     <div class="cover-question">
+      <p data-template-id="opening-question" class="canva-text" style="color: rgb(25, 33, 50); font-weight: 700; font-style: normal; font-size: 16px;">¿De qué sirve proteger un servidor si cualquiera puede entrar físicamente?</p>
+     </div>
+    </div>
+    <figure><img data-template-id="hero-image" class="canva-image cover-photo" loading="lazy" src="https://images.pexels.com/photos/37730211/pexels-photo-37730211.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1280" alt="Armario de servidores con iluminación azul en un centro de datos">
+    </figure>
+   </section>
+   <section class="sheet inner" aria-labelledby="objectives-title"><span class="eyebrow">MARCO DE LA UNIDAD</span>
+    <h2 id="objectives-title" data-template-id="objectives-title" class="canva-text" style="color: rgb(206, 22, 119); font-weight: 800; margin: 8px 0px 18px; font-style: normal; font-size: 24px;">Objetivos y tríada CIA</h2>
+    <p class="section-description">Esta unidad introduce los principios básicos de la seguridad informática y explica cómo proteger activos, personas y servicios frente a incidentes de distinto tipo.</p>
+    <p data-template-id="objectives-intro" class="canva-text muted" style="color: rgb(82, 96, 116); font-weight: 400; font-style: normal; font-size: 16px;">Distinguir seguridad física y lógica; seleccionar controles para proteger información, instalaciones y servicios; verificar los resultados mediante evidencias.</p>
+    <div class="grid-3">
+     <div class="card">
+      <h3>Confidencialidad</h3>
+      <p>Solo accede quien está autorizado.</p>
+     </div>
+     <div class="card">
+      <h3>Integridad</h3>
+      <p>Los datos y sistemas no sufren cambios indebidos.</p>
+     </div>
+     <div class="card">
+      <h3>Disponibilidad</h3>
+      <p>Los servicios pueden utilizarse cuando se necesitan.</p>
+     </div>
+    </div>
+    <div class="diagram" role="img" aria-label="Defensa en profundidad: controles físicos, sistema y red, datos y evidencias">
+     <div class="diagram-title">
+      Esquema · defensa en profundidad
+     </div>
+     <div class="stack">
+      <div class="stack-item">
+       
+       <div>
+        01 · Perímetro y acceso físico<br>
+        <small>Controla quién entra y qué zonas puede visitar.</small>
+       </div>
+      </div>
+      <div class="stack-item">
+       
+       <div>
+        02 · Sistema, identidad y red<br>
+        <small>Reforza autenticación, permisos y protección de la red.</small>
+       </div>
+      </div>
+      <div class="stack-item">
+       
+       <div>
+        03 · Datos, cifrado y recuperación<br>
+        <small>Protege la información y garantiza la continuidad del servicio.</small>
+       </div>
+      </div>
+      <div class="stack-item">
+       
+       <div>
+        04 · Registros y evidencias<br>
+        <small>Genera trazabilidad para detectar y analizar incidentes.</small>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="diagram">
+        <img src="../../assets/linkia/seguridad-perimetro.webp"></div>
+    </div>
+   </section>
+   <section class="sheet chapter" aria-labelledby="physical-title">
+    <div class="chapter-heading">
+     <span class="eyebrow">BLOQUE 01 / 05</span>
+     <h2 id="physical-title" data-template-id="physical-title" class="canva-text" style="color: rgb(206, 22, 119); font-weight: 800; font-style: normal; font-size: 24px;">1. Seguridad física en entornos TIC</h2>
+     <p class="section-description">Se analiza cómo proteger instalaciones, accesos y equipos críticos para evitar incidentes derivados del entorno físico.</p>
+    </div>
+    <div class="inner">
+     <div class="grid-2">
+      <figure>
+       <img data-template-id="datacenter-image" class="canva-image photo" loading="lazy" src="https://images.pexels.com/photos/17323801/pexels-photo-17323801.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Sala de servidores moderna con equipos de red e iluminación azul">
+       <figcaption>
+        Sala de servidores: instalación y equipos críticos.
+       </figcaption>
+      </figure>
+      <div class="card accent">
+       <h3>El lugar también es una superficie de ataque</h3>
+       <ul>
+        <li>Proteger perímetro, salas de servidores y zonas restringidas.</li>
+        <li>Autorizar cada acceso y registrar entradas y salidas.</li>
+        <li>Combinar vigilancia con continuidad operativa.</li>
+       </ul>
+      </div>
+     </div>
+     <div class="topic">
+      <h3>1.1 Perímetro, accesos y visitantes</h3>
+      <div class="grid-3">
+       <div class="card">
+        <h4>Perímetro</h4>
+        <p>Puertas, barreras, iluminación, sensores e inspecciones periódicas.</p>
+       </div>
+       <div class="card">
+        <h4>Zona restringida</h4>
+        <p>Permiso según función y riesgo. Tarjeta RFID/NFC, PIN o biometría según el entorno.</p>
+       </div>
+       <div class="card">
+        <h4>Visitantes</h4>
+        <p>Registrar motivo, responsable y horas; usar credencial temporal y acompañamiento.</p>
+       </div>
+      </div>
+      <div class="diagram" role="img" aria-label="Flujo de control físico: perímetro, zona restringida, credencial y registro">
+       <div class="diagram-title">
+        Recorrido de acceso físico
+       </div>
+       <div class="flow">
+        <div class="node">
+         Perímetro
+        </div><span class="arrow">→</span>
+        <div class="node">
+         Zona restringida
+        </div><span class="arrow">→</span>
+        <div class="node">
+         Credencial
+        </div><span class="arrow">→</span>
+        <div class="node">
+         Registro
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="topic">
+      <h3>1.2 CCTV y protección de grabaciones</h3>
+      <div class="grid-2">
+       <figure>
+        <img data-template-id="cctv-image" class="canva-image photo" loading="lazy" src="https://images.pexels.com/photos/430208/pexels-photo-430208.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Dos cámaras de vigilancia instaladas en una pared de hormigón">
+        <figcaption>
+         Vigilancia de accesos y áreas críticas.
+        </figcaption>
+       </figure>
+       <div class="card">
+        <ul>
+         <li>Cubrir entradas y puntos críticos sin puntos ciegos; proteger cámaras y grabadores.</li>
+         <li>Registrar identidad, hora, punto de acceso, método y resultado.</li>
+         <li>Sincronizar relojes mediante NTP para comparar vídeo y eventos.</li>
+         <li>Restringir y auditar el acceso a las grabaciones; definir la retención según normativa y política aplicable.</li>
+        </ul>
+       </div>
+      </div>
+     </div>
+     <div class="topic">
+      <h3>1.3 Continuidad física</h3>
+      <div class="grid-3">
+       <div class="card">
+        <h4>SAI</h4>
+        <p>Dimensionar carga y autonomía; probar baterías, alertas y apagado seguro.</p>
+       </div>
+       <div class="card">
+        <h4>Climatización</h4>
+        <p>Supervisar temperatura, humedad y flujo de aire; mantener sistemas críticos.</p>
+       </div>
+       <div class="card">
+        <h4>Incendio y desastre</h4>
+        <p>Detección, extinción apropiada, evacuación, copias y plan de recuperación.</p>
+       </div>
+      </div>
+      <div class="card warning" style="margin-top:15px">
+       <strong>Prioridad:</strong> proteger a las personas, preservar las evidencias y recuperar los servicios siguiendo el plan de contingencia.
+      </div>
+     </div>
+    </div>
+   </section>
+   <section class="sheet chapter" aria-labelledby="hardening-title">
+    <div class="chapter-heading">
+     <span class="eyebrow">BLOQUE 02 / 05</span>
+     <h2 id="hardening-title" data-template-id="hardening-title" class="canva-text" style="color: rgb(206, 22, 119); font-weight: 800; font-style: normal; font-size: 24px;">2. Configuración segura (hardening)</h2>
+     <p class="section-description">Se reducen los riesgos de los sistemas mediante políticas de acceso, cifrado, parches y control del software instalado.</p>
+    </div>
+    <div class="inner">
+     <div class="grid-2">
+      <div class="card accent">
+       <h3>Reducir la superficie de ataque</h3>
+       <ul>
+        <li>Partir de una baseline adecuada para la versión instalada.</li>
+        <li>Inventariar servicios y comprobar dependencias antes de deshabilitarlos.</li>
+        <li>Aplicar mínimos privilegios, verificar y documentar cada cambio.</li>
+       </ul>
+      </div>
+      <figure>
+       <img data-template-id="server-image" class="canva-image photo" loading="lazy" src="https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Detalle de un armario de servidores con luces de actividad">
+       <figcaption>
+        Servidor protegido mediante controles complementarios.
+       </figcaption>
+      </figure>
+     </div>
+     <div class="topic">
+      <h3>2.1 Benchmarks CIS · Windows y Linux</h3>
+      <p>Los benchmarks CIS ofrecen recomendaciones comprobables. CIS-CAT ayuda a identificar desviaciones; ninguna recomendación debe aplicarse sin revisar la función del sistema.</p>
+      <div class="diagram" role="img" aria-label="Comparación de controles de hardening para Windows y Linux">
+       <div class="diagram-title">
+        Comparación · dos sistemas, el mismo principio
+       </div>
+       <div class="grid-2">
+        <div class="card">
+         <span class="visual-label">TERMINAL WINDOWS</span>
+         <h4>Windows</h4>
+         <ul>
+          <li>GPO y grupos para políticas de acceso.</li>
+          <li>Permisos NTFS y servicios con PowerShell.</li>
+          <li>Firewall y auditoría con auditpol.</li>
+         </ul>
+        </div>
+        <div class="card">
+         <span class="visual-label">TERMINAL LINUX</span>
+         <h4>Linux</h4>
+         <ul>
+          <li>Servicios con systemctl.</li>
+          <li>Permisos, grupos y sudoers.</li>
+          <li>Firewall, PAM y auditd.</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="topic">
+      <h3>2.2 Identidades y credenciales</h3>
+      <div class="grid-3">
+       <div class="card">
+        <h4>Cuentas y grupos</h4>
+        <p>Identidades individuales, permisos por función y revisión de cuentas inactivas.</p>
+       </div>
+       <div class="card">
+        <h4>PAM</h4>
+        <p>Políticas de autenticación de Linux para servicios, contraseñas y bloqueo.</p>
+       </div>
+       <div class="card">
+        <h4>MFA</h4>
+        <p>Combina factores distintos: algo que sabes, tienes o eres; prioriza accesos sensibles.</p>
+       </div>
+      </div>
+     </div>
+     <div class="topic">
+      <h3>2.3 Cifrado, TLS y arranque seguro</h3>
+      <div class="grid-3">
+       <div class="card">
+        <span class="visual-label">DISCO CIFRADO</span>
+        <div class="concept" aria-hidden="true">
+         ◉ ─ 🔒<small>BitLocker / LUKS</small>
+        </div>
+        <p>Proteger datos en reposo y conservar claves de recuperación seguras y probadas.</p>
+       </div>
+       <div class="card">
+        <span class="visual-label">CERTIFICADO TLS</span>
+        <div class="concept" aria-hidden="true">
+         Cliente → ◈ → Servidor<small>Certificado X.509 · TLS</small>
+        </div>
+        <p>Proteger datos en tránsito; validar certificado, protocolos y renovación.</p>
+       </div>
+       <div class="card">
+        <span class="visual-label">ARRANQUE SEGURO</span>
+        <div class="concept" aria-hidden="true">
+         UEFI → Secure Boot → TPM<small>Firmas · integridad · claves</small>
+        </div>
+        <p>Verificar componentes de arranque y proteger claves mediante hardware compatible.</p>
+       </div>
+      </div>
+      <p class="card warning" style="margin-top:15px">Los secretos no deben quedar en texto plano ni en el código fuente. El cifrado no sustituye los controles físicos ni las copias de seguridad.</p>
+     </div>
+     <div class="topic">
+      <h3>2.4 Parches, mantenimiento y rollback</h3>
+      <p>WSUS administra actualizaciones Windows; Apt, Yum/DNF y Ansible permiten gestionar y automatizar cambios según el entorno.</p>
+      <div class="diagram" role="img" aria-label="Flujo de parches: detectar, evaluar, probar, desplegar, registrar y revertir si es necesario">
+       <div class="diagram-title">
+        Flujo de gestión de parches
+       </div>
+       <div class="flow">
+        <div class="node">
+         Detectar
+        </div><span class="arrow">→</span>
+        <div class="node">
+         Evaluar
+        </div><span class="arrow">→</span>
+        <div class="node">
+         Probar
+        </div><span class="arrow">→</span>
+        <div class="node">
+         Desplegar
+        </div><span class="arrow">→</span>
+        <div class="node">
+         Registrar
+        </div><span class="arrow">→</span>
+        <div class="node">
+         Revertir si falla
+        </div>
+       </div>
+      </div>
+      <div class="grid-2">
+       <div class="card success">
+        <h4>Antes</h4>
+        <p>Respaldo o snapshot validado, aprobación, pruebas y ventana comunicada.</p>
+       </div>
+       <div class="card warning">
+        <h4>Si falla</h4>
+        <p>Detener el despliegue, preservar registros y ejecutar un rollback previamente probado.</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+   <section class="sheet chapter" aria-labelledby="audit-title">
+    <div class="chapter-heading">
+     <span class="eyebrow">BLOQUE 03 / 05</span>
+     <h2 id="audit-title" data-template-id="audit-title" class="canva-text" style="color: rgb(206, 22, 119); font-weight: 800; font-style: normal; font-size: 24px;">3. Registro y auditoría</h2>
+     <p class="section-description">La trazabilidad y la sincronización horaria permiten demostrar qué ocurrió, cuándo y quién lo hizo.</p>
+    </div>
+    <div class="inner">
+     <div class="grid-2">
+      <div>
+       <h3>3.1 Logs, NTP y evidencias</h3>
+       <ul>
+        <li>Capturar accesos, cambios, errores y actividad sospechosa.</li>
+        <li>Sincronizar la hora de sistemas y controles físicos.</li>
+        <li>Definir retención, permisos, integridad y copias de las evidencias.</li>
+       </ul>
+      </div>
+      <figure>
+       <img data-template-id="audit-image" class="canva-image photo" loading="lazy" src="https://images.pexels.com/photos/12969403/pexels-photo-12969403.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Ordenador portátil que muestra un panel de análisis de datos">
+       <figcaption>
+        Visualización ilustrativa de un panel de análisis; no representa datos de la UT2.
+       </figcaption>
+      </figure>
+     </div>
+     <div class="diagram" role="img" aria-label="Flujo de auditoría: evento, agente o reenvío, recolector, correlación, alerta e informe">
+      <div class="diagram-title">
+       Flujo de auditoría
+      </div>
+      <div class="flow">
+       <div class="node">
+        Evento
+       </div><span class="arrow">→</span>
+       <div class="node">
+        Agente / WEF
+       </div><span class="arrow">→</span>
+       <div class="node">
+        Recolector
+       </div><span class="arrow">→</span>
+       <div class="node">
+        Correlación
+       </div><span class="arrow">→</span>
+       <div class="node">
+        Alerta e informe
+       </div>
+      </div>
+     </div>
+     <div class="grid-2">
+      <div class="card">
+       <h3>3.2 Centralización</h3>
+       <p>Wazuh, Elastic y Windows Event Forwarding permiten reunir y consultar eventos de distintos equipos.</p>
+      </div>
+      <div class="card">
+       <h3>3.3 Auditoría automatizada</h3>
+       <p>Scripts, Ansible y PowerShell DSC ayudan a detectar desviaciones y elaborar informes con evidencia y acciones correctivas.</p>
+      </div>
+     </div>
+     <h3 class="topic">Comandos de consulta y verificación</h3>
+     <pre data-template-id="audit-commands" class="canva-text" style="color: rgb(238, 243, 255); font-weight: 400; font-style: normal; font-size: 12px;">Windows: Get-WinEvent -FilterHashtable @{LogName='Security';Id=4624}
+Windows: w32tm /resync
+Linux: journalctl -xe
+Linux: grep 'Failed password' /var/log/auth.log
+Linux: timedatectl set-ntp true</pre>
+    </div>
+   </section>
+   <section class="sheet chapter" aria-labelledby="protection-title">
+    <div class="chapter-heading">
+     <span class="eyebrow">BLOQUE 04 / 05</span>
+     <h2 id="protection-title" data-template-id="protection-title" class="canva-text" style="color: rgb(206, 22, 119); font-weight: 800; font-style: normal; font-size: 24px;">4. Herramientas de protección</h2>
+     <p class="section-description">Se presentan los principales controles tecnológicos para detectar amenazas, filtrar tráfico y limitar accesos no autorizados.</p>
+    </div>
+    <div class="inner">
+     <div class="grid-3">
+      <div class="card">
+       <h3>4.1 EDR y antimalware</h3>
+       <p>Detectan comportamientos anómalos y permiten investigar o aislar un equipo afectado.</p>
+      </div>
+      <div class="card">
+       <h3>4.1 Firewall y dispositivos</h3>
+       <p>Limitar tráfico por aplicación o puerto y controlar dispositivos USB e impresoras.</p>
+      </div>
+      <div class="card">
+       <h3>4.2 Software aprobado</h3>
+       <p>Inventario, listas permitidas o denegadas, reputación y análisis aislado mediante sandboxing.</p>
+      </div>
+     </div>
+     <p class="muted" style="margin-top:18px">Ejemplos de reglas de cortafuegos del PDF:</p>
+     <pre data-template-id="firewall-commands" class="canva-text" style="color: rgb(238, 243, 255); font-weight: 400; font-style: normal; font-size: 12px;">Windows: netsh advfirewall firewall add rule name="Bloquear puerto 1234" dir=in action=block protocol=TCP localport=1234
+Linux: sudo ufw deny 1234/tcp</pre>
+    </div>
+   </section>
+   <section class="sheet chapter" aria-labelledby="practice-title">
+    <div class="chapter-heading">
+     <span class="eyebrow">BLOQUE 05 / 05</span>
+     <h2 id="practice-title" data-template-id="practice-title" class="canva-text" style="color: rgb(206, 22, 119); font-weight: 800; font-style: normal; font-size: 24px;">5. Prácticas y laboratorio</h2>
+     <p class="section-description">Las actividades propuestas permiten aplicar medidas de endurecimiento, análisis de evidencias y recuperación ante fallos reales.</p>
+    </div>
+    <div class="inner">
+     <p>Las prácticas reúnen configuración segura, investigación de evidencias y continuidad ante cambios fallidos. Cada tarjeta contiene el planteamiento y una solución orientativa visible.</p>
+     <div class="card warning">
+      <strong data-template-id="lab-warning" class="canva-text" style="color: rgb(104, 71, 16); font-weight: 700; font-style: normal; font-size: 16px;">Probar los comandos primero en laboratorio y adaptarlos a la versión del sistema</strong>
+     </div>
+     <article class="exercise" aria-labelledby="exercise-one-title"><span class="eyebrow">EJERCICIO 01 · HARDENING CIS</span>
+      <h3 id="exercise-one-title" data-template-id="exercise-one-title" class="canva-text" style="color: rgb(25, 33, 50); font-weight: 800; font-style: normal; font-size: 19px;">5.1 Endurecimiento guiado de una imagen de SO</h3>
+      <dl>
+       <dt>
+        Objetivo
+       </dt>
+       <dd>
+        Reducir la superficie de ataque y documentar una baseline.
+       </dd>
+       <dt>
+        Escenario
+       </dt>
+       <dd>
+        Máquina Windows o Linux de laboratorio con servicios y permisos por revisar.
+       </dd>
+       <dt>
+        Pasos
+       </dt>
+       <dd>
+        1. Elegir el checklist CIS de la versión. 2. Inventariar servicios y dependencias. 3. Revisar privilegios y cortafuegos. 4. Comprobar auditoría y documentar los cambios.
+       </dd>
+       <dt>
+        Resultado esperado
+       </dt>
+       <dd class="expected">
+        Baseline revisada, controles comprobados y cambios documentados.
+       </dd>
+       <dt>
+        Solución orientativa
+       </dt>
+       <dd>
+        Deshabilitar solo lo innecesario; limitar permisos y conexiones; verificar que los eventos relevantes quedan registrados.
+       </dd>
+      </dl>
+      <pre data-template-id="exercise-one-code" class="canva-text" style="color: rgb(238, 243, 255); font-weight: 400; font-style: normal; font-size: 12px;">Windows: Get-Service · Set-Service · auditpol
+Linux: systemctl · ls -ld · chmod · chown · visudo
+Firewall: sudo ufw deny 1234/tcp</pre>
+     </article>
+     <article class="exercise" aria-labelledby="exercise-two-title"><span class="eyebrow">EJERCICIO 02 · INVESTIGACIÓN</span>
+      <h3 id="exercise-two-title" data-template-id="exercise-two-title" class="canva-text" style="color: rgb(25, 33, 50); font-weight: 800; font-style: normal; font-size: 19px;">5.2 Investigar un acceso sospechoso</h3>
+      <dl>
+       <dt>
+        Objetivo
+       </dt>
+       <dd>
+        Correlacionar evidencias físicas y lógicas.
+       </dd>
+       <dt>
+        Escenario
+       </dt>
+       <dd>
+        Una entrada en una zona restringida coincide con actividad de inicio de sesión.
+       </dd>
+       <dt>
+        Pasos
+       </dt>
+       <dd>
+        1. Consultar CCTV y control de accesos. 2. Verificar sincronización horaria. 3. Distinguir eventos correctos y fallidos. 4. Elaborar una cronología y conservar evidencias.
+       </dd>
+       <dt>
+        Resultado esperado
+       </dt>
+       <dd class="expected">
+        Cronología y alerta fundamentadas, sin atribuciones no demostradas.
+       </dd>
+       <dt>
+        Solución orientativa
+       </dt>
+       <dd>
+        Cruzar identidad, hora, punto de acceso, resultado y vídeo. En Windows, 4624 indica inicio de sesión correcto y 4625 fallido; ninguno prueba por sí solo una entrada física.
+       </dd>
+      </dl>
+      <pre data-template-id="exercise-two-code" class="canva-text" style="color: rgb(238, 243, 255); font-weight: 400; font-style: normal; font-size: 12px;">Windows: Get-WinEvent -FilterHashtable @{LogName='Security';Id=4624}
+Windows: w32tm /resync
+Linux: journalctl -xe
+Linux: grep 'Failed password' /var/log/auth.log</pre>
+     </article>
+     <article class="exercise" aria-labelledby="exercise-three-title"><span class="eyebrow">EJERCICIO 03 · CONTINUIDAD</span>
+      <h3 id="exercise-three-title" data-template-id="exercise-three-title" class="canva-text" style="color: rgb(25, 33, 50); font-weight: 800; font-style: normal; font-size: 19px;">5.3 Gestionar y revertir un parche problemático</h3>
+      <dl>
+       <dt>
+        Objetivo
+       </dt>
+       <dd>
+        Actualizar manteniendo la continuidad del servicio.
+       </dd>
+       <dt>
+        Escenario
+       </dt>
+       <dd>
+        Una actualización provoca fallos en un servicio tras su despliegue.
+       </dd>
+       <dt>
+        Pasos
+       </dt>
+       <dd>
+        1. Preparar backup o snapshot. 2. Probar en un entorno de pruebas. 3. Aplicar en la ventana acordada. 4. Verificar el servicio. 5. Si falla, revertir y registrar.
+       </dd>
+       <dt>
+        Resultado esperado
+       </dt>
+       <dd class="expected">
+        Servicio verificado o estado anterior recuperado, con evidencia del cambio.
+       </dd>
+       <dt>
+        Solución orientativa
+       </dt>
+       <dd>
+        Elegir WSUS, Ansible, Apt o Yum según el entorno; detener un despliegue fallido y aplicar el procedimiento de rollback probado.
+       </dd>
+      </dl>
+      <pre data-template-id="exercise-three-code" class="canva-text" style="color: rgb(238, 243, 255); font-weight: 400; font-style: normal; font-size: 12px;">Windows: Checkpoint-Computer -Description "PrePatchBackup"
+Windows: Restore-Computer -RestorePoint 1
+Linux: sudo apt update &amp;&amp; sudo apt upgrade
+Snapshot LVM: sudo lvcreate --size 1G --snapshot --name root_snap /dev/vg0/root
+Rollback LVM: sudo lvconvert --merge /dev/vg0/root_snap</pre>
+     </article>
+    </div>
+   </section>
+   <section class="sheet inner" aria-labelledby="case-title"><span class="eyebrow">APLICACIÓN INTEGRADORA</span>
+    <h2 id="case-title" data-template-id="case-title" class="canva-text" style="color: rgb(206, 22, 119); font-weight: 800; margin: 8px 0px 18px; font-style: normal; font-size: 24px;">Caso práctico · acceso fuera de horario</h2>
+    <div class="card dark">
+     <p>Se detecta una entrada fuera de horario en la sala de servidores y, minutos después, un inicio de sesión fallido y cambios en un servicio. ¿Qué harías primero y cómo demostrarías lo sucedido?</p>
+    </div>
+    <div class="diagram" role="img" aria-label="Respuesta a una incidencia: detectar, contener, preservar, analizar, recuperar y documentar">
+     <div class="diagram-title">
+      Diagrama de respuesta a una incidencia
+     </div>
+     <div class="flow">
+      <div class="node">
+       Detectar
+      </div><span class="arrow">→</span>
+      <div class="node">
+       Contener
+      </div><span class="arrow">→</span>
+      <div class="node">
+       Preservar
+      </div><span class="arrow">→</span>
+      <div class="node">
+       Analizar
+      </div><span class="arrow">→</span>
+      <div class="node">
+       Recuperar
+      </div><span class="arrow">→</span>
+      <div class="node">
+       Documentar
+      </div>
+     </div>
+    </div>
+    <div class="grid-2">
+     <div class="card">
+      <h3>Evidencias</h3>
+      <p>Registro físico, CCTV, relojes NTP, eventos del host, inventario y baseline.</p>
+     </div>
+     <div class="card">
+      <h3>Respuesta orientativa</h3>
+      <p>Coordinar contención física y lógica; preservar la cronología; verificar dependencias antes de cambiar servicios; abrir un ticket con acciones, responsable y comprobación final. No atribuir la entrada basándose solo en un evento del sistema.</p>
+     </div>
+    </div>
+   </section>
+   <section class="sheet inner" aria-labelledby="conclusions-title"><span class="eyebrow">CIERRE</span>
+    <h2 id="conclusions-title" data-template-id="conclusions-title" class="canva-text" style="color: rgb(206, 22, 119); font-weight: 800; margin: 8px 0px 18px; font-style: normal; font-size: 24px;">Conclusiones · ¿qué has aprendido?</h2>
+    <div class="grid-3">
+     <div class="card">
+      <h3>01 · Capas</h3>
+      <p>La seguridad física, la lógica y la organización se necesitan mutuamente.</p>
+     </div>
+     <div class="card">
+      <h3>02 · Mantenimiento</h3>
+      <p>Mínimos privilegios, cifrado y MFA requieren revisión y actualizaciones.</p>
+     </div>
+     <div class="card">
+      <h3>03 · Evidencia</h3>
+      <p>Sin registros, pruebas y recuperación no hay un control verificable.</p>
+     </div>
+    </div>
+   </section>
+   <section class="sheet inner" aria-labelledby="sources-title">
+    <h2 id="sources-title" data-template-id="sources-title" class="canva-text" style="color: rgb(206, 22, 119); font-weight: 800; margin: 0px 0px 15px; font-style: normal; font-size: 24px;">Fuentes de información</h2>
+    <ul class="sources">
+     <li>Center for Internet Security. CIS Benchmarks — https://www.cisecurity.org/cis-benchmarks</li>
+     <li>Microsoft Learn. BitLocker overview — https://learn.microsoft.com</li>
+     <li>Red Hat. Security hardening in Linux — https://access.redhat.com</li>
+     <li>NIST. Guide to General Server Security, SP 800-123 — https://csrc.nist.gov</li>
+     <li>Wazuh. Documentation — https://documentation.wazuh.com</li>
+     <li>ISO/IEC 27001. Information security management systems — Requirements.</li>
+    </ul>
+    <p class="muted" style="margin-top:16px;font-size:13px">Fotografías ilustrativas: Pexels. Referencias docentes: PDF de la UT2 aportado.</p>
+   </section>
+   <section class="sheet inner" aria-labelledby="glossary-title">
+    <h2 id="glossary-title" data-template-id="glossary-title" class="canva-text" style="color: rgb(206, 22, 119); font-weight: 800; margin: 0px 0px 15px; font-style: normal; font-size: 24px;">Glosario</h2>
+    <ul class="glossary">
+     <li><strong>Hardening:</strong> configuración segura para reducir vulnerabilidades y superficie de ataque.</li>
+     <li><strong>Benchmark CIS:</strong> guía de configuraciones recomendadas para sistemas y aplicaciones.</li>
+     <li><strong>MFA:</strong> verificación mediante dos o más factores distintos.</li>
+     <li><strong>BitLocker / LUKS:</strong> tecnologías de cifrado de disco para Windows y Linux.</li>
+     <li><strong>TPM:</strong> hardware que protege claves y permite medir integridad.</li>
+     <li><strong>TLS:</strong> protocolo de protección de comunicaciones en red.</li>
+     <li><strong>WSUS:</strong> distribución controlada de actualizaciones Windows.</li>
+     <li><strong>Ansible:</strong> automatización de configuración y parches.</li>
+     <li><strong>Log:</strong> registro de eventos de un sistema o aplicación.</li>
+     <li><strong>EDR:</strong> detección y respuesta en equipos finales.</li>
+     <li><strong>Sandboxing:</strong> ejecución aislada para analizar software.</li>
+    </ul>
+   </section>
+   
+
+
+   <section class="sheet chapter" aria-labelledby="a1-title">
+    <div class="chapter-head"><span class="eyebrow">ACTIVIDAD 01 · SEGURIDAD FÍSICA</span>
+     <h2 id="a1-title" data-template-id="a1-title" class="canva-text" style="color: rgb(206, 22, 119); font-weight: 800; font-style: normal; font-size: 23px;">Proteger un centro de datos pequeño</h2>
+    </div>
+    <div class="chapter-body">
+     <div data-template-id="a1-statement-card" class="canva-card card statement" style="background: rgb(247, 248, 251);">
+      <h3 data-template-id="a1-statement-title" class="canva-text" style="color: rgb(142, 20, 85); font-weight: 800; font-style: normal; font-size: 18px;">ENUNCIADO</h3>
+      <p data-template-id="a1-statement" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Diseña el perímetro y las zonas restringidas de un centro de datos pequeño. Explica el acceso con tarjeta, PIN o biometría, la atención a visitantes y el registro de entradas. Justifica tus elecciones e incluye ejemplos de Windows y Linux.</p>
+     </div>
+     <div data-template-id="a1-explanation-card" class="canva-card card explanation" style="background: rgb(255, 255, 255);">
+      <h3 data-template-id="a1-explanation-title" class="canva-text" style="color: rgb(142, 20, 85); font-weight: 800; font-style: normal; font-size: 18px;">EXPLICACIÓN</h3>
+      <ol>
+       <li data-template-id="a1-step-1" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Dibuja el recorrido: perímetro → recepción → zona restringida → sala de servidores. Indica quién puede pasar por cada zona.</li>
+       <li data-template-id="a1-step-2" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Elige tarjeta, PIN o biometría para cada acceso. Escribe una razón sencilla para cada elección.</li>
+       <li data-template-id="a1-step-3" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Explica cómo se identifica y autoriza a un visitante, quién lo acompaña y cómo se registra su entrada y salida.</li>
+       <li data-template-id="a1-step-4" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Indica qué guarda el registro: persona, zona, fecha, hora y resultado del intento de acceso.</li>
+      </ol>
+      <div class="examples">
+       <p data-template-id="a1-examples-title" class="canva-text example-label" style="color: rgb(142, 20, 85); font-weight: 800; font-style: normal; font-size: 15px;">Ejemplos de acceso lógico</p><span data-template-id="a1-win-command" class="canva-text command" style="background: rgb(25, 33, 50); color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 15px;">Get-WinEvent -LogName Security -MaxEvents 20</span>
+       <p data-template-id="a1-win-note" class="canva-text command-note" style="color: rgb(82, 96, 116); font-weight: 400; font-style: normal; font-size: 15px;">Windows: muestra eventos recientes de seguridad. Una captura demuestra que se pueden consultar registros del sistema.</p><span data-template-id="a1-linux-command" class="canva-text command" style="background: rgb(25, 33, 50); color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 15px;">id usuario</span>
+       <p data-template-id="a1-linux-note" class="canva-text command-note" style="color: rgb(82, 96, 116); font-weight: 400; font-style: normal; font-size: 15px;">Linux: muestra los grupos de una cuenta. Una captura demuestra a qué grupos pertenece. Sustituye «usuario» por una cuenta del laboratorio.</p>
+       <p data-template-id="a1-command-limit" class="canva-text command-note" style="color: rgb(82, 96, 116); font-weight: 400; font-style: normal; font-size: 15px;">Estos comandos revisan accesos al sistema. No demuestran que se haya abierto una puerta física.</p>
+      </div>
+      <ol start="5">
+       <li data-template-id="a1-step-5" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Entrega el plano de zonas, una lista de permisos por persona o grupo y capturas de los comandos y de un registro de acceso. Explica qué muestra cada captura.</li>
+      </ol>
+     </div>
+    </div>
+   </section>
+   <section class="sheet chapter" aria-labelledby="a2-title">
+    <div class="chapter-head"><span class="eyebrow">ACTIVIDAD 02 · CCTV</span>
+     <h2 id="a2-title" data-template-id="a2-title" class="canva-text" style="color: rgb(206, 22, 119); font-weight: 800; font-style: normal; font-size: 23px;">Cámaras, grabaciones y registros</h2>
+    </div>
+    <div class="chapter-body">
+     <div data-template-id="a2-statement-card" class="canva-card card statement" style="background: rgb(247, 248, 251);">
+      <h3 data-template-id="a2-statement-title" class="canva-text" style="color: rgb(142, 20, 85); font-weight: 800; font-style: normal; font-size: 18px;">ENUNCIADO</h3>
+      <p data-template-id="a2-statement" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Configura un CCTV básico para un entorno TIC. Selecciona cámaras y dibuja la red. Explica los registros de acceso y las grabaciones, la hora, la conservación y la protección. Incluye comandos de monitorización en Windows y Linux.</p>
+     </div>
+     <div data-template-id="a2-explanation-card" class="canva-card card explanation" style="background: rgb(255, 255, 255);">
+      <h3 data-template-id="a2-explanation-title" class="canva-text" style="color: rgb(142, 20, 85); font-weight: 800; font-style: normal; font-size: 18px;">EXPLICACIÓN</h3>
+      <ol>
+       <li data-template-id="a2-step-1" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Marca en un plano las entradas y zonas que necesitan cámaras. Elige cada cámara según la luz, la distancia y la zona que debe cubrir.</li>
+       <li data-template-id="a2-step-2" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Dibuja el recorrido de la imagen y señala dónde se graba.</li>
+      </ol>
+      <div class="flow" aria-label="Esquema de CCTV"><span data-template-id="a2-flow-1" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Cámaras</span><b aria-hidden="true">→</b> <span data-template-id="a2-flow-2" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Red CCTV</span><b aria-hidden="true">→</b> <span data-template-id="a2-flow-3" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">NVR/DVR</span><b aria-hidden="true">→</b> <span data-template-id="a2-flow-4" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Almacenamiento</span>
+      </div>
+      <ol start="3">
+       <li data-template-id="a2-step-3" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Indica quién puede ver o exportar grabaciones. Registra cada acceso. Sincroniza la hora de cámaras y grabador mediante NTP.</li>
+       <li data-template-id="a2-step-4" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Explica cuánto tiempo se conservan las imágenes según la política y la normativa aplicables. Protege el acceso y el borrado; no inventes un plazo universal.</li>
+      </ol>
+      <div class="examples">
+       <p data-template-id="a2-examples-title" class="canva-text example-label" style="color: rgb(142, 20, 85); font-weight: 800; font-style: normal; font-size: 15px;">Ejemplos de monitorización</p><span data-template-id="a2-win-command" class="canva-text command" style="background: rgb(25, 33, 50); color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 15px;">Get-Service</span>
+       <p data-template-id="a2-win-note" class="canva-text command-note" style="color: rgb(82, 96, 116); font-weight: 400; font-style: normal; font-size: 15px;">Windows: muestra los servicios del equipo de grabación o monitorización. La captura permite revisar si el servicio previsto funciona.</p><span data-template-id="a2-linux-command" class="canva-text command" style="background: rgb(25, 33, 50); color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 15px;">timedatectl status</span>
+       <p data-template-id="a2-linux-note" class="canva-text command-note" style="color: rgb(82, 96, 116); font-weight: 400; font-style: normal; font-size: 15px;">Linux: muestra la hora y el estado de sincronización. La captura ayuda a comprobar la hora del equipo.</p>
+      </div>
+      <ol start="5">
+       <li data-template-id="a2-step-5" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Entrega el plano de cámaras, el esquema de red y capturas de una grabación de prueba, la hora sincronizada y los registros. Indica qué prueba cada imagen.</li>
+      </ol>
+     </div>
+    </div>
+   </section>
+   <section class="sheet chapter" aria-labelledby="a3-title">
+    <div class="chapter-head"><span class="eyebrow">ACTIVIDAD 03 · HARDENING</span>
+     <h2 id="a3-title" data-template-id="a3-title" class="canva-text" style="color: rgb(206, 22, 119); font-weight: 800; font-style: normal; font-size: 23px;">Configurar Windows y Linux de forma segura</h2>
+    </div>
+    <div class="chapter-body">
+     <div data-template-id="a3-statement-card" class="canva-card card statement" style="background: rgb(247, 248, 251);">
+      <h3 data-template-id="a3-statement-title" class="canva-text" style="color: rgb(142, 20, 85); font-weight: 800; font-style: normal; font-size: 18px;">ENUNCIADO</h3>
+      <p data-template-id="a3-statement" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Refuerza una imagen de Windows y otra de Linux con recomendaciones CIS. Detecta y deshabilita servicios innecesarios. Configura contraseñas y mínimos privilegios. Documenta los pasos y comandos usados.</p>
+     </div>
+     <div data-template-id="a3-explanation-card" class="canva-card card explanation" style="background: rgb(255, 255, 255);">
+      <h3 data-template-id="a3-explanation-title" class="canva-text" style="color: rgb(142, 20, 85); font-weight: 800; font-style: normal; font-size: 18px;">EXPLICACIÓN</h3>
+      <ol>
+       <li data-template-id="a3-step-1" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Anota la versión de cada sistema. Consulta la guía CIS que corresponda a esa versión. Guarda una captura del estado inicial.</li>
+       <li data-template-id="a3-step-2" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Busca servicios que no necesitas. Comprueba para qué sirven antes de deshabilitarlos. Mantén una forma de recuperar el acceso.</li>
+       <li data-template-id="a3-step-3" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Aplica la política de contraseñas, concede solo los permisos necesarios, activa la auditoría y revisa los parches.</li>
+      </ol>
+      <div class="examples">
+       <p data-template-id="a3-win-title" class="canva-text example-label" style="color: rgb(142, 20, 85); font-weight: 800; font-style: normal; font-size: 15px;">Windows</p><span data-template-id="a3-win-command" class="canva-text command" style="background: rgb(25, 33, 50); color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 15px;">Get-Service</span>
+       <p data-template-id="a3-win-note" class="canva-text command-note" style="color: rgb(82, 96, 116); font-weight: 400; font-style: normal; font-size: 15px;">Muestra los servicios y su estado. Guarda el resultado antes y después del cambio para comparar.</p><span data-template-id="a3-win-audit-command" class="canva-text command" style="background: rgb(25, 33, 50); color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 15px;">auditpol /get /category:*</span>
+       <p data-template-id="a3-win-audit-note" class="canva-text command-note" style="color: rgb(82, 96, 116); font-weight: 400; font-style: normal; font-size: 15px;">Muestra la auditoría configurada. Su salida permite comprobar qué eventos se registran.</p>
+       <p data-template-id="a3-linux-title" class="canva-text example-label" style="color: rgb(142, 20, 85); font-weight: 800; font-style: normal; font-size: 15px;">Linux</p><span data-template-id="a3-linux-command" class="canva-text command" style="background: rgb(25, 33, 50); color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 15px;">systemctl list-unit-files --state=enabled</span>
+       <p data-template-id="a3-linux-note" class="canva-text command-note" style="color: rgb(82, 96, 116); font-weight: 400; font-style: normal; font-size: 15px;">Lista servicios habilitados. Ayuda a decidir cuáles revisar; no indica por sí solo que sobren.</p><span data-template-id="a3-linux-update-command" class="canva-text command" style="background: rgb(25, 33, 50); color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 15px;">apt list --upgradable</span>
+       <p data-template-id="a3-linux-update-note" class="canva-text command-note" style="color: rgb(82, 96, 116); font-weight: 400; font-style: normal; font-size: 15px;">En sistemas que usan APT, muestra paquetes con actualizaciones disponibles. Adapta la herramienta a tu distribución.</p>
+      </div>
+      <ol start="4">
+       <li data-template-id="a3-step-4" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Prueba que el sistema sigue funcionando. Documenta cada cambio, la recomendación CIS usada y el resultado observado.</li>
+       <li data-template-id="a3-step-5" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Entrega capturas antes y después de Windows y Linux: servicios, políticas, permisos, auditoría y parches. Añade una prueba de funcionamiento.</li>
+      </ol>
+     </div>
+    </div>
+   </section>
+   <section class="sheet chapter" aria-labelledby="a4-title">
+    <div class="chapter-head"><span class="eyebrow">ACTIVIDAD 04 · IDENTIDADES</span>
+     <h2 id="a4-title" data-template-id="a4-title" class="canva-text" style="color: rgb(206, 22, 119); font-weight: 800; font-style: normal; font-size: 23px;">Cuentas, grupos, PAM y MFA</h2>
+    </div>
+    <div class="chapter-body">
+     <div data-template-id="a4-statement-card" class="canva-card card statement" style="background: rgb(247, 248, 251);">
+      <h3 data-template-id="a4-statement-title" class="canva-text" style="color: rgb(142, 20, 85); font-weight: 800; font-style: normal; font-size: 18px;">ENUNCIADO</h3>
+      <p data-template-id="a4-statement" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Configura cuentas y grupos en Windows y Linux. Usa PAM para la autenticación avanzada en Linux y habilita MFA. Explica el bloqueo y la rotación de contraseñas con políticas y ejemplos de comandos.</p>
+     </div>
+     <div data-template-id="a4-explanation-card" class="canva-card card explanation" style="background: rgb(255, 255, 255);">
+      <h3 data-template-id="a4-explanation-title" class="canva-text" style="color: rgb(142, 20, 85); font-weight: 800; font-style: normal; font-size: 18px;">EXPLICACIÓN</h3>
+      <ol>
+       <li data-template-id="a4-step-1" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Crea una cuenta por persona y grupos según la función. Explica qué puede hacer cada grupo.</li>
+      </ol>
+      <div class="flow" aria-label="Flujo de acceso"><span data-template-id="a4-flow-1" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Identidad</span><b aria-hidden="true">→</b> <span data-template-id="a4-flow-2" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Grupo</span><b aria-hidden="true">→</b> <span data-template-id="a4-flow-3" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Autenticación</span><b aria-hidden="true">→</b> <span data-template-id="a4-flow-4" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Permisos</span><b aria-hidden="true">→</b> <span data-template-id="a4-flow-5" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Auditoría</span>
+      </div>
+      <ol start="2">
+       <li data-template-id="a4-step-2" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">En Linux, explica qué regla de PAM se usa para comprobar el acceso. Prueba los cambios en laboratorio y conserva una forma de entrar si algo falla.</li>
+       <li data-template-id="a4-step-3" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Activa MFA en un servicio compatible. Combina dos factores distintos, por ejemplo contraseña y aplicación de autenticación.</li>
+       <li data-template-id="a4-step-4" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Escribe la política de intentos fallidos, bloqueo y cambio de contraseña. Usa valores aprobados para el laboratorio; no presentes un plazo como obligatorio para todos.</li>
+      </ol>
+      <div class="examples">
+       <p data-template-id="a4-examples-title" class="canva-text example-label" style="color: rgb(142, 20, 85); font-weight: 800; font-style: normal; font-size: 15px;">Ejemplos para comprobar</p><span data-template-id="a4-win-command" class="canva-text command" style="background: rgb(25, 33, 50); color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 15px;">Get-LocalGroupMember -Group "Administrators"</span>
+       <p data-template-id="a4-win-note" class="canva-text command-note" style="color: rgb(82, 96, 116); font-weight: 400; font-style: normal; font-size: 15px;">Windows: muestra los miembros del grupo administrador. La captura ayuda a comprobar quién tiene permisos elevados. Adapta el nombre del grupo al idioma del sistema.</p><span data-template-id="a4-linux-command" class="canva-text command" style="background: rgb(25, 33, 50); color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 15px;">id usuario</span>
+       <p data-template-id="a4-linux-note" class="canva-text command-note" style="color: rgb(82, 96, 116); font-weight: 400; font-style: normal; font-size: 15px;">Linux: muestra los grupos de la cuenta indicada. La captura demuestra su pertenencia después de renovar la sesión.</p><span data-template-id="a4-linux-lock-command" class="canva-text command" style="background: rgb(25, 33, 50); color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 15px;">faillock --user usuario</span>
+       <p data-template-id="a4-linux-lock-note" class="canva-text command-note" style="color: rgb(82, 96, 116); font-weight: 400; font-style: normal; font-size: 15px;">Linux: muestra fallos de acceso si el sistema utiliza pam_faillock. La captura ayuda a comprobar la política de bloqueo.</p>
+      </div>
+      <ol start="5">
+       <li data-template-id="a4-step-5" class="canva-text" style="font-weight: 400; font-style: normal; font-size: 15px;">Entrega capturas de cuentas y grupos, ajustes de PAM y MFA, un acceso permitido, otro denegado y el registro de ambos. Oculta contraseñas y códigos de recuperación.</li>
+      </ol>
+     </div>
+    </div>
+  
+   </section>
+   <footer class="footer">
+    UT2 · Seguridad en Sistemas, Redes y Servicios · ASIX / ASIX-CIBER
+   </footer>
+  </main>
+ 
+</body></html>

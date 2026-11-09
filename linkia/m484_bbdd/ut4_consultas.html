@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UT4 · Realización de consultas · LinkiaFP</title>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', () => hljs.highlightAll());</script>
+    <script src="../script.js" defer></script>
+    <style>
+        .didactic-image {
+            max-width: 860px;
+            margin: 10px auto 18px;
+            padding: 8px 14px;
+            border: 1px solid #e0e5ef;
+            border-radius: 12px;
+            background: #f8faff;
+        }
+
+        .didactic-image svg {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .didactic-image figcaption {
+            margin-top: 4px;
+            color: #444;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        .cover .didactic-image {
+            max-width: 660px;
+            margin: 18px 0;
+            background: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="deck">
+        <section class="slide cover" id="portada">
+            <div style="max-width: 70%;">
+                <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="LinkiaFP">
+                <div class="title">UT4 · Realización de consultas</div>
+                <div class="subtitle">Bases de datos · SQL</div>
+           
+                
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;" alt="LinkiaFP">
+            </div>
+        </section>
+
+        <section class="slide" id="objetivos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Objetivos de la unidad</h2>
+           
+           
+            <ul>
+                <li>Construir consultas SQL y recuperar datos relevantes.</li>
+                <li>Filtrar, comparar, calcular y ordenar resultados.</li>
+                <li>Relacionar tablas con <code>INNER JOIN</code> y <code>LEFT JOIN</code>.</li>
+                <li>Resumir datos con funciones de agregación, <code>GROUP BY</code> y <code>HAVING</code>.</li>
+                <li>Utilizar subconsultas y vistas.</li>
+                <li>Interpretar un plan de ejecución y aplicar mejoras básicas.</li>
+            </ul>
+        </section>
+
+        
+
+        <section class="slide" id="estructura-sql">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>4.1. Lenguaje SQL: estructura y sintaxis</h2>
+            
+            <p>SQL (<em>Structured Query Language</em>) permite consultar y gestionar bases de datos relacionales.
+                Una consulta de selección combina cláusulas para indicar columnas, tabla, filtros y orden.</p>
+            <pre><code class="language-sql">SELECT nombre, salario -- Indica las columnas que queremos mostrar
+FROM empleados -- Indica la tabla de origen
+WHERE salario &gt; 30000 -- Conserva solo los salarios mayores que 30000
+ORDER BY salario DESC; -- Ordena del salario más alto al más bajo</code></pre>
+            <ul>
+                <li><code>SELECT</code>: columnas que se devuelven.</li>
+                <li><code>FROM</code>: tabla o tablas consultadas.</li>
+                <li><code>WHERE</code>: condición aplicada a cada fila.</li>
+                <li><code>ORDER BY</code>: orden de presentación.</li>
+            </ul>
+<figure class="didactic-image" role="img" aria-label="Las clausulas SQL mantienen un orden sintactico fijo.">
+<svg viewBox="0 0 930 158" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><title>Anatomia de una consulta SQL</title><rect x="29" y="12" width="621" height="132" rx="8" fill="#17243a" stroke="#101827" stroke-width="2"/><rect x="29" y="12" width="621" height="24" rx="8" fill="#28364e" stroke="#28364e" stroke-width="2"/><circle cx="48" cy="24" r="5" fill="#f07178" stroke="none" stroke-width="1"/><circle cx="65" cy="24" r="5" fill="#eabf63" stroke="none" stroke-width="1"/><circle cx="82" cy="24" r="5" fill="#6dc995" stroke="none" stroke-width="1"/><text x="101" y="28" font-family="Arial,sans-serif" font-size="9" fill="#dbe5f4" font-weight="400" text-anchor="start">consulta.sql</text><text x="55" y="58" font-family="Arial,sans-serif" font-size="12" fill="#82d4ff" font-weight="700" text-anchor="start">SELECT</text><text x="177" y="58" font-family="Arial,sans-serif" font-size="11" fill="#e9eff8" font-weight="400" text-anchor="start">columnas</text><text x="34" y="58" font-family="Arial,sans-serif" font-size="9" fill="#8997ad" font-weight="400" text-anchor="start">1</text><text x="55" y="80" font-family="Arial,sans-serif" font-size="12" fill="#82d4ff" font-weight="700" text-anchor="start">FROM</text><text x="177" y="80" font-family="Arial,sans-serif" font-size="11" fill="#e9eff8" font-weight="400" text-anchor="start">tabla origen</text><text x="34" y="80" font-family="Arial,sans-serif" font-size="9" fill="#8997ad" font-weight="400" text-anchor="start">2</text><text x="55" y="102" font-family="Arial,sans-serif" font-size="12" fill="#82d4ff" font-weight="700" text-anchor="start">WHERE</text><text x="177" y="102" font-family="Arial,sans-serif" font-size="11" fill="#e9eff8" font-weight="400" text-anchor="start">filtro opcional</text><text x="34" y="102" font-family="Arial,sans-serif" font-size="9" fill="#8997ad" font-weight="400" text-anchor="start">3</text><text x="55" y="124" font-family="Arial,sans-serif" font-size="12" fill="#82d4ff" font-weight="700" text-anchor="start">ORDER BY</text><text x="177" y="124" font-family="Arial,sans-serif" font-size="11" fill="#e9eff8" font-weight="400" text-anchor="start">orden opcional</text><text x="34" y="124" font-family="Arial,sans-serif" font-size="9" fill="#8997ad" font-weight="400" text-anchor="start">4</text><rect x="699" y="24" width="207" height="105" rx="11" fill="#fff3d6" stroke="#c68500" stroke-width="2"/><text x="802" y="53" font-family="Arial,sans-serif" font-size="13" fill="#996500" font-weight="700" text-anchor="middle">ORDEN FIJO</text><text x="802" y="79" font-family="Arial,sans-serif" font-size="10" fill="#26334a" font-weight="400" text-anchor="middle">SELECT -&gt; FROM</text><text x="802" y="103" font-family="Arial,sans-serif" font-size="10" fill="#53627a" font-weight="400" text-anchor="middle">filtros opcionales</text></svg>
+<figcaption>Las clausulas SQL mantienen un orden sintactico fijo.</figcaption>
+</figure>
+<div class="info-box">
+                <p>La consulta se escribe con un orden sintáctico fijo. No es necesario poner cada cláusula:
+                    <code>WHERE</code> y <code>ORDER BY</code> son opcionales.</p>
+            </div>
+</section>
+        <section class="slide" id="consultas-simples">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>4.2. Consultas simples con SELECT</h2>
+            
+            <p>Selecciona solo la información necesaria. El asterisco devuelve todas las columnas y es útil para
+                explorar, pero en una consulta final es mejor enumerar las columnas.</p>
+            <pre><code class="language-sql">--Devuelve el título y el salario de cada oferta
+SELECT titulo, salario FROM Ofertas; -- Consulta todas las filas de Ofertas
+
+-- Misma consulta con alias
+SELECT titulo AS puesto, salario AS salario_euros FROM Ofertas;</code></pre>
+<figure class="didactic-image" role="img" aria-label="SELECT decide que columnas aparecen en el resultado.">
+<svg viewBox="0 0 930 153" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><title>Proyeccion de columnas y alias</title><text x="30" y="20" font-family="Arial,sans-serif" font-size="11" fill="#35445d" font-weight="700" text-anchor="start">TABLA: Ofertas</text><rect x="30" y="27" width="455" height="108" rx="3" fill="#fff" stroke="#aeb9c8" stroke-width="2"/><rect x="30" y="27" width="180" height="25" rx="0" fill="#e7f3ff" stroke="#aeb9c8" stroke-width="2"/><text x="38" y="44" font-family="Arial,sans-serif" font-size="9" fill="#245c88" font-weight="700" text-anchor="start">titulo</text><rect x="30" y="52" width="180" height="39" rx="0" fill="#fff" stroke="#d9dfe7" stroke-width="2"/><text x="38" y="75" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">Analista</text><rect x="30" y="91" width="180" height="43" rx="0" fill="#f8fafc" stroke="#d9dfe7" stroke-width="2"/><rect x="210" y="27" width="120" height="25" rx="0" fill="#e7f3ff" stroke="#aeb9c8" stroke-width="2"/><text x="218" y="44" font-family="Arial,sans-serif" font-size="9" fill="#245c88" font-weight="700" text-anchor="start">salario</text><rect x="210" y="52" width="120" height="39" rx="0" fill="#fff" stroke="#d9dfe7" stroke-width="2"/><text x="218" y="75" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">32000</text><rect x="210" y="91" width="120" height="43" rx="0" fill="#f8fafc" stroke="#d9dfe7" stroke-width="2"/><rect x="330" y="27" width="155" height="25" rx="0" fill="#e7f3ff" stroke="#aeb9c8" stroke-width="2"/><text x="338" y="44" font-family="Arial,sans-serif" font-size="9" fill="#245c88" font-weight="700" text-anchor="start">ubicacion</text><rect x="330" y="52" width="155" height="39" rx="0" fill="#fff" stroke="#d9dfe7" stroke-width="2"/><text x="338" y="75" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">Madrid</text><rect x="330" y="91" width="155" height="43" rx="0" fill="#f8fafc" stroke="#d9dfe7" stroke-width="2"/><path d="M501 81 L553 81" fill="none" stroke="#5a4a86" stroke-width="4"/><text x="527" y="67" font-family="Arial,sans-serif" font-size="9" fill="#5a4a86" font-weight="700" text-anchor="middle">AS</text><rect x="569" y="34" width="333" height="101" rx="8" fill="#f2fbf4" stroke="#3c8c58" stroke-width="2"/><text x="586" y="54" font-family="Arial,sans-serif" font-size="10" fill="#28633c" font-weight="700" text-anchor="start">NOMBRES DE SALIDA</text><rect x="586" y="65" width="133" height="22" rx="2" fill="#dcefe1" stroke="#9ebfa7" stroke-width="2"/><text x="595" y="80" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="700" text-anchor="start">puesto</text><rect x="729" y="65" width="154" height="22" rx="2" fill="#dcefe1" stroke="#9ebfa7" stroke-width="2"/><text x="738" y="80" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="700" text-anchor="start">salario_euros</text><text x="586" y="112" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">Analista | 32000</text></svg>
+<figcaption>SELECT decide que columnas aparecen en el resultado.</figcaption>
+</figure>
+<div class="info-box">
+                <p><code>AS</code> crea un alias para mostrar un nombre legible en el resultado; no renombra
+                    permanentemente la columna.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="where-comparaciones">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Filtrar filas con WHERE</h2>
+           
+            <p><code>WHERE</code> mantiene únicamente las filas que cumplen la condición. Los operadores de
+                comparación habituales son <code>=</code>, <code>&lt;&gt;</code>, <code>&gt;</code>,
+                <code>&lt;</code>, <code>&gt;=</code> y <code>&lt;=</code>.</p>
+            <pre><code class="language-sql"> -- Consulta con intervalo
+SELECT titulo, salario 
+FROM Ofertas
+WHERE salario &gt;= 25000 AND salario &lt;= 40000;
+
+-- Consulta con límite
+SELECT titulo, fecha_publicacion
+FROM Ofertas
+WHERE fecha_publicacion &gt; '2024-01-01'; </code></pre>
+<figure class="didactic-image" role="img" aria-label="WHERE conserva solo las filas que cumplen la condicion.">
+<svg viewBox="0 0 930 154" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><title>Filtro de filas como embudo</title><text x="28" y="19" font-family="Arial,sans-serif" font-size="10" fill="#35445d" font-weight="700" text-anchor="start">FILAS DE ENTRADA</text><rect x="28" y="27" width="220" height="16" rx="3" fill="#e8f0fa" stroke="#b3c2d4" stroke-width="2"/><text x="39" y="39" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">salario 18000</text><rect x="28" y="48" width="220" height="16" rx="3" fill="#e8f0fa" stroke="#b3c2d4" stroke-width="2"/><text x="39" y="60" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">salario 32000</text><rect x="28" y="69" width="220" height="16" rx="3" fill="#e8f0fa" stroke="#b3c2d4" stroke-width="2"/><text x="39" y="81" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">salario 41000</text><rect x="28" y="90" width="220" height="16" rx="3" fill="#e8f0fa" stroke="#b3c2d4" stroke-width="2"/><text x="39" y="102" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">salario 29000</text><rect x="28" y="111" width="220" height="16" rx="3" fill="#e8f0fa" stroke="#b3c2d4" stroke-width="2"/><text x="39" y="123" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">salario 35000</text><path d="M286 25 H449 L409 127 H328 Z" fill="#f7eafa" stroke="#8e5aa7" stroke-width="3"/><text x="368" y="55" font-family="Arial,sans-serif" font-size="13" fill="#704280" font-weight="700" text-anchor="middle">WHERE</text><text x="368" y="80" font-family="Arial,sans-serif" font-size="12" fill="#26334a" font-weight="700" text-anchor="middle">&gt; 30000</text><text x="368" y="103" font-family="Arial,sans-serif" font-size="9" fill="#53627a" font-weight="400" text-anchor="middle">evaluar</text><path d="M251 79 L279 79" fill="none" stroke="#5a4a86" stroke-width="3"/><path d="M410 79 L463 79" fill="none" stroke="#5a4a86" stroke-width="3"/><rect x="488" y="34" width="166" height="21" rx="4" fill="#e8f5eb" stroke="#83b392" stroke-width="2"/><text x="502" y="49" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">salario 32000</text><rect x="488" y="63" width="166" height="21" rx="4" fill="#e8f5eb" stroke="#83b392" stroke-width="2"/><text x="502" y="78" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">salario 41000</text><rect x="488" y="92" width="166" height="21" rx="4" fill="#e8f5eb" stroke="#83b392" stroke-width="2"/><text x="502" y="107" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">salario 35000</text><circle cx="790" cy="76" r="43" fill="#f2fbf4" stroke="#3c8c58" stroke-width="3"/><text x="790" y="73" font-family="Arial,sans-serif" font-size="17" fill="#28633c" font-weight="700" text-anchor="middle">3 / 5</text><text x="790" y="91" font-family="Arial,sans-serif" font-size="9" fill="#53627a" font-weight="400" text-anchor="middle">coinciden</text></svg>
+<figcaption>WHERE conserva solo las filas que cumplen la condicion.</figcaption>
+</figure>
+<div class="info-box">
+                <p>Una fecha ISO como <code>AAAA-MM-DD</code> es fácil de comparar y ordenar en columnas
+                    de tipo fecha.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="operadores-filtros">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Operadores de filtro: LIKE, IN y BETWEEN</h2>
+           
+            <ul>
+                <li><code>LIKE</code> busca patrones: <code>%</code> representa cero o más caracteres y
+                    <code>_</code> representa uno.</li>
+                <li><code>IN</code> comprueba si un valor coincide con una lista.</li>
+                <li><code>BETWEEN</code> comprueba un intervalo e incluye ambos extremos.</li>
+            </ul>
+            <pre><code class="language-sql">-- Busca la palabra dentro del título
+SELECT titulo
+FROM Ofertas
+WHERE titulo LIKE '%Ingeniero%'; 
+
+-- Acepta cualquiera de las dos ciudades
+SELECT titulo, ubicacion
+FROM Ofertas
+WHERE ubicacion IN ('Madrid', 'Barcelona'); 
+
+-- Incluye salarios de 25000 y de 40000
+SELECT titulo, salario
+FROM Ofertas
+WHERE salario BETWEEN 25000 AND 40000; </code></pre>
+ <figure class="didactic-image" role="img" aria-label="LIKE, IN y BETWEEN permiten buscar de formas distintas.">
+<svg viewBox="0 0 930 154" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><title>Patron, lista y rango numerico</title><rect x="20" y="22" width="280" height="114" rx="12" fill="#f1f7ff" stroke="#2980b9" stroke-width="2"/><circle cx="63" cy="61" r="18" fill="none" stroke="#2980b9" stroke-width="4"/><path d="M76 75 L92 91" fill="none" stroke="#2980b9" stroke-width="4"/><text x="115" y="52" font-family="Arial,sans-serif" font-size="13" fill="#245c88" font-weight="700" text-anchor="start">LIKE</text><text x="115" y="74" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">%ingeniero%</text><rect x="40" y="98" width="237" height="24" rx="3" fill="#fff" stroke="#b8cee2" stroke-width="2"/><text x="51" y="114" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">texto parcial</text><rect x="324" y="22" width="280" height="114" rx="12" fill="#fff8e7" stroke="#c68500" stroke-width="2"/><text x="346" y="44" font-family="Arial,sans-serif" font-size="13" fill="#996500" font-weight="700" text-anchor="start">IN ( ... )</text><rect x="348" y="54" width="13" height="13" rx="2" fill="#fff" stroke="#c68500" stroke-width="2"/><text x="372" y="65" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">Madrid</text><rect x="348" y="77" width="13" height="13" rx="2" fill="#fff" stroke="#c68500" stroke-width="2"/><text x="372" y="88" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">Barcelona</text><rect x="348" y="100" width="13" height="13" rx="2" fill="#fff" stroke="#c68500" stroke-width="2"/><text x="372" y="111" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">Sevilla</text><rect x="628" y="22" width="280" height="114" rx="12" fill="#f2fbf4" stroke="#3c8c58" stroke-width="2"/><text x="650" y="44" font-family="Arial,sans-serif" font-size="13" fill="#28633c" font-weight="700" text-anchor="start">BETWEEN</text><path d="M661 81 L874 81" fill="none" stroke="#3c8c58" stroke-width="5"/><circle cx="696" cy="81" r="8" fill="#fff" stroke="#3c8c58" stroke-width="3"/><circle cx="839" cy="81" r="8" fill="#fff" stroke="#3c8c58" stroke-width="3"/><text x="675" y="110" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="700" text-anchor="start">25000</text><text x="820" y="110" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="700" text-anchor="start">40000</text></svg>
+<figcaption>LIKE, IN y BETWEEN permiten buscar de formas distintas.</figcaption>
+</figure>       
+</section>
+
+        <section class="slide" id="logica-y-aritmetica">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Operadores lógicos y aritméticos</h2>
+           
+            <ul>
+                <li><code>AND</code>: deben cumplirse todas las condiciones.</li>
+                <li><code>OR</code>: basta con que se cumpla una condición.</li>
+                <li><code>NOT</code>: invierte una condición.</li>
+                <li>Los operadores aritméticos <code>+</code>, <code>-</code>, <code>*</code> y <code>/</code>
+                    permiten calcular valores en el resultado.</li>
+            </ul>
+            <pre><code class="language-sql">-- Exige salario y ciudad coincidentes
+SELECT titulo, salario 
+FROM Ofertas
+WHERE salario &gt; 30000 AND ubicacion = 'Madrid'; 
+
+-- Calcula una columna adicional con un 10 %
+SELECT titulo, salario, salario * 1.10 AS salario_con_aumento 
+FROM Ofertas -- Consulta la tabla Ofertas
+WHERE salario IS NOT NULL; -- Evita calcular sobre salarios sin informar</code></pre>
+<figure class="didactic-image" role="img" aria-label="Combina condiciones y calcula expresiones en la consulta.">
+<svg viewBox="0 0 930 158" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><title>Puerta logica y columna calculada</title><rect x="24" y="22" width="256" height="119" rx="10" fill="#eef5ff" stroke="#6e90c4" stroke-width="2"/><text x="44" y="48" font-family="Arial,sans-serif" font-size="10" fill="#35445d" font-weight="700" text-anchor="start">condicion A</text><text x="44" y="106" font-family="Arial,sans-serif" font-size="10" fill="#35445d" font-weight="700" text-anchor="start">condicion B</text><path d="M125 45 L163 45" fill="none" stroke="#7182a1" stroke-width="3"/><path d="M125 101 L163 101" fill="none" stroke="#7182a1" stroke-width="3"/><path d="M163 27 Q220 27 220 82 Q220 137 163 137 Z" fill="#dbe9ff" stroke="#4d6f9f" stroke-width="3"/><text x="184" y="86" font-family="Arial,sans-serif" font-size="12" fill="#35445d" font-weight="700" text-anchor="start">AND</text><path d="M220 82 L270 82" fill="none" stroke="#7182a1" stroke-width="3"/><rect x="334" y="22" width="260" height="119" rx="10" fill="#fff5e8" stroke="#c68500" stroke-width="2"/><text x="464" y="52" font-family="Arial,sans-serif" font-size="15" fill="#805500" font-weight="700" text-anchor="middle">salario * 1.10</text><path d="M359 65 L569 65" fill="none" stroke="#dfbd70" stroke-width="1"/><text x="464" y="96" font-family="Arial,sans-serif" font-size="10" fill="#53627a" font-weight="400" text-anchor="middle">expresion calculada</text><text x="464" y="120" font-family="Arial,sans-serif" font-size="10" fill="#805500" font-weight="700" text-anchor="middle">AS salario_nuevo</text><rect x="639" y="22" width="267" height="119" rx="10" fill="#f2fbf4" stroke="#3c8c58" stroke-width="2"/><text x="772" y="51" font-family="Arial,sans-serif" font-size="12" fill="#28633c" font-weight="700" text-anchor="middle">A AND B</text><text x="772" y="81" font-family="Arial,sans-serif" font-size="10" fill="#26334a" font-weight="400" text-anchor="middle">TRUE si ambas</text><text x="772" y="109" font-family="Arial,sans-serif" font-size="9" fill="#53627a" font-weight="400" text-anchor="middle">OR acepta cualquiera</text></svg>
+<figcaption>Combina condiciones y calcula expresiones en la consulta.</figcaption>
+</figure>
+<div class="warning-box">
+                <p>Usa paréntesis para dejar clara la prioridad al combinar <code>AND</code> y <code>OR</code>,
+                    por ejemplo: <code>(ubicacion = 'Madrid' OR ubicacion = 'Barcelona') AND salario &gt; 30000</code>.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="valores-nulos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Tratamiento de NULL y valores vacíos</h2>
+            
+            <p><code>NULL</code> indica que no hay un valor conocido o informado. No se compara con <code>=</code>
+                ni con <code>&lt;&gt;</code>; se comprueba con <code>IS NULL</code> o <code>IS NOT NULL</code>.</p>
+            <pre><code class="language-sql">SELECT titulo, salario -- Muestra las ofertas sin salario informado
+FROM Ofertas -- Consulta la tabla Ofertas
+WHERE salario IS NULL; -- Busca valores nulos
+
+SELECT titulo, descripcion -- Muestra título y descripción
+FROM Ofertas -- Consulta la tabla Ofertas
+WHERE descripcion IS NULL OR descripcion = ''; -- Busca nulo o texto vacío</code></pre>
+<figure class="didactic-image" role="img" aria-label="NULL no equivale a un valor conocido ni a un texto vacio.">
+<svg viewBox="0 0 930 153" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><title>Comparacion de valor, NULL y cadena vacia</title><text x="30" y="20" font-family="Arial,sans-serif" font-size="10" fill="#35445d" font-weight="700" text-anchor="start">ESTADO DE LA COLUMNA</text><rect x="30" y="29" width="255" height="106" rx="10" fill="#e7f3ff" stroke="#2980b9" stroke-width="2"/><text x="46" y="53" font-family="Arial,sans-serif" font-size="11" fill="#2980b9" font-weight="700" text-anchor="start">INFORMADO</text><text x="46" y="83" font-family="Arial,sans-serif" font-size="17" fill="#17243a" font-weight="700" text-anchor="start">32000</text><path d="M46 95 L268 95" fill="none" stroke="#2980b9" stroke-width="1"/><text x="46" y="120" font-family="Arial,sans-serif" font-size="9" fill="#53627a" font-weight="400" text-anchor="start">IS NULL: NO</text><rect x="337" y="29" width="255" height="106" rx="10" fill="#fff3d6" stroke="#c68500" stroke-width="2"/><text x="353" y="53" font-family="Arial,sans-serif" font-size="11" fill="#c68500" font-weight="700" text-anchor="start">NULL</text><text x="353" y="83" font-family="Arial,sans-serif" font-size="17" fill="#17243a" font-weight="700" text-anchor="start">desconocido</text><path d="M353 95 L575 95" fill="none" stroke="#c68500" stroke-width="1"/><text x="353" y="120" font-family="Arial,sans-serif" font-size="9" fill="#53627a" font-weight="400" text-anchor="start">IS NULL: SI</text><rect x="644" y="29" width="255" height="106" rx="10" fill="#f7eafa" stroke="#8e5aa7" stroke-width="2"/><text x="660" y="53" font-family="Arial,sans-serif" font-size="11" fill="#8e5aa7" font-weight="700" text-anchor="start">VACIO</text><text x="660" y="83" font-family="Arial,sans-serif" font-size="17" fill="#17243a" font-weight="700" text-anchor="start">&#x27;&#x27;</text><path d="M660 95 L882 95" fill="none" stroke="#8e5aa7" stroke-width="1"/><text x="660" y="120" font-family="Arial,sans-serif" font-size="9" fill="#53627a" font-weight="400" text-anchor="start">IS NULL: NO</text></svg>
+<figcaption>NULL no equivale a un valor conocido ni a un texto vacio.</figcaption>
+</figure>
+<div class="info-box">
+                <p>Una cadena vacía (<code>''</code>) no es lo mismo que <code>NULL</code>. Si los datos pueden
+                    contener ambos, trata las dos situaciones.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="ordenacion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Ordenar resultados con ORDER BY</h2>
+            
+            <p><code>ASC</code> ordena de forma ascendente y es la opción predeterminada. <code>DESC</code> ordena
+                de forma descendente. Se pueden indicar varias columnas para resolver empates.</p>
+            <pre><code class="language-sql">SELECT titulo, salario, ubicacion -- Muestra tres columnas
+FROM Ofertas -- Consulta las ofertas
+ORDER BY salario ASC, titulo ASC; -- Ordena por salario y después por título
+
+
+SELECT nombre, ciudad -- Muestra candidatos y su ciudad
+FROM Candidatos -- Consulta la tabla Candidatos
+ORDER BY ciudad DESC, nombre ASC; -- Ordena ciudad descendente y nombre ascendente</code></pre>
+<figure class="didactic-image" role="img" aria-label="ORDER BY presenta las filas en el orden solicitado.">
+<svg viewBox="0 0 930 151" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><title>Ordenar una lista de filas por salario</title><text x="30" y="19" font-family="Arial,sans-serif" font-size="10" fill="#53627a" font-weight="700" text-anchor="start">ORDEN DE ENTRADA</text><rect x="30" y="27" width="238" height="19" rx="4" fill="#f1f3f6" stroke="#d2d9e3" stroke-width="2"/><text x="42" y="41" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">Ana</text><text x="255" y="41" font-family="Arial,sans-serif" font-size="9" fill="#53627a" font-weight="700" text-anchor="end">32000</text><rect x="30" y="51" width="238" height="19" rx="4" fill="#f1f3f6" stroke="#d2d9e3" stroke-width="2"/><text x="42" y="65" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">Luis</text><text x="255" y="65" font-family="Arial,sans-serif" font-size="9" fill="#53627a" font-weight="700" text-anchor="end">25000</text><rect x="30" y="75" width="238" height="19" rx="4" fill="#f1f3f6" stroke="#d2d9e3" stroke-width="2"/><text x="42" y="89" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">Eva</text><text x="255" y="89" font-family="Arial,sans-serif" font-size="9" fill="#53627a" font-weight="700" text-anchor="end">41000</text><rect x="30" y="99" width="238" height="19" rx="4" fill="#f1f3f6" stroke="#d2d9e3" stroke-width="2"/><text x="42" y="113" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">Omar</text><text x="255" y="113" font-family="Arial,sans-serif" font-size="9" fill="#53627a" font-weight="700" text-anchor="end">30000</text><path d="M285 76 L354 76" fill="none" stroke="#5a4a86" stroke-width="4"/><text x="320" y="62" font-family="Arial,sans-serif" font-size="8" fill="#5a4a86" font-weight="700" text-anchor="middle">ORDER BY</text><text x="390" y="19" font-family="Arial,sans-serif" font-size="10" fill="#28633c" font-weight="700" text-anchor="start">SALARIO ASC</text><circle cx="397" cy="37" r="8" fill="#3c8c58" stroke="none" stroke-width="1"/><text x="397" y="40" font-family="Arial,sans-serif" font-size="7" fill="#fff" font-weight="700" text-anchor="middle">1</text><rect x="413" y="27" width="252" height="19" rx="4" fill="#e8f5eb" stroke="#b5d2bc" stroke-width="2"/><text x="424" y="41" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">Luis</text><text x="654" y="41" font-family="Arial,sans-serif" font-size="9" fill="#28633c" font-weight="700" text-anchor="end">25000</text><circle cx="397" cy="61" r="8" fill="#3c8c58" stroke="none" stroke-width="1"/><text x="397" y="64" font-family="Arial,sans-serif" font-size="7" fill="#fff" font-weight="700" text-anchor="middle">2</text><rect x="413" y="51" width="252" height="19" rx="4" fill="#e8f5eb" stroke="#b5d2bc" stroke-width="2"/><text x="424" y="65" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">Omar</text><text x="654" y="65" font-family="Arial,sans-serif" font-size="9" fill="#28633c" font-weight="700" text-anchor="end">30000</text><circle cx="397" cy="85" r="8" fill="#3c8c58" stroke="none" stroke-width="1"/><text x="397" y="88" font-family="Arial,sans-serif" font-size="7" fill="#fff" font-weight="700" text-anchor="middle">3</text><rect x="413" y="75" width="252" height="19" rx="4" fill="#e8f5eb" stroke="#b5d2bc" stroke-width="2"/><text x="424" y="89" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">Ana</text><text x="654" y="89" font-family="Arial,sans-serif" font-size="9" fill="#28633c" font-weight="700" text-anchor="end">32000</text><circle cx="397" cy="109" r="8" fill="#3c8c58" stroke="none" stroke-width="1"/><text x="397" y="112" font-family="Arial,sans-serif" font-size="7" fill="#fff" font-weight="700" text-anchor="middle">4</text><rect x="413" y="99" width="252" height="19" rx="4" fill="#e8f5eb" stroke="#b5d2bc" stroke-width="2"/><text x="424" y="113" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">Eva</text><text x="654" y="113" font-family="Arial,sans-serif" font-size="9" fill="#28633c" font-weight="700" text-anchor="end">41000</text><path d="M735 118 L735 38" fill="none" stroke="#3c8c58" stroke-width="4"/><text x="776" y="80" font-family="Arial,sans-serif" font-size="11" fill="#28633c" font-weight="700" text-anchor="start">ASC</text></svg>
+<figcaption>ORDER BY presenta las filas en el orden solicitado.</figcaption>
+</figure>
+<div class="info-box">
+                <p>La posición de <code>NULL</code> en una ordenación depende del gestor. En MySQL se puede
+                    expresarla de forma portable con una primera clave, por ejemplo
+                    <code>ORDER BY salario IS NULL, salario ASC</code>, para colocar los nulos al final.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="joins">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>4.5. Consultas multitabla: JOIN</h2>
+            
+            <p>Un <code>JOIN</code> combina filas de tablas relacionadas mediante columnas con valores
+                correspondientes, normalmente una clave primaria y una clave foránea.</p>
+            <pre><code class="language-sql">SELECT o.titulo, e.nombre, o.ubicacion -- Muestra datos de la oferta y su empresa
+FROM Ofertas AS o -- Usa o como alias de Ofertas
+INNER JOIN Empresas AS e ON o.id_empresa = e.id_empresa; -- Conserva ofertas con empresa relacionada</code></pre>
+<figure class="didactic-image" role="img" aria-label="JOIN empareja filas mediante una clave compartida.">
+<svg viewBox="0 0 930 157" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><title>Dos tablas conectadas por una clave</title><rect x="22" y="22" width="282" height="105" rx="10" fill="#e7f3ff" stroke="#2980b9" stroke-width="2"/><text x="42" y="45" font-family="Arial,sans-serif" font-size="12" fill="#245c88" font-weight="700" text-anchor="start">OFERTAS</text><text x="42" y="75" font-family="Arial,sans-serif" font-size="10" fill="#26334a" font-weight="400" text-anchor="start">id_empresa  4</text><text x="42" y="102" font-family="Arial,sans-serif" font-size="10" fill="#26334a" font-weight="400" text-anchor="start">titulo  Analista</text><rect x="626" y="22" width="282" height="105" rx="10" fill="#f7eafa" stroke="#8e5aa7" stroke-width="2"/><text x="646" y="45" font-family="Arial,sans-serif" font-size="12" fill="#704280" font-weight="700" text-anchor="start">EMPRESAS</text><text x="646" y="75" font-family="Arial,sans-serif" font-size="10" fill="#26334a" font-weight="400" text-anchor="start">id_empresa  4</text><text x="646" y="102" font-family="Arial,sans-serif" font-size="10" fill="#26334a" font-weight="400" text-anchor="start">nombre  Linkia</text><circle cx="270" cy="75" r="11" fill="#2980b9" stroke="none" stroke-width="1"/><circle cx="660" cy="75" r="11" fill="#8e5aa7" stroke="none" stroke-width="1"/><path d="M281 75 L649 75" fill="none" stroke="#5a4a86" stroke-width="4"/><text x="465" y="63" font-family="Arial,sans-serif" font-size="10" fill="#5a4a86" font-weight="700" text-anchor="middle">ON id_empresa</text><rect x="367" y="101" width="196" height="38" rx="8" fill="#e8f5eb" stroke="#3c8c58" stroke-width="2"/><text x="465" y="117" font-family="Arial,sans-serif" font-size="9" fill="#28633c" font-weight="700" text-anchor="middle">FILA COMBINADA</text><text x="465" y="132" font-family="Arial,sans-serif" font-size="8" fill="#26334a" font-weight="400" text-anchor="middle">Analista + Linkia</text></svg>
+<figcaption>JOIN empareja filas mediante una clave compartida.</figcaption>
+</figure>
+<div class="info-box">
+                <p>Los nombres <code>id_empresa</code>, las tablas y sus relaciones son ejemplos. Sustitúyelos por
+                    los nombres que aparezcan en <code>DESCRIBE</code> y en la estructura real de la base.</p>
+            </div>
+            <h3>INNER JOIN y LEFT JOIN</h3>
+            <ul>
+                <li><strong>INNER JOIN:</strong> devuelve solo filas con coincidencia en ambas tablas.</li>
+                <li><strong>LEFT JOIN:</strong> mantiene todas las filas de la tabla izquierda; las columnas sin
+                    coincidencia de la derecha aparecen como <code>NULL</code>.</li>
+            </ul>
+        </section>
+
+        <section class="slide" id="join-left-right">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>LEFT JOIN, candidatos sin inscripción y OUTER JOIN</h2>
+            
+            <pre><code class="language-sql">SELECT o.titulo, e.nombre -- Muestra todas las ofertas y su empresa si existe
+FROM Ofertas AS o -- Conserva como lado izquierdo todas las ofertas
+LEFT JOIN Empresas AS e ON o.id_empresa = e.id_empresa; -- Añade la empresa coincidente o NULL
+
+SELECT c.nombre -- Busca candidatos sin inscripciones
+FROM Candidatos AS c -- Conserva todos los candidatos
+LEFT JOIN Inscripciones AS i ON i.id_candidato = c.id_candidato -- Busca sus inscripciones
+WHERE i.id_candidato IS NULL; -- Devuelve solo candidatos sin coincidencia</code></pre>
+            <ul>
+                <li><code>RIGHT JOIN</code> conserva las filas de la tabla derecha.</li>
+                <li>MySQL no ofrece <code>FULL OUTER JOIN</code> directamente; se puede combinar un
+                    <code>LEFT JOIN</code> con un <code>RIGHT JOIN</code> mediante <code>UNION</code>.</li>
+            </ul>
+<figure class="didactic-image" role="img" aria-label="LEFT JOIN mantiene todas las filas del lado izquierdo.">
+<svg viewBox="0 0 930 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><title>Conjuntos para entender LEFT JOIN</title><rect x="25" y="38" width="195" height="78" rx="9" fill="#f7faff" stroke="#2980b9" stroke-width="2"/><text x="122" y="63" font-family="Arial,sans-serif" font-size="11" fill="#245c88" font-weight="700" text-anchor="middle">CANDIDATOS</text><text x="122" y="90" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="middle">todos se conservan</text><circle cx="410" cy="78" r="57" fill="#9bc8e6" stroke="#2980b9" stroke-width="2"/><circle cx="530" cy="78" r="57" fill="#c9a8d4" stroke="#8e5aa7" stroke-width="2"/><circle cx="470" cy="78" r="29" fill="#73ab83" stroke="#3c8c58" stroke-width="2"/><text x="381" y="82" font-family="Arial,sans-serif" font-size="9" fill="#17243a" font-weight="700" text-anchor="middle">LEFT</text><text x="536" y="82" font-family="Arial,sans-serif" font-size="9" fill="#17243a" font-weight="700" text-anchor="middle">JOIN</text><rect x="710" y="38" width="195" height="78" rx="9" fill="#fff3d6" stroke="#c68500" stroke-width="2"/><text x="807" y="63" font-family="Arial,sans-serif" font-size="11" fill="#996500" font-weight="700" text-anchor="middle">SIN PAREJA</text><text x="807" y="90" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="middle">derecha: NULL</text><path d="M220 77 L339 77" fill="none" stroke="#2980b9" stroke-width="3"/><path d="M587 77 L708 77" fill="none" stroke="#c68500" stroke-width="3"/></svg>
+<figcaption>LEFT JOIN mantiene todas las filas del lado izquierdo.</figcaption>
+</figure>
+<div class="warning-box">
+                <p>Para que un <code>LEFT JOIN</code> siga conservando filas sin coincidencia, ten cuidado al
+                    filtrar columnas de la tabla derecha en <code>WHERE</code>: el filtro puede descartar los
+                    registros con <code>NULL</code>.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="agregacion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>4.6. Funciones de agregación</h2>
+            
+            <p>Las funciones de agregación calculan un resumen sobre varias filas:</p>
+            <ul>
+                <li><code>COUNT(*)</code>: cuenta filas.</li>
+                <li><code>SUM(campo)</code>: suma valores.</li>
+                <li><code>AVG(campo)</code>: calcula la media.</li>
+                <li><code>MIN(campo)</code> y <code>MAX(campo)</code>: encuentran mínimo y máximo.</li>
+            </ul>
+            <pre><code class="language-sql">SELECT COUNT(*) AS total_ofertas -- Cuenta todas las ofertas
+FROM Ofertas; -- Lee la tabla de ofertas
+
+SELECT MIN(salario) AS salario_minimo, MAX(salario) AS salario_maximo -- Resume los salarios extremos
+FROM Ofertas -- Lee la tabla de ofertas
+WHERE salario IS NOT NULL; -- Ignora los salarios no informados</code></pre>
+<figure class="didactic-image" role="img" aria-label="Una funcion resume muchas filas en una medida.">
+<svg viewBox="0 0 930 158" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><title>Agregar muchas filas en un unico resultado</title><text x="28" y="20" font-family="Arial,sans-serif" font-size="10" fill="#53627a" font-weight="700" text-anchor="start">FILAS</text><rect x="30" y="49" width="20" height="34" rx="3" fill="#a8cde8" stroke="#5d94bb" stroke-width="2"/><rect x="58" y="49" width="20" height="59" rx="3" fill="#a8cde8" stroke="#5d94bb" stroke-width="2"/><rect x="86" y="49" width="20" height="44" rx="3" fill="#a8cde8" stroke="#5d94bb" stroke-width="2"/><rect x="114" y="49" width="20" height="70" rx="3" fill="#a8cde8" stroke="#5d94bb" stroke-width="2"/><rect x="142" y="49" width="20" height="51" rx="3" fill="#a8cde8" stroke="#5d94bb" stroke-width="2"/><rect x="170" y="49" width="20" height="36" rx="3" fill="#a8cde8" stroke="#5d94bb" stroke-width="2"/><rect x="198" y="49" width="20" height="61" rx="3" fill="#a8cde8" stroke="#5d94bb" stroke-width="2"/><path d="M241 83 L333 83" fill="none" stroke="#5a4a86" stroke-width="4"/><text x="286" y="68" font-family="Arial,sans-serif" font-size="9" fill="#5a4a86" font-weight="700" text-anchor="middle">COUNT / AVG</text><path d="M362 38 H514 L490 127 H386 Z" fill="#f7eafa" stroke="#8e5aa7" stroke-width="3"/><text x="438" y="75" font-family="Arial,sans-serif" font-size="11" fill="#704280" font-weight="700" text-anchor="middle">RESUMEN</text><text x="438" y="98" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="middle">agrupar datos</text><rect x="576" y="28" width="327" height="112" rx="14" fill="#f2fbf4" stroke="#3c8c58" stroke-width="2"/><text x="739" y="74" font-family="Arial,sans-serif" font-size="25" fill="#28633c" font-weight="700" text-anchor="middle">4,812</text><text x="739" y="103" font-family="Arial,sans-serif" font-size="10" fill="#26334a" font-weight="400" text-anchor="middle">filas -&gt; una medida</text></svg>
+<figcaption>Una funcion resume muchas filas en una medida.</figcaption>
+</figure>
+<div class="info-box">
+                <p>Las agregaciones, salvo <code>COUNT(*)</code>, normalmente ignoran valores <code>NULL</code>.
+                    Si la consulta mezcla columnas normales y agregadas, usa <code>GROUP BY</code>.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="group-by">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Agrupar resultados con GROUP BY</h2>
+            
+            <p><code>GROUP BY</code> crea grupos con el mismo valor de una o más columnas. Las funciones de
+                agregación se calculan para cada grupo.</p>
+            <pre><code class="language-sql">SELECT ubicacion, COUNT(*) AS numero_ofertas -- Cuenta ofertas de cada ubicación
+FROM Ofertas -- Lee la tabla de ofertas
+GROUP BY ubicacion -- Crea un grupo para cada ciudad
+ORDER BY numero_ofertas DESC; -- Muestra primero las ciudades con más ofertas
+
+SELECT ubicacion, AVG(salario) AS salario_medio -- Calcula el salario medio por ubicación
+FROM Ofertas -- Lee la tabla de ofertas
+WHERE salario IS NOT NULL -- Excluye salarios no informados antes de agrupar
+GROUP BY ubicacion; -- Devuelve una fila por ubicación</code></pre>
+<figure class="didactic-image" role="img" aria-label="GROUP BY calcula un resultado para cada grupo.">
+<svg viewBox="0 0 930 153" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><title>Agrupar filas como columnas por ciudad</title><text x="28" y="19" font-family="Arial,sans-serif" font-size="10" fill="#35445d" font-weight="700" text-anchor="start">GRUPOS POR UBICACION</text><rect x="30" y="26" width="210" height="111" rx="8" fill="#f8fafc" stroke="#2980b9" stroke-width="2"/><text x="44" y="46" font-family="Arial,sans-serif" font-size="10" fill="#2980b9" font-weight="700" text-anchor="start">MADRID</text><rect x="48" y="106" width="24" height="17" rx="3" fill="#2980b9" stroke="#2980b9" stroke-width="2"/><rect x="83" y="96" width="24" height="27" rx="3" fill="#2980b9" stroke="#2980b9" stroke-width="2"/><rect x="118" y="103" width="24" height="20" rx="3" fill="#2980b9" stroke="#2980b9" stroke-width="2"/><text x="224" y="127" font-family="Arial,sans-serif" font-size="9" fill="#2980b9" font-weight="700" text-anchor="end">n=3</text><rect x="265" y="26" width="210" height="111" rx="8" fill="#f8fafc" stroke="#8e5aa7" stroke-width="2"/><text x="279" y="46" font-family="Arial,sans-serif" font-size="10" fill="#8e5aa7" font-weight="700" text-anchor="start">SEVILLA</text><rect x="283" y="95" width="24" height="28" rx="3" fill="#8e5aa7" stroke="#8e5aa7" stroke-width="2"/><rect x="318" y="104" width="24" height="19" rx="3" fill="#8e5aa7" stroke="#8e5aa7" stroke-width="2"/><text x="459" y="127" font-family="Arial,sans-serif" font-size="9" fill="#8e5aa7" font-weight="700" text-anchor="end">n=2</text><rect x="500" y="26" width="210" height="111" rx="8" fill="#f8fafc" stroke="#3c8c58" stroke-width="2"/><text x="514" y="46" font-family="Arial,sans-serif" font-size="10" fill="#3c8c58" font-weight="700" text-anchor="start">BILBAO</text><rect x="518" y="101" width="24" height="22" rx="3" fill="#3c8c58" stroke="#3c8c58" stroke-width="2"/><rect x="553" y="92" width="24" height="31" rx="3" fill="#3c8c58" stroke="#3c8c58" stroke-width="2"/><rect x="588" y="107" width="24" height="16" rx="3" fill="#3c8c58" stroke="#3c8c58" stroke-width="2"/><rect x="623" y="97" width="24" height="26" rx="3" fill="#3c8c58" stroke="#3c8c58" stroke-width="2"/><text x="694" y="127" font-family="Arial,sans-serif" font-size="9" fill="#3c8c58" font-weight="700" text-anchor="end">n=4</text><rect x="744" y="48" width="164" height="70" rx="8" fill="#fff3d6" stroke="#c68500" stroke-width="2"/><text x="826" y="76" font-family="Arial,sans-serif" font-size="10" fill="#996500" font-weight="700" text-anchor="middle">COUNT(*)</text><text x="826" y="98" font-family="Arial,sans-serif" font-size="9" fill="#53627a" font-weight="400" text-anchor="middle">por grupo</text></svg>
+<figcaption>GROUP BY calcula un resultado para cada grupo.</figcaption>
+</figure>
+<div class="warning-box">
+                <p>Cada columna del <code>SELECT</code> que no esté dentro de una función de agregación debe
+                    incluirse en el <code>GROUP BY</code>.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="having">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Filtrar grupos con HAVING</h2>
+            
+            <p><code>WHERE</code> filtra filas antes de agrupar. <code>HAVING</code> filtra los grupos después
+                de calcular las agregaciones.</p>
+            <pre><code class="language-sql">SELECT ubicacion, AVG(salario) AS salario_medio -- Calcula una media por ciudad
+FROM Ofertas -- Lee las ofertas
+WHERE salario IS NOT NULL -- Elimina salarios desconocidos antes del cálculo
+GROUP BY ubicacion -- Agrupa las filas por ciudad
+HAVING AVG(salario) &gt; 30000 -- Conserva ciudades con media superior a 30000
+ORDER BY salario_medio DESC; -- Ordena las medias de mayor a menor</code></pre>
+<figure class="didactic-image" role="img" aria-label="HAVING filtra los grupos despues de calcular sus medidas.">
+<svg viewBox="0 0 930 125" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><title>Condicion previa, agrupacion y filtro de grupos</title><text x="26" y="20" font-family="Arial,sans-serif" font-size="9" fill="#53627a" font-weight="700" text-anchor="start">FILAS</text><circle cx="47" cy="47" r="7" fill="#2980b9" stroke="none" stroke-width="1"/><circle cx="74" cy="59" r="7" fill="#8e5aa7" stroke="none" stroke-width="1"/><circle cx="101" cy="47" r="7" fill="#3c8c58" stroke="none" stroke-width="1"/><circle cx="128" cy="59" r="7" fill="#2980b9" stroke="none" stroke-width="1"/><circle cx="155" cy="47" r="7" fill="#8e5aa7" stroke="none" stroke-width="1"/><circle cx="182" cy="59" r="7" fill="#3c8c58" stroke="none" stroke-width="1"/><path d="M215 58 L270 58" fill="none" stroke="#5a4a86" stroke-width="3"/><rect x="277" y="26" width="174" height="66" rx="8" fill="#e7f3ff" stroke="#2980b9" stroke-width="2"/><text x="364" y="51" font-family="Arial,sans-serif" font-size="10" fill="#245c88" font-weight="700" text-anchor="middle">GROUP BY</text><text x="364" y="74" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="middle">AVG(salario)</text><path d="M453 58 L497 58" fill="none" stroke="#5a4a86" stroke-width="3"/><path d="M506 24 H658 L632 95 H532 Z" fill="#fff3d6" stroke="#c68500" stroke-width="3"/><text x="581" y="53" font-family="Arial,sans-serif" font-size="11" fill="#996500" font-weight="700" text-anchor="middle">HAVING</text><text x="581" y="74" font-family="Arial,sans-serif" font-size="8" fill="#26334a" font-weight="400" text-anchor="middle">AVG &gt; 30000</text><path d="M660 58 L704 58" fill="none" stroke="#5a4a86" stroke-width="3"/><rect x="710" y="26" width="195" height="66" rx="8" fill="#f2fbf4" stroke="#3c8c58" stroke-width="2"/><text x="807" y="51" font-family="Arial,sans-serif" font-size="9" fill="#28633c" font-weight="700" text-anchor="middle">GRUPOS VALIDOS</text><text x="807" y="74" font-family="Arial,sans-serif" font-size="8" fill="#26334a" font-weight="400" text-anchor="middle">tras el calculo</text></svg>
+<figcaption>HAVING filtra los grupos despues de calcular sus medidas.</figcaption>
+</figure>
+<div class="info-box">
+                <p><strong>Recuerda:</strong> filtra una fila por su salario con <code>WHERE salario &gt; ...</code>;
+                    filtra un grupo por su media con <code>HAVING AVG(salario) &gt; ...</code>.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="subconsultas">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>4.7. Subconsultas en WHERE y SELECT</h2>
+            
+            <p>Una subconsulta es una consulta dentro de otra. Puede calcular un valor de referencia, comprobar
+                pertenencia o añadir una columna calculada.</p>
+            <pre><code class="language-sql">SELECT titulo, salario -- Muestra título y salario de cada oferta
+FROM Ofertas -- Consulta las ofertas
+WHERE salario &gt; (SELECT AVG(salario) FROM Ofertas WHERE salario IS NOT NULL); -- Compara con la media global
+
+SELECT titulo, salario, (SELECT AVG(salario) FROM Ofertas WHERE salario IS NOT NULL) AS media_global -- Añade la media en cada fila
+FROM Ofertas; -- Devuelve todas las ofertas</code></pre>
+<figure class="didactic-image" role="img" aria-label="El resultado interno se utiliza en la consulta exterior.">
+<svg viewBox="0 0 930 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><title>Consulta anidada que calcula un valor</title><rect x="30" y="16" width="572" height="128" rx="8" fill="#17243a" stroke="#101827" stroke-width="2"/><text x="52" y="40" font-family="Arial,sans-serif" font-size="11" fill="#82d4ff" font-weight="700" text-anchor="start">SELECT titulo FROM Ofertas</text><text x="52" y="65" font-family="Arial,sans-serif" font-size="11" fill="#e9eff8" font-weight="400" text-anchor="start">WHERE salario &gt; (</text><rect x="170" y="76" width="358" height="40" rx="6" fill="#5a4a86" stroke="#b89ddd" stroke-width="2"/><text x="188" y="101" font-family="Arial,sans-serif" font-size="10" fill="#fff" font-weight="700" text-anchor="start">SELECT AVG(salario) FROM Ofertas</text><text x="52" y="131" font-family="Arial,sans-serif" font-size="11" fill="#e9eff8" font-weight="400" text-anchor="start">)</text><circle cx="692" cy="80" r="37" fill="#fff3d6" stroke="#c68500" stroke-width="3"/><text x="692" y="76" font-family="Arial,sans-serif" font-size="12" fill="#996500" font-weight="700" text-anchor="middle">AVG</text><text x="692" y="93" font-family="Arial,sans-serif" font-size="7" fill="#26334a" font-weight="400" text-anchor="middle">SUBQUERY</text><path d="M604 80 L649 80" fill="none" stroke="#c68500" stroke-width="3"/><path d="M732 80 L778 80" fill="none" stroke="#3c8c58" stroke-width="3"/><rect x="784" y="43" width="125" height="75" rx="9" fill="#f2fbf4" stroke="#3c8c58" stroke-width="2"/><text x="846" y="71" font-family="Arial,sans-serif" font-size="9" fill="#28633c" font-weight="700" text-anchor="middle">RESULTADO</text><text x="846" y="94" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="middle">filtrado</text></svg>
+<figcaption>El resultado interno se utiliza en la consulta exterior.</figcaption>
+</figure>
+<div class="info-box">
+                <p>La primera subconsulta devuelve un único valor (la media). La consulta exterior utiliza ese
+                    resultado como parte del filtro.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="subconsultas-avanzadas">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Subconsultas en FROM y subconsultas correlacionadas</h2>
+            
+            <pre><code class="language-sql">SELECT resumen.ubicacion, resumen.total_ofertas -- Muestra los resultados calculados por la subconsulta
+FROM ( -- Inicia una tabla derivada
+    SELECT ubicacion, COUNT(*) AS total_ofertas -- Cuenta las ofertas por ciudad
+    FROM Ofertas -- Consulta las ofertas
+    GROUP BY ubicacion -- Crea un grupo por ciudad
+) AS resumen -- Asigna un alias obligatorio a la tabla derivada
+WHERE resumen.total_ofertas &gt; 2; -- Conserva ciudades con más de dos ofertas</code></pre>
+            <p>Una subconsulta correlacionada hace referencia a una fila de la consulta exterior. Se evalúa en
+                relación con esa fila.</p>
+            <pre><code class="language-sql">SELECT e.nombre -- Muestra el nombre de cada empresa
+FROM Empresas AS e -- Recorre las empresas
+WHERE EXISTS ( -- Comprueba si existe al menos una fila relacionada
+    SELECT 1 -- Solo interesa comprobar la existencia
+    FROM Ofertas AS o -- Busca ofertas
+    WHERE o.id_empresa = e.id_empresa -- Relaciona la oferta con la empresa actual
+); -- Finaliza la comprobación</code></pre>
+<figure class="didactic-image" role="img" aria-label="FROM crea una tabla derivada; EXISTS comprueba coincidencias.">
+<svg viewBox="0 0 930 155" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><title>Tabla derivada y comprobacion EXISTS</title><rect x="24" y="23" width="405" height="115" rx="10" fill="#f1f7ff" stroke="#2980b9" stroke-width="2"/><text x="44" y="46" font-family="Arial,sans-serif" font-size="10" fill="#245c88" font-weight="700" text-anchor="start">FROM (subconsulta) AS resumen</text><rect x="50" y="59" width="164" height="55" rx="5" fill="#fff" stroke="#9bc5e3" stroke-width="2"/><text x="132" y="82" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="700" text-anchor="middle">tabla derivada</text><text x="132" y="102" font-family="Arial,sans-serif" font-size="8" fill="#53627a" font-weight="400" text-anchor="middle">resultado temporal</text><path d="M435 80 L487 80" fill="none" stroke="#7182a1" stroke-width="3"/><rect x="495" y="23" width="411" height="115" rx="10" fill="#fff8e7" stroke="#c68500" stroke-width="2"/><text x="515" y="46" font-family="Arial,sans-serif" font-size="10" fill="#996500" font-weight="700" text-anchor="start">EXISTS (subconsulta)</text><circle cx="565" cy="83" r="14" fill="#fff" stroke="#c68500" stroke-width="2"/><circle cx="680" cy="83" r="14" fill="#fff" stroke="#c68500" stroke-width="2"/><circle cx="795" cy="83" r="14" fill="#fff" stroke="#c68500" stroke-width="2"/><path d="M579 83 L666 83" fill="none" stroke="#c68500" stroke-width="2"/><path d="M694 83 L781 83" fill="none" stroke="#c68500" stroke-width="2"/><path d="M795 64 L565 64" fill="none" stroke="#c68500" stroke-width="2"/><text x="700" y="118" font-family="Arial,sans-serif" font-size="8" fill="#53627a" font-weight="400" text-anchor="middle">comprueba cada fila exterior</text></svg>
+<figcaption>FROM crea una tabla derivada; EXISTS comprueba coincidencias.</figcaption>
+</figure>
+<div class="warning-box">
+                <p>Asigna siempre un alias a una subconsulta usada en <code>FROM</code>. Usa <code>EXISTS</code>
+                    cuando solo necesites comprobar si hay filas relacionadas.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="vistas">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>4.8. Vistas</h2>
+            
+            <p>Una vista es una consulta guardada que se utiliza como una tabla virtual. Puede simplificar consultas
+                repetidas o presentar un conjunto de datos más concreto.</p>
+            <pre><code class="language-sql">CREATE VIEW ofertas_salario_alto AS -- Guarda una vista con ofertas seleccionadas
+    SELECT id_oferta, titulo, salario, ubicacion -- Expone solo estas columnas
+    FROM Ofertas -- Usa Ofertas como fuente
+    WHERE salario &gt; 30000; -- Limita la vista a salarios mayores de 30000
+
+SELECT titulo, salario -- Consulta las columnas necesarias
+FROM ofertas_salario_alto -- Lee la vista guardada
+ORDER BY salario DESC; -- Ordena por salario descendente</code></pre>
+<figure class="didactic-image" role="img" aria-label="Una vista guarda una consulta reutilizable.">
+<svg viewBox="0 0 930 154" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><title>Vista como lente de una consulta guardada</title><rect x="23" y="35" width="248" height="94" rx="10" fill="#e7f3ff" stroke="#2980b9" stroke-width="2"/><text x="147" y="61" font-family="Arial,sans-serif" font-size="12" fill="#245c88" font-weight="700" text-anchor="middle">TABLAS</text><text x="147" y="92" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="middle">Ofertas + Empresas</text><path d="M274 82 L346 82" fill="none" stroke="#5a4a86" stroke-width="4"/><rect x="354" y="24" width="211" height="112" rx="48" fill="#f7eafa" stroke="#8e5aa7" stroke-width="2"/><circle cx="459" cy="75" r="31" fill="#fff" stroke="#8e5aa7" stroke-width="3"/><circle cx="459" cy="75" r="11" fill="#8e5aa7" stroke="none" stroke-width="1"/><text x="459" y="125" font-family="Arial,sans-serif" font-size="9" fill="#704280" font-weight="700" text-anchor="middle">VIEW guardada</text><path d="M569 82 L642 82" fill="none" stroke="#5a4a86" stroke-width="4"/><rect x="650" y="35" width="257" height="94" rx="10" fill="#f2fbf4" stroke="#3c8c58" stroke-width="2"/><text x="778" y="61" font-family="Arial,sans-serif" font-size="12" fill="#28633c" font-weight="700" text-anchor="middle">CONSULTA</text><text x="778" y="92" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="middle">reutiliza el resultado</text></svg>
+<figcaption>Una vista guarda una consulta reutilizable.</figcaption>
+</figure>
+<div class="info-box">
+                <p>Una vista sencilla sobre una sola tabla y sin agregaciones suele ser actualizable. Las vistas con
+                    agrupaciones, funciones agregadas, <code>DISTINCT</code> o uniones complejas pueden no serlo.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="vistas-operaciones">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Modificar, reemplazar y eliminar vistas</h2>
+            
+            <pre><code class="language-sql">CREATE OR REPLACE VIEW ofertas_salario_alto AS -- Crea o sustituye la definición de la vista
+    SELECT id_oferta, titulo, salario, ubicacion -- Mantiene las columnas necesarias
+    FROM Ofertas -- Usa la tabla original
+    WHERE salario &gt; 35000; -- Actualiza el criterio de selección
+
+DROP VIEW IF EXISTS ofertas_salario_alto; -- Elimina la vista si existe</code></pre>
+<figure class="didactic-image" role="img" aria-label="Una vista se crea, se reemplaza o se elimina.">
+<svg viewBox="0 0 930 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><title>Ciclo de las operaciones sobre una vista</title><text x="465" y="16" font-family="Arial,sans-serif" font-size="10" fill="#35445d" font-weight="700" text-anchor="middle">CICLO DE VIDA DE LA VISTA</text><circle cx="150" cy="68" r="42" fill="#e7f3ff" stroke="#2980b9" stroke-width="3"/><text x="150" y="65" font-family="Arial,sans-serif" font-size="10" fill="#2980b9" font-weight="700" text-anchor="middle">CREATE</text><text x="150" y="82" font-family="Arial,sans-serif" font-size="8" fill="#26334a" font-weight="400" text-anchor="middle">crear</text><circle cx="465" cy="68" r="42" fill="#f7eafa" stroke="#8e5aa7" stroke-width="3"/><text x="465" y="65" font-family="Arial,sans-serif" font-size="10" fill="#8e5aa7" font-weight="700" text-anchor="middle">REPLACE</text><text x="465" y="82" font-family="Arial,sans-serif" font-size="8" fill="#26334a" font-weight="400" text-anchor="middle">actualizar</text><circle cx="780" cy="68" r="42" fill="#fff3d6" stroke="#c68500" stroke-width="3"/><text x="780" y="65" font-family="Arial,sans-serif" font-size="10" fill="#c68500" font-weight="700" text-anchor="middle">DROP</text><text x="780" y="82" font-family="Arial,sans-serif" font-size="8" fill="#26334a" font-weight="400" text-anchor="middle">eliminar</text><path d="M196 68 L419 68" fill="none" stroke="#5a4a86" stroke-width="3"/><path d="M511 68 L734 68" fill="none" stroke="#5a4a86" stroke-width="3"/><text x="307" y="55" font-family="Arial,sans-serif" font-size="8" fill="#53627a" font-weight="400" text-anchor="middle">definicion inicial</text><text x="622" y="55" font-family="Arial,sans-serif" font-size="8" fill="#53627a" font-weight="400" text-anchor="middle">nueva definicion</text><path d="M780 116 L150 116" fill="none" stroke="#9aa9bd" stroke-width="2"/><text x="465" y="135" font-family="Arial,sans-serif" font-size="8" fill="#53627a" font-weight="400" text-anchor="middle">DROP elimina la vista, no su tabla de origen</text></svg>
+<figcaption>Una vista se crea, se reemplaza o se elimina.</figcaption>
+</figure>
+<div class="warning-box">
+                <p><code>DROP VIEW</code> elimina la definición de la vista, no los datos de la tabla original.
+                    Antes de usar <code>UPDATE</code> o <code>DELETE</code> sobre una vista, confirma que es
+                    actualizable y que la operación afecta a las filas esperadas.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="optimizar">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>4.9. Optimización de consultas</h2>
+            
+            <p>Optimizar busca reducir el trabajo que realiza el gestor sin cambiar el resultado correcto de la
+                consulta.</p>
+            <ul>
+                <li>Seleccionar las columnas necesarias en vez de usar <code>SELECT *</code>.</li>
+                <li>Filtrar con condiciones claras y aprovechar índices en columnas buscadas con frecuencia.</li>
+                <li>Limitar resultados con <code>LIMIT</code> cuando solo se necesita una muestra.</li>
+                <li>Usar <code>EXISTS</code> cuando baste con comprobar que hay filas relacionadas.</li>
+                <li>Evitar aplicar funciones sobre una columna filtrada, porque puede impedir el uso de un índice.</li>
+                <li>Comparar el plan de ejecución antes y después de un cambio.</li>
+            </ul>
+            <h3>En este ejemplo se utiliza EXPLAIN para comprobar, antes y después, como funciona el índice:</h3>
+            <p>EXPLAIN no devuelve los resultados de la consulta, sino el plan de ejecución que el gestor utilizará para procesarla.</p>
+            <pre><code class="language-sql">EXPLAIN SELECT titulo, ubicacion -- Pide al gestor el plan de ejecución
+FROM Ofertas -- Lee las ofertas
+WHERE ubicacion = 'Madrid'; -- Filtra por la ubicación indicada
+
+CREATE INDEX idx_ofertas_ubicacion ON Ofertas (ubicacion); -- Añade un índice para búsquedas por ubicación
+
+EXPLAIN SELECT titulo, ubicacion -- Vuelve a solicitar el plan
+FROM Ofertas -- Lee la misma tabla
+WHERE ubicacion = 'Madrid'; -- Compara el plan para el mismo filtro</code></pre>
+<figure class="didactic-image" role="img" aria-label="EXPLAIN permite comparar el acceso a los datos.">
+<svg viewBox="0 0 930 152" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><title>Comparar lectura completa e indice</title><text x="465" y="17" font-family="Arial,sans-serif" font-size="10" fill="#35445d" font-weight="700" text-anchor="middle">DOS CAMINOS DE ACCESO</text><rect x="25" y="28" width="388" height="106" rx="10" fill="#fff3f1" stroke="#d46a5e" stroke-width="2"/><text x="45" y="49" font-family="Arial,sans-serif" font-size="11" fill="#a33f36" font-weight="700" text-anchor="start">SIN INDICE</text><rect x="45" y="63" width="29" height="24" rx="3" fill="#f3b9b0" stroke="#d46a5e" stroke-width="2"/><rect x="87" y="63" width="29" height="24" rx="3" fill="#f3b9b0" stroke="#d46a5e" stroke-width="2"/><rect x="129" y="63" width="29" height="24" rx="3" fill="#f3b9b0" stroke="#d46a5e" stroke-width="2"/><rect x="171" y="63" width="29" height="24" rx="3" fill="#f3b9b0" stroke="#d46a5e" stroke-width="2"/><rect x="213" y="63" width="29" height="24" rx="3" fill="#f3b9b0" stroke="#d46a5e" stroke-width="2"/><rect x="255" y="63" width="29" height="24" rx="3" fill="#f3b9b0" stroke="#d46a5e" stroke-width="2"/><rect x="297" y="63" width="29" height="24" rx="3" fill="#f3b9b0" stroke="#d46a5e" stroke-width="2"/><rect x="339" y="63" width="29" height="24" rx="3" fill="#f3b9b0" stroke="#d46a5e" stroke-width="2"/><text x="219" y="118" font-family="Arial,sans-serif" font-size="9" fill="#7e3933" font-weight="400" text-anchor="middle">lectura completa</text><rect x="517" y="28" width="388" height="106" rx="10" fill="#f2fbf4" stroke="#3c8c58" stroke-width="2"/><text x="538" y="49" font-family="Arial,sans-serif" font-size="11" fill="#28633c" font-weight="700" text-anchor="start">CON INDICE</text><circle cx="557" cy="94" r="9" fill="#cce8d2" stroke="#3c8c58" stroke-width="2"/><circle cx="625" cy="72" r="9" fill="#cce8d2" stroke="#3c8c58" stroke-width="2"/><circle cx="693" cy="94" r="9" fill="#cce8d2" stroke="#3c8c58" stroke-width="2"/><circle cx="761" cy="72" r="9" fill="#cce8d2" stroke="#3c8c58" stroke-width="2"/><circle cx="829" cy="94" r="9" fill="#cce8d2" stroke="#3c8c58" stroke-width="2"/><path d="M566 92 L616 74" fill="none" stroke="#3c8c58" stroke-width="2"/><path d="M634 74 L684 92" fill="none" stroke="#3c8c58" stroke-width="2"/><path d="M702 92 L752 74" fill="none" stroke="#3c8c58" stroke-width="2"/><path d="M770 74 L820 92" fill="none" stroke="#3c8c58" stroke-width="2"/><text x="711" y="118" font-family="Arial,sans-serif" font-size="9" fill="#28633c" font-weight="400" text-anchor="middle">busqueda dirigida</text><circle cx="465" cy="82" r="26" fill="#5a4a86" stroke="none" stroke-width="1"/><text x="465" y="85" font-family="Arial,sans-serif" font-size="7" fill="#fff" font-weight="700" text-anchor="middle">EXPLAIN</text></svg>
+<figcaption>EXPLAIN permite comparar el acceso a los datos.</figcaption>
+</figure>
+<div class="warning-box">
+                <p>Un índice puede acelerar lecturas, pero ocupa espacio y añade trabajo al insertar, actualizar o
+                    borrar. No se debe crear un índice sin una necesidad comprobada.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="limitar-resultados">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Limitar resultados y escribir filtros eficientes</h2>
+            
+            <p>Cuando solo necesites una muestra, limita el número de filas devueltas. En filtros por fecha,
+                compara directamente la columna con un intervalo en lugar de transformar cada valor.</p>
+            <pre><code class="language-sql">SELECT titulo, fecha_publicacion -- Muestra el título y la fecha de la oferta
+FROM Ofertas -- Consulta la tabla Ofertas
+ORDER BY fecha_publicacion DESC -- Coloca primero las ofertas más recientes
+LIMIT 10; -- Devuelve solo diez filas
+
+SELECT titulo, fecha_publicacion -- Devuelve título y fecha
+FROM Ofertas -- Consulta la tabla Ofertas
+WHERE fecha_publicacion &gt;= '2024-01-01' AND fecha_publicacion &lt; '2025-01-01'; -- Filtra un intervalo sin transformar la columna</code></pre>
+<figure class="didactic-image" role="img" aria-label="Ordena antes de limitar el numero de filas devueltas.">
+<svg viewBox="0 0 930 145" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><title>Seleccion de las primeras filas con LIMIT</title><text x="28" y="18" font-family="Arial,sans-serif" font-size="10" fill="#35445d" font-weight="700" text-anchor="start">LISTA ORDENADA</text><rect x="29" y="25" width="411" height="13" rx="3" fill="#dff0e3" stroke="#3c8c58" stroke-width="2"/><text x="40" y="35" font-family="Arial,sans-serif" font-size="8" fill="#26334a" font-weight="400" text-anchor="start">oferta 1</text><text x="427" y="35" font-family="Arial,sans-serif" font-size="7" fill="#53627a" font-weight="400" text-anchor="end">salario</text><rect x="29" y="41" width="411" height="13" rx="3" fill="#dff0e3" stroke="#3c8c58" stroke-width="2"/><text x="40" y="51" font-family="Arial,sans-serif" font-size="8" fill="#26334a" font-weight="400" text-anchor="start">oferta 2</text><text x="427" y="51" font-family="Arial,sans-serif" font-size="7" fill="#53627a" font-weight="400" text-anchor="end">salario</text><rect x="29" y="57" width="411" height="13" rx="3" fill="#dff0e3" stroke="#3c8c58" stroke-width="2"/><text x="40" y="67" font-family="Arial,sans-serif" font-size="8" fill="#26334a" font-weight="400" text-anchor="start">oferta 3</text><text x="427" y="67" font-family="Arial,sans-serif" font-size="7" fill="#53627a" font-weight="400" text-anchor="end">salario</text><rect x="29" y="73" width="411" height="13" rx="3" fill="#f1f3f6" stroke="#c5ccd6" stroke-width="2"/><text x="40" y="83" font-family="Arial,sans-serif" font-size="8" fill="#26334a" font-weight="400" text-anchor="start">oferta 4</text><text x="427" y="83" font-family="Arial,sans-serif" font-size="7" fill="#53627a" font-weight="400" text-anchor="end">salario</text><rect x="29" y="89" width="411" height="13" rx="3" fill="#f1f3f6" stroke="#c5ccd6" stroke-width="2"/><text x="40" y="99" font-family="Arial,sans-serif" font-size="8" fill="#26334a" font-weight="400" text-anchor="start">oferta 5</text><text x="427" y="99" font-family="Arial,sans-serif" font-size="7" fill="#53627a" font-weight="400" text-anchor="end">salario</text><rect x="29" y="105" width="411" height="13" rx="3" fill="#f1f3f6" stroke="#c5ccd6" stroke-width="2"/><text x="40" y="115" font-family="Arial,sans-serif" font-size="8" fill="#26334a" font-weight="400" text-anchor="start">oferta 6</text><text x="427" y="115" font-family="Arial,sans-serif" font-size="7" fill="#53627a" font-weight="400" text-anchor="end">salario</text><rect x="29" y="121" width="411" height="13" rx="3" fill="#f1f3f6" stroke="#c5ccd6" stroke-width="2"/><text x="40" y="131" font-family="Arial,sans-serif" font-size="8" fill="#26334a" font-weight="400" text-anchor="start">oferta 7</text><text x="427" y="131" font-family="Arial,sans-serif" font-size="7" fill="#53627a" font-weight="400" text-anchor="end">salario</text><path d="M480 36 H678 L650 95 H508 Z" fill="#e7f3ff" stroke="#2980b9" stroke-width="3"/><text x="578" y="62" font-family="Arial,sans-serif" font-size="12" fill="#245c88" font-weight="700" text-anchor="middle">LIMIT 3</text><text x="578" y="81" font-family="Arial,sans-serif" font-size="8" fill="#26334a" font-weight="400" text-anchor="middle">muestra</text><path d="M442 78 L475 78" fill="none" stroke="#5a4a86" stroke-width="3"/><path d="M682 67 L737 67" fill="none" stroke="#2980b9" stroke-width="3"/><rect x="746" y="42" width="158" height="54" rx="8" fill="#f2fbf4" stroke="#3c8c58" stroke-width="2"/><text x="825" y="65" font-family="Arial,sans-serif" font-size="11" fill="#28633c" font-weight="700" text-anchor="middle">3 FILAS</text><text x="825" y="82" font-family="Arial,sans-serif" font-size="8" fill="#26334a" font-weight="400" text-anchor="middle">devueltas</text></svg>
+<figcaption>Ordena antes de limitar el numero de filas devueltas.</figcaption>
+</figure>
+<div class="info-box">
+                <p>Para consultar si existe una relación, <code>EXISTS</code> expresa directamente esa intención.
+                    La elección entre <code>EXISTS</code> e <code>IN</code> depende de la consulta y del plan que
+                    produzca el gestor.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="leer-explain">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Leer el resultado de EXPLAIN</h2>
+            
+            <p><code>EXPLAIN</code> muestra cómo planea ejecutar la consulta. En MySQL, revisa especialmente:</p>
+            <ul>
+                <li><strong>type:</strong> método de acceso; una búsqueda por índice puede ser más selectiva que
+                    recorrer toda la tabla.</li>
+                <li><strong>possible_keys / key:</strong> índices candidatos y el índice elegido.</li>
+                <li><strong>rows:</strong> estimación de filas que se leerán.</li>
+                <li><strong>Extra:</strong> información adicional sobre filtros y operaciones.</li>
+            </ul>
+<figure class="didactic-image" role="img" aria-label="TYPE, KEY y ROWS describen el plan estimado.">
+<svg viewBox="0 0 930 153" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><title>Leer los indicadores del plan</title><rect x="27" y="21" width="531" height="117" rx="8" fill="#f8fafc" stroke="#aeb9c8" stroke-width="2"/><text x="48" y="42" font-family="Arial,sans-serif" font-size="10" fill="#35445d" font-weight="700" text-anchor="start">PLAN DE EJECUCION</text><rect x="48" y="54" width="145" height="24" rx="3" fill="#dfeafa" stroke="#aec1dc" stroke-width="2"/><text x="56" y="70" font-family="Arial,sans-serif" font-size="9" fill="#245c88" font-weight="700" text-anchor="start">type</text><rect x="48" y="79" width="145" height="39" rx="3" fill="#fff" stroke="#d5dce6" stroke-width="2"/><text x="56" y="103" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">range</text><rect x="211" y="54" width="145" height="24" rx="3" fill="#dfeafa" stroke="#aec1dc" stroke-width="2"/><text x="219" y="70" font-family="Arial,sans-serif" font-size="9" fill="#245c88" font-weight="700" text-anchor="start">key</text><rect x="211" y="79" width="145" height="39" rx="3" fill="#fff" stroke="#d5dce6" stroke-width="2"/><text x="219" y="103" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">idx_salario</text><rect x="374" y="54" width="145" height="24" rx="3" fill="#dfeafa" stroke="#aec1dc" stroke-width="2"/><text x="382" y="70" font-family="Arial,sans-serif" font-size="9" fill="#245c88" font-weight="700" text-anchor="start">rows</text><rect x="374" y="79" width="145" height="39" rx="3" fill="#fff" stroke="#d5dce6" stroke-width="2"/><text x="382" y="103" font-family="Arial,sans-serif" font-size="9" fill="#26334a" font-weight="400" text-anchor="start">42</text><rect x="613" y="24" width="293" height="108" rx="9" fill="#17243a" stroke="#101827" stroke-width="2"/><text x="759" y="48" font-family="Arial,sans-serif" font-size="11" fill="#82d4ff" font-weight="700" text-anchor="middle">INTERPRETAR</text><text x="636" y="74" font-family="Arial,sans-serif" font-size="9" fill="#e9eff8" font-weight="400" text-anchor="start">type = acceso</text><text x="636" y="96" font-family="Arial,sans-serif" font-size="9" fill="#e9eff8" font-weight="400" text-anchor="start">key = indice usado</text><text x="636" y="118" font-family="Arial,sans-serif" font-size="9" fill="#e9eff8" font-weight="400" text-anchor="start">rows = filas estimadas</text></svg>
+<figcaption>TYPE, KEY y ROWS describen el plan estimado.</figcaption>
+</figure>
+<div class="info-box">
+                <p>Compara la misma consulta antes y después del índice. Explica qué cambia en <code>key</code> y
+                    <code>rows</code>; el plan depende del tamaño de los datos y de las estadísticas del servidor.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="resumen-ut4">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>¿Qué has aprendido?</h2>
+          
+            <ul>
+                <li>Una consulta se construye con cláusulas como <code>SELECT</code>, <code>FROM</code>,
+                    <code>WHERE</code> y <code>ORDER BY</code>.</li>
+                <li>Los operadores permiten filtrar por comparación, texto, intervalos, listas y valores nulos.</li>
+                <li>Los <code>JOIN</code> combinan tablas; <code>LEFT JOIN</code> conserva todas las filas del lado
+                    izquierdo.</li>
+                <li>Las agregaciones resumen los datos; <code>GROUP BY</code> agrupa y <code>HAVING</code> filtra grupos.</li>
+                <li>Las subconsultas y vistas organizan consultas reutilizables.</li>
+                <li><code>EXPLAIN</code> ayuda a entender el plan; los índices se valoran según el uso real.</li>
+            </ul>
+        </section>
+
+        <section class="slide" id="glosario-ut4">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Glosario esencial</h2>
+            
+            <ul>
+                <li><strong>Alias:</strong> nombre temporal para una columna o tabla.</li>
+                <li><strong>Agregación:</strong> cálculo de resumen como suma, media o recuento.</li>
+                <li><strong>JOIN:</strong> combinación de filas relacionadas entre tablas.</li>
+                <li><strong>NULL:</strong> ausencia de un valor conocido o informado.</li>
+                <li><strong>Subconsulta:</strong> consulta anidada dentro de otra consulta.</li>
+                <li><strong>Vista:</strong> consulta guardada que se presenta como tabla virtual.</li>
+                <li><strong>Índice:</strong> estructura que puede ayudar a localizar filas con mayor rapidez.</li>
+                <li><strong>Plan de ejecución:</strong> estrategia que el gestor prevé utilizar para ejecutar una consulta.</li>
+            </ul>
+        </section>
+
+        <section class="slide" id="actividad1-tutorial">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Actividad 1: consultas simples, condiciones y ordenación</h2>
+
+<div class="info-box">
+                <p><strong>Enunciado:</strong> en <code>bd_ofertasdetrabajo</code>, realiza las diez consultas del enunciado con filtros
+                    y ordenaciones.</p>
+                
+                <p><strong>Entrega:</strong> archivo SQL y PDF con cada consulta y una captura del resultado.</p>
+            </div>
+            <h3>Ejemplo guiado: salario de 25.000 a 40.000</h3>
+            <pre><code class="language-sql">SELECT titulo AS oferta, salario AS salario_euros -- Presenta alias legibles
+FROM Ofertas -- Consulta la tabla de ofertas
+WHERE salario BETWEEN 25000 AND 40000 -- Incluye los dos límites
+ORDER BY salario DESC; -- Ordena de menor a mayor</code></pre>
+            <h3>Continúa con el resto de ejercicios:</h3>
+            <ol>
+                <li>Utiliza <code>LIKE '%Ingeniero%'</code> para buscar texto contenido en el título.</li>
+                <li>Compara fechas con <code>&gt;</code> y cadenas con <code>LIKE '%Madrid%'</code>.</li>
+                <li>Usa <code>IS NULL</code> y combina con <code>OR descripcion = ''</code> para textos ausentes.</li>
+                <li>Ordena candidatos por ciudad y comprueba el sentido de <code>ASC</code> y <code>DESC</code>.</li>
+            </ol>
+            <div class="warning-box">
+                <p>Confirma con <code>DESCRIBE</code> los nombres reales de las columnas antes de redactar las diez
+                    consultas. No incluyas capturas sin el texto de la consulta que produjo el resultado.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="actividad2-tutorial">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Actividad 2: consultas multitabla con JOIN y LEFT JOIN</h2>
+
+
+            <h3>Ejemplo guiado: título, empresa y ubicación</h3>
+            <p>El primer paso es identificar las relaciones entre las tablas. En este caso Ofertas tiene una clave foránea <code>id_empresa</code> que apunta a Empresas. Por tanto, podemos unirlas con un <code>INNER JOIN</code>.</p>
+            <pre><code class="language-sql">SELECT o.titulo, e.nombre AS empresa, o.ubicacion -- Elige columnas de ambas tablas
+FROM Ofertas AS o -- Da un alias corto a Ofertas
+INNER JOIN Empresas AS e ON o.id_empresa = e.id_empresa; -- Relaciona cada oferta con su empresa</code></pre>
+            <h3>Pasos para resolver las demás</h3>
+            <ol>
+                <li>Dibuja o identifica las relaciones en las claves foráneas.</li>
+                <li>Elige <code>INNER JOIN</code> cuando solo quieras coincidencias; elige <code>LEFT JOIN</code>
+                    para conservar también las filas sin relación.</li>
+                <li>Para contar candidatos, combina inscripciones y ofertas, usa <code>COUNT</code> y agrupa por oferta.</li>
+                <li>Para candidatos sin ofertas, usa <code>LEFT JOIN</code> y filtra la clave de inscripción con
+                    <code>IS NULL</code>.</li>
+                <li>Para el caso Barcelona, filtra la ciudad de la empresa y excluye la ubicación de la oferta.</li>
+            </ol>
+            <div class="warning-box">
+                <p>Los nombres de tablas y claves del ejemplo pueden diferir de la base de datos entregada. Ajusta
+                    <code>id_empresa</code>, <code>id_candidato</code> y <code>id_oferta</code> a las columnas reales.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="actividad3-tutorial">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Actividad 3: agregaciones y agrupación</h2>
+
+<div class="info-box">
+                <p><strong>Enunciado:</strong> resuelve ocho consultas usando <code>COUNT</code>, <code>SUM</code>,
+                    <code>AVG</code>, <code>MAX</code>, <code>MIN</code>, <code>GROUP BY</code> y <code>HAVING</code></p>
+               
+            </div>
+            <h3>Ejemplo guiado: Número total de ofertas publicadas en la tabla Ofertas de cada empresa.</h3>
+            <p>Para contar ofertas por empresa, agrupa por la columna de id_empresa y usa <code>COUNT(*)</code> para contar las filas de cada grupo. Ordena el resultado de mayor a menor.</p>
+            <pre><code class="language-sql">SELECT id_empresa, COUNT(*) AS total_ofertas -- Cuenta las filas de cada grupo
+FROM Ofertas -- Lee las ofertas publicadas
+GROUP BY id_empresa -- Agrupa por empresa
+ORDER BY total_ofertas DESC; -- Muestra primero las empresas con más ofertas</code></pre>
+            <h3>Cómo completar las otras consultas</h3>
+            <ol>
+                <li>Empieza por la dimensión de agrupación: empresa, ubicación, ciudad o sexo.</li>
+                <li>Escoge la función adecuada: cuenta filas, calcula media, máximo o mínimo.</li>
+                <li>Añade <code>HAVING</code> solo para condiciones sobre el resultado agregado.</li>
+                <li>Ordena los resultados por la medida calculada cuando lo solicite el enunciado.</li>
+            </ol>
+            <div class="info-box">
+                <p>Una columna del <code>SELECT</code> que no sea agregada debe aparecer en <code>GROUP BY</code>.
+                    Usa alias para que los resultados sean fáciles de interpretar.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="actividad4-tutorial">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="LinkiaFP">
+            <h2>Actividad 4: subconsultas, vistas y EXPLAIN</h2>
+
+<div class="info-box">
+                <p><strong>Enunciado:</strong> Mostrar todas las ofertas cuyo salario sea superior al salario promedio de todas las ofertas.</p>            </div>
+            <h3>Ejemplo:Mostrar todas las ofertas cuyo salario sea superior al salario promedio de todas las ofertas.</h3>
+            <pre><code class="language-sql">SELECT id_oferta, titulo, salario, ubicacion -- Mantiene las columnas necesarias 
+FROM Ofertas -- Consulta la tabla de ofertas
+WHERE salario &gt; (SELECT AVG(salario) FROM Ofertas); -- Compara con la media global usando una subconsulta escalar</code></pre>
+            
+            <h3>Ejemplo: Crear una vista que muestre solo las ofertas con salario superior a 30000. Esta vista debe permitir UPDATE y DELETE sobre sus registros.</h3>
+            <pre><code class="language-sql">CREATE OR REPLACE VIEW ofertas_altas AS
+SELECT id_oferta, titulo, salario, ubicacion
+FROM Ofertas
+WHERE salario > 30000;
+</code></pre>
+<h3>Ejemplo: Crea una consulta con EXPLAIN</h3>
+            <pre><code class="language-sql">EXPLAIN SELECT e.nombre, o.titulo -- Solicita el plan de la consulta
+FROM Empresas AS e -- Consulta empresas
+INNER JOIN Ofertas AS o ON o.id_empresa = e.id_empresa -- Relaciona cada empresa con sus ofertas
+WHERE o.ubicacion = 'Madrid'; -- Limita los resultados a Madrid</code></pre>
+
+<h3>Completa la práctica</h3>
+            <ol>
+                <li>Para candidatos en ciudades con ofertas, usa <code>IN</code> con una subconsulta que seleccione
+                    ubicaciones.</li>
+                <li>Para añadir la media global, incorpora una subconsulta escalar en la lista de <code>SELECT</code>.</li>
+                <li>Crea una vista simple de ofertas con salario superior a 30.000 y comprueba sus filas.</li>
+                
+            </ol>
+           
+
+        </section>
+    </div>
+
+    <div class="footer">
+        <div class="bar">
+            <small>UT4 · Realización de consultas · LinkiaFP</small>
+            <small>© Vicente Català Ruiz · 2026</small>
+        </div>
+    </div>
+</body>
+
+</html>

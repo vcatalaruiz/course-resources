@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UT5 - Usabilidad, accesibilidad y diseño visual</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+    <script src="../script.js" defer></script>
+    <style>
+        .dark-mode { background-color: #2c3e50 !important; color: #ecf0f1 !important; }
+        .dark-mode .slide { background-color: #2c3e50 !important; color: #ecf0f1 !important; }
+    </style>
+</head>
+
+<body>
+    <!-- Sección inicial con logo -->
+    <div class="deck">
+        <section class="slide cover" id="portada">
+            <div style="max-width: 60%;">
+                <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="LinkiaFP">
+                <div class="title">UT5 - Usabilidad, accesibilidad y dise&#241;o visual</div>
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;" alt="LinkiaFP">
+            </div>
+        </section>
+
+    <!-- 1. Principios de diseño de interfaz -->
+    <section class="slide" id="principios-diseno">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+        <h2>1. Principios de diseño de interfaz de usuario</h2>
+        <p>El diseño de interfaces de usuario (UI) busca crear sistemas que sean <strong>eficaces, intuitivos y
+                agradables</strong> para los usuarios. Aplicar principios de diseño facilita la interacción, reduce
+            errores y mejora la experiencia general.</p>
+
+        <h3>1.1 Diseño centrado en el usuario (DCU)</h3>
+        <p>El DCU es un enfoque de diseño que pone a las personas en el centro del proceso. Sus decisiones se basan en
+            necesidades, objetivos y contexto de uso de los usuarios finales.</p>
+
+        <h4>1.1.1 Características del DCU</h4>
+        <ul>
+            <li><strong>Enfoque en el usuario:</strong> La interfaz se adapta a la forma en que los usuarios piensan y
+                trabajan.</li>
+            <li><strong>Iterativo:</strong> Se desarrollan prototipos, se prueban y se ajustan continuamente.</li>
+            <li><strong>Accesible:</strong> Todos los usuarios, independientemente de sus capacidades, deben poder
+                utilizar la interfaz.</li>
+            <li><strong>Basado en evidencia:</strong> Se recopilan datos mediante entrevistas, encuestas y pruebas de
+                usabilidad.</li>
+        </ul>
+
+        <h4>1.1.2 Etapas principales del DCU</h4>
+        <ul>
+            <li><strong>Análisis del usuario:</strong> Identificar perfiles, necesidades y contexto de uso.</li>
+            <li><strong>Requisitos de la interfaz:</strong> Definir funcionalidades, restricciones y objetivos de la UI.
+            </li>
+            <li><strong>Prototipado:</strong> Crear representaciones visuales iniciales para probar ideas.</li>
+            <li><strong>Evaluación:</strong> Recoger retroalimentación mediante pruebas de usabilidad y ajustar la
+                interfaz.</li>
+            <li><strong>Revisión:</strong> Adaptar el diseño según los resultados y volver a evaluar los cambios.</li>
+        </ul>
+        <div class="diagram">
+            <img src="../../assets/linkia/diseno-centrado-usuario-dcu-usabilidad-proceso-ux.webp" alt="Diagrama etapas DCU" />
+        </div>
+
+        <h3>1.2 Coherencia visual y experiencia de uso</h3>
+        <p>La coherencia visual significa que los elementos de la interfaz siguen patrones consistentes. Esto permite al
+            usuario aprender la aplicación más rápido y reduce errores.</p>
+
+        <h4>1.2.1 ¿Qué implica un diseño coherente?</h4>
+        <ul>
+            <li>Colores y tipografía uniformes en toda la interfaz.</li>
+            <li>Estilos de botones y controles consistentes.</li>
+            <li>Patrones de navegación claros y predecibles.</li>
+        </ul>
+        <div class="diagram">
+            <img src="../../assets/linkia/correos-rebranding-color-summa.jpg" alt="Ejemplo de coherencia visual" />
+        </div>
+
+        <h4>1.2.2 Consecuencias de una interfaz incoherente</h4>
+        <ul>
+            <li>Usuarios confundidos y frustrados.</li>
+            <li>Mayor probabilidad de cometer errores.</li>
+            <li>Tiempo de aprendizaje más largo para usar la aplicación.</li>
+        </ul>
+
+        <div class="diagram">
+            <img src="../../assets/linkia/incoherente_ux.jpg" width="900px" alt="ux incoherente mal diseño web">
+        </div>
+
+        <h3>Principios de usabilidad de Jakob Nielsen</h3>
+        <p>Estas heurísticas ayudan a detectar problemas de uso durante la evaluación de una interfaz:</p>
+        <ol>
+            <li>Visibilidad del estado del sistema: informar de lo que está ocurriendo.</li>
+            <li>Correspondencia entre el sistema y el mundo real: usar términos familiares.</li>
+            <li>Control y libertad: facilitar deshacer o salir de una acción.</li>
+            <li>Consistencia y estándares: mantener patrones reconocibles.</li>
+            <li>Prevención de errores: evitar problemas antes de que sucedan.</li>
+            <li>Reconocimiento antes que recuerdo: mostrar opciones y ayudas cuando se necesitan.</li>
+            <li>Flexibilidad y eficiencia: ofrecer atajos a usuarios con experiencia.</li>
+            <li>Diseño estético y minimalista: mostrar solo información relevante.</li>
+            <li>Ayudar a reconocer, diagnosticar y recuperarse de errores.</li>
+            <li>Ofrecer ayuda y documentación cuando sea necesaria.</li>
+        </ol>
+        <div class="info-box">
+            <p><strong>Ejemplo:</strong> después de enviar un formulario, mostrar “Guardando…” y luego “Cambios
+                guardados” permite conocer el estado del sistema; incluir “Deshacer” aporta control al usuario.</p>
+        </div>
+
+    </section>
+
+    <section class="slide" id="ayudas-contextuales">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+        <h2>Ayudas sensibles al contexto</h2>
+        <p>Una ayuda contextual ofrece información relacionada con la tarea, el campo o la pantalla que el usuario está
+            utilizando. Debe aparecer cuando es útil y explicar cómo continuar sin interrumpir el trabajo.</p>
+        <ul>
+            <li><strong>Texto de ayuda junto a un campo:</strong> aclara el formato esperado, por ejemplo, “Introduce
+                una fecha en formato día/mes/año”.</li>
+            <li><strong>Mensaje de validación:</strong> explica qué dato falta o cómo corregirlo.</li>
+            <li><strong>Ayuda breve o tooltip:</strong> define una opción sin reemplazar su etiqueta visible.</li>
+            <li><strong>Guía paso a paso o documentación:</strong> acompaña tareas con varios pasos.</li>
+        </ul>
+        <h3>Cómo diseñarla</h3>
+        <ol>
+            <li>Identifica la tarea y la dificultad probable del usuario.</li>
+            <li>Presenta la ayuda cerca del elemento al que se refiere y en el momento adecuado.</li>
+            <li>Escribe instrucciones concretas, claras y fáciles de cerrar o volver a consultar.</li>
+            <li>Comprueba que se pueda percibir y utilizar con teclado y tecnologías de asistencia.</li>
+        </ol>
+        <div class="warning-box">
+            <p>No uses el color como única forma de comunicar un error ni ocultes información esencial en un tooltip
+                que solo aparece al pasar el ratón. La ayuda debe seguir disponible en pantallas táctiles y teclado.</p>
+        </div>
+    </section>
+
+    <!-- 2. Organización de elementos -->
+    <section class="slide" id="organizacion-elementos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+        <h2>2. Organización de elementos en pantalla</h2>
+        <p>Una interfaz eficaz no depende únicamente del diseño visual o del tipo de controles utilizados. La
+            <strong>organización espacial y jerárquica</strong> de los elementos en pantalla es clave para facilitar la
+            comprensión, reducir la carga cognitiva y guiar al usuario hacia las acciones más importantes.
+        </p>
+        <p>Organizar bien una pantalla significa distribuir la información y los controles de forma lógica, predecible y
+            visualmente atractiva. Un mal diseño puede hacer que incluso una funcionalidad bien implementada resulte
+            difícil de usar.</p>
+
+        <h3>2.1 Distribución y jerarquía visual</h3>
+        <p>La jerarquía visual es el orden de importancia que asignamos a los elementos de una interfaz a través de
+            técnicas gráficas como <strong>tamaño, color, posición y agrupación</strong>. Permite al usuario saber de un
+            vistazo qué mirar primero, qué ignorar y cómo proceder.</p>
+
+        <h4>Principios básicos de jerarquía visual</h4>
+        <ul>
+            <li><strong>Proximidad:</strong> los elementos cercanos se perciben como relacionados.</li>
+            <li><strong>Repetición:</strong> usar patrones visuales repetidos facilita el reconocimiento.</li>
+            <li><strong>Contraste:</strong> colores, tamaños o estilos distintos indican niveles de importancia.</li>
+            <li><strong>Alineación:</strong> una disposición alineada transmite orden y estructura.</li>
+            <li><strong>Espaciado adecuado:</strong> evita saturación visual y mejora legibilidad.</li>
+        </ul>
+        <div class="diagram">
+            <img src="../../assets/linkia/visual_design_principles.avif" width="700px" alt="principios diseño visual web" />
+        </div>
+        <h4>Zonas de atención</h4>
+        <p>Estudios de seguimiento ocular muestran que los usuarios tienden a mirar primero la parte superior izquierda
+            y seguir un patrón en “F”. Esto condiciona el posicionamiento estratégico de elementos clave:</p>
+        <ul>
+            <li>Logotipo, menú o navegación principal en la parte superior.</li>
+            <li>Contenido importante al inicio de las secciones.</li>
+            <li>Botones de acción destacados cerca de los elementos relacionados.</li>
+        </ul>
+        <div class="diagram">
+            <img src="../../assets/linkia/F-shape.png" alt="Ejemplo de patrón F en interfaz" />
+        </div>
+
+        <h4>Organización en cuadrícula</h4>
+        <p>El uso de sistemas de <strong>grid</strong> permite distribuir elementos respetando márgenes, alineaciones y
+            zonas funcionales. Existen frameworks que aplican estos principios (por ejemplo, Bootstrap en web), pero
+            también se aplican en diseño de escritorio y móvil.</p>
+        <div class="diagram">
+            <img src="../../assets/linkia/common-grid-structures-84.png" alt="Ejemplo de grid en interfaz" />
+        </div>
+
+        <h3>2.2 Selección de controles apropiados</h3>
+        <p>Una interfaz debe usar controles que se adapten a la información y al tipo de interacción esperada. No todos
+            los controles son adecuados para cualquier situación; una mala elección puede causar errores, frustración o
+            pérdida de eficiencia.</p>
+
+        <h4>2.2.1 Tipos de controles comunes y uso recomendado</h4>
+        <table border="1" cellpadding="5" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Tipo de control</th>
+                    <th>Uso recomendado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Botón (Button)</td>
+                    <td>Iniciar acciones, confirmar opciones, aceptar o cancelar.</td>
+                </tr>
+                <tr>
+                    <td>Etiqueta (Label)</td>
+                    <td>Mostrar texto estático o nombres asociados a otros controles.</td>
+                </tr>
+                <tr>
+                    <td>Caja de texto (TextBox)</td>
+                    <td>Ingresar datos libres: nombres, direcciones, comentarios.</td>
+                </tr>
+                <tr>
+                    <td>Área de texto (TextArea)</td>
+                    <td>Ingresar textos largos o multilínea.</td>
+                </tr>
+                <tr>
+                    <td>Casillas (CheckBox)</td>
+                    <td>Marcar múltiples opciones independientes.</td>
+                </tr>
+                <tr>
+                    <td>Botones de opción (RadioButton)</td>
+                    <td>Elegir una opción entre varias mutuamente excluyentes.</td>
+                </tr>
+                <tr>
+                    <td>Listas desplegables (ComboBox)</td>
+                    <td>Ofrecer muchas opciones en poco espacio.</td>
+                </tr>
+                <tr>
+                    <td>Cuadro de lista (ListBox)</td>
+                    <td>Mostrar múltiples ítems, con selección simple o múltiple.</td>
+                </tr>
+                <tr>
+                    <td>Calendario (DatePicker)</td>
+                    <td>Selección de fechas de forma visual y precisa.</td>
+                </tr>
+                <tr>
+                    <td>Slider / SpinBox</td>
+                    <td>Modificar valores numéricos de forma rápida o precisa.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>Criterios para elección de controles</h4>
+        <ul>
+            <li><strong>Número de opciones:</strong> muchas → lista desplegable; pocas → botones de opción.</li>
+            <li><strong>Espacio disponible:</strong> si es reducido, se priorizan controles compactos.</li>
+            <li><strong>Contexto de uso:</strong> en móviles, usar controles táctiles y grandes.</li>
+            <li><strong>Frecuencia de uso:</strong> lo más usado debe estar más accesible.</li>
+        </ul>
+
+        <h4>Buenas prácticas en el uso de controles</h4>
+        <ul>
+            <li>Etiquetar claramente cada control con descripciones comprensibles.</li>
+            <li>Usar controles nativos del sistema operativo siempre que sea posible.</li>
+            <li>Evitar controles personalizados innecesarios que rompan la coherencia.</li>
+            <li>Validar la entrada del usuario antes de enviarla o procesarla.</li>
+        </ul>
+
+
+    </section>
+
+
+    <!-- 3. Criterios de accesibilidad -->
+    <section class="slide" id="criterios-accesibilidad">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+        <h2>3. Criterios de accesibilidad</h2>
+        <p>La accesibilidad garantiza que todas las personas puedan usar una interfaz, independientemente de sus
+            capacidades, condiciones físicas, cognitivas o del entorno. Cumplir normativas y aplicar principios de
+            diseño inclusivo mejora la experiencia de todos los usuarios.</p>
+
+        <h3>3.1 Normativas y estándares de accesibilidad</h3>
+        <p>Entre los estándares y normativas más importantes se incluyen:</p>
+
+        <h4>3.1.1 Normas internacionales (WCAG)</h4>
+        <div class="diagram">
+            <img src="../../assets/linkia/WCAG logo.jpg" alt="Logo WCAG" width="250px">
+        </div>
+        <p>Las versiones más utilizadas son <strong>WCAG 2.0 y 2.1</strong>. Sus principios (POUR) son:</p>
+        <ul>
+            <li><strong>Perceptible:</strong> El contenido debe poder percibirse mediante los sentidos, no solo visual.
+            </li>
+            <li><strong>Operable:</strong> Debe poder utilizarse con teclado u otros dispositivos.</li>
+            <li><strong>Comprensible:</strong> La interfaz debe ser entendible y predecible.</li>
+            <li><strong>Robusto:</strong> Compatible con tecnologías de asistencia.</li>
+        </ul>
+
+        <div class="diagram">
+            <img src="../../assets/linkia/WCAG animation.gif" alt="Logo WCAG" width="450px">
+        </div>
+
+        <h4>3.1.2 Buenas prácticas y normativas locales</h4>
+        <ul>
+            <li><strong>EN 301 549 (UE):</strong> Estándar europeo que establece requisitos de accesibilidad para
+                productos y servicios TIC, incluyendo software y aplicaciones móviles.</li>
+            <div class="diagram">
+                <img src="../../assets/linkia/Spanish_EN_301549_e2fbc89e11.jpg" alt="Logo WCAG" width="350px">
+            </div>
+            <li><strong>Ley 34/2002 (LSSI, España):</strong> Exige accesibilidad de sitios web y aplicaciones públicas,
+                y en ciertos casos privadas.</li>
+            <div class="diagram">
+                <img src="../../assets/linkia/LSSI.jpg" alt="Logo WCAG" width="350px">
+            </div>
+        </ul>
+
+        <h4>Ejemplos de requisitos comunes</h4>
+        <ul>
+            <li>Contraste mínimo de 4.5:1 entre texto y fondo.</li>
+            <li>Navegación completa mediante teclado.</li>
+            <li>Incluir texto alternativo en imágenes.</li>
+            <li>Titulación y etiquetas claras para formularios.</li>
+            <li>Evitar contenido que parpadee o se mueva sin control.</li>
+        </ul>
+
+        <div id="ejemplo-accesibilidad">
+            <p>Este bloque muestra cómo aplicar algunos de los criterios más importantes de accesibilidad:</p>
+
+            <!-- Contraste mínimo -->
+            <div style="margin-bottom: 20px;">
+                <strong>Contraste mínimo 4.5:1:</strong>
+                <p style="background-color: #ffffff; color: #000000; padding: 10px; display: inline-block;">
+                    Texto negro sobre fondo blanco → alto contraste ✅
+                </p>
+                <p style="background-color: #ffffff; color: #cccccc; padding: 10px; display: inline-block;">
+                    Texto gris claro sobre fondo blanco → bajo contraste ❌
+                </p>
+            </div>
+
+            <!-- Navegación mediante teclado -->
+            <div style="margin-bottom: 20px;">
+                <strong>Navegación con teclado:</strong>
+                <p>Prueba moverte entre los campos usando la tecla <kbd>Tab</kbd>:</p>
+                <input type="text" placeholder="Nombre" />
+                <input type="email" placeholder="Correo electrónico" />
+                <button>Enviar</button>
+            </div>
+
+            <!-- Texto alternativo en imágenes -->
+            <div style="margin-bottom: 20px;">
+                <strong>Texto alternativo en imágenes:</strong>
+                <p></p>
+                <img src="../../assets/linkia/atributo_alt_marketing_gacelaweb.jpg" width="450px"
+                    alt="Logo de ejemplo con descripción para lectores de pantalla" />
+                <p>La etiqueta <code>alt</code> permite que usuarios con lectores de pantalla comprendan la imagen.</p>
+            </div>
+
+            <!-- Etiquetas claras en formularios -->
+            <div style="margin-bottom: 20px;">
+                <strong>Etiquetas claras en formularios:</strong>
+                <form>
+                    <label for="usuario">Usuario:</label>
+                    <input type="text" id="usuario" name="usuario" /><br><br>
+                    <label for="clave">Contraseña:</label>
+                    <input type="password" id="clave" name="clave" /><br><br>
+                    <button type="submit">Iniciar sesión</button>
+                </form>
+            </div>
+
+            <!-- Evitar contenido parpadeante -->
+            <div style="margin-bottom: 20px;">
+                <strong>Evitar contenido que parpadee:</strong>
+                <p>Este texto no parpadea, para cumplir con accesibilidad ✅</p>
+                <p style="color: red; font-weight: bold;">
+                    No se deben usar elementos que parpadeen o se muevan de forma automática.
+                </p>
+            </div>
+
+        </div>
+
+        <h3>3.2 Diseño inclusivo</h3>
+        <p>El diseño inclusivo va más allá de cumplir normativas: incorpora la diversidad de los usuarios desde el
+            inicio del proyecto, evitando correcciones posteriores.</p>
+
+
+
+        <h4>Características del diseño inclusivo</h4>
+        <ul>
+            <li><strong>Flexibilidad:</strong> Se adapta a distintas necesidades, dispositivos y entornos.</li>
+            <li><strong>Prevención de exclusión:</strong> Detecta y evita barreras antes de que aparezcan.</li>
+            <li><strong>Participación activa:</strong> Usuarios diversos participan en pruebas de usabilidad.</li>
+        </ul>
+
+        <h4>Buenas prácticas de diseño inclusivo</h4>
+        <ul>
+            <li>No usar el color como único indicador; acompañar con texto o icono.</li>
+            <li>Permitir ajustes de tamaño de texto sin pérdida de funcionalidad.</li>
+            <li>Evitar interacciones temporizadas que impidan completar tareas.</li>
+            <li>Diseñar formularios con etiquetas externas legibles por lectores de pantalla.</li>
+            <li>Ofrecer subtítulos, transcripciones o descripciones de audio en contenidos multimedia.</li>
+        </ul>
+        <div class="diagram">
+            <img src="../../assets/linkia/td-7steps-universal-design.gif" width="750px" alt="Ejemplo de tecnologías de asistencia" />
+        </div>
+        <h4>Ejemplos de colectivos beneficiados</h4>
+        <ul>
+            <li>Personas con discapacidad visual: baja visión, daltonismo, ceguera.</li>
+            <li>Personas con discapacidad auditiva: sordera, pérdida auditiva parcial.</li>
+            <li>Personas con dificultades cognitivas: TDAH, dislexia, TEA.</li>
+            <li>Personas mayores: deterioro sensorial, motricidad reducida.</li>
+            <li>Usuarios con limitaciones temporales: brazos lesionados, fatiga visual, entornos ruidosos.</li>
+        </ul>
+
+        <h4>Tecnologías de asistencia</h4>
+        <ul>
+            <li>Lectores de pantalla (JAWS, NVDA, VoiceOver).</li>
+            <li>Magnificadores de pantalla.</li>
+            <li>Software de navegación por voz.</li>
+            <li>Teclados alternativos o adaptados.</li>
+            <li>Líneas braille electrónicas.</li>
+        </ul>
+
+    </section>
+
+
+    <!-- 4. Estética y legibilidad -->
+    <section class="slide" id="estetica-legibilidad">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+
+        <h2>4. Estética y legibilidad</h2>
+        <p>Una interfaz funcional no tiene por qué ser estéticamente pobre. Diseñar una interfaz visualmente cuidada y
+            legible favorece tanto la comprensión como la aceptación del sistema por parte del usuario.</p>
+        <p>La estética debe estar al servicio de la función: un diseño atractivo capta la atención, transmite
+            profesionalidad y mejora la experiencia de uso sin distraer del objetivo principal. Además, una buena
+            legibilidad garantiza accesibilidad para personas con baja visión o dificultades cognitivas.</p>
+
+        <h3>4.1 Colores, tipografía y contraste</h3>
+        <div class="diagram">
+            <img src="../../assets/linkia/color_and-tipo.jpeg" width="750px" alt="Tipografía y color en diseño web" />
+        </div>
+        <p>Estos elementos son fundamentales para garantizar claridad informativa y equilibrio visual en la
+            interfaz.</p>
+
+        <h4>Colores</h4>
+        <p>Los colores cumplen una función decorativa, simbólica y funcional. El uso correcto ayuda a:</p>
+
+        <ul>
+            <li>Agrupar elementos relacionados.</li>
+            <li>Resaltar acciones importantes.</li>
+            <li>Asociar significados (verde = éxito, rojo = error).</li>
+            <li>Guiar la atención visual.</li>
+        </ul>
+        <div class="diagram">
+            <img src="../../assets/linkia/tipo_color.gif" width="350px" alt="Tipo colores" />
+        </div>
+        <p><strong>Buenas prácticas:</strong></p>
+        <ul>
+            <li>Limitar la paleta a 3-4 colores principales.</li>
+            <li>Usar colores contrastados para texto y fondo.</li>
+            <li>Reservar colores llamativos para acciones importantes.</li>
+            <li>Probar visibilidad con filtros de daltonismo (Coblis, simuladores de accesibilidad).</li>
+            <li>Evitar combinaciones que generen fatiga visual (por ejemplo, rojo sobre verde).</li>
+        </ul>
+
+
+        <h4>Tipografía</h4>
+        <p>La elección de fuentes influye directamente en la facilidad de lectura. Una fuente inadecuada provoca fatiga
+            ocular y confusión.</p>
+        <ul>
+            <li>Usar fuentes sans-serif (Arial, Verdana, Roboto) para interfaces digitales.</li>
+            <li>Evitar fuentes decorativas o manuscritas salvo casos puntuales.</li>
+            <li>Tamaño mínimo de 11 pt para texto base (preferible 12-13 pt en pantallas grandes).</li>
+            <li>Aplicar jerarquía tipográfica mediante tamaño, grosor y color (títulos, subtítulos, cuerpo).</li>
+            <li>Limitar a dos familias tipográficas en toda la interfaz.</li>
+            <li>Asegurar interlineado suficiente (1.3 a 1.6 veces el tamaño de fuente).</li>
+        </ul>
+        <div class="diagram">
+            <img src="../../assets/linkia/typography.jpg" alt="Ejemplo de tipografía legible y jerarquía tipográfica" />
+        </div>
+
+        <h4>Contraste</h4>
+        <p>El contraste entre texto y fondo es esencial para la legibilidad. Según WCAG:</p>
+        <h3>Contraste y legibilidad según WCAG</h3>
+        <p>El contraste entre texto y fondo es esencial para la legibilidad. Según WCAG:</p>
+        <ul>
+            <li>Relación mínima 4.5:1 para texto normal.</li>
+            <li>Relación mínima 3:1 para texto grande (≥18 pt o ≥14 pt en negrita).</li>
+        </ul>
+
+        <h4>Ejemplos de contraste</h4>
+
+        <!-- Contraste correcto -->
+        <div style="background-color: #ffffff; color: #000000; padding: 10px; margin-bottom: 10px;">
+            <strong>✅ Contraste correcto:</strong> Texto negro sobre fondo blanco, legible y seguro.
+        </div>
+
+        <!-- Contraste insuficiente -->
+        <div style="background-color: #ffffff; color: #cccccc; padding: 10px; margin-bottom: 10px;">
+            <strong>❌ Contraste insuficiente:</strong> Texto gris claro sobre fondo blanco, difícil de leer.
+        </div>
+
+        <h3>4.2 Personalización de estilos</h3>
+        <p>Permitir que el usuario adapte la interfaz a sus preferencias mejora accesibilidad, usabilidad y experiencia
+            general. Los usuarios trabajan en condiciones diversas: luz solar directa, problemas de visión o
+            preferencias personales.</p>
+
+        <h4>Ejemplos de estilos personalizables</h4>
+        <ul>
+            <li>Modo oscuro / claro: visibilidad en distintas condiciones de luz.</li>
+            <li>Tamaños de fuente ajustables: ayuda a personas con baja visión o dislexia.</li>
+            <li>Esquemas de color alternativos: pensados para daltonismo u otras alteraciones perceptivas.</li>
+            <li>Interfaz adaptable al dispositivo: diseño responsive para reorganizar elementos según tamaño de
+                pantalla.</li>
+        </ul>
+        <div class="diagram">
+            <img src="../../assets/linkia/switching-between-themes-Indigo-Design-App-Builder.gif" alt="Ejemplos de personalización de interfaz" />
+        </div>
+
+        <h4>Técnicas para permitir personalización</h4>
+        <ul>
+            <li>Usar variables de estilo (CSS variables, temas en WPF).</li>
+            <li>Incluir preferencias de usuario almacenadas localmente o en la nube.</li>
+            <li>Evitar unidades fijas; preferir relativas (em, %, rem).</li>
+            <li>Aplicar hojas de estilo separadas por modo (por ejemplo, modo accesible).</li>
+        </ul>
+
+        <h4>Ejemplo práctico de personalización</h4>
+        <p>Un ejemplo simple de modo oscuro y cambio de tamaño de fuente:</p>
+        <button id="toggle-dark">CAMBIA EL TEMA</button>
+        <pre><code class="language-html">&lt;!-- Botón de ejemplo para alternar el modo oscuro --&gt;
+&lt;button onclick="document.body.classList.toggle('dark-mode')"&gt;Modo oscuro&lt;/button&gt;
+&lt;!-- Botón de ejemplo para aumentar el tamaño del texto --&gt;
+&lt;button onclick="document.body.style.fontSize='18px'"&gt;Fuente grande&lt;/button&gt;
+&lt;!-- Inicia los estilos del modo oscuro --&gt;
+&lt;style&gt;
+/* Aplica los colores del tema oscuro */
+.dark-mode {
+    background-color: #121212; /* Usa un fondo oscuro */
+    color: #f0f0f0; /* Mantiene el texto legible */
+} /* Finaliza las reglas del modo oscuro */
+&lt;/style&gt; &lt;!-- Finaliza los estilos del ejemplo --&gt;
+    </code></pre>
+
+    </section>
+
+    <section class="slide" id="resumen-ut5">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+        <h2>¿Qué has aprendido?</h2>
+        <ul>
+            <li>El diseño centrado en el usuario tiene en cuenta sus necesidades y el contexto de uso.</li>
+            <li>La coherencia visual y una buena jerarquía facilitan el aprendizaje y la realización de tareas.</li>
+            <li>Los controles deben elegirse según los datos, las opciones y el dispositivo.</li>
+            <li>Las WCAG organizan la accesibilidad en cuatro principios: perceptible, operable, comprensible y robusto.</li>
+            <li>El diseño inclusivo incorpora la diversidad desde el inicio.</li>
+            <li>Contraste, tipografía y personalización influyen en la legibilidad y la experiencia.</li>
+            <li>Las ayudas contextuales deben aparecer donde y cuando el usuario las necesita.</li>
+        </ul>
+        <div class="info-box">
+            <p>Una interfaz de calidad no solo resulta atractiva: también es clara, coherente, accesible y útil para
+                personas con diferentes necesidades y contextos.</p>
+        </div>
+    </section>
+
+    <section class="slide" id="glosario-ut5">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+        <h2>Glosario de la UT5</h2>
+        <div class="two-col">
+            <ul>
+                <li><strong>Accesibilidad:</strong> capacidad de una interfaz para ser utilizada por el mayor número
+                    posible de personas.</li>
+                <li><strong>Contraste:</strong> diferencia visual entre elementos, especialmente entre texto y fondo.</li>
+                <li><strong>Coherencia visual:</strong> uso uniforme de colores, tipografías, iconos y estructuras.</li>
+                <li><strong>Control:</strong> elemento interactivo que permite realizar acciones.</li>
+                <li><strong>DCU:</strong> metodología que coloca al usuario en el centro del diseño.</li>
+                <li><strong>Diseño inclusivo:</strong> creación de productos útiles para personas diversas desde el inicio.</li>
+                <li><strong>Experiencia de usuario (UX):</strong> percepciones y resultados que una persona experimenta
+                    al utilizar una aplicación.</li>
+                <li><strong>Interfaz de usuario (UI):</strong> parte visual e interactiva que comunica al usuario con
+                    el sistema.</li>
+            </ul>
+            <ul>
+                <li><strong>Jerarquía visual:</strong> organización gráfica que guía la atención según la importancia.</li>
+                <li><strong>Legibilidad:</strong> facilidad para leer y comprender el texto en pantalla.</li>
+                <li><strong>WCAG:</strong> pautas internacionales para la accesibilidad de contenidos digitales.</li>
+                <li><strong>Personalización de estilos:</strong> ajustes que adaptan la apariencia a preferencias y
+                    necesidades.</li>
+                <li><strong>Prototipo:</strong> versión preliminar para probar ideas antes del desarrollo final.</li>
+                <li><strong>Tipografía:</strong> estilo, forma y disposición de las letras.</li>
+                <li><strong>Ayuda contextual:</strong> información de apoyo relacionada con la tarea o elemento actual.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="slide" id="fuentes-ut5">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+        <h2>Fuentes de información</h2>
+        <ul>
+            <li>Apple, <em>Human Interface Guidelines</em>.</li>
+            <li>ISO 9241-210, diseño centrado en el ser humano para sistemas interactivos.</li>
+            <li>Microsoft, <em>Fluent Design System</em>.</li>
+            <li>Nielsen, <em>Usabilidad: diseño de sitios web efectivos</em>.</li>
+            <li>W3C, <em>Web Content Accessibility Guidelines (WCAG) 2.1</em>.</li>
+            <li>Unión Europea, norma EN 301 549 sobre accesibilidad de productos y servicios TIC.</li>
+            <li>Fundación ONCE, guías prácticas de accesibilidad digital.</li>
+        </ul>
+        <div class="info-box">
+            <p>Consulta la versión vigente de cada norma y guía cuando debas comprobar requisitos de accesibilidad.</p>
+        </div>
+    </section>
+
+    <section class="slide" id="actividad1-tutorial-ut5">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+        <h2>Actividad 1: relaciona conceptos de diseño centrado en el usuario</h2>
+        <div class="info-box">
+            <p><strong>Enunciado:</strong> relaciona cada concepto con su definición.</p>
+            <p><strong>Conceptos:</strong> 1. Diseño centrado en el usuario; 2. Coherencia visual;
+                3. Ayuda sensible al contexto; 4. Accesibilidad.</p>
+            <p><strong>Definiciones:</strong> A. Ayuda que adapta la información a la necesidad del usuario en ese
+                momento; B. Diseño que prioriza la experiencia del usuario; C. Uso de elementos visuales consistentes;
+                D. Inclusión de personas con distintas capacidades.</p>
+        </div>
+        <h3>Cómo resolverla</h3>
+        <ol>
+            <li>Explica con tus palabras cada concepto antes de elegir una definición.</li>
+            <li>Busca las palabras clave: necesidades, consistencia, momento de uso y distintas capacidades.</li>
+            <li>Anota las parejas en el formato <code>1-?, 2-?, 3-?, 4-?</code> y revisa que no repitas definiciones.</li>
+        </ol>
+        <div class="warning-box">
+            <p>La rúbrica valora todas las relaciones correctas y una comprensión clara de las ayudas contextuales;
+                no basta con asociar palabras sin explicar el concepto.</p>
+        </div>
+    </section>
+
+    <section class="slide" id="actividad2-tutorial-ut5">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+        <h2>Actividad 2: clasifica elementos visuales</h2>
+        <div class="info-box">
+            <p><strong>Enunciado:</strong> clasifica cada elemento como <em>jerarquía visual</em>,
+                <em>estilo gráfico</em> o <em>control de interacción</em>.</p>
+            <p><strong>Elementos:</strong> tamaño de fuente, contraste de colores, botón de envío, encabezado principal,
+                tipografía y casilla de verificación.</p>
+        </div>
+        <h3>Plantilla de respuesta</h3>
+        <table border="1" cellpadding="5" cellspacing="0">
+            <thead><tr><th>Elemento</th><th>Categoría</th><th>¿Por qué?</th></tr></thead>
+            <tbody>
+                <tr><td>Tamaño de fuente</td><td></td><td></td></tr>
+                <tr><td>Contraste de colores</td><td></td><td></td></tr>
+                <tr><td>Botón de envío</td><td></td><td></td></tr>
+                <tr><td>Encabezado principal</td><td></td><td></td></tr>
+                <tr><td>Tipografía</td><td></td><td></td></tr>
+                <tr><td>Casilla de verificación</td><td></td><td></td></tr>
+            </tbody>
+        </table>
+        <div class="info-box">
+            <p>Primero distingue los elementos que organizan la atención, los que definen la apariencia y los que
+                permiten realizar una acción. Justifica brevemente las decisiones.</p>
+        </div>
+    </section>
+
+    <section class="slide" id="actividad3-tutorial-ut5">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+        <h2>Actividad 3: completa la tabla sobre accesibilidad</h2>
+        <div class="info-box">
+            <p><strong>Enunciado:</strong> indica qué aspecto de accesibilidad mejora cada acción:
+                usar alto contraste; incluir texto alternativo en imágenes; permitir navegación con teclado;
+                mostrar ayudas contextuales.</p>
+            <p><strong>Opciones:</strong> acceso para personas con baja visión; acceso para lectores de pantalla;
+                acceso sin necesidad de ratón; apoyo en tareas específicas.</p>
+        </div>
+        <table border="1" cellpadding="5" cellspacing="0">
+            <thead><tr><th>Acción</th><th>Mejora en accesibilidad</th></tr></thead>
+            <tbody>
+                <tr><td>Usar alto contraste</td><td></td></tr>
+                <tr><td>Incluir texto alternativo en imágenes</td><td></td></tr>
+                <tr><td>Permitir navegación con teclado</td><td></td></tr>
+                <tr><td>Mostrar ayudas contextuales</td><td></td></tr>
+            </tbody>
+        </table>
+        <h3>Cómo resolverla</h3>
+        <ol>
+            <li>Piensa qué barrera reduce cada acción.</li>
+            <li>Usa cada opción una sola vez y verifica que la relación sea concreta.</li>
+            <li>Relaciona las ayudas contextuales con la tarea que la persona intenta completar.</li>
+        </ol>
+    </section>
+
+    <section class="slide" id="actividad4-tutorial-ut5">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+        <h2>Actividad 4: ordena el proceso de diseño inclusivo</h2>
+        <div class="info-box">
+            <p><strong>Enunciado:</strong> ordena estos pasos para diseñar una interfaz inclusiva:</p>
+            <ul>
+                <li>A. Identificar necesidades de accesibilidad.</li>
+                <li>B. Aplicar normativas y estándares.</li>
+                <li>C. Diseñar ayudas sensibles al contexto.</li>
+                <li>D. Personalizar estilos para distintos perfiles.</li>
+                <li>E. Verificar la experiencia de uso.</li>
+            </ul>
+        </div>
+        <h3>Cómo resolverla</h3>
+        <ol>
+            <li>Empieza por conocer a las personas y las barreras que pueden encontrar.</li>
+            <li>Después decide qué requisitos y soluciones de diseño aplicar.</li>
+            <li>Termina comprobando la experiencia con pruebas y revisa el resultado.</li>
+        </ol>
+        <p><strong>Orden propuesto:</strong> ______ → ______ → ______ → ______ → ______</p>
+        <div class="warning-box">
+            <p>La rúbrica valora el orden y la explicación de cómo las ayudas contextuales contribuyen al diseño
+                inclusivo. Justifica el proceso con una frase por paso.</p>
+        </div>
+    </section>
+
+    </div>
+    <script>
+        const btnDark = document.getElementById('toggle-dark'); // Selecciona el control del tema
+        btnDark.addEventListener('click', () => { // Registra la acción al pulsarlo
+            document.body.classList.toggle('dark-mode'); // Alterna el tema oscuro
+        }); // Finaliza el manejador del evento
+    </script>
+
+    <div class="footer">
+        <div class="bar">
+            <small>UT5 - Usabilidad, accesibilidad y dise&#241;o visual - LinkiaFP</small>
+            <small>&copy; Vicente Catal&#224; Ruiz - 2025</small>
+        </div>
+    </div>
+</body>
+
+</html>

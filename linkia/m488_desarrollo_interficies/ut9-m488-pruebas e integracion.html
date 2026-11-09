@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UT9. Pruebas y evaluación de la interfaz</title>
+
+    <!-- Mermaid -->
+    <script type="module">
+        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+
+    <!-- HighlightJS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Edu+QLD+Hand:wght@400..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+    <header>
+        <img style="background-color: white; padding: 2%;" src="../../assets/linkia/linkia_logo.jpeg" alt="Logo de la escuela">
+        <h1>UT9. Pruebas y evaluación de la interfaz</h1>
+    </header>
+
+    <main>
+
+
+
+
+
+        <!-- Bloque 1 -->
+        <section>
+            <h2>1. Diseño de la estrategia de pruebas</h2>
+            <p>En el desarrollo de interfaces, una fase fundamental del ciclo de vida del software es la validación de
+                su comportamiento mediante pruebas. Estas pruebas tienen como objetivo garantizar que la aplicación
+                funciona correctamente, es eficiente, segura y cumple con las expectativas de usabilidad por parte de
+                sus usuarios.</p>
+            <p>Diseñar una estrategia de pruebas eficaz supone establecer un conjunto de pruebas organizadas y
+                documentadas que permitan detectar errores de forma sistemática, verificar el cumplimiento de los
+                requisitos y facilitar la toma de decisiones sobre posibles mejoras.</p>
+            <div class="diagram">
+                <img src="../assets/test-funcional.gif" alt="Test funcional" width="450px">
+            </div>
+
+            <h3>1.1 Tipos de pruebas: funcionales, de estrés, de seguridad</h3>
+
+            <h4>a) Pruebas funcionales</h4>
+            <p>Las pruebas funcionales permiten comprobar que cada una de las funciones o características de la interfaz
+                se comporta según lo previsto. Suelen basarse en los requisitos definidos al inicio del proyecto.</p>
+            <div class="diagram">
+                <img src="../assets/test-funcional-2.png" alt="Test funcional" width="250px">
+            </div>
+            <p><strong>Ejemplos comunes:</strong></p>
+            <ul>
+                <li>Comprobación de la navegación entre pantallas.</li>
+                <li>Verificación de botones, menús y formularios.</li>
+                <li>Validación de entradas y salidas de datos.</li>
+            </ul>
+            <p>Estas pruebas pueden ser manuales o automatizadas. En su forma más básica, un tester interactúa con la
+                interfaz comprobando que las acciones generan los resultados esperados.</p>
+            <div class="diagram">
+                <img src="../assets/testing-form.webp" alt="Test formulario" width="250px">
+            </div>
+
+            <h4>b) Pruebas de estrés</h4>
+            <p>Las pruebas de estrés (o “stress testing”) están orientadas a evaluar el comportamiento de la interfaz
+                cuando se somete a una carga elevada o condiciones extremas. No se centran únicamente en verificar el
+                funcionamiento correcto, sino en observar la capacidad de respuesta y resistencia ante situaciones
+                límite.</p>
+            <div class="diagram">
+                <img src="../assets/estres-test.jpg" alt="Test funcional" width="450px">
+            </div>
+            <p><strong>Ejemplos:</strong></p>
+            <ul>
+                <li>Apertura simultánea de múltiples ventanas o procesos.</li>
+                <li>Entrada masiva de datos por parte de distintos usuarios.</li>
+                <li>Comportamiento ante la escasez de recursos (memoria o CPU).</li>
+            </ul>
+
+
+
+            <h4>c) Pruebas de seguridad</h4>
+            <p>El objetivo de las pruebas de seguridad es comprobar que la interfaz no permite accesos no autorizados,
+                manipulación de datos o vulnerabilidades que puedan comprometer la integridad del sistema o la
+                privacidad del usuario.</p>
+            <div class="diagram">
+                <img src="../assets/test-website-security.png" alt="Test funcional" width="450px">
+            </div>
+            <p><strong>Ejemplos de técnicas utilizadas:</strong></p>
+            <ul>
+                <li>Inyección de datos maliciosos en campos de formulario (inyección SQL o XSS).</li>
+                <li>Pruebas de acceso a áreas restringidas sin autenticación.</li>
+                <li>Simulación de comportamientos inesperados por parte del usuario.</li>
+            </ul>
+            <!-- Imagen aquí: esquema de ataque XSS -->
+
+            <h3>1.2 Planificación y documentación</h3>
+            <p>Una estrategia de pruebas sólida no puede improvisarse. Requiere de una planificación previa que defina
+                el alcance, los recursos, los procedimientos y los criterios de aceptación. Esto implica generar
+                distintos documentos que guíen el proceso y dejen constancia de los resultados obtenidos.</p>
+            <div class="diagram">
+                <img src="../assets/strategy.png" alt="strategy" width="450px">
+            </div>
+            <p><strong>Elementos clave:</strong></p>
+            <ul>
+                <li><strong>Plan de pruebas:</strong> objetivos, tipos de pruebas, herramientas empleadas, cronograma,
+                    roles asignados.</li>
+                <li><strong>Casos de prueba (Test Cases):</strong> identificador, objetivo, pasos a seguir, datos de
+                    entrada esperados, resultado esperado, resultado real, estado (superada/fallida).</li>
+                <h4>Ejemplo de caso de prueba:</h4>
+                <table border="1" style="width:100%; text-align:left;">
+                    <tr>
+                        <th>ID</th>
+                        <td>TC_01</td>
+                    </tr>
+                    <tr>
+                        <th>Objetivo</th>
+                        <td>Validar funcionamiento del botón “Enviar” en el formulario de contacto</td>
+                    </tr>
+                    <tr>
+                        <th>Entradas</th>
+                        <td>Nombre: “Ana” / Correo: “ana@correo.com” / Mensaje: “Hola”</td>
+                    </tr>
+                    <tr>
+                        <th>Resultado esperado</th>
+                        <td>Aparece mensaje: “Mensaje enviado correctamente”</td>
+                    </tr>
+                    <tr>
+                        <th>Resultado real</th>
+                        <td>Aparece mensaje correcto</td>
+                    </tr>
+                    <tr>
+                        <th>Estado</th>
+                        <td>Superada</td>
+                    </tr>
+                </table>
+                <li><strong>Registro de incidencias:</strong> errores detectados, fecha, gravedad, solución propuesta.
+                </li>
+            </ul>
+        </section>
+
+
+
+        <!-- Bloque 2 -->
+        <section>
+            <h2>2. Ejecución de pruebas</h2>
+            <p>Validar el funcionamiento real de la interfaz en condiciones similares al entorno de uso.</p>
+
+            <h3>2.1 Integración y regresión</h3>
+            <p><strong>Pruebas de integración:</strong> Verifican la interacción entre componentes y módulos.</p>
+            <ul>
+                <li>Comprueban el intercambio de datos entre formularios, controles y servicios.</li>
+                <li>Detectan errores que no aparecen en pruebas unitarias.</li>
+            </ul>
+            <p><strong>Ejemplo:</strong> Un formulario envía datos a un módulo que los guarda en base de datos.</p>
+
+            <p><strong>Pruebas de regresión:</strong> Detectan si cambios han afectado funcionalidades previas.</p>
+            <p>Son necesarias en entornos ágiles para evitar errores tras actualizaciones.</p>
+            <p><em>Automatización:</em> Se recomienda automatizar para reducir tiempo y asegurar cobertura.</p>
+            <div class="diagram">
+                <img src="../assets/unit_integration_regression_testing.jpg" alt="unit_integration_regression_testing"
+                    width="450px">
+            </div>
+
+            <h3>2.2 Volumen y consumo de recursos</h3>
+            <p>Analizan rendimiento bajo carga elevada y consumo de memoria, CPU y tiempo de respuesta.</p>
+            <ul>
+                <li>Pruebas de volumen: manejo de grandes cantidades de datos (ej. 5000 registros en una tabla).</li>
+                <li>Pruebas de consumo: uso de recursos y velocidad de carga.</li>
+            </ul>
+            <p><strong>Herramientas útiles:</strong> Monitor del sistema, pestaña “Performance” del navegador,
+                Lighthouse.</p>
+            <p><strong>Buenas prácticas:</strong> Ejecutar pruebas en condiciones realistas, registrar incidencias y
+                repetir tras correcciones.</p>
+            <!-- Imagen aquí -->
+        </section>
+
+        <!-- Bloque 3 -->
+        <section>
+            <h2>3. Evaluación de la experiencia de usuario</h2>
+            <p>Más allá del funcionamiento técnico, se analiza la facilidad de uso, eficiencia y satisfacción del
+                usuario.</p>
+            <div class="diagram">
+                <img src="../assets/ux-ui-test.jpg" alt="ux-ui test" width="450px">
+            </div>
+
+            <h3>3.1 Pruebas de usabilidad</h3>
+            <p>Definición según ISO 9241-11: “La medida en que un producto puede ser utilizado por usuarios específicos
+                para lograr objetivos específicos con efectividad, eficiencia y satisfacción en un contexto
+                determinado”.</p>
+            <div class="diagram">
+                <img src="../assets/ISO 9241-11.png" alt="ISO 9241-11" style="max-width: 90%;">
+            </div>
+            <p>Dimensiones:</p>
+            <ul>
+                <li>1. Efectividad: ¿Completa las tareas?</li>
+                <li>2. Eficiencia: ¿Lo hace rápido y sin esfuerzo?</li>
+                <li>3. Satisfacción: ¿Cómo se siente?</li>
+            </ul>
+            <p>Métodos:</p>
+            <ul>
+                <li>Pruebas con usuarios (user testing).</li>
+                <li>Recorrido cognitivo (cognitive walkthrough).</li>
+                <li>Inspección heurística (principios de Nielsen).</li>
+            </ul>
+            <!-- Imagen aquí -->
+
+            <h3>3.2 Registro de resultados y mejora</h3>
+            <p>Instrumentos:</p>
+            <ul>
+                <li>Ficha individual: tarea, tiempo, errores, satisfacción.</li>
+                <li>Grabación en vídeo o capturas.</li>
+                <li>Cuestionario posterior.</li>
+            </ul>
+            <section class="anotation-section">
+
+                <h4>Ejemplo de ficha:</h4>
+                <table border="1">
+                    <tr>
+                        <th>Tarea</th>
+                        <th>¿Completada?</th>
+                        <th>Tiempo (s)</th>
+                        <th>Errores</th>
+                        <th>Dificultades</th>
+                        <th>Satisfacción</th>
+                    </tr>
+                    <tr>
+                        <td>Enviar formulario</td>
+                        <td>Sí</td>
+                        <td>55</td>
+                        <td>1</td>
+                        <td>No localiza botón</td>
+                        <td>4/5</td>
+                    </tr>
+                </table>
+                <p><strong>*Propuestas de mejora:</strong> Cambiar color del botón, añadir mensaje de confirmación más
+                    visible.</p>
+            </section>
+            <!-- Imagen aquí -->
+        </section>
+
+        <!-- Tutorial práctico -->
+        <section>
+            <h2>Tutorial práctico: Crear un plan de pruebas para una interfaz HTML</h2>
+            <h3>Paso 1: Crear formulario HTML</h3>
+            <pre><code>&lt;form id="contacto"&gt;
+    &lt;input type="text" name="nombre" placeholder="Nombre"&gt;
+    &lt;input type="email" name="correo" placeholder="Correo"&gt;
+    &lt;textarea name="mensaje" placeholder="Mensaje"&gt;&lt;/textarea&gt;
+    &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+
+            <h3>Paso 2: Validaciones con JavaScript</h3>
+            <pre><code>document.getElementById('contacto').addEventListener('submit', function(e){
+    e.preventDefault();
+    let correo = document.querySelector('[name="correo"]').value;
+    if(!correo.includes('@')){
+        alert('Correo electrónico no válido');
+    }
+});
+</code></pre>
+
+            <h3>Paso 3: Casos de prueba</h3>
+            <table border="1">
+                <tr>
+                    <th>ID</th>
+                    <th>Descripción</th>
+                    <th>Entrada</th>
+                    <th>Resultado esperado</th>
+                </tr>
+
+                <tr>
+                    <td>TC_01</td>
+                    <td>Todos los campos vacíos</td>
+                    <td>"" / "" / ""</td>
+                    <td>Error: "Todos los campos son obligatorios."</td>
+                </tr>
+
+                <tr>
+                    <td>TC_02</td>
+                    <td>Email mal escrito</td>
+                    <td>"Ana" / "anaemail.com" / "Hola"</td>
+                    <td>Error: "Correo electrónico no válido."</td>
+                </tr>
+
+                <tr>
+                    <td>TC_03</td>
+                    <td>Mensaje demasiado largo</td>
+                    <td>"Luis" / "luis@mail.com" / 600 caracteres</td>
+                    <td>Error: "El mensaje es demasiado largo."</td>
+                </tr>
+
+                <tr>
+                    <td>TC_04</td>
+                    <td>Envío correcto</td>
+                    <td>"María" / "maria@web.com" / "Hola, esto es una prueba"</td>
+                    <td>Éxito: "Mensaje enviado correctamente."</td>
+                </tr>
+
+                <tr>
+                    <td>TC_05</td>
+                    <td>Reenvío sin recargar</td>
+                    <td>Enviar dos veces el mismo formulario</td>
+                    <td>Mismo comportamiento correcto ambas veces</td>
+                </tr>
+            </table>
+
+            <h3>Paso 4: Documentar los resultados reales</h3>
+            <p>
+                Tras realizar cada prueba en el navegador, se anotan los resultados reales observados y se marca si la
+                prueba ha sido superada o fallida.
+            </p>
+
+            <h4>Ficha individual de prueba</h4>
+
+            <table border="1">
+                <tr>
+                    <th>Campo</th>
+                    <th>Valor</th>
+                </tr>
+                <tr>
+                    <td>ID de prueba</td>
+                    <td>TC_02</td>
+                </tr>
+                <tr>
+                    <td>Objetivo</td>
+                    <td>Validar comportamiento con email inválido</td>
+                </tr>
+                <tr>
+                    <td>Datos de entrada</td>
+                    <td>Nombre: Ana – Email: anaemail.com – Mensaje: Hola</td>
+                </tr>
+                <tr>
+                    <td>Resultado esperado</td>
+                    <td>Mensaje de error: "Correo electrónico no válido."</td>
+                </tr>
+                <tr>
+                    <td>Resultado observado</td>
+                    <td>Muestra correctamente el mensaje de error</td>
+                </tr>
+                <tr>
+                    <td>Estado de la prueba</td>
+                    <td>Superada</td>
+                </tr>
+            </table>
+
+            <h3>Paso 5: Conclusión</h3>
+
+            <p>
+                Tras completar la ejecución de todos los casos de prueba definidos para la validación del formulario,
+                se elabora un informe final que resume el estado general del sistema, identifica posibles problemas
+                y propone mejoras para futuras versiones. Esta conclusión permite evaluar la calidad del formulario,
+                así como su grado de cumplimiento con los requisitos funcionales establecidos.
+            </p>
+
+            <h4>5.1 Resultados globales</h4>
+            <p>
+            <ul>
+                <li>Se recopilan los resultados de cada caso de prueba, indicando cuántas pruebas han sido superadas y
+                    pruebas fallidas.
+                </li>
+                <li>Se recopilan los resultados de cada caso de prueba, indicando cuántas pruebas han sido superadas y
+                    porcentaje de éxito.
+                </li>
+            </ul>
+
+            <h4>5.2 Incidencias detectadas</h4>
+            <p>
+                Durante el proceso de validación se registran todas las incidencias observadas, independientemente
+                de su gravedad. </p>
+                <p>Cada incidencia debe describir:
+            </p>
+
+            <ul>
+                <li><strong>ID de prueba asociada</strong> (si corresponde).</li>
+                <li><strong>Descripción clara del problema</strong> (comportamiento incorrecto, fallo de validación,
+                    mensaje no mostrado, error visual, bloqueo del formulario, etc.).</li>
+                <li><strong>Impacto</strong> (bajo, medio, alto) según afecte o impida al usuario completar el
+                    formulario.</li>
+                <li><strong>Posible causa</strong> (errores en el script de validación, fallos de DOM, estilos CSS,
+                    validación incompleta, etc.).</li>
+                <li><strong>Estado actual</strong> (pendiente, en análisis, resuelto).</li>
+            </ul>
+
+            <p>
+                En caso de que no se hayan encontrado problemas, se deja constancia explícita:
+            </p>
+
+            <p><em>No se han detectado incidencias durante la ejecución de las pruebas.</em></p>
+
+            <h4>5.3 Propuestas de mejora</h4>
+            <p>
+                Independientemente de si se detectaron errores o no, siempre se recomienda incluir sugerencias para
+                mejorar
+                la experiencia del usuario, la robustez del código y la mantenibilidad del formulario. Algunas
+                propuestas
+                habituales son:
+            </p>
+
+            <ul>
+                <li>Implementar una <strong>validación del correo electrónico mediante expresiones regulares más
+                        estrictas</strong>
+                    para evitar formatos incorrectos (ejemplo: usuario@dominio.tld).</li>
+                <li>Añadir una <strong>validación de longitud mínima</strong> para el nombre y el mensaje.</li>
+                <li>Incorporar <strong>indicadores visuales de error</strong> accesibles (marcos rojos, iconos, avisos
+                    ARIA),
+                    mejorando la usabilidad.</li>
+                <li>Mostrar los mensajes de error junto a cada campo en lugar de un mensaje general, facilitando la
+                    corrección.</li>
+                <li>Evitar el reenvío accidental implementando <strong>desactivación temporal del botón de
+                        envío</strong>
+                    o un token antifraude (Anti-CSRF).</li>
+                <li>Registrar validaciones también en el servidor para aumentar la seguridad y evitar envíos
+                    manipulados.</li>
+                <li>Implementar <strong>pruebas automatizadas</strong> (por ejemplo, con Jest o Cypress) para acelerar
+                    futuras
+                    validaciones y prevenir regresiones.</li>
+            </ul>
+
+
+            cuántas han fallado. Esto proporciona una visión general del nivel de fiabilidad del formulario.
+            </p>
+            <ul>
+                <li><strong>Total de pruebas ejecutadas:</strong> X</li>
+                <li><strong>Pruebas superadas:</strong> Y</li>
+
+
+        </section>
+
+       
+
+
+
+    </main>
+
+    <footer>
+        <p>© Vicente Català Ruiz 2025-26. Todos los derechos reservados.</p>
+    </footer>
+</body>
+
+</html>

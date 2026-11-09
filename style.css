@@ -480,3 +480,10 @@ code { white-space: pre-wrap; word-break: break-word; }
     font-size: 0.9em;
     line-height: 1.5;
 }
+.note {
+    border-left: 4px solid var(--magenta);
+    background: #fff1f8;
+    padding: 10px 35px;
+    border-radius: 8px;
+    color: #6b284e
+}

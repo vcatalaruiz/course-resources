@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>UT 2. Programación de eventos y construcción de aplicaciones visuales</title>
+    <style>
+         .mermaid {
+            text-align: center;
+            margin: 20px 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 2em auto;
+            background: #f9f9f9;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: justify;
+        }
+
+        header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-direction: column;
+        }
+
+        header img {
+            width: 150px;
+            height: auto;
+            margin-right: 20px;
+            margin-bottom: 2%;
+        }
+
+        h1 {
+            font-size: 1.5em;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
+        h3 {
+            font-size: 1em;
+            margin-top: 15px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        code {
+            background: #eaeaea;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        pre {
+            background: #eaeaea;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 4px;
+        }
+
+        .success {
+            color: green;
+            font-weight: bold;
+            margin-top: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="../../assets/linkia/linkia_logo.jpeg" alt="">
+        <h1>UT 2. Programación de eventos y construcción de aplicaciones visuales</h1>
+    </header>
+
+<script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <h2>1. Introducción al modelo de eventos en desarrollo web</h2>
+
+    <h3>1.1. Concepto de evento y manejadores en JavaScript</h3>
+    <p>Un evento es cualquier acción que ocurre en la página web y que puede ser detectada mediante JavaScript,
+        permitiendo que la aplicación responda de manera interactiva. Los elementos que intervienen en un evento son:
+    </p>
+    <ul>
+        <li><strong>Elemento</strong>: nodo HTML que genera el evento (por ejemplo, <code>&lt;button&gt;</code>,
+            <code>&lt;input&gt;</code>, <code>&lt;form&gt;</code>).</li>
+        <li><strong>Evento</strong>: tipo de acción que ocurre (por ejemplo, click, input, submit).</li>
+        <li><strong>Manejador</strong>: función JavaScript que se ejecuta cuando ocurre el evento.</li>
+    </ul>
+    <p>Tipos de eventos frecuentes:</p>
+    <ul>
+        <li><strong>Mouse</strong>: click, dblclick, mouseover, mouseout, mousemove.</li>
+        <li><strong>Teclado</strong>: keydown, keyup.</li>
+        <li><strong>Formulario</strong>: input, change, submit, focus, blur.</li>
+        <li><strong>Ventana/documento</strong>: load, resize, scroll, DOMContentLoaded.</li>
+    </ul>
+    <p>Ejemplo práctico de manejador:</p>
+    <pre><code>document.getElementById("miBoton").addEventListener("click", function() {
+    alert("Botón clicado!");
+});</code></pre>
+
+    <h3>1.2. Ciclo de vida de una aplicación web basada en eventos</h3>
+    <p>Las etapas principales del ciclo de vida de una aplicación web basada en eventos son:</p>
+    <ol>
+        <li>Carga del DOM y ejecución de scripts.</li>
+        <li>Asignación de eventos y espera activa del usuario.</li>
+        <li>Propagación de eventos: bubbling y capturing.</li>
+        <li>Ejecución de manejadores y actualización del DOM.</li>
+        <li>Repetición del ciclo hasta cierre de página o navegación.</li>
+    </ol>
+    <p>Ejemplo:</p>
+    <pre><code>document.addEventListener("DOMContentLoaded", function() {
+    console.log("DOM completamente cargado y analizado");
+});</code></pre>
+
+    <h2>2. Asociación de acciones a eventos en páginas web</h2>
+
+    <h3>2.1. Captura de eventos del usuario en el DOM</h3>
+    <p>La delegación de eventos permite manejar eventos de varios elementos hijos desde un contenedor. Ejemplo:</p>
+    <pre><code>document.getElementById("miLista").addEventListener("click", function(event) {
+    if (event.target.tagName === "LI") {
+        alert("Elemento de lista clicado: " + event.target.textContent);
+    }
+});</code></pre>
+
+    <h3>2.2. Métodos para asignar funciones a eventos</h3>
+    <p>Se pueden usar atributos HTML, propiedades de objeto, y el método <code>addEventListener</code>. Ejemplo:</p>
+    <pre><code>&lt;button onclick="miFuncion()"&gt;Click&lt;/button&gt;
+&lt;script&gt;
+    function miFuncion() {
+        alert("Botón clicado!");
+    }
+&lt;/script&gt;</code></pre>
+
+    <h2>3. Desarrollo de una aplicación web completa</h2>
+
+    <h3>3.1. Integración de estructura HTML, estilos CSS y lógica JavaScript</h3>
+    <p>Vamos a desglosar y explicar los puntos más relevantes del código proporcionado para el desarrollo de una
+        aplicación web completa:</p>
+
+    <h3>Estructura HTML</h3>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Formulario Registro&lt;/title&gt;
+    &lt;style&gt;
+        /* Estilos CSS aquí */
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2&gt;Registro de Usuario&lt;/h2&gt;
+    &lt;form id="registroForm" novalidate&gt;
+        &lt;label for="nombre"&gt;Nombre completo&lt;/label&gt;
+        &lt;input type="text" id="nombre"&gt;
+        &lt;div id="errorNombre" class="error"&gt;&lt;/div&gt;
+        &lt;label for="email"&gt;Correo electrónico&lt;/label&gt;
+        &lt;input type="email" id="email"&gt;
+        &lt;div id="errorEmail" class="error"&gt;&lt;/div&gt;
+        &lt;label for="password"&gt;Contraseña&lt;/label&gt;
+        &lt;input type="password" id="password" minlength="6"&gt;
+        &lt;div id="errorPassword" class="error"&gt;&lt;/div&gt;
+        &lt;label&gt;&lt;input type="checkbox" id="acepto"&gt; Acepto los términos&lt;/label&gt;
+        &lt;div id="errorAcepto" class="error"&gt;&lt;/div&gt;
+        &lt;button type="submit"&gt;Registrarse&lt;/button&gt;
+        &lt;div id="resultado" class="success"&gt;&lt;/div&gt;
+    &lt;/form&gt;
+    &lt;script&gt;
+        /* Lógica JavaScript aquí */
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+    <h3>Estilos CSS</h3>
+    <pre><code>body { font-family: Arial; max-width: 500px; margin: 2em auto; background: #f9f9f9; }
+form { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+label { display: block; margin-top: 15px; font-weight: bold; }
+input { width: 100%; padding: 8px; margin-top: 5px; border-radius: 4px; border: 1px solid #ccc; }
+.error { color: red; font-size: 0.9em; margin-top: 4px; }
+.success { color: green; font-weight: bold; margin-top: 15px; text-align: center; }
+button { margin-top: 20px; width: 100%; padding: 10px; background-color: #00529b; color: white; border: none; border-radius: 5px; cursor: pointer; }
+button:hover { background-color: #003f7d; }</code></pre>
+
+    <h3>Lógica JavaScript</h3>
+    <p>Vamos a explicar cada parte del JavaScript y su vinculación con el HTML:</p>
+    <pre><code>document.getElementById('registroForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    let valido = true;
+    const nombre = document.getElementById('nombre');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const acepto = document.getElementById('acepto');
+    document.getElementById('errorNombre').textContent = '';
+    document.getElementById('errorEmail').textContent = '';
+    document.getElementById('errorPassword').textContent = '';
+    document.getElementById('errorAcepto').textContent = '';
+    document.getElementById('resultado').textContent = '';
+    if (nombre.value.trim() === '') {
+        document.getElementById('errorNombre').textContent = 'Nombre obligatorio';
+        valido = false;
+    }
+    if (email.value.trim() === '') {
+        document.getElementById('errorEmail').textContent = 'Correo obligatorio';
+        valido = false;
+    }
+    if (password.value.length < 6) {
+        document.getElementById('errorPassword').textContent = 'Contraseña mínima 6 caracteres';
+        valido = false;
+    }
+    if (!acepto.checked) {
+        document.getElementById('errorAcepto').textContent = 'Debe aceptar términos';
+        valido = false;
+    }
+    if (valido) {
+        document.getElementById('resultado').textContent = 'Registro exitoso';
+        this.reset();
+    }
+});</code></pre>
+
+    <p><strong>Explicación:</strong></p>
+    <ul>
+        <li><strong>Captura del evento submit</strong>: Se añade un manejador de eventos al formulario para capturar el
+            evento <code>submit</code> y evitar el comportamiento por defecto (recargar la página) usando
+            <code>e.preventDefault()</code>.</li>
+        <li><strong>Validación de campos</strong>: Se obtienen los valores de los campos de entrada y se comprueba si
+            están vacíos o no cumplen con los requisitos. Si hay errores, se muestran mensajes de error específicos.
+        </li>
+        <li><strong>Mostrar mensajes de éxito</strong>: Si todos los campos son válidos, se muestra un mensaje de éxito
+            y se reinicia el formulario.</li>
+    </ul>
+
+
+    <h2>Esquema del Ciclo de Vida de una Aplicación Web</h2>
+    <pre><code class="mermaid">
+    graph TD;
+        A[Inicio] --> B[Carga del DOM];
+        B --> C[Asignación de eventos];
+        C --> D[Espera activa del usuario];
+        D --> E[Propagación de eventos];
+        E --> F[Ejecución de manejadores];
+        F --> G[Actualización del DOM];
+        G --> D;
+        G --> H[Cierre de página o navegación];
+    </code></pre>
+</body>
+
+</html>

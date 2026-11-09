@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Creación y reutilización de componentes visuales</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+    <script src="../script.js" defer></script>
+    <link href="../style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="deck">
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="LinkiaFP">
+                </div>
+                <div class="title">UT4 - Creación y reutilización de componentes visuales</div>
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;" alt="LinkiaFP">
+            </div>
+        </section>
+
+        <section class="slide" id="introduccion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+            <h2>Introducción</h2>
+            <p>La creación de componentes visuales modulares y reutilizables es fundamental en el desarrollo de interfaces modernas y eficientes. En esta página se presentan las ventajas de la modularización, el diseño de componentes con propiedades y eventos gestionables, así como las mejores prácticas para pruebas, documentación, empaquetado e integración en otros proyectos.</p>
+            <div class="diagram">
+                <img src="../../assets/linkia/elementos-sitio-web-darle-personalidad.webp" alt="Diagrama de componentes modulares">
+            </div>
+        </section>
+
+        <section class="slide" id="ventajas-modularizacion">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+            <h2>1. Ventajas de la modularización</h2>
+            <ul>
+                <li><strong>Reutilización de código:</strong> Los componentes se pueden usar en distintos proyectos o pantallas.</li>
+                <li><strong>Mantenibilidad:</strong> Centraliza la lógica en componentes específicos, facilitando correcciones y mejoras.</li>
+                <li><strong>Escalabilidad:</strong> Permite construir sistemas complejos agregando componentes sin alterar el sistema base.</li>
+                <li><strong>Trabajo colaborativo:</strong> Múltiples desarrolladores pueden trabajar en diferentes componentes de forma independiente.</li>
+            </ul>
+            <h3>Ejemplo visual</h3>
+            <div class="diagram">
+                <img src="../../assets/linkia/modular_design_example.gif" alt="Diagrama de componentes modulares">
+            </div>
+            <p class="referencia">Esquema conceptual de modularización en UI</p>
+        </section>
+
+       <section class="slide" id="diseño-componentes">
+           <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+           <h2>2. Diseño de componentes con propiedades y eventos</h2>
+           <h3>2.1 Propiedades configurables</h3>
+           <p>Las propiedades permiten personalizar un componente desde su exterior sin modificar su código interno. Ejemplo en JavaScript:</p>
+           <pre><code>class MyButton extends HTMLElement {
+   constructor() {
+       super();
+       const color = this.getAttribute('color') || 'red';
+       const shadow = this.attachShadow({ mode: 'open' });
+       const button = document.createElement('button');
+       button.textContent = this.textContent;
+
+       const style = document.createElement('style');
+       style.textContent = `
+           button {
+               background-color: ${color};
+               color: white;
+               border: none;
+               padding: 10px 20px;
+               border-radius: 8px;
+               cursor: pointer;
+               font-size: 16px;
+               transition: background-color 0.3s;
+           }
+           button:hover {
+               background-color: #4338ca;
+           }
+       `;
+
+       shadow.appendChild(style);
+       shadow.appendChild(button);
+
+       button.addEventListener('click', () => {
+           alert(`Has hecho click en "${button.textContent}"`);
+       });
+   }
+}
+customElements.define('my-button', MyButton);</code></pre>
+
+           <p>Uso del componente:</p>
+           <pre><code class="language-html">&lt;my-button color="blue"&gt;Botón personalizado&lt;/my-button&gt;
+&lt;my-button&gt;Otro botón personalizado&lt;/my-button&gt;</code></pre>
+
+           <h3>2.2 Eventos gestionables por el usuario</h3>
+           <p>Los eventos personalizados permiten la comunicación entre elementos. Por ejemplo, un botón puede enviar datos a un contador:</p>
+           <pre><code class="language-html">&lt;div class="ejemplo"&gt;
+   &lt;h3&gt;Ejemplo de contador con evento personalizado&lt;/h3&gt;
+   &lt;h2&gt;Clicks totales: &lt;span id="contador"&gt;0&lt;/span&gt;&lt;/h2&gt;
+   &lt;button id="btnIncremento"&gt;Haz click aquí&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+           <pre><code class="language-javascript">const boton = document.getElementById('btnIncremento');
+const contador = document.getElementById('contador');
+let totalClicks = 0;
+
+const eventoClick = new CustomEvent('botonPulsado', {
+   detail: { valor: 1 }
+});
+
+document.addEventListener('botonPulsado', (e) => {
+   totalClicks += e.detail.valor;
+   contador.textContent = totalClicks;
+});
+
+boton.addEventListener('click', () => {
+   document.dispatchEvent(eventoClick);
+});</code></pre>
+
+           <div class="ejemplo">
+               <h3>Ejemplo de contador con evento personalizado</h3>
+               <h2>Clicks totales: <span id="contador">0</span></h2>
+               <button id="btnIncremento">Haz click aquí</button>
+           </div>
+
+           <script>
+               const boton = document.getElementById('btnIncremento');
+               const contador = document.getElementById('contador');
+               let totalClicks = 0;
+
+               const eventoClick = new CustomEvent('botonPulsado', {
+                   detail: { valor: 1 }
+               });
+
+               document.addEventListener('botonPulsado', (e) => {
+                   totalClicks += e.detail.valor;
+                   contador.textContent = totalClicks;
+               });
+
+               boton.addEventListener('click', () => {
+                   document.dispatchEvent(eventoClick);
+               });
+           </script>
+       </section>
+
+       <section class="slide" id="pruebas-documentacion">
+           <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+           <h2>3. Pruebas y documentación de componentes</h2>
+           <h3>3.1 Pruebas antes de integrar un componente</h3>
+           <ul>
+               <li><strong>Visualización:</strong> comprobar que se renderiza correctamente con diferentes configuraciones.</li>
+               <li><strong>Interacción:</strong> asegurarse de que los eventos se lanzan y capturan correctamente.</li>
+               <li><strong>Comprobación de errores:</strong> observar su comportamiento ante entradas inválidas o estados inesperados.</li>
+           </ul>
+
+           <h3>3.2 Generación de documentación técnica</h3>
+           <ul>
+               <li>Descripción funcional</li>
+               <li>Propiedades configurables (nombre, tipo, valor por defecto)</li>
+               <li>Eventos disponibles (nombre, condiciones de activación)</li>
+               <li>Ejemplo de uso en un entorno real</li>
+               <li>Requisitos técnicos (framework, versión mínima)</li>
+           </ul>
+       </section>
+
+       <section class="slide" id="empacado-integracion">
+           <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+           <h2>4. Reutilización e integración en otras interfaces</h2>
+           <h3>4.1 Empaquetado del componente</h3>
+           <ul>
+               <li><strong>Java:</strong> archivo <code>.jar</code> con todas las clases y recursos.</li>
+               <li><strong>JavaScript:</strong> paquete <code>npm</code> o módulo ESM (<code>.mjs</code>).</li>
+           </ul>
+
+           <h3>4.2 Importación en otros proyectos</h3>
+           <p><strong>JavaScript:</strong> se puede usar directamente en HTML o importar como módulo:</p>
+           <div class="ejemplo">
+               <pre><code class="language-html">&lt;my-button color="green"&gt;Botón reutilizable&lt;/my-button&gt;
+&lt;script type="module"&gt;
+   import './my-button.js';
+&lt;/script&gt;</code></pre>
+           </div>
+           <p>Es importante verificar que los estilos y dependencias sean compatibles con la aplicación donde se integra.</p>
+       </section>
+
+       <section class="slide" id="herramientas-componentes">
+           <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+           <h2>Herramientas para diseñar componentes</h2>
+
+           <div class="two-col">
+               <div>
+                   <h3>Java y JavaFX</h3>
+                   <ul>
+                       <li><strong>Scene Builder:</strong> editor visual para crear interfaces FXML.</li>
+                       <li><strong>FXML + Java:</strong> separa la estructura visual de la lógica.</li>
+                       <li><strong>Control o Region:</strong> clases base para personalizar controles y regiones.</li>
+                   </ul>
+               </div>
+               <div>
+                   <h3>JavaScript</h3>
+                   <ul>
+                       <li><strong>Web Components:</strong> API del navegador para definir etiquetas propias.</li>
+                       <li><strong>React:</strong> componentes funcionales o de clase que reciben props.</li>
+                       <li><strong>Vue:</strong> componentes con plantilla, lógica y estilos.</li>
+                   </ul>
+               </div>
+           </div>
+
+           <div class="info-box">
+               <p>La herramienta se elige según el proyecto. En todos los casos, el objetivo es encapsular estructura,
+                   estilo y comportamiento para poder reutilizar el componente.</p>
+           </div>
+       </section>
+
+       <section class="slide" id="propiedades-componentes">
+           <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+           <h2>Propiedades configurables en distintos entornos</h2>
+
+           <p>Las propiedades permiten configurar un componente desde fuera sin cambiar su implementación interna.</p>
+
+           
+                   <h3>React</h3>
+                   <pre><code class="language-jsx">function MyButton({ text = 'Aceptar', color = 'blue' }) { // Recibe valores configurables
+    return &lt;button style={{ backgroundColor: color }}&gt;{text}&lt;/button&gt;; // Muestra el texto y aplica el color
+} // Finaliza el componente
+
+&lt;MyButton text="Guardar" color="green" /&gt; // Configura una instancia</code></pre>
+              
+                   <h3>JavaFX</h3>
+                   <pre><code class="language-java">public class MyPanel extends Region { // Define un componente JavaFX reutilizable
+    private final StringProperty title = // Declara una propiedad observable
+        new SimpleStringProperty(this, "title", "Panel"); // Asigna su valor por defecto
+    public String getTitle() { return title.get(); } // Lee el valor actual
+    public void setTitle(String value) { title.set(value); } // Cambia el valor
+    public StringProperty titleProperty() { return title; } // Permite enlazar la propiedad
+} // Finaliza la clase del componente</code></pre>
+              
+
+           <div class="info-box">
+               <p>En JavaFX, propiedades como <code>StringProperty</code> y <code>BooleanProperty</code> pueden
+                   observarse o enlazarse (binding) para mantener sincronizados varios elementos.</p>
+           </div>
+       </section>
+
+       <section class="slide" id="eventos-distintos-entornos">
+           <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+           <h2>Eventos gestionables en JavaScript y JavaFX</h2>
+
+         
+                   <h3>JavaScript</h3>
+                   <p>Un componente puede emitir un evento personalizado y comunicar información mediante
+                       <code>detail</code>.</p>
+                   <pre><code class="language-javascript">const evento = new CustomEvent('guardado', { // Crea un evento propio
+    detail: { id: 12 }, // Adjunta información del registro
+    bubbles: true // Permite que el evento suba por el DOM
+}); // Finaliza la configuración del evento
+elemento.dispatchEvent(evento); // Emite el evento para que otros elementos lo escuchen</code></pre>
+               
+                   <h3>JavaFX</h3>
+                   <p>Los manejadores permiten reaccionar a acciones del usuario, como pulsar un botón.</p>
+                   <pre><code class="language-java">guardarButton.setOnAction(event -&gt; { // Registra la acción al pulsar el botón
+    System.out.println("Datos guardados"); // Ejecuta la respuesta al evento
+}); // Finaliza el registro del manejador</code></pre>
+              
+
+           <div class="info-box">
+               <p>En React se suele pasar una función callback, por ejemplo <code>onSave</code>; en Vue se puede emitir
+                   un evento que el componente padre escucha con <code>@save</code> o <code>@click</code>.</p>
+           </div>
+       </section>
+
+       <section class="slide" id="pruebas-documentacion-detalle">
+           <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+           <h2>Pruebas individuales y documentación técnica</h2>
+
+           <ol>
+               <li><strong>Visualización:</strong> revisar la apariencia con valores por defecto y configuraciones distintas.</li>
+               <li><strong>Interacción:</strong> probar acciones y confirmar que se emiten y gestionan los eventos esperados.</li>
+               <li><strong>Errores:</strong> probar entradas inválidas, datos ausentes y estados inesperados.</li>
+           </ol>
+
+           <ul>
+               <li>Java: probar el componente en una escena JavaFX sencilla.</li>
+               <li>JavaScript: usar una página HTML de prueba o herramientas como Jest, Cypress o Vitest.</li>
+           </ul>
+
+           <div class="info-box">
+               <p>La documentación debe incluir descripción funcional, propiedades (nombre, tipo y valor por defecto),
+                   eventos (nombre y activación), ejemplo de uso y requisitos técnicos (framework y versión mínima).
+                   Puede publicarse en Markdown/README, HTML o JavaDoc.</p>
+           </div>
+       </section>
+
+       <section class="slide" id="empaquetado-integracion-detalle">
+           <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+           <h2>Empaquetar, versionar e integrar</h2>
+
+           <ul>
+               <li><strong>Java:</strong> empaquetar clases compiladas y recursos (FXML, CSS) en una librería
+                   <code>.jar</code>; añadirla como dependencia en Maven, Gradle o desde el IDE.</li>
+               <li><strong>JavaScript:</strong> publicar un paquete npm o distribuir un módulo ESM; instalarlo con npm
+                   o incluirlo como script.</li>
+               <li>Incluir fuentes, versión minificada si existe, README y definición de versión
+                   (<code>package.json</code> o <code>MANIFEST.MF</code>).</li>
+               <li>Importar el componente en el proyecto destino y usarlo desde JavaFX/FXML o desde el DOM.</li>
+           </ul>
+
+           <pre><code class="language-html">&lt;!-- La etiqueta usa el componente registrado por el módulo --&gt;
+&lt;mi-boton texto="Aceptar"&gt;&lt;/mi-boton&gt;
+&lt;script type="module"&gt; // Carga el módulo JavaScript
+    import './mi-boton.js'; // Registra el componente en el navegador
+&lt;/script&gt; &lt;!-- Termina la carga del módulo --&gt;</code></pre>
+
+           <div class="warning-box">
+               <p><strong>Posibles problemas:</strong> versiones incompatibles de Java, Node o frameworks; dependencias
+                   ausentes o duplicadas; rutas incorrectas de CSS/recursos; diferencias de estilos; y API distintas
+                   entre versiones. Comprueba las versiones y prueba la integración antes de distribuir.</p>
+           </div>
+       </section>
+
+       <section class="slide" id="resumen-ut4">
+           <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+           <h2>¿Qué has aprendido?</h2>
+           <ul>
+               <li>Los componentes personalizados ayudan a crear interfaces modulares, reutilizables y mantenibles.</li>
+               <li>JavaFX permite extender clases como <code>Region</code>; JavaScript ofrece Web Components, React y Vue.</li>
+               <li>Las propiedades configuran un componente y los eventos comunican acciones al exterior.</li>
+               <li>Las pruebas individuales comprueban visualización, interacción y respuesta ante errores.</li>
+               <li>La documentación y el empaquetado facilitan que otros desarrolladores integren el componente.</li>
+               <li>La integración requiere comprobar versiones, dependencias, requisitos y estilos.</li>
+           </ul>
+           <div class="info-box">
+               <p>Antes de reutilizar un componente en otro proyecto, consulta su documentación, verifica los requisitos
+                   y prueba su funcionamiento en el entorno destino.</p>
+           </div>
+       </section>
+
+       <section class="slide" id="actividad1-tutorial">
+           <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+           <h2>Actividad 1: explicar las ventajas de modularizar</h2>
+
+           <div class="info-box">
+               <p><strong>Enunciado:</strong> redacta un texto breve sobre las ventajas de la modularización de
+                   componentes personalizados e incluye un ejemplo en JavaScript, como
+                   <code>&lt;my-button&gt;</code>.</p>
+               <p><strong>Entrega:</strong> explicación de las ventajas con un ejemplo de componente reutilizable en
+                   JavaScript.</p>
+           </div>
+
+           <h3>Cómo resolverla</h3>
+           <ol>
+               <li>Explica reutilización, mantenibilidad, escalabilidad y colaboración.</li>
+               <li>Para cada ventaja, describe qué mejora en el desarrollo del proyecto.</li>
+               <li>Incluye una etiqueta personalizada sencilla, como <code>&lt;my-button&gt;</code>, y explica dónde se
+                   reutilizaría en una página web.</li>
+           </ol>
+
+           <pre><code class="language-html">&lt;!-- Ejemplo de uso de una etiqueta reutilizable --&gt;
+&lt;my-button color="green"&gt;Guardar&lt;/my-button&gt;</code></pre>
+           <pre><code class="language-javascript">class MyButton extends HTMLElement {
+    constructor() {
+        super();
+        const shadow = this.attachShadow({ mode: 'open' });
+        const button = document.createElement('button');
+        button.style.backgroundColor = this.getAttribute('color') || 'green';
+        button.append(document.createElement('slot'));
+        shadow.append(button);
+    }
+}
+
+customElements.define('my-button', MyButton);</code></pre>
+
+           <div class="info-box">
+               <p><strong>Para alcanzar el nivel excelente:</strong> explica las cuatro ventajas con ejemplos claros
+                   basados en componentes JavaScript; no te limites a enumerarlas.</p>
+           </div>
+       </section>
+
+       <section class="slide" id="actividad2-tutorial">
+           <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+           <h2>Actividad 2: diseñar propiedades y eventos</h2>
+
+           <div class="info-box">
+               <p><strong>Enunciado:</strong> diseña un componente personalizado, real o ficticio, y describe dos
+                   propiedades configurables (nombre, tipo y valor por defecto) y dos eventos gestionables (nombre y
+                   cuándo se activan).</p>
+           </div>
+
+           <h3>Ejemplo de una propiedad</h3>
+           <pre><code class="language-javascript">const propiedades = { // Define las opciones públicas del componente
+    titulo: { tipo: 'String', valorPorDefecto: 'Aviso' } // Describe una propiedad configurable
+}; // Fin del ejemplo; añade otra propiedad para completar la actividad</code></pre>
+
+           <h3>Ahora completa el diseño</h3>
+           <ol>
+               <li>Elige un componente y explica para qué sirve.</li>
+               <li>Añade una segunda propiedad e indica su tipo, valor por defecto y un ejemplo de configuración.</li>
+               <li>Define dos eventos con nombre y condición de activación (por ejemplo, confirmar y cancelar).</li>
+               <li>Describe cómo escucharía esos eventos el componente que lo contiene.</li>
+           </ol>
+
+           <div class="info-box">
+               <p>Una respuesta completa distingue las propiedades que configuran el componente de los eventos que
+                   comunican algo que ha ocurrido.</p>
+           </div>
+       </section>
+
+       <section class="slide" id="actividad3-tutorial">
+           <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+           <h2>Actividad 3: probar y documentar un componente</h2>
+
+           <div class="info-box">
+               <p><strong>Enunciado:</strong> simula que has creado un componente y describe tres pruebas individuales
+                   (visualización, interacción y errores). Prepara documentación técnica básica con descripción,
+                   propiedades, eventos y ejemplo de uso.</p>
+           </div>
+
+           <h3>Plantilla para las tres pruebas</h3>
+           <ol>
+               <li><strong>Visualización:</strong> configuración usada, resultado esperado y resultado observado.</li>
+               <li><strong>Interacción:</strong> acción realizada, evento esperado y resultado observado.</li>
+               <li><strong>Errores:</strong> dato inválido o estado inesperado, respuesta esperada y resultado observado.</li>
+           </ol>
+
+           <h3>Plantilla de documentación</h3>
+           <ul>
+               <li>Nombre y descripción funcional del componente.</li>
+               <li>Propiedades: nombre, tipo y valor por defecto.</li>
+               <li>Eventos: nombre y condición de activación.</li>
+               <li>Ejemplo de uso y requisitos técnicos (entorno y versión mínima).</li>
+           </ul>
+
+           <div class="info-box">
+               <p><strong>Importante:</strong> no basta con decir “funciona”; anota qué probaste, qué
+                   esperabas y qué ocurrió. Puedes presentar la documentación en Markdown o HTML y usar comentarios
+                   JSDoc para describir el componente JavaScript.</p>
+           </div>
+       </section>
+
+       <section class="slide" id="actividad4-tutorial">
+           <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;" alt="LinkiaFP">
+           <h2>Actividad 4: empaquetar e integrar el componente</h2>
+
+           <div class="info-box">
+               <p><strong>Enunciado:</strong> explica cómo empaquetar e importar un componente en otro proyecto. Indica
+                   un formato JavaScript, como un paquete npm o un módulo ESM, el proceso de integración y los
+                   problemas que podrían aparecer.</p>
+           </div>
+
+           <h3>Guion para la respuesta</h3>
+           <ol>
+               <li>Indica si el componente es un módulo JavaScript o un Web Component y el formato elegido.</li>
+               <li>Enumera qué archivos, recursos y dependencias deben incluirse.</li>
+               <li>Explica cómo se instala/importa y cómo se usa en el proyecto destino.</li>
+               <li>Indica la versión y los requisitos técnicos.</li>
+               <li>Prevé problemas de compatibilidad, recursos, estilos o dependencias y cómo verificarlos.</li>
+           </ol>
+
+           <pre><code class="language-html">&lt;!-- Carga el módulo que registra el componente --&gt;
+&lt;script type="module"&gt; // Indica que se importa un módulo JavaScript
+    import './my-button.js'; // Carga y registra el componente en este proyecto
+&lt;/script&gt; &lt;!-- Finaliza la importación --&gt;</code></pre>
+
+           <div class="info-box">
+               <p><strong>Entrega sugerida:</strong> describe el paquete, documenta versión y requisitos, añade un
+                   ejemplo de importación y cierra con una lista de comprobaciones de integración.</p>
+           </div>
+       </section>
+
+    </div>
+    <div class="footer">
+        <div class="bar">
+            <small>UT4 · Creación y reutilización de componentes visuales · LinkiaFP</small>
+            <small>© Vicente Català Ruiz · 2025</small>
+        </div>
+    </div>
+</body>
+</html>

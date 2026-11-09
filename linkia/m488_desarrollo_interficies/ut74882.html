@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RA 4 - Programación Orientada a Objetos</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <link rel="stylesheet" href="../../../course-resources/style.css">
+</head>
+
+<body>
+    <header>
+        <img src="../../assets/linkia/linkia_logo.jpeg" alt="Logo">
+        <h1>UT7 - Documentación técnica y de usuario para interfaces</h1>
+        <h2>Guía completa con ejemplos</h2>
+    </header>
+
+    <main>
+        <!-- SECCIÓN 1: INTRODUCCIÓN -->
+        <section id="introduccion">
+            <h2>Introducción</h2>
+            <p>La documentación técnica y de usuario es un componente esencial en el desarrollo de interfaces. No solo
+                facilita el uso correcto de una aplicación, sino que también mejora su mantenibilidad y escalabilidad.
+                Esta unidad aborda tres pilares fundamentales:</p>
+            <ul>
+                <li>Generación de ayudas contextuales</li>
+                <li>Manual de usuario</li>
+                <li>Documentación técnica del proyecto</li>
+            </ul>
+        </section>
+
+        <!-- SECCIÓN 2: GENERACIÓN DE AYUDAS CONTEXTUALES -->
+        <section id="ayudas-contextuales">
+            <h2>1. Generación de ayudas contextuales</h2>
+            <p>La ayuda contextual ofrece información útil y breve directamente relacionada con la acción que el usuario
+                está ejecutando, sin interrumpir su flujo de trabajo.</p>
+
+            <h3>1.1 Sistemas de ayuda integrados</h3>
+            <ul>
+                <li><strong>Tooltips:</strong> Mensajes breves que aparecen al pasar el cursor sobre un elemento.
+                    Ejemplo: <em>Guardar cambios</em> al situar el ratón sobre el icono de guardar.</li>
+                <div class="diagram">
+                    <img src="../../assets/linkia/buenas-practicas-tooltip-contraste.webp" alt="Tooltips">
+                </div>
+                <li><strong>Barras de estado:</strong> Muestran información contextual en la parte inferior de la
+                    ventana.</li>
+                    <div class="diagram">
+                    <img src="../../assets/linkia/status_bar.jpeg" alt="Status Bar">
+                </div>
+                <li><strong>Paneles dinámicos:</strong> Actualizan su contenido según el elemento seleccionado.</li>
+                <div class="diagram">
+                    <img src="../../assets/linkia/dynamic_dashboard.jpeg" alt="Dynamic Dashboard">
+                </div>
+                <li><strong>Mensajes emergentes:</strong> Alertas sobre acciones importantes o riesgos.</li>
+                <div class="diagram">
+                    <img src="../../assets/linkia/pop-ups-amigables-01.jpg" alt="Pop-up">
+                </div>
+                <li><strong>Asistentes (Wizards):</strong> Guías paso a paso para procesos complejos.</li>
+                <div class="diagram">
+                    <img src="../../assets/linkia/WizardUI.png" alt="Wizard">
+                </div>
+                <li><strong>Ayuda F1 contextual:</strong> Abre documentación específica del control activo.</li>
+                <div class="diagram">
+                    <img src="../../assets/linkia/f1_help.jpg" alt="F1 Help">
+                </div>
+                <li><strong>Áreas explicativas:</strong> Texto fijo dentro del formulario que explica el uso del
+                    componente.</li>
+                    <div class="diagram">
+                    <img src="../../assets/linkia/placeholder_example.webp" alt="Placeholder exapmple">
+                </div>
+            </ul>
+
+            
+<h3>1.2 Formatos comunes de ayuda</h3>
+<p>Los sistemas de ayuda pueden presentarse en diferentes formatos según la plataforma, el tipo de aplicación y el perfil del usuario. Cada formato tiene ventajas y limitaciones que conviene conocer para elegir el más adecuado.</p>
+
+<ul>
+    <li>
+        <strong>HTML/HTML5:</strong> 
+        Ideal para aplicaciones web o manuales interactivos. Permite navegación mediante enlaces, integración de imágenes, vídeos y estilos CSS.
+        <br><em>Ejemplo:</em> Una página de ayuda con buscador y enlaces internos:
+        <pre><code class="html">&lt;div class="help"&gt;
+    &lt;h2&gt;¿Cómo crear un proyecto?&lt;/h2&gt;
+    &lt;p&gt;Haz clic en &lt;a href="#nuevo"&gt;Nuevo proyecto&lt;/a&gt; en la barra de herramientas.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+    </li>
+
+    <li>
+        <strong>CHM (Compiled HTML Help):</strong> 
+        Formato clásico en Windows que compila varias páginas HTML en un archivo único con índice, buscador y enlaces cruzados.
+        <br><em>Ejemplo:</em> Manual de instalación accesible desde el menú “Ayuda” de una aplicación de escritorio.
+    <div class="diagram">
+                    <img src="../../assets/linkia/CHM editor.png" alt="CHM Editor">
+                </div>
+    </li>
+
+    <li>
+        <strong>PDF:</strong> 
+        Perfecto para manuales completos y documentación imprimible. No es interactivo, pero permite incluir imágenes, tablas y enlaces.
+        <br><em>Ejemplo:</em> Un manual de usuario descargable con secciones como “Instalación”, “Configuración” y “Preguntas frecuentes”.
+    <div class="diagram">
+                    <img src="../../assets/linkia/pdf-ejemplo.png" alt="PDF Example">
+                </div>
+    </li>
+
+    <li>
+        <strong>Markdown (.md):</strong> 
+        Muy usado en entornos de desarrollo y repositorios (GitHub, GitLab). Sintaxis sencilla que se convierte fácilmente en HTML.
+        
+        
+<div class="diagram">
+                    <img src="../../assets/linkia/markdown example.png" alt="MK Example">
+                </div>
+    </li>
+
+    <li>
+        <strong>TXT:</strong> 
+        Formato básico para instrucciones rápidas, especialmente en aplicaciones de consola o scripts.
+        <div class="diagram">
+                    <img src="../../assets/linkia/log_txt.png" alt="log_txt">
+                </div>
+    </li>
+
+    <li>
+        <strong>EPUB:</strong> 
+        Orientado a dispositivos móviles y lectores electrónicos. Permite navegación y ajuste de texto.
+        <br><em>Ejemplo:</em> Manual interactivo para una app móvil, con capítulos y enlaces internos.
+        <div class="diagram">
+                    <img src="../../assets/linkia/epub example.png" alt="epub">
+                </div>
+    </li>
+</ul>
+
+<p><strong>Consejo:</strong> Elige el formato según el contexto: HTML para aplicaciones web, CHM para escritorio, PDF para documentación formal, Markdown para desarrolladores, TXT para instrucciones rápidas y EPUB para movilidad.</p>
+
+        </section>
+
+        <!-- SECCIÓN 3: MANUAL DE USUARIO -->
+        <section id="manual-usuario">
+            <h2>2. Manual de usuario</h2>
+            <p>Documento esencial que guía al usuario final en el uso correcto del sistema.</p>
+
+            <h3>2.1 Contenido mínimo y estructura</h3>
+            <ul>
+                <li><strong>Portada:</strong> Nombre del producto, versión, autor.</li>
+                <li><strong>Índice general:</strong> Listado de contenidos.</li>
+                <li><strong>Introducción:</strong> Finalidad del software y público objetivo.</li>
+                <li><strong>Requisitos del sistema:</strong> Hardware y software necesarios.</li>
+                <li><strong>Instalación:</strong> Pasos detallados con capturas.</li>
+                <li><strong>Interfaz general:</strong> Descripción de menús y botones.</li>
+                <li><strong>Funcionalidades principales:</strong> Operaciones más importantes.</li>
+                <li><strong>Procedimientos operativos:</strong> Ejemplo: crear proyecto, guardar archivo.</li>
+                <li><strong>FAQ:</strong> Preguntas frecuentes.</li>
+                <li><strong>Soporte y contacto:</strong> Datos de asistencia técnica.</li>
+                <li><strong>Apéndices:</strong> Glosario, notas legales.</li>
+            </ul>
+
+            <h3>2.2 Guía paso a paso y ejemplos</h3>
+            <p><strong>Ejemplo:</strong> Crear un nuevo proyecto</p>
+            <ol>
+                <li>Inicia la aplicación.</li>
+                <li>Haz clic en “Nuevo proyecto”.</li>
+                <li>Introduce el nombre del proyecto.</li>
+                <li>Selecciona el tipo de interfaz.</li>
+                <li>Configura parámetros iniciales.</li>
+                <li>Pulsa “Aceptar”.</li>
+            </ol>
+        </section>
+
+        <!-- SECCIÓN 4: DOCUMENTACIÓN TÉCNICA -->
+        <section id="documentacion-tecnica">
+            <h2>3. Documentación técnica del proyecto</h2>
+            <p>Garantiza que la aplicación pueda ser instalada, configurada y mantenida eficientemente.</p>
+
+            <h3>3.1 Manual de instalación y configuración</h3>
+            <ul>
+                <li><strong>Introducción:</strong> Objetivos del manual.</li>
+                <li><strong>Requisitos previos:</strong> SO, dependencias.</li>
+                <li><strong>Fuentes del software:</strong> Descarga y verificación.</li>
+                <li><strong>Pasos de instalación:</strong> Asistida, manual, en red.</li>
+                <li><strong>Configuración inicial:</strong> Idioma, rutas.</li>
+                <li><strong>Configuración avanzada:</strong> BD, roles, APIs.</li>
+                <li><strong>Errores frecuentes:</strong> Soluciones.</li>
+                <li><strong>Pruebas iniciales:</strong> Verificación.</li>
+                <li><strong>Actualización y desinstalación:</strong> Procedimientos.</li>
+            </ul>
+
+            <h3>3.2 Estructura de la información persistente</h3>
+            <ul>
+                <li><strong>Modelo lógico:</strong> Diagramas ER.</li>
+                <li><strong>Modelo físico:</strong> Tablas, índices.</li>
+                <li><strong>Tecnologías:</strong> Motores y formatos.</li>
+                <li><strong>Seguridad:</strong> Permisos, cifrado.</li>
+                <li><strong>Configuración persistente:</strong> Archivos externos, claves API.</li>
+            </ul>
+        </section>
+    </main>
+</body>
+
+</html>

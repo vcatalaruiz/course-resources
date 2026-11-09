@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ASIX-ASIXCIBER C037: Seguridad en Sistemas, Redes y Servicios</title>
+  <meta name="description"
+    content="Presentación HTML con secciones tipo diapositiva para la UT2: Programación de eventos y aplicaciones visuales." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <link rel="stylesheet" href="../style.css" />
+  <script src="../script.js" defer></script>
+</head>
+
+<body>
+  <div class="deck">
+    <!-- ====================== COVER ====================== -->
+    <section class="slide cover" id="slide-1">
+      <div style="max-width: 60%;">
+        <div>
+          <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+        </div>
+        <div class="title">ASIX-ASIXCIBER C037: Seguridad en Sistemas, Redes y Servicios</div>
+        <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+      </div>
+      <div class="logo-first-page">
+        <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;" alt="">
+      </div>
+    </section>
+
+   <section class="slide" id="ut1-portada">
+  <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+  <h2>UT1: Fundamentos de ciberseguridad y gestión de riesgos</h2>
+  <p>La ciberseguridad estudia cómo proteger sistemas, redes, servicios y datos frente a amenazas internas y externas. En esta unidad analizaremos los principios fundamentales de seguridad, los riesgos existentes y las medidas de protección más habituales.</p>
+  <p><strong>Resultado de aprendizaje:</strong> identificar activos, amenazas, vulnerabilidades y riesgos en entornos informáticos reales.</p>
+</section>
+
+<section class="slide" id="introduccion">
+  <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+  <h2>1. Introducción a la ciberseguridad</h2>
+  <p>Las tecnologías de la información son imprescindibles para cualquier organización. Empresas, hospitales, bancos, centros educativos y administraciones públicas almacenan grandes cantidades de información que debe protegerse frente a accesos no autorizados.</p>
+  <ul>
+    <li>La información se ha convertido en un activo estratégico.</li>
+    <li>Internet ha aumentado la exposición a ciberataques.</li>
+    <li>La protección de datos tiene implicaciones técnicas y legales.</li>
+    <li>La seguridad es una necesidad operativa y empresarial.</li>
+  </ul>
+  <p><strong>Ejemplo:</strong> un instituto almacena expedientes académicos, nóminas y datos personales. Una fuga de información podría generar sanciones y pérdida de confianza.</p>
+</section>
+
+<section class="slide" id="concepto-seguridad">
+  <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+  <h2>2. Concepto de seguridad informática</h2>
+  <p>La seguridad informática puede definirse como la implantación de medidas técnicas y organizativas que garantizan que únicamente los usuarios autorizados acceden a los recursos del sistema.</p>
+  <p>La seguridad absoluta no existe. Por ello se trabaja con el concepto de <strong>riesgo aceptable</strong>, reduciendo la probabilidad y el impacto de los incidentes.</p>
+  <ul>
+    <li>Protección de sistemas y redes.</li>
+    <li>Protección de datos e información.</li>
+    <li>Prevención, detección y respuesta ante incidentes.</li>
+    <li>Mejora continua de los controles de seguridad.</li>
+  </ul>
+</section>
+
+<section class="slide" id="cia">
+  <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+  <h2>3. La tríada CIA</h2>
+  <p>Los tres pilares fundamentales de la seguridad informática son:</p>
+  <ul>
+    <li><strong>Confidencialidad:</strong> impedir el acceso no autorizado.</li>
+    <li><strong>Integridad:</strong> evitar modificaciones indebidas.</li>
+    <li><strong>Disponibilidad:</strong> garantizar el acceso cuando sea necesario.</li>
+  </ul>
+  <p>Cualquier medida de seguridad debe contribuir al menos a uno de estos tres objetivos.</p>
+</section>
+
+<section class="slide" id="confidencialidad">
+  <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+  <h2>3.1 Confidencialidad</h2>
+  <p>La confidencialidad garantiza que únicamente las personas o sistemas autorizados puedan acceder a la información y a los recursos corporativos.</p>
+  <h3>Métodos para proteger la confidencialidad</h3>
+  <ul>
+    <li>Listas de control de acceso (ACL).</li>
+    <li>Contraseñas robustas y MFA.</li>
+    <li>Cifrado de la información.</li>
+    <li>Clasificación de datos.</li>
+    <li>Formación y concienciación.</li>
+  </ul>
+  <p><strong>Ejemplo:</strong> en un hospital los médicos acceden a historiales clínicos según su función. Los datos se almacenan cifrados y queda registrado quién accede a cada expediente.</p>
+</section>
+
+<section class="slide" id="integridad">
+  <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+  <h2>3.2 Integridad</h2>
+  <p>La integridad garantiza que la información sea exacta, coherente y que sólo pueda ser modificada por usuarios autorizados.</p>
+
+  <h3>Mecanismos de protección</h3>
+  <ul>
+    <li>Funciones hash (SHA-256, SHA-512).</li>
+    <li>Firmas digitales.</li>
+    <li>Control de versiones.</li>
+    <li>Sistemas IDS e IPS.</li>
+  </ul>
+
+  <p><strong>Ejemplo:</strong> una empresa calcula hashes periódicamente sobre documentos críticos para detectar alteraciones no autorizadas.</p>
+
+  <pre><code>sha256sum documento.pdf
+
+Resultado:
+7f95e4b8d4f4c7a776...
+</code></pre>
+</section>
+
+<section class="slide" id="disponibilidad">
+  <img src="../../assets/linkia/logoack.png
+  <h2>3.3 Disponibilidad</h2>
+  <p>La disponibilidad garantiza que los sistemas y servicios estén accesibles para los usuarios autorizados cuando los necesiten.</p>
+
+  <h3>Controles habituales</h3>
+  <ul>
+    <li>Redundancia de infraestructura.</li>
+    <li>Balanceadores de carga.</li>
+    <li>Sistemas de alimentación ininterrumpida (SAI).</li>
+    <li>Monitorización continua.</li>
+    <li>Planes de recuperación ante desastres.</li>
+  </ul>
+
+  <p><strong>Ejemplo:</strong> una tienda online utiliza varios servidores web. Si uno falla, el tráfico se redirige automáticamente a otro.</p>
+</section>
+
+<section class="slide" id="gestion-riesgo">
+  <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+  <h2>4. Gestión del riesgo</h2>
+  <p>La gestión del riesgo consiste en identificar, analizar y tratar los riesgos que pueden afectar a los activos de una organización.</p>
+
+  <h3>Elementos principales</h3>
+  <ul>
+    <li><strong>Activo:</strong> elemento de valor para la organización.</li>
+    <li><strong>Amenaza:</strong> causa potencial de un incidente.</li>
+    <li><strong>Vulnerabilidad:</strong> debilidad explotable.</li>
+    <li><strong>Impacto:</strong> consecuencia de un incidente.</li>
+    <li><strong>Riesgo:</strong> probabilidad × impacto.</li>
+  </ul>
+
+  <p><strong>Ejemplo:</strong> un servidor web es un activo; una vulnerabilidad en Apache puede ser explotada por un atacante para comprometerlo.</p>
+</section>
+
+<section class="slide" id="compromiso-seguridad">
+  <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+  <h2>4.1 Compromiso de la seguridad</h2>
+  <p>La seguridad debe buscar un equilibrio entre protección, costes y operatividad.</p>
+
+  <ul>
+    <li>La seguridad absoluta es imposible.</li>
+    <li>Debe existir un análisis de riesgos previo.</li>
+    <li>Las inversiones deben justificarse mediante coste-beneficio.</li>
+    <li>El riesgo residual siempre existe.</li>
+    <li>La seguridad requiere mejora continua.</li>
+  </ul>
+
+  <p><strong>Ejemplo:</strong> proteger un servidor con MFA puede tener un coste reducido frente al impacto económico de un robo de credenciales.</p>
+</section>
+
+<section class="slide" id="costes">
+  <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+  <h2>4.2 Costes de la seguridad</h2>
+
+  <h3>Costes directos</h3>
+  <ul>
+    <li>Hardware de seguridad.</li>
+    <li>Software de protección.</li>
+    <li>Personal especializado.</li>
+  </ul>
+
+  <h3>Costes indirectos</h3>
+  <ul>
+    <li>Formación.</li>
+    <li>Tiempo de inactividad.</li>
+    <li>Pérdida temporal de productividad.</li>
+  </ul>
+
+  <h3>Costes derivados de incidentes</h3>
+  <ul>
+    <li>Pérdidas económicas.</li>
+    <li>Daño reputacional.</li>
+    <li>Sanciones legales.</li>
+    <li>Recuperación de sistemas.</li>
+  </ul>
+</section>
+
+<section class="slide" id="activos">
+  <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+  <h2>5. Protección de activos</h2>
+
+  <h3>Hardware</h3>
+  <p>Equipos físicos como servidores, ordenadores, switches o routers.</p>
+  <ul>
+    <li>Control de acceso físico.</li>
+    <li>SAI y redundancia.</li>
+    <li>Mantenimiento preventivo.</li>
+  </ul>
+
+  <h3>Software</h3>
+  <ul>
+    <li>Actualizaciones y parches.</li>
+    <li>Antivirus y antimalware.</li>
+    <li>Firewall y control de accesos.</li>
+  </ul>
+
+  <h3>Datos</h3>
+  <ul>
+    <li>Cifrado.</li>
+    <li>Copias de seguridad.</li>
+    <li>Auditoría y trazabilidad.</li>
+  </ul>
+</section>
+
+<section class="slide" id="vulnerabilidades">
+  <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+  <h2>6. Vulnerabilidades informáticas</h2>
+
+  <p>Una vulnerabilidad es una debilidad que puede ser explotada para comprometer la seguridad de un sistema.</p>
+
+  <p><strong>Diferencia clave:</strong></p>
+  <ul>
+    <li>Vulnerabilidad = debilidad.</li>
+    <li>Amenaza = quien aprovecha la debilidad.</li>
+  </ul>
+
+  <p><strong>Ejemplo:</strong> una aplicación web sin validar entradas es vulnerable a ataques SQL Injection.</p>
+</section>
+
+<section class="slide" id="tipos-vulnerabilidades">
+  <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+  <h2>6.1 Tipos de vulnerabilidades</h2>
+
+  <ul>
+    <li>Físicas.</li>
+    <li>De origen natural.</li>
+    <li>De hardware.</li>
+    <li>De software.</li>
+    <li>De red.</li>
+    <li>Humanas.</li>
+  </ul>
+
+  <p>Todas ellas pueden generar incidentes si no se aplican medidas preventivas adecuadas.</p>
+</section>
+
+<section class="slide" id="vulnerabilidades-software">
+  <img./assets/linkia/logo_linkia_black.png
+  <h2>6.2 Vulnerabilidades de software</h2>
+
+  <h3>Buffer Overflow</h3>
+  <p>Se produce cuando una aplicación almacena más datos de los permitidos en memoria.</p>
+
+  <h3>SQL Injection</h3>
+  <p>Permite manipular consultas SQL mediante entradas maliciosas.</p>
+
+  <h3>Cross Site Scripting (XSS)</h3>
+  <p>Permite insertar código JavaScript malicioso en sitios web.</p>
+
+  <h3>Prevención</h3>
+  <ul>
+    <li>Actualización continua.</li>
+    <li>Pentesting.</li>
+    <li>Validación de entradas.</li>
+    <li>Uso de WAF.</li>
+  </ul>
+</section>
+
+<section class="slide" id="vulnerabilidades-red">
+  <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+  <h2>6.3 Vulnerabilidades de red</h2>
+
+  <ul>
+    <li>Contraseñas débiles.</li>
+    <li>Protocolos inseguros como Telnet.</li>
+    <li>Ausencia de segmentación.</li>
+    <li>Firewalls mal configurados.</li>
+    <li>Puntos únicos de fallo.</li>
+  </ul>
+
+  <p><strong>Ejemplo:</strong> utilizar Telnet para administrar un router permite capturar credenciales porque las comunicaciones no están cifradas.</p>
+</section>
+
+<section class="slide" id="factor-humano">
+  <img src="<img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">" style="max-width:20%;" alt="">  <p>Las personas representan el eslabón más débil de la cadena de seguridad.</p>
+
+  <ul>
+    <li>Ingeniería social.</li>
+    <li>Phishing.</li>
+    <li>Contraseñas débiles.</li>
+    <li>Desconocimiento de buenas prácticas.</li>
+    <li>Insiders maliciosos.</li>
+  </ul>
+
+  <p><strong>Ejemplo:</strong> compartir la contraseña por teléfono con alguien que se hace pasar por el departamento de TI.</p>
+</section>
+
+<section class="slide" id="ingenieria-social">
+  <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+  <h2>7. Ingeniería social y phishing</h2>
+
+  <p>La ingeniería social manipula a las personas para que revelen información o realicen acciones que favorecen al atacante.</p>
+
+  <h3>Phishing</h3>
+  <p>Mensajes fraudulentos que imitan entidades legítimas para robar credenciales o instalar malware.</p>
+
+  <p><strong>Ejemplo de correo sospechoso:</strong></p>
+
+  <pre><code>Asunto: Verificación urgente de cuenta
+
+Su cuenta será suspendida.
+Pulse aquí para confirmar sus credenciales.
+
+https://sitio-falso.ejemplo
+</code></pre>
+
+  <h3>Buenas prácticas</h3>
+  <ul>
+    <li>Verificar remitentes.</li>
+    <li>No abrir enlaces sospechosos.</li>
+    <li>Usar MFA.</li>
+    <li>Consultar con el departamento de TI.</li>
+  </ul>
+</section>
+
+<section class="slide" id="conclusion">
+  <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+  <h2>Conclusiones de la unidad</h2>
+
+  <ul>
+    <li>La seguridad se basa en confidencialidad, integridad y disponibilidad.</li>
+    <li>Los riesgos deben analizarse y gestionarse continuamente.</li>
+    <li>Los activos principales son hardware, software y datos.</li>
+    <li>Las vulnerabilidades pueden ser técnicas, físicas o humanas.</li>
+    <li>La formación de usuarios es un elemento esencial de protección.</li>
+  </ul>
+
+  <p>Estos conceptos servirán como base para las actividades prácticas: inventario de activos, hardening, copias de seguridad, monitorización y respuesta ante incidentes.</p>
+</section>
+
+  </div>
+
+  <div class="footer">
+    <div class="bar">
+      <small>ASIX-ASIXCIBER C037: Seguridad en Sistemas, Redes y Servicios</small>
+      <small>© 2026/2027 · Docente: Vicente Català Ruiz</small>
+    </div>
+  </div>
+</body>
+
+</html>

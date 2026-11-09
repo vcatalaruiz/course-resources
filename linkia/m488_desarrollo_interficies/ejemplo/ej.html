@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Ejemplo de uso de una etiqueta reutilizable -->
+<my-button >Guardar</my-button>
+    
+</body>
+</html>
+
+<script defer>
+    class MyButton extends HTMLElement {
+    constructor() {
+        super();
+        const color = this.getAttribute('color') || 'gray';
+        const shadow = this.attachShadow({ mode: 'open' });
+        const button = document.createElement('button');
+        button.style.backgroundColor = this.getAttribute('color') || 'blue';
+        button.append(document.createElement('slot'));
+        shadow.append(button);
+    }
+}
+
+customElements.define('my-button', MyButton);
+</script>
+

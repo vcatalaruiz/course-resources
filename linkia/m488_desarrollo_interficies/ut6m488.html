@@ -1,0 +1,521 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>UT6 - Generación de informes y representación gráfica de datos</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link href="../style.css" rel="stylesheet">
+    <script defer="" src="../script.js"></script>
+</head>
+
+<body>
+    <!-- Sección inicial con logo -->
+    <div class="deck">
+        <section class="slide cover" id="portada">
+            <div style="max-width: 60%;">
+                <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="LinkiaFP">
+                <div class="title">UT6 - Generaci&#243;n de informes y representaci&#243;n gr&#225;fica de datos</div>
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;" alt="LinkiaFP">
+            </div>
+        </section>
+        <script type="module">
+            import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: false });
+            await mermaid.run({ querySelector: '.mermaid' });
+        </script>
+        <!-- 1. Estructura de un informe -->
+        <section class="slide" id="estructura-informe">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+            <h2>1. Estructura de un informe</h2>
+
+            <p>
+                Un informe profesional debe ser claro, consistente y estar organizado en secciones que faciliten la
+                lectura, la validación y la toma de decisiones. La estructura clásica se compone de
+                <strong>encabezado</strong>,
+                <strong>cuerpo</strong> y <strong>pie</strong>. A continuación se describe cada parte con
+                recomendaciones
+                prácticas
+                y ejemplos.
+            </p>
+
+            <h3>1.1. Elementos básicos: encabezado, cuerpo y pie</h3>
+
+            <div class="info-box">
+                <strong>Resumen práctico:</strong>
+                <ul>
+                    <li><strong>Encabezado:</strong> identifica el documento y contextualiza (título, filtros, fecha).
+                    </li>
+                    <li><strong>Cuerpo:</strong> presenta los datos (tablas, listas, gráficos, agrupaciones).</li>
+                    <li><strong>Pie:</strong> contiene totales, notas legales, número de página y metadatos.</li>
+                </ul>
+            </div>
+
+            <h4>1.1.1. Encabezado</h4>
+            <p>
+                El encabezado sirve para contextualizar el informe y permitir la trazabilidad. Debe incluir elementos
+                mínimos como <em>título, fecha de generación, filtros aplicados</em> y, opcionalmente, logotipo y datos
+                del
+                autor.
+            </p>
+
+            <ul>
+                <li><strong>Recomendaciones:</strong> mantén un título corto y descriptivo; muestra los filtros activos
+                    (p.
+                    ej. rango de fechas)</li>
+                <li><strong>Usabilidad:</strong> si el informe puede exportarse, incluye un identificador único o
+                    versión
+                    para identificar revisiones.</li>
+            </ul>
+
+
+
+            <div class="info-box">
+                <strong>Ejemplo de encabezado (texto):</strong>
+                <pre><code class="language-plaintext">Informe de Ventas Mensuales — Mayo 2025
+Filtrado por: Región Este
+Generado por: Usuario Admin | Fecha: 01/06/2025</code></pre>
+            </div>
+
+            <h4>1.1.2. Cuerpo del informe</h4>
+            <p>
+                El cuerpo contiene la información principal: tablas, listas, gráficos y secciones agrupadas. Debe
+                priorizar
+                la
+                legibilidad y la jerarquía de la información (resaltar totales o KPIs).
+            </p>
+
+            <ul>
+                <li>Usa tablas con encabezados claros y orden lógico de columnas (fecha, categoría, valor).</li>
+                <li>Incluye agrupaciones y subtotales para facilitar el análisis (por cliente, región, producto).</li>
+                <li>Combina tablas y gráficos; no repitas la misma información innecesariamente.</li>
+            </ul>
+
+
+
+            <div class="diagram">
+                <img src="../../assets/linkia/MostrarDetalleTD.png" width="450px" alt="Ejemplos de tabla informe" />
+            </div>
+
+            <h4>1.1.3. Pie del informe</h4>
+            <p>
+                El pie alberga información de cierre: totales globales, número de página, fecha/hora de exportación,
+                notas
+                legales
+                o firma. Debe ser discreto, legible y uniforme en todas las páginas.
+            </p>
+
+            <ul>
+                <li>Incluye totales y si procede, enlaces a políticas o notas aclaratorias.</li>
+                <li>Muestra número de página en formato "Página X de Y".</li>
+                <li>Si el informe se exportará, añade la fecha y la hora de la exportación.</li>
+            </ul>
+
+
+
+            <div class="info-box">
+                <strong>Ejemplo de pie (texto):</strong>
+                <pre><code class="language-java">Total general: 12.500 €
+Página 1 de 3
+Generado el: 01/06/2025 10:24</code></pre>
+            </div>
+
+            <h3>1.2. Uso de asistentes para generación rápida</h3>
+            <p>
+                Los asistentes de informes aceleran la creación de plantillas y diseños sin necesidad de codificar todo
+                el
+                formato a mano. Son muy útiles para prototipos o informes estándar; en informes complejos pueden
+                requerir
+                ajustes manuales posteriores.
+            </p>
+
+            <h4>1.2.1. Asistentes en entornos comunes</h4>
+            <p>
+                Herramientas habituales que ofrecen asistentes:
+            </p>
+            <ul>
+                <li><strong>Visual Studio (ReportViewer / RDLC):</strong> integración directa en aplicaciones .NET.</li>
+                <li><strong>JasperReports / Jaspersoft Studio:</strong> diseñador visual para Java (.jrxml / .jasper).
+                </li>
+                <li><strong>Crystal Reports:</strong> clásico en entornos .NET y SAP.</li>
+                <li><strong>Herramientas BI (p. ej. Power BI):</strong> generadores visuales con conectores a múltiples
+                    orígenes.</li>
+            </ul>
+
+
+
+            <h4>1.2.2. Ventajas y limitaciones</h4>
+            <p><strong>Ventajas</strong>:</p>
+            <ul>
+                <li>Desarrollo rápido de plantillas y compatibilidad con múltiples fuentes.</li>
+                <li>Alineación y estilos predefinidos que reducen errores visuales.</li>
+                <li>Permiten probar datos reales sin escribir todo el código.</li>
+            </ul>
+
+            <p><strong>Limitaciones</strong>:</p>
+            <ul>
+                <li>Menor flexibilidad para diseños muy específicos o con lógica compleja.</li>
+                <li>El código generado puede ser difícil de mantener si se personaliza mucho.</li>
+                <li>Algunos asistentes no soportan características avanzadas (scripts, subinformes dinámicos).</li>
+            </ul>
+
+            <div class="info-box">
+                <strong>Flujo típico de un asistente:</strong>
+                <ol>
+                    <li>Selección del origen de datos.</li>
+                    <li>Definición de campos a mostrar.</li>
+                    <li>Agrupaciones y totales.</li>
+                    <li>Estilo y disposición.</li>
+                    <li>Configuración de encabezado y pie.</li>
+                </ol>
+            </div>
+
+            <h3>Consejos prácticos para diseñar la estructura</h3>
+            <ul>
+                <li>Pensar en el usuario final: ¿qué información necesita primero?</li>
+                <li>No sobrecargar el encabezado con datos irrelevantes; usar prefiltros para reducir ruido.</li>
+                <li>Usar subtotales y trazabilidad (usuario/fecha) cuando el informe se comparte o archiva.</li>
+                <li>Preparar el informe para exportación (PDF, Excel) asegurando que las tablas no queden partidas en
+                    páginas de forma inapropiada).</li>
+            </ul>
+
+
+        </section>
+
+        <section class="slide" id="fuentes-calculos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+            <h2>2. Fuentes de datos, filtros y cálculos</h2>
+
+            <h3>2.1. Selección de fuentes de datos y aplicación de filtros</h3>
+            <div class="two-col">
+                <div>
+                    <h4>Fuentes habituales</h4>
+                    <ul>
+                        <li><strong>Bases de datos relacionales:</strong> MySQL, SQL Server, PostgreSQL u Oracle.</li>
+                        <li><strong>Datos en memoria:</strong> listas, arrays o colecciones como
+                            <code>List&lt;T&gt;</code>.</li>
+                        <li><strong>Servicios web:</strong> APIs REST cuando la herramienta de informes lo permite.</li>
+                        <li><strong>Archivos:</strong> CSV, XML o JSON.</li>
+                    </ul>
+                    <p>La conexión puede realizarse mediante conjuntos de datos, procedimientos almacenados, consultas
+                        SQL o asistentes gráficos.</p>
+                </div>
+                <div>
+                    <h4>Filtros dinámicos</h4>
+                    <ul>
+                        <li><strong>Antes de generar:</strong> el usuario elige fechas, cliente, categoría o estado.
+                        </li>
+                        <li><strong>Durante la ejecución:</strong> se pasan parámetros al informe y a su consulta.</li>
+                    </ul>
+                    <p>Ejemplo: mostrar pedidos de un cliente entre dos fechas seleccionadas.</p>
+                </div>
+            </div>
+
+            <pre><code class="language-java">Map&lt;String, Object&gt; parametros = new HashMap&lt;&gt;(); // Prepara los filtros que recibirá el informe
+parametros.put("ClienteID", 102); // Filtra por el identificador del cliente
+parametros.put("FechaInicio", "2025-05-01"); // Establece la fecha inicial
+parametros.put("FechaFin", "2025-05-31"); // Establece la fecha final
+JasperPrint print = JasperFillManager.fillReport("InformePedidos.jasper", parametros, conn); // Genera el informe con esos filtros</code></pre>
+
+            <h3>2.2. Subtotales, campos calculados y formatos</h3>
+            <ul>
+                <li><strong>Subtotales:</strong> agrupan y suman valores, por ejemplo, ventas por región o incidencias
+                    por
+                    técnico.</li>
+                <li><strong>Campos calculados:</strong> precio total = cantidad × precio unitario; margen = precio de
+                    venta
+                    − coste; IVA = base imponible × 0,21.</li>
+                <li><strong>Formato:</strong> configura decimales, separadores de miles, moneda, porcentajes y
+                    alineación.</li>
+                <li><strong>Condiciones:</strong> muestra “Pendiente” si la fecha de entrega está vacía o resalta
+                    valores
+                    que superan un umbral.</li>
+            </ul>
+            <div class="info-box">
+                <p><strong>Ejemplo:</strong> 3 unidades a 12,50 € dan un subtotal de 37,50 €. Si el informe muestra
+                    importes monetarios, usa dos decimales y el símbolo de moneda; no presentes el dato como un número
+                    sin contexto.</p>
+            </div>
+            <div class="warning-box">
+                <p>Comprueba que los filtros limiten los datos esperados y que las escalas, unidades y formatos no
+                    alteren
+                    la interpretación de los resultados.</p>
+            </div>
+        </section>
+
+        <!-- 3. Representación gráfica de información -->
+        <section class="slide" id="representacion-grafica">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+            <h2>3. Representación gráfica de información</h2>
+
+            <p>
+                Los gráficos son un complemento visual que facilita la comprensión de los datos
+                presentados en un informe. A través de ellos, es posible detectar tendencias,
+                comparar resultados y comunicar información compleja de forma clara y atractiva.
+            </p>
+
+            <h3>3.1. Tipos de gráficos: barras, líneas y sectores</h3>
+            <p>
+                Cada tipo de gráfico se adapta a un propósito distinto. Elegir el tipo adecuado
+                mejora la comunicación y evita interpretaciones erróneas.
+            </p>
+
+            <h4>3.1.1. Gráfico de barras</h4>
+            <p>
+                Ideal para comparar valores entre categorías o grupos. Puede representarse de forma
+                horizontal o vertical. Es uno de los más utilizados en informes de ventas o rendimiento.
+            </p>
+
+            <div class="diagram">
+                <img src="../../assets/linkia/chrome_cLKjOaxnbz.webp" width="450px" alt="Gif gráfico de barras" />
+            </div>
+
+            <div class="info-box">
+                <strong>Ejemplo práctico:</strong> Comparar las ventas por zona durante el último trimestre
+                permite identificar regiones con mejor rendimiento y ajustar la estrategia comercial.
+            </div>
+
+            <h4>3.1.2. Gráfico de líneas</h4>
+            <p>
+                Se utiliza para mostrar la evolución de un valor a lo largo del tiempo, como la tendencia
+                de ventas mensuales o el crecimiento de usuarios. Transmite continuidad y permite visualizar
+                patrones de comportamiento.
+            </p>
+
+            <div class="diagram">
+                <img src="../../assets/linkia/line chart.svg" width="450px"
+                    alt="Ejemplos de line chart grafico linea" />
+            </div>
+
+            <h4>3.1.3. Gráfico de sectores (tarta)</h4>
+            <p>
+                Muestra la proporción de cada categoría respecto al total. Es útil para representar
+                distribuciones porcentuales, aunque se recomienda evitarlo si hay muchas categorías
+                o valores muy similares.
+            </p>
+
+            <div class="diagram">
+                <pre class="mermaid">
+pie showData
+    title Distribución de presupuesto por área
+    "Marketing" : 30
+    "Desarrollo" : 40
+    "Formación" : 15
+    "Soporte" : 15
+            </pre>
+            </div>
+
+            <h3>3.2. Configuración visual de gráficos</h3>
+            <p>
+                Además del tipo de gráfico, su efectividad depende de una configuración visual adecuada:
+                colores, etiquetas, escalas y leyendas deben diseñarse con criterio estético y funcional.
+            </p>
+
+            <h4>3.2.1. Colores, etiquetas y leyendas</h4>
+            <ul>
+                <li>Usa colores coherentes con la identidad visual de la aplicación o empresa.</li>
+                <li>Resalta solo los datos importantes con colores más intensos.</li>
+                <li>Incluye etiquetas visibles con los valores clave o porcentajes.</li>
+            </ul>
+
+            <div class="info-box">
+                <strong>Ejemplo:</strong> en un gráfico de ventas por producto, resaltar con color azul
+                los productos más vendidos y en gris los demás mejora la lectura inmediata.
+            </div>
+
+            <h4>3.2.2. Escalas y ejes</h4>
+            <ul>
+                <li>Define escalas coherentes y proporcionales para evitar distorsionar los datos.</li>
+                <li>Etiqueta los ejes con nombres y unidades claras (€, %, unidades, etc.).</li>
+                <li>Usa eje secundario si comparas métricas con diferentes unidades (p. ej. ingresos y visitas).</li>
+            </ul>
+
+            <h4>3.2.3. Personalización adicional</h4>
+            <ul>
+                <li>Agrega títulos descriptivos que indiquen qué representa el gráfico.</li>
+                <li>Ordena los valores de forma lógica (por valor o por nombre alfabético).</li>
+                <li>Usa formato de valores adecuado: moneda, número o porcentaje.</li>
+            </ul>
+
+
+            <pre class="mermaid">
+flowchart LR
+    A[Seleccionar tipo de gráfico] --> B[Configurar ejes]
+    B --> C[Aplicar colores y etiquetas]
+    C --> D[Agregar título y leyenda]
+    D --> E[Insertar en el informe]
+            </pre>
+
+
+            <div class="info-box">
+                <strong>Consejo:</strong> los gráficos deben complementar al texto o las tablas,
+                no duplicar exactamente los mismos datos. Su función es <em>visualizar patrones</em>,
+                no reemplazar la información detallada.
+            </div>
+
+
+        </section>
+
+        <!-- 4. Generación de código e integración de informes en aplicaciones -->
+        <section class="slide" id="integracion-informes">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 18%; margin-bottom: 10px;"
+                alt="LinkiaFP">
+            <h2>4. Generación de código e integración de informes en aplicaciones</h2>
+
+            <p>
+                Una vez diseñado el informe con sus datos y gráficos, el siguiente paso es
+                <strong>integrarlo dentro de la aplicación</strong>. Esto permite que el usuario final pueda
+                visualizarlo,
+                filtrarlo, imprimirlo o exportarlo a distintos formatos directamente desde la interfaz del software.
+            </p>
+
+            <h3>4.1. Herramientas que ayudan a automatizar este proceso</h3>
+            <p>
+                Existen herramientas y librerías que permiten generar y mostrar informes desde el código,
+                integrándolos en aplicaciones de escritorio o web.
+                Estas herramientas se encargan de conectar los datos, renderizar el diseño y mostrar el resultado.
+            </p>
+
+            <h4>4.1.1. JasperReports en Java</h4>
+            <p>
+                <strong>JasperReports</strong> es una de las librerías más utilizadas en el entorno Java para crear
+                informes.
+                Se basa en plantillas diseñadas con <em>Jaspersoft Studio</em>, que se guardan como archivos
+                <code>.jrxml</code> y se compilan a <code>.jasper</code>.
+            </p>
+
+
+            <pre class="mermaid">
+flowchart LR
+    A[Jaspersoft Studio .jrxml] --> B[Compilar a .jasper]
+    B --> C[Aplicación Java]
+    C --> D[Cargar datos y parámetros]
+    D --> E[Renderizar informe con JasperReports]
+    E --> F[Mostrar o exportar PDF/Excel/HTML]
+            </pre>
+
+
+
+            <strong>Ejemplo básico en Java:</strong>
+            <pre><code class="language-java">Connection conn = DriverManager.getConnection(url, user, pass); // Abre la conexión a la base de datos
+Map&lt;String, Object&gt; params = new HashMap&lt;&gt;(); // Crea el mapa de parámetros del informe
+params.put("ClienteID", 102); // Filtra por el cliente indicado
+params.put("FechaInicio", "2025-05-01"); // Define el inicio del periodo
+params.put("FechaFin", "2025-05-31"); // Define el final del periodo
+JasperPrint print = JasperFillManager.fillReport("InformeVentas.jasper", params, conn); // Combina plantilla, parámetros y datos
+JasperViewer.viewReport(print, false); // Muestra el informe en una ventana</code></pre>
+            <p>El informe se muestra en una ventana lista para imprimir o exportar.</p>
+
+
+            <h4>4.1.2. Otras herramientas (solo como referencia)</h4>
+            <p>
+                Además de JasperReports, existen alternativas según el entorno de desarrollo:
+            </p>
+            <ul>
+                <li><strong>Crystal Reports:</strong> ampliamente usado en .NET y SAP; ofrece diseñador visual y visor
+                    integrado.</li>
+                <li><strong>ReportViewer (RDLC):</strong> nativo en Visual Studio, ideal para proyectos C# o VB.NET.
+                </li>
+                <li><strong>iReport / Pentaho:</strong> soluciones complementarias en entornos empresariales.</li>
+            </ul>
+
+            <div class="info-box">
+                <strong>Ejemplo en .NET (C#):</strong>
+                <pre><code class="language-csharp">ReportViewer viewer = new ReportViewer(); // Crea el visor de informes
+viewer.LocalReport.ReportPath = "InformeVentas.rdlc"; // Selecciona la plantilla
+viewer.LocalReport.DataSources.Add( // Añade la fuente de datos
+    new ReportDataSource("VentasDataSet", listaVentas) // Asocia la lista al conjunto esperado
+); // Finaliza la configuración de la fuente
+viewer.RefreshReport(); // Actualiza y muestra el informe</code></pre>
+            </div>
+
+            <h3>4.2. Cómo usar los informes en nuestra aplicación</h3>
+            <p>
+                Una vez que la plantilla del informe está creada, se puede incluir en la aplicación
+                de varias formas: mostrando el informe en una ventana, pasando parámetros de filtrado
+                o exportando el resultado a diferentes formatos.
+            </p>
+
+            <h4>4.2.1. Pasar datos al informe</h4>
+            <p>
+                Los parámetros permiten personalizar los datos que aparecen en el informe.
+                Por ejemplo, mostrar los pedidos de un cliente específico o los resultados de un mes concreto.
+            </p>
+
+            <div class="info-box">
+                <strong>Ejemplo de paso de parámetros (Java):</strong>
+                <pre><code class="language-java">Map&lt;String, Object&gt; parametros = new HashMap&lt;&gt;(); // Prepara los parámetros del informe
+parametros.put("Mes", "Mayo"); // Selecciona el mes del informe
+parametros.put("Anio", 2025); // Selecciona el año del informe
+JasperPrint print = JasperFillManager.fillReport("InformeMensual.jasper", parametros, conn); // Genera el informe con el periodo indicado</code></pre>
+            </div>
+
+            <h4>4.2.2. Mostrar el informe en una ventana</h4>
+            <p>
+                Los informes pueden visualizarse directamente dentro de la aplicación.
+                En Java, se usa <code>JasperViewer</code>; en .NET, el control <code>ReportViewer</code>
+                embebido en formularios o páginas web.
+            </p>
+
+            <div class="info-box">
+                <strong>Ejemplo (JasperReports):</strong>
+                <pre><code class="language-java">JasperViewer.viewReport(print, false); // Abre el informe para consultarlo e imprimirlo</code></pre>
+                <p>Esta línea abre una ventana interactiva con opciones de impresión y zoom.</p>
+            </div>
+
+            <h4>4.2.3. Guardar el informe como PDF u otros formatos</h4>
+            <p>
+                También es posible exportar los informes a distintos formatos: PDF, Excel, Word,
+                HTML o incluso imagen. Esto permite compartir los resultados fácilmente.
+            </p>
+
+            <div class="info-box">
+                <strong>Ejemplo de exportación a PDF (JasperReports):</strong>
+                <pre><code class="language-java">JasperExportManager.exportReportToPdfFile(print, "InformeVentas.pdf"); // Guarda el informe en formato PDF</code></pre>
+                <p>El archivo generado puede adjuntarse a correos o almacenarse en el servidor.</p>
+            </div>
+
+
+            <pre class="mermaid">
+flowchart TD
+    A[Aplicación] --> B[Cargar informe .jasper]
+    B --> C[Pasar parámetros y datos]
+    C --> D[Renderizar informe]
+    D --> E[Mostrar en ventana]
+    D --> F[Exportar PDF / Excel / Word]
+            </pre>
+
+
+            <h3>Recomendaciones finales</h3>
+            <ul>
+                <li>Separa la lógica de datos del diseño del informe (modelo MVC o MVP).</li>
+                <li>Guarda las plantillas <code>.jasper</code> o <code>.rdlc</code> en una carpeta accesible y
+                    controlada
+                    por versión.</li>
+                <li>Proporciona al usuario opciones claras de exportación y filtrado.</li>
+                <li>Verifica la compatibilidad de fuentes y formatos antes de la exportación.</li>
+            </ul>
+
+
+        </section>
+
+
+    </div>
+    <div class="footer">
+        <div class="bar">
+            <small>UT6 - Generaci&#243;n de informes y representaci&#243;n gr&#225;fica de datos - LinkiaFP</small>
+            <small>&copy; Vicente Catal&#224; Ruiz - 2025</small>
+        </div>
+    </div>
+</body>
+
+</html>

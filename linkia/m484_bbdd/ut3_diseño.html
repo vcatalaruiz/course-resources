@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>UT3 · Diseño físico e implementación de bases de datos · LinkiaFP</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link href="../style.css" rel="stylesheet">
+    <script defer="" src="../script.js"></script>
+    </link>
+</head>
+
+<body>
+    <div class="deck">
+        <!-- COVER -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img alt="" src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" />
+                </div>
+                <div class="title">UT3 · Diseño físico e implementación de bases de datos · LinkiaFP</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;" />
+            </div>
+        </section>
+
+
+        <section class="slide" id="objetivos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Objetivos de la unidad</h2>
+            <ul>
+                <li>Comprender qué es MySQL y para qué se utiliza.</li>
+                <li>Instalar y configurar MySQL en diferentes sistemas operativos.</li>
+                <li>Utilizar sentencias DDL para crear y modificar bases de datos.</li>
+                <li>Definir tablas, tipos de datos y restricciones.</li>
+                <li>Aplicar claves primarias y foráneas.</li>
+                <li>Optimizar el rendimiento mediante índices.</li>
+                <li>Gestionar usuarios, privilegios y seguridad.</li>
+            </ul>
+        </section>
+
+        <section class="slide" id="mysql">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>¿Qué es MySQL?</h2>
+            <div class="two-col" style="align-items:center;">
+                <div>
+                    <p>MySQL es un Sistema Gestor de Bases de Datos Relacional (RDBMS) de código abierto que utiliza SQL
+                        para almacenar y gestionar información.</p>
+                    <ul>
+                        <li>Permite operaciones CRUD (Crear, Leer, Actualizar y Borrar).</li>
+                        <li>Soporta transacciones.</li>
+                        <li>Permite definir claves primarias y foráneas.</li>
+                        <li>Garantiza la integridad referencial.</li>
+                        <li>Se utiliza en aplicaciones web como WordPress.</li>
+                    </ul>
+                </div>
+                <div class="diagram">
+                    <img src="../../assets/linkia/mysql.png" style="max-width:100%; border:0;" alt="Logotipo de MySQL">
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" id="requisitos">
+            <div class="two-col" style="align-items:center;">
+                <div>
+                    <h2>Requisitos para instalar MySQL</h2>
+
+                    <h3>Hardware</h3>
+                    <ul>
+                        <li>Procesador Intel o AMD.</li>
+                        <li>1 GB RAM mínimo (recomendable 2 GB o más).</li>
+                        <li>200 MB de espacio libre.</li>
+                    </ul>
+
+                    <h3>Software</h3>
+                    <ul>
+                        <li>Windows.</li>
+                        <li>Linux.</li>
+                        <li>macOS.</li>
+                    </ul>
+
+
+                </div>
+                <div class="diagram">
+                    <img src="../../assets/test-funcional-2.png" style="max-width:100%; border:0;" alt="">
+                </div>
+            </div>
+            <div class="info-box">
+                <p>Antes de empezar debemos asegurarnos de que nuestro sistema cumple estas características.</p>
+            </div>
+        </section>
+
+
+
+        <section class="slide" id="instalacion-windows">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Instalación de MySQL en Windows</h2>
+
+            <ol>
+                <li>Descargar MySQL Installer: <a
+                        href="https://dev.mysql.com/downloads/installer/">https://dev.mysql.com/downloads/installer/</a>
+                </li>
+                <li>Seguir los pasos de instalación.</li>
+                <li>Configurar puerto 3306.</li>
+                <li>Configurar contraseña del usuario root.</li>
+                <li>Finalizar instalación.</li>
+            </ol>
+
+            <h3>Video demostrativo de instalación</h3>
+            <div class="diagram">
+                <video width="640" height="360" controls>
+                    <source src="../../assets/linkia/instalación mysq y workbench.mp4" type="video/mp4">
+
+                </video>
+
+            </div>
+            <p><a href="https://ucoc-my.sharepoint.com/:v:/g/personal/vicente_catala_linkiafp_es/IQBNLxiJ8I8pQbNr0BwNcvENAVPYzLcZRXWKqCrV41Dd-rM?e=Rga041"
+                    target="_blank" rel="noopener noreferrer">Enlace al vídeo en SharePoint</a></p>
+            <p><strong>En el terminal ejecutamos el siguiente comando:</strong></p>
+            <pre><code>mysql -u root -p  # Abre una sesión de MySQL con el usuario root y solicita su contraseña</code></pre>
+            <div class="info-box">
+                <p>Si accedemos a MySQL la instalación ha sido correcta.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="instalacion-linux">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Instalación en Linux Ubuntu</h2>
+
+            <pre><code>sudo apt-get update  # Actualiza la lista de paquetes disponibles
+sudo apt-get install mysql-server  # Instala el servidor MySQL
+sudo mysql_secure_installation  # Ejecuta el asistente de configuración segura
+sudo mysql -u root -p  # Se conecta a MySQL como administrador y solicita la contraseña</code></pre>
+
+            <p>mysql_secure_installation mejora la seguridad eliminando usuarios anónimos y configuraciones inseguras.
+            </p>
+        </section>
+
+        <section class="slide" id="instalacion-macos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Instalación en macOS</h2>
+
+            <pre><code>brew install mysql  # Instala MySQL mediante Homebrew
+brew services start mysql  # Inicia MySQL como servicio
+mysql_secure_installation  # Ejecuta el asistente de configuración segura
+mysql -u root -p  # Se conecta a MySQL y solicita la contraseña</code></pre>
+
+            <p>Homebrew facilita la instalación y gestión de servicios en macOS.</p>
+        </section>
+
+        <section class="slide" id="configuracion">
+            <div class="two-col" style="align-items:center;">
+                <div>
+                    <h2>Configuración de MySQL</h2>
+
+                    <p>El archivo de configuración <strong>my.cnf</strong> (Linux/macOS) o <strong>my.ini</strong>
+                        (Windows) permite ajustar parámetros del servidor.</p>
+
+                    <ul>
+                        <li><strong>max_connections</strong>: número máximo de usuarios conectados.</li>
+                        <li><strong>key_buffer_size</strong>: memoria utilizada por índices.</li>
+                        <li><strong>innodb_buffer_pool_size</strong>: memoria para tablas InnoDB.</li>
+                    </ul>
+
+                    <p>La configuración influye directamente en el rendimiento del servidor.</p>
+                </div>
+                <div class="diagram">
+                    <img src="../../assets/linkia/mysql_config.png" style="max-width:100%; border:0;" alt="">
+                </div>
+                <div class="diagram">
+                    <img src="../../assets/linkia/nano-view-max-connections.png" style="max-width:100%; border:0;"
+                        alt="">
+
+                </div>
+            </div>
+
+            <div class="info-box">
+                <p>Es recomendable revisar y ajustar estos parámetros según las necesidades de la aplicación y la carga
+                    esperada.</p>
+                <p>La configuración influye directamente en el rendimiento del servidor.</p>
+            </div>
+
+        </section>
+
+        <section class="slide" id="herramientas">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Herramientas para trabajar con MySQL</h2>
+            <div class="two-col" style="align-items:center;">
+                <div>
+
+
+                    <p>Existen varias herramientas para interactuar con MySQL, cada una con sus ventajas y desventajas.
+                    </p>
+
+                    <ul>
+                        <li><strong>MySQL Workbench:</strong> interfaz gráfica, ideal para principiantes.</li>
+                        <li><strong>DBeaver:</strong> herramienta multiplataforma, ideal para desarrolladores avanzados.
+                        </li>
+                        <li><strong>Línea de comandos (CLI):</strong> rápida y potente, permite automatización mediante
+                            scripts.</li>
+                        <li><strong>phpMyAdmin:</strong> acceso mediante navegador, habitual en entornos web. No
+                            requiere instalación adicional.</li>
+                    </ul>
+                </div>
+                <div class="diagram">
+                    <img src="../../assets/linkia/ejemplos-administradores-bbdd.webp" style="max-width:100%; border:0;"
+                        alt="">
+                </div>
+
+            </div>
+
+
+        </section>
+
+        <section class="slide" id="sql">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <div class="two-col" style="align-items:center;">
+                <div>
+                    <h2>Lenguaje SQL</h2>
+
+                    <p>SQL (Structured Query Language) es el lenguaje estándar para gestionar bases de datos
+                        relacionales.</p>
+
+                    <ul>
+                        <li><strong>DDL (Data Definition Language):</strong> define y modifica la estructura de la base
+                            de datos.</li>
+                        <li><strong>DML (Data Manipulation Language):</strong> manipula los datos almacenados en la base
+                            de datos.</li>
+                        <li><strong>DCL (Data Control Language):</strong> controla los permisos y accesos de los
+                            usuarios.</li>
+                    </ul>
+                </div>
+                <div class="diagram">
+                    <img src="../../assets/linkia/sql-logo.webp" style="max-width:100%; border:0;" alt="">
+                </div>
+            </div>
+
+        </section>
+        <section class="slide" id="sentencias-ddl">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Sentencias DDL (Data Definition Language)</h2>
+
+            <ul>
+                <li><code>CREATE</code>: crea bases de datos, tablas, índices y otros objetos.</li>
+                <li><code>ALTER</code>: modifica la estructura de una base de datos o tabla existente.</li>
+                <li><code>DROP</code>: elimina bases de datos, tablas o índices.</li>
+                <li><code>TRUNCATE</code>: borra todos los registros de una tabla sin eliminar su estructura.</li>
+            </ul>
+
+            <div class="info-box">
+                <p><strong>Ejemplo:</strong> crear una base de datos llamada <code>empresa</code>, añadir una tabla
+                    <code>empleados</code>, modificarla para añadir un campo y finalmente eliminarla.
+                </p>
+
+            </div>
+            <p><strong>Crear la base de datos y la tabla:</strong></p>
+            <pre><code>CREATE DATABASE empresa; -- Crea la base de datos de la empresa
+USE empresa; -- Selecciona empresa para las siguientes operaciones
+CREATE TABLE empleados ( -- Crea la tabla que almacenará a los empleados
+    id INT PRIMARY KEY AUTO_INCREMENT, -- Identificador único generado automáticamente
+    nombre VARCHAR(50) NOT NULL, -- Nombre obligatorio de hasta 50 caracteres
+    email VARCHAR(100) UNIQUE, -- Correo electrónico que no se puede repetir
+    telefono VARCHAR(15), -- Número de teléfono del empleado
+    fecha_alta DATE DEFAULT CURRENT_DATE -- Fecha de alta, por defecto la fecha actual
+); -- Finaliza la definición de la tabla</code></pre>
+            <p><strong>Modificar la tabla:</strong> añadir columna <em>salario</em></p>
+            <pre><code>ALTER TABLE empleados ADD COLUMN salario DECIMAL(10,2) CHECK (salario >= 1200); -- Añade un salario y exige que sea de al menos 1200</code></pre>
+            <p><strong>Eliminar la tabla:</strong></p>
+            <pre><code>DROP TABLE empleados; -- Elimina la tabla empleados y todos sus registros</code></pre>
+
+        </section>
+
+
+        <section class="slide" id="bases-datos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Creación de bases de datos</h2>
+
+            <p>Una base de datos agrupa tablas relacionadas. En este ejemplo guardaremos información de una empresa.</p>
+
+            <pre><code>CREATE DATABASE empresa; -- Crea la base de datos empresa
+USE empresa; -- Selecciona empresa como base de datos activa
+SHOW TABLES; -- Muestra las tablas de la base de datos seleccionada</code></pre>
+
+            <p><strong>¿Qué hace cada sentencia?</strong></p>
+            <ul>
+                <li><code>CREATE DATABASE</code>: crea una base de datos.</li>
+                <li><code>USE</code>: selecciona la base de datos con la que trabajaremos.</li>
+                <li><code>SHOW TABLES</code>: muestra sus tablas.</li>
+            </ul>
+
+            <div class="warning-box">
+                <p><strong>Precaución:</strong> <code>DROP DATABASE empresa;</code> elimina la base de datos y todos sus
+                    datos.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="charset">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>CHARACTER SET (juego de caracteres) y COLLATE (reglas de comparación)</h2>
+
+            <p>El juego de caracteres determina qué caracteres se pueden guardar; la intercalación establece cómo se
+                ordenan y comparan.</p>
+
+            <pre><code>CREATE DATABASE gestion_ventas -- Crea la base de datos de ventas
+CHARACTER SET utf8mb4 -- Permite guardar caracteres Unicode, como acentos y emojis
+COLLATE utf8mb4_unicode_ci; -- Define las reglas Unicode para comparar y ordenar textos</code></pre>
+
+            <ul>
+                <li><code>utf8mb4</code> permite guardar caracteres Unicode, como acentos y emojis.</li>
+                <li><code>COLLATE</code> define reglas para comparar y ordenar textos.</li>
+            </ul>
+            <div class="info-box">
+                <p>Es recomendable usar <code>utf8mb4</code> y una intercalación Unicode para soportar múltiples idiomas.
+                </p>
+                <p><strong>Ejemplo:</strong> guardar “Muñoz” o “Café” sin perder caracteres y ordenar los nombres según
+                    las reglas elegidas.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="alter-database">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Modificar una base de datos con ALTER DATABASE</h2>
+
+            <pre><code>ALTER DATABASE gestion_ventas -- Modifica la configuración de gestion_ventas
+CHARACTER SET utf8mb4 -- Configura el juego de caracteres Unicode
+COLLATE utf8mb4_unicode_ci; -- Configura las reglas de comparación Unicode</code></pre>
+
+            <p><code>ALTER DATABASE</code> cambia la configuración de una base de datos ya creada.</p>
+            <div class="info-box">
+                <p><strong>Ejemplo:</strong> ajustar <code>gestion_ventas</code> para que admita textos en varios idiomas
+                    y se comparen con las reglas Unicode.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="tipos-numericos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Tipos de datos numéricos</h2>
+
+            <ul>
+                <li><code>TINYINT</code> / <code>SMALLINT</code>: números enteros pequeños.</li>
+                <li><code>MEDIUMINT</code> / <code>INT</code> / <code>BIGINT</code>: enteros de capacidad creciente.
+                </li>
+                <li><code>FLOAT</code> / <code>DOUBLE</code>: números aproximados con decimales.</li>
+                <li><code>DECIMAL</code>: número decimal exacto, apropiado para importes.</li>
+            </ul>
+
+            <pre><code>unidades INT, -- Guarda una cantidad entera de unidades
+temperatura FLOAT, -- Guarda una temperatura aproximada con decimales
+precio DECIMAL(8,2) -- Guarda un importe exacto con hasta dos decimales</code></pre>
+
+<div class="info-box">
+                <p>Se recomienda usar <code>DECIMAL</code> para precios y cantidades monetarias, evitando errores de
+                    redondeo.</p>
+            <p><strong>Ejemplo:</strong> guardar 3 unidades, una temperatura aproximada de 21.5 y un precio de 19.99. En
+                <code>DECIMAL(8,2)</code>, 8 es el total de dígitos y 2 los decimales.
+            </p>
+            </div>
+        </section>
+
+        <section class="slide" id="tipos-texto">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Tipos de datos de texto y binarios</h2>
+
+            <pre><code>nombre VARCHAR(50), -- Guarda un nombre de longitud variable de hasta 50 caracteres
+codigo CHAR(5), -- Guarda un código de longitud fija de 5 caracteres
+descripcion TEXT, -- Guarda una descripción de texto largo
+imagen BLOB -- Guarda el contenido binario de una imagen</code></pre>
+
+            <ul>
+                <li><code>VARCHAR(50)</code>: hasta 50 caracteres, por ejemplo “Ana López”.</li>
+                <li><code>CHAR(5)</code>: longitud fija, útil para códigos como “A0123”.</li>
+                <li><code>TEXT</code>: texto largo, como la descripción de un producto.</li>
+                <li><code>BLOB</code> (Binary Large Object): datos binarios, como el contenido de una imagen.</li>
+            </ul>
+        </section>
+
+        <section class="slide" id="tipos-fecha">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Tipos de datos de fecha y hora</h2>
+
+            <ul>
+                <li><code>DATE</code>: día del examen → <code>'2026-10-24'</code>.</li>
+                <li><code>TIME</code>: hora de inicio → <code>'09:30:00'</code>.</li>
+                <li><code>DATETIME</code>: día y hora juntos → <code>'2026-10-24 09:30:00'</code>.</li>
+                <li><code>TIMESTAMP</code>: momento en que se registró el examen.</li>
+                <li><code>YEAR</code>: año académico → <code>2026</code>.</li>
+            </ul>
+
+            <h3>Ejemplo práctico: registrar un examen de la UT3</h3>
+            <pre><code>CREATE TABLE examenes ( -- Crea una tabla para registrar exámenes
+    id INT AUTO_INCREMENT PRIMARY KEY, -- Genera un identificador único para cada examen
+    asignatura VARCHAR(40), -- Guarda el nombre de la asignatura
+    fecha DATE, -- Guarda el día del examen
+    hora TIME, -- Guarda la hora de inicio
+    inicio DATETIME, -- Guarda juntos el día y la hora de inicio
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Registra automáticamente cuándo se creó la fila
+    anio_academico YEAR -- Guarda el año académico
+); -- Finaliza la definición de la tabla
+INSERT INTO examenes -- Añade un examen de ejemplo a la tabla
+    (asignatura, fecha, hora, inicio, anio_academico) -- Indica las columnas que recibirán valores
+VALUES -- Comienza la lista de valores que se insertarán
+    ('Bases de datos', '2026-10-24', '09:30:00', -- Asigna la asignatura, la fecha y la hora
+     '2026-10-24 09:30:00', 2026); -- Asigna la fecha y hora completas y el año académico</code></pre>
+            <div class="info-box">
+                <p>Al insertar el examen, MySQL completa <code>creado_en</code> automáticamente con la fecha y hora
+                    actuales.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="boolean">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Tipo BOOLEAN (valor lógico)</h2>
+
+            <pre><code>CREATE TABLE productos ( -- Crea la tabla de productos
+    id INT PRIMARY KEY, -- Define el identificador único de cada producto
+    nombre VARCHAR(80) NOT NULL, -- Exige un nombre de hasta 80 caracteres
+    activo BOOLEAN DEFAULT TRUE -- Marca el producto como activo si no se indica otro valor
+); -- Finaliza la definición de la tabla
+INSERT INTO productos (id, nombre, activo) -- Indica las columnas que se van a rellenar
+VALUES (1, 'Teclado', TRUE); -- Añade un teclado disponible</code></pre>
+
+            <p>Se usa para estados que solo tienen dos posibilidades, por ejemplo, si un producto está disponible:</p>
+
+            <ul>
+                <li><code>TRUE</code> (verdadero) = 1.</li>
+                <li><code>FALSE</code> (falso) = 0.</li>
+            </ul>
+        </section>
+
+        <section class="slide" id="restricciones">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Restricciones (reglas de validación)</h2>
+
+            <ul>
+                <li><code>NOT NULL</code>: el dato es obligatorio.</li>
+                <li><code>DEFAULT</code>: valor asignado si no se indica otro.</li>
+                <li><code>UNIQUE</code>: impide valores duplicados.</li>
+                <li><code>CHECK</code>: comprueba una condición.</li>
+                <li><code>PRIMARY KEY</code> (clave primaria): identifica cada fila.</li>
+                <li><code>FOREIGN KEY</code> (clave foránea): relaciona tablas.</li>
+                <li><code>AUTO_INCREMENT</code>: genera identificadores numéricos automáticamente.</li>
+            </ul>
+
+            <pre><code>CREATE TABLE empleados ( -- Crea una tabla para almacenar empleados
+    id INT AUTO_INCREMENT PRIMARY KEY, -- Genera un identificador único automáticamente
+    email VARCHAR(100) UNIQUE NOT NULL, -- Exige un correo obligatorio y no repetido
+    salario DECIMAL(10,2) CHECK (salario >= 1200), -- Acepta salarios de al menos 1200
+    activo BOOLEAN DEFAULT TRUE -- Marca al empleado como activo por defecto
+); -- Finaliza la definición de la tabla</code></pre>
+            <div class="info-box">
+                <p><strong>Ejemplo:</strong> MySQL genera el identificador, exige un correo único y no permite salarios
+                    inferiores a 1200.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="create-table">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Creación de tablas</h2>
+
+            <pre><code>CREATE TABLE empleados ( -- Crea la tabla empleados
+    id INT AUTO_INCREMENT PRIMARY KEY, -- Genera el identificador único de cada empleado
+    nombre VARCHAR(50) NOT NULL, -- Guarda el nombre, que es obligatorio
+    email VARCHAR(100) UNIQUE, -- Evita que dos empleados compartan el mismo correo
+    salario DECIMAL(10,2) CHECK (salario >= 1200), -- Exige un salario mínimo de 1200
+    fecha_ingreso DATE NOT NULL, -- Guarda la fecha de ingreso, que es obligatoria
+    activo BOOLEAN DEFAULT TRUE -- Marca al empleado como activo si no se indica otro valor
+); -- Finaliza la definición de la tabla</code></pre>
+            <div class="info-box">
+                <p><strong>Ejemplo:</strong> cada empleado tiene un identificador automático; el nombre y la fecha de
+                    ingreso son obligatorios y el estado activo se marca por defecto.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="alter-table">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>ALTER TABLE (modificar una tabla)</h2>
+
+            <h3>Añadir una columna</h3>
+
+            <pre><code>ALTER TABLE empleados -- Selecciona la tabla que se va a modificar
+ADD telefono VARCHAR(15); -- Añade una columna para el teléfono</code></pre>
+
+            <h3>Modificar el tipo de una columna</h3>
+
+            <pre><code>ALTER TABLE empleados -- Selecciona la tabla que se va a modificar
+MODIFY salario DECIMAL(12,2) NOT NULL; -- Amplía el salario y lo hace obligatorio</code></pre>
+
+            <h3>Eliminar una columna</h3>
+
+            <pre><code>ALTER TABLE empleados -- Selecciona la tabla que se va a modificar
+DROP COLUMN telefono; -- Elimina la columna del teléfono</code></pre>
+            <div class="info-box">
+                <p><strong>Ejemplo:</strong> añadir el teléfono de contacto, ampliar la precisión del salario o retirar
+                    una columna que ya no se utiliza.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="drop-table">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Eliminar tablas con DROP TABLE</h2>
+
+            <pre><code>DROP TABLE empleados; -- Elimina la tabla empleados y todos sus registros</code></pre>
+
+            <p><code>DROP TABLE</code> elimina tanto la estructura como todos los datos de la tabla.</p>
+
+            <div class="warning-box">
+                <p><strong>Precaución:</strong> se puede usar para eliminar una tabla de pruebas que ya no se necesita.
+                    Comprueba el nombre y realiza una copia de seguridad antes de ejecutarlo.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="pk">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>PRIMARY KEY (clave primaria)</h2>
+            <p>La clave primaria identifica de forma única cada fila de una tabla. No admite valores duplicados ni
+                <code>NULL</code>.</p>
+            <pre><code>CREATE TABLE departamentos ( -- Crea la tabla que aparece debajo en el diagrama
+    Dept_No INT PRIMARY KEY, -- Usa el número del departamento como clave primaria
+    D_Name VARCHAR(60) NOT NULL, -- Guarda el nombre del departamento
+    Location VARCHAR(60) -- Guarda la ciudad donde está el departamento
+); -- Finaliza la definición de la tabla
+CREATE TABLE empleados ( -- Crea la tabla principal del diagrama
+    Emp_ID INT PRIMARY KEY, -- Identifica de forma única a cada empleado
+    Aadhaar_No CHAR(5) UNIQUE, -- Guarda el número personal sin repetirlo
+    E_Name VARCHAR(50) NOT NULL, -- Guarda el nombre del empleado
+    Job VARCHAR(40), -- Guarda el puesto de trabajo
+    Salary DECIMAL(10,2), -- Guarda el salario
+    Dept_No INT -- Indica el departamento al que pertenece
+); -- Finaliza la definición de la tabla
+INSERT INTO departamentos (Dept_No, D_Name, Location) -- Indica las columnas de los departamentos
+VALUES -- Comienza los datos que aparecen en la tabla del diagrama
+(90, 'Marketing', 'Delhi'), -- Inserta el departamento 90
+(58, 'Shipping', 'London'), -- Inserta el departamento 58
+(26, 'IT', 'New York'), -- Inserta el departamento 26
+(24, 'Executive', 'Paris'), -- Inserta el departamento 24
+(28, 'Office', 'Bangalore'); -- Inserta el departamento 28
+INSERT INTO empleados (Emp_ID, Aadhaar_No, E_Name, Job, Salary, Dept_No) -- Indica las columnas de empleados
+VALUES -- Comienza los datos que aparecen en la tabla del diagrama
+(10, '65778', 'Aman', 'Clerk', 20000, 90), -- Inserta a Aman, empleado 10 del departamento 90
+(11, '56789', 'Smith', 'Manager', 50000, 58), -- Inserta a Smith, empleado 11 del departamento 58
+(12, '23456', 'Geeta', 'Operator', 30000, 26), -- Inserta a Geeta, empleado 12 del departamento 26
+(13, '23567', 'Ravi', 'President', 60000, 24), -- Inserta a Ravi, empleado 13 del departamento 24
+(14, '76556', 'Divya', 'Clerk', 20000, 28); -- Inserta a Divya, empleado 14 del departamento 28</code></pre>
+
+            <div class="info-box">
+                <p><strong>En la imagen:</strong> <code>Emp_ID</code> (10–14) es la clave primaria de empleados y
+                    <code>Dept_No</code> (90, 58, 26, 24, 28) es la clave primaria de departamentos. En empleados,
+                    <code>Dept_No</code> señala el departamento de cada persona.
+                </p>
+                <p>La imagen también señala <code>Aadhaar_No</code> como clave compuesta, pero técnicamente una clave
+                    compuesta utiliza dos o más columnas. Aquí se muestra como única con <code>UNIQUE</code>.</p>
+            </div>
+            <div class="diagram">
+                <img src="../../assets/linkia/primary key in database.png" style="max-width:55%; border:0;"
+                    alt="Tablas de empleados y departamentos: Emp-ID y Dept-No identifican de forma única cada fila; Dept-No relaciona ambas tablas">
+            </div>
+        </section>
+
+        <section class="slide" id="fk">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>FOREIGN KEY (clave foránea)</h2>
+
+            <pre><code>ALTER TABLE empleados -- Modifica la tabla empleados del ejemplo anterior
+ADD CONSTRAINT fk_empleados_departamentos -- Asigna un nombre a la restricción
+FOREIGN KEY (Dept_No) -- Declara Dept_No como clave foránea
+REFERENCES departamentos(Dept_No); -- Exige que el número de departamento exista</code></pre>
+
+            <div class="info-box">
+                <p>La clave foránea relaciona cada empleado con un departamento existente. Por ejemplo,
+                    <code>Dept_No = 90</code> relaciona a Aman con el departamento Marketing, cuyo número es 90.
+                </p>
+            </div>
+        </section>
+
+        <section class="slide" id="acciones-fk">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>ON DELETE y ON UPDATE (acciones al borrar o actualizar)</h2>
+
+            <pre><code>FOREIGN KEY (id_departamento) -- Declara la columna de relación
+REFERENCES departamentos(id) -- Apunta al identificador de un departamento
+ON DELETE CASCADE -- Borra empleados asociados si se elimina el departamento
+ON UPDATE RESTRICT -- Impide cambiar el id si existen empleados asociados</code></pre>
+
+            <ul>
+                <li><code>ON DELETE CASCADE</code>: al borrar un departamento, elimina también los empleados asociados.
+                </li>
+                <li><code>ON UPDATE RESTRICT</code>: impide cambiar el id si hay empleados que lo usan.</li>
+            </ul>
+            <div class="info-box">
+                <p><strong>Ejemplo:</strong> estas acciones determinan qué ocurre con los empleados cuando se intenta
+                    borrar o modificar el departamento al que pertenecen.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="drop-fk">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Índices y búsqueda textual</h2>
+            <p>Los índices aceleran las búsquedas; los índices de texto permiten localizar palabras dentro de textos
+                largos. Es importante utilizarlos para mejorar el rendimiento de las consultas.</p>
+
+            <pre><code>CREATE INDEX idx_email -- Crea un índice para acelerar búsquedas por correo
+ON clientes(email); -- Aplica el índice a la columna email de clientes</code></pre>
+
+            <pre><code>CREATE FULLTEXT INDEX idx_descripcion -- Crea un índice para buscar palabras en textos
+ON productos(descripcion); -- Aplica el índice a la descripción de los productos</code></pre>
+
+            <p><code>CREATE INDEX</code> crea un índice para acelerar búsquedas; <code>FULLTEXT</code> permite buscar
+                palabras dentro de textos.</p>
+            <pre><code>SELECT nombre -- Devuelve el nombre de los productos encontrados
+FROM productos -- Busca en la tabla de productos
+WHERE MATCH(descripcion) -- Consulta el índice de texto de la descripción
+AGAINST ('portátil gaming'); -- Busca productos con estas palabras</code></pre>
+            <div class="info-box">
+                <p><strong>Ejemplo:</strong> localizar rápidamente un cliente por email o productos cuya descripción
+                    incluya las palabras buscadas.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="estructuras-indices">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Estructuras de índices</h2>
+
+            <ul>
+                <li><strong>B-Tree</strong> (árbol equilibrado): búsquedas por igualdad y por rangos; habitual en
+                    índices MySQL.</li>
+                <li><strong>Hash</strong> (tabla hash): búsquedas exactas; disponible, por ejemplo, en el motor MEMORY.
+                </li>
+                <li><strong>R-Tree</strong> (árbol espacial): búsquedas con datos geográficos o espaciales.</li>
+            </ul>
+
+            <div class="info-box">
+                <p><strong>Ejemplos:</strong> buscar pedidos por fecha (B-Tree), localizar un valor exacto en una tabla
+                    MEMORY (Hash) o encontrar tiendas cercanas (índice espacial R-Tree).</p>
+            </div>
+        </section>
+
+        <section class="slide" id="usuarios">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Creación de usuarios</h2>
+            <p>En MySQL, cada usuario tiene un nombre y un host desde el que puede conectarse. Se recomienda crear cuentas
+                independientes para cada persona y conceder solo los permisos necesarios.</p>
+
+            <pre><code>CREATE USER 'juan'@'localhost' -- Crea la cuenta juan, válida desde este mismo equipo
+IDENTIFIED BY 'Usa_una_clave_segura'; -- Asigna una contraseña de ejemplo que debe reemplazarse</code></pre>
+
+            <p><code>CREATE USER</code> crea una cuenta; <code>'localhost'</code> limita la conexión al propio equipo.
+            </p>
+            <div class="info-box">
+                <p><strong>Ejemplo:</strong> crear una cuenta independiente para el empleado Juan. Después se conceden
+                    solo los permisos que necesite.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="grant">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>GRANT</h2>
+            <p>Conceder permisos a un usuario permite que realice ciertas acciones sobre la base de datos. Se recomienda
+                otorgar solo los permisos necesarios para cada tarea.</p>
+
+            <pre><code>GRANT SELECT, INSERT, UPDATE -- Concede permisos para consultar, añadir y modificar
+ON empresa.clientes -- Limita los permisos a la tabla clientes de empresa
+TO 'juan'@'localhost'; -- Asigna los permisos a la cuenta juan local</code></pre>
+
+            <p><code>GRANT</code> concede permisos: <code>SELECT</code> (consultar), <code>INSERT</code> (añadir) y
+                <code>UPDATE</code> (modificar).
+            </p>
+            <div class="info-box">
+                <p><strong>Ejemplo:</strong> Juan puede trabajar con la tabla de clientes, pero no borrar sus registros.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="revoke">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>REVOKE</h2>
+            <p>Retirar permisos a un usuario limita las acciones que puede realizar. Se recomienda revocar solo los permisos
+                que ya no sean necesarios.</p>
+
+            <pre><code>REVOKE INSERT -- Retira el permiso para añadir registros
+ON empresa.clientes -- Limita el cambio a la tabla clientes de empresa
+FROM 'juan'@'localhost'; -- Retira el permiso a la cuenta juan local</code></pre>
+
+            <p><code>REVOKE</code> retira permisos concedidos anteriormente.</p>
+            <div class="info-box">
+                <p><strong>Ejemplo:</strong> retirar a Juan el permiso para añadir clientes cuando cambia de
+                    responsabilidades; conservará los otros permisos que tenga.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="show-grants">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>SHOW GRANTS</h2>
+<p>Permite consultar los permisos concedidos a un usuario. Es útil para verificar que un usuario tiene los permisos correctos antes de permitirle realizar ciertas acciones.</p>
+            <pre><code>SHOW GRANTS -- Muestra los permisos de una cuenta
+FOR 'juan'@'localhost'; -- Consulta los permisos de juan desde este equipo</code></pre>
+
+            <p><code>SHOW GRANTS</code> muestra los permisos concedidos a una cuenta.</p>
+            <div class="info-box">
+                <p><strong>Ejemplo:</strong> comprobar que Juan puede consultar clientes, pero no borrar datos, antes de
+                    habilitar su acceso.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="password">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Cambio de contraseña</h2>
+
+            <pre><code>ALTER USER 'juan'@'localhost' -- Selecciona la cuenta local de juan
+IDENTIFIED BY 'Otra_clave_segura'; -- Cambia su contraseña; usa una clave propia y robusta</code></pre>
+
+            <p><code>ALTER USER</code> modifica una cuenta; en este caso, actualiza su contraseña.</p>
+            <div class="info-box">
+                <p><strong>Ejemplo:</strong> cambiar la clave de Juan si se sospecha que alguien más la conoce. Usa una
+                    clave robusta y única.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="drop-user">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Eliminar usuarios</h2>
+
+            <pre><code>DROP USER 'juan'@'localhost'; -- Elimina la cuenta local de juan y sus permisos</code></pre>
+
+            <p><code>DROP USER</code> elimina una cuenta de MySQL y los permisos asociados a ella.</p>
+            <div class="warning-box">
+                <p><strong>Precaución:</strong> elimina la cuenta de Juan solo cuando ya no necesite conectarse al
+                    servidor.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="seguridad">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Buenas prácticas de seguridad</h2>
+
+            <ul>
+                <li><strong>Mínimo privilegio:</strong> conceder solo las acciones necesarias para cada tarea.</li>
+                <li>Usar contraseñas robustas y diferentes para cada cuenta.</li>
+                <li>Revisar periódicamente los permisos con <code>SHOW GRANTS</code>.</li>
+                <li>No conceder <code>ALL PRIVILEGES</code> sin una necesidad justificada.</li>
+                <li>Realizar copias de seguridad y comprobar que pueden restaurarse.</li>
+            </ul>
+
+            <div class="info-box">
+                <p><strong>Ejemplo:</strong> un usuario de ventas solo debería poder consultar pedidos y clientes, no
+                    borrar tablas completas.</p>
+            </div>
+        </section>
+
+
+
+        <section class="slide" id="cierre">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>¿Qué hemos aprendido?</h2>
+
+            <ul>
+                <li>Instalar y configurar MySQL.</li>
+                <li>Crear y modificar bases de datos.</li>
+                <li>Definir tipos de datos adecuados.</li>
+                <li>Aplicar restricciones.</li>
+                <li>Crear relaciones mediante claves.</li>
+                <li>Optimizar consultas con índices.</li>
+                <li>Gestionar usuarios y permisos.</li>
+            </ul>
+
+            <h3>Ahora estamos preparados para resolver todas las actividades de la UT3.</h3>
+            <div class="info-box">
+                <p><strong>Ejemplo final:</strong> diseñar una base de datos de una tienda online con clientes, pedidos
+                    y productos.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="tutorial-actividad1">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Actividad 1: instalar y comprobar MySQL</h2>
+
+            <div class="info-box">
+                <p><strong>Enunciado:</strong> instala MySQL Server en tu ordenador o en un entorno virtual y añade
+                    MySQL Workbench como cliente, o prepara el uso de la línea de comandos. Crea una conexión al
+                    servidor, comprueba que puedes ejecutar instrucciones básicas y simula la conexión a la futura base
+                    de datos <code>empresa</code>.</p>
+                <p><strong>Entrega:</strong> un PDF con los pasos y capturas de la instalación, la configuración
+                    básica del servidor y del usuario (sin contraseñas reales), las pruebas realizadas y las
+                    incidencias con sus soluciones.</p>
+            </div>
+
+            <p>Checklist:</p>
+            <ol>
+                    <li>Instala MySQL Server en el ordenador o en una máquina virtual.</li>
+                    <li>Instala MySQL Workbench o prepara el acceso mediante la línea de comandos.</li>
+                    <li>Inicia el servicio y crea una conexión local usando el puerto habitual 3306 (o el que hayas puesto).</li>
+                    <li>Conéctate con un usuario con todos los privilegios (root) y comprueba que el servidor responde.</li>
+                    <li>Guarda capturas de los pasos, las pruebas y cualquier incidencia resuelta.</li>
+            </ol>
+
+            <p><strong>En la terminal:</strong></p>
+            <pre><code>mysql -u root -p  # Abre la consola con root y solicita la contraseña</code></pre>
+
+            <p><strong>Ya dentro de MySQL:</strong></p>
+            <pre><code>SELECT VERSION(); -- Muestra la versión del servidor
+CREATE DATABASE IF NOT EXISTS empresa; -- Simula la preparación de la futura base de datos
+SHOW DATABASES; -- Comprueba que empresa aparece en la lista
+USE empresa; -- Selecciona empresa para las siguientes instrucciones
+SELECT DATABASE(); -- Confirma cuál es la base de datos seleccionada</code></pre>
+
+            <div class="info-box">
+                    <p><strong>Plus adicional:</strong> indica la diferencia entre servidor (MySQL Server), cliente gráfico
+                        (Workbench) y cliente de texto (CLI).º</p>
+            </div>
+        </section>
+
+        <section class="slide" id="tutorial-actividad2-esquema">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Actividad 2 (Paso 1): diseñar y crear el esquema</h2>
+
+            <div class="info-box">
+                <p><strong>Enunciado:</strong> diseña e implementa la base de datos <code>empresa</code> con las tablas
+                    <code>departamentos</code>, <code>empleados</code>, <code>proyectos</code> y
+                    <code>asignaciones</code>. Cada empleado pertenece a un departamento y puede participar en varios
+                    proyectos.</p>
+                <p>Incluye los campos solicitados en la actividad, define tipos de datos, claves primarias y foráneas
+                    y restricciones. Inserta al menos un registro en cada tabla para comprobar el funcionamiento.</p>
+                <p><strong>Entrega:</strong> el script SQL de creación y un diagrama entidad-relación generado con
+                    MySQL Workbench.</p>
+            </div>
+
+            <ol>
+                    <li>Empieza por <code>departamentos</code>, ya que los empleados dependen de ella.</li>
+                    <li>Crea <code>empleados</code> con una clave foránea al departamento.</li>
+                    <li>Crea <code>proyectos</code> y relaciona cada responsable con un empleado.</li>
+                    <li>Usa <code>asignaciones</code> para resolver la relación de muchos a muchos entre empleados y
+                        proyectos.</li>
+                    <li>Elige tipos apropiados: fechas como <code>DATE</code>, importes como <code>DECIMAL</code> y textos
+                        con <code>VARCHAR</code> o <code>TEXT</code>.</li>
+            </ol>
+            <div class="diagram">
+                <img src="../../assets/linkia/act3-diagrama.png" style="max-width:55%; border:0;"
+                    alt="Diagrama de la base de datos empresa con las tablas departamentos, empleados, proyectos y asignaciones">
+            </div>
+
+            <pre><code>CREATE DATABASE IF NOT EXISTS empresa; -- Crea la base de datos si todavía no existe
+USE empresa; -- Selecciona la base de datos de trabajo
+CREATE TABLE departamentos ( -- Crea primero la tabla principal de departamentos
+    id INT AUTO_INCREMENT PRIMARY KEY, -- Identifica cada departamento con una clave primaria automática
+    nombre VARCHAR(60) NOT NULL, 
+    ubicacion VARCHAR(100)
+); 
+CREATE TABLE empleados ( -- Crea la tabla de empleados
+    id INT AUTO_INCREMENT PRIMARY KEY, -- Identifica cada empleado con una clave primaria automática
+    nombre VARCHAR(60) NOT NULL, 
+    apellidos VARCHAR(100) NOT NULL,
+    dni CHAR(9) NOT NULL, 
+    fecha_nacimiento DATE, 
+    ...
+    FOREIGN KEY (id_departamento) REFERENCES departamentos(id) -- Vincula el empleado con un departamento existente
+); 
+...
+-- Haz lo mismo con las demás tablas</code></pre>
+
+            <div class="warning-box">
+                    <p><strong>Importante:</strong> ejecuta las tablas en este orden: departamentos, empleados, proyectos
+                        y asignaciones. Así existen las tablas referenciadas cuando se crean las claves foráneas.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="tutorial-actividad2-datos">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Actividad 2 (Paso 2): insertar datos y comprobar relaciones</h2>
+
+            <div class="info-box">
+                <p>Usaremos únicamente las sentencias básicas vistas en clase: <code>INSERT</code> para añadir filas y
+                    <code>SELECT</code> para comprobarlas. Para que se vea claramente cómo se conectan las tablas,
+                    indicaremos los identificadores en los ejemplos.</p>
+            </div>
+
+            <p><strong>1. Insertar un departamento:</strong></p>
+            <pre><code>INSERT INTO departamentos (id, nombre, ubicacion) -- Indica las columnas que se van a rellenar
+VALUES (1, 'Informática', 'Valencia'); -- Crea el departamento con identificador 1</code></pre>
+
+            <p><strong>2. Crear el empleado y asignarlo al departamento:</strong></p>
+            <pre><code>INSERT INTO empleados (id, nombre, apellidos, dni, fecha_nacimiento, email, telefono, direccion, fecha_ingreso, salario, id_departamento) -- Indica las columnas del empleado
+VALUES (1, 'Lucía', 'Martínez Soler', '12345678A', '2001-04-18', 'lucia@empresa.test', '600123456', 'Calle Mayor 10', '2025-09-01', 24000.00, 1); -- Asigna a Lucía al departamento 1</code></pre>
+
+            <p><strong>3. Crear un proyecto y asignarle una persona responsable:</strong></p>
+            <pre><code>INSERT INTO proyectos (id, nombre, descripcion, fecha_inicio, fecha_fin, presupuesto, duracion_maxima_dias, id_responsable) -- Indica las columnas del proyecto
+VALUES (1, 'Web corporativa', 'Renovación del sitio web', '2026-01-15', '2026-06-30', 15000.00, 166, 1); -- Asigna a Lucía (empleada 1) como responsable</code></pre>
+
+            <p><strong>4. Asignar el empleado al proyecto:</strong></p>
+            <pre><code>INSERT INTO asignaciones (id_empleado, id_proyecto, fecha_asignacion, rol_en_proyecto) -- Indica quién participa, en qué proyecto, desde cuándo y con qué rol
+VALUES (1, 1, '2026-01-15', 'Desarrollador'); -- Asigna a la empleada 1 al proyecto 1</code></pre>
+
+            <p><strong>5. Comprobar las filas con SELECT:</strong></p>
+            <pre><code>SELECT * FROM departamentos; -- Muestra los departamentos guardados
+SELECT * FROM empleados; -- Comprueba que id_departamento vale 1
+SELECT * FROM proyectos; -- Comprueba que id_responsable vale 1
+SELECT * FROM asignaciones; -- Comprueba que la asignación relaciona empleado 1 con proyecto 1</code></pre>
+
+            <ol>
+                    <li>Ejecuta las inserciones en orden y revisa que no haya errores de claves foráneas.</li>
+                    <li>En Workbench, genera un diagrama E-R a partir del esquema y comprueba las relaciones.</li>
+                    <li>Guarda el script SQL y exporta el diagrama para adjuntarlos a la entrega.</li>
+            </ol>
+
+            <div class="info-box">
+                    <p><strong>Importante:</strong> la tabla <code>asignaciones</code> relaciona empleados y
+                        proyectos. Así, una persona puede participar en varios proyectos y un proyecto puede tener varios
+                        empleados. En estos ejemplos se escriben los identificadores manualmente para ver las relaciones:
+                        el departamento 1, el empleado 1 y el proyecto 1.</p>
+                    <p>La actividad usa <code>AUTO_INCREMENT</code>; para repetir estos datos, utiliza una base vacía o
+                        cambia los identificadores para que no estén ya ocupados.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="tutorial-actividad3-cambios">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Actividad 3 (Paso 1): modificar tablas y validar datos</h2>
+
+            <div class="info-box">
+                <p><strong>Enunciado:</strong> adapta la base <code>empresa</code> con <code>ALTER TABLE</code>:
+                    añade género y estado (por defecto «activo») a empleados, exige salarios superiores a 1000,
+                    amplía dirección a 100 caracteres, añade <code>activo</code> a departamentos con valor
+                    predeterminado verdadero y elimina <code>ubicacion</code>.</p>
+                <p>Exige duración y presupuesto superiores a 0; añade a asignaciones las horas diarias (más de 0 y hasta
+                    8) y limita el rol a Desarrollador, Analista, Jefe de Proyecto o Tester, con Desarrollador por
+                    defecto. Crea un índice simple para DNI, haz único el correo y añade otros dos índices justificados.</p>
+                <p><strong>Entrega:</strong> script SQL comentado, diagrama E-R actualizado y PDF con la justificación
+                    de los índices.</p>
+            </div>
+
+            <ol>
+                    <li>Abre la base <code>empresa</code> creada en la Actividad 2 y revisa la estructura antes de cambiarla.</li>
+                    <li>Añade los campos y restricciones solicitados con <code>ALTER TABLE</code>.</li>
+                    <li>Asigna nombres a las restricciones para identificarlas fácilmente.</li>
+                    <li>Prueba valores aceptados y rechazados después de modificar las tablas.</li>
+            </ol>
+
+            <pre><code>USE empresa; -- Selecciona la base de datos que se va a modificar
+ALTER TABLE empleados ADD COLUMN genero VARCHAR(20); -- Añade el género del empleado
+ALTER TABLE empleados ADD COLUMN estado VARCHAR(20) NOT NULL DEFAULT 'activo'; -- Añade el estado activo por defecto
+ALTER TABLE empleados ADD CONSTRAINT chk_empleados_salario CHECK (salario > 1000); -- Exige un salario superior a 1000
+... -- Así con el resto de las restricciones</code></pre>
+
+            <div class="warning-box">
+                    <p><strong>Antes de ejecutar:</strong> comprueba que no haya valores actuales que incumplan las nuevas
+                        restricciones. En MySQL, <code>CHECK</code> se aplica en versiones actuales (8.0.16 o posteriores).</p>
+                    <p><code>DROP COLUMN ubicacion</code> elimina sus datos; confirma que no se necesitan antes de hacerlo.</p>
+            </div>
+            <div class="info-box">
+                    <p><strong>Consejo:</strong> prueba un salario de 1000 y otro de 1000.01; una duración de
+                        0 y otra de 1 día; y 8 frente a 8.01 horas. Compara qué valores acepta cada restricción.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="tutorial-actividad3-indices">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Actividad 3 (Paso 2): crear y justificar índices</h2>
+
+            <p>Los índices ayudan a localizar filas más rápido. Antes de crear el índice único del correo, comprueba que
+                    no haya direcciones repetidas.</p>
+
+            <pre><code>
+CREATE INDEX idx_empleados_dni ON empleados(dni); -- Acelera las búsquedas por DNI sin imponer unicidad
+CREATE UNIQUE INDEX uq_empleados_email ON empleados(email); -- Impide correos duplicados
+... -- Crea más índices para completar la actividad</code></pre>
+
+            <div class="info-box">
+                    <p><strong>Justificación para el informe:</strong> el índice de DNI facilita localizar empleados; el
+                        índice único de email protege la unicidad; el índice compuesto de apellidos y nombre ayuda a buscar
+                        personas ordenadas por esos campos; el índice de fecha facilita consultar proyectos por inicio.</p>
+                    <p>Entrega el script SQL de modificaciones, el diagrama E-R actualizado y un PDF explicando por qué
+                        elegiste cada índice.</p>
+            </div>
+        </section>
+
+        <section class="slide" id="tutorial-actividad4">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width:20%;" alt="">
+            <h2>Actividad 4: crear usuarios y comprobar permisos</h2>
+
+            <div class="info-box">
+                <p><strong>Enunciado:</strong> crea tres usuarios para la base <code>empresa</code> y aplica el
+                    principio de mínimo privilegio:</p>
+                <ul>
+                    <li><strong>Gestor:</strong> leer, insertar, modificar y eliminar datos en todas las tablas.</li>
+                    <li><strong>Administrativo:</strong> gestionar empleados y departamentos; consultar proyectos y
+                        asignaciones.</li>
+                    <li><strong>Comercial:</strong> consultar y modificar proyectos y asignaciones; consultar
+                        empleados; sin acceso a departamentos.</li>
+                </ul>
+                <p>Verifica los permisos con <code>SHOW GRANTS</code>. <strong>Entrega:</strong> script SQL y PDF
+                    justificativo con capturas de pantalla.</p>
+            </div>
+
+            <h3>Ejemplo resuelto: perfil administrativo</h3>
+            <pre><code>CREATE USER 'administrativo'@'localhost' IDENTIFIED BY 'CAMBIAR_por_una_clave_segura'; -- Crea la cuenta de ejemplo
+GRANT SELECT, INSERT, UPDATE, DELETE ON empresa.empleados TO 'administrativo'@'localhost'; -- Permite gestionar empleados
+GRANT SELECT, INSERT, UPDATE, DELETE ON empresa.departamentos TO 'administrativo'@'localhost'; -- Permite gestionar departamentos
+GRANT SELECT ON empresa.proyectos TO 'administrativo'@'localhost'; -- Permite consultar proyectos
+GRANT SELECT ON empresa.asignaciones TO 'administrativo'@'localhost'; -- Permite consultar asignaciones
+SHOW GRANTS FOR 'administrativo'@'localhost'; -- Comprueba los permisos concedidos</code></pre>
+
+            <div class="warning-box">
+                <p><strong>Seguridad:</strong> sustituye el texto de contraseña por una clave propia y segura. No la
+                    incluyas en capturas ni documentos. Ejecuta las sentencias con una cuenta administradora.</p>
+            </div>
+            <div class="info-box">
+                <p><strong>Ahora os toca:</strong> crea los perfiles <code>gestor</code> y <code>comercial</code> siguiendo
+                    el enunciado de la actividad. Decide qué permisos necesita cada uno y escríbelos con
+                    <code>GRANT</code>; después comprueba cada cuenta con <code>SHOW GRANTS</code>.</p>
+                <p>Entrega el script SQL completo y un PDF con capturas de la comprobación de los tres perfiles.</p>
+            </div>
+        </section>
+
+    </div>
+    <div class="footer">
+        <div class="bar">
+            <small>UT3 · Diseño físico e implementación de bases de datos · LinkiaFP</small>
+            <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -134,7 +134,23 @@ li {
     margin: 20px 20px;
     font-size: clamp(15px, 1.5vw, 20px)
 }
+.info-box {
+    background-color: #e7f3ff;
+    border-left: 4px solid #2980b9;
+    padding: 10px 20px 10px 5px;
+}
 
+.warning-box {
+    background-color: #fff3cd;
+    border-left: 4px solid #ff9800;
+    padding: 10px 20px 10px 0px;
+}
+
+.success-box {
+    background-color: #d4edda;
+    border-left: 4px solid #28a745;
+    padding: 10px 20px 10px 0px;
+}
 .two-col {
     display: grid;
     grid-template-columns: 1.2fr .8fr;
