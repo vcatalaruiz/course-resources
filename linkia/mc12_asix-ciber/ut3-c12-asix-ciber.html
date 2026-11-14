@@ -1,0 +1,916 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Material didáctico de la UT3: protección y aseguramiento de servicios en red (ASIX-CIBER).">
+  <title>UT3 · Protección y aseguramiento de servicios en red</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root{--pink:#ce1677;--pink-light:#fff1f8;--navy:#192132;--ink:#39475d;--paper:#f5f6f9;--line:#dce2e9;--green:#147d62;--green-bg:#effaf5;--amber:#93600b;--amber-bg:#fff8e9;--teacher-bg:#f0f4f8;--teacher-border:#3b82f6}
+    *{box-sizing:border-box}
+    html{scroll-behavior:auto}
+    body{margin:0;background:var(--paper);font-family:"DM Sans",sans-serif;color:var(--navy)}
+    .document{width:100%;max-width:1200px;margin:0 auto;padding:32px clamp(16px,4vw,52px) 70px}
+    .sheet{position:relative;background:white;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 12px 36px #1921320a;margin-bottom:22px}
+    .sheet::before{content:"";position:absolute;z-index:2;top:16px;left:clamp(18px,3vw,32px);width:112px;height:36px;background:url("../../assets/linkia/logo_linkia_black.png") left center/contain no-repeat}
+    .inner{padding:clamp(22px,4vw,48px);padding-top:70px}
+    .chapter{border-top:7px solid var(--pink)}
+    .chapter-heading,.chapter-head{padding:70px clamp(22px,4vw,48px) 28px;background:linear-gradient(110deg,#fff 55%,#fff1f8);border-bottom:1px solid #f0d6e4}
+    .chapter-heading h2,.chapter-head h2{margin:6px 0 0;color:var(--pink);font-weight:800;letter-spacing:-.035em;line-height:1.16}
+    .chapter-body{padding:clamp(22px,4vw,48px)}
+    .section-description{margin:8px 0 0;color:var(--ink);font-size:.96rem;line-height:1.6}
+    .statement,.explanation{border:1px solid var(--line);border-radius:16px;padding:22px 20px;background:#fbfcfe}
+    .statement{background:#f7f8fb;border-left:5px solid var(--pink)}
+    .explanation{background:#fff;border-left:5px solid var(--green)}
+    .examples{margin-top:16px;padding-top:14px;border-top:1px dashed #d7dfe9}
+    .example-label,.visual-label{display:block;margin:12px 0 8px;color:var(--pink);font:700 12px "Space Mono",monospace;letter-spacing:.08em;text-transform:uppercase}
+    .command{display:block;margin:8px 0 6px;padding:10px 12px;border-radius:10px;background:var(--navy);color:white;font:12px/1.5 "Space Mono",monospace;overflow-wrap:anywhere}
+    .command-note{margin:0 0 10px;color:var(--ink);font-size:14px}
+    .flow{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap;padding:14px 12px;margin:14px 0;border:1px solid #e2ccda;border-radius:12px;background:#fff7fb;color:var(--navy);font-weight:700}
+    .flow b,.arrow{align-self:center;color:var(--pink)}
+    .node{flex:1 1 115px;background:white;border:1px solid #e9c1d5;border-radius:10px;padding:11px;text-align:center;font-size:13px;font-weight:700;min-width:0}
+    
+    /* Nota para revisión docente al final */
+    .teacher-note{background:var(--teacher-bg);border-left:5px solid var(--teacher-border);border-radius:12px;padding:18px 20px;margin:18px 0;position:relative}
+    .teacher-note-title{font:700 12px "Space Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:#1d4ed8;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+    .teacher-note p,.teacher-note li{font-size:14px;color:#1e3a8a;margin-bottom:6px}
+    .teacher-note p:last-child{margin-bottom:0}
+
+    /* Caja de preguntas para debate en aula */
+    .class-debate{background:#fdf4ff;border:1px solid #f5d0fe;border-left:5px solid #d946ef;border-radius:12px;padding:18px 20px;margin:18px 0}
+    .class-debate-title{font:700 12px "Space Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:#a21caf;margin-bottom:6px}
+
+    /* Contenedor de diagramas SVG ilustrativos */
+    .svg-container{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin:18px 0;text-align:center;overflow-x:auto}
+    .svg-container svg{max-width:100%;height:auto;display:block;margin:0 auto}
+
+    h1{font-weight:800;line-height:1.07;letter-spacing:-.045em;margin:12px 0}
+    h2{line-height:1.2}
+    h3{font-size:1.18rem;line-height:1.25;font-weight:800;margin:0 0 11px}
+    h4{font-size:1rem;font-weight:800;margin:0 0 8px}
+    p,li{line-height:1.55}
+    p{margin:0 0 12px}
+    ul,ol{padding-left:21px;margin:0}
+    li+li{margin-top:6px}
+    .eyebrow{font:700 11px "Space Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:#a01261}
+    .muted{color:#526074}
+    .grid-2,.grid-3{display:grid;gap:15px}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .card{background:#f7f8fb;border:1px solid var(--line);border-radius:14px;padding:20px;min-width:0}
+    .card p,.card li{font-size:14px;color:var(--ink)}
+    .card p:last-child{margin-bottom:0}
+    .accent{border-left:4px solid var(--pink)}
+    .success{border-left:4px solid var(--green);background:var(--green-bg)}
+    .warning{border-left:4px solid #d69122;background:var(--amber-bg);color:#684710}
+    .dark{background:var(--navy);color:white;border-color:var(--navy)}
+    .dark p,.dark li{color:#e1e8f3}
+    .topic{margin-top:27px}
+    .topic:first-child{margin-top:0}
+    .topic>h3{color:var(--navy);padding-bottom:9px;border-bottom:2px solid #f1d0e1}
+    .cover{display:grid;grid-template-columns:1.05fr .95fr}
+    .cover-copy{padding:clamp(28px,5vw,62px);align-self:center}
+    .cover-copy h1{color:var(--pink);font-size:clamp(34px,4vw,56px)}
+    .cover-question{margin-top:28px;padding:18px;border-left:4px solid var(--pink);background:#fff0f7;font-weight:700}
+    .cover-visual{display:grid;place-items:center;min-height:340px;padding:32px;background:radial-gradient(circle at 70% 30%,#f8c5df,transparent 35%),linear-gradient(145deg,#fff7fb,#e9edf5)}
+    .service-stack{display:grid;gap:10px;width:min(100%,360px)}
+    .service-stack div{padding:14px 18px;border:1px solid #e9c1d5;border-radius:12px;background:#fff;text-align:center;font-weight:800;box-shadow:0 6px 16px #1921320a}
+    .service-stack small{display:block;margin-top:3px;color:var(--ink);font-weight:500}
+    .exercise{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;margin-top:16px}
+    .exercise h3{margin:4px 0 14px}
+    .exercise dl{display:grid;grid-template-columns:145px 1fr;gap:8px 14px;margin:0}
+    .exercise dt{font-weight:800;color:var(--navy)}
+    .exercise dd{margin:0;color:var(--ink);line-height:1.55}
+    .expected{font-weight:700;color:var(--green)!important}
+    .sources{columns:2;column-gap:34px}
+    .sources li{break-inside:avoid}
+    .glossary{columns:2;column-gap:34px}
+    .glossary dt{font-weight:800;color:var(--pink);margin-top:10px}
+    .glossary dd{margin:2px 0 8px;color:var(--ink);line-height:1.5}
+    pre{white-space:pre-wrap;overflow-wrap:anywhere;margin:12px 0;padding:14px;border-radius:10px;background:var(--navy);color:#eef3ff;font:12px/1.6 "Space Mono",monospace}
+    .table-wrap{overflow-x:auto}
+    table{width:100%;border-collapse:collapse;font-size:14px}
+    th,td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+    th{background:#fff1f8;color:#8e1455}
+    @media(max-width:760px){.sheet::before{width:96px;height:31px;top:12px;left:18px}.inner{padding-top:60px}.chapter-heading,.chapter-head{padding-top:60px}.cover,.grid-2,.grid-3{grid-template-columns:1fr}.cover-visual{min-height:250px}.sources,.glossary{columns:1}.document{padding:12px 12px 34px}.flow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.exercise dl{grid-template-columns:1fr;gap:3px}.exercise dd{margin-bottom:9px}}
+    @media(max-width:420px){.flow{grid-template-columns:1fr}}
+    @media print{body{background:#fff}.document{padding:0}.sheet{box-shadow:none;break-inside:avoid}.exercise{break-inside:avoid}}
+  </style>
+</head>
+<body>
+  <main class="document">
+    <!-- PORTADA -->
+    <section class="sheet cover" aria-labelledby="page-title">
+      <div class="cover-copy">
+        <span class="eyebrow">ASIX · ASIX-CIBER</span>
+        <h1 id="page-title">UT 3. Protección y aseguramiento de servicios en red</h1>
+        <p class="muted">Seguridad en Sistemas, Redes y Servicios</p>
+        <div class="cover-question">¿Cómo demostrar que un servicio de red está protegido, disponible y preparado para responder a un incidente?</div>
+      </div>
+      <div class="cover-visual" role="img" aria-label="Capas de protección para los servicios de red">
+        <div class="service-stack">
+          <div>01 · Servicios<small>DNS · Web · Correo · Ficheros</small></div>
+          <div>02 · Comunicaciones<small>VoIP · TLS · Certificados</small></div>
+          <div>03 · Observabilidad<small>Métricas · Logs · Alertas</small></div>
+          <div>04 · Respuesta<small>Inventario · Cambios · Playbooks</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTRODUCCIÓN Y MARCO -->
+    <section class="sheet inner" aria-labelledby="objectives-title">
+      <span class="eyebrow">MARCO DE LA UNIDAD</span>
+      <h2 id="objectives-title">Objetivos y defensa en profundidad</h2>
+      <p class="section-description">Los servicios de red conectan usuarios, aplicaciones y datos. Un fallo de configuración puede comprometer la confidencialidad, la integridad o la disponibilidad de toda la organización.</p>
+      <p class="muted">Al finalizar la unidad podrás identificar riesgos habituales en servicios de red, proponer controles adecuados, comprobar configuraciones y conservar evidencias útiles para la operación y la respuesta a incidentes.</p>
+      
+      <div class="grid-3">
+        <div class="card"><h3>Reducir exposición</h3><p>Deshabilitar lo innecesario, limitar accesos y mantener los servicios actualizados.</p></div>
+        <div class="card"><h3>Proteger comunicaciones</h3><p>Usar cifrado, autenticación y gestión correcta de claves y certificados.</p></div>
+        <div class="card"><h3>Verificar y responder</h3><p>Medir el servicio, centralizar registros y ensayar respuestas controladas.</p></div>
+      </div>
+
+      <!-- Esquema visual interactivo: Ciclo de protección -->
+      <div class="svg-container">
+        <span class="visual-label">Esquema conceptual: Ciclo continuo de aseguramiento</span>
+        <svg viewBox="0 0 800 120" width="100%" height="120" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1 L 10 5 L 0 9 z" fill="#ce1677"/>
+            </marker>
+          </defs>
+          <g font-family="DM Sans, sans-serif" font-size="13" font-weight="700" text-anchor="middle">
+            <rect x="20" y="30" width="120" height="60" rx="10" fill="#fff1f8" stroke="#ce1677" stroke-width="2"/>
+            <text x="80" y="55" fill="#192132">1. Inventariar</text>
+            <text x="80" y="73" fill="#526074" font-size="11" font-weight="500">¿Qué tenemos?</text>
+
+            <line x1="145" y1="60" x2="175" y2="60" stroke="#ce1677" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+            <rect x="180" y="30" width="120" height="60" rx="10" fill="#fff1f8" stroke="#ce1677" stroke-width="2"/>
+            <text x="240" y="55" fill="#192132">2. Endurecer</text>
+            <text x="240" y="73" fill="#526074" font-size="11" font-weight="500">Min. Privilegio</text>
+
+            <line x1="305" y1="60" x2="335" y2="60" stroke="#ce1677" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+            <rect x="340" y="30" width="120" height="60" rx="10" fill="#fff1f8" stroke="#ce1677" stroke-width="2"/>
+            <text x="400" y="55" fill="#192132">3. Verificar</text>
+            <text x="400" y="73" fill="#526074" font-size="11" font-weight="500">Tests y Audits</text>
+
+            <line x1="465" y1="60" x2="495" y2="60" stroke="#ce1677" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+            <rect x="500" y="30" width="120" height="60" rx="10" fill="#fff1f8" stroke="#ce1677" stroke-width="2"/>
+            <text x="560" y="55" fill="#192132">4. Monitorizar</text>
+            <text x="560" y="73" fill="#526074" font-size="11" font-weight="500">Logs y SIEM</text>
+
+            <line x1="625" y1="60" x2="655" y2="60" stroke="#ce1677" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+            <rect x="660" y="30" width="120" height="60" rx="10" fill="#147d62" stroke="#147d62" stroke-width="2"/>
+            <text x="720" y="55" fill="#ffffff">5. Responder</text>
+            <text x="720" y="73" fill="#eef3ff" font-size="11" font-weight="500">Playbooks</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="flow" aria-label="Ciclo de protección de servicios">
+        <div class="node">Inventariar</div><b aria-hidden="true">→</b>
+        <div class="node">Endurecer</div><b aria-hidden="true">→</b>
+        <div class="node">Verificar</div><b aria-hidden="true">→</b>
+        <div class="node">Monitorizar</div><b aria-hidden="true">→</b>
+        <div class="node">Mejorar</div>
+      </div>
+      <p class="card warning"><strong>Regla de laboratorio:</strong> las comprobaciones activas se realizan únicamente en sistemas propios o con autorización explícita. Emplea los nombres y direcciones del entorno de prácticas.</p>
+    </section>
+
+    <!-- BLOQUE 1: SERVICIOS BÁSICOS -->
+    <section class="sheet chapter" aria-labelledby="services-title">
+      <div class="chapter-heading">
+        <span class="eyebrow">BLOQUE 01 / 05</span>
+        <h2 id="services-title">1. Servicios básicos y su protección</h2>
+        <p class="section-description">DNS, web, correo y transferencia de ficheros requieren controles específicos, mantenimiento y monitorización continua.</p>
+      </div>
+      <div class="inner">
+        <div class="grid-2">
+          <div class="card accent">
+            <h3>Reducir superficie de exposición</h3>
+            <ul>
+              <li>Conocer qué servicio está activo, quién lo utiliza y quién lo administra.</li>
+              <li>Separar servicios públicos, internos y de administración.</li>
+              <li>Aplicar mínimo privilegio y limitar puertos, protocolos y origen.</li>
+              <li>Probar los cambios antes de desplegarlos y conservar una vía de vuelta atrás.</li>
+            </ul>
+          </div>
+          <div class="card dark">
+            <h3>Protección por capas</h3>
+            <p>La seguridad no depende de una única opción. Combina configuración segura, control de acceso, cifrado, actualizaciones, registros y copias de seguridad.</p>
+          </div>
+        </div>
+
+        <!-- 1.1 DNS -->
+        <div class="topic">
+          <h3>1.1 DNS: DNSSEC, DoT/DoH y split-DNS</h3>
+          
+         
+
+          <!-- Ilustración SVG DNS -->
+          <div class="svg-container">
+            <span class="visual-label">Ilustración conceptual: Resolución DNS segura (Split-DNS + DNSSEC + DoT/DoH)</span>
+            <svg viewBox="0 0 750 180" width="100%" height="180" xmlns="http://www.w3.org/2000/svg">
+              <rect x="20" y="20" width="140" height="130" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+              <text x="90" y="45" font-family="DM Sans" font-weight="700" font-size="13" text-anchor="middle" fill="#192132">Cliente (App/User)</text>
+              <text x="90" y="75" font-family="DM Sans" font-size="11" text-anchor="middle" fill="#526074">Solicita IP</text>
+              <text x="90" y="110" font-family="Space Mono" font-size="10" text-anchor="middle" fill="#ce1677">DoT / DoH (Cifrado)</text>
+
+              <line x1="165" y1="85" x2="265" y2="85" stroke="#ce1677" stroke-width="2" stroke-dasharray="4" marker-end="url(#arrow)"/>
+
+              <rect x="270" y="20" width="180" height="130" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+              <text x="360" y="45" font-family="DM Sans" font-weight="700" font-size="13" text-anchor="middle" fill="#147d62">Resolver Autorizado</text>
+              <text x="360" y="75" font-family="DM Sans" font-size="11" text-anchor="middle" fill="#526074">Split-DNS (Interno/Externo)</text>
+              <text x="360" y="110" font-family="Space Mono" font-size="10" text-anchor="middle" fill="#147d62">Valida Firma DNSSEC</text>
+
+              <line x1="455" y1="85" x2="555" y2="85" stroke="#147d62" stroke-width="2" marker-end="url(#arrow)"/>
+
+              <rect x="560" y="20" width="160" height="130" rx="10" fill="#fdf2f8" stroke="#fbcfe8" stroke-width="1.5"/>
+              <text x="640" y="45" font-family="DM Sans" font-weight="700" font-size="13" text-anchor="middle" fill="#8e1455">Servidor DNS Raíz</text>
+              <text x="640" y="75" font-family="DM Sans" font-size="11" text-anchor="middle" fill="#526074">Zona .test firmada</text>
+              <text x="640" y="110" font-family="Space Mono" font-size="10" text-anchor="middle" fill="#8e1455">Claves RRSIG</text>
+            </svg>
+          </div>
+
+          <div class="grid-2">
+            <div class="card">
+              <h4>Qué protege cada tecnología</h4>
+              <ul>
+                <li><strong>DNSSEC:</strong> firmas que permiten validar autenticidad e integridad de los datos DNS; no cifra las consultas.</li>
+                <li><strong>DoT / DoH:</strong> cifran el transporte de la consulta entre cliente y resolver; no sustituyen DNSSEC.</li>
+                <li><strong>Split-DNS:</strong> separa la resolución de nombres internos y públicos para limitar la exposición de información.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>Operación segura</h4>
+              <ul>
+                <li>Limitar la recursividad a clientes autorizados; no operar como resolver abierto.</li>
+                <li>Reducir respuestas innecesarias y monitorizar patrones anómalos.</li>
+                <li>Proteger y rotar claves de firma; revisar vencimientos y delegaciones.</li>
+                <li>Aplicar parches y auditar la configuración periódicamente.</li>
+              </ul>
+            </div>
+          </div>
+          <pre>dig @&lt;DNS-LAB&gt; example.test A +dnssec
+dig @&lt;DNS-LAB&gt; example.test MX</pre>
+          <p class="muted">Consultas de lectura para el DNS del laboratorio. Una respuesta DNSSEC válida respalda la integridad del dato, pero no garantiza por sí sola que el servicio o el equipo cliente sean seguros.</p>
+        </div>
+
+        <!-- 1.2 Web -->
+        <div class="topic">
+          <h3>1.2 Web: servidor, reverse proxy y WAF</h3>
+
+          <div class="svg-container">
+            <span class="visual-label">Esquema arquitectónico: Posicionamiento del Proxy Inverso y WAF</span>
+            <svg viewBox="0 0 780 150" width="100%" height="150" xmlns="http://www.w3.org/2000/svg">
+              <rect x="20" y="35" width="100" height="80" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+              <text x="70" y="70" font-family="DM Sans" font-weight="700" font-size="12" text-anchor="middle" fill="#192132">Navegador</text>
+              <text x="70" y="90" font-family="DM Sans" font-size="10" text-anchor="middle" fill="#64748b">HTTPS / TLS</text>
+
+              <line x1="125" y1="75" x2="165" y2="75" stroke="#ce1677" stroke-width="2" marker-end="url(#arrow)"/>
+
+              <rect x="170" y="35" width="130" height="80" rx="8" fill="#fff1f8" stroke="#ce1677" stroke-width="1.5"/>
+              <text x="235" y="65" font-family="DM Sans" font-weight="700" font-size="12" text-anchor="middle" fill="#ce1677">Reverse Proxy</text>
+              <text x="235" y="85" font-family="DM Sans" font-size="10" text-anchor="middle" fill="#526074">Nginx / Apache</text>
+              <text x="235" y="102" font-family="Space Mono" font-size="9" text-anchor="middle" fill="#8e1455">Terminación TLS</text>
+
+              <line x1="305" y1="75" x2="345" y2="75" stroke="#ce1677" stroke-width="2" marker-end="url(#arrow)"/>
+
+              <rect x="350" y="35" width="130" height="80" rx="8" fill="#effaf5" stroke="#147d62" stroke-width="1.5"/>
+              <text x="415" y="65" font-family="DM Sans" font-weight="700" font-size="12" text-anchor="middle" fill="#147d62">WAF (ModSecurity)</text>
+              <text x="415" y="85" font-family="DM Sans" font-size="10" text-anchor="middle" fill="#526074">OWASP CRS</text>
+              <text x="415" y="102" font-family="Space Mono" font-size="9" text-anchor="middle" fill="#147d62">Filtro de Ataques</text>
+
+              <line x1="485" y1="75" x2="525" y2="75" stroke="#147d62" stroke-width="2" marker-end="url(#arrow)"/>
+
+              <rect x="530" y="35" width="130" height="80" rx="8" fill="#f8fafc" stroke="#475569" stroke-width="1.5"/>
+              <text x="595" y="65" font-family="DM Sans" font-weight="700" font-size="12" text-anchor="middle" fill="#192132">Backend App</text>
+              <text x="595" y="85" font-family="DM Sans" font-size="10" text-anchor="middle" fill="#526074">Node.js / PHP</text>
+              <text x="595" y="102" font-family="Space Mono" font-size="9" text-anchor="middle" fill="#475569">Red Interna</text>
+            </svg>
+          </div>
+
+          <div class="grid-3">
+            <div class="card"><h4>Servidor y proxy</h4><p>Actualiza Nginx o Apache, limita módulos, métodos y permisos, y publica solo los servicios necesarios.</p></div>
+            <div class="card"><h4>HTTPS y cabeceras</h4><p>Usa TLS correctamente y configura cabeceras de seguridad coherentes con la aplicación. HSTS solo debe habilitarse cuando HTTPS funcione de forma estable.</p></div>
+            <div class="card"><h4>WAF</h4><p>ModSecurity y OWASP CRS ayudan a detectar o bloquear patrones comunes. Las reglas requieren pruebas y ajuste para reducir falsos positivos.</p></div>
+          </div>
+          <div class="flow" aria-label="Flujo de una aplicación web protegida">
+            <div class="node">Cliente</div><b aria-hidden="true">→</b><div class="node">TLS / Proxy</div><b aria-hidden="true">→</b><div class="node">WAF</div><b aria-hidden="true">→</b><div class="node">Aplicación</div>
+          </div>
+          <p class="card warning"><strong>Importante:</strong> un WAF es una capa adicional. No corrige errores de autorización, validación o diseño dentro de la aplicación.</p>
+        </div>
+
+        <!-- 1.3 Correo -->
+        <div class="topic">
+          <h3>1.3 Correo: TLS, SPF, DKIM y DMARC</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Control</th><th>Función</th><th>Comprobación operativa</th></tr></thead>
+              <tbody>
+                <tr><td>TLS</td><td>Protege el transporte entre clientes y servidores compatibles.</td><td>Validar certificado, protocolos habilitados y renovación.</td></tr>
+                <tr><td>SPF</td><td>Publica qué remitentes pueden enviar correo por un dominio.</td><td>Revisar el registro DNS y evitar autorizaciones demasiado amplias.</td></tr>
+                <tr><td>DKIM</td><td>Firma mensajes para que el receptor pueda validar dominio e integridad.</td><td>Verificar selector, clave pública y rotación.</td></tr>
+                <tr><td>DMARC</td><td>Define cómo gestionar mensajes que no superan SPF/DKIM y facilita informes.</td><td>Desplegar gradualmente y revisar informes antes de endurecer la política.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="muted">Añade filtrado antispam y anti-suplantación, limita el acceso administrativo y revisa los registros de entrega y autenticación.</p>
+        </div>
+
+        <!-- 1.4 Ficheros -->
+        <div class="topic">
+          <h3>1.4 Transferencia de ficheros</h3>
+          <div class="grid-3">
+            <div class="card"><h4>FTP</h4><p>El modo tradicional puede transmitir credenciales y datos sin cifrado. Evítalo en redes no confiables.</p></div>
+            <div class="card"><h4>SFTP</h4><p>Transfiere ficheros mediante SSH. Limita cuentas, rutas y permisos al propósito necesario.</p></div>
+            <div class="card"><h4>FTPS</h4><p>Añade TLS a FTP. Valida certificados y configura de forma coherente puertos y canales de datos.</p></div>
+          </div>
+          <p class="card success"><strong>Buena práctica:</strong> elimina protocolos planos cuando ya no sean necesarios; documenta el método seguro elegido y comprueba quién puede leer, modificar o descargar los ficheros.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOQUE 2: VOIP Y CERTIFICADOS -->
+    <section class="sheet chapter" aria-labelledby="voice-title">
+      <div class="chapter-heading">
+        <span class="eyebrow">BLOQUE 02 / 05</span>
+        <h2 id="voice-title">2. VoIP y ciclo de vida de certificados</h2>
+        <p class="section-description">La voz sobre IP necesita proteger tanto la señalización como el contenido de las llamadas, además de gestionar certificados de forma continua.</p>
+      </div>
+      <div class="inner">
+        <!-- 2.1 VoIP -->
+        <div class="topic">
+          <h3>2.1 VoIP: proteger señalización y medios</h3>
+          <div class="grid-2">
+            <div class="card accent">
+              <h4>Controles recomendados</h4>
+              <ul>
+                <li><strong>SIP sobre TLS:</strong> protege la señalización frente a escucha o modificación en tránsito.</li>
+                <li><strong>SRTP:</strong> protege el flujo de audio y vídeo cuando los extremos lo negocian correctamente.</li>
+                <li>Autenticar extensiones y equipos; cambiar credenciales predeterminadas.</li>
+                <li>Separar voz en una VLAN o segmento dedicado y limitar la administración.</li>
+                <li>Aplicar límites y alertas ante consumo o patrones de llamada inusuales.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>Amenazas a considerar</h4>
+              <ul>
+                <li>Fraude de llamadas o toll fraud por cuentas comprometidas.</li>
+                <li>Escucha o manipulación si señalización o medios no están protegidos.</li>
+                <li>Denegación de servicio que degrade el registro o la calidad de llamadas.</li>
+                <li>Equipos sin parches o accesibles desde redes que no los necesitan.</li>
+              </ul>
+              <p class="muted">La disponibilidad de voz también depende de energía, conectividad, capacidad y procedimientos de continuidad.</p>
+            </div>
+          </div>
+          <div class="flow" aria-label="Flujos de una llamada VoIP">
+            <div class="node">Terminal autenticado</div><b aria-hidden="true">→</b><div class="node">Señalización SIP/TLS</div><b aria-hidden="true">→</b><div class="node">Medios SRTP</div>
+          </div>
+        </div>
+
+        <!-- 2.2 Certificados -->
+        <div class="topic">
+          <h3>2.2 Certificados: emisión, renovación y revocación</h3>
+
+          <div class="svg-container">
+            <span class="visual-label">Esquema: Ciclo de vida y automatización de Certificados (ACME)</span>
+            <svg viewBox="0 0 780 140" width="100%" height="140" xmlns="http://www.w3.org/2000/svg">
+              <rect x="20" y="30" width="160" height="70" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+              <text x="100" y="60" font-family="DM Sans" font-weight="700" font-size="12" text-anchor="middle" fill="#192132">1. Inventario</text>
+              <text x="100" y="80" font-family="DM Sans" font-size="10" text-anchor="middle" fill="#526074">Registro y Fechas</text>
+
+              <line x1="185" y1="65" x2="215" y2="65" stroke="#ce1677" stroke-width="2" marker-end="url(#arrow)"/>
+
+              <rect x="220" y="30" width="160" height="70" rx="8" fill="#fff1f8" stroke="#ce1677" stroke-width="1.5"/>
+              <text x="300" y="60" font-family="DM Sans" font-weight="700" font-size="12" text-anchor="middle" fill="#ce1677">2. Automatización</text>
+              <text x="300" y="80" font-family="DM Sans" font-size="10" text-anchor="middle" fill="#526074">Protocolo ACME</text>
+
+              <line x1="385" y1="65" x2="415" y2="65" stroke="#ce1677" stroke-width="2" marker-end="url(#arrow)"/>
+
+              <rect x="420" y="30" width="160" height="70" rx="8" fill="#effaf5" stroke="#147d62" stroke-width="1.5"/>
+              <text x="500" y="60" font-family="DM Sans" font-weight="700" font-size="12" text-anchor="middle" fill="#147d62">3. Despliegue</text>
+              <text x="500" y="80" font-family="DM Sans" font-size="10" text-anchor="middle" fill="#526074">Validación / OCSP</text>
+
+              <line x1="585" y1="65" x2="615" y2="65" stroke="#147d62" stroke-width="2" marker-end="url(#arrow)"/>
+
+              <rect x="620" y="30" width="140" height="70" rx="8" fill="#fff8e9" stroke="#d69122" stroke-width="1.5"/>
+              <text x="690" y="60" font-family="DM Sans" font-weight="700" font-size="12" text-anchor="middle" fill="#93600b">4. Revocación</text>
+              <text x="690" y="80" font-family="DM Sans" font-size="10" text-anchor="middle" fill="#526074">Claves Comprometidas</text>
+            </svg>
+          </div>
+
+          <div class="grid-3">
+            <div class="card"><h4>Inventariar</h4><p>Registra nombre, servicio, emisor, responsable, ubicación de clave y fecha de vencimiento.</p></div>
+            <div class="card"><h4>Renovar</h4><p>Automatiza la emisión cuando sea apropiado (por ejemplo, con ACME) y alerta antes del vencimiento.</p></div>
+            <div class="card"><h4>Validar</h4><p>Comprueba cadena de confianza, nombre, vigencia y configuración. Revoca certificados comprometidos o retirados.</p></div>
+          </div>
+          <p class="card warning"><strong>Claves privadas:</strong> restringe su lectura, evita incluirlas en repositorios o logs y define cómo recuperarlas y rotarlas. OCSP stapling puede mejorar la comprobación de revocación; HSTS fuerza HTTPS en clientes compatibles, pero requiere una configuración previa correcta.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOQUE 3: MONITORIZACIÓN, SIEM/SOAR -->
+    <section class="sheet chapter" aria-labelledby="monitor-title">
+      <div class="chapter-heading">
+        <span class="eyebrow">BLOQUE 03 / 05</span>
+        <h2 id="monitor-title">3. Monitorización, SIEM/SOAR e integración cloud</h2>
+        <p class="section-description">Medir la salud de los servicios y correlacionar registros permite detectar degradaciones e investigar incidentes con contexto.</p>
+      </div>
+      <div class="inner">
+        <!-- 3.1 SLI/SLO -->
+        <div class="topic">
+          <h3>3.1 Métricas SLI/SLO y comprobaciones de salud</h3>
+          <div class="grid-3">
+            <div class="card"><h4>SLI</h4><p>Indicador medido, como disponibilidad, latencia o tasa de errores.</p></div>
+            <div class="card"><h4>SLO</h4><p>Objetivo acordado para un indicador durante un periodo definido.</p></div>
+            <div class="card"><h4>Health check</h4><p>Comprueba que una función crítica responde; los tests sintéticos simulan una operación desde un punto controlado.</p></div>
+          </div>
+          <p>Define umbrales con datos del servicio y del impacto al usuario. Una alerta útil identifica el síntoma, su prioridad, el servicio afectado y el procedimiento de actuación.</p>
+        </div>
+
+        <!-- 3.2 SIEM y SOAR -->
+        <div class="topic">
+          <h3>3.2 SIEM y SOAR</h3>
+
+          <div class="svg-container">
+            <span class="visual-label">Esquema: Pipeline de Automatización de Incidentes (SIEM a SOAR)</span>
+            <svg viewBox="0 0 780 130" width="100%" height="130" xmlns="http://www.w3.org/2000/svg">
+              <rect x="20" y="25" width="130" height="80" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="1.5"/>
+              <text x="85" y="55" font-family="DM Sans" font-weight="700" font-size="12" text-anchor="middle" fill="#192132">Logs Servidores</text>
+              <text x="85" y="75" font-family="DM Sans" font-size="10" text-anchor="middle" fill="#64748b">Syslog / Netflow</text>
+              <text x="85" y="92" font-family="Space Mono" font-size="9" text-anchor="middle" fill="#ce1677">Sysmon / WAF</text>
+
+              <line x1="155" y1="65" x2="195" y2="65" stroke="#ce1677" stroke-width="2" marker-end="url(#arrow)"/>
+
+              <rect x="200" y="25" width="160" height="80" rx="8" fill="#fff1f8" stroke="#ce1677" stroke-width="1.5"/>
+              <text x="280" y="55" font-family="DM Sans" font-weight="700" font-size="12" text-anchor="middle" fill="#ce1677">SIEM (Correlación)</text>
+              <text x="280" y="75" font-family="DM Sans" font-size="10" text-anchor="middle" fill="#526074">Reglas y Umbrales</text>
+              <text x="280" y="92" font-family="Space Mono" font-size="9" text-anchor="middle" fill="#8e1455">Genera Alerta</text>
+
+              <line x1="365" y1="65" x2="405" y2="65" stroke="#ce1677" stroke-width="2" marker-end="url(#arrow)"/>
+
+              <rect x="410" y="25" width="160" height="80" rx="8" fill="#effaf5" stroke="#147d62" stroke-width="1.5"/>
+              <text x="490" y="55" font-family="DM Sans" font-weight="700" font-size="12" text-anchor="middle" fill="#147d62">SOAR (Orquestación)</text>
+              <text x="490" y="75" font-family="DM Sans" font-size="10" text-anchor="middle" fill="#526074">Playbooks y Tareas</text>
+              <text x="490" y="92" font-family="Space Mono" font-size="9" text-anchor="middle" fill="#147d62">Aprobación Humana</text>
+
+              <line x1="575" y1="65" x2="615" y2="65" stroke="#147d62" stroke-width="2" marker-end="url(#arrow)"/>
+
+              <rect x="620" y="25" width="140" height="80" rx="8" fill="#f0fdf4" stroke="#147d62" stroke-width="1.5"/>
+              <text x="690" y="55" font-family="DM Sans" font-weight="700" font-size="12" text-anchor="middle" fill="#147d62">Contención</text>
+              <text x="690" y="75" font-family="DM Sans" font-size="10" text-anchor="middle" fill="#526074">Bloqueo / IP / User</text>
+              <text x="690" y="92" font-family="Space Mono" font-size="9" text-anchor="middle" fill="#147d62">Reversión Auditada</text>
+            </svg>
+          </div>
+
+          <div class="grid-2">
+            <div class="card"><h4>SIEM · correlación y contexto</h4><p>Centraliza eventos de servidores, aplicaciones, firewalls y servicios. Normaliza datos, aplica reglas y genera alertas investigables.</p></div>
+            <div class="card"><h4>SOAR · respuesta orquestada</h4><p>Coordina tareas repetibles mediante playbooks, aprobaciones, notificaciones y acciones controladas. La automatización debe tener límites y registro.</p></div>
+          </div>
+          <div class="flow" aria-label="Flujo de monitorización y respuesta">
+            <div class="node">Fuentes de logs</div><b aria-hidden="true">→</b><div class="node">SIEM</div><b aria-hidden="true">→</b><div class="node">Alerta</div><b aria-hidden="true">→</b><div class="node">Playbook SOAR</div><b aria-hidden="true">→</b><div class="node">Revisión y cierre</div>
+          </div>
+          <p class="muted">Los playbooks deben contemplar falsos positivos, responsable de aprobación, alcance de la acción, reversión y evidencias. No automatices un bloqueo con impacto amplio sin criterios probados.</p>
+        </div>
+
+        <!-- 3.3 Cloud e IAM -->
+        <div class="topic">
+          <h3>3.3 Cloud e IAM: accesos, secretos y rotación</h3>
+          <div class="grid-3">
+            <div class="card"><h4>Identidad</h4><p>Asigna permisos mínimos a usuarios, aplicaciones y cuentas de servicio; revisa accesos periódicamente.</p></div>
+            <div class="card"><h4>Secretos</h4><p>Usa un gestor de secretos; no los incluyas en código, imágenes, tickets ni registros.</p></div>
+            <div class="card"><h4>Trazabilidad</h4><p>Habilita auditoría, alertas y rotación; conserva quién accedió o modificó políticas y cuándo.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOQUE 4: INVENTARIO, CAMBIOS Y EVIDENCIAS -->
+    <section class="sheet chapter" aria-labelledby="operations-title">
+      <div class="chapter-heading">
+        <span class="eyebrow">BLOQUE 04 / 05</span>
+        <h2 id="operations-title">4. Inventario, cambios y evidencias</h2>
+        <p class="section-description">La operación segura comienza con saber qué existe y continúa con cambios trazables, revisados y verificables.</p>
+      </div>
+      <div class="inner">
+        <div class="grid-2">
+          <div class="card accent">
+            <h3>4.1 Inventario de servicios</h3>
+            <ul>
+              <li>Identificador, responsable, propósito y criticidad.</li>
+              <li>Host, dirección, puertos, dependencias y exposición (interna o pública).</li>
+              <li>Versión, configuración, certificado y fecha de soporte.</li>
+              <li>Fuente de logs, monitorización, copia y procedimiento de recuperación.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Topología lógica</h3>
+            <p>Representa clientes, zonas, servicios y dependencias con sus flujos autorizados. El diagrama ayuda a detectar accesos innecesarios y puntos únicos de fallo.</p>
+            <div class="flow" aria-label="Flujo de servicio de ejemplo"><div class="node">Cliente</div><b aria-hidden="true">→</b><div class="node">Proxy</div><b aria-hidden="true">→</b><div class="node">Servicio</div><b aria-hidden="true">→</b><div class="node">Datos</div></div>
+          </div>
+        </div>
+        <div class="topic">
+          <h3>4.2 Gestión del cambio</h3>
+          <div class="flow" aria-label="Proceso controlado de cambio"><div class="node">Solicitar</div><b aria-hidden="true">→</b><div class="node">Evaluar riesgo</div><b aria-hidden="true">→</b><div class="node">Probar</div><b aria-hidden="true">→</b><div class="node">Aprobar</div><b aria-hidden="true">→</b><div class="node">Desplegar</div><b aria-hidden="true">→</b><div class="node">Verificar</div></div>
+          <div class="grid-3">
+            <div class="card"><h4>Antes</h4><p>Alcance, impacto, ventana, respaldo y plan de reversión comprobable.</p></div>
+            <div class="card"><h4>Durante</h4><p>Responsable, pasos, versiones y evidencias de ejecución.</p></div>
+            <div class="card"><h4>Después</h4><p>Pruebas, alertas, resultado, incidencias y actualización del inventario.</p></div>
+          </div>
+          <p class="card success"><strong>Versionado:</strong> guarda configuraciones sin secretos en un repositorio con control de acceso y revisión. Registra el motivo del cambio y conserva evidencia de la validación.</p>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- CONCLUSIONES -->
+    <section class="sheet inner" aria-labelledby="conclusions-title">
+      <span class="eyebrow">CIERRE</span>
+      <h2 id="conclusions-title">Conclusiones · ¿qué has aprendido?</h2>
+      <div class="grid-3">
+        <div class="card"><h3>01 · Servicio</h3><p>DNS, web, correo, ficheros y VoIP necesitan controles ajustados a su función y exposición.</p></div>
+        <div class="card"><h3>02 · Operación</h3><p>Certificados, inventario y cambios requieren responsables, revisión y mantenimiento continuo.</p></div>
+        <div class="card"><h3>03 · Evidencia</h3><p>Métricas, logs y playbooks probados permiten detectar, responder y aprender con trazabilidad.</p></div>
+      </div>
+    </section>
+
+    <!-- FUENTES -->
+    <section class="sheet inner" aria-labelledby="sources-title">
+      <h2 id="sources-title">Fuentes de información</h2>
+      <ul class="sources">
+        <li>Material de la asignatura: <em>UT 3. Protección y Aseguramiento de Servicios en Red</em>, Seguridad en Sistemas, Redes y Servicios.</li>
+        <li>OWASP. ModSecurity Core Rule Set — <a href="https://coreruleset.org/">coreruleset.org</a>.</li>
+        <li>OWASP. Application Security Verification Standard — <a href="https://owasp.org/www-project-application-security-verification-standard/">owasp.org</a>.</li>
+        <li>Let’s Encrypt. Documentación de ACME — <a href="https://letsencrypt.org/docs/">letsencrypt.org/docs</a>.</li>
+        <li>NIST. Security and Privacy Controls — <a href="https://csrc.nist.gov/publications/">csrc.nist.gov</a>.</li>
+        <li>RFC 4033. DNS Security Introduction and Requirements — <a href="https://www.rfc-editor.org/rfc/rfc4033">rfc-editor.org/rfc/rfc4033</a>.</li>
+        <li>RFC 8446. The Transport Layer Security (TLS) Protocol Version 1.3 — <a href="https://www.rfc-editor.org/rfc/rfc8446">rfc-editor.org/rfc/rfc8446</a>.</li>
+      </ul>
+      <p class="muted">Consulta la documentación oficial de cada producto y la política del entorno antes de aplicar cambios. Las referencias externas pueden actualizarse.</p>
+    </section>
+
+    <!-- GLOSARIO -->
+    <section class="sheet inner" aria-labelledby="glossary-title">
+      <h2 id="glossary-title">Glosario</h2>
+      <dl class="glossary">
+        <dt>ACME</dt><dd>Protocolo para automatizar la emisión y renovación de certificados.</dd>
+        <dt>DMARC</dt><dd>Política e informes para gestionar correo que no supera SPF o DKIM.</dd>
+        <dt>DNSSEC</dt><dd>Extensiones DNS que permiten validar autenticidad e integridad mediante firmas.</dd>
+        <dt>DoH / DoT</dt><dd>DNS sobre HTTPS o TLS para cifrar el transporte de consultas hasta un resolver.</dd>
+        <dt>IAM</dt><dd>Gestión de identidades y accesos de personas, servicios y aplicaciones.</dd>
+        <dt>SIEM</dt><dd>Plataforma que centraliza y correlaciona eventos para generar alertas e investigaciones.</dd>
+        <dt>SLI / SLO</dt><dd>Indicador de servicio medido y objetivo acordado para ese indicador.</dd>
+        <dt>SOAR</dt><dd>Orquestación y automatización de procesos de seguridad mediante flujos o playbooks.</dd>
+        <dt>SPF / DKIM</dt><dd>Mecanismos de autenticación de correo basados en política de remitentes y firma de mensajes.</dd>
+        <dt>SRTP</dt><dd>Protocolo para proteger el flujo de medios en comunicaciones en tiempo real.</dd>
+        <dt>WAF</dt><dd>Firewall de aplicaciones web que inspecciona solicitudes HTTP/S según reglas.</dd>
+      </dl>
+    </section>
+
+    <!-- GUÍA PARA ELABORAR LAS ACTIVIDADES -->
+    <section class="sheet chapter" aria-labelledby="activity-guide-title">
+      <div class="chapter-heading">
+        <span class="eyebrow">GUÍA PRÁCTICA / APLICACIÓN</span>
+        <h2 id="activity-guide-title">Cómo elaborar las actividades</h2>
+        <p class="section-description">Una pauta de trabajo para pasar del enunciado a una propuesta razonada, probarla en el laboratorio y explicar qué hemos aprendido.</p>
+      </div>
+      <div class="chapter-body">
+        <div class="statement">
+          <h3>Pasos para elaborar cualquier actividad</h3>
+          <div class="flow" aria-label="Pasos para elaborar una actividad">
+            <div class="node">1. Entender<small>¿qué problema resuelvo?</small></div><b aria-hidden="true">→</b>
+            <div class="node">2. Diseñar<small>¿qué decisión tomo y por qué?</small></div><b aria-hidden="true">→</b>
+            <div class="node">3. Probar<small>¿qué resultado espero?</small></div><b aria-hidden="true">→</b>
+            <div class="node">4. Explicar<small>¿qué evidencia lo demuestra?</small></div>
+          </div>
+        </div>
+
+        <div class="topic">
+          <h3>Actividad 1 · Firewall y segmentación</h3>
+          <div class="statement">
+            <span class="example-label">Enunciado de la actividad</span>
+            <p>Diseña y configura un firewall para una red corporativa, definiendo reglas de acceso, zonas de seguridad y segmentación de la red. Justifica las decisiones tomadas y documenta los comandos o configuraciones utilizadas en dispositivos Cisco y Linux.</p>
+          </div>
+          <p>Identifica los equipos y separa los que tienen funciones o niveles de confianza distintas. Dibuja el recorrido del tráfico antes de definir las reglas.</p>
+          <div class="svg-container">
+            <span class="visual-label">Ejemplo de esquema: las zonas llegan al switch y el firewall controla el tráfico</span>
+            <svg viewBox="0 0 1000 390" role="img" aria-labelledby="activity1-map-title activity1-map-description">
+              <title id="activity1-map-title">Red segmentada con firewall y switch central</title>
+              <desc id="activity1-map-description">Internet se conecta al firewall, que se conecta mediante un trunk al switch. El switch conecta por enlaces independientes las VLAN 30 DMZ, 10 administración, 20 usuarios y 40 visitantes. El firewall filtra las comunicaciones entre redes.</desc>
+              <defs>
+                <pattern id="activity-map-grid" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#dce2e9"/></pattern>
+                <marker id="activity-map-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#64748b"/></marker>
+                <marker id="activity-map-30" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#ce1677"/></marker>
+                <marker id="activity-map-10" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#147d62"/></marker>
+                <marker id="activity-map-20" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#3478b9"/></marker>
+                <marker id="activity-map-40" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#c18419"/></marker>
+                <style>
+                  .activity-map-label{font-family:"DM Sans",sans-serif;fill:#192132}
+                  .activity-map-light{font-family:"DM Sans",sans-serif;fill:#fff}
+                  .activity-map-muted{font-family:"DM Sans",sans-serif;fill:#526074}
+                  .activity-map-ip{font-family:"Space Mono",monospace;fill:#39475d}
+                </style>
+              </defs>
+              <rect x="1" y="1" width="998" height="388" rx="16" fill="#fff" stroke="#dce2e9"/>
+              <rect x="1" y="1" width="998" height="388" rx="16" fill="url(#activity-map-grid)" opacity=".6"/>
+
+              <path d="M150 195H185" stroke="#64748b" stroke-width="4" marker-end="url(#activity-map-arrow)"/>
+              <path d="M365 195H430" stroke="#64748b" stroke-width="4" marker-end="url(#activity-map-arrow)"/>
+              <path d="M590 195C650 195 650 72 700 72" stroke="#ce1677" stroke-width="4" fill="none" marker-end="url(#activity-map-30)"/>
+              <path d="M590 195C650 195 650 152 700 152" stroke="#147d62" stroke-width="4" fill="none" marker-end="url(#activity-map-10)"/>
+              <path d="M590 195C650 195 650 232 700 232" stroke="#3478b9" stroke-width="4" fill="none" marker-end="url(#activity-map-20)"/>
+              <path d="M590 195C650 195 650 312 700 312" stroke="#c18419" stroke-width="4" fill="none" marker-end="url(#activity-map-40)"/>
+
+              <rect x="22" y="159" width="128" height="72" rx="34" fill="#f3f6fa" stroke="#b8c5d5" stroke-width="2"/>
+              <text x="86" y="190" text-anchor="middle" class="activity-map-label" font-size="15" font-weight="800">INTERNET</text>
+              <text x="86" y="211" text-anchor="middle" class="activity-map-muted" font-size="11">red pública</text>
+
+              <rect x="185" y="145" width="180" height="100" rx="16" fill="#192132" stroke="#101827" stroke-width="2"/>
+              <path d="M212 177H242M232 168L242 177L232 186M338 211H308M318 202L308 211L318 220" stroke="#f8c5df" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <text x="275" y="204" text-anchor="middle" class="activity-map-light" font-size="15" font-weight="800">FIREWALL</text>
+              <text x="275" y="228" text-anchor="middle" fill="#dce2e9" font-family="DM Sans,sans-serif" font-size="11">gateway · reglas</text>
+
+              <rect x="371" y="165" width="56" height="22" rx="7" fill="#fff" stroke="#dce2e9"/>
+              <text x="399" y="180" text-anchor="middle" class="activity-map-label" font-size="9" font-weight="800">TRUNK</text>
+              <text x="399" y="203" text-anchor="middle" class="activity-map-muted" font-size="9">802.1Q</text>
+
+              <rect x="430" y="145" width="160" height="100" rx="16" fill="#eef1fb" stroke="#7276bf" stroke-width="2"/>
+              <g fill="#7276bf"><rect x="451" y="166" width="24" height="10" rx="3"/><rect x="483" y="166" width="24" height="10" rx="3"/><rect x="515" y="166" width="24" height="10" rx="3"/><rect x="547" y="166" width="24" height="10" rx="3"/><rect x="451" y="182" width="24" height="10" rx="3"/><rect x="483" y="182" width="24" height="10" rx="3"/><rect x="515" y="182" width="24" height="10" rx="3"/><rect x="547" y="182" width="24" height="10" rx="3"/></g>
+              <text x="510" y="218" text-anchor="middle" class="activity-map-label" font-size="14" font-weight="800">SWITCH L2</text>
+              <text x="510" y="235" text-anchor="middle" class="activity-map-muted" font-size="10">puertos access</text>
+
+              <g>
+                <rect x="700" y="42" width="276" height="60" rx="12" fill="#fff1f8" stroke="#e9a1c8" stroke-width="2"/>
+                <rect x="700" y="42" width="10" height="60" rx="5" fill="#ce1677"/>
+                <text x="728" y="67" class="activity-map-label" font-size="14" font-weight="800">DMZ · VLAN 30</text>
+                <text x="728" y="88" class="activity-map-ip" font-size="11">192.168.30.0/24 · servidor web</text>
+
+                <rect x="700" y="122" width="276" height="60" rx="12" fill="#effaf5" stroke="#a8d9c8" stroke-width="2"/>
+                <rect x="700" y="122" width="10" height="60" rx="5" fill="#147d62"/>
+                <text x="728" y="147" class="activity-map-label" font-size="14" font-weight="800">ADMINISTRACIÓN · VLAN 10</text>
+                <text x="728" y="168" class="activity-map-ip" font-size="11">192.168.10.0/24 · acceso autorizado</text>
+
+                <rect x="700" y="202" width="276" height="60" rx="12" fill="#eff6ff" stroke="#abc8e8" stroke-width="2"/>
+                <rect x="700" y="202" width="10" height="60" rx="5" fill="#3478b9"/>
+                <text x="728" y="227" class="activity-map-label" font-size="14" font-weight="800">USUARIOS · VLAN 20</text>
+                <text x="728" y="248" class="activity-map-ip" font-size="11">192.168.20.0/24 · uso corporativo</text>
+
+                <rect x="700" y="282" width="276" height="60" rx="12" fill="#fff8e9" stroke="#e7cc8e" stroke-width="2"/>
+                <rect x="700" y="282" width="10" height="60" rx="5" fill="#c18419"/>
+                <text x="728" y="307" class="activity-map-label" font-size="14" font-weight="800">VISITANTES · VLAN 40</text>
+                <text x="728" y="328" class="activity-map-ip" font-size="11">192.168.40.0/24 · solo salida permitida</text>
+              </g>
+              <text x="510" y="277" text-anchor="middle" class="activity-map-muted" font-size="10">El firewall decide qué tráfico cruza de una red a otra</text>
+            </svg>
+          </div>
+          <div class="grid-2">
+            <div class="card">
+              <h4>Ejemplo de decisión</h4>
+              <p><strong>Necesidad:</strong> una persona de administración debe gestionar un servidor.</p>
+              <p><strong>Propuesta:</strong> permitir el acceso de gestión solo desde el equipo autorizado; denegar el mismo acceso desde visitantes.</p>
+            </div>
+            <div class="card success">
+              <h4>Cómo comprobarlo</h4>
+              <p>Prueba el acceso desde el equipo autorizado y repite desde la red de visitantes. Anota ambos resultados y confirma que las reglas se aplican en el firewall.</p>
+            </div>
+          </div>
+          <h4 class="example-label">Ejemplos orientativos para cada zona</h4>
+          <div class="grid-2">
+            <div class="card accent">
+              <h4>Administración · VLAN 10</h4>
+              <p><strong>Equipos:</strong> puesto del administrador y herramientas de gestión.</p>
+              <p><strong>Ejemplo:</strong> permitir SSH desde el puesto autorizado hacia los equipos que deba administrar. No permitir ese acceso desde usuarios o visitantes.</p>
+              <p><strong>Motivo:</strong> las cuentas de gestión tienen privilegios elevados.</p>
+            </div>
+            <div class="card">
+              <h4>Usuarios · VLAN 20</h4>
+              <p><strong>Equipos:</strong> ordenadores del personal.</p>
+              <p><strong>Ejemplo:</strong> permitir DNS y navegación web; limitar el acceso a servidores internos a los servicios que necesite el trabajo.</p>
+              <p><strong>Motivo:</strong> una estación de usuario no necesita acceso completo a toda la red.</p>
+            </div>
+            <div class="card">
+              <h4>DMZ · VLAN 30</h4>
+              <p><strong>Equipos:</strong> servidor web publicado.</p>
+              <p><strong>Ejemplo:</strong> desde Internet, publicar solo HTTP/HTTPS hacia el servidor. Restringir las conexiones de la DMZ hacia las redes internas.</p>
+              <p><strong>Motivo:</strong> si el servicio público se compromete, se reduce el alcance hacia la red corporativa.</p>
+            </div>
+            <div class="card">
+              <h4>Visitantes · VLAN 40</h4>
+              <p><strong>Equipos:</strong> dispositivos personales de invitados.</p>
+              <p><strong>Ejemplo:</strong> permitir salida a Internet y denegar el acceso a administración, usuarios y DMZ.</p>
+              <p><strong>Motivo:</strong> ofrecer conectividad sin confiar en dispositivos ajenos.</p>
+            </div>
+          </div>
+          <p class="muted">Son ejemplos para iniciar el diseño, no una política universal: ajusta servicios, equipos y permisos a las necesidades descritas en el enunciado.</p>
+          <div class="card">
+            <h4>Fragmento orientativo · ACL de visitantes en Cisco</h4>
+            <p>Este ejemplo bloquea el acceso de la VLAN 40 a la red corporativa y permite DNS y navegación web. Sustituye redes e interfaz por las de tu diseño.</p>
+            <pre><code>ip access-list extended VISITANTES_IN
+ deny ip 192.168.40.0 0.0.0.255 192.168.0.0 0.0.255.255
+ permit udp 192.168.40.0 0.0.0.255 any eq 53
+ permit tcp 192.168.40.0 0.0.0.255 any eq 80
+ permit tcp 192.168.40.0 0.0.0.255 any eq 443
+!
+interface GigabitEthernet0/0.40
+ ip access-group VISITANTES_IN in</code></pre>
+            <p class="muted">La ACL se evalúa de arriba abajo. La última denegación implícita bloquea lo que no se haya permitido. La regla es un ejemplo de filtrado, no sustituye a un firewall con seguimiento de conexiones.</p>
+          </div>
+          <p class="muted">El dibujo es un ejemplo para justificar el diseño: las VLAN separan los equipos y el firewall controla los cruces. Los puertos, redes y permisos deben ajustarse al enunciado.</p>
+        </div>
+
+        <div class="topic">
+          <h3>Actividad 2 · VPN y cifrado</h3>
+          <div class="statement">
+            <span class="example-label">Enunciado de la actividad</span>
+            <p>Configura una VPN para una empresa pequeña, asegurando el cifrado de las comunicaciones. Explica los protocolos utilizados y documenta los comandos para configurar VPN en Windows y Linux.</p>
+          </div>
+          <p>Define quién se conecta y a qué necesita acceder. Representa el túnel, explica cómo se autentican sus extremos y comprueba la conexión.</p>
+          <div class="flow" aria-label="Ejemplo de conexión VPN">
+            <div class="node">Equipo remoto<small>usuario autorizado</small></div><b aria-hidden="true">→</b>
+            <div class="node">Túnel VPN<small>autenticado y cifrado</small></div><b aria-hidden="true">→</b>
+            <div class="node">Recurso interno<small>solo el necesario</small></div>
+          </div>
+          <div class="grid-2">
+            <div class="card accent">
+              <h4>La idea del túnel</h4>
+              <p>Sin VPN, el equipo remoto se comunica por Internet con los servicios públicos. Con la VPN, crea una conexión cifrada hasta la empresa; dentro de ese túnel puede acceder a los recursos que se le hayan autorizado.</p>
+              <p><strong>Analogía:</strong> Internet es una vía pública y la VPN, un canal protegido entre el portátil y la empresa. El canal no abre automáticamente todas las puertas internas.</p>
+            </div>
+            <div class="card">
+              <h4>Elegir y mantener un mismo protocolo</h4>
+              <p>WireGuard e IKEv2 son opciones distintas. El servidor y el cliente deben usar el mismo protocolo y parámetros compatibles.</p>
+              <p><strong>Ejemplo:</strong> servidor Linux con WireGuard y cliente Windows con WireGuard. También puede elegirse IKEv2 si se configura ese mismo protocolo en ambos extremos; no se conecta un cliente IKEv2 a un servidor WireGuard.</p>
+            </div>
+          </div>
+          <h4 class="example-label">Ejemplo orientativo · WireGuard</h4>
+          <p>Supongamos un servidor Linux en la empresa y un portátil Windows remoto. La red del túnel será <code>10.8.0.0/24</code>; el servidor usará <code>10.8.0.1</code> y el portátil <code>10.8.0.2</code>. La LAN autorizada de ejemplo es <code>192.168.10.0/24</code>.</p>
+          <div class="grid-2">
+            <div class="card">
+              <h4>Servidor Linux · parámetros</h4>
+              <ul>
+                <li>Interfaz del túnel: <code>10.8.0.1/24</code>.</li>
+                <li>Puerto UDP de escucha: por ejemplo, <code>51820</code>.</li>
+                <li>Clave privada propia, guardada solo en el servidor.</li>
+                <li>Peer portátil: su clave pública y la IP <code>10.8.0.2/32</code>.</li>
+              </ul>
+              <p class="muted">El administrador configura el reenvío y el firewall para permitir únicamente el acceso necesario a la LAN.</p>
+            </div>
+            <div class="card">
+              <h4>Cliente Windows · parámetros</h4>
+              <ul>
+                <li>Interfaz del túnel: <code>10.8.0.2/32</code>.</li>
+                <li>Clave privada propia y clave pública del servidor.</li>
+                <li>Dirección del servidor: nombre o IP pública y puerto UDP.</li>
+                <li>Rutas autorizadas: <code>10.8.0.0/24</code> y <code>192.168.10.0/24</code>.</li>
+              </ul>
+              <p class="muted">En Linux cliente se utilizarían los mismos parámetros de peer; cambia la aplicación, no la identidad ni el protocolo del túnel.</p>
+            </div>
+          </div>
+          <h4 class="example-label">Fragmentos de configuración · WireGuard</h4>
+          <div class="grid-2">
+            <div class="card">
+              <h4>Servidor Linux · <code>wg0.conf</code></h4>
+              <pre><code>[Interface]
+Address = 10.8.0.1/24
+ListenPort = 51820
+PrivateKey = &lt;CLAVE_PRIVADA_SERVIDOR&gt;
+
+[Peer]
+PublicKey = &lt;CLAVE_PUBLICA_CLIENTE&gt;
+AllowedIPs = 10.8.0.2/32</code></pre>
+            </div>
+            <div class="card">
+              <h4>Cliente Windows · túnel</h4>
+              <pre><code>[Interface]
+Address = 10.8.0.2/32
+PrivateKey = &lt;CLAVE_PRIVADA_CLIENTE&gt;
+
+[Peer]
+PublicKey = &lt;CLAVE_PUBLICA_SERVIDOR&gt;
+Endpoint = vpn.empresa.example:51820
+AllowedIPs = 10.8.0.0/24, 192.168.10.0/24
+PersistentKeepalive = 25</code></pre>
+            </div>
+          </div>
+          <p class="muted">Los marcadores de clave se reemplazan por claves generadas por separado en cada equipo. Este fragmento muestra el intercambio de claves públicas y las rutas del túnel; el acceso a la LAN también requiere reenvío IP, reglas de firewall y una ruta de retorno.</p>
+          <div class="grid-2">
+            <div class="card success">
+              <h4>Cómo comprobarlo</h4>
+              <p>Activa el túnel y comprueba que aparece una conexión reciente entre los peers. Después prueba un servicio autorizado de la LAN y verifica que una red no autorizada no queda accesible.</p>
+            </div>
+            <div class="card">
+              <h4>Si no funciona</h4>
+              <p>Revisa, por este orden: protocolo coincidente, claves públicas, dirección y puerto del servidor, rutas anunciadas, reenvío IP, reglas del firewall y ruta de retorno.</p>
+            </div>
+          </div>
+          <div class="warning"><strong>Claves privadas:</strong> son secretas y no deben copiarse a capturas, informes o chats. En los ejemplos se indican como valores de configuración, pero se generan por separado en cada extremo y se mantienen protegidas.</div>
+        </div>
+
+        <div class="topic">
+          <h3>Actividad 3 · Captura y análisis de tráfico</h3>
+          <div class="statement">
+            <span class="example-label">Enunciado de la actividad</span>
+            <p>Utiliza herramientas como Wireshark y tcpdump para capturar y analizar tráfico de red. Identifica posibles amenazas y anomalías, y documenta los comandos y filtros utilizados.</p>
+          </div>
+          <p>Formula una pregunta concreta y captura solo el tráfico autorizado que necesitas. Utiliza Wireshark para contrastar lo observado.</p>
+          <div class="flow" aria-label="Ejemplo de análisis de tráfico">
+            <div class="node">Elegir interfaz<small>y pedir autorización</small></div><b aria-hidden="true">→</b>
+            <div class="node">Capturar una muestra<small>tcpdump</small></div><b aria-hidden="true">→</b>
+            <div class="node">Filtrar y analizar<small>Wireshark</small></div><b aria-hidden="true">→</b>
+            <div class="node">Anotar evidencia<small>hechos y límites</small></div>
+          </div>
+          <div class="grid-2">
+            <div class="card accent">
+              <h4>Ejemplo de captura</h4>
+              <p>En una interfaz autorizada, guarda una muestra acotada para analizarla después:</p>
+              <code class="command">sudo tcpdump -i eth0 -nn -w ut3.pcap 'host 192.168.1.20 and port 443'</code>
+              <p><code>-i</code> selecciona la interfaz, <code>-w</code> guarda la captura y el filtro limita los paquetes a un host y servicio del ejemplo.</p>
+            </div>
+            <div class="card">
+              <h4>Ejemplo de análisis</h4>
+              <p>Abre el fichero <code>ut3.pcap</code> en Wireshark y prueba filtros de visualización como:</p>
+              <code class="command">dns</code>
+              <code class="command">tcp.port == 443</code>
+              <p>El primero muestra consultas DNS; el segundo, tráfico TCP del puerto 443. Los filtros de Wireshark no son los mismos que los de captura de tcpdump.</p>
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="card success"><h4>Qué explicar</h4><p>Describe el paquete o patrón observado y su hora. Si el contenido está cifrado, explica qué metadatos ves y por qué no puedes afirmar qué datos se intercambiaron.</p></div>
+            <div class="card"><h4>Cómo cuidar la captura</h4><p>Limita la captura a equipos y tráfico autorizados. Un fichero PCAP puede contener información sensible: guárdalo de forma segura y evita compartir datos personales.</p></div>
+          </div>
+        </div>
+
+        <div class="topic">
+          <h3>Actividad 4 · IDS e IPS</h3>
+          <div class="statement">
+            <span class="example-label">Enunciado de la actividad</span>
+            <p>Configura un sistema IDS/IPS para detectar y prevenir intrusiones en la red. Explica las reglas y políticas aplicadas, y documenta los comandos y configuraciones en Snort o Suricata.</p>
+          </div>
+          <p>Si la VPN es el túnel seguro, el IDS/IPS es el vigilante y sistema de alarmas automático que inspecciona todo el tráfico de red en busca de comportamientos maliciosos.
+            Comprueba primero que se genera una alerta y explica qué cambiaría si el sistema bloqueara el tráfico.</p>
+          <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-2">
+                        <h4 class="text-emerald-400 font-bold flex items-center gap-2">🚨 Diferencia Clave</h4>
+                        <ul class="text-xs text-slate-400 space-y-1 list-disc list-inside">
+                            <li><strong>IDS (Detection):</strong> Actúa como cámaras de seguridad. Genera alarmas o logs, pero no bloquea el tráfico.</li>
+                            <li><strong>IPS (Prevention):</strong> Actúa como guardia con reflejos inmediatos. Detecta y descarta (`drop`) paquetes maliciosos al vuelo.</li>
+                        </ul>
+                    </div>
+            <div class="grid-2">
+            <div class="card accent">
+              <h4>IDS · observar</h4>
+              <p>El sensor recibe una copia del tráfico, busca coincidencias con las reglas y registra alertas. Es el modo adecuado para empezar y ajustar falsos positivos.</p>
+              <div class="flow" aria-label="Flujo de un IDS"><div class="node">Copia del tráfico</div><b>→</b><div class="node">Sensor IDS</div><b>→</b><div class="node">Alerta</div></div>
+            </div>
+            <div class="card">
+              <h4>IPS · actuar</h4>
+              <p>El tráfico pasa por el sensor y una regla puede descartarlo. Una prueba IPS debe hacerse en un laboratorio aislado y tener una forma clara de revertirla.</p>
+              <div class="flow" aria-label="Flujo de un IPS"><div class="node">Origen</div><b>→</b><div class="node">Sensor IPS</div><b>→</b><div class="node">Destino o bloqueo</div></div>
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="card">
+              <h4>Ejemplo de regla de alerta</h4>
+              <p>Una regla de laboratorio puede registrar una solicitud de diagnóstico ICMP dirigida a la red protegida:</p>
+              <code class="command">alert icmp any any -&gt; $HOME_NET any (msg:"ICMP de prueba"; itype:8; sid:1000001; rev:1;)</code>
+              <p>La acción <code>alert</code> informa del evento; no bloquea el paquete. <code>$HOME_NET</code> debe representar la red monitorizada.</p>
+            </div>
+            <div class="card success">
+              <h4>Ejemplo de comprobación</h4>
+              <p>Valida primero la configuración y, después, consulta el registro de alertas:</p>
+              <code class="command">sudo suricata -T -c /etc/suricata/suricata.yaml</code>
+              <code class="command">sudo tail -f /var/log/suricata/fast.log</code>
+              <p>Genera la prueba solo en un laboratorio autorizado y comprueba si aparece el evento esperado.</p>
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="card"><h4>De IDS a IPS</h4><p>En IDS el sensor observa y alerta. En IPS el tráfico pasa por el sensor y una regla puede bloquearlo. Por eso se empieza en IDS y la prevención se prueba de forma aislada y con posibilidad de revertirla.</p></div>
+            <div class="card"><h4>Qué documentar</h4><p>Indica la red observada, la regla y su objetivo, el resultado de la validación y la evidencia del registro. Distingue entre una alerta generada y un paquete realmente bloqueado.</p></div>
+          </div>
+        </div>
+
+        <div class="explanation">
+          <h3>Antes de entregar, comprobadlo</h3>
+          <ul>
+            <li>¿Se entiende el problema y la decisión propuesta?</li>
+            <li>¿Incluye un esquema cuando ayuda a ver las zonas o el recorrido del tráfico?</li>
+            <li>¿Se explica qué resultado se espera y cómo se ha probado?</li>
+            <li>¿Se distinguen los datos observados de las conclusiones?</li>
+            <li>¿Se han protegido claves, capturas y datos personales?</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+  </div>
+
+  </main>
+</body>
+</html>

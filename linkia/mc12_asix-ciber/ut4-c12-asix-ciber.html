@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Material didáctico de la UT4: seguridad web y vulnerabilidades (ASIX-CIBER).">
+  <title>UT 4 · Seguridad web y vulnerabilidades</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root{--pink:#ce1677;--pink-light:#fff1f8;--navy:#192132;--ink:#39475d;--paper:#f5f6f9;--line:#dce2e9;--green:#147d62;--green-bg:#effaf5;--amber:#93600b;--amber-bg:#fff8e9}
+    *{box-sizing:border-box}
+    html{scroll-behavior:auto}
+    body{margin:0;background:var(--paper);font-family:"DM Sans",sans-serif;color:var(--navy)}
+    .document{width:100%;max-width:1200px;margin:0 auto;padding:32px clamp(16px,4vw,52px) 70px}
+    .sheet{position:relative;background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 12px 36px #1921320a;margin-bottom:22px}
+    .sheet::before{content:"";position:absolute;z-index:2;top:16px;left:clamp(18px,3vw,32px);width:112px;height:36px;background:url("../../assets/linkia/logo_linkia_black.png") left center/contain no-repeat}
+    .inner{padding:clamp(22px,4vw,48px);padding-top:70px}
+    .chapter{border-top:7px solid var(--pink)}
+    .chapter-heading{padding:70px clamp(22px,4vw,48px) 28px;background:linear-gradient(110deg,#fff 55%,#fff1f8);border-bottom:1px solid #f0d6e4}
+    .chapter-heading h2{margin:6px 0 0;color:var(--pink);font-weight:800;letter-spacing:-.035em;line-height:1.16}
+    .chapter-body{padding:clamp(22px,4vw,48px)}
+    .section-description{margin:8px 0 0;color:var(--ink);font-size:.96rem;line-height:1.6}
+    .statement,.explanation{border:1px solid var(--line);border-radius:16px;padding:22px 20px;background:#fbfcfe}
+    .statement{background:#f7f8fb;border-left:5px solid var(--pink)}
+    .explanation{background:#fff;border-left:5px solid var(--green)}
+    .example-label,.visual-label{display:block;margin:12px 0 8px;color:var(--pink);font:700 12px "Space Mono",monospace;letter-spacing:.08em;text-transform:uppercase}
+    .flow{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap;padding:14px 12px;margin:14px 0;border:1px solid #e2ccda;border-radius:12px;background:#fff7fb;color:var(--navy);font-weight:700}
+    .flow b{align-self:center;color:var(--pink)}
+    .node{flex:1 1 115px;background:#fff;border:1px solid #e9c1d5;border-radius:10px;padding:11px;text-align:center;font-size:13px;font-weight:700;min-width:0}
+    .node small{display:block;margin-top:3px;color:var(--ink);font-weight:500}
+    .grid-2,.grid-3{display:grid;gap:15px}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .card{background:#f7f8fb;border:1px solid var(--line);border-radius:14px;padding:20px;min-width:0}
+    .card p,.card li{font-size:14px;color:var(--ink)}
+    .card p:last-child{margin-bottom:0}
+    .objective-icon{display:grid;place-items:center;width:44px;height:44px;margin:2px 0 12px;border-radius:12px;background:var(--pink-light);color:var(--pink)}
+    .objective-icon svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .risk-icon{display:grid;place-items:center;width:38px;height:38px;margin:0 0 10px;border-radius:11px;background:var(--pink-light);color:var(--pink)}
+    .risk-icon svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .lifecycle-explanations{margin-top:16px}
+    .lifecycle-explanations .card{padding:16px}
+    .lifecycle-explanations h3{font-size:1rem;color:var(--pink)}
+    .accent{border-left:4px solid var(--pink)}
+    .success{border-left:4px solid var(--green);background:var(--green-bg)}
+    .warning{border-left:4px solid #d69122;background:var(--amber-bg);color:#684710}
+    .dark{background:var(--navy);color:#fff;border-color:var(--navy)}
+    .dark p,.dark li{color:#e1e8f3}
+    .topic{margin-top:27px}
+    .topic:first-child{margin-top:0}
+    .topic>h3{color:var(--navy);padding-bottom:9px;border-bottom:2px solid #f1d0e1}
+    .cover{display:grid;grid-template-columns:1.05fr .95fr}
+    .cover-copy{padding:clamp(28px,5vw,62px);align-self:center}
+    .cover-copy h1{color:var(--pink);font-size:clamp(34px,4vw,56px)}
+    .cover-question{margin-top:28px;padding:18px;border-left:4px solid var(--pink);background:#fff0f7;font-weight:700}
+    .cover-visual{display:grid;align-content:center;justify-items:center;gap:14px;min-height:340px;padding:32px;background:radial-gradient(circle at 70% 30%,#f8c5df,transparent 35%),linear-gradient(145deg,#fff7fb,#e9edf5)}
+    .cover-photo{width:min(100%,360px);margin:0}
+    .cover-photo img{display:block;width:100%;height:150px;object-fit:cover;border:1px solid var(--line);border-radius:14px}
+    .cover-photo figcaption,.incident-figure figcaption{margin-top:6px;color:var(--ink);font-size:11px;line-height:1.45}
+    .slide-visual{margin:18px 0;padding:10px;border:1px solid var(--line);border-radius:14px;background:#fff}
+    .slide-visual img{display:block;width:100%;height:190px;object-fit:cover;border-radius:9px}
+    .slide-visual figcaption{margin:7px 4px 1px;color:var(--ink);font-size:11px;line-height:1.45}
+    .incident-figure{margin:0;padding:16px;border:1px solid var(--line);border-radius:12px;background:#fff;text-align:center}
+    .incident-figure img{display:block;width:min(100%,230px);height:90px;object-fit:contain;margin:0 auto}
+    .service-stack{display:grid;gap:10px;width:min(100%,360px)}
+    .service-stack div{padding:14px 18px;border:1px solid #e9c1d5;border-radius:12px;background:#fff;text-align:center;font-weight:800;box-shadow:0 6px 16px #1921320a}
+    .service-stack small{display:block;margin-top:3px;color:var(--ink);font-weight:500}
+    .svg-container{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin:18px 0;text-align:center;overflow-x:auto}
+    .svg-container svg{max-width:100%;height:auto;display:block;margin:0 auto}
+    .diagram-label{font-family:"DM Sans",sans-serif;fill:#192132}
+    .diagram-muted{font-family:"DM Sans",sans-serif;fill:#526074}
+    h1{font-weight:800;line-height:1.07;letter-spacing:-.045em;margin:12px 0}
+    h2{line-height:1.2}
+    h3{font-size:1.18rem;line-height:1.25;font-weight:800;margin:0 0 11px}
+    h4{font-size:1rem;font-weight:800;margin:0 0 8px}
+    p,li{line-height:1.55}
+    p{margin:0 0 12px}
+    ul,ol{padding-left:21px;margin:0}
+    li+li{margin-top:6px}
+    .eyebrow{font:700 11px "Space Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:#a01261}
+    .muted{color:#526074}
+    .sources{columns:2;column-gap:34px}
+    .sources li{break-inside:avoid}
+    .glossary{columns:2;column-gap:34px}
+    .glossary dt{font-weight:800;color:var(--pink);margin-top:10px}
+    .glossary dd{margin:2px 0 8px;color:var(--ink);line-height:1.5}
+    pre{white-space:pre-wrap;overflow-wrap:anywhere;margin:12px 0;padding:14px;border-radius:10px;background:var(--navy);color:#eef3ff;font:12px/1.6 "Space Mono",monospace}
+    code{font-family:"Space Mono",monospace;font-size:.92em;overflow-wrap:anywhere}
+    .table-wrap{overflow-x:auto}
+    table{width:100%;border-collapse:collapse;font-size:14px}
+    th,td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+    th{background:#fff1f8;color:#8e1455}
+    @media(max-width:760px){.sheet::before{width:96px;height:31px;top:12px;left:18px}.inner{padding-top:60px}.chapter-heading{padding-top:60px}.cover,.grid-2,.grid-3{grid-template-columns:1fr}.cover-visual{min-height:250px}.sources,.glossary{columns:1}.document{padding:12px 12px 34px}.flow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:420px){.flow{grid-template-columns:1fr}}
+    @media print{body{background:#fff}.document{padding:0}.sheet{box-shadow:none;break-inside:avoid}}
+  </style>
+</head>
+<body>
+  <main class="document">
+    <section class="sheet cover" aria-labelledby="page-title">
+      <div class="cover-copy">
+        <span class="eyebrow">ASIX · ASIX-CIBER</span>
+        <h1 id="page-title">UT 4. Seguridad web y vulnerabilidades</h1>
+        <p class="muted">Seguridad en Sistemas, Redes y Servicios</p>
+        <div class="cover-question">¿Cómo reducimos los riesgos de una aplicación web desde el diseño hasta su despliegue y operación?</div>
+      </div>
+      <div class="cover-visual">
+        <figure class="cover-photo">
+          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Filas de servidores en un centro de datos" width="900" height="600" fetchpriority="high">
+          <figcaption>Infraestructura web: proteger también los servicios y componentes que la hacen funcionar.</figcaption>
+        </figure>
+        <div class="service-stack">
+          <div>01 · Comprender<small>amenazas y exposición</small></div>
+          <div>02 · Detectar<small>código, aplicación y dependencias</small></div>
+          <div>03 · Proteger<small>identidad, sesión y despliegue</small></div>
+          <div>04 · Aprender<small>registros, informes y correcciones</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet inner" aria-labelledby="objectives-title">
+      <span class="eyebrow">MARCO DE LA UNIDAD</span>
+      <h2 id="objectives-title">Seguridad durante todo el ciclo de vida</h2>
+      <p class="section-description">Una aplicación web está formada por código, datos, identidades, dependencias y servicios desplegados. La seguridad funciona mejor cuando cada parte se protege y se verifica de forma continua.</p>
+      <figure class="slide-visual">
+        <img src="https://neubox.com/blog/wp-content/uploads/2023/05/860x436-SEGURIDAD-WEB-2.webp" alt="Detalle de una placa electrónica que representa los componentes de un sistema" width="1200" height="800" loading="lazy" decoding="async">
+        <figcaption>Una aplicación se compone de piezas conectadas: código, servicios, datos y dependencias.</figcaption>
+      </figure>
+      <div class="grid-3">
+        <div class="card"><h3>Reducir vulnerabilidades</h3><span class="objective-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 6v5c0 4.7-2.8 8-7 10-4.2-2-7-5.3-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg></span><p>Validar entradas, controlar permisos y evitar exponer información o componentes innecesarios.</p></div>
+        <div class="card"><h3>Proteger el acceso</h3><span class="objective-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14v3"/></svg></span><p>Gestionar correctamente autenticación, autorización, sesiones y secretos.</p></div>
+        <div class="card"><h3>Detectar y corregir</h3><span class="objective-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/><path d="m8 10 2 2 3-3"/></svg></span><p>Analizar la aplicación, observar registros y confirmar que las correcciones funcionan.</p></div>
+      </div>
+      <div class="svg-container">
+        <span class="visual-label">Ciclo de seguridad de una aplicación</span>
+        <svg viewBox="0 0 800 125" width="100%" height="125" role="img" aria-labelledby="cycle-title cycle-desc">
+          <title id="cycle-title">Ciclo de seguridad web</title>
+          <desc id="cycle-desc">Diseñar, desarrollar, analizar, desplegar, monitorizar y mejorar de forma continua.</desc>
+          <defs><marker id="cycle-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#ce1677"/></marker></defs>
+          <g font-family="DM Sans,sans-serif" font-size="12" font-weight="700" text-anchor="middle">
+            <rect x="10" y="30" width="112" height="58" rx="10" fill="#fff1f8" stroke="#ce1677"/><text x="66" y="55" class="diagram-label">Diseñar</text><text x="66" y="73" class="diagram-muted" font-size="10">amenazas</text>
+            <line x1="124" y1="59" x2="146" y2="59" stroke="#ce1677" stroke-width="2" marker-end="url(#cycle-arrow)"/>
+            <rect x="150" y="30" width="112" height="58" rx="10" fill="#fff1f8" stroke="#ce1677"/><text x="206" y="55" class="diagram-label">Desarrollar</text><text x="206" y="73" class="diagram-muted" font-size="10">controles</text>
+            <line x1="264" y1="59" x2="286" y2="59" stroke="#ce1677" stroke-width="2" marker-end="url(#cycle-arrow)"/>
+            <rect x="290" y="30" width="112" height="58" rx="10" fill="#fff1f8" stroke="#ce1677"/><text x="346" y="55" class="diagram-label">Analizar</text><text x="346" y="73" class="diagram-muted" font-size="10">SAST · DAST · SCA</text>
+            <line x1="404" y1="59" x2="426" y2="59" stroke="#ce1677" stroke-width="2" marker-end="url(#cycle-arrow)"/>
+            <rect x="430" y="30" width="112" height="58" rx="10" fill="#effaf5" stroke="#147d62"/><text x="486" y="55" class="diagram-label">Desplegar</text><text x="486" y="73" class="diagram-muted" font-size="10">configurar</text>
+            <line x1="544" y1="59" x2="566" y2="59" stroke="#147d62" stroke-width="2" marker-end="url(#cycle-arrow)"/>
+            <rect x="570" y="30" width="112" height="58" rx="10" fill="#effaf5" stroke="#147d62"/><text x="626" y="55" class="diagram-label">Monitorizar</text><text x="626" y="73" class="diagram-muted" font-size="10">registros</text>
+            <line x1="684" y1="59" x2="706" y2="59" stroke="#147d62" stroke-width="2" marker-end="url(#cycle-arrow)"/>
+            <rect x="710" y="30" width="80" height="58" rx="10" fill="#147d62" stroke="#147d62"/><text x="750" y="55" fill="#fff">Mejorar</text><text x="750" y="73" fill="#eef3ff" font-size="10">revisar</text>
+          </g>
+        </svg>
+      </div>
+      <div class="grid-3 lifecycle-explanations">
+        <div class="card"><h3>Diseñar · anticipar amenazas</h3><p>Identificar qué datos y servicios son importantes, por dónde pueden entrar solicitudes y qué podría salir mal. Así se deciden las protecciones necesarias antes de programar.</p></div>
+        <div class="card"><h3>Desarrollar · incorporar controles</h3><p>Aplicar esas protecciones en el código: validar datos, comprobar permisos y evitar exponer información sensible.</p></div>
+        <div class="card"><h3>Analizar · buscar problemas</h3><p><strong>SAST</strong> revisa el código sin ejecutarlo; <strong>DAST</strong> observa una aplicación en funcionamiento; <strong>SCA</strong> revisa sus bibliotecas. Los resultados se comprueban antes de corregir.</p></div>
+        <div class="card"><h3>Desplegar · configurar con seguridad</h3><p>Publicar la versión revisada con HTTPS, permisos mínimos, secretos protegidos y solo los servicios necesarios expuestos.</p></div>
+        <div class="card"><h3>Monitorizar · observar señales</h3><p>Revisar registros y alertas para detectar errores, accesos inusuales o cambios inesperados, evitando guardar contraseñas y tokens.</p></div>
+        <div class="card"><h3>Mejorar · aprender y repetir</h3><p>Investigar los avisos, corregir su causa y comprobar que la solución funciona. Los cambios y nuevas amenazas vuelven a iniciar el ciclo.</p></div>
+      </div>
+      <p class="card warning"><strong>Uso responsable:</strong> las pruebas activas y los análisis se realizan solo sobre sistemas propios o con autorización explícita, con alcance definido y preferiblemente en un entorno de pruebas.</p>
+    </section>
+
+    <section class="sheet chapter" aria-labelledby="threats-title">
+      <div class="chapter-heading">
+        <span class="eyebrow">BLOQUE 01 / 04</span>
+        <h2 id="threats-title">1. Amenazas y vectores web</h2>
+        <p class="section-description">Para proteger una aplicación, primero identificamos dónde entra la información, qué puede hacer cada usuario y qué datos quedarían expuestos si algo falla.</p>
+      </div>
+      <div class="chapter-body">
+        <figure class="slide-visual">
+          <img src="https://www.shutterstock.com/image-vector/collection-internet-threat-icons-web-260nw-2222409111.jpg?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Pantallas con visualizaciones de seguridad y actividad digital" width="1200" height="800" loading="lazy" decoding="async">
+          <figcaption>Identificar las amenazas ayuda a decidir qué partes de la aplicación necesitan protección.</figcaption>
+        </figure>
+        <div class="topic">
+          <h3>1.1 Familias de riesgos en aplicaciones web</h3>
+          <p>OWASP Top 10 agrupa riesgos frecuentes para ayudar a priorizar. No es una lista exhaustiva ni reemplaza el análisis del contexto de cada aplicación.</p>
+          <div class="grid-3">
+            <div class="card accent"><h4>Inyección</h4><span class="risk-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></span><p>Datos externos llegan a una consulta o intérprete como si fueran instrucciones. La defensa principal es separar datos de código, por ejemplo, mediante consultas parametrizadas.</p></div>
+            <div class="card"><h4>XSS</h4><span class="risk-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="15" rx="2"/><path d="M3 8h18M8 13l-2 2 2 2M16 13l2 2-2 2M13 12l-2 6"/></svg></span><p>Contenido no confiable se interpreta como código en el navegador. Se reduce con escape de salida según contexto y políticas CSP como defensa adicional.</p></div>
+            <div class="card"><h4>Control de acceso</h4><span class="risk-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2M17 11l2 2 4-4"/></svg></span><p>La aplicación confía en un identificador o rol enviado por el cliente. Cada operación debe comprobar en el servidor si ese usuario puede actuar sobre ese recurso.</p></div>
+            <div class="card"><h4>CSRF y sesiones</h4><span class="risk-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 6v5c0 4.7-2.8 8-7 10-4.2-2-7-5.3-7-10V6l7-3Z"/><path d="M8 12h8M13 9l3 3-3 3"/></svg></span><p>Una sesión débil o una petición no protegida puede permitir acciones no deseadas. Se combinan tokens CSRF, cookies seguras y validaciones del origen según el caso.</p></div>
+            <div class="card"><h4>SSRF y acceso a recursos</h4><span class="risk-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="5" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="m7.3 10.8 9.4-4.6M7.3 13.2l9.4 4.6M12 9v6"/></svg></span><p>La aplicación puede ser inducida a solicitar destinos que no debería alcanzar. Limita destinos permitidos y controla las salidas de red desde el servidor.</p></div>
+            <div class="card"><h4>Configuración y componentes</h4><span class="risk-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6 7 7M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span><p>Servicios expuestos, dependencias vulnerables, permisos excesivos o valores por defecto aumentan la superficie de ataque.</p></div>
+          </div>
+          <div class="flow" aria-label="Preguntas para entender una amenaza">
+            <div class="node">Entrada<small>¿qué dato controla el usuario?</small></div><b aria-hidden="true">→</b>
+            <div class="node">Procesamiento<small>¿se trata como dato o instrucción?</small></div><b aria-hidden="true">→</b>
+            <div class="node">Autorización<small>¿quién puede hacer qué?</small></div><b aria-hidden="true">→</b>
+            <div class="node">Impacto<small>¿qué recurso o dato se afecta?</small></div>
+          </div>
+        </div>
+
+        <div class="topic">
+          <h3>1.2 De una entrada no confiable a una consulta segura</h3>
+          <p>Una consulta debe mantener separada la estructura SQL del valor proporcionado por la persona usuaria. La parametrización permite que el controlador trate ese valor como dato.</p>
+          <div class="grid-2">
+            <div class="card warning">
+              <h4>Patrón que se debe evitar</h4>
+              <p>Construir la consulta concatenando directamente una entrada:</p>
+              <pre><code>query = "SELECT * FROM users WHERE id = " + user_input</code></pre>
+              <p>El riesgo aparece cuando un valor de entrada puede modificar la estructura de la consulta.</p>
+            </div>
+            <div class="card success">
+              <h4>Patrón recomendado</h4>
+              <p>Usar una consulta parametrizada:</p>
+              <pre><code>cursor.execute(
+    "SELECT * FROM users WHERE id = ?",
+    (user_id,)
+)</code></pre>
+              <p>El marcador puede variar según la biblioteca; consulta su documentación y valida también tipo, formato y permisos.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic">
+          <h3>1.3 Exposición de datos y errores</h3>
+          <div class="grid-2">
+            <div class="card">
+              <h4>Fuentes habituales</h4>
+              <ul>
+                <li>Mensajes de error que revelan rutas, consultas o versiones.</li>
+                <li>Copias de seguridad y ficheros temporales en directorios públicos.</li>
+                <li>Almacenamiento en nube con permisos públicos no previstos.</li>
+                <li>Credenciales, tokens o datos personales en código y registros.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>Medidas sencillas</h4>
+              <ul>
+                <li>Mostrar errores generales al usuario y conservar el detalle en registros protegidos.</li>
+                <li>Separar copias y secretos del directorio público de la web.</li>
+                <li>Revisar quién puede acceder a cada contenedor o recurso.</li>
+                <li>Limitar y enmascarar datos sensibles en logs.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="explanation"><strong>Idea clave:</strong> los datos que la aplicación no necesita exponer no deben estar disponibles por comodidad, por un error detallado ni por una configuración predeterminada.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet chapter" aria-labelledby="analysis-title">
+      <div class="chapter-heading">
+        <span class="eyebrow">BLOQUE 02 / 04</span>
+        <h2 id="analysis-title">2. Análisis y detección</h2>
+        <p class="section-description">Distintas técnicas observan partes distintas del sistema. Combinarlas ayuda a encontrar problemas antes de desplegar y a validar el comportamiento de la aplicación.</p>
+      </div>
+      <div class="chapter-body">
+        <figure class="slide-visual">
+          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Persona trabajando con un ordenador durante el análisis de una aplicación" width="1200" height="800" loading="lazy" decoding="async">
+          <figcaption>El análisis combina revisión del código, dependencias y comportamiento de la aplicación.</figcaption>
+        </figure>
+        <div class="topic">
+          <h3>2.1 SAST, DAST y SCA: tres perspectivas</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Tipo</th><th>Qué analiza</th><th>Cuándo aporta valor</th><th>Ejemplo de herramienta</th></tr></thead>
+              <tbody>
+                <tr><td><strong>SAST</strong><br>Análisis estático</td><td>Código fuente o compilado sin ejecutar la aplicación.</td><td>Durante el desarrollo y la revisión del código.</td><td>SonarQube y analizadores del lenguaje.</td></tr>
+                <tr><td><strong>DAST</strong><br>Análisis dinámico</td><td>Una aplicación en ejecución mediante solicitudes observables.</td><td>En una versión de pruebas desplegada.</td><td>OWASP ZAP o Burp Suite en alcance autorizado.</td></tr>
+                <tr><td><strong>SCA</strong><br>Análisis de composición</td><td>Bibliotecas y componentes de terceros frente a vulnerabilidades conocidas.</td><td>Al instalar, actualizar y construir la aplicación.</td><td>OWASP Dependency-Check y gestores de dependencias.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="grid-3">
+            <div class="card accent"><h4>SAST pregunta</h4><p>¿Hay patrones inseguros en el código antes de ejecutarlo?</p></div>
+            <div class="card"><h4>DAST pregunta</h4><p>¿Cómo responde la aplicación desplegada a las solicitudes de prueba?</p></div>
+            <div class="card"><h4>SCA pregunta</h4><p>¿Qué componentes usamos y tienen avisos de seguridad conocidos?</p></div>
+          </div>
+          <p class="muted">Las herramientas pueden producir falsos positivos o no detectar un fallo. Revisa los hallazgos, confirma su contexto y documenta qué quedó fuera del análisis.</p>
+        </div>
+
+        <div class="topic">
+          <h3>2.2 Caso real: la brecha de Equifax (2017)</h3>
+          <p>En 2017, atacantes aprovecharon una vulnerabilidad crítica de Apache Struts en un sistema de Equifax. El incidente expuso información personal de aproximadamente 147 millones de personas. Apache había publicado un aviso de seguridad con versiones corregidas.</p>
+          <div class="grid-2">
+            <figure class="incident-figure">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Equifax.svg" alt="Logotipo de Equifax, empresa afectada por la brecha de 2017" width="230" height="90" loading="lazy" decoding="async">
+              <figcaption>Logotipo de Equifax. Fuente: Wikimedia Commons (dominio público).</figcaption>
+            </figure>
+            <div class="card accent">
+              <h4>Qué enseña el caso</h4>
+              <ul>
+                <li><strong>Componente:</strong> Apache Struts, usado para procesar solicitudes de la aplicación.</li>
+                <li><strong>Debilidad:</strong> CVE-2017-5638 afectaba a ciertas versiones del componente.</li>
+                <li><strong>Lección:</strong> inventariar dependencias, revisar avisos y desplegar parches con rapidez.</li>
+              </ul>
+            </div>
+          </div>
+          <h4 class="example-label">Ejemplo defensivo: actualizar la dependencia vulnerable</h4>
+          <div class="grid-2">
+            <div class="card warning">
+              <h4>Versión afectada del ejemplo</h4>
+              <pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.struts&lt;/groupId&gt;
+  &lt;artifactId&gt;struts2-core&lt;/artifactId&gt;
+  &lt;version&gt;2.3.31&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+              <p>Esta versión está dentro del rango vulnerable descrito en el aviso de Apache para CVE-2017-5638.</p>
+            </div>
+            <div class="card success">
+              <h4>Versión corregida indicada por Apache</h4>
+              <pre><code>&lt;version&gt;2.3.32&lt;/version&gt;</code></pre>
+              <p>Apache también publicó la corrección en la rama 2.5.10.1. En un proyecto real, verifica compatibilidad, pruebas y avisos vigentes antes de actualizar.</p>
+            </div>
+          </div>
+          <p class="card warning"><strong>Idea clave:</strong> el ejemplo muestra cómo identificar y corregir una dependencia vulnerable; no incluye instrucciones ni cargas para explotar el fallo.</p>
+        </div>
+
+        <div class="topic">
+          <h3>2.3 Pruebas de seguridad con alcance definido</h3>
+          <div class="flow" aria-label="Proceso controlado de prueba de seguridad">
+            <div class="node">Autorizar<small>objetivos y límites</small></div><b aria-hidden="true">→</b>
+            <div class="node">Preparar<small>entorno y respaldo</small></div><b aria-hidden="true">→</b>
+            <div class="node">Analizar<small>métodos acordados</small></div><b aria-hidden="true">→</b>
+            <div class="node">Validar<small>impacto mínimo</small></div><b aria-hidden="true">→</b>
+            <div class="node">Informar<small>evidencia y mejora</small></div>
+          </div>
+          <div class="grid-2">
+            <div class="card">
+              <h4>Antes de probar</h4>
+              <ul>
+                <li>Define propietario, dominio, aplicaciones y fechas autorizadas.</li>
+                <li>Utiliza un entorno aislado con datos ficticios siempre que sea posible.</li>
+                <li>Acuerda límites, técnicas permitidas, contactos y condiciones de parada.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>Al analizar</h4>
+              <ul>
+                <li>Empieza con observación y herramientas en modo seguro.</li>
+                <li>Confirma manualmente los hallazgos sin acceder a datos ajenos ni modificarlos.</li>
+                <li>Registra hora, alcance, evidencia saneada e impacto potencial.</li>
+              </ul>
+            </div>
+          </div>
+          <p class="card warning"><strong>El permiso importa:</strong> no analices ni pruebes sistemas públicos, cuentas o redes que no estén dentro del alcance autorizado. Una prueba de seguridad no requiere demostrar daño para documentar un riesgo.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet chapter" aria-labelledby="protections-title">
+      <div class="chapter-heading">
+        <span class="eyebrow">BLOQUE 03 / 04</span>
+        <h2 id="protections-title">3. Medidas de protección</h2>
+        <p class="section-description">Las defensas se combinan: navegador, aplicación, identidad, infraestructura y proceso de despliegue.</p>
+      </div>
+      <div class="chapter-body">
+        <figure class="slide-visual">
+          <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Candado que simboliza la protección de datos y servicios digitales" width="1200" height="800" loading="lazy" decoding="async">
+          <figcaption>Una aplicación se protege combinando controles técnicos y configuración segura.</figcaption>
+        </figure>
+        <div class="topic">
+          <h3>3.1 Cabeceras de seguridad: instrucciones al navegador</h3>
+          <div class="grid-3">
+            <div class="card accent"><h4>HSTS</h4><p>Indica al navegador que use HTTPS durante un periodo. Actívala cuando HTTPS funcione correctamente en todo el alcance indicado.</p></div>
+            <div class="card"><h4>CSP</h4><p>Limita desde dónde puede cargar recursos la página. Ayuda a reducir el impacto de inyecciones, pero debe ajustarse a los recursos legítimos de la aplicación.</p></div>
+            <div class="card"><h4>Otras cabeceras</h4><p><code>X-Content-Type-Options: nosniff</code> evita interpretar tipos de contenido de forma inesperada. <code>frame-ancestors</code> controla quién puede incrustar la página.</p></div>
+          </div>
+          <h4 class="example-label">Ejemplo inicial de Content Security Policy</h4>
+          <pre><code>Content-Security-Policy:
+  default-src 'self';
+  object-src 'none';
+  base-uri 'self';
+  frame-ancestors 'none'</code></pre>
+          <p class="muted">Esta política es un punto de partida restrictivo, no una configuración universal. Prueba primero en modo de solo reporte y ajusta las fuentes necesarias sin permitir recursos indiscriminadamente.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Cabecera</th><th>Objetivo</th><th>Precaución</th></tr></thead>
+              <tbody>
+                <tr><td><code>Strict-Transport-Security</code></td><td>Favorecer HTTPS tras una conexión segura.</td><td>No actives <code>includeSubDomains</code> hasta verificar que todos los subdominios soportan HTTPS.</td></tr>
+                <tr><td><code>Content-Security-Policy</code></td><td>Restringir fuentes de scripts, estilos, imágenes y otros recursos.</td><td>Una política incorrecta puede bloquear funciones legítimas.</td></tr>
+                <tr><td><code>X-Content-Type-Options: nosniff</code></td><td>Respetar el tipo MIME indicado por el servidor.</td><td>Sirve contenido con tipos MIME correctos.</td></tr>
+                <tr><td><code>frame-ancestors</code></td><td>Limitar la incrustación de páginas en marcos.</td><td>Permite solo los orígenes que realmente requiere la aplicación.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="topic">
+          <h3>3.2 Sesiones y cookies</h3>
+          <div class="flow" aria-label="Ciclo seguro de una sesión">
+            <div class="node">Autenticar<small>verificar identidad</small></div><b aria-hidden="true">→</b>
+            <div class="node">Emitir token<small>aleatorio y protegido</small></div><b aria-hidden="true">→</b>
+            <div class="node">Renovar<small>rotar al elevar privilegios</small></div><b aria-hidden="true">→</b>
+            <div class="node">Invalidar<small>cerrar y caducar</small></div>
+          </div>
+          <div class="grid-2">
+            <div class="card">
+              <h4>Atributos que reducen riesgo</h4>
+              <ul>
+                <li><code>Secure</code>: enviar la cookie solo por HTTPS.</li>
+                <li><code>HttpOnly</code>: impedir su lectura desde JavaScript.</li>
+                <li><code>SameSite</code>: limitar el envío en solicitudes entre sitios.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>Ciclo de vida</h4>
+              <ul>
+                <li>Usa identificadores impredecibles y evita exponerlos en URL o logs.</li>
+                <li>Rota el identificador después de autenticar o cambiar privilegios.</li>
+                <li>Invalida la sesión al cerrar sesión y aplica expiración adecuada.</li>
+              </ul>
+            </div>
+          </div>
+          <h4 class="example-label">Ejemplo ilustrativo de cookie de sesión</h4>
+          <pre><code>Set-Cookie: __Host-session=&lt;token&gt;; Path=/; Secure; HttpOnly; SameSite=Lax</code></pre>
+          <p class="muted">El nombre <code>__Host-</code> requiere HTTPS, ruta raíz y ausencia del atributo <code>Domain</code>. El token debe generarse de forma segura en el servidor; nunca escribas su valor real en documentación.</p>
+        </div>
+
+        <div class="topic">
+          <h3>3.3 Autenticación, autorización y abuso automatizado</h3>
+          <div class="grid-3">
+            <div class="card accent"><h4>Autenticación</h4><p>Responde: «¿quién eres?». MFA añade un factor independiente y dificulta el acceso si una contraseña se filtra.</p></div>
+            <div class="card"><h4>Autorización</h4><p>Responde: «¿qué puedes hacer?». Comprueba los permisos en cada operación y recurso, no solo en la interfaz.</p></div>
+            <div class="card"><h4>Rate limiting</h4><p>Limita la frecuencia de acciones, como inicios de sesión o recuperación de cuenta, sin sustituir el control de acceso.</p></div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Modelo</th><th>Decisión basada en</th><th>Ejemplo sencillo</th></tr></thead>
+              <tbody>
+                <tr><td>RBAC</td><td>Rol asignado a la persona.</td><td>El rol «editor» puede publicar contenido.</td></tr>
+                <tr><td>ABAC</td><td>Atributos de persona, recurso, acción y contexto.</td><td>Permitir editar un documento solo a su responsable dentro del equipo autorizado.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>CAPTCHA puede ayudar frente a automatización en algunos flujos, pero no sustituye MFA, límites de frecuencia, detección de abuso ni una buena gestión de contraseñas.</p>
+        </div>
+
+        <div class="topic">
+          <h3>3.4 Despliegue: contenedores, secretos e inventario</h3>
+          <div class="grid-2">
+            <div class="card">
+              <h4>Contenedores más seguros</h4>
+              <ul>
+                <li>Usa imágenes base mantenidas y mínimas.</li>
+                <li>Ejecuta el proceso con usuario no privilegiado cuando sea posible.</li>
+                <li>Actualiza, analiza y limita capacidades y puertos.</li>
+                <li>Despliega artefactos revisados e imágenes verificables.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>Secretos y SBOM</h4>
+              <ul>
+                <li>No incluyas contraseñas o claves en el código ni en la imagen.</li>
+                <li>Usa un gestor de secretos con acceso mínimo y rotación.</li>
+                <li>Genera un SBOM para conocer componentes y versiones.</li>
+                <li>Revisa avisos de seguridad y actualiza dependencias afectadas.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="flow" aria-label="Flujo de despliegue seguro">
+            <div class="node">Código revisado</div><b aria-hidden="true">→</b>
+            <div class="node">Análisis y SBOM</div><b aria-hidden="true">→</b>
+            <div class="node">Imagen verificada</div><b aria-hidden="true">→</b>
+            <div class="node">Despliegue mínimo</div><b aria-hidden="true">→</b>
+            <div class="node">Monitorización</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet chapter" aria-labelledby="operations-title">
+      <div class="chapter-heading">
+        <span class="eyebrow">BLOQUE 04 / 04</span>
+        <h2 id="operations-title">4. Registros, alertas e informes</h2>
+        <p class="section-description">Los registros aportan contexto para detectar e investigar. Un informe convierte los hallazgos en acciones que pueden priorizarse y verificarse.</p>
+      </div>
+      <div class="chapter-body">
+        <figure class="slide-visual">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Panel de datos con gráficos para observar actividad y tendencias" width="1200" height="800" loading="lazy" decoding="async">
+          <figcaption>Los registros y las alertas convierten eventos en información útil para investigar.</figcaption>
+        </figure>
+        <div class="topic">
+          <h3>4.1 De los eventos a una alerta útil</h3>
+          <div class="flow" aria-label="Pipeline de registros de seguridad">
+            <div class="node">Aplicación y servicios<small>eventos</small></div><b aria-hidden="true">→</b>
+            <div class="node">Recolector<small>normaliza</small></div><b aria-hidden="true">→</b>
+            <div class="node">Análisis<small>correlaciona</small></div><b aria-hidden="true">→</b>
+            <div class="node">Alerta<small>investigar y responder</small></div>
+          </div>
+          <div class="grid-2">
+            <div class="card">
+              <h4>Eventos que aportan contexto</h4>
+              <ul>
+                <li>Inicios de sesión satisfactorios y fallidos.</li>
+                <li>Cambios de permisos, configuración o factores MFA.</li>
+                <li>Errores de la aplicación y respuestas inusuales.</li>
+                <li>Creación de cuentas, tokens o recursos públicos.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>Patrones que merecen revisión</h4>
+              <ul>
+                <li>Aumento de errores de autenticación en poco tiempo.</li>
+                <li>Acceso a muchos recursos que no son habituales para la cuenta.</li>
+                <li>Cambios administrativos fuera de ventanas esperadas.</li>
+                <li>Errores repetidos o picos de solicitudes anómalos.</li>
+              </ul>
+            </div>
+          </div>
+          <p class="card warning"><strong>Protege los logs:</strong> no registres contraseñas, tokens de sesión ni datos personales innecesarios. Restringe accesos, define retención y conserva integridad y marcas de tiempo.</p>
+        </div>
+
+        <div class="topic">
+          <h3>4.2 Comunicar un hallazgo con claridad</h3>
+          <p>Un hallazgo debe poder entenderse, priorizarse y reproducirse de manera segura. Describe las condiciones y el impacto sin incluir datos sensibles innecesarios.</p>
+          <div class="grid-2">
+            <div class="card accent">
+              <h4>Estructura de un hallazgo</h4>
+              <ol>
+                <li><strong>Título y activo afectado.</strong></li>
+                <li><strong>Descripción:</strong> qué se observó y en qué condiciones.</li>
+                <li><strong>Impacto y riesgo:</strong> probabilidad y consecuencias.</li>
+                <li><strong>Evidencia:</strong> solicitud o registro saneado.</li>
+                <li><strong>Recomendación:</strong> acción concreta de corrección.</li>
+                <li><strong>Verificación:</strong> prueba posterior que demuestra la mejora.</li>
+              </ol>
+            </div>
+            <div class="card">
+              <h4>Ejemplo breve</h4>
+              <p><strong>Hallazgo:</strong> no se observa una política CSP en la respuesta de prueba.</p>
+              <p><strong>Riesgo:</strong> falta una capa de defensa frente a contenido no previsto; el riesgo real depende de cómo se procese la entrada en la aplicación.</p>
+              <p><strong>Recomendación:</strong> definir una política ajustada a los recursos legítimos, probarla en modo de reporte y volver a revisar la respuesta.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic">
+          <h3>4.3 Priorizar, corregir y verificar</h3>
+          <div class="grid-3">
+            <div class="card"><h4>Priorizar</h4><p>Considera impacto, probabilidad, exposición, datos afectados y controles existentes. Una puntuación orienta; no sustituye el contexto.</p></div>
+            <div class="card"><h4>Corregir</h4><p>Asigna responsable y plazo, aplica el cambio y registra qué componente o configuración se modificó.</p></div>
+            <div class="card success"><h4>Verificar</h4><p>Repite la comprobación que detectó el problema y confirma que la corrección no rompe la función legítima.</p></div>
+          </div>
+          <div class="explanation"><strong>Regla práctica:</strong> un informe útil no termina con «se encontró un problema»; deja claro quién puede actuar, qué cambio se propone y cómo se comprobará el resultado.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet inner" aria-labelledby="conclusions-title">
+      <span class="eyebrow">CIERRE</span>
+      <h2 id="conclusions-title">Una aplicación web segura se mantiene</h2>
+      <figure class="slide-visual">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Equipo colaborando alrededor de un ordenador para mejorar un proyecto" width="1200" height="800" loading="lazy" decoding="async">
+        <figcaption>La seguridad mejora con revisión continua, colaboración y correcciones verificadas.</figcaption>
+      </figure>
+      <div class="grid-3">
+        <div class="card"><h3>01 · Diseñar</h3><p>Comprender las entradas, los activos, los flujos y los permisos reduce riesgos desde el origen.</p></div>
+        <div class="card"><h3>02 · Verificar</h3><p>Combinar análisis estático, dinámico y de dependencias mejora la cobertura, pero los resultados requieren revisión.</p></div>
+        <div class="card"><h3>03 · Mejorar</h3><p>Registros protegidos, informes claros y pruebas posteriores convierten los hallazgos en mejoras continuas.</p></div>
+      </div>
+      <div class="statement">
+        <h3>Recuerda</h3>
+        <p>Proteger no es añadir una única herramienta: es reducir exposición, comprobar permisos, cuidar secretos, observar el comportamiento y corregir con evidencia.</p>
+      </div>
+    </section>
+
+    <section class="sheet inner" aria-labelledby="sources-title">
+      <h2 id="sources-title">Fuentes de información</h2>
+      
+      <ul class="sources">
+        <li>Material de la asignatura: <em>UT 4. Seguridad web y vulnerabilidades</em>, Seguridad en Sistemas, Redes y Servicios.</li>
+        <li>OWASP Top 10 — <a href="https://owasp.org/www-project-top-ten/">owasp.org/www-project-top-ten</a>.</li>
+        <li>OWASP Application Security Verification Standard — <a href="https://owasp.org/www-project-application-security-verification-standard/">owasp.org</a>.</li>
+        <li>OWASP Cheat Sheet Series — <a href="https://cheatsheetseries.owasp.org/">cheatsheetseries.owasp.org</a>.</li>
+        <li>Mozilla Web Security Guidelines — <a href="https://infosec.mozilla.org/guidelines/web_security">infosec.mozilla.org</a>.</li>
+        <li>NIST Secure Software Development Framework (SSDF) — <a href="https://csrc.nist.gov/Projects/ssdf">csrc.nist.gov</a>.</li>
+        <li>Aviso oficial de Apache Struts S2-045 / CVE-2017-5638 y versiones corregidas — <a href="https://cwiki.apache.org/confluence/display/WW/S2-045">cwiki.apache.org</a>.</li>
+        <li>GAO, informe sobre la brecha de Equifax de 2017 — <a href="https://www.gao.gov/products/gao-18-559">gao.gov</a>.</li>
+        <li>FTC, acuerdo relacionado con la brecha de Equifax — <a href="https://www.ftc.gov/news-events/news/press-releases/2019/07/equifax-pay-575-million-settlement-ftc-cfpb-states-related-2017-data-breach">ftc.gov</a>.</li>
+        <li>Fotografía de servidores — <a href="https://unsplash.com/license">Unsplash License</a>.</li>
+        <li>Logotipo de Equifax — <a href="https://commons.wikimedia.org/wiki/File:Equifax.svg">Wikimedia Commons</a> (dominio público).</li>
+      </ul>
+      <p class="muted">Consulta la documentación oficial de cada herramienta y adapta las políticas al entorno y a los requisitos de la aplicación.</p>
+    </section>
+
+    <section class="sheet inner" aria-labelledby="glossary-title">
+      <h2 id="glossary-title">Glosario</h2>
+     
+      <dl class="glossary">
+        <dt>ABAC</dt><dd>Control de acceso basado en atributos del usuario, el recurso, la acción y el contexto.</dd>
+        <dt>CSP</dt><dd>Política que restringe las fuentes de recursos que puede cargar una página web.</dd>
+        <dt>CSRF</dt><dd>Solicitud no deseada que aprovecha la sesión activa de una persona usuaria.</dd>
+        <dt>DAST</dt><dd>Análisis dinámico de una aplicación que está ejecutándose.</dd>
+        <dt>MFA</dt><dd>Autenticación multifactor que combina más de una prueba de identidad.</dd>
+        <dt>RBAC</dt><dd>Control de acceso basado en roles asignados.</dd>
+        <dt>SAST</dt><dd>Análisis estático de código o artefactos sin ejecutar la aplicación.</dd>
+        <dt>SCA</dt><dd>Análisis de composición de software y dependencias de terceros.</dd>
+        <dt>SBOM</dt><dd>Inventario legible de componentes de software incluidos en un producto.</dd>
+        <dt>SSRF</dt><dd>Riesgo de que una aplicación realice solicitudes a destinos no previstos.</dd>
+        <dt>XSS</dt><dd>Ejecución de contenido no confiable en el contexto del navegador de otra persona usuaria.</dd>
+      </dl>
+    </section>
+  </main>
+</body>
+</html>
