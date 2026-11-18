@@ -709,11 +709,461 @@ class RespuestaController extends Controller
 </code></pre>
     </section>
 
-    <!-- SECCIÓN 5: MIDDLEWARE -->
-    <section id="middleware">
-      <h2>5. Middleware</h2>
+    <!-- SECCIÓN 5: FORMULARIOS Y COMUNICACIÓN CON CONTROLADOR -->
+    <section id="formularios">
+      <h2>5. Formularios y comunicación con controlador</h2>
 
-      <h3>5.1. ¿Qué es un middleware?</h3>
+      <h3>5.1. Estructura básica de un formulario</h3>
+      <p>Los formularios en Blade se crean con la etiqueta HTML <code>&lt;form&gt;</code> y necesitan un token CSRF para seguridad.</p>
+
+      <pre><code class="language-html">
+{{-- resources/views/films/create.blade.php --}}
+
+@extends('layouts.app')
+
+@section('contenido')
+    &lt;h2&gt;Crear nueva película&lt;/h2&gt;
+    
+    {{-- Usar route('nombreRuta') para generar la URL --}}
+    &lt;form action="{{ route('createFilm') }}" method="POST"&gt;
+        {{-- Token CSRF (obligatorio en Laravel) --}}
+        {{ csrf_field() }}
+        
+        &lt;label for="name"&gt;Nombre&lt;/label&gt;
+        &lt;input type="text" name="name" id="name" required&gt;
+        &lt;br&gt;
+        
+        &lt;label for="age"&gt;Año de estreno&lt;/label&gt;
+        &lt;input type="number" name="age" id="age" required&gt;
+        &lt;br&gt;
+        
+        &lt;input type="submit" value="Enviar" /&gt;
+    &lt;/form&gt;
+@endsection
+</code></pre>
+
+      <h3>5.2. Token CSRF (Cross-Site Request Forgery)</h3>
+      <p>Laravel protege las aplicaciones contra ataques CSRF. <strong>Todos los formularios POST, PUT, DELETE deben incluir un token CSRF.</strong></p>
+
+      <pre><code class="language-html">
+{{-- Opción 1: Usando csrf_field() --}}
+&lt;form method="POST" action="/guardar"&gt;
+    {{ csrf_field() }}
+    &lt;!-- resto del formulario --&gt;
+&lt;/form&gt;
+
+{{-- Opción 2: Usando @csrf (alias más corto) --}}
+&lt;form method="POST" action="/guardar"&gt;
+    @csrf
+    &lt;!-- resto del formulario --&gt;
+&lt;/form&gt;
+
+{{-- Opción 3: En AJAX --}}
+&lt;script&gt;
+    fetch('/api/datos', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+    });
+&lt;/script&gt;
+</code></pre>
+
+      <h3>5.3. Tipos de inputs en formularios</h3>
+      <pre><code class="language-html">
+{{-- Text input --}}
+&lt;input type="text" name="nombre" placeholder="Ingresa tu nombre"&gt;
+
+{{-- Email input --}}
+&lt;input type="email" name="email" required&gt;
+
+{{-- Password input --}}
+&lt;input type="password" name="password"&gt;
+
+{{-- Number input --}}
+&lt;input type="number" name="edad" min="0" max="120"&gt;
+
+{{-- Textarea --}}
+&lt;textarea name="descripcion" rows="5" cols="40"&gt;&lt;/textarea&gt;
+
+{{-- Select (dropdown) --}}
+&lt;select name="genero"&gt;
+    &lt;option value=""&gt;Selecciona un género&lt;/option&gt;
+    &lt;option value="accion"&gt;Acción&lt;/option&gt;
+    &lt;option value="comedia"&gt;Comedia&lt;/option&gt;
+    &lt;option value="drama"&gt;Drama&lt;/option&gt;
+&lt;/select&gt;
+
+{{-- Checkbox --}}
+&lt;label&gt;
+    &lt;input type="checkbox" name="activo" value="1"&gt;
+    Película activa
+&lt;/label&gt;
+
+{{-- Radio buttons --}}
+&lt;label&gt;
+    &lt;input type="radio" name="formato" value="2d"&gt;
+    2D
+&lt;/label&gt;
+&lt;label&gt;
+    &lt;input type="radio" name="formato" value="3d"&gt;
+    3D
+&lt;/label&gt;
+
+{{-- File input --}}
+&lt;input type="file" name="cartel" accept="image/*"&gt;
+
+{{-- Submit button --}}
+&lt;button type="submit"&gt;Enviar&lt;/button&gt;
+
+{{-- Reset button --}}
+&lt;button type="reset"&gt;Limpiar&lt;/button&gt;
+
+{{-- Hidden input --}}
+&lt;input type="hidden" name="id" value="123"&gt;
+</code></pre>
+
+      <h3>5.4. Ejemplo completo: Formulario en Blade</h3>
+      <pre><code class="language-html">
+{{-- resources/views/films/create.blade.php --}}
+@extends('layouts.app')
+
+@section('contenido')
+    &lt;div class="container"&gt;
+        &lt;h2&gt;Crear nueva película&lt;/h2&gt;
+        
+        {{-- Mostrar errores de validación si existen --}}
+        @if ($errors->any())
+            &lt;div class="alert alert-danger"&gt;
+                &lt;ul&gt;
+                    @foreach ($errors->all() as $error)
+                        &lt;li&gt;{{ $error }}&lt;/li&gt;
+                    @endforeach
+                &lt;/ul&gt;
+            &lt;/div&gt;
+        @endif
+        
+        {{-- Formulario --}}
+        &lt;form action="{{ route('createFilm') }}" method="POST"&gt;
+            @csrf
+            
+            &lt;div class="form-group"&gt;
+                &lt;label for="name"&gt;Nombre&lt;/label&gt;
+                &lt;input 
+                    type="text" 
+                    name="name" 
+                    id="name"
+                    class="form-control"
+                    value="{{ old('name') }}"
+                    required
+                &gt;
+                @error('name')
+                    &lt;span class="text-danger"&gt;{{ $message }}&lt;/span&gt;
+                @enderror
+            &lt;/div&gt;
+            
+            &lt;div class="form-group"&gt;
+                &lt;label for="year"&gt;Año de estreno&lt;/label&gt;
+                &lt;input 
+                    type="number" 
+                    name="year" 
+                    id="year"
+                    class="form-control"
+                    value="{{ old('year') }}"
+                    required
+                &gt;
+                @error('year')
+                    &lt;span class="text-danger"&gt;{{ $message }}&lt;/span&gt;
+                @enderror
+            &lt;/div&gt;
+            
+            &lt;div class="form-group"&gt;
+                &lt;label for="genero"&gt;Género&lt;/label&gt;
+                &lt;select name="genero" id="genero" class="form-control"&gt;
+                    &lt;option value=""&gt;Selecciona un género&lt;/option&gt;
+                    &lt;option value="accion" {{ old('genero') == 'accion' ? 'selected' : '' }}&gt;Acción&lt;/option&gt;
+                    &lt;option value="comedia" {{ old('genero') == 'comedia' ? 'selected' : '' }}&gt;Comedia&lt;/option&gt;
+                    &lt;option value="drama" {{ old('genero') == 'drama' ? 'selected' : '' }}&gt;Drama&lt;/option&gt;
+                &lt;/select&gt;
+            &lt;/div&gt;
+            
+            &lt;button type="submit" class="btn btn-primary"&gt;Crear película&lt;/button&gt;
+            &lt;a href="{{ route('films.index') }}" class="btn btn-secondary"&gt;Cancelar&lt;/a&gt;
+        &lt;/form&gt;
+    &lt;/div&gt;
+@endsection
+</code></pre>
+
+      <h3>5.5. Recibir datos en el controlador</h3>
+      <p>Cuando el formulario se envía con método POST, el controlador recibe los datos y puede procesarlos.</p>
+
+      <pre><code class="language-php">
+&lt;?php
+// app/Http/Controllers/FilmController.php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class FilmController extends Controller
+{
+    // Mostrar formulario de creación
+    public function create()
+    {
+        return view('films.create');
+    }
+    
+    // Recibir datos del formulario
+    public function createFilm(Request $request)
+    {
+        // Obtener todos los datos
+        $datos = $request->all();
+        
+        // Obtener valores específicos
+        $nombre = $request->input('name');
+        $year = $request->input('year');
+        $genero = $request->get('genero');
+        
+        // Validar datos
+        $validado = $request->validate([
+            'name' => 'required|string|max:255',
+            'year' => 'required|integer|min:1800|max:' . date('Y'),
+            'genero' => 'sometimes|in:accion,comedia,drama',
+        ]);
+        
+        // Guardar en base de datos (ejemplo)
+        // Film::create($validado);
+        
+        // Redirigir con mensaje de éxito
+        return redirect()->route('films.index')
+                         ->with('success', 'Película creada correctamente');
+    }
+    
+    // Listar películas
+    public function index()
+    {
+        $films = []; // Obtener de BD
+        return view('films.index', ['films' => $films]);
+    }
+}
+?&gt;
+</code></pre>
+
+      <h3>5.6. Validación de formularios</h3>
+      <p>Laravel permite validar datos de forma simple usando el método <code>validate()</code>.</p>
+
+      <pre><code class="language-php">
+&lt;?php
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class FilmController extends Controller
+{
+    public function createFilm(Request $request)
+    {
+        // Validación simple
+        $validado = $request->validate([
+            'name' => 'required|string|max:255',
+            'year' => 'required|integer|min:1800',
+            'email' => 'required|email',
+            'edad' => 'required|integer|min:0|max:120',
+        ]);
+        
+        // Si la validación falla, Laravel redirige automáticamente atrás
+        // con los errores disponibles en $errors
+        
+        // Si llega aquí, los datos son válidos
+        return redirect()->back()->with('success', 'Validación correcta');
+    }
+}
+?&gt;
+</code></pre>
+
+      <h3>5.7. Reglas de validación comunes</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Regla</th>
+            <th>Descripción</th>
+            <th>Ejemplo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>required</code></td>
+            <td>El campo es obligatorio</td>
+            <td>'name' => 'required'</td>
+          </tr>
+          <tr>
+            <td><code>string</code></td>
+            <td>Debe ser texto</td>
+            <td>'name' => 'string'</td>
+          </tr>
+          <tr>
+            <td><code>email</code></td>
+            <td>Debe ser email válido</td>
+            <td>'email' => 'email'</td>
+          </tr>
+          <tr>
+            <td><code>integer</code></td>
+            <td>Debe ser número entero</td>
+            <td>'edad' => 'integer'</td>
+          </tr>
+          <tr>
+            <td><code>numeric</code></td>
+            <td>Debe ser número (entero o decimal)</td>
+            <td>'precio' => 'numeric'</td>
+          </tr>
+          <tr>
+            <td><code>min:valor</code></td>
+            <td>Valor mínimo (para números y strings)</td>
+            <td>'edad' => 'min:18'</td>
+          </tr>
+          <tr>
+            <td><code>max:valor</code></td>
+            <td>Valor máximo (para números y strings)</td>
+            <td>'nombre' => 'max:255'</td>
+          </tr>
+          <tr>
+            <td><code>in:valor1,valor2</code></td>
+            <td>Debe estar en lista de valores</td>
+            <td>'genero' => 'in:accion,comedia'</td>
+          </tr>
+          <tr>
+            <td><code>unique:tabla</code></td>
+            <td>Valor único en tabla</td>
+            <td>'email' => 'unique:users'</td>
+          </tr>
+          <tr>
+            <td><code>confirmed</code></td>
+            <td>Campo debe tener confirmación (ej: password_confirmation)</td>
+            <td>'password' => 'confirmed'</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>5.8. Mostrar errores en la vista</h3>
+      <pre><code class="language-html">
+{{-- Mostrar todos los errores --}}
+@if ($errors->any())
+    &lt;div class="alert alert-danger"&gt;
+        &lt;h4&gt;Errores encontrados:&lt;/h4&gt;
+        &lt;ul&gt;
+            @foreach ($errors->all() as $error)
+                &lt;li&gt;{{ $error }}&lt;/li&gt;
+            @endforeach
+        &lt;/ul&gt;
+    &lt;/div&gt;
+@endif
+
+{{-- Mostrar error de un campo específico --}}
+&lt;label for="name"&gt;Nombre&lt;/label&gt;
+&lt;input type="text" name="name" id="name"&gt;
+@error('name')
+    &lt;span class="text-danger"&gt;{{ $message }}&lt;/span&gt;
+@enderror
+
+{{-- Mantener valores previos en el formulario (old values) --}}
+&lt;input type="text" name="email" value="{{ old('email') }}"&gt;
+
+{{-- Comprobar si existe un error para un campo --}}
+&lt;input type="text" name="name" class="{{ $errors->has('name') ? 'is-invalid' : '' }}"&gt;
+</code></pre>
+
+      <h3>5.9. Rutas y formularios</h3>
+      <pre><code class="language-php">
+&lt;?php
+// routes/web.php
+
+use App\Http\Controllers\FilmController;
+
+// Mostrar formulario (GET)
+Route::get('/films/create', [FilmController::class, 'create'])->name('films.create');
+
+// Procesar formulario (POST)
+Route::post('/films', [FilmController::class, 'createFilm'])->name('createFilm');
+
+// CRUD completo
+Route::resource('films', FilmController::class);
+?&gt;
+</code></pre>
+
+      <h3>5.10. Ejemplo: Formulario de contacto simple</h3>
+      <pre><code class="language-html">
+{{-- resources/views/contacto.blade.php --}}
+&lt;form action="{{ route('enviar.contacto') }}" method="POST"&gt;
+    @csrf
+    
+    &lt;div&gt;
+        &lt;label for="nombre"&gt;Nombre:&lt;/label&gt;
+        &lt;input 
+            type="text" 
+            name="nombre" 
+            id="nombre" 
+            value="{{ old('nombre') }}"
+            required
+        &gt;
+        @error('nombre')
+            &lt;small style="color: red;"&gt;{{ $message }}&lt;/small&gt;
+        @enderror
+    &lt;/div&gt;
+    
+    &lt;div&gt;
+        &lt;label for="email"&gt;Email:&lt;/label&gt;
+        &lt;input 
+            type="email" 
+            name="email" 
+            id="email"
+            value="{{ old('email') }}"
+            required
+        &gt;
+        @error('email')
+            &lt;small style="color: red;"&gt;{{ $message }}&lt;/small&gt;
+        @enderror
+    &lt;/div&gt;
+    
+    &lt;div&gt;
+        &lt;label for="mensaje"&gt;Mensaje:&lt;/label&gt;
+        &lt;textarea 
+            name="mensaje" 
+            id="mensaje" 
+            rows="5"
+            required
+        &gt;{{ old('mensaje') }}&lt;/textarea&gt;
+        @error('mensaje')
+            &lt;small style="color: red;"&gt;{{ $message }}&lt;/small&gt;
+        @enderror
+    &lt;/div&gt;
+    
+    &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+
+      <pre><code class="language-php">
+&lt;?php
+// En el controlador
+public function enviarContacto(Request $request)
+{
+    $validado = $request->validate([
+        'nombre' => 'required|string|max:100',
+        'email' => 'required|email',
+        'mensaje' => 'required|string|min:10|max:1000',
+    ]);
+    
+    // Guardar o enviar email...
+    
+    return redirect()->back()->with('success', 'Mensaje enviado');
+}
+?&gt;
+</code></pre>
+    </section>
+
+    <!-- SECCIÓN 6: MIDDLEWARE -->
+    <section id="middleware">
+      <h2>6. Middleware</h2>
+
+      <h3>6.1. ¿Qué es un middleware?</h3>
       <p>Un middleware es un filtro HTTP que se ejecuta <strong>antes o después</strong> de que una petición llegue al controlador. Se usa para autenticación, logging, CORS, etc.</p>
 
       <div class="mermaid">
@@ -734,7 +1184,7 @@ graph LR
     style E fill:#ffe1e1
       </div>
 
-      <h3>5.2. Crear un middleware</h3>
+      <h3>6.2. Crear un middleware</h3>
       <pre><code class="language-bash">
 # Crear middleware
 php artisan make:middleware VerificarEdad
@@ -773,7 +1223,7 @@ class VerificarEdad
 ?&gt;
 </code></pre>
 
-      <h3>5.3. Registrar middleware</h3>
+      <h3>6.3. Registrar middleware</h3>
       <pre><code class="language-php">
 &lt;?php
 // app/Http/Kernel.php
@@ -789,7 +1239,7 @@ protected $middlewareAliases = [
 ?&gt;
 </code></pre>
 
-      <h3>5.4. Usar middleware en rutas</h3>
+      <h3>6.4. Usar middleware en rutas</h3>
       <pre><code class="language-php">
 &lt;?php
 // routes/web.php
@@ -825,7 +1275,7 @@ Route::get('/productos', [ProductoController::class, 'index'])
 ?&gt;
 </code></pre>
 
-      <h3>5.5. Middleware global</h3>
+      <h3>6.5. Middleware global</h3>
       <pre><code class="language-php">
 &lt;?php
 // app/Http/Kernel.php
@@ -857,7 +1307,7 @@ protected $middlewareGroups = [
 ?&gt;
 </code></pre>
 
-      <h3>5.6. Middleware en controladores</h3>
+      <h3>6.6. Middleware en controladores</h3>
       <pre><code class="language-php">
 &lt;?php
 namespace App\Http\Controllers;
@@ -890,14 +1340,14 @@ class ProductoController extends Controller
 </code></pre>
     </section>
 
-    <!-- SECCIÓN 6: KERNEL -->
+    <!-- SECCIÓN 7: KERNEL -->
     <section id="kernel">
-      <h2>6. Kernel HTTP</h2>
+      <h2>7. Kernel HTTP</h2>
 
-      <h3>6.1. ¿Qué es el Kernel?</h3>
+      <h3>7.1. ¿Qué es el Kernel?</h3>
       <p>El Kernel HTTP (<code>app/Http/Kernel.php</code>) es el corazón de la aplicación Laravel. Define qué middleware se ejecuta en cada petición y en qué orden.</p>
 
-      <h3>6.2. Estructura del Kernel</h3>
+      <h3>7.2. Estructura del Kernel</h3>
       <pre><code class="language-php">
 &lt;?php
 // app/Http/Kernel.php
@@ -969,7 +1419,7 @@ class Kernel extends HttpKernel
 ?&gt;
 </code></pre>
 
-      <h3>6.3. Tipos de middleware en Kernel</h3>
+      <h3>7.3. Tipos de middleware en Kernel</h3>
       <table>
         <thead>
           <tr>
@@ -997,7 +1447,7 @@ class Kernel extends HttpKernel
         </tbody>
       </table>
 
-      <h3>6.4. Orden de ejecución</h3>
+      <h3>7.4. Orden de ejecución</h3>
       <pre><code class="language-plaintext">
 1. $middleware (global)
    ↓
@@ -1010,7 +1460,7 @@ class Kernel extends HttpKernel
 5. Respuesta atraviesa middleware en orden inverso
 </code></pre>
 
-      <h3>6.5. Añadir middleware personalizado</h3>
+      <h3>7.5. Añadir middleware personalizado</h3>
       <pre><code class="language-php">
 &lt;?php
 // 1. Crear middleware
@@ -1059,7 +1509,7 @@ Route::get('/admin', function () {
 ?&gt;
 </code></pre>
 
-      <h3>6.6. Prioridad de middleware</h3>
+      <h3>7.6. Prioridad de middleware</h3>
       <pre><code class="language-php">
 &lt;?php
 // Definir prioridad (los primeros se ejecutan antes)
