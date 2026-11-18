@@ -137,8 +137,84 @@ Es especialmente útil cuando varias personas trabajan sobre el mismo código.
 </section>
 
 <!-- SECCIÓN 3 -->
+<section id="instalacion">
+<h2>3. Instalación y Configuración de Git</h2>
+
+<p>
+Para empezar a usar Git, primero es necesario instalarlo en tu ordenador
+y configurar tus datos de usuario.
+</p>
+
+<h3>3.1. Instalar Git</h3>
+
+<p>
+Git está disponible para Windows, macOS y Linux. Para descargar e instalar la última versión,
+visita <a href="https://git-scm.com/install/windows" target="_blank">https://git-scm.com/install/windows</a>.
+</p>
+
+<div class="diagram">
+    <img src="../assets/git_install.png" style="max-width:80%;" alt="Git Installation">
+</div>
+
+<h3>3.2. Verificar la instalación</h3>
+
+<p>
+Abre una terminal (cmd, PowerShell o Git Bash) y verifica que Git está instalado correctamente:
+</p>
+
+<pre><code class="language-bash">
+git --version
+</code></pre>
+
+<p>
+El resultado debe mostrar algo similar a:
+</p>
+
+<pre><code class="language-text">
+git version 2.43.0.windows.1
+</code></pre>
+
+<h3>3.3. Configurar usuario y email</h3>
+
+<p>
+Debes configurar tu nombre de usuario y correo electrónico. Estos datos
+aparecerán en cada commit que realices.
+</p>
+
+<pre><code class="language-bash">
+git config --global user.name "TuNombre"
+git config --global user.email "tu.email@ejemplo.com"
+</code></pre>
+
+<h3>3.4. Verificar la configuración</h3>
+
+<p>
+Para ver toda la configuración de Git en tu sistema:
+</p>
+
+<pre><code class="language-bash">
+git config --list
+</code></pre>
+
+<p>
+Este comando mostrará todas las opciones configuradas, incluyendo el nombre de usuario,
+el email, y otras opciones de Git.
+</p>
+
+<p>
+Si solo quieres ver tu nombre de usuario o email:
+</p>
+
+<pre><code class="language-bash">
+git config user.name
+git config user.email
+</code></pre>
+
+</section>
+
+<!-- SECCIÓN 4 -->
 <section id="repositorio">
-<h2>3. Repositorio Git</h2>
+<h2>4. Repositorio Git</h2>
 
 <p>
 Un <strong>repositorio</strong> es el lugar donde Git almacena el historial del proyecto.
@@ -148,7 +224,7 @@ Puede ser local o remoto.
     <img src="../assets/git_repository.png" style="max-width:80%;" alt="Git Logo">
 </div>
 
-<h3>3.1. Crear un repositorio</h3>
+<h3>4.1. Crear un repositorio</h3>
 
 <pre><code class="language-bash">
 git init
@@ -156,27 +232,27 @@ git init
 
 </section>
 
-<!-- SECCIÓN 4 -->
+<!-- SECCIÓN 5 -->
 <section id="flujo">
-<h2>4. Flujo básico de trabajo en Git (init)</h2>
+<h2>5. Flujo básico de trabajo en Git (init)</h2>
 
 <div class="diagram">
     <img src="../assets/git_flow.gif" style="max-width:80%;" alt="Git Flow">
 </div>
 
-<h3>4.1. Añadir cambios (add)</h3>
+<h3>5.1. Añadir cambios (add)</h3>
 
 <pre><code class="language-bash">
 git add archivo.txt
 </code></pre>
 
-<h3>4.2. Confirmar cambios (commit)</h3>
+<h3>5.2. Confirmar cambios (commit)</h3>
 
 <pre><code class="language-bash">
 git commit -m "Mensaje descriptivo"
 </code></pre>
 
-<h3>4.3. Enviar cambios al repositorio remoto (push)</h3>
+<h3>5.3. Enviar cambios al repositorio remoto (push)</h3>
 
 <pre><code class="language-bash">
 git push origin main
@@ -184,9 +260,9 @@ git push origin main
 
 </section>
 
-<!-- SECCIÓN 5 -->
+<!-- SECCIÓN 6 -->
 <section id="ramas">
-<h2>5. Ramas en Git (Branches)</h2>
+<h2>6. Ramas en Git (Branches)</h2>
 
 <p>
 Las ramas permiten desarrollar nuevas funcionalidades sin afectar
@@ -199,9 +275,9 @@ al código principal.
 
 </section>
 
-<!-- SECCIÓN 6 -->
+<!-- SECCIÓN 7 -->
 <section id="github">
-<h2>6. Git y GitHub</h2>
+<h2>7. Git y GitHub</h2>
 
 <p>
 GitHub es una plataforma que permite alojar repositorios Git
@@ -212,13 +288,13 @@ y trabajar de forma colaborativa.
     <img src="../assets/github_use.png" style="max-width:80%;" alt="Git Logo">
 </div>
 
-<h3>6.1. Descargar cambios (clone)</h3>
+<h3>7.1. Descargar cambios (clone)</h3>
 
 <pre><code class="language-bash">
 git clone https://github.com/usuario/proyecto.git
 </code></pre>
 
-<h3>6.2. Renombrar mensaje de commit (amend)</h3>
+<h3>7.2. Renombrar mensaje de commit (amend)</h3>
 
 <p>
 Si necesitas corregir el mensaje del último commit, puedes usar <code>--amend</code>.
@@ -233,9 +309,9 @@ git push --force
 
 </section>
 
-<!-- SECCIÓN 7 -->
+<!-- SECCIÓN 8 -->
 <section id="conflictos">
-<h2>7. Conflictos en Git</h2>
+<h2>8. Conflictos en Git</h2>
 <div class="diagram">
     <img src="../assets/git_conflict.png" style="max-width:80%;" alt="Git Flow">
 </div>
@@ -246,7 +322,7 @@ la misma parte de un archivo y Git no puede decidir automáticamente
 qué versión es la correcta.
 </p>
 
-<h3>7.1. ¿Cuándo se producen los conflictos?</h3>
+<h3>8.1. ¿Cuándo se producen los conflictos?</h3>
 
 <ul>
     <li>Dos desarrolladores editan las mismas líneas de un archivo</li>
@@ -254,7 +330,7 @@ qué versión es la correcta.
     <li>Se hace un <code>pull</code> con cambios remotos que colisionan con los locales</li>
 </ul>
 
-<h3>7.2. Ejemplo de conflicto</h3>
+<h3>8.2. Ejemplo de conflicto</h3>
 
 <pre><code class="language-text">
 <<<<<<< HEAD
@@ -264,7 +340,7 @@ System.out.println("Versión remota");
 >>>>>>> origin/main
 </code></pre>
 
-<h3>7.3. Resolución de conflictos</h3>
+<h3>8.3. Resolución de conflictos</h3>
 
 <p>
 Para resolver un conflicto es necesario:
@@ -280,9 +356,9 @@ Para resolver un conflicto es necesario:
 
 </section>
 
-<!-- SECCIÓN 8 -->
+<!-- SECCIÓN 9 -->
 <section id="gitignore">
-<h2>8. Archivo .gitignore</h2>
+<h2>9. Archivo .gitignore</h2>
 
 <p>
 El archivo <code>.gitignore</code> se utiliza para indicar a Git
@@ -300,7 +376,7 @@ Es habitual ignorar:
     <li>Configuraciones locales</li>
 </ul>
 
-<h3>8.1. Ejemplo de .gitignore</h3>
+<h3>9.1. Ejemplo de .gitignore</h3>
 
 <pre><code class="language-text">
 /bin/
@@ -317,9 +393,9 @@ en futuros commits.
 
 </section>
 
-<!-- SECCIÓN 9 -->
+<!-- SECCIÓN 10 -->
 <section id="strategy">
-<h2>9. Estrategias de trabajo con Git</h2>
+<h2>10. Estrategias de trabajo con Git</h2>
 
 <p>
 Una <strong>Git Strategy</strong> define cómo se utilizan las ramas
@@ -327,14 +403,14 @@ y cómo se integran los cambios en un proyecto.
 Elegir una buena estrategia mejora la organización y reduce errores.
 </p>
 
-<h3>9.1. Rama principal</h3>
+<h3>10.1. Rama principal</h3>
 
 <p>
 La rama <code>main</code> (o <code>master</code>) contiene la versión estable del proyecto.
 Nunca debería incluir código sin probar.
 </p>
 
-<h3>9.2. Ramas de desarrollo</h3>
+<h3>10.2. Ramas de desarrollo</h3>
 
 <ul>
     <li>Una rama por funcionalidad</li>
@@ -345,7 +421,7 @@ Nunca debería incluir código sin probar.
     <img src="../assets/git_simple	.png" style="max-width:80%;" alt="Git Logo">
 </div>
 
-<h3>9.3. Ejemplo de estrategia</h3>
+<h3>10.3. Ejemplo de estrategia</h3>
 
 <div class="diagram">
     <img src="../assets/git_strategy.png" style="max-width:80%;" alt="Git Logo">

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 3: Seguridad en Servidores Web (Apache, Nginx, IIS y ModSecurity) | Linkia FP</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .slide { display: none; }
+        #slide1:target, #slide2:target, #slide3:target, #slide4:target, 
+        #slide5:target, #slide6:target, #slide7:target, #slide8:target {
+            display: block;
+        }
+        body:not(:has(:target)) #slide1 { display: block; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between font-sans selection:bg-pink-500 selection:text-white">
+
+    <!-- HEADER -->
+    <header class="bg-slate-900 border-b border-slate-800 px-6 py-4 flex flex-wrap justify-between items-center shadow-md">
+        <div class="flex items-center space-x-3">
+            <span class="bg-pink-600 text-white text-xs font-black px-2.5 py-1 rounded-md uppercase tracking-wider">Docente: Gema Santos</span>
+            <h1 class="text-lg font-bold text-slate-200 tracking-tight">ASIX-ASIXCIBER C037 <span class="text-pink-400 font-normal">| UT4: Seguridad Web</span></h1>
+        </div>
+        <!-- Menú de Pestañas / Navegación rápida -->
+        <nav class="flex flex-wrap gap-2 mt-2 sm:mt-0">
+            <a href="#slide1" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-pink-600 hover:text-white transition">1. Intro Servidores</a>
+            <a href="#slide2" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-pink-600 hover:text-white transition">2. Amenazas Web</a>
+            <a href="#slide3" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-pink-600 hover:text-white transition">3. Apache Hardening</a>
+            <a href="#slide4" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-pink-600 hover:text-white transition">4. ModSecurity (WAF)</a>
+            <a href="#slide5" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-pink-600 hover:text-white transition">5. Nginx Seguridad</a>
+            <a href="#slide6" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-pink-600 hover:text-white transition">6. IIS y Microsoft</a>
+            <a href="#slide7" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-pink-600 hover:text-white transition">7. Tabla Comparativa</a>
+            <a href="#slide8" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-pink-600 hover:text-white transition">8. Resumen Global</a>
+        </nav>
+    </header>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <main class="flex-grow max-w-6xl w-full mx-auto p-6 md:p-10 my-auto">
+
+        <!-- DIAPOSITIVA 1: INTRODUCCIÓN A SERVIDORES WEB -->
+        <section id="slide1" class="slide bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl">
+            <div class="flex justify-between items-start mb-6 border-b border-slate-800 pb-4">
+                <div>
+                    <span class="text-xs font-mono text-pink-400 uppercase tracking-widest">Unidad de Trabajo 4</span>
+                    <h2 class="text-3xl font-extrabold text-white mt-1">¿Qué es un Servidor Web y por qué protegerlo?</h2>
+                </div>
+                <span class="text-sm font-mono text-slate-500">01 / 08</span>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4">
+                    <p class="text-slate-300 leading-relaxed text-base">
+                        Un servidor web es un software esencial que actúa como intermediario entre los usuarios (navegadores) y las aplicaciones web, procesando peticiones HTTP/HTTPS[cite: 5].
+                    </p>
+                    <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-2">
+                        <h4 class="text-pink-400 font-bold flex items-center gap-2">🏠 Analogía Didáctica Visual</h4>
+                        <p class="text-sm text-slate-400">
+                            Los servidores web son como la <strong>puerta principal de una casa</strong>: por ahí entra todo el mundo[cite: 8]. Su alta accesibilidad los convierte en el blanco principal de los ciberdelincuentes.
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-center">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80" alt="Servidor web corporativo y ciberseguridad" class="rounded-lg max-h-56 mx-auto object-cover w-full opacity-90 border border-slate-700">
+                    <span class="text-[10px] text-slate-500 mt-2 block font-mono">Infraestructura de servidores y conexiones concurrentes</span>
+                </div>
+            </div>
+
+            <div class="flex justify-end mt-8">
+                <a href="#slide2" class="bg-pink-600 text-white font-bold px-6 py-2.5 rounded-xl hover:bg-pink-500 transition flex items-center gap-2">Siguiente: Amenazas Web &rarr;</a>
+            </div>
+        </section>
+
+        <!-- DIAPOSITIVA 2: AMENAZAS Y VULNERABILIDADES WEB -->
+        <section id="slide2" class="slide bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl">
+            <div class="flex justify-between items-start mb-6 border-b border-slate-800 pb-4">
+                <div>
+                    <span class="text-xs font-mono text-pink-400 uppercase tracking-widest">Seguridad en Aplicaciones</span>
+                    <h2 class="text-3xl font-extrabold text-white mt-1">Principales Amenazas de Seguridad</h2>
+                </div>
+                <span class="text-sm font-mono text-slate-500">02 / 08</span>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-2">
+                    <div class="text-pink-400 font-bold">XSS (Cross-Site Scripting)</div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Inyección de scripts maliciosos ejecutados en el navegador del usuario (Reflejado, Almacenado y DOM)[cite: 9].
+                    </p>
+                    <span class="text-[10px] bg-red-950 text-red-300 px-2 py-0.5 rounded font-mono inline-block">Impacto: Robo de sesiones</span>
+                </div>
+                <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-2">
+                    <div class="text-pink-400 font-bold">Inyección SQL (SQLi)</div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Manipulación de consultas a bases de datos para extraer, modificar o borrar registros sensibles[cite: 10].
+                    </p>
+                    <span class="text-[10px] bg-red-950 text-red-300 px-2 py-0.5 rounded font-mono inline-block">Impacto: Exfiltración de datos</span>
+                </div>
+                <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-2">
+                    <div class="text-pink-400 font-bold">Ataques DoS / DDoS</div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Sobrecarga masiva de solicitudes o ancho de banda para agotar los recursos de CPU y memoria del servidor[cite: 12].
+                    </p>
+                    <span class="text-[10px] bg-red-950 text-red-300 px-2 py-0.5 rounded font-mono inline-block">Impacto: Caída del servicio</span>
+                </div>
+            </div>
+
+            <div class="flex justify-between mt-8">
+                <a href="#slide1" class="bg-slate-800 text-slate-200 font-bold px-6 py-2.5 rounded-xl hover:bg-slate-700 transition">&larr; Anterior</a>
+                <a href="#slide3" class="bg-pink-600 text-white font-bold px-6 py-2.5 rounded-xl hover:bg-pink-500 transition flex items-center gap-2">Siguiente: Apache Hardening &rarr;</a>
+            </div>
+        </section>
+
+        <!-- DIAPOSITIVA 3: CONFIGURACIÓN SEGURA DE APACHE -->
+        <section id="slide3" class="slide bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl">
+            <div class="flex justify-between items-start mb-6 border-b border-slate-800 pb-4">
+                <div>
+                    <span class="text-xs font-mono text-pink-400 uppercase tracking-widest">Endurecimiento (Hardening)</span>
+                    <h2 class="text-3xl font-extrabold text-white mt-1">Configuración Segura para Apache</h2>
+                </div>
+                <span class="text-sm font-mono text-slate-500">03 / 08</span>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="space-y-3">
+                    <h3 class="text-sm font-bold text-pink-400 uppercase tracking-wider">Ocultación y Permisos</h3>
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono text-xs text-slate-300 space-y-2 overflow-x-auto">
+                        <p class="text-slate-500"># Suprimir banner de versión en apache2.conf</p>
+                        <p class="text-pink-300">ServerSignature Off<br>ServerTokens Prod[cite: 14]</p>
+                        <p class="text-slate-500"># Deshabilitar listado de directorios</p>
+                        <p class="text-pink-300">&lt;Directory /var/www/html&gt;<br>&nbsp;&nbsp;Options -Indexes<br>&lt;/Directory&gt;[cite: 15]</p>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <h3 class="text-sm font-bold text-pink-400 uppercase tracking-wider">Cabeceras y Cifrado SSL</h3>
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono text-xs text-slate-300 space-y-2 overflow-x-auto">
+                        <p class="text-slate-500"># Protección XSS y Cookies Seguras</p>
+                        <p class="text-pink-300">Header set X-XSS-Protection "1; mode=block"<br>Header edit Set-Cookie ^(.*)$ $1; HttpOnly; Secure[cite: 19, 21]</p>
+                        <p class="text-slate-500"># Habilitar módulo SSL</p>
+                        <p class="text-pink-300">sudo a2enmod ssl[cite: 20]</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between mt-8">
+                <a href="#slide2" class="bg-slate-800 text-slate-200 font-bold px-6 py-2.5 rounded-xl hover:bg-slate-700 transition">&larr; Anterior</a>
+                <a href="#slide4" class="bg-pink-600 text-white font-bold px-6 py-2.5 rounded-xl hover:bg-pink-500 transition flex items-center gap-2">Siguiente: ModSecurity WAF &rarr;</a>
+            </div>
+        </section>
+
+        <!-- DIAPOSITIVA 4: MODSECURITY (WAF) -->
+        <section id="slide4" class="slide bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl">
+            <div class="flex justify-between items-start mb-6 border-b border-slate-800 pb-4">
+                <div>
+                    <span class="text-xs font-mono text-pink-400 uppercase tracking-widest">Seguridad Perimetral Web</span>
+                    <h2 class="text-3xl font-extrabold text-white mt-1">ModSecurity: Firewall de Aplicaciones Web (WAF)</h2>
+                </div>
+                <span class="text-sm font-mono text-slate-500">04 / 08</span>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4">
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        ModSecurity es un WAF de código abierto que analiza, filtra y bloquea solicitudes HTTP/HTTPS maliciosas antes de que lleguen a la aplicación web[cite: 22].
+                    </p>
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                        <h4 class="text-pink-400 font-bold text-xs uppercase tracking-wider">Ejemplo de Regla WAF Personalizada:</h4>
+                        <code class="text-xs font-mono text-pink-300 block">SecRule REQUEST_URI "@contains /admin" "id:1234, deny, status:403, msg:'Acceso no autorizado'"[cite: 27]</code>
+                    </div>
+                </div>
+                <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 font-mono text-xs text-slate-300 space-y-3">
+                    <div class="text-slate-500 uppercase tracking-wider text-[10px] font-bold">Despliegue rápido en Linux:</div>
+                    <p class="text-pink-300">sudo apt install libapache2-mod-security2[cite: 25]</p>
+                    <p class="text-slate-500"># Activar módulo y reglas OWASP CRS</p>
+                    <p class="text-pink-300">sudo a2enmod security2<br>git clone https://github.com/coreruleset/coreruleset /usr/share/modsecurity-crs[cite: 25, 26]</p>
+                </div>
+            </div>
+
+            <div class="flex justify-between mt-8">
+                <a href="#slide3" class="bg-slate-800 text-slate-200 font-bold px-6 py-2.5 rounded-xl hover:bg-slate-700 transition">&larr; Anterior</a>
+                <a href="#slide5" class="bg-pink-600 text-white font-bold px-6 py-2.5 rounded-xl hover:bg-pink-500 transition flex items-center gap-2">Siguiente: Nginx Seguridad &rarr;</a>
+            </div>
+        </section>
+
+        <!-- DIAPOSITIVA 5: NGINX SEGURIDAD -->
+        <section id="slide5" class="slide bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl">
+            <div class="flex justify-between items-start mb-6 border-b border-slate-800 pb-4">
+                <div>
+                    <span class="text-xs font-mono text-pink-400 uppercase tracking-widest">Alto Rendimiento y Eventos</span>
+                    <h2 class="text-3xl font-extrabold text-white mt-1">Nginx: Configuración y Mitigación</h2>
+                </div>
+                <span class="text-sm font-mono text-slate-500">05 / 08</span>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="space-y-3">
+                    <h3 class="text-sm font-bold text-pink-400 uppercase tracking-wider">Directivas Clave (nginx.conf)</h3>
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono text-xs text-slate-300 space-y-2 overflow-x-auto">
+                        <p class="text-slate-500"># Ocultar versión del servidor</p>
+                        <p class="text-pink-300">server_tokens off;[cite: 29]</p>
+                        <p class="text-slate-500"># Bloquear ficheros ocultos (.git, .env)</p>
+                        <p class="text-pink-300">location ~ /\. { deny all; }[cite: 30]</p>
+                        <p class="text-slate-500"># Limitar métodos HTTP permitidos</p>
+                        <p class="text-pink-300">if ($request_method !~ ^(GET|POST|HEAD)$) { return 405; }[cite: 35]</p>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <h3 class="text-sm font-bold text-pink-400 uppercase tracking-wider">Mitigación Anti-DDoS (Rate Limiting)</h3>
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono text-xs text-slate-300 space-y-2 overflow-x-auto">
+                        <p class="text-slate-500"># Limitar peticiones a 10 req/s por IP</p>
+                        <p class="text-pink-300">limit_req_zone $binary_remote_addr zone=one:10m rate=10r/s;<br><br>server {<br>&nbsp;&nbsp;location / {<br>&nbsp;&nbsp;&nbsp;&nbsp;limit_req zone=one burst=5;<br>&nbsp;&nbsp;}<br>}[cite: 33]</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between mt-8">
+                <a href="#slide4" class="bg-slate-800 text-slate-200 font-bold px-6 py-2.5 rounded-xl hover:bg-slate-700 transition">&larr; Anterior</a>
+                <a href="#slide6" class="bg-pink-600 text-white font-bold px-6 py-2.5 rounded-xl hover:bg-pink-500 transition flex items-center gap-2">Siguiente: IIS & Microsoft &rarr;</a>
+            </div>
+        </section>
+
+        <!-- DIAPOSITIVA 6: IIS Y MICROSOFT -->
+        <section id="slide6" class="slide bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl">
+            <div class="flex justify-between items-start mb-6 border-b border-slate-800 pb-4">
+                <div>
+                    <span class="text-xs font-mono text-pink-400 uppercase tracking-widest">Entornos Empresariales Windows</span>
+                    <h2 class="text-3xl font-extrabold text-white mt-1">Internet Information Services (IIS)</h2>
+                </div>
+                <span class="text-sm font-mono text-slate-500">06 / 08</span>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="space-y-3">
+                    <h3 class="text-sm font-bold text-pink-400 uppercase tracking-wider">Mejoras de Seguridad en IIS</h3>
+                    <ul class="text-xs text-slate-300 space-y-2 bg-slate-950 p-4 rounded-xl border border-slate-800">
+                        <li>✔️ <strong>Protocolos Seguros:</strong> Deshabilitar SSL 2.0/3.0 y TLS 1.0, manteniendo solo TLS 1.2+[cite: 41].</li>
+                        <li>✔️ <strong>Dynamic IP Restrictions:</strong> Mitigar fuerza bruta y ataques DoS limitando IPs sospechosas[cite: 42].</li>
+                        <li>✔️ <strong>Cabeceras HTTP:</strong> HSTS, X-Frame-Options y X-Content-Type-Options configuradas nativamente[cite: 42].</li>
+                    </ul>
+                </div>
+                <div class="space-y-3">
+                    <h3 class="text-sm font-bold text-pink-400 uppercase tracking-wider">Herramientas Oficiales</h3>
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs text-slate-300 space-y-3">
+                        <p><strong>IIS Crypto:</strong> Utilidad gráfica para aplicar perfiles de cifrado seguros acordes a normativas PCI DSS, HIPAA o NIST[cite: 45].</p>
+                        <p><strong>Security Compliance Toolkit:</strong> Plantillas avanzadas de políticas de seguridad predefinidas por Microsoft[cite: 46].</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between mt-8">
+                <a href="#slide5" class="bg-slate-800 text-slate-200 font-bold px-6 py-2.5 rounded-xl hover:bg-slate-700 transition">&larr; Anterior</a>
+                <a href="#slide7" class="bg-pink-600 text-white font-bold px-6 py-2.5 rounded-xl hover:bg-pink-500 transition flex items-center gap-2">Siguiente: Tabla Comparativa &rarr;</a>
+            </div>
+        </section>
+
+        <!-- DIAPOSITIVA 7: TABLA COMPARATIVA -->
+        <section id="slide7" class="slide bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl">
+            <div class="flex justify-between items-start mb-6 border-b border-slate-800 pb-4">
+                <div>
+                    <span class="text-xs font-mono text-pink-400 uppercase tracking-widest">Análisis Comparativo</span>
+                    <h2 class="text-3xl font-extrabold text-white mt-1">Tabla Comparativa: Apache, Nginx e IIS</h2>
+                </div>
+                <span class="text-sm font-mono text-slate-500">07 / 08</span>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs text-slate-300">
+                    <thead class="bg-slate-950 text-pink-400 uppercase tracking-wider font-mono">
+                        <tr>
+                            <th class="p-3">Característica</th>
+                            <th class="p-3">Apache</th>
+                            <th class="p-3">Nginx</th>
+                            <th class="p-3">IIS</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800">
+                        <tr>
+                            <td class="p-3 font-bold text-white">Desarrollador</td>
+                            <td class="p-3">Apache Software Foundation[cite: 47]</td>
+                            <td class="p-3">Igor Sysoev[cite: 47]</td>
+                            <td class="p-3">Microsoft[cite: 47]</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-white">Procesamiento</td>
+                            <td class="p-3">Basado en procesos / hilos (threads)[cite: 47]</td>
+                            <td class="p-3">Basado en eventos (asíncrono)[cite: 47]</td>
+                            <td class="p-3">Hilos y procesos optimizados para Windows[cite: 47]</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-white">Cuota de Mercado</td>
+                            <td class="p-3">&gt; 30%[cite: 47]</td>
+                            <td class="p-3">&gt; 30%[cite: 47]</td>
+                            <td class="p-3">~ 10%[cite: 47]</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-white">Seguridad</td>
+                            <td class="p-3">Excelente con ModSecurity; requiere hardening manual[cite: 48]</td>
+                            <td class="p-3">Robusta por diseño; configuraciones seguras predeterminadas[cite: 48]</td>
+                            <td class="p-3">Integración nativa con herramientas de Microsoft[cite: 48]</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-white">Licencia</td>
+                            <td class="p-3">Apache 2.0 (Código Abierto)[cite: 48]</td>
+                            <td class="p-3">BSD (Código Abierto)[cite: 48]</td>
+                            <td class="p-3">Propietaria de Microsoft[cite: 48]</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="flex justify-between mt-8">
+                <a href="#slide6" class="bg-slate-800 text-slate-200 font-bold px-6 py-2.5 rounded-xl hover:bg-slate-700 transition">&larr; Anterior</a>
+                <a href="#slide8" class="bg-pink-600 text-white font-bold px-6 py-2.5 rounded-xl hover:bg-pink-500 transition flex items-center gap-2">Siguiente: Resumen Global &rarr;</a>
+            </div>
+        </section>
+
+        <!-- DIAPOSITIVA 8: RESUMEN GLOBAL -->
+        <section id="slide8" class="slide bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-2xl">
+            <div class="flex justify-between items-start mb-6 border-b border-slate-800 pb-4">
+                <div>
+                    <span class="text-xs font-mono text-pink-400 uppercase tracking-widest">Conclusiones de la UT4</span>
+                    <h2 class="text-3xl font-extrabold text-white mt-1">Resumen y Buenas Prácticas</h2>
+                </div>
+                <span class="text-sm font-mono text-slate-500">08 / 08</span>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-2">
+                    <div class="text-pink-400 font-bold">Apache</div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Ideal para aplicaciones web dinámicas y máxima personalización mediante módulos potentes como mod_rewrite y ModSecurity[cite: 49].
+                    </p>
+                </div>
+                <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-2">
+                    <div class="text-pink-400 font-bold">Nginx</div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Líder indiscutible en rendimiento para tráfico elevado, streaming y excelente desempeño como proxy inverso eficiente[cite: 50].
+                    </p>
+                </div>
+                <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-2">
+                    <div class="text-pink-400 font-bold">IIS</div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        La opción perfecta para entornos empresariales Windows con tecnologías .NET y gestión amigable mediante interfaz gráfica[cite: 51].
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex justify-between mt-8">
+                <a href="#slide7" class="bg-slate-800 text-slate-200 font-bold px-6 py-2.5 rounded-xl hover:bg-slate-700 transition">&larr; Anterior</a>
+                <a href="#slide1" class="bg-slate-800 text-pink-400 font-bold px-6 py-2.5 rounded-xl hover:bg-slate-700 transition flex items-center gap-2">🔄 Volver al Inicio</a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 border-t border-slate-800 text-center py-4 text-xs text-slate-500">
+        ASIX-ASIXCIBER C037: Seguridad en Sistemas, Redes y Servicios | Docente: Gema Santos | Linkia FP
+    </footer>
+
+</body>
+</html>

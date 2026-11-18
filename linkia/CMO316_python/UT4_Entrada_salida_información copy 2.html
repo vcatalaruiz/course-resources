@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UT4 · Entrada y salida de información · LinkiaFP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <link rel="stylesheet" href="../style.css" />
+    <script src="../script.js" defer></script>
+</head>
+
+<body>
+    <div class="deck">
+
+        <!-- COVER -->
+        <section class="slide cover" id="slide-1">
+            <div style="max-width: 60%;">
+                <div>
+                    <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
+                </div>
+                <div class="title">UT4 · Entrada y salida de información</div>
+                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+
+            </div>
+            <div class="logo-first-page">
+                <img src="../../assets/linkia/logo_linkia_ppt.png" style="max-width: 90%;">
+            </div>
+
+        </section>
+
+
+        <section class="slide" id="entrada-salida-consola">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>1. Entrada/salida por consola</h2>
+            <p>
+                La <strong>consola</strong> es la forma más sencilla y directa de comunicación entre el usuario y el
+                programa
+                en los primeros niveles de aprendizaje. Mediante la entrada se reciben datos desde el teclado, y con la
+                salida
+                se muestran resultados o mensajes por pantalla utilizando principalmente <code>input()</code> y
+                <code>print()</code>.
+            </p>
+            <ul>
+                <li>La E/S por consola facilita comprender el flujo de datos: el usuario introduce información, el
+                    programa la procesa y devuelve resultados.</li>
+                <li>Es la base para introducir <strong>validación de datos</strong> y <strong>formateo de
+                        salidas</strong>.</li>
+                <li>Sirve como paso previo al trabajo con archivos y formatos más complejos.</li>
+            </ul>
+            
+
+        </section>
+
+        <section class="slide" id="interaccion-usuario-input">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>1. Entrada/salida por consola</h2>
+            <h3>1.1 Interacción con el usuario: <code>input()</code></h3>
+            <p>
+                La función <code>input()</code> permite pausar la ejecución del programa para que el usuario escriba un
+                dato.
+                El valor leído se almacena siempre como <strong>cadena de caracteres (<code>str</code>)</strong>, por lo
+                que
+                suele ser necesaria una conversión de tipo antes de operar con él.
+            </p>
+            <ul>
+                <li><strong>Sintaxis básica</strong>: <code>variable = input("Mensaje al usuario: ")</code>.</li>
+                <li>El contenido introducido es siempre <code>str</code>, incluso si parece un número.</li>
+                <li>Conversión típica: <code>int()</code> para enteros, <code>float()</code> para decimales,
+                    <code>bool()</code> para booleanos (con tratamiento especial).</li>
+            </ul>
+            <pre class="language-python"><code>nombre = input("Introduce tu nombre: ")
+
+edad_texto = input("Introduce tu edad: ")
+
+# Conversión de tipos
+
+edad = int(edad_texto)
+
+print("Hola,", nombre)
+print("El año que viene tendrás", edad + 1, "años")</code></pre>
+
+        </section>
+
+        <section class="slide" id="formateo-salidas-print">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>1. Entrada/salida por consola</h2>
+            <h3>1.2 Formateo de salidas personalizadas: <code>print()</code></h3>
+            <p>
+                La función <code>print()</code> muestra información por pantalla. Un uso cuidadoso del formateo es clave
+                para generar salidas claras, alineadas y legibles en programas que presentan informes, cálculos o
+                resultados.
+            </p>
+            <ul>
+                <li><strong>Concatenación con <code>+</code></strong>: solo une cadenas, obliga a convertir números con
+                    <code>str()</code>.</li>
+                <li><strong>Separación con comas</strong>: permite mezclar tipos sin conversión explícita;
+                    <code>print()</code> inserta espacios automáticamente.</li>
+                <li><strong>f-strings</strong> (Python ≥ 3.6): permiten incrustar variables dentro de la cadena y
+                    formatear números con precisión.</li>
+                <li>Parámetros útiles: <code>sep</code> (separador) y <code>end</code> (final de línea).</li>
+            </ul>
+            <pre class="language-python"><code>nombre = "Ana"
+
+nota = 8.75
+
+# a) Concatenación
+
+print("Alumno: " + nombre + " - Nota: " + str(nota))
+
+# b) Comas
+
+print("Alumno:", nombre, "Nota:", nota)
+
+# c) f-strings con formateo
+
+print(f"Alumno: {nombre} - Nota: {nota:.2f}")  # 2 decimales
+
+# Personalizar separador y final
+
+print("A", "B", "C", sep="-", end=">")
+print("Fin")</code></pre>
+
+        </section>
+
+        <section class="slide" id="manejo-archivos-intro">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>2. Manejo de archivos</h2>
+            <p>
+                El manejo de archivos en Python permite <strong>almacenar y recuperar datos de forma
+                    permanente</strong>, más allá
+                de la ejecución del programa. Es una competencia básica en contextos donde se necesitan registros,
+                informes,
+                logs de actividad o cualquier información reutilizable.
+            </p>
+            <ul>
+                <li>La función <code>open()</code> permite acceder a archivos de texto mediante distintos <strong>modos
+                        de apertura</strong>.</li>
+                <li>La lectura y escritura de ficheros de texto constituye la base para trabajar con formatos más
+                    complejos como CSV o JSON.</li>
+                <li>Se recomienda usar <strong><code>with open()</code></strong> para garantizar el cierre seguro del
+                    archivo.</li>
+            </ul>
+            
+
+        </section>
+
+        <section class="slide" id="apertura-lectura-escritura">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>2.1 Lectura y escritura en archivos de texto</h3>
+            <p>
+                Para acceder a un archivo se utiliza la función integrada <code>open()</code>, que recibe el nombre del
+                archivo
+                y el <strong>modo de apertura</strong>. Una vez abierto, se pueden leer o escribir líneas de texto antes
+                de
+                cerrar el fichero.
+            </p>
+            <ul>
+                <li>Primer parámetro: nombre del archivo (por ejemplo, <code>"datos.txt"</code>).</li>
+                <li>Segundo parámetro: modo (<code>"r"</code>, <code>"w"</code>, <code>"a"</code>, <code>"r+"</code>,
+                    etc.).</li>
+                <li>La lectura básica se realiza con <code>read()</code>, <code>readline()</code> o
+                    <code>readlines()</code>.</li>
+            </ul>
+            <pre class="language-python"><code># Lectura básica
+
+archivo = open("texto.txt", "r", encoding="utf-8")
+contenido = archivo.read()
+print(contenido)
+archivo.close()
+
+# Escritura básica (sobrescribe el archivo si ya existe)
+
+archivo = open("salida.txt", "w", encoding="utf-8")
+archivo.write("Primera línean")
+archivo.write("Segunda línean")
+archivo.close()</code></pre>
+
+        </section>
+
+        <section class="slide" id="modos-apertura-open">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>2.2 Modos de apertura (<code>r</code>, <code>w</code>, <code>a</code>, <code>r+</code>)</h3>
+            <p>
+                Los <strong>modos de apertura</strong> definen qué se puede hacer con el archivo y qué ocurre con su
+                contenido
+                previo. Elegir el modo correcto es crucial para evitar perder información.
+            </p>
+            <ul>
+                <li><code>"r"</code>: solo lectura. Produce error si el archivo no existe.</li>
+                <li><code>"w"</code>: escritura. Crea el archivo o <strong>borra todo su contenido</strong> si ya
+                    existe.</li>
+                <li><code>"a"</code>: añadir (append). Escribe al final sin borrar lo anterior.</li>
+                <li><code>"r+"</code>: lectura y escritura. Requiere que el archivo exista.</li>
+            </ul>
+            <pre class="language-python"><code># Ejemplo de modo append (a)
+
+with open("log.txt", "a", encoding="utf-8") as f:
+f.write("Nueva entrada de logn")</code></pre>
+
+        </section>
+
+        <section class="slide" id="with-open-gestion-automatica">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>2.3 Uso de <code>with open()</code> (gestión automática)</h3>
+            <p>
+                La estructura <code>with open() as</code> es la forma recomendada de trabajar con archivos en Python,
+                ya que <strong>garantiza el cierre automático</strong> incluso si se produce un error durante la lectura
+                o escritura.
+            </p>
+            <ul>
+                <li>No es necesario llamar a <code>.close()</code> explícitamente.</li>
+                <li>Reduce la posibilidad de dejar archivos abiertos accidentalmente.</li>
+                <li>Es más legible y seguro en programas reales.</li>
+            </ul>
+            <pre class="language-python"><code># Lectura con with
+
+with open("datos.txt", "r", encoding="utf-8") as f:
+    for linea in f:
+        print(linea.strip())
+
+# Escritura con with
+
+with open("resultado.txt", "w", encoding="utf-8") as f:
+    f.write("Informe generado correctamente")</code></pre>
+
+        </section>
+
+        <section class="slide" id="estructura-archivos-lineas">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>2.4 Estructura de archivos y líneas</h3>
+            <p>
+                Un archivo de texto está formado por <strong>líneas</strong> separadas por caracteres de fin de línea
+                (generalmente <code>n</code>). Python ofrece distintas funciones para trabajar con estas líneas de
+                forma flexible.
+            </p>
+            <ul>
+                <li><code>read()</code>: lee todo el contenido como una sola cadena.</li>
+                <li><code>readline()</code>: lee una única línea por llamada.</li>
+                <li><code>readlines()</code> o iterar sobre el archivo: permite procesar línea a línea.</li>
+                <li>Es frecuente usar <code>.strip()</code> para eliminar saltos de línea al procesar texto.</li>
+            </ul>
+            <pre class="language-python"><code># Leer línea a línea
+
+with open("alumnos.txt", "r", encoding="utf-8") as f:
+    for linea in f:
+        print("Línea:", linea.strip())
+
+# Escribir varias líneas
+
+lineas = ["Ana,20n", "Luis,22n", "María,19n"]
+with open("alumnos.txt", "w", encoding="utf-8") as f:
+    f.writelines(lineas)</code></pre>
+
+        </section>
+
+        <section class="slide" id="organizacion-datos-ficheros">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>3. Organización de datos en ficheros</h2>
+            <p>
+                En entornos profesionales, trabajar con archivos implica no solo leer y escribir texto, sino
+                <strong>organizar los datos de forma estructurada</strong>. El uso de separadores, formatos y
+                codificaciones
+                permite simular registros, tablas, informes o logs de actividad fácilmente procesables.
+            </p>
+            <ul>
+                <li>Un archivo puede verse como una colección de <strong>registros</strong> (líneas) y
+                    <strong>campos</strong> (datos dentro de cada línea).</li>
+                <li>Los separadores (comas, tabuladores, etc.) delimitan los campos de información.</li>
+                <li>Una codificación adecuada (como <code>utf-8</code>) asegura que se representen correctamente acentos
+                    y símbolos especiales.</li>
+            </ul>
+            
+
+        </section>
+
+        <section class="slide" id="separadores-formatos-codificaciones">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>3.1 Separadores, formatos y codificaciones</h3>
+            <p>
+                Un <strong>separador</strong> es un símbolo que se usa para delimitar campos en una misma línea de
+                texto.
+                Los formatos como <strong>CSV</strong> o <strong>TSV</strong> se basan en separadores y son muy comunes
+                para intercambiar datos tabulados entre programas.
+            </p>
+            <ul>
+                <li>Separadores típicos: coma (<code>,</code>) en CSV, tabulador (<code>t</code>) en TSV, punto y coma
+                    (<code>;</code>), barra vertical (<code>|</code>).</li>
+                <li>Formatos frecuentes: <strong>.txt</strong>, <strong>.csv</strong>, <strong>.tsv</strong>,
+                    <strong>.log</strong>, <strong>.dat</strong>.</li>
+                <li>Codificaciones: <strong>utf-8</strong> (recomendada), <strong>utf-16</strong>,
+                    <strong>latin-1</strong> según el contexto.</li>
+            </ul>
+            <pre class="language-python"><code># Escritura de un CSV simple
+
+with open("alumnos.csv", "w", encoding="utf-8") as f:
+    f.write("nombre,edadn")
+    f.write("Ana,20n")
+    f.write("Luis,22n")
+
+# Lectura y separación por comas
+
+with open("alumnos.csv", "r", encoding="utf-8") as f:
+    next(f)  # saltar cabecera
+    for linea in f:
+        nombre, edad = linea.strip().split(",")
+        print(f"Alumno: {nombre} - Edad: {edad}")</code></pre>
+
+        </section>
+
+        <section class="slide" id="aplicaciones-practicas-registros-logs">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h3>3.2 Aplicaciones prácticas: registros, logs, informes</h3>
+            <p>
+                La organización de datos en ficheros permite crear estructuras sencillas como
+                <strong>registros</strong>,
+                <strong>logs</strong> e <strong>informes</strong>, que son muy utilizadas en aplicaciones reales para
+                llevar trazabilidad y generar resultados legibles.
+            </p>
+            <ul>
+                <li><strong>Registros</strong>: cada línea representa una unidad de información (usuario, reserva,
+                    visita...).</li>
+                <li><strong>Logs</strong>: almacenan trazas de funcionamiento, errores, avisos y eventos con marcas de
+                    tiempo.</li>
+                <li><strong>Informes</strong>: resumen de datos procesados, alineados en columnas para facilitar su
+                    lectura.</li>
+            </ul>
+            <pre class="language-python"><code>
+# Ejemplo de log con marcas de tiempo
+import datetime
+with open("app.log", "a", encoding="utf-8") as f:
+    f.write(f"{datetime.datetime.now()}: Usuario inició sesiónn")
+
+            </code></pre>
+
+        </section>
+
+        
+
+        <section class="slide" id="actividades-evaluacion-ut4">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+
+            <h2>Actividades de evaluación (no obligatorias)</h2>
+           
+            <ul>
+                <li><strong>Actividad 1: Manejo de archivos</strong>
+                    <ul>
+                        <li>Crear <code>datos.txt</code>, escribir nombre y edad introducidos por el usuario, y leerlos
+                            de nuevo por consola.</li>
+                    </ul>
+                </li>
+                <li><strong>Actividad 2: Organización de datos en ficheros</strong>
+                    <ul>
+                        <li>Solicitar varios nombres y edades y guardar cada entrada en <code>usuarios.txt</code> en el
+                            formato <em>nombre - edad</em>.</li>
+                    </ul>
+                </li>
+                <li><strong>Actividad 3: Estadísticas básicas desde un fichero</strong>
+                    <ul>
+                        <li>Leer <code>edades.txt</code> y calcular: edad media, mínima, máxima y número total de
+                            entradas.</li>
+                    </ul>
+                </li>
+            </ul>
+
+        </section>
+
+
+
+
+    </div>
+
+    <div class="footer">
+        <div class="bar">
+            <small>UT4 · Entrada y salida de información</small>
+            <small>© 2025/2026 · Docente: Vicente Català Ruiz</small>
+        </div>
+    </div>
+</body>
+
+</html>

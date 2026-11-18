@@ -7,13 +7,187 @@
     <title>UT4 · Entrada y salida de información · LinkiaFP</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
+    <script>document.addEventListener("DOMContentLoaded", () => hljs.highlightAll());</script>
     <link rel="stylesheet" href="../style.css" />
     <script src="../script.js" defer></script>
+    <style>
+        .ut4-deck section.slide:not(.cover) {
+            border-top: 4px solid var(--magenta);
+            text-align: left;
+        }
+
+        .ut4-deck section.slide h2 {
+            color: #5a2868;
+        }
+
+        .ut4-deck section.slide h3 {
+            margin-top: 24px;
+            color: #7a2d68;
+        }
+
+        .ut4-deck section.slide p {
+            max-width: 90ch;
+            line-height: 1.65;
+        }
+
+        .ut4-deck section.slide li {
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+
+        .ut4-deck section.slide li::marker {
+            color: var(--magenta);
+        }
+
+        .ut4-deck pre {
+            overflow-x: auto;
+            border: 1px solid #293247;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(17, 24, 39, .12);
+        }
+
+        .ut4-deck .terminal-output {
+            margin: -4px 0 22px;
+            overflow: hidden;
+            border: 1px solid #273449;
+            border-radius: 10px;
+            background: #101923;
+            color: #e2e8f0;
+            box-shadow: 0 6px 18px rgba(17, 24, 39, .12);
+        }
+
+        .ut4-deck .terminal-heading {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 14px;
+            background: #1b2735;
+            color: #cbd5e1;
+            font-size: .82rem;
+            font-weight: 600;
+        }
+
+        .ut4-deck .terminal-dots {
+            display: inline-flex;
+            gap: 5px;
+        }
+
+        .ut4-deck .terminal-dots span {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #fb7185;
+        }
+
+        .ut4-deck .terminal-dots span:nth-child(2) {
+            background: #fbbf24;
+        }
+
+        .ut4-deck .terminal-dots span:nth-child(3) {
+            background: #4ade80;
+        }
+
+        .ut4-deck .terminal-output pre {
+            margin: 0;
+            padding: 14px 16px;
+            overflow-x: auto;
+            border: 0;
+            border-radius: 0;
+            background: transparent;
+            color: #d1fae5;
+            box-shadow: none;
+            font: 14px/1.6 Consolas, "Courier New", monospace;
+            white-space: pre-wrap;
+        }
+
+        .ut4-deck .eyebrow {
+            margin: 0;
+            color: var(--magenta);
+            font-size: .82rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .ut4-deck .learning-grid,
+        .ut4-deck .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 14px;
+            margin: 20px 0;
+        }
+
+        .ut4-deck .learning-card,
+        .ut4-deck .activity-card {
+            padding: 16px;
+            border: 1px solid #ead8e7;
+            border-radius: 12px;
+            background: #fff8fc;
+        }
+
+        .ut4-deck .learning-card h3,
+        .ut4-deck .activity-card h3 {
+            margin: 0 0 8px;
+        }
+
+        .ut4-deck .learning-card p,
+        .ut4-deck .activity-card p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .ut4-deck .callout {
+            margin: 18px 0;
+            padding: 12px 18px;
+            border-left: 4px solid #d88a00;
+            border-radius: 8px;
+            background: #fff7e6;
+        }
+
+        .ut4-deck .callout p {
+            margin: 4px 0;
+        }
+
+        .ut4-deck table {
+            border-collapse: collapse;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .ut4-deck th,
+        .ut4-deck td {
+            border-color: #e4d7e3;
+            text-align: left;
+        }
+
+        .ut4-deck th {
+            background: #5a2868;
+        }
+
+        @media (max-width: 600px) {
+            .ut4-deck {
+                padding: 16px 10px 90px;
+            }
+
+            .ut4-deck section.slide {
+                padding: 22px 18px;
+            }
+
+            .ut4-deck section.slide.cover > div:first-child {
+                max-width: 78% !important;
+            }
+
+            .ut4-deck section.slide.cover .logo-first-page {
+                top: 0;
+                right: -15%;
+                width: 48%;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <div class="deck">
+    <div class="deck ut4-deck">
 
         <!-- COVER -->
         <section class="slide cover" id="slide-1">
@@ -21,8 +195,9 @@
                 <div>
                     <img src="../../assets/linkia/logo_linkia_white.png" style="max-width: 50%;" alt="">
                 </div>
+                <p class="eyebrow">Programación · Python</p>
                 <div class="title">UT4 · Entrada y salida de información</div>
-                <div class="subtitle">Vicente Català Ruiz · Profesor del Área de Informática</div>
+                <div class="subtitle">De la consola a los archivos: introducir, guardar y recuperar datos</div>
 
             </div>
             <div class="logo-first-page">
@@ -31,10 +206,36 @@
 
         </section>
 
+        <section class="slide" id="objetivos-ut4">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Linkia FP">
+            <p class="eyebrow">Antes de empezar</p>
+            <h2>Qué vas a aprender</h2>
+            <p>En esta unidad seguirás el recorrido de los datos: entran en el programa, se transforman, se guardan y
+                vuelven a mostrarse cuando los necesitamos.</p>
+            <div class="learning-grid">
+                <article class="learning-card">
+                    <h3>1. Interactuar</h3>
+                    <p>Leer datos con <code>input()</code> y presentar resultados comprensibles con <code>print()</code>.</p>
+                </article>
+                <article class="learning-card">
+                    <h3>2. Persistir</h3>
+                    <p>Abrir archivos de texto en el modo adecuado y gestionarlos con <code>with open()</code>.</p>
+                </article>
+                <article class="learning-card">
+                    <h3>3. Procesar</h3>
+                    <p>Organizar registros por líneas, separar sus campos y calcular información útil.</p>
+                </article>
+            </div>
+            <div class="callout">
+                <p><strong>Idea clave:</strong> los datos recibidos por teclado son texto; conviértelos al tipo que
+                    necesites antes de calcular.</p>
+            </div>
+        </section>
 
         <section class="slide" id="entrada-salida-consola">
-            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Linkia FP">
 
+            <p class="eyebrow">01 · Consola</p>
             <h2>1. Entrada/salida por consola</h2>
             <p>
                 La <strong>consola</strong> es la forma más sencilla y directa de comunicación entre el usuario y el
@@ -56,8 +257,9 @@
         </section>
 
         <section class="slide" id="interaccion-usuario-input">
-            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Linkia FP">
 
+            <p class="eyebrow">01 · Entrada</p>
             <h2>1. Entrada/salida por consola</h2>
             <h3>1.1 Interacción con el usuario: <code>input()</code></h3>
             <p>
@@ -70,25 +272,30 @@
             <ul>
                 <li><strong>Sintaxis básica</strong>: <code>variable = input("Mensaje al usuario: ")</code>.</li>
                 <li>El contenido introducido es siempre <code>str</code>, incluso si parece un número.</li>
-                <li>Conversión típica: <code>int()</code> para enteros, <code>float()</code> para decimales,
-                    <code>bool()</code> para booleanos (con tratamiento especial).</li>
+                <li>Conversión típica: <code>int()</code> para enteros y <code>float()</code> para decimales.
+                    No conviertas una respuesta textual a <code>bool()</code> directamente: por ejemplo,
+                    <code>bool("no")</code> también es <code>True</code>.</li>
             </ul>
             <pre class="language-python"><code>nombre = input("Introduce tu nombre: ")
+edad = int(input("Introduce tu edad: "))
 
-edad_texto = input("Introduce tu edad: ")
-
-# Conversión de tipos
-
-edad = int(edad_texto)
-
-print("Hola,", nombre)
-print("El año que viene tendrás", edad + 1, "años")</code></pre>
-
+print(f"Hola, {nombre}. El año que viene tendrás {edad + 1} años.")</code></pre>
+            <div class="terminal-output">
+                <div class="terminal-heading"><span class="terminal-dots" aria-hidden="true"><span></span><span></span><span></span></span>Salida de ejemplo · datos introducidos: Lucía, 20</div>
+                <pre><code>Introduce tu nombre: Lucía
+Introduce tu edad: 20
+Hola, Lucía. El año que viene tendrás 21 años.</code></pre>
+            </div>
+            <div class="callout">
+                <p><strong>Comprueba el tipo:</strong> si intentas sumar un número a una cadena, Python no puede
+                    adivinar si quieres concatenar o hacer una operación matemática.</p>
+            </div>
         </section>
 
         <section class="slide" id="formateo-salidas-print">
-            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Linkia FP">
 
+            <p class="eyebrow">01 · Salida</p>
             <h2>1. Entrada/salida por consola</h2>
             <h3>1.2 Formateo de salidas personalizadas: <code>print()</code></h3>
             <p>
@@ -125,12 +332,20 @@ print(f"Alumno: {nombre} - Nota: {nota:.2f}")  # 2 decimales
 
 print("A", "B", "C", sep="-", end=">")
 print("Fin")</code></pre>
+            <div class="terminal-output">
+                <div class="terminal-heading"><span class="terminal-dots" aria-hidden="true"><span></span><span></span><span></span></span>Salida de ejemplo</div>
+                <pre><code>Alumno: Ana - Nota: 8.75
+Alumno: Ana Nota: 8.75
+Alumno: Ana - Nota: 8.75
+A-B-C&gt;Fin</code></pre>
+            </div>
 
         </section>
 
         <section class="slide" id="manejo-archivos-intro">
-            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Linkia FP">
 
+            <p class="eyebrow">02 · Archivos</p>
             <h2>2. Manejo de archivos</h2>
             <p>
                 El manejo de archivos en Python permite <strong>almacenar y recuperar datos de forma
@@ -152,8 +367,9 @@ print("Fin")</code></pre>
         </section>
 
         <section class="slide" id="apertura-lectura-escritura">
-            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Linkia FP">
 
+            <p class="eyebrow">02 · Lectura y escritura</p>
             <h3>2.1 Lectura y escritura en archivos de texto</h3>
             <p>
                 Para acceder a un archivo se utiliza la función integrada <code>open()</code>, que recibe el nombre del
@@ -169,26 +385,31 @@ print("Fin")</code></pre>
                 <li>La lectura básica se realiza con <code>read()</code>, <code>readline()</code> o
                     <code>readlines()</code>.</li>
             </ul>
-            <pre class="language-python"><code># Lectura básica
-
-archivo = open("texto.txt", "r", encoding="utf-8")
-contenido = archivo.read()
+            <pre class="language-python"><code># Leer todo el contenido
+with open("texto.txt", "r", encoding="utf-8") as archivo:
+    contenido = archivo.read()
 print(contenido)
-archivo.close()
 
-# Escritura básica (sobrescribe el archivo si ya existe)
+# Escribir dos líneas (sobrescribe el archivo si ya existe)
+with open("salida.txt", "w", encoding="utf-8") as archivo:
+    archivo.write("Primera línea\n")
+    archivo.write("Segunda línea\n")</code></pre>
+            <div class="terminal-output">
+                <div class="terminal-heading"><span class="terminal-dots" aria-hidden="true"><span></span><span></span><span></span></span>Salida de ejemplo · texto.txt contiene «Registro de ejemplo»</div>
+                <pre><code>Registro de ejemplo
 
-archivo = open("salida.txt", "w", encoding="utf-8")
-archivo.write("Primera línean")
-archivo.write("Segunda línean")
-archivo.close()</code></pre>
+salida.txt creado con:
+Primera línea
+Segunda línea</code></pre>
+            </div>
 
         </section>
 
         <section class="slide" id="modos-apertura-open">
-            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Linkia FP">
 
-            <h3>2.2 Modos de apertura (<code>r</code>, <code>w</code>, <code>a</code>, <code>r+</code>)</h3>
+            <p class="eyebrow">02 · Modos</p>
+            <h3>2.2 Modos de apertura (<code>r</code>, <code>w</code>, <code>a</code>, <code>x</code>, <code>r+</code>)</h3>
             <p>
                 Los <strong>modos de apertura</strong> definen qué se puede hacer con el archivo y qué ocurre con su
                 contenido
@@ -199,18 +420,29 @@ archivo.close()</code></pre>
                 <li><code>"w"</code>: escritura. Crea el archivo o <strong>borra todo su contenido</strong> si ya
                     existe.</li>
                 <li><code>"a"</code>: añadir (append). Escribe al final sin borrar lo anterior.</li>
-                <li><code>"r+"</code>: lectura y escritura. Requiere que el archivo exista.</li>
+                <li><code>"x"</code>: crea un archivo nuevo; produce un error si ya existe.</li>
+                <li><code>"r+"</code>: lectura y escritura sobre un archivo existente; requiere cuidado con la posición
+                    del cursor y puede sobrescribir contenido.</li>
             </ul>
-            <pre class="language-python"><code># Ejemplo de modo append (a)
-
+            <pre class="language-python"><code># Añade una entrada sin borrar las anteriores
 with open("log.txt", "a", encoding="utf-8") as f:
-f.write("Nueva entrada de logn")</code></pre>
+    f.write("Nueva entrada de registro\n")</code></pre>
+            <div class="terminal-output">
+                <div class="terminal-heading"><span class="terminal-dots" aria-hidden="true"><span></span><span></span><span></span></span>Efecto de la ejecución</div>
+                <pre><code>El programa no muestra texto en la consola.
+Se añade a log.txt: Nueva entrada de registro</code></pre>
+            </div>
+            <div class="callout">
+                <p><strong>Atención:</strong> el modo <code>"w"</code> vacía el contenido previo. Si quieres conservar
+                    los datos y añadir otros, utiliza <code>"a"</code>.</p>
+            </div>
 
         </section>
 
         <section class="slide" id="with-open-gestion-automatica">
-            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Linkia FP">
 
+            <p class="eyebrow">02 · Buenas prácticas</p>
             <h3>2.3 Uso de <code>with open()</code> (gestión automática)</h3>
             <p>
                 La estructura <code>with open() as</code> es la forma recomendada de trabajar con archivos en Python,
@@ -232,16 +464,24 @@ with open("datos.txt", "r", encoding="utf-8") as f:
 
 with open("resultado.txt", "w", encoding="utf-8") as f:
     f.write("Informe generado correctamente")</code></pre>
+            <div class="terminal-output">
+                <div class="terminal-heading"><span class="terminal-dots" aria-hidden="true"><span></span><span></span><span></span></span>Salida de ejemplo · datos.txt contiene dos líneas</div>
+                <pre><code>Primera línea
+Segunda línea
+
+resultado.txt creado con: Informe generado correctamente</code></pre>
+            </div>
 
         </section>
 
         <section class="slide" id="estructura-archivos-lineas">
-            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Linkia FP">
 
+            <p class="eyebrow">02 · Líneas</p>
             <h3>2.4 Estructura de archivos y líneas</h3>
             <p>
                 Un archivo de texto está formado por <strong>líneas</strong> separadas por caracteres de fin de línea
-                (generalmente <code>n</code>). Python ofrece distintas funciones para trabajar con estas líneas de
+                (generalmente <code>\n</code>). Python ofrece distintas funciones para trabajar con estas líneas de
                 forma flexible.
             </p>
             <ul>
@@ -250,23 +490,30 @@ with open("resultado.txt", "w", encoding="utf-8") as f:
                 <li><code>readlines()</code> o iterar sobre el archivo: permite procesar línea a línea.</li>
                 <li>Es frecuente usar <code>.strip()</code> para eliminar saltos de línea al procesar texto.</li>
             </ul>
-            <pre class="language-python"><code># Leer línea a línea
+            <pre class="language-python"><code># Escribir varias líneas
+lineas = ["Ana,20\n", "Luis,22\n", "María,19\n"]
+with open("alumnos.txt", "w", encoding="utf-8") as f:
+    f.writelines(lineas)
 
+# Leer línea a línea
 with open("alumnos.txt", "r", encoding="utf-8") as f:
     for linea in f:
-        print("Línea:", linea.strip())
+        print("Línea:", linea.strip())</code></pre>
+            <div class="terminal-output">
+                <div class="terminal-heading"><span class="terminal-dots" aria-hidden="true"><span></span><span></span><span></span></span>Salida de ejemplo</div>
+                <pre><code>Línea: Ana,20
+Línea: Luis,22
+Línea: María,19
 
-# Escribir varias líneas
-
-lineas = ["Ana,20n", "Luis,22n", "María,19n"]
-with open("alumnos.txt", "w", encoding="utf-8") as f:
-    f.writelines(lineas)</code></pre>
+alumnos.txt contiene los tres registros escritos.</code></pre>
+            </div>
 
         </section>
 
         <section class="slide" id="organizacion-datos-ficheros">
-            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Linkia FP">
 
+            <p class="eyebrow">03 · Datos estructurados</p>
             <h2>3. Organización de datos en ficheros</h2>
             <p>
                 En entornos profesionales, trabajar con archivos implica no solo leer y escribir texto, sino
@@ -286,8 +533,9 @@ with open("alumnos.txt", "w", encoding="utf-8") as f:
         </section>
 
         <section class="slide" id="separadores-formatos-codificaciones">
-            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Linkia FP">
 
+            <p class="eyebrow">03 · Formatos</p>
             <h3>3.1 Separadores, formatos y codificaciones</h3>
             <p>
                 Un <strong>separador</strong> es un símbolo que se usa para delimitar campos en una misma línea de
@@ -296,33 +544,41 @@ with open("alumnos.txt", "w", encoding="utf-8") as f:
                 para intercambiar datos tabulados entre programas.
             </p>
             <ul>
-                <li>Separadores típicos: coma (<code>,</code>) en CSV, tabulador (<code>t</code>) en TSV, punto y coma
+                <li>Separadores típicos: coma (<code>,</code>) en CSV, tabulador (<code>\t</code>) en TSV, punto y coma
                     (<code>;</code>), barra vertical (<code>|</code>).</li>
                 <li>Formatos frecuentes: <strong>.txt</strong>, <strong>.csv</strong>, <strong>.tsv</strong>,
                     <strong>.log</strong>, <strong>.dat</strong>.</li>
                 <li>Codificaciones: <strong>utf-8</strong> (recomendada), <strong>utf-16</strong>,
                     <strong>latin-1</strong> según el contexto.</li>
             </ul>
-            <pre class="language-python"><code># Escritura de un CSV simple
-
+            <pre class="language-python"><code># Escritura de un archivo separado por comas
 with open("alumnos.csv", "w", encoding="utf-8") as f:
-    f.write("nombre,edadn")
-    f.write("Ana,20n")
-    f.write("Luis,22n")
+    f.write("nombre,edad\n")
+    f.write("Ana,20\n")
+    f.write("Luis,22\n")
 
-# Lectura y separación por comas
-
+# Lectura y separación por comas (campos sin comas internas)
 with open("alumnos.csv", "r", encoding="utf-8") as f:
-    next(f)  # saltar cabecera
+    next(f)  # omitir la cabecera
     for linea in f:
         nombre, edad = linea.strip().split(",")
-        print(f"Alumno: {nombre} - Edad: {edad}")</code></pre>
+        print(f"Alumno: {nombre} - Edad: {int(edad)}")</code></pre>
+            <div class="terminal-output">
+                <div class="terminal-heading"><span class="terminal-dots" aria-hidden="true"><span></span><span></span><span></span></span>Salida de ejemplo</div>
+                <pre><code>Alumno: Ana - Edad: 20
+Alumno: Luis - Edad: 22</code></pre>
+            </div>
+            <div class="callout">
+                <p>Para CSV reales con comas dentro de los campos, comillas o separadores configurables, utiliza el
+                    módulo estándar <code>csv</code> en lugar de separar las líneas manualmente.</p>
+            </div>
 
         </section>
 
         <section class="slide" id="aplicaciones-practicas-registros-logs">
-            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Linkia FP">
 
+            <p class="eyebrow">03 · Aplicaciones</p>
             <h3>3.2 Aplicaciones prácticas: registros, logs, informes</h3>
             <p>
                 La organización de datos en ficheros permite crear estructuras sencillas como
@@ -338,44 +594,110 @@ with open("alumnos.csv", "r", encoding="utf-8") as f:
                 <li><strong>Informes</strong>: resumen de datos procesados, alineados en columnas para facilitar su
                     lectura.</li>
             </ul>
-            <pre class="language-python"><code>
-# Ejemplo de log con marcas de tiempo
+            <pre class="language-python"><code># Añade una línea con marca de tiempo al registro
 import datetime
 with open("app.log", "a", encoding="utf-8") as f:
-    f.write(f"{datetime.datetime.now()}: Usuario inició sesiónn")
-
-            </code></pre>
+    momento = datetime.datetime.now().isoformat(timespec="seconds")
+    f.write(f"{momento}: Usuario inició sesión\n")</code></pre>
+            <div class="terminal-output">
+                <div class="terminal-heading"><span class="terminal-dots" aria-hidden="true"><span></span><span></span><span></span></span>Efecto de la ejecución</div>
+                <pre><code>El programa no muestra texto en la consola.
+Se añade a app.log una línea con la fecha y hora actuales,
+por ejemplo: 2026-11-10T17:00:00: Usuario inició sesión</code></pre>
+            </div>
 
         </section>
 
         
 
-        <section class="slide" id="actividades-evaluacion-ut4">
-            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="">
+        <section class="slide" id="actividad-consumo-energetico">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Linkia FP">
+            <p class="eyebrow">Reto práctico · Actividad</p>
+            <h2>Registro semanal de consumo eléctrico</h2>
+            <p>Una pequeña asociación quiere guardar las lecturas de consumo de su local y consultar un resumen al
+                terminar la semana. Crea un programa que solicite el día y el consumo en kWh de cinco días y lo guarde en
+                <code>consumo.txt</code>.</p>
+            <div class="activity-grid">
+                <article class="activity-card">
+                    <h3>Entrada</h3>
+                    <p>Para cada día, pide el nombre del día y el consumo en kWh.</p>
+                </article>
+                <article class="activity-card">
+                    <h3>Archivo</h3>
+                    <p>Guarda un registro por línea con el formato <code>día;consumo</code>.</p>
+                </article>
+                <article class="activity-card">
+                    <h3>Resumen</h3>
+                    <p>Vuelve a leer el archivo y muestra el total, la media, el mínimo y el máximo.</p>
+                </article>
+            </div>
+            <div class="callout">
+                <p><strong>Condiciones:</strong> convierte cada lectura a <code>float</code>, conserva los datos usando
+                    una escritura controlada y utiliza <code>with open()</code>. Para repetir la actividad desde cero,
+                    comprueba si el archivo anterior debe reemplazarse en vez de añadirse.</p>
+            </div>
+        </section>
 
-            <h2>Actividades de evaluación (no obligatorias)</h2>
-           
-            <ul>
-                <li><strong>Actividad 1: Manejo de archivos</strong>
-                    <ul>
-                        <li>Crear <code>datos.txt</code>, escribir nombre y edad introducidos por el usuario, y leerlos
-                            de nuevo por consola.</li>
-                    </ul>
-                </li>
-                <li><strong>Actividad 2: Organización de datos en ficheros</strong>
-                    <ul>
-                        <li>Solicitar varios nombres y edades y guardar cada entrada en <code>usuarios.txt</code> en el
-                            formato <em>nombre - edad</em>.</li>
-                    </ul>
-                </li>
-                <li><strong>Actividad 3: Estadísticas básicas desde un fichero</strong>
-                    <ul>
-                        <li>Leer <code>edades.txt</code> y calcular: edad media, mínima, máxima y número total de
-                            entradas.</li>
-                    </ul>
-                </li>
-            </ul>
+        <section class="slide" id="pautas-resolver-actividad">
+            <img src="../../assets/linkia/logo_linkia_black.png" style="max-width: 20%;" alt="Linkia FP">
+            <p class="eyebrow">Reto práctico · Guía</p>
+            <h2>Pautas para resolver la actividad</h2>
+            <ol>
+                <li><strong>Prepara el registro:</strong> usa una lista con cinco días y lecturas de prueba diferentes:
+                    lunes 6.8, martes 7.4, miércoles 5.9, jueves 8.1 y viernes 6.3 kWh.</li>
+                <li><strong>Guarda los datos:</strong> convierte cada lectura a número y escribe una línea por día en
+                    <code>consumo.txt</code>, por ejemplo <code>lunes;6.8</code>. Añade <code>\n</code> al final de
+                    cada registro.</li>
+                <li><strong>Lee y separa:</strong> recorre el archivo línea a línea, elimina el salto con
+                    <code>strip()</code>, separa por <code>;</code> y convierte el segundo campo a <code>float</code>.</li>
+                <li><strong>Calcula:</strong> guarda las lecturas en una lista; después calcula el total con
+                    <code>sum()</code>, la cantidad con <code>len()</code>, y los extremos con <code>min()</code> y
+                    <code>max()</code>.</li>
+                <li><strong>Presenta el informe:</strong> muestra las unidades y redondea la media a dos decimales con
+                    una f-string, por ejemplo <code>{media:.2f}</code>.</li>
+            </ol>
+            <pre class="language-python"><code># Primero recoge las cinco lecturas y crea un archivo nuevo
+dias = ["lunes", "martes", "miércoles", "jueves", "viernes"]
+with open("consumo.txt", "w", encoding="utf-8") as archivo:
+    for dia in dias:
+        consumo = float(input(f"Consumo del {dia} (kWh): ").replace(",", "."))
+        archivo.write(f"{dia};{consumo}\n")
 
+# Después lee el archivo y prepara el resumen
+lecturas = []
+with open("consumo.txt", "r", encoding="utf-8") as archivo:
+    for linea in archivo:
+        dia, consumo_texto = linea.strip().split(";")
+        lecturas.append(float(consumo_texto))
+
+if lecturas:
+    total = sum(lecturas)
+    media = total / len(lecturas)
+    print(f"Total: {total:.2f} kWh")
+    print(f"Media: {media:.2f} kWh")
+    print(f"Mínimo: {min(lecturas):.2f} kWh")
+    print(f"Máximo: {max(lecturas):.2f} kWh")
+else:
+    print("El archivo no contiene lecturas.")</code></pre>
+            <div class="terminal-output">
+                <div class="terminal-heading"><span class="terminal-dots" aria-hidden="true"><span></span><span></span><span></span></span>Salida de ejemplo · lecturas: 6.8, 7.4, 5.9, 8.1 y 6.3</div>
+                <pre><code>Consumo del lunes (kWh): 6.8
+Consumo del martes (kWh): 7.4
+Consumo del miércoles (kWh): 5.9
+Consumo del jueves (kWh): 8.1
+Consumo del viernes (kWh): 6.3
+Total: 34.50 kWh
+Media: 6.90 kWh
+Mínimo: 5.90 kWh
+Máximo: 8.10 kWh</code></pre>
+            </div>
+            <div class="callout">
+                <p><strong>Comprueba el resultado:</strong> con los cinco valores de ejemplo, el total es
+                    <strong>34.5 kWh</strong>, la media es <strong>6.90 kWh</strong>, el mínimo es
+                    <strong>5.9 kWh</strong> y el máximo es <strong>8.1 kWh</strong>.</p>
+                <p>Prueba también qué ocurre si el archivo está vacío o si una línea no sigue el formato indicado.
+                    Como mejora, puedes validar la entrada y mostrar un mensaje claro cuando no sea válida.</p>
+            </div>
         </section>
 
 
